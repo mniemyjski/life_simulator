@@ -83,7 +83,6 @@ class DateCubit extends HydratedCubit<DateState> {
             emit(DateState.loaded(date.copyWith(day: 1, month: 1, year: date.year + 1)));
           }
         }
-        _saveCubit.change(true);
       });
     }
   }

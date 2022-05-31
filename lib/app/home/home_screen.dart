@@ -57,6 +57,7 @@ class HomeScreen extends StatelessWidget {
                 onPressed: () {
                   context.read<SaveCubit>().change(false);
                   context.router.push(const GameRoute());
+                  context.read<SaveCubit>().change(true);
                 },
                 child: Text(LocaleKeys.newGame.tr()),
               ),
