@@ -4,7 +4,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../utilities/utilities.dart';
 import '../../save/save_cubit.dart';
 import '../models/bonus/bonus_model.dart';
 import '../models/time_spend_model/time_spend_model.dart';
@@ -182,11 +181,20 @@ class TimeSpendCubit extends HydratedCubit<TimeSpendState> {
         orElse: () => 0);
   }
 
+  bool checkBonusSource(ETypeBonusSource eTypeBonusSource) {
+    return state.maybeWhen(
+        loaded: (timeSpend) {
+          for (var i = 0; i < timeSpend.bonuses.length; i++) {
+            if (timeSpend.bonuses[i] == eTypeBonusSource) return true;
+          }
+          return false;
+        },
+        orElse: () => false);
+  }
+
   resetDay() {
     return state.whenOrNull(loaded: (timeSpend) {
       int _commuting = getBonus(ETypeBonus.commuting);
-
-      Logger().wtf(_commuting);
 
       TimeSpend refresh = timeSpend.copyWith(
         used: 0,

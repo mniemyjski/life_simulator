@@ -38,7 +38,7 @@ class Data {
             salary: 1200,
             interval: 30,
             work: 8,
-            commuting: 4,
+            commuting: 2,
             bonusToRelax: -2,
             bonusToSleep: -2,
             requirements: [],
@@ -68,7 +68,7 @@ class Data {
             exp: 0,
             salary: 1000,
             interval: 30,
-            work: 10,
+            work: 8,
             commuting: 2,
             bonusToRelax: -3,
             bonusToSleep: -2,
@@ -80,7 +80,7 @@ class Data {
             exp: 1,
             salary: 1400,
             interval: 30,
-            work: 10,
+            work: 8,
             commuting: 2,
             bonusToRelax: -2,
             bonusToSleep: -2,
@@ -92,8 +92,8 @@ class Data {
             exp: 2,
             salary: 2400,
             interval: 30,
-            work: 12,
-            commuting: 0,
+            work: 8,
+            commuting: 2,
             bonusToRelax: -1,
             bonusToSleep: -1,
             requirements: [],
@@ -212,14 +212,14 @@ class Data {
       Learning(
           id: uuid.v1(),
           name: 'Kurs programowania',
-          cost: 900,
+          cost: 5000,
           skills: [
             Skill(
               name: ETypeSkills.programming,
               exp: 1,
             ),
           ],
-          time: 5000),
+          time: 900),
     ];
   }
   //#endregion
