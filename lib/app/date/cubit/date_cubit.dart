@@ -8,7 +8,6 @@ import 'package:life_simulator/app/learning/cubit/learning_cubit.dart';
 
 import '../../income/cubit/income_cubit.dart';
 import '../../save/save_cubit.dart';
-import '../../stats/cubit/stats_cubit.dart';
 import '../../time_spend/cubit/time_spend_cubit.dart';
 
 part 'date_cubit.freezed.dart';
@@ -19,7 +18,7 @@ part 'date_state.dart';
 class DateCubit extends HydratedCubit<DateState> {
   final SaveCubit _saveCubit;
   final TimeSpendCubit _timeSpendCubit;
-  final StatsCubit _statsCubit;
+
   final LearningCubit _learningCubit;
   final IncomeCubit _incomeCubit;
   late StreamSubscription _save;
@@ -27,11 +26,9 @@ class DateCubit extends HydratedCubit<DateState> {
   DateCubit({
     required SaveCubit saveCubit,
     required TimeSpendCubit timeSpendCubit,
-    required StatsCubit statsCubit,
     required LearningCubit learningCubit,
     required IncomeCubit incomeCubit,
   })  : _timeSpendCubit = timeSpendCubit,
-        _statsCubit = statsCubit,
         _learningCubit = learningCubit,
         _incomeCubit = incomeCubit,
         _saveCubit = saveCubit,
@@ -70,7 +67,6 @@ class DateCubit extends HydratedCubit<DateState> {
         });
 
         _timeSpendCubit.resetDay();
-        _statsCubit.counting(date.year);
         _incomeCubit.counting();
 
         emit(DateState.loading());

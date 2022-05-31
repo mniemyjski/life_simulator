@@ -4,8 +4,10 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../utilities/utilities.dart';
 import '../../save/save_cubit.dart';
-import '../models/time_spend_model.dart';
+import '../models/bonus/bonus_model.dart';
+import '../models/time_spend_model/time_spend_model.dart';
 
 part 'time_spend_cubit.freezed.dart';
 part 'time_spend_cubit.g.dart';
@@ -14,66 +16,93 @@ part 'time_spend_state.dart';
 @lazySingleton
 class TimeSpendCubit extends HydratedCubit<TimeSpendState> {
   final SaveCubit _saveCubit;
-  late StreamSubscription _save;
+  late StreamSubscription _saveSub;
+  late StreamSubscription _transportSub;
 
   TimeSpendCubit({
     required SaveCubit saveCubit,
   })  : _saveCubit = saveCubit,
         super(TimeSpendState.initial(null)) {
     _saveCubit.state.whenOrNull(loaded: (save) => init(save));
-    _save = _saveCubit.stream.listen((s) => s.whenOrNull(loaded: (save) => init(save)));
+    _saveSub = _saveCubit.stream.listen((s) => s.whenOrNull(loaded: (save) => init(save)));
   }
 
   @override
   Future<void> close() async {
-    _save.cancel();
+    _saveSub.cancel();
+    _transportSub.cancel();
     super.close();
   }
 
   init(bool newGame) {
+    _newGame() => emit(
+          TimeSpendState.loaded(
+            TimeSpend(
+              free: 14,
+              work: 0,
+              commuting: 0,
+              learn: 0,
+              relax: 2,
+              sleep: 8,
+              used: 0,
+              bonuses: [],
+            ),
+          ),
+        );
+
+    _loadGame(TimeSpend timeSpend) => emit(TimeSpendState.loaded(timeSpend));
+
     state.whenOrNull(
-      initial: (data) {
-        !newGame || data == null
-            ? emit(TimeSpendState.loaded(
-                TimeSpend(
-                  free: 14,
-                  work: 0,
-                  learn: 0,
-                  relax: 2,
-                  sleep: 8,
-                  used: 0,
-                ),
-              ))
-            : emit(TimeSpendState.loaded(data));
+      initial: (timeSpend) {
+        !newGame || timeSpend == null ? _newGame() : _loadGame(timeSpend);
       },
-      loaded: (data) {
-        !newGame
-            ? emit(TimeSpendState.loaded(
-                TimeSpend(
-                  free: 14,
-                  work: 0,
-                  learn: 0,
-                  relax: 2,
-                  sleep: 8,
-                  used: 0,
-                ),
-              ))
-            : emit(TimeSpendState.loaded(data));
+      loaded: (timeSpend) {
+        !newGame ? _newGame() : _loadGame(timeSpend);
       },
     );
   }
 
-  String? changeWork(int hours) {
+  bool checkFreeTime(int value) {
+    return state.maybeWhen(
+      orElse: () => false,
+      loaded: (timeSpend) => timeSpend.free >= value ? true : false,
+    );
+  }
+
+  addBonuses(Bonus bonus) {
+    state.whenOrNull(loaded: (timeSpend) {
+      List<Bonus> result = List.from(timeSpend.bonuses)..add(bonus);
+      emit(TimeSpendState.loaded(timeSpend.copyWith(bonuses: result)));
+    });
+  }
+
+  removeBonuses(ETypeBonusSource eTypeBonusSource) {
+    state.whenOrNull(loaded: (timeSpend) {
+      List<Bonus> result = List.from(timeSpend.bonuses)
+        ..removeWhere((element) => element.eTypeBonusSource == eTypeBonusSource);
+
+      emit(TimeSpendState.loaded(timeSpend.copyWith(bonuses: result)));
+    });
+  }
+
+  String? changeWork(int work) {
     var result = state.whenOrNull(loaded: (timeSpend) {
-      if (timeSpend.free >= hours) {
-        TimeSpend refresh = timeSpend.copyWith(
-          work: timeSpend.work + hours,
-          free: timeSpend.free - hours,
-        );
-        emit(TimeSpendState.loaded(refresh));
-      } else {
-        return "You don't have free time";
-      }
+      TimeSpend refresh = timeSpend.copyWith(
+        work: timeSpend.work + work,
+        free: timeSpend.free - work,
+      );
+      emit(TimeSpendState.loaded(refresh));
+    });
+    return result;
+  }
+
+  String? changeCommuting(int commuting) {
+    var result = state.whenOrNull(loaded: (timeSpend) {
+      TimeSpend refresh = timeSpend.copyWith(
+        commuting: timeSpend.commuting + commuting,
+        free: timeSpend.free - commuting,
+      );
+      emit(TimeSpendState.loaded(refresh));
     });
     return result;
   }
@@ -135,11 +164,38 @@ class TimeSpendCubit extends HydratedCubit<TimeSpendState> {
     return result;
   }
 
+  int getBonus(ETypeBonus eTypeBonus) {
+    return state.maybeWhen(
+        loaded: (timeSpend) {
+          int bonus = 0;
+          timeSpend.bonuses
+            ..forEach((element) {
+              if (element.eTypeBonus == eTypeBonus) bonus += element.value;
+            });
+
+          if (ETypeBonus.commuting == eTypeBonus) {
+            return timeSpend.commuting < bonus ? timeSpend.commuting : bonus;
+          } else {
+            return bonus;
+          }
+        },
+        orElse: () => 0);
+  }
+
   resetDay() {
     return state.whenOrNull(loaded: (timeSpend) {
+      int _commuting = getBonus(ETypeBonus.commuting);
+
+      Logger().wtf(_commuting);
+
       TimeSpend refresh = timeSpend.copyWith(
         used: 0,
-        free: 24 - timeSpend.learn - timeSpend.work - timeSpend.relax - timeSpend.sleep,
+        free: 24 -
+            timeSpend.learn -
+            timeSpend.work -
+            timeSpend.relax -
+            timeSpend.sleep -
+            (timeSpend.commuting - _commuting),
       );
       emit(TimeSpendState.loaded(refresh));
     });

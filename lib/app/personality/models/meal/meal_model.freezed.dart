@@ -23,9 +23,9 @@ mixin _$Meal {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   int get cost => throw _privateConstructorUsedError;
-  int get bonusToSatisfaction => throw _privateConstructorUsedError;
-  int get bonusToTiredness => throw _privateConstructorUsedError;
-  int get bonusToHealth => throw _privateConstructorUsedError;
+  int get bonusToRelax => throw _privateConstructorUsedError;
+  int get bonusToSleep => throw _privateConstructorUsedError;
+  int get bonusToLearn => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -40,9 +40,9 @@ abstract class $MealCopyWith<$Res> {
       {String id,
       String name,
       int cost,
-      int bonusToSatisfaction,
-      int bonusToTiredness,
-      int bonusToHealth});
+      int bonusToRelax,
+      int bonusToSleep,
+      int bonusToLearn});
 }
 
 /// @nodoc
@@ -58,9 +58,9 @@ class _$MealCopyWithImpl<$Res> implements $MealCopyWith<$Res> {
     Object? id = freezed,
     Object? name = freezed,
     Object? cost = freezed,
-    Object? bonusToSatisfaction = freezed,
-    Object? bonusToTiredness = freezed,
-    Object? bonusToHealth = freezed,
+    Object? bonusToRelax = freezed,
+    Object? bonusToSleep = freezed,
+    Object? bonusToLearn = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -75,17 +75,17 @@ class _$MealCopyWithImpl<$Res> implements $MealCopyWith<$Res> {
           ? _value.cost
           : cost // ignore: cast_nullable_to_non_nullable
               as int,
-      bonusToSatisfaction: bonusToSatisfaction == freezed
-          ? _value.bonusToSatisfaction
-          : bonusToSatisfaction // ignore: cast_nullable_to_non_nullable
+      bonusToRelax: bonusToRelax == freezed
+          ? _value.bonusToRelax
+          : bonusToRelax // ignore: cast_nullable_to_non_nullable
               as int,
-      bonusToTiredness: bonusToTiredness == freezed
-          ? _value.bonusToTiredness
-          : bonusToTiredness // ignore: cast_nullable_to_non_nullable
+      bonusToSleep: bonusToSleep == freezed
+          ? _value.bonusToSleep
+          : bonusToSleep // ignore: cast_nullable_to_non_nullable
               as int,
-      bonusToHealth: bonusToHealth == freezed
-          ? _value.bonusToHealth
-          : bonusToHealth // ignore: cast_nullable_to_non_nullable
+      bonusToLearn: bonusToLearn == freezed
+          ? _value.bonusToLearn
+          : bonusToLearn // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -100,9 +100,9 @@ abstract class _$$_MealCopyWith<$Res> implements $MealCopyWith<$Res> {
       {String id,
       String name,
       int cost,
-      int bonusToSatisfaction,
-      int bonusToTiredness,
-      int bonusToHealth});
+      int bonusToRelax,
+      int bonusToSleep,
+      int bonusToLearn});
 }
 
 /// @nodoc
@@ -119,9 +119,9 @@ class __$$_MealCopyWithImpl<$Res> extends _$MealCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = freezed,
     Object? cost = freezed,
-    Object? bonusToSatisfaction = freezed,
-    Object? bonusToTiredness = freezed,
-    Object? bonusToHealth = freezed,
+    Object? bonusToRelax = freezed,
+    Object? bonusToSleep = freezed,
+    Object? bonusToLearn = freezed,
   }) {
     return _then(_$_Meal(
       id: id == freezed
@@ -136,17 +136,17 @@ class __$$_MealCopyWithImpl<$Res> extends _$MealCopyWithImpl<$Res>
           ? _value.cost
           : cost // ignore: cast_nullable_to_non_nullable
               as int,
-      bonusToSatisfaction: bonusToSatisfaction == freezed
-          ? _value.bonusToSatisfaction
-          : bonusToSatisfaction // ignore: cast_nullable_to_non_nullable
+      bonusToRelax: bonusToRelax == freezed
+          ? _value.bonusToRelax
+          : bonusToRelax // ignore: cast_nullable_to_non_nullable
               as int,
-      bonusToTiredness: bonusToTiredness == freezed
-          ? _value.bonusToTiredness
-          : bonusToTiredness // ignore: cast_nullable_to_non_nullable
+      bonusToSleep: bonusToSleep == freezed
+          ? _value.bonusToSleep
+          : bonusToSleep // ignore: cast_nullable_to_non_nullable
               as int,
-      bonusToHealth: bonusToHealth == freezed
-          ? _value.bonusToHealth
-          : bonusToHealth // ignore: cast_nullable_to_non_nullable
+      bonusToLearn: bonusToLearn == freezed
+          ? _value.bonusToLearn
+          : bonusToLearn // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -159,9 +159,9 @@ class _$_Meal implements _Meal {
       {required this.id,
       required this.name,
       required this.cost,
-      this.bonusToSatisfaction = 0,
-      this.bonusToTiredness = 0,
-      this.bonusToHealth = 0});
+      this.bonusToRelax = 0,
+      this.bonusToSleep = 0,
+      this.bonusToLearn = 0});
 
   factory _$_Meal.fromJson(Map<String, dynamic> json) => _$$_MealFromJson(json);
 
@@ -173,17 +173,17 @@ class _$_Meal implements _Meal {
   final int cost;
   @override
   @JsonKey()
-  final int bonusToSatisfaction;
+  final int bonusToRelax;
   @override
   @JsonKey()
-  final int bonusToTiredness;
+  final int bonusToSleep;
   @override
   @JsonKey()
-  final int bonusToHealth;
+  final int bonusToLearn;
 
   @override
   String toString() {
-    return 'Meal(id: $id, name: $name, cost: $cost, bonusToSatisfaction: $bonusToSatisfaction, bonusToTiredness: $bonusToTiredness, bonusToHealth: $bonusToHealth)';
+    return 'Meal(id: $id, name: $name, cost: $cost, bonusToRelax: $bonusToRelax, bonusToSleep: $bonusToSleep, bonusToLearn: $bonusToLearn)';
   }
 
   @override
@@ -195,11 +195,11 @@ class _$_Meal implements _Meal {
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.cost, cost) &&
             const DeepCollectionEquality()
-                .equals(other.bonusToSatisfaction, bonusToSatisfaction) &&
+                .equals(other.bonusToRelax, bonusToRelax) &&
             const DeepCollectionEquality()
-                .equals(other.bonusToTiredness, bonusToTiredness) &&
+                .equals(other.bonusToSleep, bonusToSleep) &&
             const DeepCollectionEquality()
-                .equals(other.bonusToHealth, bonusToHealth));
+                .equals(other.bonusToLearn, bonusToLearn));
   }
 
   @JsonKey(ignore: true)
@@ -209,9 +209,9 @@ class _$_Meal implements _Meal {
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(cost),
-      const DeepCollectionEquality().hash(bonusToSatisfaction),
-      const DeepCollectionEquality().hash(bonusToTiredness),
-      const DeepCollectionEquality().hash(bonusToHealth));
+      const DeepCollectionEquality().hash(bonusToRelax),
+      const DeepCollectionEquality().hash(bonusToSleep),
+      const DeepCollectionEquality().hash(bonusToLearn));
 
   @JsonKey(ignore: true)
   @override
@@ -229,9 +229,9 @@ abstract class _Meal implements Meal {
       {required final String id,
       required final String name,
       required final int cost,
-      final int bonusToSatisfaction,
-      final int bonusToTiredness,
-      final int bonusToHealth}) = _$_Meal;
+      final int bonusToRelax,
+      final int bonusToSleep,
+      final int bonusToLearn}) = _$_Meal;
 
   factory _Meal.fromJson(Map<String, dynamic> json) = _$_Meal.fromJson;
 
@@ -242,11 +242,11 @@ abstract class _Meal implements Meal {
   @override
   int get cost => throw _privateConstructorUsedError;
   @override
-  int get bonusToSatisfaction => throw _privateConstructorUsedError;
+  int get bonusToRelax => throw _privateConstructorUsedError;
   @override
-  int get bonusToTiredness => throw _privateConstructorUsedError;
+  int get bonusToSleep => throw _privateConstructorUsedError;
   @override
-  int get bonusToHealth => throw _privateConstructorUsedError;
+  int get bonusToLearn => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_MealCopyWith<_$_Meal> get copyWith => throw _privateConstructorUsedError;

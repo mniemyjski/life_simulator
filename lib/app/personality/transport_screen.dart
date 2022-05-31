@@ -118,11 +118,11 @@ class CarScreen extends StatelessWidget {
                       child: Row(
                         children: [
                           Text(
-                            'health: ',
+                            'Learn: ',
                             style: txtStyle.copyWith(fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            '${element.bonusToHealth.toString()}',
+                            '${element.bonusToLearn.toString()}',
                             style: txtStyle,
                           ),
                         ],
@@ -133,11 +133,11 @@ class CarScreen extends StatelessWidget {
                       child: Row(
                         children: [
                           Text(
-                            'Satisfaction: ',
+                            'Relax: ',
                             style: txtStyle.copyWith(fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            '${element.bonusToSatisfaction.toString()}',
+                            '${element.bonusToRelax.toString()}',
                             style: txtStyle,
                           ),
                         ],
@@ -148,11 +148,11 @@ class CarScreen extends StatelessWidget {
                       child: Row(
                         children: [
                           Text(
-                            'Tiredness: ',
+                            'Sleep: ',
                             style: txtStyle.copyWith(fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            '${element.bonusToTiredness.toString()}',
+                            '${element.bonusToSleep.toString()}',
                             style: txtStyle,
                           ),
                         ],

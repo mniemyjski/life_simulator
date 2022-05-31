@@ -51,34 +51,32 @@ class JobCubit extends HydratedCubit<JobState> {
   }
 
   init(bool newGame) {
+    _newGame() => emit(JobState.loaded(job: null, experience: null, jobs: Data.jobs()));
+    _loadGame(Job? job, Experience? experience, List<Job> jobs) =>
+        emit(JobState.loaded(job: job, experience: experience, jobs: jobs));
+
     state.whenOrNull(
       initial: (job, experience, jobs) {
-        !newGame || jobs == null
-            ? emit(JobState.loaded(job: null, experience: null, jobs: Data.jobs()))
-            : emit(JobState.loaded(job: job, experience: experience, jobs: jobs));
+        !newGame || jobs == null ? _newGame() : _loadGame(job, experience, jobs);
       },
       loaded: (job, experience, jobs) {
-        !newGame
-            ? emit(JobState.loaded(job: null, experience: null, jobs: Data.jobs()))
-            : emit(JobState.loaded(job: job, experience: experience, jobs: jobs));
+        !newGame ? _newGame() : _loadGame(job, experience, jobs);
       },
     );
   }
 
   String getJob({required Job job, required Experience experience}) {
-    String? usedTime = _timeSpendCubit.changeUsed(1);
-    if (usedTime != null) return "You don't have free time";
+    bool hasFreeTime = _timeSpendCubit.checkFreeTime(1 + experience.work + experience.commuting);
+    if (!hasFreeTime) return "You don't have free time";
 
+    _timeSpendCubit.changeUsed(1);
     bool test = !_testSkills(experience);
     if (test) return "You didn't get a job";
 
     return state.maybeWhen(
         loaded: (_job, _experience, jobs) {
-          String? workTime = _timeSpendCubit.changeWork(experience.time);
-          if (workTime != null) {
-            _timeSpendCubit.changeUsed(-1);
-            return "You don't have free time";
-          }
+          _timeSpendCubit.changeWork(experience.work);
+          _timeSpendCubit.changeCommuting(experience.commuting);
 
           Income income = Income(
             id: job.id,
@@ -141,29 +139,38 @@ class JobCubit extends HydratedCubit<JobState> {
       });
 
       _incomeCubit.remove(job!.id);
-      _timeSpendCubit.changeWork(-experience!.time);
+      _timeSpendCubit.changeWork(-experience!.work);
+      _timeSpendCubit.changeCommuting(-experience.commuting);
+
       emit(JobState.loaded(job: null, experience: null, jobs: jobs));
     });
   }
 
-  String? applyForPromotion() {
-    return state.whenOrNull(loaded: (job, experience, jobs) {
-      int exp = experience!.exp + 1;
+  String applyForPromotion() {
+    return state.maybeWhen(
+        loaded: (job, experience, jobs) {
+          int exp = experience!.exp + 1;
 
-      if (exp >= job!.experiences.length) return 'max';
+          if (exp >= job!.experiences.length) return 'max';
 
-      String? usedTime = _timeSpendCubit.changeUsed(1);
-      if (usedTime != null) return "You don't have free time";
+          Experience newExperience = job.experiences[exp];
 
-      Experience newExperience = job.experiences[exp];
+          bool hasFreeTime =
+              _timeSpendCubit.checkFreeTime(1 + newExperience.work - experience.work);
+          if (!hasFreeTime) return "You don't have free time";
 
-      bool test = !_testSkills(newExperience);
-      if (test) return "You didn't get a promote";
+          _timeSpendCubit.changeUsed(1);
 
-      _incomeCubit.update(id: job.id, value: newExperience.salary);
-      emit(JobState.loaded(job: job, experience: newExperience, jobs: jobs));
-      return 'succeed';
-    });
+          bool test = !_testSkills(newExperience);
+          if (test) return "You didn't get a promote";
+
+          _timeSpendCubit.changeCommuting(newExperience.commuting - experience.commuting);
+
+          _incomeCubit.update(id: job.id, value: newExperience.salary);
+          emit(JobState.loaded(job: job, experience: newExperience, jobs: jobs));
+          return 'succeed';
+        },
+        orElse: () => 'error');
   }
 
   @override

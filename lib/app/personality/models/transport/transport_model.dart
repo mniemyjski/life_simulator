@@ -16,9 +16,10 @@ class Transport with _$Transport {
     required int cost,
     required int monthlyCost,
     DateGame? dateBuy,
-    @Default(0) int bonusToSatisfaction,
-    @Default(0) int bonusToTiredness,
-    @Default(0) int bonusToHealth,
+    @Default(0) int bonusToRelax,
+    @Default(0) int bonusToSleep,
+    @Default(0) int bonusToLearn,
+    @Default(0) int commuting,
   }) = _Transport;
 
   factory Transport.fromJson(Map<String, dynamic> json) => _$TransportFromJson(json);

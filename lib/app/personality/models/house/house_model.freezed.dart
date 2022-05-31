@@ -26,9 +26,9 @@ mixin _$House {
   int get cost => throw _privateConstructorUsedError;
   int get monthlyCost => throw _privateConstructorUsedError;
   DateGame? get dateBuy => throw _privateConstructorUsedError;
-  int get bonusToSatisfaction => throw _privateConstructorUsedError;
-  int get bonusToTiredness => throw _privateConstructorUsedError;
-  int get bonusToHealth => throw _privateConstructorUsedError;
+  int get bonusToRelax => throw _privateConstructorUsedError;
+  int get bonusToSleep => throw _privateConstructorUsedError;
+  int get bonusToLearn => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -46,9 +46,9 @@ abstract class $HouseCopyWith<$Res> {
       int cost,
       int monthlyCost,
       DateGame? dateBuy,
-      int bonusToSatisfaction,
-      int bonusToTiredness,
-      int bonusToHealth});
+      int bonusToRelax,
+      int bonusToSleep,
+      int bonusToLearn});
 
   $DateGameCopyWith<$Res>? get dateBuy;
 }
@@ -69,9 +69,9 @@ class _$HouseCopyWithImpl<$Res> implements $HouseCopyWith<$Res> {
     Object? cost = freezed,
     Object? monthlyCost = freezed,
     Object? dateBuy = freezed,
-    Object? bonusToSatisfaction = freezed,
-    Object? bonusToTiredness = freezed,
-    Object? bonusToHealth = freezed,
+    Object? bonusToRelax = freezed,
+    Object? bonusToSleep = freezed,
+    Object? bonusToLearn = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -98,17 +98,17 @@ class _$HouseCopyWithImpl<$Res> implements $HouseCopyWith<$Res> {
           ? _value.dateBuy
           : dateBuy // ignore: cast_nullable_to_non_nullable
               as DateGame?,
-      bonusToSatisfaction: bonusToSatisfaction == freezed
-          ? _value.bonusToSatisfaction
-          : bonusToSatisfaction // ignore: cast_nullable_to_non_nullable
+      bonusToRelax: bonusToRelax == freezed
+          ? _value.bonusToRelax
+          : bonusToRelax // ignore: cast_nullable_to_non_nullable
               as int,
-      bonusToTiredness: bonusToTiredness == freezed
-          ? _value.bonusToTiredness
-          : bonusToTiredness // ignore: cast_nullable_to_non_nullable
+      bonusToSleep: bonusToSleep == freezed
+          ? _value.bonusToSleep
+          : bonusToSleep // ignore: cast_nullable_to_non_nullable
               as int,
-      bonusToHealth: bonusToHealth == freezed
-          ? _value.bonusToHealth
-          : bonusToHealth // ignore: cast_nullable_to_non_nullable
+      bonusToLearn: bonusToLearn == freezed
+          ? _value.bonusToLearn
+          : bonusToLearn // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -137,9 +137,9 @@ abstract class _$$_HouseCopyWith<$Res> implements $HouseCopyWith<$Res> {
       int cost,
       int monthlyCost,
       DateGame? dateBuy,
-      int bonusToSatisfaction,
-      int bonusToTiredness,
-      int bonusToHealth});
+      int bonusToRelax,
+      int bonusToSleep,
+      int bonusToLearn});
 
   @override
   $DateGameCopyWith<$Res>? get dateBuy;
@@ -162,9 +162,9 @@ class __$$_HouseCopyWithImpl<$Res> extends _$HouseCopyWithImpl<$Res>
     Object? cost = freezed,
     Object? monthlyCost = freezed,
     Object? dateBuy = freezed,
-    Object? bonusToSatisfaction = freezed,
-    Object? bonusToTiredness = freezed,
-    Object? bonusToHealth = freezed,
+    Object? bonusToRelax = freezed,
+    Object? bonusToSleep = freezed,
+    Object? bonusToLearn = freezed,
   }) {
     return _then(_$_House(
       id: id == freezed
@@ -191,17 +191,17 @@ class __$$_HouseCopyWithImpl<$Res> extends _$HouseCopyWithImpl<$Res>
           ? _value.dateBuy
           : dateBuy // ignore: cast_nullable_to_non_nullable
               as DateGame?,
-      bonusToSatisfaction: bonusToSatisfaction == freezed
-          ? _value.bonusToSatisfaction
-          : bonusToSatisfaction // ignore: cast_nullable_to_non_nullable
+      bonusToRelax: bonusToRelax == freezed
+          ? _value.bonusToRelax
+          : bonusToRelax // ignore: cast_nullable_to_non_nullable
               as int,
-      bonusToTiredness: bonusToTiredness == freezed
-          ? _value.bonusToTiredness
-          : bonusToTiredness // ignore: cast_nullable_to_non_nullable
+      bonusToSleep: bonusToSleep == freezed
+          ? _value.bonusToSleep
+          : bonusToSleep // ignore: cast_nullable_to_non_nullable
               as int,
-      bonusToHealth: bonusToHealth == freezed
-          ? _value.bonusToHealth
-          : bonusToHealth // ignore: cast_nullable_to_non_nullable
+      bonusToLearn: bonusToLearn == freezed
+          ? _value.bonusToLearn
+          : bonusToLearn // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -217,9 +217,9 @@ class _$_House implements _House {
       required this.cost,
       required this.monthlyCost,
       this.dateBuy,
-      this.bonusToSatisfaction = 0,
-      this.bonusToTiredness = 0,
-      this.bonusToHealth = 0});
+      this.bonusToRelax = 0,
+      this.bonusToSleep = 0,
+      this.bonusToLearn = 0});
 
   factory _$_House.fromJson(Map<String, dynamic> json) =>
       _$$_HouseFromJson(json);
@@ -238,17 +238,17 @@ class _$_House implements _House {
   final DateGame? dateBuy;
   @override
   @JsonKey()
-  final int bonusToSatisfaction;
+  final int bonusToRelax;
   @override
   @JsonKey()
-  final int bonusToTiredness;
+  final int bonusToSleep;
   @override
   @JsonKey()
-  final int bonusToHealth;
+  final int bonusToLearn;
 
   @override
   String toString() {
-    return 'House(id: $id, name: $name, eTypeHouse: $eTypeHouse, cost: $cost, monthlyCost: $monthlyCost, dateBuy: $dateBuy, bonusToSatisfaction: $bonusToSatisfaction, bonusToTiredness: $bonusToTiredness, bonusToHealth: $bonusToHealth)';
+    return 'House(id: $id, name: $name, eTypeHouse: $eTypeHouse, cost: $cost, monthlyCost: $monthlyCost, dateBuy: $dateBuy, bonusToRelax: $bonusToRelax, bonusToSleep: $bonusToSleep, bonusToLearn: $bonusToLearn)';
   }
 
   @override
@@ -265,11 +265,11 @@ class _$_House implements _House {
                 .equals(other.monthlyCost, monthlyCost) &&
             const DeepCollectionEquality().equals(other.dateBuy, dateBuy) &&
             const DeepCollectionEquality()
-                .equals(other.bonusToSatisfaction, bonusToSatisfaction) &&
+                .equals(other.bonusToRelax, bonusToRelax) &&
             const DeepCollectionEquality()
-                .equals(other.bonusToTiredness, bonusToTiredness) &&
+                .equals(other.bonusToSleep, bonusToSleep) &&
             const DeepCollectionEquality()
-                .equals(other.bonusToHealth, bonusToHealth));
+                .equals(other.bonusToLearn, bonusToLearn));
   }
 
   @JsonKey(ignore: true)
@@ -282,9 +282,9 @@ class _$_House implements _House {
       const DeepCollectionEquality().hash(cost),
       const DeepCollectionEquality().hash(monthlyCost),
       const DeepCollectionEquality().hash(dateBuy),
-      const DeepCollectionEquality().hash(bonusToSatisfaction),
-      const DeepCollectionEquality().hash(bonusToTiredness),
-      const DeepCollectionEquality().hash(bonusToHealth));
+      const DeepCollectionEquality().hash(bonusToRelax),
+      const DeepCollectionEquality().hash(bonusToSleep),
+      const DeepCollectionEquality().hash(bonusToLearn));
 
   @JsonKey(ignore: true)
   @override
@@ -305,9 +305,9 @@ abstract class _House implements House {
       required final int cost,
       required final int monthlyCost,
       final DateGame? dateBuy,
-      final int bonusToSatisfaction,
-      final int bonusToTiredness,
-      final int bonusToHealth}) = _$_House;
+      final int bonusToRelax,
+      final int bonusToSleep,
+      final int bonusToLearn}) = _$_House;
 
   factory _House.fromJson(Map<String, dynamic> json) = _$_House.fromJson;
 
@@ -324,11 +324,11 @@ abstract class _House implements House {
   @override
   DateGame? get dateBuy => throw _privateConstructorUsedError;
   @override
-  int get bonusToSatisfaction => throw _privateConstructorUsedError;
+  int get bonusToRelax => throw _privateConstructorUsedError;
   @override
-  int get bonusToTiredness => throw _privateConstructorUsedError;
+  int get bonusToSleep => throw _privateConstructorUsedError;
   @override
-  int get bonusToHealth => throw _privateConstructorUsedError;
+  int get bonusToLearn => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_HouseCopyWith<_$_House> get copyWith =>

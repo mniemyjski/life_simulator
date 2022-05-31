@@ -20,24 +20,33 @@ class Data {
         industry: '?',
         experiences: [
           Experience(
+            name: 'test 1',
+            id: uuid.v1(),
             exp: 0,
             salary: 800,
             interval: 30,
-            time: 12,
+            work: 8,
+            commuting: 2,
             requirements: [],
           ),
           Experience(
+            id: uuid.v1(),
+            name: 'test 2',
             exp: 1,
             salary: 1200,
             interval: 30,
-            time: 12,
+            work: 8,
+            commuting: 4,
             requirements: [],
           ),
           Experience(
+            id: uuid.v1(),
+            name: 'test 3',
             exp: 2,
             salary: 2200,
             interval: 30,
-            time: 12,
+            work: 8,
+            commuting: 2,
             requirements: [],
           ),
         ],
@@ -48,24 +57,33 @@ class Data {
         industry: 'Shop',
         experiences: [
           Experience(
+            id: uuid.v1(),
+            name: 'test 1',
             exp: 0,
-            salary: 800,
+            salary: 1000,
             interval: 30,
-            time: 12,
+            work: 10,
+            commuting: 2,
             requirements: [],
           ),
           Experience(
+            id: uuid.v1(),
+            name: 'test 2',
             exp: 1,
-            salary: 1200,
+            salary: 1400,
             interval: 30,
-            time: 12,
+            work: 10,
+            commuting: 2,
             requirements: [],
           ),
           Experience(
+            id: uuid.v1(),
+            name: 'test 3',
             exp: 2,
-            salary: 2200,
+            salary: 2400,
             interval: 30,
-            time: 12,
+            work: 12,
+            commuting: 0,
             requirements: [],
           ),
         ],
@@ -76,185 +94,75 @@ class Data {
         industry: 'IT',
         experiences: [
           Experience(
+            id: uuid.v1(),
+            name: 'test 1',
             exp: 0,
             salary: 1000,
             interval: 30,
-            time: 10,
+            work: 8,
+            commuting: 2,
             requirements: [
               Skill(name: ETypeSkills.programming, exp: 1),
             ],
           ),
           Experience(
+            id: uuid.v1(),
+            name: 'test 1',
             exp: 1,
             salary: 2000,
             interval: 30,
-            time: 10,
+            work: 8,
+            commuting: 2,
             requirements: [
               Skill(name: ETypeSkills.programming, exp: 2),
             ],
           ),
           Experience(
+            id: uuid.v1(),
+            name: 'test 2',
             exp: 2,
             salary: 4000,
             interval: 30,
-            time: 10,
+            work: 8,
+            commuting: 0,
             requirements: [
               Skill(name: ETypeSkills.programming, exp: 3),
             ],
           ),
           Experience(
+            id: uuid.v1(),
+            name: 'test 3',
             exp: 3,
             salary: 6000,
             interval: 30,
-            time: 10,
+            work: 8,
+            commuting: 0,
             requirements: [
               Skill(name: ETypeSkills.programming, exp: 4),
             ],
           ),
           Experience(
+            id: uuid.v1(),
+            name: 'test 4',
             exp: 4,
             salary: 10000,
             interval: 30,
-            time: 10,
+            work: 8,
+            commuting: 0,
             requirements: [
               Skill(name: ETypeSkills.programming, exp: 5),
             ],
           ),
           Experience(
+            id: uuid.v1(),
+            name: 'test 5',
             exp: 5,
             salary: 28000,
             interval: 30,
-            time: 10,
+            work: 8,
+            commuting: 0,
             requirements: [
               Skill(name: ETypeSkills.programming, exp: 6),
-            ],
-          ),
-        ],
-      ),
-      Job(
-        id: uuid.v1(),
-        company: 'NetGuru',
-        industry: 'IT',
-        experiences: [
-          Experience(
-            exp: 0,
-            salary: 1000,
-            interval: 30,
-            time: 10,
-            requirements: [
-              Skill(name: ETypeSkills.programming, exp: 1),
-            ],
-          ),
-          Experience(
-            exp: 1,
-            salary: 2000,
-            interval: 30,
-            time: 10,
-            requirements: [
-              Skill(name: ETypeSkills.programming, exp: 2),
-            ],
-          ),
-          Experience(
-            exp: 2,
-            salary: 4000,
-            interval: 30,
-            time: 10,
-            requirements: [
-              Skill(name: ETypeSkills.programming, exp: 3),
-            ],
-          ),
-          Experience(
-            exp: 3,
-            salary: 6000,
-            interval: 30,
-            time: 10,
-            requirements: [
-              Skill(name: ETypeSkills.programming, exp: 4),
-            ],
-          ),
-          Experience(
-            exp: 4,
-            salary: 10000,
-            interval: 30,
-            time: 10,
-            requirements: [
-              Skill(name: ETypeSkills.programming, exp: 5),
-            ],
-          ),
-          Experience(
-            exp: 5,
-            salary: 28000,
-            interval: 30,
-            time: 10,
-            requirements: [
-              Skill(
-                name: ETypeSkills.programming,
-                exp: 6,
-              ),
-            ],
-          ),
-        ],
-      ),
-      Job(
-        id: uuid.v1(),
-        company: 'Divinity',
-        industry: 'IT',
-        experiences: [
-          Experience(
-            exp: 0,
-            salary: 1000,
-            interval: 30,
-            time: 10,
-            requirements: [
-              Skill(name: ETypeSkills.programming, exp: 1),
-            ],
-          ),
-          Experience(
-            exp: 1,
-            salary: 2000,
-            interval: 30,
-            time: 10,
-            requirements: [
-              Skill(name: ETypeSkills.programming, exp: 2),
-            ],
-          ),
-          Experience(
-            exp: 2,
-            salary: 4000,
-            interval: 30,
-            time: 10,
-            requirements: [
-              Skill(name: ETypeSkills.programming, exp: 3),
-            ],
-          ),
-          Experience(
-            exp: 3,
-            salary: 6000,
-            interval: 30,
-            time: 10,
-            requirements: [
-              Skill(name: ETypeSkills.programming, exp: 4),
-            ],
-          ),
-          Experience(
-            exp: 4,
-            salary: 10000,
-            interval: 30,
-            time: 10,
-            requirements: [
-              Skill(name: ETypeSkills.programming, exp: 5),
-            ],
-          ),
-          Experience(
-            exp: 5,
-            salary: 28000,
-            interval: 30,
-            time: 10,
-            requirements: [
-              Skill(
-                name: ETypeSkills.programming,
-                exp: 6,
-              ),
             ],
           ),
         ],
@@ -312,6 +220,8 @@ class Data {
         id: uuid.v1(),
         name: 'food 1',
         cost: 10,
+        bonusToRelax: -1,
+        bonusToSleep: -1,
       ),
       Meal(
         id: uuid.v1(),
@@ -322,16 +232,21 @@ class Data {
         id: uuid.v1(),
         name: 'food 3',
         cost: 40,
+        bonusToRelax: 1,
       ),
       Meal(
         id: uuid.v1(),
         name: 'food 4',
         cost: 80,
+        bonusToRelax: 1,
+        bonusToSleep: 1,
       ),
       Meal(
         id: uuid.v1(),
         name: 'food 5',
         cost: 150,
+        bonusToRelax: 2,
+        bonusToSleep: 1,
       ),
     ];
   }
@@ -347,6 +262,8 @@ class Data {
         eTypeHouse: ETypeHouse.rent,
         cost: 800,
         monthlyCost: 800,
+        bonusToRelax: -1,
+        bonusToSleep: -1,
       ),
       House(
         id: uuid.v1(),
@@ -361,6 +278,8 @@ class Data {
         eTypeHouse: ETypeHouse.rent,
         cost: 1800,
         monthlyCost: 1800,
+        bonusToRelax: 1,
+        bonusToSleep: 1,
       ),
       House(
         id: uuid.v1(),
@@ -382,6 +301,8 @@ class Data {
         eTypeHouse: ETypeHouse.buy,
         cost: 260000,
         monthlyCost: 400,
+        bonusToRelax: 1,
+        bonusToSleep: 1,
       ),
     ];
   }
@@ -392,13 +313,15 @@ class Data {
     var uuid = Uuid();
     return [
       Transport(
-        id: uuid.v1(),
-        name: 'Ticket',
-        eTypeTransport: ETypeTransport.publicTransport,
-        brand: 'Cities transport',
-        cost: 50,
-        monthlyCost: 50,
-      ),
+          id: uuid.v1(),
+          name: 'Ticket',
+          eTypeTransport: ETypeTransport.publicTransport,
+          brand: 'Cities transport',
+          cost: 50,
+          monthlyCost: 50,
+          commuting: 1,
+          bonusToRelax: -1,
+          bonusToSleep: -1),
       Transport(
         id: uuid.v1(),
         name: 'Car 1',
@@ -406,14 +329,17 @@ class Data {
         brand: 'Brand 1',
         cost: 2000,
         monthlyCost: 200,
+        commuting: 2,
       ),
       Transport(
         id: uuid.v1(),
         name: 'Car 2',
         eTypeTransport: ETypeTransport.car,
         brand: 'Brand 1',
-        cost: 5000,
+        cost: 1000,
         monthlyCost: 200,
+        commuting: 2,
+        bonusToRelax: 1,
       ),
     ];
   }

@@ -8,20 +8,32 @@ part of 'experience_model.dart';
 
 _$_Experience _$$_ExperienceFromJson(Map<String, dynamic> json) =>
     _$_Experience(
+      id: json['id'] as String,
+      name: json['name'] as String,
       exp: json['exp'] as int,
       requirements: (json['requirements'] as List<dynamic>)
           .map((e) => Skill.fromJson(e as Map<String, dynamic>))
           .toList(),
       salary: json['salary'] as int,
       interval: json['interval'] as int,
-      time: json['time'] as int,
+      work: json['work'] as int,
+      commuting: json['commuting'] as int,
+      bonusToRelax: json['bonusToRelax'] as int? ?? 0,
+      bonusToSleep: json['bonusToSleep'] as int? ?? 0,
+      bonusToLearn: json['bonusToLearn'] as int? ?? 0,
     );
 
 Map<String, dynamic> _$$_ExperienceToJson(_$_Experience instance) =>
     <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
       'exp': instance.exp,
       'requirements': instance.requirements.map((e) => e.toJson()).toList(),
       'salary': instance.salary,
       'interval': instance.interval,
-      'time': instance.time,
+      'work': instance.work,
+      'commuting': instance.commuting,
+      'bonusToRelax': instance.bonusToRelax,
+      'bonusToSleep': instance.bonusToSleep,
+      'bonusToLearn': instance.bonusToLearn,
     };

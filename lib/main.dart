@@ -64,70 +64,73 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<DarkModeCubit>(
+          lazy: false,
           create: (_) => getIt<DarkModeCubit>(),
         ),
         BlocProvider<SaveCubit>(
+          lazy: false,
           create: (_) => getIt<SaveCubit>(),
         ),
       ],
-      child: BlocBuilder<SaveCubit, SaveState>(
-        builder: (context, state) {
-          return MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (_) => getIt<DateCubit>(),
-              ),
-              BlocProvider(
-                create: (_) => getIt<StatsCubit>(),
-              ),
-              BlocProvider(
-                create: (_) => getIt<SkillsCubit>(),
-              ),
-              BlocProvider(
-                create: (_) => getIt<IncomeCubit>(),
-              ),
-              BlocProvider(
-                create: (_) => getIt<MoneyCubit>(),
-              ),
-              BlocProvider(
-                create: (_) => getIt<JobCubit>(),
-              ),
-              BlocProvider(
-                create: (_) => getIt<TimeSpendCubit>(),
-              ),
-              BlocProvider(
-                create: (_) => getIt<LearningCubit>(),
-              ),
-              BlocProvider(
-                create: (_) => getIt<MealCubit>(),
-              ),
-              BlocProvider(
-                create: (_) => getIt<HouseCubit>(),
-              ),
-              BlocProvider(
-                create: (_) => getIt<TransportCubit>(),
-              ),
-            ],
-            child: MaterialApp.router(
-              debugShowCheckedModeBanner: false,
-              builder: (context, widget) => _build(widget, context, botToastBuilder),
-              title: Strings.app_name(),
-              locale: context.locale,
-              localizationsDelegates: context.localizationDelegates,
-              supportedLocales: context.supportedLocales,
-              theme: CustomTheme.lightTheme,
-              darkTheme: CustomTheme.darkTheme,
-              themeMode: context.watch<DarkModeCubit>().state ? ThemeMode.dark : ThemeMode.light,
-              routerDelegate: _appRouter.delegate(
-                navigatorObservers: () => [
-                  BotToastNavigatorObserver(),
-                ],
-              ),
-              routeInformationParser: _appRouter.defaultRouteParser(),
+      child: Builder(builder: (context) {
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (_) => getIt<DateCubit>(),
             ),
-          );
-        },
-      ),
+            BlocProvider(
+              create: (_) => getIt<StatsCubit>(),
+            ),
+            BlocProvider(
+              create: (_) => getIt<SkillsCubit>(),
+            ),
+            BlocProvider(
+              create: (_) => getIt<IncomeCubit>(),
+            ),
+            BlocProvider(
+              create: (_) => getIt<MoneyCubit>(),
+            ),
+            BlocProvider(
+              create: (_) => getIt<JobCubit>(),
+            ),
+            BlocProvider(
+              create: (_) => getIt<TimeSpendCubit>(),
+            ),
+            BlocProvider(
+              create: (_) => getIt<LearningCubit>(),
+            ),
+            BlocProvider(
+              lazy: false,
+              create: (_) => getIt<MealCubit>(),
+            ),
+            BlocProvider(
+              lazy: false,
+              create: (_) => getIt<HouseCubit>(),
+            ),
+            BlocProvider(
+              lazy: false,
+              create: (_) => getIt<TransportCubit>(),
+            ),
+          ],
+          child: MaterialApp.router(
+            debugShowCheckedModeBanner: false,
+            builder: (context, widget) => _build(widget, context, botToastBuilder),
+            title: Strings.app_name(),
+            locale: context.locale,
+            localizationsDelegates: context.localizationDelegates,
+            supportedLocales: context.supportedLocales,
+            theme: CustomTheme.lightTheme,
+            darkTheme: CustomTheme.darkTheme,
+            themeMode: context.watch<DarkModeCubit>().state ? ThemeMode.dark : ThemeMode.light,
+            routerDelegate: _appRouter.delegate(
+              navigatorObservers: () => [
+                BotToastNavigatorObserver(),
+              ],
+            ),
+            routeInformationParser: _appRouter.defaultRouteParser(),
+          ),
+        );
+      }),
     );
   }
 

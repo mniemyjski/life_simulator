@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 
 class TimeSpendElement extends StatelessWidget {
   final String name;
+  final String valueName;
   final Color? color;
   final int value;
 
-  const TimeSpendElement({Key? key, required this.name, this.color, required this.value})
-      : super(key: key);
+  const TimeSpendElement({
+    Key? key,
+    required this.name,
+    this.color,
+    required this.value,
+    required this.valueName,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +36,7 @@ class TimeSpendElement extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.center,
                   child: Text(
-                    '${(value).round()}',
+                    valueName,
                     style:
                         TextStyle(fontSize: 8, color: Theme.of(context).textTheme.bodyText1!.color),
                   ),

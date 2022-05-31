@@ -27,9 +27,10 @@ mixin _$Transport {
   int get cost => throw _privateConstructorUsedError;
   int get monthlyCost => throw _privateConstructorUsedError;
   DateGame? get dateBuy => throw _privateConstructorUsedError;
-  int get bonusToSatisfaction => throw _privateConstructorUsedError;
-  int get bonusToTiredness => throw _privateConstructorUsedError;
-  int get bonusToHealth => throw _privateConstructorUsedError;
+  int get bonusToRelax => throw _privateConstructorUsedError;
+  int get bonusToSleep => throw _privateConstructorUsedError;
+  int get bonusToLearn => throw _privateConstructorUsedError;
+  int get commuting => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -49,9 +50,10 @@ abstract class $TransportCopyWith<$Res> {
       int cost,
       int monthlyCost,
       DateGame? dateBuy,
-      int bonusToSatisfaction,
-      int bonusToTiredness,
-      int bonusToHealth});
+      int bonusToRelax,
+      int bonusToSleep,
+      int bonusToLearn,
+      int commuting});
 
   $DateGameCopyWith<$Res>? get dateBuy;
 }
@@ -73,9 +75,10 @@ class _$TransportCopyWithImpl<$Res> implements $TransportCopyWith<$Res> {
     Object? cost = freezed,
     Object? monthlyCost = freezed,
     Object? dateBuy = freezed,
-    Object? bonusToSatisfaction = freezed,
-    Object? bonusToTiredness = freezed,
-    Object? bonusToHealth = freezed,
+    Object? bonusToRelax = freezed,
+    Object? bonusToSleep = freezed,
+    Object? bonusToLearn = freezed,
+    Object? commuting = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -106,17 +109,21 @@ class _$TransportCopyWithImpl<$Res> implements $TransportCopyWith<$Res> {
           ? _value.dateBuy
           : dateBuy // ignore: cast_nullable_to_non_nullable
               as DateGame?,
-      bonusToSatisfaction: bonusToSatisfaction == freezed
-          ? _value.bonusToSatisfaction
-          : bonusToSatisfaction // ignore: cast_nullable_to_non_nullable
+      bonusToRelax: bonusToRelax == freezed
+          ? _value.bonusToRelax
+          : bonusToRelax // ignore: cast_nullable_to_non_nullable
               as int,
-      bonusToTiredness: bonusToTiredness == freezed
-          ? _value.bonusToTiredness
-          : bonusToTiredness // ignore: cast_nullable_to_non_nullable
+      bonusToSleep: bonusToSleep == freezed
+          ? _value.bonusToSleep
+          : bonusToSleep // ignore: cast_nullable_to_non_nullable
               as int,
-      bonusToHealth: bonusToHealth == freezed
-          ? _value.bonusToHealth
-          : bonusToHealth // ignore: cast_nullable_to_non_nullable
+      bonusToLearn: bonusToLearn == freezed
+          ? _value.bonusToLearn
+          : bonusToLearn // ignore: cast_nullable_to_non_nullable
+              as int,
+      commuting: commuting == freezed
+          ? _value.commuting
+          : commuting // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -147,9 +154,10 @@ abstract class _$$_TransportCopyWith<$Res> implements $TransportCopyWith<$Res> {
       int cost,
       int monthlyCost,
       DateGame? dateBuy,
-      int bonusToSatisfaction,
-      int bonusToTiredness,
-      int bonusToHealth});
+      int bonusToRelax,
+      int bonusToSleep,
+      int bonusToLearn,
+      int commuting});
 
   @override
   $DateGameCopyWith<$Res>? get dateBuy;
@@ -174,9 +182,10 @@ class __$$_TransportCopyWithImpl<$Res> extends _$TransportCopyWithImpl<$Res>
     Object? cost = freezed,
     Object? monthlyCost = freezed,
     Object? dateBuy = freezed,
-    Object? bonusToSatisfaction = freezed,
-    Object? bonusToTiredness = freezed,
-    Object? bonusToHealth = freezed,
+    Object? bonusToRelax = freezed,
+    Object? bonusToSleep = freezed,
+    Object? bonusToLearn = freezed,
+    Object? commuting = freezed,
   }) {
     return _then(_$_Transport(
       id: id == freezed
@@ -207,17 +216,21 @@ class __$$_TransportCopyWithImpl<$Res> extends _$TransportCopyWithImpl<$Res>
           ? _value.dateBuy
           : dateBuy // ignore: cast_nullable_to_non_nullable
               as DateGame?,
-      bonusToSatisfaction: bonusToSatisfaction == freezed
-          ? _value.bonusToSatisfaction
-          : bonusToSatisfaction // ignore: cast_nullable_to_non_nullable
+      bonusToRelax: bonusToRelax == freezed
+          ? _value.bonusToRelax
+          : bonusToRelax // ignore: cast_nullable_to_non_nullable
               as int,
-      bonusToTiredness: bonusToTiredness == freezed
-          ? _value.bonusToTiredness
-          : bonusToTiredness // ignore: cast_nullable_to_non_nullable
+      bonusToSleep: bonusToSleep == freezed
+          ? _value.bonusToSleep
+          : bonusToSleep // ignore: cast_nullable_to_non_nullable
               as int,
-      bonusToHealth: bonusToHealth == freezed
-          ? _value.bonusToHealth
-          : bonusToHealth // ignore: cast_nullable_to_non_nullable
+      bonusToLearn: bonusToLearn == freezed
+          ? _value.bonusToLearn
+          : bonusToLearn // ignore: cast_nullable_to_non_nullable
+              as int,
+      commuting: commuting == freezed
+          ? _value.commuting
+          : commuting // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -234,9 +247,10 @@ class _$_Transport implements _Transport {
       required this.cost,
       required this.monthlyCost,
       this.dateBuy,
-      this.bonusToSatisfaction = 0,
-      this.bonusToTiredness = 0,
-      this.bonusToHealth = 0});
+      this.bonusToRelax = 0,
+      this.bonusToSleep = 0,
+      this.bonusToLearn = 0,
+      this.commuting = 0});
 
   factory _$_Transport.fromJson(Map<String, dynamic> json) =>
       _$$_TransportFromJson(json);
@@ -257,17 +271,20 @@ class _$_Transport implements _Transport {
   final DateGame? dateBuy;
   @override
   @JsonKey()
-  final int bonusToSatisfaction;
+  final int bonusToRelax;
   @override
   @JsonKey()
-  final int bonusToTiredness;
+  final int bonusToSleep;
   @override
   @JsonKey()
-  final int bonusToHealth;
+  final int bonusToLearn;
+  @override
+  @JsonKey()
+  final int commuting;
 
   @override
   String toString() {
-    return 'Transport(id: $id, name: $name, brand: $brand, eTypeTransport: $eTypeTransport, cost: $cost, monthlyCost: $monthlyCost, dateBuy: $dateBuy, bonusToSatisfaction: $bonusToSatisfaction, bonusToTiredness: $bonusToTiredness, bonusToHealth: $bonusToHealth)';
+    return 'Transport(id: $id, name: $name, brand: $brand, eTypeTransport: $eTypeTransport, cost: $cost, monthlyCost: $monthlyCost, dateBuy: $dateBuy, bonusToRelax: $bonusToRelax, bonusToSleep: $bonusToSleep, bonusToLearn: $bonusToLearn, commuting: $commuting)';
   }
 
   @override
@@ -285,11 +302,12 @@ class _$_Transport implements _Transport {
                 .equals(other.monthlyCost, monthlyCost) &&
             const DeepCollectionEquality().equals(other.dateBuy, dateBuy) &&
             const DeepCollectionEquality()
-                .equals(other.bonusToSatisfaction, bonusToSatisfaction) &&
+                .equals(other.bonusToRelax, bonusToRelax) &&
             const DeepCollectionEquality()
-                .equals(other.bonusToTiredness, bonusToTiredness) &&
+                .equals(other.bonusToSleep, bonusToSleep) &&
             const DeepCollectionEquality()
-                .equals(other.bonusToHealth, bonusToHealth));
+                .equals(other.bonusToLearn, bonusToLearn) &&
+            const DeepCollectionEquality().equals(other.commuting, commuting));
   }
 
   @JsonKey(ignore: true)
@@ -303,9 +321,10 @@ class _$_Transport implements _Transport {
       const DeepCollectionEquality().hash(cost),
       const DeepCollectionEquality().hash(monthlyCost),
       const DeepCollectionEquality().hash(dateBuy),
-      const DeepCollectionEquality().hash(bonusToSatisfaction),
-      const DeepCollectionEquality().hash(bonusToTiredness),
-      const DeepCollectionEquality().hash(bonusToHealth));
+      const DeepCollectionEquality().hash(bonusToRelax),
+      const DeepCollectionEquality().hash(bonusToSleep),
+      const DeepCollectionEquality().hash(bonusToLearn),
+      const DeepCollectionEquality().hash(commuting));
 
   @JsonKey(ignore: true)
   @override
@@ -327,9 +346,10 @@ abstract class _Transport implements Transport {
       required final int cost,
       required final int monthlyCost,
       final DateGame? dateBuy,
-      final int bonusToSatisfaction,
-      final int bonusToTiredness,
-      final int bonusToHealth}) = _$_Transport;
+      final int bonusToRelax,
+      final int bonusToSleep,
+      final int bonusToLearn,
+      final int commuting}) = _$_Transport;
 
   factory _Transport.fromJson(Map<String, dynamic> json) =
       _$_Transport.fromJson;
@@ -349,11 +369,13 @@ abstract class _Transport implements Transport {
   @override
   DateGame? get dateBuy => throw _privateConstructorUsedError;
   @override
-  int get bonusToSatisfaction => throw _privateConstructorUsedError;
+  int get bonusToRelax => throw _privateConstructorUsedError;
   @override
-  int get bonusToTiredness => throw _privateConstructorUsedError;
+  int get bonusToSleep => throw _privateConstructorUsedError;
   @override
-  int get bonusToHealth => throw _privateConstructorUsedError;
+  int get bonusToLearn => throw _privateConstructorUsedError;
+  @override
+  int get commuting => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_TransportCopyWith<_$_Transport> get copyWith =>

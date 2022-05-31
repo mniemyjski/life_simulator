@@ -4,6 +4,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:life_simulator/app/save/save_cubit.dart';
+import 'package:life_simulator/app/time_spend/cubit/time_spend_cubit.dart';
+import 'package:life_simulator/app/time_spend/models/bonus/bonus_model.dart';
 
 import '../../../../data/data.dart';
 import '../../../income/cubit/income_cubit.dart';
@@ -19,38 +21,42 @@ part 'transport_state.dart';
 class TransportCubit extends HydratedCubit<TransportState> {
   final MoneyCubit _moneyCubit;
   final IncomeCubit _incomeCubit;
+  final TimeSpendCubit _timeSpendCubit;
+
   final SaveCubit _saveCubit;
-  late StreamSubscription _save;
+  late StreamSubscription _saveSub;
 
   TransportCubit({
     required MoneyCubit moneyCubit,
     required IncomeCubit incomeCubit,
     required SaveCubit saveCubit,
+    required TimeSpendCubit timeSpendCubit,
   })  : _moneyCubit = moneyCubit,
         _incomeCubit = incomeCubit,
         _saveCubit = saveCubit,
+        _timeSpendCubit = timeSpendCubit,
         super(TransportState.initial(transport: null, transports: null)) {
     _saveCubit.state.whenOrNull(loaded: (save) => init(save));
-    _save = _saveCubit.stream.listen((s) => s.whenOrNull(loaded: (save) => init(save)));
+    _saveSub = _saveCubit.stream.listen((s) => s.whenOrNull(loaded: (save) => init(save)));
   }
 
   @override
   Future<void> close() async {
-    _save.cancel();
+    _saveSub.cancel();
     super.close();
   }
 
   init(bool newGame) {
+    _newGame() => emit(TransportState.loaded(transport: null, transports: Data.transports()));
+    _loadGame(Transport? transport, List<Transport> transports) =>
+        emit(TransportState.loaded(transport: transport, transports: transports));
+
     state.whenOrNull(
       initial: (transport, transports) {
-        !newGame || transports == null
-            ? emit(TransportState.loaded(transport: null, transports: Data.transports()))
-            : emit(TransportState.loaded(transport: transport, transports: transports));
+        !newGame || transports == null ? _newGame() : _loadGame(transport, transports);
       },
       loaded: (transport, transports) {
-        !newGame
-            ? emit(TransportState.loaded(transport: null, transports: Data.transports()))
-            : emit(TransportState.loaded(transport: transport, transports: transports));
+        !newGame ? _newGame() : _loadGame(transport, transports);
       },
     );
   }
@@ -63,6 +69,7 @@ class TransportCubit extends HydratedCubit<TransportState> {
         if (_transport.name != 'Ticket') {
           return "Before you can buy new car you must to sell your car";
         } else {
+          _timeSpendCubit.removeBonuses(ETypeBonusSource.transport);
           _incomeCubit.remove(_transport.id);
         }
       }
@@ -76,6 +83,21 @@ class TransportCubit extends HydratedCubit<TransportState> {
         timeLeft: 30,
       );
 
+      if (transport.commuting != 0)
+        _timeSpendCubit.addBonuses(
+          Bonus(
+              eTypeBonus: ETypeBonus.commuting,
+              eTypeBonusSource: ETypeBonusSource.transport,
+              value: transport.commuting),
+        );
+
+      if (transport.bonusToRelax != 0)
+        _timeSpendCubit.addBonuses(
+          Bonus(
+              eTypeBonus: ETypeBonus.relax,
+              eTypeBonusSource: ETypeBonusSource.transport,
+              value: transport.bonusToRelax),
+        );
       _moneyCubit.change(-transport.cost);
       _incomeCubit.add(income);
 
@@ -88,6 +110,7 @@ class TransportCubit extends HydratedCubit<TransportState> {
   sell() {
     return state.whenOrNull(loaded: (_transport, _transports) {
       if (_transport != null) {
+        _timeSpendCubit.removeBonuses(ETypeBonusSource.transport);
         _incomeCubit.remove(_transport.id);
         _moneyCubit.change((_transport.cost * 0.8).toInt());
 

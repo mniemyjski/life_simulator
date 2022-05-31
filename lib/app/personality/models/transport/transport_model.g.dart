@@ -17,9 +17,10 @@ _$_Transport _$$_TransportFromJson(Map<String, dynamic> json) => _$_Transport(
       dateBuy: json['dateBuy'] == null
           ? null
           : DateGame.fromJson(json['dateBuy'] as Map<String, dynamic>),
-      bonusToSatisfaction: json['bonusToSatisfaction'] as int? ?? 0,
-      bonusToTiredness: json['bonusToTiredness'] as int? ?? 0,
-      bonusToHealth: json['bonusToHealth'] as int? ?? 0,
+      bonusToRelax: json['bonusToRelax'] as int? ?? 0,
+      bonusToSleep: json['bonusToSleep'] as int? ?? 0,
+      bonusToLearn: json['bonusToLearn'] as int? ?? 0,
+      commuting: json['commuting'] as int? ?? 0,
     );
 
 Map<String, dynamic> _$$_TransportToJson(_$_Transport instance) =>
@@ -31,9 +32,10 @@ Map<String, dynamic> _$$_TransportToJson(_$_Transport instance) =>
       'cost': instance.cost,
       'monthlyCost': instance.monthlyCost,
       'dateBuy': instance.dateBuy?.toJson(),
-      'bonusToSatisfaction': instance.bonusToSatisfaction,
-      'bonusToTiredness': instance.bonusToTiredness,
-      'bonusToHealth': instance.bonusToHealth,
+      'bonusToRelax': instance.bonusToRelax,
+      'bonusToSleep': instance.bonusToSleep,
+      'bonusToLearn': instance.bonusToLearn,
+      'commuting': instance.commuting,
     };
 
 const _$ETypeTransportEnumMap = {

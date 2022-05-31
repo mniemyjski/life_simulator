@@ -23,6 +23,9 @@ mixin _$Stats {
   double get health => throw _privateConstructorUsedError;
   double get satisfaction => throw _privateConstructorUsedError;
   double get tiredness => throw _privateConstructorUsedError;
+  double get maxHealth => throw _privateConstructorUsedError;
+  double get maxSatisfaction => throw _privateConstructorUsedError;
+  double get maxTiredness => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -33,7 +36,13 @@ mixin _$Stats {
 abstract class $StatsCopyWith<$Res> {
   factory $StatsCopyWith(Stats value, $Res Function(Stats) then) =
       _$StatsCopyWithImpl<$Res>;
-  $Res call({double health, double satisfaction, double tiredness});
+  $Res call(
+      {double health,
+      double satisfaction,
+      double tiredness,
+      double maxHealth,
+      double maxSatisfaction,
+      double maxTiredness});
 }
 
 /// @nodoc
@@ -49,6 +58,9 @@ class _$StatsCopyWithImpl<$Res> implements $StatsCopyWith<$Res> {
     Object? health = freezed,
     Object? satisfaction = freezed,
     Object? tiredness = freezed,
+    Object? maxHealth = freezed,
+    Object? maxSatisfaction = freezed,
+    Object? maxTiredness = freezed,
   }) {
     return _then(_value.copyWith(
       health: health == freezed
@@ -63,6 +75,18 @@ class _$StatsCopyWithImpl<$Res> implements $StatsCopyWith<$Res> {
           ? _value.tiredness
           : tiredness // ignore: cast_nullable_to_non_nullable
               as double,
+      maxHealth: maxHealth == freezed
+          ? _value.maxHealth
+          : maxHealth // ignore: cast_nullable_to_non_nullable
+              as double,
+      maxSatisfaction: maxSatisfaction == freezed
+          ? _value.maxSatisfaction
+          : maxSatisfaction // ignore: cast_nullable_to_non_nullable
+              as double,
+      maxTiredness: maxTiredness == freezed
+          ? _value.maxTiredness
+          : maxTiredness // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -72,7 +96,13 @@ abstract class _$$_StatsCopyWith<$Res> implements $StatsCopyWith<$Res> {
   factory _$$_StatsCopyWith(_$_Stats value, $Res Function(_$_Stats) then) =
       __$$_StatsCopyWithImpl<$Res>;
   @override
-  $Res call({double health, double satisfaction, double tiredness});
+  $Res call(
+      {double health,
+      double satisfaction,
+      double tiredness,
+      double maxHealth,
+      double maxSatisfaction,
+      double maxTiredness});
 }
 
 /// @nodoc
@@ -89,6 +119,9 @@ class __$$_StatsCopyWithImpl<$Res> extends _$StatsCopyWithImpl<$Res>
     Object? health = freezed,
     Object? satisfaction = freezed,
     Object? tiredness = freezed,
+    Object? maxHealth = freezed,
+    Object? maxSatisfaction = freezed,
+    Object? maxTiredness = freezed,
   }) {
     return _then(_$_Stats(
       health: health == freezed
@@ -103,6 +136,18 @@ class __$$_StatsCopyWithImpl<$Res> extends _$StatsCopyWithImpl<$Res>
           ? _value.tiredness
           : tiredness // ignore: cast_nullable_to_non_nullable
               as double,
+      maxHealth: maxHealth == freezed
+          ? _value.maxHealth
+          : maxHealth // ignore: cast_nullable_to_non_nullable
+              as double,
+      maxSatisfaction: maxSatisfaction == freezed
+          ? _value.maxSatisfaction
+          : maxSatisfaction // ignore: cast_nullable_to_non_nullable
+              as double,
+      maxTiredness: maxTiredness == freezed
+          ? _value.maxTiredness
+          : maxTiredness // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -113,7 +158,10 @@ class _$_Stats implements _Stats {
   const _$_Stats(
       {required this.health,
       required this.satisfaction,
-      required this.tiredness});
+      required this.tiredness,
+      required this.maxHealth,
+      required this.maxSatisfaction,
+      required this.maxTiredness});
 
   factory _$_Stats.fromJson(Map<String, dynamic> json) =>
       _$$_StatsFromJson(json);
@@ -124,10 +172,16 @@ class _$_Stats implements _Stats {
   final double satisfaction;
   @override
   final double tiredness;
+  @override
+  final double maxHealth;
+  @override
+  final double maxSatisfaction;
+  @override
+  final double maxTiredness;
 
   @override
   String toString() {
-    return 'Stats(health: $health, satisfaction: $satisfaction, tiredness: $tiredness)';
+    return 'Stats(health: $health, satisfaction: $satisfaction, tiredness: $tiredness, maxHealth: $maxHealth, maxSatisfaction: $maxSatisfaction, maxTiredness: $maxTiredness)';
   }
 
   @override
@@ -138,7 +192,12 @@ class _$_Stats implements _Stats {
             const DeepCollectionEquality().equals(other.health, health) &&
             const DeepCollectionEquality()
                 .equals(other.satisfaction, satisfaction) &&
-            const DeepCollectionEquality().equals(other.tiredness, tiredness));
+            const DeepCollectionEquality().equals(other.tiredness, tiredness) &&
+            const DeepCollectionEquality().equals(other.maxHealth, maxHealth) &&
+            const DeepCollectionEquality()
+                .equals(other.maxSatisfaction, maxSatisfaction) &&
+            const DeepCollectionEquality()
+                .equals(other.maxTiredness, maxTiredness));
   }
 
   @JsonKey(ignore: true)
@@ -147,7 +206,10 @@ class _$_Stats implements _Stats {
       runtimeType,
       const DeepCollectionEquality().hash(health),
       const DeepCollectionEquality().hash(satisfaction),
-      const DeepCollectionEquality().hash(tiredness));
+      const DeepCollectionEquality().hash(tiredness),
+      const DeepCollectionEquality().hash(maxHealth),
+      const DeepCollectionEquality().hash(maxSatisfaction),
+      const DeepCollectionEquality().hash(maxTiredness));
 
   @JsonKey(ignore: true)
   @override
@@ -164,7 +226,10 @@ abstract class _Stats implements Stats {
   const factory _Stats(
       {required final double health,
       required final double satisfaction,
-      required final double tiredness}) = _$_Stats;
+      required final double tiredness,
+      required final double maxHealth,
+      required final double maxSatisfaction,
+      required final double maxTiredness}) = _$_Stats;
 
   factory _Stats.fromJson(Map<String, dynamic> json) = _$_Stats.fromJson;
 
@@ -174,6 +239,12 @@ abstract class _Stats implements Stats {
   double get satisfaction => throw _privateConstructorUsedError;
   @override
   double get tiredness => throw _privateConstructorUsedError;
+  @override
+  double get maxHealth => throw _privateConstructorUsedError;
+  @override
+  double get maxSatisfaction => throw _privateConstructorUsedError;
+  @override
+  double get maxTiredness => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_StatsCopyWith<_$_Stats> get copyWith =>

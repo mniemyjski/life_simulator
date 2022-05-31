@@ -16,9 +16,9 @@ class House with _$House {
     required int cost,
     required int monthlyCost,
     DateGame? dateBuy,
-    @Default(0) int bonusToSatisfaction,
-    @Default(0) int bonusToTiredness,
-    @Default(0) int bonusToHealth,
+    @Default(0) int bonusToRelax,
+    @Default(0) int bonusToSleep,
+    @Default(0) int bonusToLearn,
   }) = _House;
 
   factory House.fromJson(Map<String, dynamic> json) => _$HouseFromJson(json);

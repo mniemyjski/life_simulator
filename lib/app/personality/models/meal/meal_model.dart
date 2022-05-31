@@ -9,9 +9,9 @@ class Meal with _$Meal {
     required String id,
     required String name,
     required int cost,
-    @Default(0) int bonusToSatisfaction,
-    @Default(0) int bonusToTiredness,
-    @Default(0) int bonusToHealth,
+    @Default(0) int bonusToRelax,
+    @Default(0) int bonusToSleep,
+    @Default(0) int bonusToLearn,
   }) = _Meal;
 
   factory Meal.fromJson(Map<String, dynamic> json) => _$MealFromJson(json);
