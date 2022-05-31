@@ -30,4 +30,5 @@ const _$ETypeBonusSourceEnumMap = {
   ETypeBonusSource.transport: 'transport',
   ETypeBonusSource.meal: 'meal',
   ETypeBonusSource.house: 'house',
+  ETypeBonusSource.job: 'job',
 };

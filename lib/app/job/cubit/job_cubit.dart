@@ -13,6 +13,7 @@ import '../../income/cubit/income_cubit.dart';
 import '../../income/models/income_model.dart';
 import '../../money/cubit/money_cubit.dart';
 import '../../save/save_cubit.dart';
+import '../../time_spend/models/bonus/bonus_model.dart';
 import '../models/job/job_model.dart';
 
 part 'job_cubit.freezed.dart';
@@ -87,6 +88,29 @@ class JobCubit extends HydratedCubit<JobState> {
             timeLeft: experience.interval,
           );
 
+          if (experience.bonusToRelax != 0)
+            _timeSpendCubit.addBonuses(
+              Bonus(
+                  eTypeBonus: ETypeBonus.relax,
+                  eTypeBonusSource: ETypeBonusSource.house,
+                  value: experience.bonusToRelax),
+            );
+
+          if (experience.bonusToSleep != 0)
+            _timeSpendCubit.addBonuses(
+              Bonus(
+                  eTypeBonus: ETypeBonus.sleep,
+                  eTypeBonusSource: ETypeBonusSource.house,
+                  value: experience.bonusToSleep),
+            );
+
+          if (experience.bonusToLearn != 0)
+            _timeSpendCubit.addBonuses(
+              Bonus(
+                  eTypeBonus: ETypeBonus.learn,
+                  eTypeBonusSource: ETypeBonusSource.house,
+                  value: experience.bonusToLearn),
+            );
           _incomeCubit.add(income);
           emit(JobState.loaded(job: job, experience: experience, jobs: jobs));
           return "succeed";
@@ -138,6 +162,7 @@ class JobCubit extends HydratedCubit<JobState> {
           });
       });
 
+      _timeSpendCubit.removeBonuses(ETypeBonusSource.job);
       _incomeCubit.remove(job!.id);
       _timeSpendCubit.changeWork(-experience!.work);
       _timeSpendCubit.changeCommuting(-experience.commuting);
@@ -165,6 +190,31 @@ class JobCubit extends HydratedCubit<JobState> {
           if (test) return "You didn't get a promote";
 
           _timeSpendCubit.changeCommuting(newExperience.commuting - experience.commuting);
+
+          _timeSpendCubit.removeBonuses(ETypeBonusSource.house);
+          if (newExperience.bonusToRelax != 0)
+            _timeSpendCubit.addBonuses(
+              Bonus(
+                  eTypeBonus: ETypeBonus.relax,
+                  eTypeBonusSource: ETypeBonusSource.house,
+                  value: newExperience.bonusToRelax),
+            );
+
+          if (newExperience.bonusToSleep != 0)
+            _timeSpendCubit.addBonuses(
+              Bonus(
+                  eTypeBonus: ETypeBonus.sleep,
+                  eTypeBonusSource: ETypeBonusSource.house,
+                  value: newExperience.bonusToSleep),
+            );
+
+          if (newExperience.bonusToLearn != 0)
+            _timeSpendCubit.addBonuses(
+              Bonus(
+                  eTypeBonus: ETypeBonus.learn,
+                  eTypeBonusSource: ETypeBonusSource.house,
+                  value: newExperience.bonusToLearn),
+            );
 
           _incomeCubit.update(id: job.id, value: newExperience.salary);
           emit(JobState.loaded(job: job, experience: newExperience, jobs: jobs));

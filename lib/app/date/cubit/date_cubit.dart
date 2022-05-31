@@ -5,6 +5,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:life_simulator/app/date/models/date_game_model.dart';
 import 'package:life_simulator/app/learning/cubit/learning_cubit.dart';
+import 'package:life_simulator/app/settings/cubit/day_setting_cubit.dart';
 
 import '../../income/cubit/income_cubit.dart';
 import '../../save/save_cubit.dart';
@@ -18,20 +19,23 @@ part 'date_state.dart';
 class DateCubit extends HydratedCubit<DateState> {
   final SaveCubit _saveCubit;
   final TimeSpendCubit _timeSpendCubit;
+  final DaySettingCubit _daySettingCubit;
 
   final LearningCubit _learningCubit;
   final IncomeCubit _incomeCubit;
   late StreamSubscription _save;
 
-  DateCubit({
-    required SaveCubit saveCubit,
-    required TimeSpendCubit timeSpendCubit,
-    required LearningCubit learningCubit,
-    required IncomeCubit incomeCubit,
-  })  : _timeSpendCubit = timeSpendCubit,
+  DateCubit(
+      {required SaveCubit saveCubit,
+      required TimeSpendCubit timeSpendCubit,
+      required LearningCubit learningCubit,
+      required IncomeCubit incomeCubit,
+      required DaySettingCubit daySettingCubit})
+      : _timeSpendCubit = timeSpendCubit,
         _learningCubit = learningCubit,
         _incomeCubit = incomeCubit,
         _saveCubit = saveCubit,
+        _daySettingCubit = daySettingCubit,
         super(DateState.initial(null)) {
     _saveCubit.state.whenOrNull(loaded: (save) => init(save));
     _save = _saveCubit.stream.listen((s) => s.whenOrNull(loaded: (save) => init(save)));
@@ -59,7 +63,7 @@ class DateCubit extends HydratedCubit<DateState> {
   }
 
   nextDay() {
-    for (var i = 0; i < 1; i++) {
+    for (var i = 0; i < _daySettingCubit.state; i++) {
       state.whenOrNull(loaded: (date) {
         _timeSpendCubit.state.whenOrNull(loaded: (timeSpend) {
           bool result = _learningCubit.counting(timeSpend.learn);

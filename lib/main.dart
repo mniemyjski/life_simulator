@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:life_simulator/app/personality/cubit/transport/transport_cubit.dart';
+import 'package:life_simulator/app/settings/cubit/day_setting_cubit.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:url_strategy/url_strategy.dart';
 
@@ -66,6 +67,10 @@ class MyApp extends StatelessWidget {
         BlocProvider<DarkModeCubit>(
           lazy: false,
           create: (_) => getIt<DarkModeCubit>(),
+        ),
+        BlocProvider<DaySettingCubit>(
+          lazy: false,
+          create: (_) => getIt<DaySettingCubit>(),
         ),
         BlocProvider<SaveCubit>(
           lazy: false,

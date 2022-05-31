@@ -5,7 +5,7 @@ part 'bonus_model.g.dart';
 
 enum ETypeBonus { commuting, relax, sleep, learn }
 
-enum ETypeBonusSource { transport, meal, house }
+enum ETypeBonusSource { transport, meal, house, job }
 
 @freezed
 class Bonus with _$Bonus {

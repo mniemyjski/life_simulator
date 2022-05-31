@@ -27,6 +27,8 @@ class Data {
             interval: 30,
             work: 8,
             commuting: 2,
+            bonusToRelax: -2,
+            bonusToSleep: -2,
             requirements: [],
           ),
           Experience(
@@ -37,6 +39,8 @@ class Data {
             interval: 30,
             work: 8,
             commuting: 4,
+            bonusToRelax: -2,
+            bonusToSleep: -2,
             requirements: [],
           ),
           Experience(
@@ -47,6 +51,8 @@ class Data {
             interval: 30,
             work: 8,
             commuting: 2,
+            bonusToRelax: -1,
+            bonusToSleep: -1,
             requirements: [],
           ),
         ],
@@ -64,6 +70,8 @@ class Data {
             interval: 30,
             work: 10,
             commuting: 2,
+            bonusToRelax: -3,
+            bonusToSleep: -2,
             requirements: [],
           ),
           Experience(
@@ -74,6 +82,8 @@ class Data {
             interval: 30,
             work: 10,
             commuting: 2,
+            bonusToRelax: -2,
+            bonusToSleep: -2,
             requirements: [],
           ),
           Experience(
@@ -84,6 +94,8 @@ class Data {
             interval: 30,
             work: 12,
             commuting: 0,
+            bonusToRelax: -1,
+            bonusToSleep: -1,
             requirements: [],
           ),
         ],
@@ -185,21 +197,10 @@ class Data {
               exp: 1,
             ),
           ],
-          time: 500),
+          time: 1800),
       Learning(
           id: uuid.v1(),
-          name: 'Wzorce projektowe',
-          cost: 50,
-          skills: [
-            Skill(
-              name: ETypeSkills.programming,
-              exp: 1,
-            ),
-          ],
-          time: 5),
-      Learning(
-          id: uuid.v1(),
-          name: 'Kurs programowania',
+          name: 'Książka programowania',
           cost: 500,
           skills: [
             Skill(
@@ -207,7 +208,18 @@ class Data {
               exp: 1,
             ),
           ],
-          time: 500),
+          time: 1800),
+      Learning(
+          id: uuid.v1(),
+          name: 'Kurs programowania',
+          cost: 900,
+          skills: [
+            Skill(
+              name: ETypeSkills.programming,
+              exp: 1,
+            ),
+          ],
+          time: 5000),
     ];
   }
   //#endregion
@@ -260,8 +272,8 @@ class Data {
         id: uuid.v1(),
         name: 'House 1',
         eTypeHouse: ETypeHouse.rent,
-        cost: 800,
-        monthlyCost: 800,
+        cost: 500,
+        monthlyCost: 500,
         bonusToRelax: -1,
         bonusToSleep: -1,
       ),
@@ -271,6 +283,8 @@ class Data {
         eTypeHouse: ETypeHouse.rent,
         cost: 1200,
         monthlyCost: 1200,
+        bonusToRelax: 0,
+        bonusToSleep: 0,
       ),
       House(
         id: uuid.v1(),
@@ -279,7 +293,7 @@ class Data {
         cost: 1800,
         monthlyCost: 1800,
         bonusToRelax: 1,
-        bonusToSleep: 1,
+        bonusToSleep: 0,
       ),
       House(
         id: uuid.v1(),
@@ -287,6 +301,8 @@ class Data {
         eTypeHouse: ETypeHouse.buy,
         cost: 60000,
         monthlyCost: 100,
+        bonusToRelax: 0,
+        bonusToSleep: 0,
       ),
       House(
         id: uuid.v1(),
@@ -294,6 +310,8 @@ class Data {
         eTypeHouse: ETypeHouse.buy,
         cost: 160000,
         monthlyCost: 200,
+        bonusToRelax: 1,
+        bonusToSleep: 0,
       ),
       House(
         id: uuid.v1(),
@@ -313,15 +331,16 @@ class Data {
     var uuid = Uuid();
     return [
       Transport(
-          id: uuid.v1(),
-          name: 'Ticket',
-          eTypeTransport: ETypeTransport.publicTransport,
-          brand: 'Cities transport',
-          cost: 50,
-          monthlyCost: 50,
-          commuting: 1,
-          bonusToRelax: -1,
-          bonusToSleep: -1),
+        id: uuid.v1(),
+        name: 'Ticket',
+        eTypeTransport: ETypeTransport.publicTransport,
+        brand: 'Cities transport',
+        cost: 50,
+        monthlyCost: 50,
+        commuting: 1,
+        bonusToRelax: -1,
+        bonusToSleep: -1,
+      ),
       Transport(
         id: uuid.v1(),
         name: 'Car 1',
@@ -336,7 +355,7 @@ class Data {
         name: 'Car 2',
         eTypeTransport: ETypeTransport.car,
         brand: 'Brand 1',
-        cost: 1000,
+        cost: 5000,
         monthlyCost: 200,
         commuting: 2,
         bonusToRelax: 1,
