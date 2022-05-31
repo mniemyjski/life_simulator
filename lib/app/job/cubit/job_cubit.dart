@@ -92,7 +92,7 @@ class JobCubit extends HydratedCubit<JobState> {
             _timeSpendCubit.addBonuses(
               Bonus(
                   eTypeBonus: ETypeBonus.relax,
-                  eTypeBonusSource: ETypeBonusSource.house,
+                  eTypeBonusSource: ETypeBonusSource.job,
                   value: experience.bonusToRelax),
             );
 
@@ -100,7 +100,7 @@ class JobCubit extends HydratedCubit<JobState> {
             _timeSpendCubit.addBonuses(
               Bonus(
                   eTypeBonus: ETypeBonus.sleep,
-                  eTypeBonusSource: ETypeBonusSource.house,
+                  eTypeBonusSource: ETypeBonusSource.job,
                   value: experience.bonusToSleep),
             );
 
@@ -108,7 +108,7 @@ class JobCubit extends HydratedCubit<JobState> {
             _timeSpendCubit.addBonuses(
               Bonus(
                   eTypeBonus: ETypeBonus.learn,
-                  eTypeBonusSource: ETypeBonusSource.house,
+                  eTypeBonusSource: ETypeBonusSource.job,
                   value: experience.bonusToLearn),
             );
           _incomeCubit.add(income);
@@ -191,12 +191,12 @@ class JobCubit extends HydratedCubit<JobState> {
 
           _timeSpendCubit.changeCommuting(newExperience.commuting - experience.commuting);
 
-          _timeSpendCubit.removeBonuses(ETypeBonusSource.house);
+          _timeSpendCubit.removeBonuses(ETypeBonusSource.job);
           if (newExperience.bonusToRelax != 0)
             _timeSpendCubit.addBonuses(
               Bonus(
                   eTypeBonus: ETypeBonus.relax,
-                  eTypeBonusSource: ETypeBonusSource.house,
+                  eTypeBonusSource: ETypeBonusSource.job,
                   value: newExperience.bonusToRelax),
             );
 
@@ -204,7 +204,7 @@ class JobCubit extends HydratedCubit<JobState> {
             _timeSpendCubit.addBonuses(
               Bonus(
                   eTypeBonus: ETypeBonus.sleep,
-                  eTypeBonusSource: ETypeBonusSource.house,
+                  eTypeBonusSource: ETypeBonusSource.job,
                   value: newExperience.bonusToSleep),
             );
 
@@ -212,7 +212,7 @@ class JobCubit extends HydratedCubit<JobState> {
             _timeSpendCubit.addBonuses(
               Bonus(
                   eTypeBonus: ETypeBonus.learn,
-                  eTypeBonusSource: ETypeBonusSource.house,
+                  eTypeBonusSource: ETypeBonusSource.job,
                   value: newExperience.bonusToLearn),
             );
 

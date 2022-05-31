@@ -6,7 +6,6 @@ import 'package:injectable/injectable.dart';
 import 'package:life_simulator/app/date/cubit/date_cubit.dart';
 import 'package:life_simulator/app/time_spend/cubit/time_spend_cubit.dart';
 
-import '../../../utilities/utilities.dart';
 import '../../save/save_cubit.dart';
 import '../../time_spend/models/bonus/bonus_model.dart';
 import '../models/stats_model.dart';
@@ -81,31 +80,11 @@ class StatsCubit extends HydratedCubit<StatsState> {
       _timeSpendCubit.state.whenOrNull(loaded: (timeSpend) {
         state.whenOrNull(loaded: (stats) {
           Stats _stats = stats;
-          int yRelax = 0;
-          int ySleep = 0;
 
-          if (year > 17 && year < 25) {
-            yRelax = -1;
-            ySleep = 1;
-          }
-          if (year >= 25 && year < 50) {
-            yRelax = 0;
-            ySleep = 0;
-          }
-          if (year >= 50 && year < 65) {
-            yRelax = 1;
-            ySleep = 1;
-          }
-          if (year >= 65) {
-            yRelax = 2;
-            ySleep = 2;
-          }
-
-          int relax = _timeSpendCubit.getBonus(ETypeBonus.relax) + timeSpend.relax + yRelax;
-          int sleep = _timeSpendCubit.getBonus(ETypeBonus.sleep) + timeSpend.sleep + ySleep;
+          int relax = _timeSpendCubit.getBonus(ETypeBonus.relax) + timeSpend.relax;
+          int sleep = _timeSpendCubit.getBonus(ETypeBonus.sleep) + timeSpend.sleep;
           bool hasHouse = _timeSpendCubit.checkBonusSource(ETypeBonusSource.house);
 
-          Logger().e(hasHouse);
           //Health
           if (_stats.tiredness == 0) {
             _stats = _stats.copyWith(health: _stats.health < 0 ? 0 : _stats.health - 0.05);
