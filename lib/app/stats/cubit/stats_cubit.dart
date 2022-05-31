@@ -6,6 +6,7 @@ import 'package:injectable/injectable.dart';
 import 'package:life_simulator/app/date/cubit/date_cubit.dart';
 import 'package:life_simulator/app/time_spend/cubit/time_spend_cubit.dart';
 
+import '../../../utilities/utilities.dart';
 import '../../save/save_cubit.dart';
 import '../../time_spend/models/bonus/bonus_model.dart';
 import '../models/stats_model.dart';
@@ -104,6 +105,7 @@ class StatsCubit extends HydratedCubit<StatsState> {
           int sleep = _timeSpendCubit.getBonus(ETypeBonus.sleep) + timeSpend.sleep + ySleep;
           bool hasHouse = _timeSpendCubit.checkBonusSource(ETypeBonusSource.house);
 
+          Logger().e(hasHouse);
           //Health
           if (_stats.tiredness == 0) {
             _stats = _stats.copyWith(health: _stats.health < 0 ? 0 : _stats.health - 0.05);

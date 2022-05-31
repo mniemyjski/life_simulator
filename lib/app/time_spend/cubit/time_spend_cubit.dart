@@ -182,14 +182,16 @@ class TimeSpendCubit extends HydratedCubit<TimeSpendState> {
   }
 
   bool checkBonusSource(ETypeBonusSource eTypeBonusSource) {
-    return state.maybeWhen(
-        loaded: (timeSpend) {
-          for (var i = 0; i < timeSpend.bonuses.length; i++) {
-            if (timeSpend.bonuses[i] == eTypeBonusSource) return true;
-          }
-          return false;
-        },
-        orElse: () => false);
+    bool check = false;
+    state.whenOrNull(
+      loaded: (timeSpend) {
+        for (var i = 0; i < timeSpend.bonuses.length; i++) {
+          if (timeSpend.bonuses[i].eTypeBonusSource == eTypeBonusSource) check = true;
+        }
+      },
+    );
+
+    return check;
   }
 
   resetDay() {
