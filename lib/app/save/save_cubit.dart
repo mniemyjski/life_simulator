@@ -8,18 +8,13 @@ part 'save_state.dart';
 
 @lazySingleton
 class SaveCubit extends HydratedCubit<SaveState> {
-  SaveCubit() : super(SaveState.initial(null)) {
-    state.when(
-      initial: (save) {
-        save != null ? emit(SaveState.loaded(save)) : emit(SaveState.loaded(false));
-      },
-      loaded: (save) {
-        emit(SaveState.loaded(save));
-      },
+  SaveCubit() : super(SaveState.initial()) {
+    state.whenOrNull(
+      initial: () => emit(SaveState.loaded(false)),
     );
   }
 
-  change(bool save) {
+  change(bool save) async {
     if (state != save) emit(SaveState.loaded(save));
   }
 

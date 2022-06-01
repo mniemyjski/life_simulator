@@ -20,7 +20,7 @@ class SkillsCubit extends HydratedCubit<SkillsState> {
   SkillsCubit({
     required SaveCubit saveCubit,
   })  : _saveCubit = saveCubit,
-        super(SkillsState.initial(null)) {
+        super(SkillsState.initial()) {
     _saveCubit.state.whenOrNull(loaded: (save) => init(save));
     _save = _saveCubit.stream.listen((s) => s.whenOrNull(loaded: (save) => init(save)));
   }
@@ -33,11 +33,9 @@ class SkillsCubit extends HydratedCubit<SkillsState> {
 
   init(bool newGame) {
     state.whenOrNull(
-      initial: (data) {
-        !newGame || data == null ? emit(SkillsState.loaded([])) : emit(SkillsState.loaded(data));
-      },
+      initial: () => emit(SkillsState.loaded([])),
       loaded: (data) {
-        !newGame ? emit(SkillsState.loaded([])) : emit(SkillsState.loaded(data));
+        if (!newGame) emit(SkillsState.loaded([]));
       },
     );
   }

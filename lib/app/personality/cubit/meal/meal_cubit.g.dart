@@ -7,18 +7,10 @@ part of 'meal_cubit.dart';
 // **************************************************************************
 
 _$Initial _$$InitialFromJson(Map<String, dynamic> json) => _$Initial(
-      meal: json['meal'] == null
-          ? null
-          : Meal.fromJson(json['meal'] as Map<String, dynamic>),
-      meals: (json['meals'] as List<dynamic>?)
-          ?.map((e) => Meal.fromJson(e as Map<String, dynamic>))
-          .toList(),
       $type: json['runtimeType'] as String?,
     );
 
 Map<String, dynamic> _$$InitialToJson(_$Initial instance) => <String, dynamic>{
-      'meal': instance.meal?.toJson(),
-      'meals': instance.meals?.map((e) => e.toJson()).toList(),
       'runtimeType': instance.$type,
     };
 

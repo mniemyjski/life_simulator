@@ -25,7 +25,7 @@ class IncomeCubit extends HydratedCubit<IncomeState> {
     required SaveCubit saveCubit,
   })  : _moneyCubit = moneyCubit,
         _saveCubit = saveCubit,
-        super(IncomeState.initial(null)) {
+        super(IncomeState.initial()) {
     _saveCubit.state.whenOrNull(loaded: (save) => init(save));
     _save = _saveCubit.stream.listen((s) => s.whenOrNull(loaded: (save) => init(save)));
   }
@@ -38,11 +38,9 @@ class IncomeCubit extends HydratedCubit<IncomeState> {
 
   init(bool newGame) {
     state.whenOrNull(
-      initial: (data) {
-        !newGame || data == null ? emit(IncomeState.loaded([])) : emit(IncomeState.loaded(data));
-      },
+      initial: () => emit(IncomeState.loaded([])),
       loaded: (data) {
-        !newGame ? emit(IncomeState.loaded([])) : emit(IncomeState.loaded(data));
+        if (!newGame) emit(IncomeState.loaded([]));
       },
     );
   }

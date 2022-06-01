@@ -31,19 +31,19 @@ SaveState _$SaveStateFromJson(Map<String, dynamic> json) {
 mixin _$SaveState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool? save) initial,
+    required TResult Function() initial,
     required TResult Function(bool save) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(bool? save)? initial,
+    TResult Function()? initial,
     TResult Function(bool save)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool? save)? initial,
+    TResult Function()? initial,
     TResult Function(bool save)? loaded,
     required TResult orElse(),
   }) =>
@@ -89,7 +89,6 @@ class _$SaveStateCopyWithImpl<$Res> implements $SaveStateCopyWith<$Res> {
 abstract class _$$InitialCopyWith<$Res> {
   factory _$$InitialCopyWith(_$Initial value, $Res Function(_$Initial) then) =
       __$$InitialCopyWithImpl<$Res>;
-  $Res call({bool? save});
 }
 
 /// @nodoc
@@ -100,85 +99,61 @@ class __$$InitialCopyWithImpl<$Res> extends _$SaveStateCopyWithImpl<$Res>
 
   @override
   _$Initial get _value => super._value as _$Initial;
-
-  @override
-  $Res call({
-    Object? save = freezed,
-  }) {
-    return _then(_$Initial(
-      save == freezed
-          ? _value.save
-          : save // ignore: cast_nullable_to_non_nullable
-              as bool?,
-    ));
-  }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$Initial implements Initial {
-  const _$Initial(this.save, {final String? $type})
-      : $type = $type ?? 'initial';
+  const _$Initial({final String? $type}) : $type = $type ?? 'initial';
 
   factory _$Initial.fromJson(Map<String, dynamic> json) =>
       _$$InitialFromJson(json);
-
-  @override
-  final bool? save;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'SaveState.initial(save: $save)';
+    return 'SaveState.initial()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$Initial &&
-            const DeepCollectionEquality().equals(other.save, save));
+        (other.runtimeType == runtimeType && other is _$Initial);
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(save));
-
-  @JsonKey(ignore: true)
-  @override
-  _$$InitialCopyWith<_$Initial> get copyWith =>
-      __$$InitialCopyWithImpl<_$Initial>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool? save) initial,
+    required TResult Function() initial,
     required TResult Function(bool save) loaded,
   }) {
-    return initial(save);
+    return initial();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(bool? save)? initial,
+    TResult Function()? initial,
     TResult Function(bool save)? loaded,
   }) {
-    return initial?.call(save);
+    return initial?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool? save)? initial,
+    TResult Function()? initial,
     TResult Function(bool save)? loaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(save);
+      return initial();
     }
     return orElse();
   }
@@ -221,14 +196,9 @@ class _$Initial implements Initial {
 }
 
 abstract class Initial implements SaveState {
-  const factory Initial(final bool? save) = _$Initial;
+  const factory Initial() = _$Initial;
 
   factory Initial.fromJson(Map<String, dynamic> json) = _$Initial.fromJson;
-
-  bool? get save => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  _$$InitialCopyWith<_$Initial> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -300,7 +270,7 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool? save) initial,
+    required TResult Function() initial,
     required TResult Function(bool save) loaded,
   }) {
     return loaded(save);
@@ -309,7 +279,7 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(bool? save)? initial,
+    TResult Function()? initial,
     TResult Function(bool save)? loaded,
   }) {
     return loaded?.call(save);
@@ -318,7 +288,7 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool? save)? initial,
+    TResult Function()? initial,
     TResult Function(bool save)? loaded,
     required TResult orElse(),
   }) {

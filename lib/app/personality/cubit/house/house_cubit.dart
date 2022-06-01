@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:life_simulator/app/income/models/income_model.dart';
 import 'package:life_simulator/app/time_spend/cubit/time_spend_cubit.dart';
@@ -18,7 +18,7 @@ part 'house_cubit.g.dart';
 part 'house_state.dart';
 
 @lazySingleton
-class HouseCubit extends Cubit<HouseState> {
+class HouseCubit extends HydratedCubit<HouseState> {
   final MoneyCubit _moneyCubit;
   final TimeSpendCubit _timeSpendCubit;
   final IncomeCubit _incomeCubit;
@@ -34,7 +34,7 @@ class HouseCubit extends Cubit<HouseState> {
         _incomeCubit = incomeCubit,
         _saveCubit = saveCubit,
         _timeSpendCubit = timeSpendCubit,
-        super(HouseState.initial(house: null, houses: null)) {
+        super(HouseState.initial()) {
     _saveCubit.state.whenOrNull(loaded: (save) => init(save));
     _save = _saveCubit.stream.listen((s) => s.whenOrNull(loaded: (save) => init(save)));
   }
@@ -49,15 +49,9 @@ class HouseCubit extends Cubit<HouseState> {
     List<House> list = Data.houses();
 
     state.whenOrNull(
-      initial: (house, houses) {
-        !newGame || houses == null
-            ? emit(HouseState.loaded(house: null, houses: list))
-            : emit(HouseState.loaded(house: house, houses: houses));
-      },
+      initial: () => emit(HouseState.loaded(house: null, houses: list)),
       loaded: (house, houses) {
-        !newGame
-            ? emit(HouseState.loaded(house: null, houses: list))
-            : emit(HouseState.loaded(house: house, houses: houses));
+        if (!newGame) emit(HouseState.loaded(house: null, houses: list));
       },
     );
   }
@@ -123,5 +117,15 @@ class HouseCubit extends Cubit<HouseState> {
         emit(HouseState.loaded(house: null, houses: _houses));
       }
     });
+  }
+
+  @override
+  HouseState? fromJson(Map<String, dynamic> json) {
+    return HouseState.fromJson(json);
+  }
+
+  @override
+  Map<String, dynamic>? toJson(HouseState state) {
+    return state.toJson();
   }
 }

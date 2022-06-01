@@ -40,7 +40,7 @@ class JobCubit extends HydratedCubit<JobState> {
         _skillsCubit = skillsCubit,
         _moneyCubit = moneyCubit,
         _saveCubit = saveCubit,
-        super(JobState.initial(job: null, experience: null, jobs: null)) {
+        super(JobState.initial()) {
     _saveCubit.state.whenOrNull(loaded: (save) => init(save));
     _save = _saveCubit.stream.listen((s) => s.whenOrNull(loaded: (save) => init(save)));
   }
@@ -52,16 +52,10 @@ class JobCubit extends HydratedCubit<JobState> {
   }
 
   init(bool newGame) {
-    _newGame() => emit(JobState.loaded(job: null, experience: null, jobs: Data.jobs()));
-    _loadGame(Job? job, Experience? experience, List<Job> jobs) =>
-        emit(JobState.loaded(job: job, experience: experience, jobs: jobs));
-
     state.whenOrNull(
-      initial: (job, experience, jobs) {
-        !newGame || jobs == null ? _newGame() : _loadGame(job, experience, jobs);
-      },
+      initial: () => emit(JobState.loaded(job: null, experience: null, jobs: Data.jobs())),
       loaded: (job, experience, jobs) {
-        !newGame ? _newGame() : _loadGame(job, experience, jobs);
+        if (!newGame) emit(JobState.loaded(job: null, experience: null, jobs: Data.jobs()));
       },
     );
   }

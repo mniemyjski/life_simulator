@@ -33,22 +33,22 @@ HouseState _$HouseStateFromJson(Map<String, dynamic> json) {
 mixin _$HouseState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(House? house, List<House>? houses) initial,
-    required TResult Function(List<House> house) loading,
+    required TResult Function() initial,
+    required TResult Function() loading,
     required TResult Function(House? house, List<House> houses) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(House? house, List<House>? houses)? initial,
-    TResult Function(List<House> house)? loading,
+    TResult Function()? initial,
+    TResult Function()? loading,
     TResult Function(House? house, List<House> houses)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(House? house, List<House>? houses)? initial,
-    TResult Function(List<House> house)? loading,
+    TResult Function()? initial,
+    TResult Function()? loading,
     TResult Function(House? house, List<House> houses)? loaded,
     required TResult orElse(),
   }) =>
@@ -98,9 +98,6 @@ class _$HouseStateCopyWithImpl<$Res> implements $HouseStateCopyWith<$Res> {
 abstract class _$$InitialCopyWith<$Res> {
   factory _$$InitialCopyWith(_$Initial value, $Res Function(_$Initial) then) =
       __$$InitialCopyWithImpl<$Res>;
-  $Res call({House? house, List<House>? houses});
-
-  $HouseCopyWith<$Res>? get house;
 }
 
 /// @nodoc
@@ -111,119 +108,64 @@ class __$$InitialCopyWithImpl<$Res> extends _$HouseStateCopyWithImpl<$Res>
 
   @override
   _$Initial get _value => super._value as _$Initial;
-
-  @override
-  $Res call({
-    Object? house = freezed,
-    Object? houses = freezed,
-  }) {
-    return _then(_$Initial(
-      house: house == freezed
-          ? _value.house
-          : house // ignore: cast_nullable_to_non_nullable
-              as House?,
-      houses: houses == freezed
-          ? _value._houses
-          : houses // ignore: cast_nullable_to_non_nullable
-              as List<House>?,
-    ));
-  }
-
-  @override
-  $HouseCopyWith<$Res>? get house {
-    if (_value.house == null) {
-      return null;
-    }
-
-    return $HouseCopyWith<$Res>(_value.house!, (value) {
-      return _then(_value.copyWith(house: value));
-    });
-  }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$Initial implements Initial {
-  const _$Initial(
-      {required this.house,
-      required final List<House>? houses,
-      final String? $type})
-      : _houses = houses,
-        $type = $type ?? 'initial';
+  const _$Initial({final String? $type}) : $type = $type ?? 'initial';
 
   factory _$Initial.fromJson(Map<String, dynamic> json) =>
       _$$InitialFromJson(json);
-
-  @override
-  final House? house;
-  final List<House>? _houses;
-  @override
-  List<House>? get houses {
-    final value = _houses;
-    if (value == null) return null;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'HouseState.initial(house: $house, houses: $houses)';
+    return 'HouseState.initial()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$Initial &&
-            const DeepCollectionEquality().equals(other.house, house) &&
-            const DeepCollectionEquality().equals(other._houses, _houses));
+        (other.runtimeType == runtimeType && other is _$Initial);
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(house),
-      const DeepCollectionEquality().hash(_houses));
-
-  @JsonKey(ignore: true)
-  @override
-  _$$InitialCopyWith<_$Initial> get copyWith =>
-      __$$InitialCopyWithImpl<_$Initial>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(House? house, List<House>? houses) initial,
-    required TResult Function(List<House> house) loading,
+    required TResult Function() initial,
+    required TResult Function() loading,
     required TResult Function(House? house, List<House> houses) loaded,
   }) {
-    return initial(house, houses);
+    return initial();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(House? house, List<House>? houses)? initial,
-    TResult Function(List<House> house)? loading,
+    TResult Function()? initial,
+    TResult Function()? loading,
     TResult Function(House? house, List<House> houses)? loaded,
   }) {
-    return initial?.call(house, houses);
+    return initial?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(House? house, List<House>? houses)? initial,
-    TResult Function(List<House> house)? loading,
+    TResult Function()? initial,
+    TResult Function()? loading,
     TResult Function(House? house, List<House> houses)? loaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(house, houses);
+      return initial();
     }
     return orElse();
   }
@@ -269,24 +211,15 @@ class _$Initial implements Initial {
 }
 
 abstract class Initial implements HouseState {
-  const factory Initial(
-      {required final House? house,
-      required final List<House>? houses}) = _$Initial;
+  const factory Initial() = _$Initial;
 
   factory Initial.fromJson(Map<String, dynamic> json) = _$Initial.fromJson;
-
-  House? get house => throw _privateConstructorUsedError;
-  List<House>? get houses => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  _$$InitialCopyWith<_$Initial> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$LoadingCopyWith<$Res> {
   factory _$$LoadingCopyWith(_$Loading value, $Res Function(_$Loading) then) =
       __$$LoadingCopyWithImpl<$Res>;
-  $Res call({List<House> house});
 }
 
 /// @nodoc
@@ -297,93 +230,64 @@ class __$$LoadingCopyWithImpl<$Res> extends _$HouseStateCopyWithImpl<$Res>
 
   @override
   _$Loading get _value => super._value as _$Loading;
-
-  @override
-  $Res call({
-    Object? house = freezed,
-  }) {
-    return _then(_$Loading(
-      house == freezed
-          ? _value._house
-          : house // ignore: cast_nullable_to_non_nullable
-              as List<House>,
-    ));
-  }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$Loading implements Loading {
-  const _$Loading(final List<House> house, {final String? $type})
-      : _house = house,
-        $type = $type ?? 'loading';
+  const _$Loading({final String? $type}) : $type = $type ?? 'loading';
 
   factory _$Loading.fromJson(Map<String, dynamic> json) =>
       _$$LoadingFromJson(json);
-
-  final List<House> _house;
-  @override
-  List<House> get house {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_house);
-  }
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'HouseState.loading(house: $house)';
+    return 'HouseState.loading()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$Loading &&
-            const DeepCollectionEquality().equals(other._house, _house));
+        (other.runtimeType == runtimeType && other is _$Loading);
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_house));
-
-  @JsonKey(ignore: true)
-  @override
-  _$$LoadingCopyWith<_$Loading> get copyWith =>
-      __$$LoadingCopyWithImpl<_$Loading>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(House? house, List<House>? houses) initial,
-    required TResult Function(List<House> house) loading,
+    required TResult Function() initial,
+    required TResult Function() loading,
     required TResult Function(House? house, List<House> houses) loaded,
   }) {
-    return loading(house);
+    return loading();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(House? house, List<House>? houses)? initial,
-    TResult Function(List<House> house)? loading,
+    TResult Function()? initial,
+    TResult Function()? loading,
     TResult Function(House? house, List<House> houses)? loaded,
   }) {
-    return loading?.call(house);
+    return loading?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(House? house, List<House>? houses)? initial,
-    TResult Function(List<House> house)? loading,
+    TResult Function()? initial,
+    TResult Function()? loading,
     TResult Function(House? house, List<House> houses)? loaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading(house);
+      return loading();
     }
     return orElse();
   }
@@ -429,14 +333,9 @@ class _$Loading implements Loading {
 }
 
 abstract class Loading implements HouseState {
-  const factory Loading(final List<House> house) = _$Loading;
+  const factory Loading() = _$Loading;
 
   factory Loading.fromJson(Map<String, dynamic> json) = _$Loading.fromJson;
-
-  List<House> get house => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  _$$LoadingCopyWith<_$Loading> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -540,8 +439,8 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(House? house, List<House>? houses) initial,
-    required TResult Function(List<House> house) loading,
+    required TResult Function() initial,
+    required TResult Function() loading,
     required TResult Function(House? house, List<House> houses) loaded,
   }) {
     return loaded(house, houses);
@@ -550,8 +449,8 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(House? house, List<House>? houses)? initial,
-    TResult Function(List<House> house)? loading,
+    TResult Function()? initial,
+    TResult Function()? loading,
     TResult Function(House? house, List<House> houses)? loaded,
   }) {
     return loaded?.call(house, houses);
@@ -560,8 +459,8 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(House? house, List<House>? houses)? initial,
-    TResult Function(List<House> house)? loading,
+    TResult Function()? initial,
+    TResult Function()? loading,
     TResult Function(House? house, List<House> houses)? loaded,
     required TResult orElse(),
   }) {

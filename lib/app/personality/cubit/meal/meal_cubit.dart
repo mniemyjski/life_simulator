@@ -30,7 +30,7 @@ class MealCubit extends HydratedCubit<MealState> {
   })  : _incomeCubit = incomeCubit,
         _saveCubit = saveCubit,
         _timeSpendCubit = timeSpendCubit,
-        super(MealState.initial(meal: null, meals: null)) {
+        super(MealState.initial()) {
     _saveCubit.state.whenOrNull(loaded: (save) => init(save));
     _save = _saveCubit.stream.listen((s) => s.whenOrNull(loaded: (save) => init(save)));
   }
@@ -53,20 +53,14 @@ class MealCubit extends HydratedCubit<MealState> {
     );
 
     state.whenOrNull(
-      initial: (meal, meals) {
-        if (!newGame || meal == null || meals == null) {
-          emit(MealState.loaded(meal: list.first, meals: list));
-          _incomeCubit.add(income);
-        } else {
-          emit(MealState.loaded(meal: meal, meals: meals));
-        }
+      initial: () {
+        emit(MealState.loaded(meal: list.first, meals: list));
+        _incomeCubit.add(income);
       },
       loaded: (meal, meals) {
         if (!newGame) {
           emit(MealState.loaded(meal: list.first, meals: list));
           _incomeCubit.add(income);
-        } else {
-          emit(MealState.loaded(meal: meal, meals: meals));
         }
       },
     );

@@ -35,7 +35,7 @@ class TransportCubit extends HydratedCubit<TransportState> {
         _incomeCubit = incomeCubit,
         _saveCubit = saveCubit,
         _timeSpendCubit = timeSpendCubit,
-        super(TransportState.initial(transport: null, transports: null)) {
+        super(TransportState.initial()) {
     _saveCubit.state.whenOrNull(loaded: (save) => init(save));
     _saveSub = _saveCubit.stream.listen((s) => s.whenOrNull(loaded: (save) => init(save)));
   }
@@ -47,16 +47,10 @@ class TransportCubit extends HydratedCubit<TransportState> {
   }
 
   init(bool newGame) {
-    _newGame() => emit(TransportState.loaded(transport: null, transports: Data.transports()));
-    _loadGame(Transport? transport, List<Transport> transports) =>
-        emit(TransportState.loaded(transport: transport, transports: transports));
-
     state.whenOrNull(
-      initial: (transport, transports) {
-        !newGame || transports == null ? _newGame() : _loadGame(transport, transports);
-      },
+      initial: () => emit(TransportState.loaded(transport: null, transports: Data.transports())),
       loaded: (transport, transports) {
-        !newGame ? _newGame() : _loadGame(transport, transports);
+        if (!newGame) emit(TransportState.loaded(transport: null, transports: Data.transports()));
       },
     );
   }

@@ -7,14 +7,10 @@ part of 'date_cubit.dart';
 // **************************************************************************
 
 _$Initial _$$InitialFromJson(Map<String, dynamic> json) => _$Initial(
-      json['dateGame'] == null
-          ? null
-          : DateGame.fromJson(json['dateGame'] as Map<String, dynamic>),
       $type: json['runtimeType'] as String?,
     );
 
 Map<String, dynamic> _$$InitialToJson(_$Initial instance) => <String, dynamic>{
-      'dateGame': instance.dateGame?.toJson(),
       'runtimeType': instance.$type,
     };
 

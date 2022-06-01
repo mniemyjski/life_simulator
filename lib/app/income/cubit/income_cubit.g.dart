@@ -7,14 +7,10 @@ part of 'income_cubit.dart';
 // **************************************************************************
 
 _$Initial _$$InitialFromJson(Map<String, dynamic> json) => _$Initial(
-      (json['incomes'] as List<dynamic>?)
-          ?.map((e) => Income.fromJson(e as Map<String, dynamic>))
-          .toList(),
       $type: json['runtimeType'] as String?,
     );
 
 Map<String, dynamic> _$$InitialToJson(_$Initial instance) => <String, dynamic>{
-      'incomes': instance.incomes?.map((e) => e.toJson()).toList(),
       'runtimeType': instance.$type,
     };
 

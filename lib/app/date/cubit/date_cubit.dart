@@ -36,7 +36,7 @@ class DateCubit extends HydratedCubit<DateState> {
         _incomeCubit = incomeCubit,
         _saveCubit = saveCubit,
         _daySettingCubit = daySettingCubit,
-        super(DateState.initial(null)) {
+        super(DateState.initial()) {
     _saveCubit.state.whenOrNull(loaded: (save) => init(save));
     _save = _saveCubit.stream.listen((s) => s.whenOrNull(loaded: (save) => init(save)));
   }
@@ -47,17 +47,11 @@ class DateCubit extends HydratedCubit<DateState> {
     super.close();
   }
 
-  init(bool newGame) {
+  init(bool newGame) async {
     state.whenOrNull(
-      initial: (data) {
-        !newGame || data == null
-            ? emit(DateState.loaded(DateGame(year: 18, month: 1, day: 1)))
-            : emit(DateState.loaded(data));
-      },
+      initial: () => emit(DateState.loaded(DateGame(year: 18, month: 1, day: 1))),
       loaded: (data) {
-        !newGame
-            ? emit(DateState.loaded(DateGame(year: 18, month: 1, day: 1)))
-            : emit(DateState.loaded(data));
+        if (!newGame) emit(DateState.loaded(DateGame(year: 18, month: 1, day: 1)));
       },
     );
   }
@@ -73,7 +67,6 @@ class DateCubit extends HydratedCubit<DateState> {
         _timeSpendCubit.resetDay();
         _incomeCubit.counting();
 
-        emit(DateState.loading());
         if (date.day < 30) {
           emit(DateState.loaded(date.copyWith(day: date.day + 1)));
         } else {
@@ -89,11 +82,11 @@ class DateCubit extends HydratedCubit<DateState> {
 
   @override
   DateState? fromJson(Map<String, dynamic> json) {
-    return DateState.loaded(DateGame.fromJson(json));
+    return DateState.fromJson(json);
   }
 
   @override
   Map<String, dynamic>? toJson(DateState state) {
-    return state.whenOrNull(loaded: (date) => date.toJson());
+    return state.toJson();
   }
 }

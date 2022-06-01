@@ -33,26 +33,23 @@ TransportState _$TransportStateFromJson(Map<String, dynamic> json) {
 mixin _$TransportState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Transport? transport, List<Transport>? transports)
-        initial,
-    required TResult Function(List<Transport> transports) loading,
+    required TResult Function() initial,
+    required TResult Function() loading,
     required TResult Function(Transport? transport, List<Transport> transports)
         loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(Transport? transport, List<Transport>? transports)?
-        initial,
-    TResult Function(List<Transport> transports)? loading,
+    TResult Function()? initial,
+    TResult Function()? loading,
     TResult Function(Transport? transport, List<Transport> transports)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Transport? transport, List<Transport>? transports)?
-        initial,
-    TResult Function(List<Transport> transports)? loading,
+    TResult Function()? initial,
+    TResult Function()? loading,
     TResult Function(Transport? transport, List<Transport> transports)? loaded,
     required TResult orElse(),
   }) =>
@@ -103,9 +100,6 @@ class _$TransportStateCopyWithImpl<$Res>
 abstract class _$$InitialCopyWith<$Res> {
   factory _$$InitialCopyWith(_$Initial value, $Res Function(_$Initial) then) =
       __$$InitialCopyWithImpl<$Res>;
-  $Res call({Transport? transport, List<Transport>? transports});
-
-  $TransportCopyWith<$Res>? get transport;
 }
 
 /// @nodoc
@@ -116,124 +110,65 @@ class __$$InitialCopyWithImpl<$Res> extends _$TransportStateCopyWithImpl<$Res>
 
   @override
   _$Initial get _value => super._value as _$Initial;
-
-  @override
-  $Res call({
-    Object? transport = freezed,
-    Object? transports = freezed,
-  }) {
-    return _then(_$Initial(
-      transport: transport == freezed
-          ? _value.transport
-          : transport // ignore: cast_nullable_to_non_nullable
-              as Transport?,
-      transports: transports == freezed
-          ? _value._transports
-          : transports // ignore: cast_nullable_to_non_nullable
-              as List<Transport>?,
-    ));
-  }
-
-  @override
-  $TransportCopyWith<$Res>? get transport {
-    if (_value.transport == null) {
-      return null;
-    }
-
-    return $TransportCopyWith<$Res>(_value.transport!, (value) {
-      return _then(_value.copyWith(transport: value));
-    });
-  }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$Initial implements Initial {
-  const _$Initial(
-      {required this.transport,
-      required final List<Transport>? transports,
-      final String? $type})
-      : _transports = transports,
-        $type = $type ?? 'initial';
+  const _$Initial({final String? $type}) : $type = $type ?? 'initial';
 
   factory _$Initial.fromJson(Map<String, dynamic> json) =>
       _$$InitialFromJson(json);
-
-  @override
-  final Transport? transport;
-  final List<Transport>? _transports;
-  @override
-  List<Transport>? get transports {
-    final value = _transports;
-    if (value == null) return null;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'TransportState.initial(transport: $transport, transports: $transports)';
+    return 'TransportState.initial()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$Initial &&
-            const DeepCollectionEquality().equals(other.transport, transport) &&
-            const DeepCollectionEquality()
-                .equals(other._transports, _transports));
+        (other.runtimeType == runtimeType && other is _$Initial);
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(transport),
-      const DeepCollectionEquality().hash(_transports));
-
-  @JsonKey(ignore: true)
-  @override
-  _$$InitialCopyWith<_$Initial> get copyWith =>
-      __$$InitialCopyWithImpl<_$Initial>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Transport? transport, List<Transport>? transports)
-        initial,
-    required TResult Function(List<Transport> transports) loading,
+    required TResult Function() initial,
+    required TResult Function() loading,
     required TResult Function(Transport? transport, List<Transport> transports)
         loaded,
   }) {
-    return initial(transport, transports);
+    return initial();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(Transport? transport, List<Transport>? transports)?
-        initial,
-    TResult Function(List<Transport> transports)? loading,
+    TResult Function()? initial,
+    TResult Function()? loading,
     TResult Function(Transport? transport, List<Transport> transports)? loaded,
   }) {
-    return initial?.call(transport, transports);
+    return initial?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Transport? transport, List<Transport>? transports)?
-        initial,
-    TResult Function(List<Transport> transports)? loading,
+    TResult Function()? initial,
+    TResult Function()? loading,
     TResult Function(Transport? transport, List<Transport> transports)? loaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(transport, transports);
+      return initial();
     }
     return orElse();
   }
@@ -279,24 +214,15 @@ class _$Initial implements Initial {
 }
 
 abstract class Initial implements TransportState {
-  const factory Initial(
-      {required final Transport? transport,
-      required final List<Transport>? transports}) = _$Initial;
+  const factory Initial() = _$Initial;
 
   factory Initial.fromJson(Map<String, dynamic> json) = _$Initial.fromJson;
-
-  Transport? get transport => throw _privateConstructorUsedError;
-  List<Transport>? get transports => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  _$$InitialCopyWith<_$Initial> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$LoadingCopyWith<$Res> {
   factory _$$LoadingCopyWith(_$Loading value, $Res Function(_$Loading) then) =
       __$$LoadingCopyWithImpl<$Res>;
-  $Res call({List<Transport> transports});
 }
 
 /// @nodoc
@@ -307,98 +233,65 @@ class __$$LoadingCopyWithImpl<$Res> extends _$TransportStateCopyWithImpl<$Res>
 
   @override
   _$Loading get _value => super._value as _$Loading;
-
-  @override
-  $Res call({
-    Object? transports = freezed,
-  }) {
-    return _then(_$Loading(
-      transports == freezed
-          ? _value._transports
-          : transports // ignore: cast_nullable_to_non_nullable
-              as List<Transport>,
-    ));
-  }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$Loading implements Loading {
-  const _$Loading(final List<Transport> transports, {final String? $type})
-      : _transports = transports,
-        $type = $type ?? 'loading';
+  const _$Loading({final String? $type}) : $type = $type ?? 'loading';
 
   factory _$Loading.fromJson(Map<String, dynamic> json) =>
       _$$LoadingFromJson(json);
-
-  final List<Transport> _transports;
-  @override
-  List<Transport> get transports {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_transports);
-  }
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'TransportState.loading(transports: $transports)';
+    return 'TransportState.loading()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$Loading &&
-            const DeepCollectionEquality()
-                .equals(other._transports, _transports));
+        (other.runtimeType == runtimeType && other is _$Loading);
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_transports));
-
-  @JsonKey(ignore: true)
-  @override
-  _$$LoadingCopyWith<_$Loading> get copyWith =>
-      __$$LoadingCopyWithImpl<_$Loading>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Transport? transport, List<Transport>? transports)
-        initial,
-    required TResult Function(List<Transport> transports) loading,
+    required TResult Function() initial,
+    required TResult Function() loading,
     required TResult Function(Transport? transport, List<Transport> transports)
         loaded,
   }) {
-    return loading(transports);
+    return loading();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(Transport? transport, List<Transport>? transports)?
-        initial,
-    TResult Function(List<Transport> transports)? loading,
+    TResult Function()? initial,
+    TResult Function()? loading,
     TResult Function(Transport? transport, List<Transport> transports)? loaded,
   }) {
-    return loading?.call(transports);
+    return loading?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Transport? transport, List<Transport>? transports)?
-        initial,
-    TResult Function(List<Transport> transports)? loading,
+    TResult Function()? initial,
+    TResult Function()? loading,
     TResult Function(Transport? transport, List<Transport> transports)? loaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading(transports);
+      return loading();
     }
     return orElse();
   }
@@ -444,14 +337,9 @@ class _$Loading implements Loading {
 }
 
 abstract class Loading implements TransportState {
-  const factory Loading(final List<Transport> transports) = _$Loading;
+  const factory Loading() = _$Loading;
 
   factory Loading.fromJson(Map<String, dynamic> json) = _$Loading.fromJson;
-
-  List<Transport> get transports => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  _$$LoadingCopyWith<_$Loading> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -556,9 +444,8 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Transport? transport, List<Transport>? transports)
-        initial,
-    required TResult Function(List<Transport> transports) loading,
+    required TResult Function() initial,
+    required TResult Function() loading,
     required TResult Function(Transport? transport, List<Transport> transports)
         loaded,
   }) {
@@ -568,9 +455,8 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(Transport? transport, List<Transport>? transports)?
-        initial,
-    TResult Function(List<Transport> transports)? loading,
+    TResult Function()? initial,
+    TResult Function()? loading,
     TResult Function(Transport? transport, List<Transport> transports)? loaded,
   }) {
     return loaded?.call(transport, transports);
@@ -579,9 +465,8 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Transport? transport, List<Transport>? transports)?
-        initial,
-    TResult Function(List<Transport> transports)? loading,
+    TResult Function()? initial,
+    TResult Function()? loading,
     TResult Function(Transport? transport, List<Transport> transports)? loaded,
     required TResult orElse(),
   }) {

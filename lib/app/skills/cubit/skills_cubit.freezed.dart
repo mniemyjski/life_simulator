@@ -33,21 +33,21 @@ SkillsState _$SkillsStateFromJson(Map<String, dynamic> json) {
 mixin _$SkillsState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<Skill>? skills) initial,
+    required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<Skill> skills) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<Skill>? skills)? initial,
+    TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Skill> skills)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<Skill>? skills)? initial,
+    TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Skill> skills)? loaded,
     required TResult orElse(),
@@ -98,7 +98,6 @@ class _$SkillsStateCopyWithImpl<$Res> implements $SkillsStateCopyWith<$Res> {
 abstract class _$$InitialCopyWith<$Res> {
   factory _$$InitialCopyWith(_$Initial value, $Res Function(_$Initial) then) =
       __$$InitialCopyWithImpl<$Res>;
-  $Res call({List<Skill>? skills});
 }
 
 /// @nodoc
@@ -109,95 +108,64 @@ class __$$InitialCopyWithImpl<$Res> extends _$SkillsStateCopyWithImpl<$Res>
 
   @override
   _$Initial get _value => super._value as _$Initial;
-
-  @override
-  $Res call({
-    Object? skills = freezed,
-  }) {
-    return _then(_$Initial(
-      skills == freezed
-          ? _value._skills
-          : skills // ignore: cast_nullable_to_non_nullable
-              as List<Skill>?,
-    ));
-  }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$Initial implements Initial {
-  const _$Initial(final List<Skill>? skills, {final String? $type})
-      : _skills = skills,
-        $type = $type ?? 'initial';
+  const _$Initial({final String? $type}) : $type = $type ?? 'initial';
 
   factory _$Initial.fromJson(Map<String, dynamic> json) =>
       _$$InitialFromJson(json);
-
-  final List<Skill>? _skills;
-  @override
-  List<Skill>? get skills {
-    final value = _skills;
-    if (value == null) return null;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'SkillsState.initial(skills: $skills)';
+    return 'SkillsState.initial()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$Initial &&
-            const DeepCollectionEquality().equals(other._skills, _skills));
+        (other.runtimeType == runtimeType && other is _$Initial);
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_skills));
-
-  @JsonKey(ignore: true)
-  @override
-  _$$InitialCopyWith<_$Initial> get copyWith =>
-      __$$InitialCopyWithImpl<_$Initial>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<Skill>? skills) initial,
+    required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<Skill> skills) loaded,
   }) {
-    return initial(skills);
+    return initial();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<Skill>? skills)? initial,
+    TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Skill> skills)? loaded,
   }) {
-    return initial?.call(skills);
+    return initial?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<Skill>? skills)? initial,
+    TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Skill> skills)? loaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(skills);
+      return initial();
     }
     return orElse();
   }
@@ -243,14 +211,9 @@ class _$Initial implements Initial {
 }
 
 abstract class Initial implements SkillsState {
-  const factory Initial(final List<Skill>? skills) = _$Initial;
+  const factory Initial() = _$Initial;
 
   factory Initial.fromJson(Map<String, dynamic> json) = _$Initial.fromJson;
-
-  List<Skill>? get skills => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  _$$InitialCopyWith<_$Initial> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -298,7 +261,7 @@ class _$Loading implements Loading {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<Skill>? skills) initial,
+    required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<Skill> skills) loaded,
   }) {
@@ -308,7 +271,7 @@ class _$Loading implements Loading {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<Skill>? skills)? initial,
+    TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Skill> skills)? loaded,
   }) {
@@ -318,7 +281,7 @@ class _$Loading implements Loading {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<Skill>? skills)? initial,
+    TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Skill> skills)? loaded,
     required TResult orElse(),
@@ -450,7 +413,7 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<Skill>? skills) initial,
+    required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<Skill> skills) loaded,
   }) {
@@ -460,7 +423,7 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<Skill>? skills)? initial,
+    TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Skill> skills)? loaded,
   }) {
@@ -470,7 +433,7 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<Skill>? skills)? initial,
+    TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Skill> skills)? loaded,
     required TResult orElse(),

@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
       body: BlocBuilder<SaveCubit, SaveState>(
         builder: (context, state) {
           return state.when(
-            initial: (save) => Container(),
+            initial: () => Container(),
             loaded: (save) => _buildBody(save),
           );
         },
@@ -54,7 +54,9 @@ class HomeScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: CustomButton(
-                onPressed: () {
+                onPressed: () async {
+                  // await HydratedBlocOverrides.current!.storage.clear();
+
                   context.read<SaveCubit>().change(false);
                   context.router.push(const GameRoute());
                   context.read<SaveCubit>().change(true);

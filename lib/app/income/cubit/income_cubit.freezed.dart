@@ -33,21 +33,21 @@ IncomeState _$IncomeStateFromJson(Map<String, dynamic> json) {
 mixin _$IncomeState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<Income>? incomes) initial,
+    required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<Income> incomes) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<Income>? incomes)? initial,
+    TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Income> incomes)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<Income>? incomes)? initial,
+    TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Income> incomes)? loaded,
     required TResult orElse(),
@@ -98,7 +98,6 @@ class _$IncomeStateCopyWithImpl<$Res> implements $IncomeStateCopyWith<$Res> {
 abstract class _$$InitialCopyWith<$Res> {
   factory _$$InitialCopyWith(_$Initial value, $Res Function(_$Initial) then) =
       __$$InitialCopyWithImpl<$Res>;
-  $Res call({List<Income>? incomes});
 }
 
 /// @nodoc
@@ -109,95 +108,64 @@ class __$$InitialCopyWithImpl<$Res> extends _$IncomeStateCopyWithImpl<$Res>
 
   @override
   _$Initial get _value => super._value as _$Initial;
-
-  @override
-  $Res call({
-    Object? incomes = freezed,
-  }) {
-    return _then(_$Initial(
-      incomes == freezed
-          ? _value._incomes
-          : incomes // ignore: cast_nullable_to_non_nullable
-              as List<Income>?,
-    ));
-  }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$Initial implements Initial {
-  const _$Initial(final List<Income>? incomes, {final String? $type})
-      : _incomes = incomes,
-        $type = $type ?? 'initial';
+  const _$Initial({final String? $type}) : $type = $type ?? 'initial';
 
   factory _$Initial.fromJson(Map<String, dynamic> json) =>
       _$$InitialFromJson(json);
-
-  final List<Income>? _incomes;
-  @override
-  List<Income>? get incomes {
-    final value = _incomes;
-    if (value == null) return null;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'IncomeState.initial(incomes: $incomes)';
+    return 'IncomeState.initial()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$Initial &&
-            const DeepCollectionEquality().equals(other._incomes, _incomes));
+        (other.runtimeType == runtimeType && other is _$Initial);
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_incomes));
-
-  @JsonKey(ignore: true)
-  @override
-  _$$InitialCopyWith<_$Initial> get copyWith =>
-      __$$InitialCopyWithImpl<_$Initial>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<Income>? incomes) initial,
+    required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<Income> incomes) loaded,
   }) {
-    return initial(incomes);
+    return initial();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<Income>? incomes)? initial,
+    TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Income> incomes)? loaded,
   }) {
-    return initial?.call(incomes);
+    return initial?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<Income>? incomes)? initial,
+    TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Income> incomes)? loaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(incomes);
+      return initial();
     }
     return orElse();
   }
@@ -243,14 +211,9 @@ class _$Initial implements Initial {
 }
 
 abstract class Initial implements IncomeState {
-  const factory Initial(final List<Income>? incomes) = _$Initial;
+  const factory Initial() = _$Initial;
 
   factory Initial.fromJson(Map<String, dynamic> json) = _$Initial.fromJson;
-
-  List<Income>? get incomes => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  _$$InitialCopyWith<_$Initial> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -298,7 +261,7 @@ class _$Loading implements Loading {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<Income>? incomes) initial,
+    required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<Income> incomes) loaded,
   }) {
@@ -308,7 +271,7 @@ class _$Loading implements Loading {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<Income>? incomes)? initial,
+    TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Income> incomes)? loaded,
   }) {
@@ -318,7 +281,7 @@ class _$Loading implements Loading {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<Income>? incomes)? initial,
+    TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Income> incomes)? loaded,
     required TResult orElse(),
@@ -450,7 +413,7 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<Income>? incomes) initial,
+    required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<Income> incomes) loaded,
   }) {
@@ -460,7 +423,7 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<Income>? incomes)? initial,
+    TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Income> incomes)? loaded,
   }) {
@@ -470,7 +433,7 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<Income>? incomes)? initial,
+    TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Income> incomes)? loaded,
     required TResult orElse(),

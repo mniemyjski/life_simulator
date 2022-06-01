@@ -7,30 +7,18 @@ part of 'house_cubit.dart';
 // **************************************************************************
 
 _$Initial _$$InitialFromJson(Map<String, dynamic> json) => _$Initial(
-      house: json['house'] == null
-          ? null
-          : House.fromJson(json['house'] as Map<String, dynamic>),
-      houses: (json['houses'] as List<dynamic>?)
-          ?.map((e) => House.fromJson(e as Map<String, dynamic>))
-          .toList(),
       $type: json['runtimeType'] as String?,
     );
 
 Map<String, dynamic> _$$InitialToJson(_$Initial instance) => <String, dynamic>{
-      'house': instance.house?.toJson(),
-      'houses': instance.houses?.map((e) => e.toJson()).toList(),
       'runtimeType': instance.$type,
     };
 
 _$Loading _$$LoadingFromJson(Map<String, dynamic> json) => _$Loading(
-      (json['house'] as List<dynamic>)
-          .map((e) => House.fromJson(e as Map<String, dynamic>))
-          .toList(),
       $type: json['runtimeType'] as String?,
     );
 
 Map<String, dynamic> _$$LoadingToJson(_$Loading instance) => <String, dynamic>{
-      'house': instance.house.map((e) => e.toJson()).toList(),
       'runtimeType': instance.$type,
     };
 

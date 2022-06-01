@@ -33,8 +33,7 @@ JobState _$JobStateFromJson(Map<String, dynamic> json) {
 mixin _$JobState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Job? job, Experience? experience, List<Job>? jobs)
-        initial,
+    required TResult Function() initial,
     required TResult Function(List<Job> jobs) loading,
     required TResult Function(Job? job, Experience? experience, List<Job> jobs)
         loaded,
@@ -42,16 +41,14 @@ mixin _$JobState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(Job? job, Experience? experience, List<Job>? jobs)?
-        initial,
+    TResult Function()? initial,
     TResult Function(List<Job> jobs)? loading,
     TResult Function(Job? job, Experience? experience, List<Job> jobs)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Job? job, Experience? experience, List<Job>? jobs)?
-        initial,
+    TResult Function()? initial,
     TResult Function(List<Job> jobs)? loading,
     TResult Function(Job? job, Experience? experience, List<Job> jobs)? loaded,
     required TResult orElse(),
@@ -101,10 +98,6 @@ class _$JobStateCopyWithImpl<$Res> implements $JobStateCopyWith<$Res> {
 abstract class _$$InitialCopyWith<$Res> {
   factory _$$InitialCopyWith(_$Initial value, $Res Function(_$Initial) then) =
       __$$InitialCopyWithImpl<$Res>;
-  $Res call({Job? job, Experience? experience, List<Job>? jobs});
-
-  $JobCopyWith<$Res>? get job;
-  $ExperienceCopyWith<$Res>? get experience;
 }
 
 /// @nodoc
@@ -115,145 +108,65 @@ class __$$InitialCopyWithImpl<$Res> extends _$JobStateCopyWithImpl<$Res>
 
   @override
   _$Initial get _value => super._value as _$Initial;
-
-  @override
-  $Res call({
-    Object? job = freezed,
-    Object? experience = freezed,
-    Object? jobs = freezed,
-  }) {
-    return _then(_$Initial(
-      job: job == freezed
-          ? _value.job
-          : job // ignore: cast_nullable_to_non_nullable
-              as Job?,
-      experience: experience == freezed
-          ? _value.experience
-          : experience // ignore: cast_nullable_to_non_nullable
-              as Experience?,
-      jobs: jobs == freezed
-          ? _value._jobs
-          : jobs // ignore: cast_nullable_to_non_nullable
-              as List<Job>?,
-    ));
-  }
-
-  @override
-  $JobCopyWith<$Res>? get job {
-    if (_value.job == null) {
-      return null;
-    }
-
-    return $JobCopyWith<$Res>(_value.job!, (value) {
-      return _then(_value.copyWith(job: value));
-    });
-  }
-
-  @override
-  $ExperienceCopyWith<$Res>? get experience {
-    if (_value.experience == null) {
-      return null;
-    }
-
-    return $ExperienceCopyWith<$Res>(_value.experience!, (value) {
-      return _then(_value.copyWith(experience: value));
-    });
-  }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$Initial implements Initial {
-  const _$Initial(
-      {this.job,
-      this.experience,
-      required final List<Job>? jobs,
-      final String? $type})
-      : _jobs = jobs,
-        $type = $type ?? 'initial';
+  const _$Initial({final String? $type}) : $type = $type ?? 'initial';
 
   factory _$Initial.fromJson(Map<String, dynamic> json) =>
       _$$InitialFromJson(json);
-
-  @override
-  final Job? job;
-  @override
-  final Experience? experience;
-  final List<Job>? _jobs;
-  @override
-  List<Job>? get jobs {
-    final value = _jobs;
-    if (value == null) return null;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'JobState.initial(job: $job, experience: $experience, jobs: $jobs)';
+    return 'JobState.initial()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$Initial &&
-            const DeepCollectionEquality().equals(other.job, job) &&
-            const DeepCollectionEquality()
-                .equals(other.experience, experience) &&
-            const DeepCollectionEquality().equals(other._jobs, _jobs));
+        (other.runtimeType == runtimeType && other is _$Initial);
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(job),
-      const DeepCollectionEquality().hash(experience),
-      const DeepCollectionEquality().hash(_jobs));
-
-  @JsonKey(ignore: true)
-  @override
-  _$$InitialCopyWith<_$Initial> get copyWith =>
-      __$$InitialCopyWithImpl<_$Initial>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Job? job, Experience? experience, List<Job>? jobs)
-        initial,
+    required TResult Function() initial,
     required TResult Function(List<Job> jobs) loading,
     required TResult Function(Job? job, Experience? experience, List<Job> jobs)
         loaded,
   }) {
-    return initial(job, experience, jobs);
+    return initial();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(Job? job, Experience? experience, List<Job>? jobs)?
-        initial,
+    TResult Function()? initial,
     TResult Function(List<Job> jobs)? loading,
     TResult Function(Job? job, Experience? experience, List<Job> jobs)? loaded,
   }) {
-    return initial?.call(job, experience, jobs);
+    return initial?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Job? job, Experience? experience, List<Job>? jobs)?
-        initial,
+    TResult Function()? initial,
     TResult Function(List<Job> jobs)? loading,
     TResult Function(Job? job, Experience? experience, List<Job> jobs)? loaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(job, experience, jobs);
+      return initial();
     }
     return orElse();
   }
@@ -299,19 +212,9 @@ class _$Initial implements Initial {
 }
 
 abstract class Initial implements JobState {
-  const factory Initial(
-      {final Job? job,
-      final Experience? experience,
-      required final List<Job>? jobs}) = _$Initial;
+  const factory Initial() = _$Initial;
 
   factory Initial.fromJson(Map<String, dynamic> json) = _$Initial.fromJson;
-
-  Job? get job => throw _privateConstructorUsedError;
-  Experience? get experience => throw _privateConstructorUsedError;
-  List<Job>? get jobs => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  _$$InitialCopyWith<_$Initial> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -389,8 +292,7 @@ class _$Loading implements Loading {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Job? job, Experience? experience, List<Job>? jobs)
-        initial,
+    required TResult Function() initial,
     required TResult Function(List<Job> jobs) loading,
     required TResult Function(Job? job, Experience? experience, List<Job> jobs)
         loaded,
@@ -401,8 +303,7 @@ class _$Loading implements Loading {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(Job? job, Experience? experience, List<Job>? jobs)?
-        initial,
+    TResult Function()? initial,
     TResult Function(List<Job> jobs)? loading,
     TResult Function(Job? job, Experience? experience, List<Job> jobs)? loaded,
   }) {
@@ -412,8 +313,7 @@ class _$Loading implements Loading {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Job? job, Experience? experience, List<Job>? jobs)?
-        initial,
+    TResult Function()? initial,
     TResult Function(List<Job> jobs)? loading,
     TResult Function(Job? job, Experience? experience, List<Job> jobs)? loaded,
     required TResult orElse(),
@@ -599,8 +499,7 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Job? job, Experience? experience, List<Job>? jobs)
-        initial,
+    required TResult Function() initial,
     required TResult Function(List<Job> jobs) loading,
     required TResult Function(Job? job, Experience? experience, List<Job> jobs)
         loaded,
@@ -611,8 +510,7 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(Job? job, Experience? experience, List<Job>? jobs)?
-        initial,
+    TResult Function()? initial,
     TResult Function(List<Job> jobs)? loading,
     TResult Function(Job? job, Experience? experience, List<Job> jobs)? loaded,
   }) {
@@ -622,8 +520,7 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Job? job, Experience? experience, List<Job>? jobs)?
-        initial,
+    TResult Function()? initial,
     TResult Function(List<Job> jobs)? loading,
     TResult Function(Job? job, Experience? experience, List<Job> jobs)? loaded,
     required TResult orElse(),

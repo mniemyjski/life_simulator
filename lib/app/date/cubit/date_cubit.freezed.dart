@@ -33,21 +33,21 @@ DateState _$DateStateFromJson(Map<String, dynamic> json) {
 mixin _$DateState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DateGame? dateGame) initial,
+    required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(DateGame dateGame) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(DateGame? dateGame)? initial,
+    TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(DateGame dateGame)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DateGame? dateGame)? initial,
+    TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(DateGame dateGame)? loaded,
     required TResult orElse(),
@@ -97,9 +97,6 @@ class _$DateStateCopyWithImpl<$Res> implements $DateStateCopyWith<$Res> {
 abstract class _$$InitialCopyWith<$Res> {
   factory _$$InitialCopyWith(_$Initial value, $Res Function(_$Initial) then) =
       __$$InitialCopyWithImpl<$Res>;
-  $Res call({DateGame? dateGame});
-
-  $DateGameCopyWith<$Res>? get dateGame;
 }
 
 /// @nodoc
@@ -110,99 +107,64 @@ class __$$InitialCopyWithImpl<$Res> extends _$DateStateCopyWithImpl<$Res>
 
   @override
   _$Initial get _value => super._value as _$Initial;
-
-  @override
-  $Res call({
-    Object? dateGame = freezed,
-  }) {
-    return _then(_$Initial(
-      dateGame == freezed
-          ? _value.dateGame
-          : dateGame // ignore: cast_nullable_to_non_nullable
-              as DateGame?,
-    ));
-  }
-
-  @override
-  $DateGameCopyWith<$Res>? get dateGame {
-    if (_value.dateGame == null) {
-      return null;
-    }
-
-    return $DateGameCopyWith<$Res>(_value.dateGame!, (value) {
-      return _then(_value.copyWith(dateGame: value));
-    });
-  }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$Initial implements Initial {
-  const _$Initial(this.dateGame, {final String? $type})
-      : $type = $type ?? 'initial';
+  const _$Initial({final String? $type}) : $type = $type ?? 'initial';
 
   factory _$Initial.fromJson(Map<String, dynamic> json) =>
       _$$InitialFromJson(json);
-
-  @override
-  final DateGame? dateGame;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'DateState.initial(dateGame: $dateGame)';
+    return 'DateState.initial()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$Initial &&
-            const DeepCollectionEquality().equals(other.dateGame, dateGame));
+        (other.runtimeType == runtimeType && other is _$Initial);
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(dateGame));
-
-  @JsonKey(ignore: true)
-  @override
-  _$$InitialCopyWith<_$Initial> get copyWith =>
-      __$$InitialCopyWithImpl<_$Initial>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DateGame? dateGame) initial,
+    required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(DateGame dateGame) loaded,
   }) {
-    return initial(dateGame);
+    return initial();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(DateGame? dateGame)? initial,
+    TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(DateGame dateGame)? loaded,
   }) {
-    return initial?.call(dateGame);
+    return initial?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DateGame? dateGame)? initial,
+    TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(DateGame dateGame)? loaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(dateGame);
+      return initial();
     }
     return orElse();
   }
@@ -248,14 +210,9 @@ class _$Initial implements Initial {
 }
 
 abstract class Initial implements DateState {
-  const factory Initial(final DateGame? dateGame) = _$Initial;
+  const factory Initial() = _$Initial;
 
   factory Initial.fromJson(Map<String, dynamic> json) = _$Initial.fromJson;
-
-  DateGame? get dateGame => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  _$$InitialCopyWith<_$Initial> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -303,7 +260,7 @@ class _$Loading implements Loading {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DateGame? dateGame) initial,
+    required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(DateGame dateGame) loaded,
   }) {
@@ -313,7 +270,7 @@ class _$Loading implements Loading {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(DateGame? dateGame)? initial,
+    TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(DateGame dateGame)? loaded,
   }) {
@@ -323,7 +280,7 @@ class _$Loading implements Loading {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DateGame? dateGame)? initial,
+    TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(DateGame dateGame)? loaded,
     required TResult orElse(),
@@ -459,7 +416,7 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DateGame? dateGame) initial,
+    required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(DateGame dateGame) loaded,
   }) {
@@ -469,7 +426,7 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(DateGame? dateGame)? initial,
+    TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(DateGame dateGame)? loaded,
   }) {
@@ -479,7 +436,7 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DateGame? dateGame)? initial,
+    TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(DateGame dateGame)? loaded,
     required TResult orElse(),

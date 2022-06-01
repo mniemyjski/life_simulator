@@ -7,14 +7,10 @@ part of 'skills_cubit.dart';
 // **************************************************************************
 
 _$Initial _$$InitialFromJson(Map<String, dynamic> json) => _$Initial(
-      (json['skills'] as List<dynamic>?)
-          ?.map((e) => Skill.fromJson(e as Map<String, dynamic>))
-          .toList(),
       $type: json['runtimeType'] as String?,
     );
 
 Map<String, dynamic> _$$InitialToJson(_$Initial instance) => <String, dynamic>{
-      'skills': instance.skills?.map((e) => e.toJson()).toList(),
       'runtimeType': instance.$type,
     };
 

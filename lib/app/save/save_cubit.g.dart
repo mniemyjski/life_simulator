@@ -7,12 +7,10 @@ part of 'save_cubit.dart';
 // **************************************************************************
 
 _$Initial _$$InitialFromJson(Map<String, dynamic> json) => _$Initial(
-      json['save'] as bool?,
       $type: json['runtimeType'] as String?,
     );
 
 Map<String, dynamic> _$$InitialToJson(_$Initial instance) => <String, dynamic>{
-      'save': instance.save,
       'runtimeType': instance.$type,
     };
 

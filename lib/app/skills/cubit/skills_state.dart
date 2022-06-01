@@ -2,7 +2,7 @@ part of 'skills_cubit.dart';
 
 @freezed
 class SkillsState with _$SkillsState {
-  const factory SkillsState.initial(List<Skill>? skills) = Initial;
+  const factory SkillsState.initial() = Initial;
   const factory SkillsState.loading() = Loading;
   const factory SkillsState.loaded(List<Skill> skills) = Loaded;
 

@@ -33,21 +33,21 @@ LearningState _$LearningStateFromJson(Map<String, dynamic> json) {
 mixin _$LearningState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<Learning>? learnings) initial,
+    required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<Learning> learnings) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<Learning>? learnings)? initial,
+    TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Learning> learnings)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<Learning>? learnings)? initial,
+    TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Learning> learnings)? loaded,
     required TResult orElse(),
@@ -99,7 +99,6 @@ class _$LearningStateCopyWithImpl<$Res>
 abstract class _$$InitialCopyWith<$Res> {
   factory _$$InitialCopyWith(_$Initial value, $Res Function(_$Initial) then) =
       __$$InitialCopyWithImpl<$Res>;
-  $Res call({List<Learning>? learnings});
 }
 
 /// @nodoc
@@ -110,96 +109,64 @@ class __$$InitialCopyWithImpl<$Res> extends _$LearningStateCopyWithImpl<$Res>
 
   @override
   _$Initial get _value => super._value as _$Initial;
-
-  @override
-  $Res call({
-    Object? learnings = freezed,
-  }) {
-    return _then(_$Initial(
-      learnings == freezed
-          ? _value._learnings
-          : learnings // ignore: cast_nullable_to_non_nullable
-              as List<Learning>?,
-    ));
-  }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$Initial implements Initial {
-  const _$Initial(final List<Learning>? learnings, {final String? $type})
-      : _learnings = learnings,
-        $type = $type ?? 'initial';
+  const _$Initial({final String? $type}) : $type = $type ?? 'initial';
 
   factory _$Initial.fromJson(Map<String, dynamic> json) =>
       _$$InitialFromJson(json);
-
-  final List<Learning>? _learnings;
-  @override
-  List<Learning>? get learnings {
-    final value = _learnings;
-    if (value == null) return null;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'LearningState.initial(learnings: $learnings)';
+    return 'LearningState.initial()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$Initial &&
-            const DeepCollectionEquality()
-                .equals(other._learnings, _learnings));
+        (other.runtimeType == runtimeType && other is _$Initial);
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_learnings));
-
-  @JsonKey(ignore: true)
-  @override
-  _$$InitialCopyWith<_$Initial> get copyWith =>
-      __$$InitialCopyWithImpl<_$Initial>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<Learning>? learnings) initial,
+    required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<Learning> learnings) loaded,
   }) {
-    return initial(learnings);
+    return initial();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<Learning>? learnings)? initial,
+    TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Learning> learnings)? loaded,
   }) {
-    return initial?.call(learnings);
+    return initial?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<Learning>? learnings)? initial,
+    TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Learning> learnings)? loaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(learnings);
+      return initial();
     }
     return orElse();
   }
@@ -245,14 +212,9 @@ class _$Initial implements Initial {
 }
 
 abstract class Initial implements LearningState {
-  const factory Initial(final List<Learning>? learnings) = _$Initial;
+  const factory Initial() = _$Initial;
 
   factory Initial.fromJson(Map<String, dynamic> json) = _$Initial.fromJson;
-
-  List<Learning>? get learnings => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  _$$InitialCopyWith<_$Initial> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -300,7 +262,7 @@ class _$Loading implements Loading {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<Learning>? learnings) initial,
+    required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<Learning> learnings) loaded,
   }) {
@@ -310,7 +272,7 @@ class _$Loading implements Loading {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<Learning>? learnings)? initial,
+    TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Learning> learnings)? loaded,
   }) {
@@ -320,7 +282,7 @@ class _$Loading implements Loading {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<Learning>? learnings)? initial,
+    TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Learning> learnings)? loaded,
     required TResult orElse(),
@@ -453,7 +415,7 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<Learning>? learnings) initial,
+    required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<Learning> learnings) loaded,
   }) {
@@ -463,7 +425,7 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<Learning>? learnings)? initial,
+    TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Learning> learnings)? loaded,
   }) {
@@ -473,7 +435,7 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<Learning>? learnings)? initial,
+    TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Learning> learnings)? loaded,
     required TResult orElse(),

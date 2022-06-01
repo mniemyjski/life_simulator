@@ -7,14 +7,10 @@ part of 'time_spend_cubit.dart';
 // **************************************************************************
 
 _$Initial _$$InitialFromJson(Map<String, dynamic> json) => _$Initial(
-      json['timeSpend'] == null
-          ? null
-          : TimeSpend.fromJson(json['timeSpend'] as Map<String, dynamic>),
       $type: json['runtimeType'] as String?,
     );
 
 Map<String, dynamic> _$$InitialToJson(_$Initial instance) => <String, dynamic>{
-      'timeSpend': instance.timeSpend?.toJson(),
       'runtimeType': instance.$type,
     };
 

@@ -21,7 +21,7 @@ class TimeSpendCubit extends HydratedCubit<TimeSpendState> {
   TimeSpendCubit({
     required SaveCubit saveCubit,
   })  : _saveCubit = saveCubit,
-        super(TimeSpendState.initial(null)) {
+        super(TimeSpendState.initial()) {
     _saveCubit.state.whenOrNull(loaded: (save) => init(save));
     _saveSub = _saveCubit.stream.listen((s) => s.whenOrNull(loaded: (save) => init(save)));
   }
@@ -34,29 +34,21 @@ class TimeSpendCubit extends HydratedCubit<TimeSpendState> {
   }
 
   init(bool newGame) {
-    _newGame() => emit(
-          TimeSpendState.loaded(
-            TimeSpend(
-              free: 14,
-              work: 0,
-              commuting: 0,
-              learn: 0,
-              relax: 2,
-              sleep: 8,
-              used: 0,
-              bonuses: [],
-            ),
-          ),
-        );
-
-    _loadGame(TimeSpend timeSpend) => emit(TimeSpendState.loaded(timeSpend));
+    TimeSpendState _state = TimeSpendState.loaded(TimeSpend(
+      free: 14,
+      work: 0,
+      commuting: 0,
+      learn: 0,
+      relax: 2,
+      sleep: 8,
+      used: 0,
+      bonuses: [],
+    ));
 
     state.whenOrNull(
-      initial: (timeSpend) {
-        !newGame || timeSpend == null ? _newGame() : _loadGame(timeSpend);
-      },
+      initial: () => emit(_state),
       loaded: (timeSpend) {
-        !newGame ? _newGame() : _loadGame(timeSpend);
+        if (!newGame) emit(state);
       },
     );
   }
