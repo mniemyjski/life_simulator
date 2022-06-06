@@ -9,7 +9,7 @@ part of 'meal_model.dart';
 _$_Meal _$$_MealFromJson(Map<String, dynamic> json) => _$_Meal(
       id: json['id'] as String,
       name: json['name'] as String,
-      cost: json['cost'] as int,
+      cost: (json['cost'] as num).toDouble(),
       bonusToRelax: json['bonusToRelax'] as int? ?? 0,
       bonusToSleep: json['bonusToSleep'] as int? ?? 0,
       bonusToLearn: json['bonusToLearn'] as int? ?? 0,

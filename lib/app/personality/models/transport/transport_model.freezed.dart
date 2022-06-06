@@ -24,8 +24,8 @@ mixin _$Transport {
   String get name => throw _privateConstructorUsedError;
   String get brand => throw _privateConstructorUsedError;
   ETypeTransport get eTypeTransport => throw _privateConstructorUsedError;
-  int get cost => throw _privateConstructorUsedError;
-  int get monthlyCost => throw _privateConstructorUsedError;
+  double get cost => throw _privateConstructorUsedError;
+  double get monthlyCost => throw _privateConstructorUsedError;
   DateGame? get dateBuy => throw _privateConstructorUsedError;
   int get bonusToRelax => throw _privateConstructorUsedError;
   int get bonusToSleep => throw _privateConstructorUsedError;
@@ -47,8 +47,8 @@ abstract class $TransportCopyWith<$Res> {
       String name,
       String brand,
       ETypeTransport eTypeTransport,
-      int cost,
-      int monthlyCost,
+      double cost,
+      double monthlyCost,
       DateGame? dateBuy,
       int bonusToRelax,
       int bonusToSleep,
@@ -100,11 +100,11 @@ class _$TransportCopyWithImpl<$Res> implements $TransportCopyWith<$Res> {
       cost: cost == freezed
           ? _value.cost
           : cost // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       monthlyCost: monthlyCost == freezed
           ? _value.monthlyCost
           : monthlyCost // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       dateBuy: dateBuy == freezed
           ? _value.dateBuy
           : dateBuy // ignore: cast_nullable_to_non_nullable
@@ -151,8 +151,8 @@ abstract class _$$_TransportCopyWith<$Res> implements $TransportCopyWith<$Res> {
       String name,
       String brand,
       ETypeTransport eTypeTransport,
-      int cost,
-      int monthlyCost,
+      double cost,
+      double monthlyCost,
       DateGame? dateBuy,
       int bonusToRelax,
       int bonusToSleep,
@@ -207,11 +207,11 @@ class __$$_TransportCopyWithImpl<$Res> extends _$TransportCopyWithImpl<$Res>
       cost: cost == freezed
           ? _value.cost
           : cost // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       monthlyCost: monthlyCost == freezed
           ? _value.monthlyCost
           : monthlyCost // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       dateBuy: dateBuy == freezed
           ? _value.dateBuy
           : dateBuy // ignore: cast_nullable_to_non_nullable
@@ -264,9 +264,9 @@ class _$_Transport implements _Transport {
   @override
   final ETypeTransport eTypeTransport;
   @override
-  final int cost;
+  final double cost;
   @override
-  final int monthlyCost;
+  final double monthlyCost;
   @override
   final DateGame? dateBuy;
   @override
@@ -343,8 +343,8 @@ abstract class _Transport implements Transport {
       required final String name,
       required final String brand,
       required final ETypeTransport eTypeTransport,
-      required final int cost,
-      required final int monthlyCost,
+      required final double cost,
+      required final double monthlyCost,
       final DateGame? dateBuy,
       final int bonusToRelax,
       final int bonusToSleep,
@@ -363,9 +363,9 @@ abstract class _Transport implements Transport {
   @override
   ETypeTransport get eTypeTransport => throw _privateConstructorUsedError;
   @override
-  int get cost => throw _privateConstructorUsedError;
+  double get cost => throw _privateConstructorUsedError;
   @override
-  int get monthlyCost => throw _privateConstructorUsedError;
+  double get monthlyCost => throw _privateConstructorUsedError;
   @override
   DateGame? get dateBuy => throw _privateConstructorUsedError;
   @override

@@ -12,7 +12,7 @@ class Experience with _$Experience {
     required String name,
     required int exp,
     required List<Skill> requirements,
-    required int salary,
+    required double salary,
     required int interval,
     required int work,
     required int commuting,

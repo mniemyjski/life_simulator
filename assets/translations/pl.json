@@ -14,5 +14,13 @@
   "sleep": "Sleep",
   "tiredness": "Tiredness",
   "used": "Used",
-  "work": "Work"
+  "work": "Work",
+  "deposit": "Lokata",
+  "loan": "Pożyczka",
+  "payOffTheLoan": "Pay off the loan",
+  "monthlyRate": "Miesięczna rata",
+  "interest": "Oprocentowanie",
+  "confirm": "Confirm",
+  "cancel": "Cancel"
+
 }

@@ -13,7 +13,7 @@ class Income with _$Income {
     required String id,
     required ETypeSource source,
     required ETypeIncome typeIncome,
-    required int value,
+    required double value,
     required int interval,
     required int timeLeft,
   }) = _Income;

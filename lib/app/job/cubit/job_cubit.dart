@@ -150,8 +150,7 @@ class JobCubit extends HydratedCubit<JobState> {
         incomes
           ..forEach((element) {
             if (element.id == job!.id && element.timeLeft <= 20) {
-              _moneyCubit
-                  .change((element.value / element.interval / element.timeLeft * 100).toInt());
+              _moneyCubit.change(element.value / element.interval / element.timeLeft * 100);
             }
           });
       });

@@ -113,7 +113,7 @@ class HouseCubit extends HydratedCubit<HouseState> {
       if (_house != null) {
         _timeSpendCubit.removeBonuses(ETypeBonusSource.house);
         _incomeCubit.remove(_house.id);
-        _moneyCubit.change((_house.cost * 0.8).toInt());
+        _moneyCubit.change(_house.cost * 0.8);
         emit(HouseState.loaded(house: null, houses: _houses));
       }
     });

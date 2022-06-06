@@ -12,8 +12,8 @@ _$_Transport _$$_TransportFromJson(Map<String, dynamic> json) => _$_Transport(
       brand: json['brand'] as String,
       eTypeTransport:
           $enumDecode(_$ETypeTransportEnumMap, json['eTypeTransport']),
-      cost: json['cost'] as int,
-      monthlyCost: json['monthlyCost'] as int,
+      cost: (json['cost'] as num).toDouble(),
+      monthlyCost: (json['monthlyCost'] as num).toDouble(),
       dateBuy: json['dateBuy'] == null
           ? null
           : DateGame.fromJson(json['dateBuy'] as Map<String, dynamic>),

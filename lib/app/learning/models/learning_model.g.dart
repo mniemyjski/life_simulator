@@ -13,7 +13,7 @@ _$_Learning _$$_LearningFromJson(Map<String, dynamic> json) => _$_Learning(
           .map((e) => Skill.fromJson(e as Map<String, dynamic>))
           .toList(),
       time: json['time'] as int,
-      cost: json['cost'] as int,
+      cost: (json['cost'] as num).toDouble(),
       status: $enumDecodeNullable(_$ETypeStatusEnumMap, json['status']) ??
           ETypeStatus.base,
     );

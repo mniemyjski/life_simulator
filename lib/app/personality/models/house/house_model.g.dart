@@ -10,8 +10,8 @@ _$_House _$$_HouseFromJson(Map<String, dynamic> json) => _$_House(
       id: json['id'] as String,
       name: json['name'] as String,
       eTypeHouse: $enumDecode(_$ETypeHouseEnumMap, json['eTypeHouse']),
-      cost: json['cost'] as int,
-      monthlyCost: json['monthlyCost'] as int,
+      cost: (json['cost'] as num).toDouble(),
+      monthlyCost: (json['monthlyCost'] as num).toDouble(),
       dateBuy: json['dateBuy'] == null
           ? null
           : DateGame.fromJson(json['dateBuy'] as Map<String, dynamic>),

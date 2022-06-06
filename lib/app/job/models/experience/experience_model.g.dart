@@ -14,7 +14,7 @@ _$_Experience _$$_ExperienceFromJson(Map<String, dynamic> json) =>
       requirements: (json['requirements'] as List<dynamic>)
           .map((e) => Skill.fromJson(e as Map<String, dynamic>))
           .toList(),
-      salary: json['salary'] as int,
+      salary: (json['salary'] as num).toDouble(),
       interval: json['interval'] as int,
       work: json['work'] as int,
       commuting: json['commuting'] as int,

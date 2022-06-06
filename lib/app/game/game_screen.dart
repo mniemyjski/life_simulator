@@ -73,6 +73,14 @@ class GameScreen extends StatelessWidget {
                       Card(
                         child: IconButton(
                           onPressed: () {
+                            context.router.push(const BankRoute());
+                          },
+                          icon: FaIcon(FontAwesomeIcons.piggyBank),
+                        ),
+                      ),
+                      Card(
+                        child: IconButton(
+                          onPressed: () {
                             context.router.pop();
                           },
                           icon: FaIcon(FontAwesomeIcons.xmark),

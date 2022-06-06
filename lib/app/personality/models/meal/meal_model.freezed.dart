@@ -22,7 +22,7 @@ Meal _$MealFromJson(Map<String, dynamic> json) {
 mixin _$Meal {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  int get cost => throw _privateConstructorUsedError;
+  double get cost => throw _privateConstructorUsedError;
   int get bonusToRelax => throw _privateConstructorUsedError;
   int get bonusToSleep => throw _privateConstructorUsedError;
   int get bonusToLearn => throw _privateConstructorUsedError;
@@ -39,7 +39,7 @@ abstract class $MealCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      int cost,
+      double cost,
       int bonusToRelax,
       int bonusToSleep,
       int bonusToLearn});
@@ -74,7 +74,7 @@ class _$MealCopyWithImpl<$Res> implements $MealCopyWith<$Res> {
       cost: cost == freezed
           ? _value.cost
           : cost // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       bonusToRelax: bonusToRelax == freezed
           ? _value.bonusToRelax
           : bonusToRelax // ignore: cast_nullable_to_non_nullable
@@ -99,7 +99,7 @@ abstract class _$$_MealCopyWith<$Res> implements $MealCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      int cost,
+      double cost,
       int bonusToRelax,
       int bonusToSleep,
       int bonusToLearn});
@@ -135,7 +135,7 @@ class __$$_MealCopyWithImpl<$Res> extends _$MealCopyWithImpl<$Res>
       cost: cost == freezed
           ? _value.cost
           : cost // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       bonusToRelax: bonusToRelax == freezed
           ? _value.bonusToRelax
           : bonusToRelax // ignore: cast_nullable_to_non_nullable
@@ -170,7 +170,7 @@ class _$_Meal implements _Meal {
   @override
   final String name;
   @override
-  final int cost;
+  final double cost;
   @override
   @JsonKey()
   final int bonusToRelax;
@@ -228,7 +228,7 @@ abstract class _Meal implements Meal {
   const factory _Meal(
       {required final String id,
       required final String name,
-      required final int cost,
+      required final double cost,
       final int bonusToRelax,
       final int bonusToSleep,
       final int bonusToLearn}) = _$_Meal;
@@ -240,7 +240,7 @@ abstract class _Meal implements Meal {
   @override
   String get name => throw _privateConstructorUsedError;
   @override
-  int get cost => throw _privateConstructorUsedError;
+  double get cost => throw _privateConstructorUsedError;
   @override
   int get bonusToRelax => throw _privateConstructorUsedError;
   @override

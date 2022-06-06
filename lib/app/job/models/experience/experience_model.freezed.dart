@@ -24,7 +24,7 @@ mixin _$Experience {
   String get name => throw _privateConstructorUsedError;
   int get exp => throw _privateConstructorUsedError;
   List<Skill> get requirements => throw _privateConstructorUsedError;
-  int get salary => throw _privateConstructorUsedError;
+  double get salary => throw _privateConstructorUsedError;
   int get interval => throw _privateConstructorUsedError;
   int get work => throw _privateConstructorUsedError;
   int get commuting => throw _privateConstructorUsedError;
@@ -48,7 +48,7 @@ abstract class $ExperienceCopyWith<$Res> {
       String name,
       int exp,
       List<Skill> requirements,
-      int salary,
+      double salary,
       int interval,
       int work,
       int commuting,
@@ -99,7 +99,7 @@ class _$ExperienceCopyWithImpl<$Res> implements $ExperienceCopyWith<$Res> {
       salary: salary == freezed
           ? _value.salary
           : salary // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       interval: interval == freezed
           ? _value.interval
           : interval // ignore: cast_nullable_to_non_nullable
@@ -140,7 +140,7 @@ abstract class _$$_ExperienceCopyWith<$Res>
       String name,
       int exp,
       List<Skill> requirements,
-      int salary,
+      double salary,
       int interval,
       int work,
       int commuting,
@@ -193,7 +193,7 @@ class __$$_ExperienceCopyWithImpl<$Res> extends _$ExperienceCopyWithImpl<$Res>
       salary: salary == freezed
           ? _value.salary
           : salary // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       interval: interval == freezed
           ? _value.interval
           : interval // ignore: cast_nullable_to_non_nullable
@@ -256,7 +256,7 @@ class _$_Experience implements _Experience {
   }
 
   @override
-  final int salary;
+  final double salary;
   @override
   final int interval;
   @override
@@ -333,7 +333,7 @@ abstract class _Experience implements Experience {
       required final String name,
       required final int exp,
       required final List<Skill> requirements,
-      required final int salary,
+      required final double salary,
       required final int interval,
       required final int work,
       required final int commuting,
@@ -353,7 +353,7 @@ abstract class _Experience implements Experience {
   @override
   List<Skill> get requirements => throw _privateConstructorUsedError;
   @override
-  int get salary => throw _privateConstructorUsedError;
+  double get salary => throw _privateConstructorUsedError;
   @override
   int get interval => throw _privateConstructorUsedError;
   @override

@@ -1,7 +1,6 @@
 // DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
-//flutter pub run easy_localization:generate -S assets/translations -f keys -O lib/constants -o locale_keys.g.dart
 
-abstract class LocaleKeys {
+abstract class  LocaleKeys {
   static const continueGame = 'continueGame';
   static const darkMode = 'darkMode';
   static const exit = 'exit';
@@ -17,4 +16,12 @@ abstract class LocaleKeys {
   static const tiredness = 'tiredness';
   static const used = 'used';
   static const work = 'work';
+  static const deposit = 'deposit';
+  static const loan = 'loan';
+  static const payOffTheLoan = 'payOffTheLoan';
+  static const monthlyRate = 'monthlyRate';
+  static const interest = 'interest';
+  static const confirm = 'confirm';
+  static const cancel = 'cancel';
+
 }

@@ -27,8 +27,8 @@ class Data {
             interval: 30,
             work: 8,
             commuting: 2,
-            bonusToRelax: -2,
-            bonusToSleep: -2,
+            bonusToRelax: -1,
+            bonusToSleep: -1,
             requirements: [],
           ),
           Experience(
@@ -39,8 +39,8 @@ class Data {
             interval: 30,
             work: 8,
             commuting: 2,
-            bonusToRelax: -2,
-            bonusToSleep: -2,
+            bonusToRelax: -1,
+            bonusToSleep: -1,
             requirements: [],
           ),
           Experience(
@@ -70,8 +70,8 @@ class Data {
             interval: 30,
             work: 8,
             commuting: 2,
-            bonusToRelax: -3,
-            bonusToSleep: -2,
+            bonusToRelax: -1,
+            bonusToSleep: -1,
             requirements: [],
           ),
           Experience(
@@ -82,8 +82,8 @@ class Data {
             interval: 30,
             work: 8,
             commuting: 2,
-            bonusToRelax: -2,
-            bonusToSleep: -2,
+            bonusToRelax: -1,
+            bonusToSleep: -1,
             requirements: [],
           ),
           Experience(
@@ -339,7 +339,6 @@ class Data {
         monthlyCost: 50,
         commuting: 1,
         bonusToRelax: -1,
-        bonusToSleep: -1,
       ),
       Transport(
         id: uuid.v1(),

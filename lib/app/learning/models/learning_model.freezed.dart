@@ -24,7 +24,7 @@ mixin _$Learning {
   String get name => throw _privateConstructorUsedError;
   List<Skill> get skills => throw _privateConstructorUsedError;
   int get time => throw _privateConstructorUsedError;
-  int get cost => throw _privateConstructorUsedError;
+  double get cost => throw _privateConstructorUsedError;
   ETypeStatus get status => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -42,7 +42,7 @@ abstract class $LearningCopyWith<$Res> {
       String name,
       List<Skill> skills,
       int time,
-      int cost,
+      double cost,
       ETypeStatus status});
 }
 
@@ -83,7 +83,7 @@ class _$LearningCopyWithImpl<$Res> implements $LearningCopyWith<$Res> {
       cost: cost == freezed
           ? _value.cost
           : cost // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       status: status == freezed
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -103,7 +103,7 @@ abstract class _$$_LearningCopyWith<$Res> implements $LearningCopyWith<$Res> {
       String name,
       List<Skill> skills,
       int time,
-      int cost,
+      double cost,
       ETypeStatus status});
 }
 
@@ -146,7 +146,7 @@ class __$$_LearningCopyWithImpl<$Res> extends _$LearningCopyWithImpl<$Res>
       cost: cost == freezed
           ? _value.cost
           : cost // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       status: status == freezed
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -184,7 +184,7 @@ class _$_Learning implements _Learning {
   @override
   final int time;
   @override
-  final int cost;
+  final double cost;
   @override
   @JsonKey()
   final ETypeStatus status;
@@ -235,7 +235,7 @@ abstract class _Learning implements Learning {
       required final String name,
       required final List<Skill> skills,
       required final int time,
-      required final int cost,
+      required final double cost,
       final ETypeStatus status}) = _$_Learning;
 
   factory _Learning.fromJson(Map<String, dynamic> json) = _$_Learning.fromJson;
@@ -249,7 +249,7 @@ abstract class _Learning implements Learning {
   @override
   int get time => throw _privateConstructorUsedError;
   @override
-  int get cost => throw _privateConstructorUsedError;
+  double get cost => throw _privateConstructorUsedError;
   @override
   ETypeStatus get status => throw _privateConstructorUsedError;
   @override

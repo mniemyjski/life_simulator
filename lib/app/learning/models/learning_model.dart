@@ -13,7 +13,7 @@ class Learning with _$Learning {
     required String name,
     required List<Skill> skills,
     required int time,
-    required int cost,
+    required double cost,
     @Default(ETypeStatus.base) ETypeStatus status,
   }) = _Learning;
 

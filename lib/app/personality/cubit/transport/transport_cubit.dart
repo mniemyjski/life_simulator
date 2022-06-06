@@ -106,7 +106,7 @@ class TransportCubit extends HydratedCubit<TransportState> {
       if (_transport != null) {
         _timeSpendCubit.removeBonuses(ETypeBonusSource.transport);
         _incomeCubit.remove(_transport.id);
-        _moneyCubit.change((_transport.cost * 0.8).toInt());
+        _moneyCubit.change(_transport.cost * 0.8);
 
         emit(TransportState.loaded(transport: null, transports: _transports));
       }

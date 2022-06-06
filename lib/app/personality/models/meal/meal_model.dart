@@ -8,7 +8,7 @@ class Meal with _$Meal {
   const factory Meal({
     required String id,
     required String name,
-    required int cost,
+    required double cost,
     @Default(0) int bonusToRelax,
     @Default(0) int bonusToSleep,
     @Default(0) int bonusToLearn,

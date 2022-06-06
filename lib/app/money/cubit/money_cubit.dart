@@ -6,7 +6,7 @@ import 'package:injectable/injectable.dart';
 import '../../save/save_cubit.dart';
 
 @lazySingleton
-class MoneyCubit extends HydratedCubit<int> {
+class MoneyCubit extends HydratedCubit<double> {
   final SaveCubit _saveCubit;
   late StreamSubscription _save;
 
@@ -28,14 +28,14 @@ class MoneyCubit extends HydratedCubit<int> {
     !newGame ? emit(5000) : emit(state);
   }
 
-  change(int money) {
-    int refresh = state + money;
+  change(double money) {
+    double refresh = state + money;
     emit(refresh);
   }
 
   @override
-  int? fromJson(Map<String, dynamic> json) => json['value'] as int;
+  double? fromJson(Map<String, dynamic> json) => json['value'] as double;
 
   @override
-  Map<String, dynamic>? toJson(int state) => {'value': state};
+  Map<String, dynamic>? toJson(double state) => {'value': state};
 }

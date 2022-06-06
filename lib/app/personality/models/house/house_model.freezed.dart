@@ -23,8 +23,8 @@ mixin _$House {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   ETypeHouse get eTypeHouse => throw _privateConstructorUsedError;
-  int get cost => throw _privateConstructorUsedError;
-  int get monthlyCost => throw _privateConstructorUsedError;
+  double get cost => throw _privateConstructorUsedError;
+  double get monthlyCost => throw _privateConstructorUsedError;
   DateGame? get dateBuy => throw _privateConstructorUsedError;
   int get bonusToRelax => throw _privateConstructorUsedError;
   int get bonusToSleep => throw _privateConstructorUsedError;
@@ -43,8 +43,8 @@ abstract class $HouseCopyWith<$Res> {
       {String id,
       String name,
       ETypeHouse eTypeHouse,
-      int cost,
-      int monthlyCost,
+      double cost,
+      double monthlyCost,
       DateGame? dateBuy,
       int bonusToRelax,
       int bonusToSleep,
@@ -89,11 +89,11 @@ class _$HouseCopyWithImpl<$Res> implements $HouseCopyWith<$Res> {
       cost: cost == freezed
           ? _value.cost
           : cost // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       monthlyCost: monthlyCost == freezed
           ? _value.monthlyCost
           : monthlyCost // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       dateBuy: dateBuy == freezed
           ? _value.dateBuy
           : dateBuy // ignore: cast_nullable_to_non_nullable
@@ -134,8 +134,8 @@ abstract class _$$_HouseCopyWith<$Res> implements $HouseCopyWith<$Res> {
       {String id,
       String name,
       ETypeHouse eTypeHouse,
-      int cost,
-      int monthlyCost,
+      double cost,
+      double monthlyCost,
       DateGame? dateBuy,
       int bonusToRelax,
       int bonusToSleep,
@@ -182,11 +182,11 @@ class __$$_HouseCopyWithImpl<$Res> extends _$HouseCopyWithImpl<$Res>
       cost: cost == freezed
           ? _value.cost
           : cost // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       monthlyCost: monthlyCost == freezed
           ? _value.monthlyCost
           : monthlyCost // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       dateBuy: dateBuy == freezed
           ? _value.dateBuy
           : dateBuy // ignore: cast_nullable_to_non_nullable
@@ -231,9 +231,9 @@ class _$_House implements _House {
   @override
   final ETypeHouse eTypeHouse;
   @override
-  final int cost;
+  final double cost;
   @override
-  final int monthlyCost;
+  final double monthlyCost;
   @override
   final DateGame? dateBuy;
   @override
@@ -302,8 +302,8 @@ abstract class _House implements House {
       {required final String id,
       required final String name,
       required final ETypeHouse eTypeHouse,
-      required final int cost,
-      required final int monthlyCost,
+      required final double cost,
+      required final double monthlyCost,
       final DateGame? dateBuy,
       final int bonusToRelax,
       final int bonusToSleep,
@@ -318,9 +318,9 @@ abstract class _House implements House {
   @override
   ETypeHouse get eTypeHouse => throw _privateConstructorUsedError;
   @override
-  int get cost => throw _privateConstructorUsedError;
+  double get cost => throw _privateConstructorUsedError;
   @override
-  int get monthlyCost => throw _privateConstructorUsedError;
+  double get monthlyCost => throw _privateConstructorUsedError;
   @override
   DateGame? get dateBuy => throw _privateConstructorUsedError;
   @override

@@ -10,7 +10,7 @@ _$_Income _$$_IncomeFromJson(Map<String, dynamic> json) => _$_Income(
       id: json['id'] as String,
       source: $enumDecode(_$ETypeSourceEnumMap, json['source']),
       typeIncome: $enumDecode(_$ETypeIncomeEnumMap, json['typeIncome']),
-      value: json['value'] as int,
+      value: (json['value'] as num).toDouble(),
       interval: json['interval'] as int,
       timeLeft: json['timeLeft'] as int,
     );
@@ -28,7 +28,7 @@ const _$ETypeSourceEnumMap = {
   ETypeSource.job: 'job',
   ETypeSource.meal: 'meal',
   ETypeSource.house: 'house',
-  ETypeSource.car: 'transport',
+  ETypeSource.car: 'car',
 };
 
 const _$ETypeIncomeEnumMap = {

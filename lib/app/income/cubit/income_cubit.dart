@@ -52,7 +52,7 @@ class IncomeCubit extends HydratedCubit<IncomeState> {
     });
   }
 
-  update({required String id, required int value}) {
+  update({required String id, required double value}) {
     state.whenOrNull(loaded: (incomes) {
       Income? income = incomes.firstWhere((element) => element.id == id);
       List<Income> refresh = List.from(incomes)..removeWhere((element) => element.id == id);

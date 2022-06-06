@@ -23,7 +23,7 @@ mixin _$Income {
   String get id => throw _privateConstructorUsedError;
   ETypeSource get source => throw _privateConstructorUsedError;
   ETypeIncome get typeIncome => throw _privateConstructorUsedError;
-  int get value => throw _privateConstructorUsedError;
+  double get value => throw _privateConstructorUsedError;
   int get interval => throw _privateConstructorUsedError;
   int get timeLeft => throw _privateConstructorUsedError;
 
@@ -40,7 +40,7 @@ abstract class $IncomeCopyWith<$Res> {
       {String id,
       ETypeSource source,
       ETypeIncome typeIncome,
-      int value,
+      double value,
       int interval,
       int timeLeft});
 }
@@ -78,7 +78,7 @@ class _$IncomeCopyWithImpl<$Res> implements $IncomeCopyWith<$Res> {
       value: value == freezed
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       interval: interval == freezed
           ? _value.interval
           : interval // ignore: cast_nullable_to_non_nullable
@@ -100,7 +100,7 @@ abstract class _$$_IncomeCopyWith<$Res> implements $IncomeCopyWith<$Res> {
       {String id,
       ETypeSource source,
       ETypeIncome typeIncome,
-      int value,
+      double value,
       int interval,
       int timeLeft});
 }
@@ -139,7 +139,7 @@ class __$$_IncomeCopyWithImpl<$Res> extends _$IncomeCopyWithImpl<$Res>
       value: value == freezed
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       interval: interval == freezed
           ? _value.interval
           : interval // ignore: cast_nullable_to_non_nullable
@@ -173,7 +173,7 @@ class _$_Income implements _Income {
   @override
   final ETypeIncome typeIncome;
   @override
-  final int value;
+  final double value;
   @override
   final int interval;
   @override
@@ -225,7 +225,7 @@ abstract class _Income implements Income {
       {required final String id,
       required final ETypeSource source,
       required final ETypeIncome typeIncome,
-      required final int value,
+      required final double value,
       required final int interval,
       required final int timeLeft}) = _$_Income;
 
@@ -238,7 +238,7 @@ abstract class _Income implements Income {
   @override
   ETypeIncome get typeIncome => throw _privateConstructorUsedError;
   @override
-  int get value => throw _privateConstructorUsedError;
+  double get value => throw _privateConstructorUsedError;
   @override
   int get interval => throw _privateConstructorUsedError;
   @override
