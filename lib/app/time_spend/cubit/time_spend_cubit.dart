@@ -48,7 +48,7 @@ class TimeSpendCubit extends HydratedCubit<TimeSpendState> {
     state.whenOrNull(
       initial: () => emit(_state),
       loaded: (timeSpend) {
-        if (!newGame) emit(state);
+        if (!newGame) emit(_state);
       },
     );
   }

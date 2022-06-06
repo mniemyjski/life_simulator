@@ -15,6 +15,7 @@ import '../../app/money/cubit/money_cubit.dart' as _i8;
 import '../../app/personality/cubit/house/house_cubit.dart' as _i15;
 import '../../app/personality/cubit/meal/meal_cubit.dart' as _i12;
 import '../../app/personality/cubit/transport/transport_cubit.dart' as _i13;
+import '../../app/rules/cubit/rules_cubit.dart' as _i17;
 import '../../app/save/save_cubit.dart' as _i5;
 import '../../app/settings/cubit/dark_mode_cubit.dart' as _i3;
 import '../../app/settings/cubit/day_setting_cubit.dart' as _i4;
@@ -73,5 +74,9 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       timeSpend: get<_i7.TimeSpendCubit>(),
       saveCubit: get<_i5.SaveCubit>(),
       dateCubit: get<_i14.DateCubit>()));
+  gh.lazySingleton<_i17.RulesCubit>(() => _i17.RulesCubit(
+      moneyCubit: get<_i8.MoneyCubit>(),
+      statsCubit: get<_i16.StatsCubit>(),
+      saveCubit: get<_i5.SaveCubit>()));
   return get;
 }
