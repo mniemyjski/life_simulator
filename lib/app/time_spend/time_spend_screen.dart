@@ -7,8 +7,8 @@ import 'package:life_simulator/app/time_spend/cubit/time_spend_cubit.dart';
 import 'package:life_simulator/utilities/utilities.dart';
 
 import '../../constants/constants.dart';
-import '../app_bar/app_bar_stats.dart';
 import '../date/cubit/date_cubit.dart';
+import '../game/widget/app_bar_stats.dart';
 
 class TimeSpendScreen extends StatelessWidget {
   const TimeSpendScreen({Key? key}) : super(key: key);

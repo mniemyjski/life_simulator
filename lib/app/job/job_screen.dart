@@ -6,8 +6,8 @@ import 'package:life_simulator/app/job/cubit/job_cubit.dart';
 import 'package:life_simulator/app/job/widgets/looking_for_job.dart';
 import 'package:life_simulator/app/job/widgets/you_job.dart';
 
-import '../app_bar/app_bar_stats.dart';
 import '../date/cubit/date_cubit.dart';
+import '../game/widget/app_bar_stats.dart';
 
 class JobScreen extends StatelessWidget {
   const JobScreen({Key? key}) : super(key: key);

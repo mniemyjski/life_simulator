@@ -8,8 +8,8 @@ import 'package:life_simulator/constants/constants.dart';
 import 'package:life_simulator/utilities/utilities.dart';
 import 'package:life_simulator/widgets/widgets.dart';
 
-import '../app_bar/app_bar_stats.dart';
 import '../date/cubit/date_cubit.dart';
+import '../game/widget/app_bar_stats.dart';
 
 class BankScreen extends StatelessWidget {
   const BankScreen({Key? key}) : super(key: key);

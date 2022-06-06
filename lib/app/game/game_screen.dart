@@ -3,7 +3,7 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:life_simulator/app/app_bar/app_bar_stats.dart';
+import 'package:life_simulator/app/game/widget/app_bar_stats.dart';
 import 'package:life_simulator/app/rules/cubit/rules_cubit.dart';
 import 'package:life_simulator/config/routes/routes.gr.dart';
 
