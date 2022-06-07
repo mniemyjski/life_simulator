@@ -7,14 +7,18 @@ part of 'loan_model.dart';
 // **************************************************************************
 
 _$_Loan _$$_LoanFromJson(Map<String, dynamic> json) => _$_Loan(
-      value: (json['value'] as num).toDouble(),
+      borrowed: (json['borrowed'] as num).toDouble(),
+      left: (json['left'] as num).toDouble(),
+      monthlyRate: (json['monthlyRate'] as num).toDouble(),
       interest: (json['interest'] as num).toDouble(),
       turns: json['turns'] as int,
       turnsToEnd: json['turnsToEnd'] as int,
     );
 
 Map<String, dynamic> _$$_LoanToJson(_$_Loan instance) => <String, dynamic>{
-      'value': instance.value,
+      'borrowed': instance.borrowed,
+      'left': instance.left,
+      'monthlyRate': instance.monthlyRate,
       'interest': instance.interest,
       'turns': instance.turns,
       'turnsToEnd': instance.turnsToEnd,

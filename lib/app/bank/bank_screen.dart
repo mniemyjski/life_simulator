@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:life_simulator/app/bank/cubit/deposit/deposit_cubit.dart';
-import 'package:life_simulator/app/money/cubit/money_cubit.dart';
+import 'package:life_simulator/app/bank/cubit/loan/loan_cubit.dart';
+import 'package:life_simulator/app/bank/widgets/deposit_button.dart';
+import 'package:life_simulator/app/bank/widgets/loan_button.dart';
 import 'package:life_simulator/constants/constants.dart';
 import 'package:life_simulator/utilities/utilities.dart';
-import 'package:life_simulator/widgets/widgets.dart';
 
 import '../date/cubit/date_cubit.dart';
 import '../game/widget/app_bar_stats.dart';
+import 'models/loan/loan_model.dart';
 
 class BankScreen extends StatelessWidget {
   const BankScreen({Key? key}) : super(key: key);
@@ -26,10 +28,9 @@ class BankScreen extends StatelessWidget {
             padding: const EdgeInsets.all(4.0),
             child: RichText(
               text: TextSpan(
+                style: Theme.of(context).textTheme.bodyText2,
                 children: <TextSpan>[
-                  TextSpan(
-                      text: '${LocaleKeys.deposit.tr()}: ',
-                      style: TextStyle(color: Theme.of(context).textTheme.bodyText2!.color)),
+                  TextSpan(text: '${LocaleKeys.deposit.tr()}: '),
                   TextSpan(
                     text: '${context.watch<DepositCubit>().state.toInt()}\$',
                     style: TextStyle(
@@ -44,12 +45,11 @@ class BankScreen extends StatelessWidget {
             padding: const EdgeInsets.all(4.0),
             child: RichText(
               text: TextSpan(
+                style: Theme.of(context).textTheme.bodyText2,
                 children: <TextSpan>[
+                  TextSpan(text: '${LocaleKeys.loan.tr()}: '),
                   TextSpan(
-                      text: '${LocaleKeys.loan.tr()}: ',
-                      style: TextStyle(color: Theme.of(context).textTheme.bodyText2!.color)),
-                  TextSpan(
-                      text: '0\$',
+                      text: '${context.watch<LoanCubit>().loan().toInt()}\$',
                       style: TextStyle(
                           color: Theme.of(context).textTheme.bodyText2!.color,
                           fontWeight: FontWeight.bold)),
@@ -61,79 +61,85 @@ class BankScreen extends StatelessWidget {
             padding: const EdgeInsets.all(4.0),
             child: RichText(
               text: TextSpan(
+                style: Theme.of(context).textTheme.bodyText2,
                 children: <TextSpan>[
+                  TextSpan(text: '${LocaleKeys.monthlyRate.tr()}: '),
                   TextSpan(
-                      text: '${LocaleKeys.monthlyRate.tr()}: ',
-                      style: TextStyle(color: Theme.of(context).textTheme.bodyText2!.color)),
-                  TextSpan(
-                      text: '0\$',
-                      style: TextStyle(
-                          color: Theme.of(context).textTheme.bodyText2!.color,
-                          fontWeight: FontWeight.bold)),
+                      text: '${context.watch<LoanCubit>().monthlyRate().toInt()}\$',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
                 ],
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: CustomButton(
-                onPressed: () async {
-                  return showDialog<void>(
-                    context: context,
-                    barrierDismissible: false, // user must tap button!
-                    builder: (BuildContext context) {
-                      final double _oldDeposit = context.read<DepositCubit>().state;
-                      double _newDeposit = context.read<DepositCubit>().state;
-                      final double _max =
-                          context.read<DepositCubit>().state + context.watch<MoneyCubit>().state;
-                      return AlertDialog(
-                        title: Text(LocaleKeys.deposit.tr()),
-                        // titlePadding: EdgeInsets.zero,
-                        content: StatefulBuilder(builder: (context, setState) {
-                          return SizedBox(
-                            height: 150,
-                            child: Slider(
-                              value: _newDeposit,
-                              max: _max,
-                              divisions: _max ~/ 10,
-                              label: '${_newDeposit.toInt()}',
-                              onChanged: (double value) => setState(() => _newDeposit = value),
+          DepositButton(),
+          LoanButton(),
+          Expanded(child: BlocBuilder<LoanCubit, LoanState>(
+            builder: (context, state) {
+              return state.maybeWhen(
+                  orElse: () => Container(),
+                  loaded: (loans) {
+                    return ListView.builder(
+                        itemCount: loans.length,
+                        itemBuilder: (context, index) {
+                          Loan element = loans[index];
+
+                          return Card(
+                              child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                RichText(
+                                  text: TextSpan(
+                                    style: Theme.of(context).textTheme.bodyText1,
+                                    children: <TextSpan>[
+                                      TextSpan(text: '${LocaleKeys.borrowed.tr()}: '),
+                                      TextSpan(
+                                          text: '${element.borrowed.toInt()}\$',
+                                          style: TextStyle(fontWeight: FontWeight.bold)),
+                                    ],
+                                  ),
+                                ),
+                                RichText(
+                                  text: TextSpan(
+                                    style: Theme.of(context).textTheme.bodyText1,
+                                    children: <TextSpan>[
+                                      TextSpan(text: '${LocaleKeys.left.tr()}: '),
+                                      TextSpan(
+                                          text: '${element.left.toInt()}\$',
+                                          style: TextStyle(fontWeight: FontWeight.bold)),
+                                    ],
+                                  ),
+                                ),
+                                RichText(
+                                  text: TextSpan(
+                                    style: Theme.of(context).textTheme.bodyText1,
+                                    children: <TextSpan>[
+                                      TextSpan(text: '${LocaleKeys.monthlyRate.tr()}: '),
+                                      TextSpan(
+                                          text: '${element.monthlyRate}\$',
+                                          style: TextStyle(fontWeight: FontWeight.bold)),
+                                    ],
+                                  ),
+                                ),
+                                RichText(
+                                  text: TextSpan(
+                                    style: Theme.of(context).textTheme.bodyText1,
+                                    children: <TextSpan>[
+                                      TextSpan(text: '${LocaleKeys.turnsToEnd.tr()}: '),
+                                      TextSpan(
+                                          text: '${element.turnsToEnd.toInt()}',
+                                          style: TextStyle(fontWeight: FontWeight.bold)),
+                                    ],
+                                  ),
+                                ),
+                              ],
                             ),
-                          );
-                        }),
-                        actions: <Widget>[
-                          TextButton(
-                            child: Text(LocaleKeys.cancel.tr()),
-                            onPressed: () => context.router.pop(),
-                          ),
-                          TextButton(
-                            child: Text(LocaleKeys.confirm.tr()),
-                            onPressed: () {
-                              if (_newDeposit > _oldDeposit) {
-                                context.read<DepositCubit>().change(_newDeposit);
-                                context.read<MoneyCubit>().change(-_newDeposit);
-                              } else if (_newDeposit < _oldDeposit) {
-                                context.read<DepositCubit>().change(-_oldDeposit + _newDeposit);
-                                context.read<MoneyCubit>().change(_oldDeposit - _newDeposit);
-                              }
-                              context.router.pop();
-                            },
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                },
-                child: Text(LocaleKeys.deposit.tr())),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: CustomButton(onPressed: () => null, child: Text(LocaleKeys.loan.tr())),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: CustomButton(onPressed: () => null, child: Text(LocaleKeys.payOffTheLoan.tr())),
-          ),
+                          ));
+                        });
+                  });
+            },
+          ))
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

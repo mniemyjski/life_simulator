@@ -23,5 +23,10 @@ abstract class  LocaleKeys {
   static const interest = 'interest';
   static const confirm = 'confirm';
   static const cancel = 'cancel';
+  static const months = 'months';
+  static const cost = 'cost';
+  static const borrowed = 'borrowed';
+  static const left = 'left';
+  static const turnsToEnd = 'turnsToEnd';
 
 }

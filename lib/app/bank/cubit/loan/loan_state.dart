@@ -1,6 +1,10 @@
 part of 'loan_cubit.dart';
 
-@immutable
-abstract class LoanState {}
+@freezed
+class LoanState with _$LoanState {
+  const factory LoanState.initial() = Initial;
+  const factory LoanState.loading() = Loading;
+  const factory LoanState.loaded(List<Loan> Loans) = Loaded;
 
-class LoanInitial extends LoanState {}
+  factory LoanState.fromJson(Map<String, dynamic> json) => _$LoanStateFromJson(json);
+}

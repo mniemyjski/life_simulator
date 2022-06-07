@@ -4,6 +4,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../date/cubit/date_cubit.dart';
+import '../../../date/models/date_game_model.dart';
 import '../../../save/save_cubit.dart';
 
 @lazySingleton
@@ -43,6 +44,7 @@ class DepositCubit extends HydratedCubit<double> {
   _counting() {
     _saveSub = _dateCubit.stream.listen((event) {
       event.whenOrNull(loaded: (date) {
+        if (date == DateGame(year: 18, month: 1, day: 1)) return;
         double result = state + (state * (0.12 / 360));
         emit(result);
       });

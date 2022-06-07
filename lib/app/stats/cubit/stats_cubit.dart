@@ -32,8 +32,8 @@ class StatsCubit extends HydratedCubit<StatsState> {
         _saveCubit = saveCubit,
         _dateCubit = dateCubit,
         super(StatsState.initial()) {
-    _saveCubit.state.whenOrNull(loaded: (s) => init(s));
-    _save = _saveCubit.stream.listen((s) => s.whenOrNull(loaded: (save) => init(save)));
+    _saveCubit.state.whenOrNull(loaded: (s) => _init(s));
+    _save = _saveCubit.stream.listen((s) => s.whenOrNull(loaded: (save) => _init(save)));
     _dateSub = _dateCubit.stream.listen((d) => d.whenOrNull(loaded: (date) => _counting(date)));
   }
 
@@ -44,7 +44,7 @@ class StatsCubit extends HydratedCubit<StatsState> {
     super.close();
   }
 
-  init(bool newGame) {
+  _init(bool newGame) {
     StatsState _state = StatsState.loaded(Stats(
       health: 1,
       satisfaction: 1,

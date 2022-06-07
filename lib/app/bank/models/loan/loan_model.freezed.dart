@@ -20,7 +20,9 @@ Loan _$LoanFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Loan {
-  double get value => throw _privateConstructorUsedError;
+  double get borrowed => throw _privateConstructorUsedError;
+  double get left => throw _privateConstructorUsedError;
+  double get monthlyRate => throw _privateConstructorUsedError;
   double get interest => throw _privateConstructorUsedError;
   int get turns => throw _privateConstructorUsedError;
   int get turnsToEnd => throw _privateConstructorUsedError;
@@ -34,7 +36,13 @@ mixin _$Loan {
 abstract class $LoanCopyWith<$Res> {
   factory $LoanCopyWith(Loan value, $Res Function(Loan) then) =
       _$LoanCopyWithImpl<$Res>;
-  $Res call({double value, double interest, int turns, int turnsToEnd});
+  $Res call(
+      {double borrowed,
+      double left,
+      double monthlyRate,
+      double interest,
+      int turns,
+      int turnsToEnd});
 }
 
 /// @nodoc
@@ -47,15 +55,25 @@ class _$LoanCopyWithImpl<$Res> implements $LoanCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? value = freezed,
+    Object? borrowed = freezed,
+    Object? left = freezed,
+    Object? monthlyRate = freezed,
     Object? interest = freezed,
     Object? turns = freezed,
     Object? turnsToEnd = freezed,
   }) {
     return _then(_value.copyWith(
-      value: value == freezed
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
+      borrowed: borrowed == freezed
+          ? _value.borrowed
+          : borrowed // ignore: cast_nullable_to_non_nullable
+              as double,
+      left: left == freezed
+          ? _value.left
+          : left // ignore: cast_nullable_to_non_nullable
+              as double,
+      monthlyRate: monthlyRate == freezed
+          ? _value.monthlyRate
+          : monthlyRate // ignore: cast_nullable_to_non_nullable
               as double,
       interest: interest == freezed
           ? _value.interest
@@ -78,7 +96,13 @@ abstract class _$$_LoanCopyWith<$Res> implements $LoanCopyWith<$Res> {
   factory _$$_LoanCopyWith(_$_Loan value, $Res Function(_$_Loan) then) =
       __$$_LoanCopyWithImpl<$Res>;
   @override
-  $Res call({double value, double interest, int turns, int turnsToEnd});
+  $Res call(
+      {double borrowed,
+      double left,
+      double monthlyRate,
+      double interest,
+      int turns,
+      int turnsToEnd});
 }
 
 /// @nodoc
@@ -92,15 +116,25 @@ class __$$_LoanCopyWithImpl<$Res> extends _$LoanCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? value = freezed,
+    Object? borrowed = freezed,
+    Object? left = freezed,
+    Object? monthlyRate = freezed,
     Object? interest = freezed,
     Object? turns = freezed,
     Object? turnsToEnd = freezed,
   }) {
     return _then(_$_Loan(
-      value: value == freezed
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
+      borrowed: borrowed == freezed
+          ? _value.borrowed
+          : borrowed // ignore: cast_nullable_to_non_nullable
+              as double,
+      left: left == freezed
+          ? _value.left
+          : left // ignore: cast_nullable_to_non_nullable
+              as double,
+      monthlyRate: monthlyRate == freezed
+          ? _value.monthlyRate
+          : monthlyRate // ignore: cast_nullable_to_non_nullable
               as double,
       interest: interest == freezed
           ? _value.interest
@@ -122,7 +156,9 @@ class __$$_LoanCopyWithImpl<$Res> extends _$LoanCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Loan implements _Loan {
   const _$_Loan(
-      {required this.value,
+      {required this.borrowed,
+      required this.left,
+      required this.monthlyRate,
       required this.interest,
       required this.turns,
       required this.turnsToEnd});
@@ -130,7 +166,11 @@ class _$_Loan implements _Loan {
   factory _$_Loan.fromJson(Map<String, dynamic> json) => _$$_LoanFromJson(json);
 
   @override
-  final double value;
+  final double borrowed;
+  @override
+  final double left;
+  @override
+  final double monthlyRate;
   @override
   final double interest;
   @override
@@ -140,7 +180,7 @@ class _$_Loan implements _Loan {
 
   @override
   String toString() {
-    return 'Loan(value: $value, interest: $interest, turns: $turns, turnsToEnd: $turnsToEnd)';
+    return 'Loan(borrowed: $borrowed, left: $left, monthlyRate: $monthlyRate, interest: $interest, turns: $turns, turnsToEnd: $turnsToEnd)';
   }
 
   @override
@@ -148,7 +188,10 @@ class _$_Loan implements _Loan {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Loan &&
-            const DeepCollectionEquality().equals(other.value, value) &&
+            const DeepCollectionEquality().equals(other.borrowed, borrowed) &&
+            const DeepCollectionEquality().equals(other.left, left) &&
+            const DeepCollectionEquality()
+                .equals(other.monthlyRate, monthlyRate) &&
             const DeepCollectionEquality().equals(other.interest, interest) &&
             const DeepCollectionEquality().equals(other.turns, turns) &&
             const DeepCollectionEquality()
@@ -159,7 +202,9 @@ class _$_Loan implements _Loan {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(value),
+      const DeepCollectionEquality().hash(borrowed),
+      const DeepCollectionEquality().hash(left),
+      const DeepCollectionEquality().hash(monthlyRate),
       const DeepCollectionEquality().hash(interest),
       const DeepCollectionEquality().hash(turns),
       const DeepCollectionEquality().hash(turnsToEnd));
@@ -177,7 +222,9 @@ class _$_Loan implements _Loan {
 
 abstract class _Loan implements Loan {
   const factory _Loan(
-      {required final double value,
+      {required final double borrowed,
+      required final double left,
+      required final double monthlyRate,
       required final double interest,
       required final int turns,
       required final int turnsToEnd}) = _$_Loan;
@@ -185,7 +232,11 @@ abstract class _Loan implements Loan {
   factory _Loan.fromJson(Map<String, dynamic> json) = _$_Loan.fromJson;
 
   @override
-  double get value => throw _privateConstructorUsedError;
+  double get borrowed => throw _privateConstructorUsedError;
+  @override
+  double get left => throw _privateConstructorUsedError;
+  @override
+  double get monthlyRate => throw _privateConstructorUsedError;
   @override
   double get interest => throw _privateConstructorUsedError;
   @override

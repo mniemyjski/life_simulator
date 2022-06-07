@@ -21,6 +21,11 @@
   "monthlyRate": "Miesięczna rata",
   "interest": "Oprocentowanie",
   "confirm": "Confirm",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "months": "Months",
+  "cost": "Cost",
+  "borrowed": "Borrowed",
+  "left": "Left",
+  "turnsToEnd": "Turns to end"
 
 }

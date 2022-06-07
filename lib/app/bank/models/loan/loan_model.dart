@@ -6,7 +6,9 @@ part 'loan_model.g.dart';
 @freezed
 class Loan with _$Loan {
   const factory Loan({
-    required double value,
+    required double borrowed,
+    required double left,
+    required double monthlyRate,
     required double interest,
     required int turns,
     required int turnsToEnd,
