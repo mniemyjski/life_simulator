@@ -17,49 +17,52 @@ class DepositButton extends StatelessWidget {
       padding: const EdgeInsets.all(4.0),
       child: CustomButton(
           onPressed: () async {
-            return showDialog<void>(
+            showModalBottomSheet<void>(
               context: context,
-              barrierDismissible: false, // user must tap button!
               builder: (BuildContext context) {
                 final double _oldDeposit = context.read<DepositCubit>().state;
                 double _newDeposit = context.read<DepositCubit>().state;
                 final double _max =
                     context.read<DepositCubit>().state + context.watch<MoneyCubit>().state;
-                return AlertDialog(
-                  title: Text(LocaleKeys.deposit.tr()),
-                  // titlePadding: EdgeInsets.zero,
-                  content: StatefulBuilder(builder: (context, setState) {
-                    return SizedBox(
-                      height: 150,
-                      child: Slider(
-                        value: _newDeposit,
-                        max: _max,
-                        divisions: _max ~/ 10,
-                        label: '${_newDeposit.toInt()}',
-                        onChanged: (double value) => setState(() => _newDeposit = value),
-                      ),
-                    );
-                  }),
-                  actions: <Widget>[
-                    TextButton(
-                      child: Text(LocaleKeys.cancel.tr()),
-                      onPressed: () => context.router.pop(),
+
+                return StatefulBuilder(builder: (context, setState) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          '${LocaleKeys.deposit.tr()}:',
+                          style: TextStyle(
+                              color: Theme.of(context).textTheme.bodyText1!.color,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Slider(
+                          value: _newDeposit,
+                          max: _max,
+                          divisions: _max ~/ 10,
+                          label: '${_newDeposit.toInt()}',
+                          onChanged: (double value) => setState(() => _newDeposit = value),
+                        ),
+                        CustomButton(
+                            onPressed: () {
+                              if (_newDeposit > _oldDeposit) {
+                                context.read<DepositCubit>().change(_newDeposit);
+                                context.read<MoneyCubit>().change(-_newDeposit);
+                              } else if (_newDeposit < _oldDeposit) {
+                                context.read<DepositCubit>().change(-_oldDeposit + _newDeposit);
+                                context.read<MoneyCubit>().change(_oldDeposit - _newDeposit);
+                              }
+                              context.router.pop();
+                            },
+                            child: Text(
+                              LocaleKeys.confirm.tr(),
+                            ))
+                      ],
                     ),
-                    TextButton(
-                      child: Text(LocaleKeys.confirm.tr()),
-                      onPressed: () {
-                        if (_newDeposit > _oldDeposit) {
-                          context.read<DepositCubit>().change(_newDeposit);
-                          context.read<MoneyCubit>().change(-_newDeposit);
-                        } else if (_newDeposit < _oldDeposit) {
-                          context.read<DepositCubit>().change(-_oldDeposit + _newDeposit);
-                          context.read<MoneyCubit>().change(_oldDeposit - _newDeposit);
-                        }
-                        context.router.pop();
-                      },
-                    ),
-                  ],
-                );
+                  );
+                });
               },
             );
           },
