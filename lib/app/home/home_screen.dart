@@ -54,7 +54,7 @@ class HomeScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: CustomButton(
-                onPressed: () async {
+                onPressed: () {
                   context.read<SaveCubit>().change(false);
                   context.router.push(const GameRoute());
                   context.read<SaveCubit>().change(true);
