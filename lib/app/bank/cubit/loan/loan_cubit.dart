@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:life_simulator/app/date/cubit/date_cubit.dart';
 import 'package:life_simulator/app/money/cubit/money_cubit.dart';
@@ -15,7 +15,7 @@ part 'loan_cubit.g.dart';
 part 'loan_state.dart';
 
 @lazySingleton
-class LoanCubit extends Cubit<LoanState> {
+class LoanCubit extends HydratedCubit<LoanState> {
   final MoneyCubit _moneyCubit;
   final DateCubit _dateCubit;
   late StreamSubscription _dateSub;
@@ -130,5 +130,15 @@ class LoanCubit extends Cubit<LoanState> {
         });
       });
     });
+  }
+
+  @override
+  LoanState? fromJson(Map<String, dynamic> json) {
+    return LoanState.fromJson(json);
+  }
+
+  @override
+  Map<String, dynamic>? toJson(LoanState state) {
+    return state.toJson();
   }
 }
