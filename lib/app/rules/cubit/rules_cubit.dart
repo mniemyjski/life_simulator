@@ -31,18 +31,8 @@ class RulesCubit extends Cubit<RulesState> {
         _statsCubit = statsCubit,
         _saveCubit = saveCubit,
         super(RulesState.loaded(false)) {
-    // _saveSub = _saveCubit.stream.listen((s) => s.whenOrNull(loaded: (save) => _init(save)));
     _listen();
   }
-
-  // _init(bool newGame) {
-  //   state.whenOrNull(
-  //     initial: () => RulesState.loaded(false),
-  //     loaded: (rule) {
-  //       if (!newGame) RulesState.loaded(false);
-  //     },
-  //   );
-  // }
 
   @override
   Future<void> close() async {
