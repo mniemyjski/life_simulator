@@ -20,10 +20,10 @@ class DepositButton extends StatelessWidget {
             showModalBottomSheet<void>(
               context: context,
               builder: (BuildContext context) {
-                final double _oldDeposit = context.read<DepositCubit>().state;
                 double _newDeposit = context.read<DepositCubit>().state;
-                final double _max =
-                    context.read<DepositCubit>().state + context.watch<MoneyCubit>().state;
+                final double _oldDeposit = context.read<DepositCubit>().state;
+                final double _money = context.watch<MoneyCubit>().state;
+                final double _max = context.read<DepositCubit>().state + (_money > 0 ? _money : 0);
 
                 return StatefulBuilder(builder: (context, setState) {
                   return Padding(
@@ -40,6 +40,7 @@ class DepositButton extends StatelessWidget {
                         ),
                         Slider(
                           value: _newDeposit,
+                          min: 0,
                           max: _max,
                           divisions: _max ~/ 10,
                           label: '${_newDeposit.toInt()}',
