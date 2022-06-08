@@ -84,27 +84,35 @@ class MyApp extends StatelessWidget {
         return MultiBlocProvider(
           providers: [
             BlocProvider(
+              lazy: false,
               create: (_) => getIt<DateCubit>(),
             ),
             BlocProvider(
+              lazy: false,
               create: (_) => getIt<StatsCubit>(),
             ),
             BlocProvider(
+              lazy: false,
               create: (_) => getIt<SkillsCubit>(),
             ),
             BlocProvider(
+              lazy: false,
               create: (_) => getIt<IncomeCubit>(),
             ),
             BlocProvider(
+              lazy: false,
               create: (_) => getIt<MoneyCubit>(),
             ),
             BlocProvider(
+              lazy: false,
               create: (_) => getIt<JobCubit>(),
             ),
             BlocProvider(
+              lazy: false,
               create: (_) => getIt<TimeSpendCubit>(),
             ),
             BlocProvider(
+              lazy: false,
               create: (_) => getIt<LearningCubit>(),
             ),
             BlocProvider(
