@@ -4,16 +4,16 @@ import 'dart:math';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:life_simulator/app/job/models/experience/experience_model.dart';
-import 'package:life_simulator/app/skills/cubit/skills_cubit.dart';
-import 'package:life_simulator/app/time_spend/cubit/time_spend_cubit.dart';
-import 'package:life_simulator/data/data.dart';
 
+import '../../../data/data.dart';
 import '../../income/cubit/income_cubit.dart';
 import '../../income/models/income_model.dart';
 import '../../money/cubit/money_cubit.dart';
-import '../../save/save_cubit.dart';
+import '../../new_game/new_game_cubit.dart';
+import '../../skills/cubit/skills_cubit.dart';
+import '../../time_spend/cubit/time_spend_cubit.dart';
 import '../../time_spend/models/bonus/bonus_model.dart';
+import '../models/experience/experience_model.dart';
 import '../models/job/job_model.dart';
 
 part 'job_cubit.freezed.dart';
@@ -22,15 +22,15 @@ part 'job_state.dart';
 
 @lazySingleton
 class JobCubit extends HydratedCubit<JobState> {
-  final SaveCubit _saveCubit;
+  final NewGameCubit _newGameCubit;
   final IncomeCubit _incomeCubit;
   final TimeSpendCubit _timeSpendCubit;
   final SkillsCubit _skillsCubit;
   final MoneyCubit _moneyCubit;
-  late StreamSubscription _save;
+  late StreamSubscription _newGameSub;
 
   JobCubit({
-    required SaveCubit saveCubit,
+    required NewGameCubit newGameCubit,
     required IncomeCubit incomeCubit,
     required TimeSpendCubit timeSpendCubit,
     required SkillsCubit skillsCubit,
@@ -39,25 +39,22 @@ class JobCubit extends HydratedCubit<JobState> {
         _timeSpendCubit = timeSpendCubit,
         _skillsCubit = skillsCubit,
         _moneyCubit = moneyCubit,
-        _saveCubit = saveCubit,
+        _newGameCubit = newGameCubit,
         super(JobState.initial()) {
-    _saveCubit.state.whenOrNull(loaded: (save) => init(save));
-    _save = _saveCubit.stream.listen((s) => s.whenOrNull(loaded: (save) => init(save)));
+    _newGame();
   }
 
   @override
   Future<void> close() async {
-    _save.cancel();
+    _newGameSub.cancel();
     super.close();
   }
 
-  init(bool newGame) {
-    state.whenOrNull(
-      initial: () => emit(JobState.loaded(job: null, experience: null, jobs: Data.jobs())),
-      loaded: (job, experience, jobs) {
-        if (!newGame) emit(JobState.loaded(job: null, experience: null, jobs: Data.jobs()));
-      },
-    );
+  _newGame() {
+    if (_newGameCubit.state) emit(JobState.loaded(job: null, experience: null, jobs: Data.jobs()));
+    _newGameSub = _newGameCubit.stream.listen((newGame) {
+      if (newGame) emit(JobState.loaded(job: null, experience: null, jobs: Data.jobs()));
+    });
   }
 
   String getJob({required Job job, required Experience experience}) {

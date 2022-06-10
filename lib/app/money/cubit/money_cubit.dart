@@ -3,29 +3,31 @@ import 'dart:async';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../save/save_cubit.dart';
+import '../../new_game/new_game_cubit.dart';
 
 @lazySingleton
 class MoneyCubit extends HydratedCubit<double> {
-  final SaveCubit _saveCubit;
-  late StreamSubscription _save;
+  final NewGameCubit _newGameCubit;
+  late StreamSubscription _newGameSub;
 
   MoneyCubit({
-    required SaveCubit saveCubit,
-  })  : _saveCubit = saveCubit,
-        super(500000) {
-    _saveCubit.state.whenOrNull(loaded: (save) => init(save));
-    _save = _saveCubit.stream.listen((s) => s.whenOrNull(loaded: (save) => init(save)));
+    required NewGameCubit newGameCubit,
+  })  : _newGameCubit = newGameCubit,
+        super(5000) {
+    _newGame();
   }
 
   @override
   Future<void> close() async {
-    _save.cancel();
+    _newGameSub.cancel();
     super.close();
   }
 
-  init(bool newGame) {
-    !newGame ? emit(5000) : emit(state);
+  _newGame() {
+    if (_newGameCubit.state) emit(5000);
+    _newGameSub = _newGameCubit.stream.listen((newGame) {
+      if (newGame) emit(5000);
+    });
   }
 
   change(double money) {

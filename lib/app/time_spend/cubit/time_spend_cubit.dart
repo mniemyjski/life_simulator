@@ -4,7 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../save/save_cubit.dart';
+import '../../new_game/new_game_cubit.dart';
 import '../models/bonus/bonus_model.dart';
 import '../models/time_spend_model/time_spend_model.dart';
 
@@ -14,43 +14,49 @@ part 'time_spend_state.dart';
 
 @lazySingleton
 class TimeSpendCubit extends HydratedCubit<TimeSpendState> {
-  final SaveCubit _saveCubit;
-  late StreamSubscription _saveSub;
+  final NewGameCubit _newGameCubit;
+  late StreamSubscription _newGameSub;
   late StreamSubscription _transportSub;
 
   TimeSpendCubit({
-    required SaveCubit saveCubit,
-  })  : _saveCubit = saveCubit,
+    required NewGameCubit newGameCubit,
+  })  : _newGameCubit = newGameCubit,
         super(TimeSpendState.initial()) {
-    _saveCubit.state.whenOrNull(loaded: (save) => init(save));
-    _saveSub = _saveCubit.stream.listen((s) => s.whenOrNull(loaded: (save) => init(save)));
+    _newGame();
   }
 
   @override
   Future<void> close() async {
-    _saveSub.cancel();
+    _newGameSub.cancel();
     _transportSub.cancel();
     super.close();
   }
 
-  init(bool newGame) {
-    TimeSpendState _state = TimeSpendState.loaded(TimeSpend(
-      free: 14,
-      work: 0,
-      commuting: 0,
-      learn: 0,
-      relax: 2,
-      sleep: 8,
-      used: 0,
-      bonuses: [],
-    ));
-
-    state.whenOrNull(
-      initial: () => emit(_state),
-      loaded: (timeSpend) {
-        if (!newGame) emit(_state);
-      },
-    );
+  _newGame() {
+    if (_newGameCubit.state)
+      emit(TimeSpendState.loaded(TimeSpend(
+        free: 14,
+        work: 0,
+        commuting: 0,
+        learn: 0,
+        relax: 2,
+        sleep: 8,
+        used: 0,
+        bonuses: [],
+      )));
+    _newGameSub = _newGameCubit.stream.listen((newGame) {
+      if (newGame)
+        emit(TimeSpendState.loaded(TimeSpend(
+          free: 14,
+          work: 0,
+          commuting: 0,
+          learn: 0,
+          relax: 2,
+          sleep: 8,
+          used: 0,
+          bonuses: [],
+        )));
+    });
   }
 
   bool checkFreeTime(int value) {

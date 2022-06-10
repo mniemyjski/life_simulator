@@ -5,7 +5,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:life_simulator/app/date/cubit/date_cubit.dart';
 import 'package:life_simulator/app/money/cubit/money_cubit.dart';
-import 'package:life_simulator/app/save/save_cubit.dart';
+import 'package:life_simulator/app/new_game/new_game_cubit.dart';
 
 import '../../../date/models/date_game_model.dart';
 import '../../models/loan/loan_model.dart';
@@ -20,36 +20,33 @@ class LoanCubit extends HydratedCubit<LoanState> {
   final DateCubit _dateCubit;
   late StreamSubscription _dateSub;
 
-  final SaveCubit _saveCubit;
-  late StreamSubscription _saveSub;
+  final NewGameCubit _newGameCubit;
+  late StreamSubscription _newGameSub;
 
   LoanCubit(
     MoneyCubit moneyCubit,
     DateCubit dateCubit,
-    SaveCubit saveCubit,
+    NewGameCubit saveCubit,
   )   : _dateCubit = dateCubit,
-        _saveCubit = saveCubit,
+        _newGameCubit = saveCubit,
         _moneyCubit = moneyCubit,
         super(LoanState.initial()) {
-    _saveCubit.state.whenOrNull(loaded: (save) => _init(save));
-    _saveSub = _saveCubit.stream.listen((s) => s.whenOrNull(loaded: (save) => _init(save)));
+    _newGame();
     _counting();
   }
 
   @override
   Future<void> close() async {
-    _saveSub.cancel();
+    _newGameSub.cancel();
     _dateSub.cancel();
     super.close();
   }
 
-  _init(bool newGame) {
-    state.whenOrNull(
-      initial: () => emit(LoanState.loaded([])),
-      loaded: (stats) {
-        if (!newGame) emit(LoanState.loaded([]));
-      },
-    );
+  _newGame() {
+    if (_newGameCubit.state) emit(LoanState.loaded([]));
+    _newGameSub = _newGameCubit.stream.listen((newGame) {
+      if (newGame) emit(LoanState.loaded([]));
+    });
   }
 
   bool creditworthiness(double borrow) {

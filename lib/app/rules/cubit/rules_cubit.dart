@@ -5,7 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../money/cubit/money_cubit.dart';
-import '../../save/save_cubit.dart';
+import '../../new_game/new_game_cubit.dart';
 import '../../stats/cubit/stats_cubit.dart';
 
 part 'rules_cubit.freezed.dart';
@@ -20,23 +20,21 @@ class RulesCubit extends Cubit<RulesState> {
   final StatsCubit _statsCubit;
   late StreamSubscription _statsSub;
 
-  final SaveCubit _saveCubit;
-  late StreamSubscription _saveSub;
+  final NewGameCubit _newGameCubit;
 
   RulesCubit({
     required MoneyCubit moneyCubit,
     required StatsCubit statsCubit,
-    required SaveCubit saveCubit,
+    required NewGameCubit saveCubit,
   })  : _moneyCubit = moneyCubit,
         _statsCubit = statsCubit,
-        _saveCubit = saveCubit,
+        _newGameCubit = saveCubit,
         super(RulesState.loaded(false)) {
     _listen();
   }
 
   @override
   Future<void> close() async {
-    _saveSub.cancel();
     _moneySub.cancel();
     _statsSub.cancel();
     super.close();
@@ -46,7 +44,7 @@ class RulesCubit extends Cubit<RulesState> {
     _statsSub = _statsCubit.stream.listen((state) {
       state.whenOrNull(loaded: (stats) {
         if (stats.health <= 0) {
-          _saveCubit.change(false);
+          _newGameCubit.change(false);
           emit(RulesState.loaded(true));
           emit(RulesState.loaded(false));
         }
@@ -55,7 +53,7 @@ class RulesCubit extends Cubit<RulesState> {
 
     _moneySub = _moneyCubit.stream.listen((money) {
       if (money < -5000) {
-        _saveCubit.change(false);
+        _newGameCubit.change(false);
         emit(RulesState.loaded(true));
         emit(RulesState.loaded(false));
       }

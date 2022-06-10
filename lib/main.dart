@@ -1,7 +1,7 @@
 import 'package:bot_toast/bot_toast.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:life_simulator/app/bank/cubit/deposit/deposit_cubit.dart';
@@ -17,9 +17,9 @@ import 'app/income/cubit/income_cubit.dart';
 import 'app/job/cubit/job_cubit.dart';
 import 'app/learning/cubit/learning_cubit.dart';
 import 'app/money/cubit/money_cubit.dart';
+import 'app/new_game/new_game_cubit.dart';
 import 'app/personality/cubit/house/house_cubit.dart';
 import 'app/personality/cubit/meal/meal_cubit.dart';
-import 'app/save/save_cubit.dart';
 import 'app/settings/cubit/dark_mode_cubit.dart';
 import 'app/skills/cubit/skills_cubit.dart';
 import 'app/stats/cubit/stats_cubit.dart';
@@ -64,6 +64,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final botToastBuilder = BotToastInit();
+    SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp],
+    );
 
     return MultiBlocProvider(
       providers: [
@@ -75,9 +78,9 @@ class MyApp extends StatelessWidget {
           lazy: false,
           create: (_) => getIt<DaySettingCubit>(),
         ),
-        BlocProvider<SaveCubit>(
+        BlocProvider<NewGameCubit>(
           lazy: false,
-          create: (_) => getIt<SaveCubit>(),
+          create: (_) => getIt<NewGameCubit>(),
         ),
       ],
       child: Builder(builder: (context) {

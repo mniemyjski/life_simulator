@@ -3,11 +3,11 @@ import 'dart:async';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:life_simulator/app/skills/cubit/skills_cubit.dart';
 
 import '../../../data/data.dart';
 import '../../money/cubit/money_cubit.dart';
-import '../../save/save_cubit.dart';
+import '../../new_game/new_game_cubit.dart';
+import '../../skills/cubit/skills_cubit.dart';
 import '../models/learning_model.dart';
 
 part 'learning_cubit.freezed.dart';
@@ -16,36 +16,33 @@ part 'learning_state.dart';
 
 @lazySingleton
 class LearningCubit extends HydratedCubit<LearningState> {
-  final SaveCubit _saveCubit;
+  final NewGameCubit _newGameCubit;
   final SkillsCubit _skillsCubit;
   final MoneyCubit _moneyCubit;
-  late StreamSubscription _save;
+  late StreamSubscription _newGameSub;
 
   LearningCubit({
-    required SaveCubit saveCubit,
+    required NewGameCubit newGameCubit,
     required SkillsCubit skillsCubit,
     required MoneyCubit moneyCubit,
   })  : _skillsCubit = skillsCubit,
         _moneyCubit = moneyCubit,
-        _saveCubit = saveCubit,
+        _newGameCubit = newGameCubit,
         super(LearningState.initial()) {
-    _saveCubit.state.whenOrNull(loaded: (save) => init(save));
-    _save = _saveCubit.stream.listen((s) => s.whenOrNull(loaded: (save) => init(save)));
+    _newGame();
   }
 
   @override
   Future<void> close() async {
-    _save.cancel();
+    _newGameSub.cancel();
     super.close();
   }
 
-  init(bool newGame) {
-    state.whenOrNull(
-      initial: () => emit(LearningState.loaded(Data.learnings())),
-      loaded: (data) {
-        !newGame ? emit(LearningState.loaded(Data.learnings())) : emit(LearningState.loaded(data));
-      },
-    );
+  _newGame() {
+    if (_newGameCubit.state) emit(LearningState.loaded(Data.learnings()));
+    _newGameSub = _newGameCubit.stream.listen((newGame) {
+      if (newGame) emit(LearningState.loaded(Data.learnings()));
+    });
   }
 
   add(Learning learning) {

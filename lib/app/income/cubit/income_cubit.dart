@@ -4,10 +4,9 @@ import 'package:collection/collection.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:life_simulator/app/money/cubit/money_cubit.dart';
 
 import '../../money/cubit/money_cubit.dart';
-import '../../save/save_cubit.dart';
+import '../../new_game/new_game_cubit.dart';
 import '../models/income_model.dart';
 
 part 'income_cubit.freezed.dart';
@@ -17,32 +16,29 @@ part 'income_state.dart';
 @lazySingleton
 class IncomeCubit extends HydratedCubit<IncomeState> {
   final MoneyCubit _moneyCubit;
-  final SaveCubit _saveCubit;
-  late StreamSubscription _save;
+  final NewGameCubit _newGameCubit;
+  late StreamSubscription _newGameSub;
 
   IncomeCubit({
     required MoneyCubit moneyCubit,
-    required SaveCubit saveCubit,
+    required NewGameCubit saveCubit,
   })  : _moneyCubit = moneyCubit,
-        _saveCubit = saveCubit,
+        _newGameCubit = saveCubit,
         super(IncomeState.initial()) {
-    _saveCubit.state.whenOrNull(loaded: (save) => init(save));
-    _save = _saveCubit.stream.listen((s) => s.whenOrNull(loaded: (save) => init(save)));
+    _newGame();
   }
 
   @override
   Future<void> close() async {
-    _save.cancel();
+    _newGameSub.cancel();
     super.close();
   }
 
-  init(bool newGame) {
-    state.whenOrNull(
-      initial: () => emit(IncomeState.loaded([])),
-      loaded: (data) {
-        if (!newGame) emit(IncomeState.loaded([]));
-      },
-    );
+  _newGame() {
+    if (_newGameCubit.state) emit(IncomeState.loaded([]));
+    _newGameSub = _newGameCubit.stream.listen((newGame) {
+      if (newGame) emit(IncomeState.loaded([]));
+    });
   }
 
   add(Income income) {

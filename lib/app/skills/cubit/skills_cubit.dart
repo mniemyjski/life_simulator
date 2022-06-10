@@ -5,7 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../save/save_cubit.dart';
+import '../../new_game/new_game_cubit.dart';
 import '../models/skills_model.dart';
 
 part 'skills_cubit.freezed.dart';
@@ -14,21 +14,27 @@ part 'skills_state.dart';
 
 @lazySingleton
 class SkillsCubit extends HydratedCubit<SkillsState> {
-  final SaveCubit _saveCubit;
-  late StreamSubscription _save;
+  final NewGameCubit _newGameCubit;
+  late StreamSubscription _newGameSub;
 
   SkillsCubit({
-    required SaveCubit saveCubit,
-  })  : _saveCubit = saveCubit,
+    required NewGameCubit newGameCubit,
+  })  : _newGameCubit = newGameCubit,
         super(SkillsState.initial()) {
-    _saveCubit.state.whenOrNull(loaded: (save) => init(save));
-    _save = _saveCubit.stream.listen((s) => s.whenOrNull(loaded: (save) => init(save)));
+    _newGame();
   }
 
   @override
   Future<void> close() async {
-    _save.cancel();
+    _newGameSub.cancel();
     super.close();
+  }
+
+  _newGame() {
+    if (_newGameCubit.state) emit(SkillsState.loaded([]));
+    _newGameSub = _newGameCubit.stream.listen((newGame) {
+      if (newGame) emit(SkillsState.loaded([]));
+    });
   }
 
   init(bool newGame) {

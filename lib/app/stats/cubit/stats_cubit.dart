@@ -3,11 +3,11 @@ import 'dart:async';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:life_simulator/app/date/cubit/date_cubit.dart';
-import 'package:life_simulator/app/date/models/date_game_model.dart';
-import 'package:life_simulator/app/time_spend/cubit/time_spend_cubit.dart';
 
-import '../../save/save_cubit.dart';
+import '../../date/cubit/date_cubit.dart';
+import '../../date/models/date_game_model.dart';
+import '../../new_game/new_game_cubit.dart';
+import '../../time_spend/cubit/time_spend_cubit.dart';
 import '../../time_spend/models/bonus/bonus_model.dart';
 import '../models/stats_model.dart';
 
@@ -17,49 +17,61 @@ part 'stats_state.dart';
 
 @lazySingleton
 class StatsCubit extends HydratedCubit<StatsState> {
-  final SaveCubit _saveCubit;
+  final NewGameCubit _newGameCubit;
   final TimeSpendCubit _timeSpendCubit;
-  late StreamSubscription _save;
+  late StreamSubscription _newGameSub;
 
   final DateCubit _dateCubit;
   late StreamSubscription _dateSub;
 
   StatsCubit({
     required TimeSpendCubit timeSpend,
-    required SaveCubit saveCubit,
+    required NewGameCubit saveCubit,
     required DateCubit dateCubit,
   })  : _timeSpendCubit = timeSpend,
-        _saveCubit = saveCubit,
+        _newGameCubit = saveCubit,
         _dateCubit = dateCubit,
         super(StatsState.initial()) {
-    _saveCubit.state.whenOrNull(loaded: (s) => _init(s));
-    _save = _saveCubit.stream.listen((s) => s.whenOrNull(loaded: (save) => _init(save)));
+    _newGame();
     _dateSub = _dateCubit.stream.listen((d) => d.whenOrNull(loaded: (date) => _counting(date)));
   }
 
   @override
   Future<void> close() async {
-    _save.cancel();
+    _newGameSub.cancel();
     _dateSub.cancel();
     super.close();
   }
 
-  _init(bool newGame) {
-    StatsState _state = StatsState.loaded(Stats(
-      health: 1,
-      satisfaction: 1,
-      tiredness: 1,
-      maxHealth: 1,
-      maxSatisfaction: 1,
-      maxTiredness: 1,
-    ));
-
-    state.whenOrNull(
-      initial: () => emit(_state),
-      loaded: (stats) {
-        if (!newGame) emit(_state);
-      },
-    );
+  _newGame() {
+    if (_newGameCubit.state)
+      emit(
+        StatsState.loaded(
+          Stats(
+            health: 1,
+            satisfaction: 1,
+            tiredness: 1,
+            maxHealth: 1,
+            maxSatisfaction: 1,
+            maxTiredness: 1,
+          ),
+        ),
+      );
+    _newGameSub = _newGameCubit.stream.listen((newGame) {
+      if (newGame)
+        emit(
+          StatsState.loaded(
+            Stats(
+              health: 1,
+              satisfaction: 1,
+              tiredness: 1,
+              maxHealth: 1,
+              maxSatisfaction: 1,
+              maxTiredness: 1,
+            ),
+          ),
+        );
+    });
   }
 
   _counting(DateGame dateGame) {

@@ -15,14 +15,10 @@ Map<String, dynamic> _$$InitialToJson(_$Initial instance) => <String, dynamic>{
     };
 
 _$Loading _$$LoadingFromJson(Map<String, dynamic> json) => _$Loading(
-      (json['jobs'] as List<dynamic>)
-          .map((e) => Job.fromJson(e as Map<String, dynamic>))
-          .toList(),
       $type: json['runtimeType'] as String?,
     );
 
 Map<String, dynamic> _$$LoadingToJson(_$Loading instance) => <String, dynamic>{
-      'jobs': instance.jobs.map((e) => e.toJson()).toList(),
       'runtimeType': instance.$type,
     };
 

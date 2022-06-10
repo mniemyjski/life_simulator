@@ -3,14 +3,14 @@ import 'dart:async';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:life_simulator/app/save/save_cubit.dart';
-import 'package:life_simulator/app/time_spend/cubit/time_spend_cubit.dart';
-import 'package:life_simulator/app/time_spend/models/bonus/bonus_model.dart';
 
 import '../../../../data/data.dart';
 import '../../../income/cubit/income_cubit.dart';
 import '../../../income/models/income_model.dart';
 import '../../../money/cubit/money_cubit.dart';
+import '../../../new_game/new_game_cubit.dart';
+import '../../../time_spend/cubit/time_spend_cubit.dart';
+import '../../../time_spend/models/bonus/bonus_model.dart';
 import '../../models/transport/transport_model.dart';
 
 part 'transport_cubit.freezed.dart';
@@ -23,27 +23,34 @@ class TransportCubit extends HydratedCubit<TransportState> {
   final IncomeCubit _incomeCubit;
   final TimeSpendCubit _timeSpendCubit;
 
-  final SaveCubit _saveCubit;
-  late StreamSubscription _saveSub;
+  final NewGameCubit _newGameCubit;
+  late StreamSubscription _newGameSub;
 
   TransportCubit({
     required MoneyCubit moneyCubit,
     required IncomeCubit incomeCubit,
-    required SaveCubit saveCubit,
+    required NewGameCubit newGameCubit,
     required TimeSpendCubit timeSpendCubit,
   })  : _moneyCubit = moneyCubit,
         _incomeCubit = incomeCubit,
-        _saveCubit = saveCubit,
+        _newGameCubit = newGameCubit,
         _timeSpendCubit = timeSpendCubit,
         super(TransportState.initial()) {
-    _saveCubit.state.whenOrNull(loaded: (save) => init(save));
-    _saveSub = _saveCubit.stream.listen((s) => s.whenOrNull(loaded: (save) => init(save)));
+    _newGame();
   }
 
   @override
   Future<void> close() async {
-    _saveSub.cancel();
+    _newGameSub.cancel();
     super.close();
+  }
+
+  _newGame() {
+    if (_newGameCubit.state)
+      emit(TransportState.loaded(transport: null, transports: Data.transports()));
+    _newGameSub = _newGameCubit.stream.listen((newGame) {
+      if (newGame) emit(TransportState.loaded(transport: null, transports: Data.transports()));
+    });
   }
 
   init(bool newGame) {

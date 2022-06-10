@@ -3,13 +3,13 @@ import 'dart:async';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:life_simulator/app/income/models/income_model.dart';
-import 'package:life_simulator/app/time_spend/cubit/time_spend_cubit.dart';
 
 import '../../../../data/data.dart';
 import '../../../income/cubit/income_cubit.dart';
+import '../../../income/models/income_model.dart';
 import '../../../money/cubit/money_cubit.dart';
-import '../../../save/save_cubit.dart';
+import '../../../new_game/new_game_cubit.dart';
+import '../../../time_spend/cubit/time_spend_cubit.dart';
 import '../../../time_spend/models/bonus/bonus_model.dart';
 import '../../models/house/house_model.dart';
 
@@ -22,38 +22,33 @@ class HouseCubit extends HydratedCubit<HouseState> {
   final MoneyCubit _moneyCubit;
   final TimeSpendCubit _timeSpendCubit;
   final IncomeCubit _incomeCubit;
-  final SaveCubit _saveCubit;
-  late StreamSubscription _save;
+  final NewGameCubit _newGameCubit;
+  late StreamSubscription _newGameSub;
 
   HouseCubit({
     required MoneyCubit moneyCubit,
     required IncomeCubit incomeCubit,
-    required SaveCubit saveCubit,
+    required NewGameCubit newGameCubit,
     required TimeSpendCubit timeSpendCubit,
   })  : _moneyCubit = moneyCubit,
         _incomeCubit = incomeCubit,
-        _saveCubit = saveCubit,
+        _newGameCubit = newGameCubit,
         _timeSpendCubit = timeSpendCubit,
         super(HouseState.initial()) {
-    _saveCubit.state.whenOrNull(loaded: (save) => init(save));
-    _save = _saveCubit.stream.listen((s) => s.whenOrNull(loaded: (save) => init(save)));
+    _newGame();
   }
 
   @override
   Future<void> close() async {
-    _save.cancel();
+    _newGameSub.cancel();
     super.close();
   }
 
-  init(bool newGame) {
-    List<House> list = Data.houses();
-
-    state.whenOrNull(
-      initial: () => emit(HouseState.loaded(house: null, houses: list)),
-      loaded: (house, houses) {
-        if (!newGame) emit(HouseState.loaded(house: null, houses: list));
-      },
-    );
+  _newGame() {
+    if (_newGameCubit.state) emit(HouseState.loaded(house: null, houses: Data.houses()));
+    _newGameSub = _newGameCubit.stream.listen((newGame) {
+      if (newGame) emit(HouseState.loaded(house: null, houses: Data.houses()));
+    });
   }
 
   String? getHouse(House house) {
