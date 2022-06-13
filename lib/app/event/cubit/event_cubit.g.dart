@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'save_cubit.dart';
+part of 'event_cubit.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -14,12 +14,26 @@ Map<String, dynamic> _$$InitialToJson(_$Initial instance) => <String, dynamic>{
       'runtimeType': instance.$type,
     };
 
+_$Loading _$$LoadingFromJson(Map<String, dynamic> json) => _$Loading(
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$LoadingToJson(_$Loading instance) => <String, dynamic>{
+      'runtimeType': instance.$type,
+    };
+
 _$Loaded _$$LoadedFromJson(Map<String, dynamic> json) => _$Loaded(
-      json['save'] as bool,
+      events: (json['events'] as List<dynamic>)
+          .map((e) => GameEvent.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      database: (json['database'] as List<dynamic>)
+          .map((e) => GameEvent.fromJson(e as Map<String, dynamic>))
+          .toList(),
       $type: json['runtimeType'] as String?,
     );
 
 Map<String, dynamic> _$$LoadedToJson(_$Loaded instance) => <String, dynamic>{
-      'save': instance.save,
+      'events': instance.events.map((e) => e.toJson()).toList(),
+      'database': instance.database.map((e) => e.toJson()).toList(),
       'runtimeType': instance.$type,
     };

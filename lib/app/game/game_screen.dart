@@ -3,6 +3,7 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:life_simulator/app/event/cubit/event_cubit.dart';
 import 'package:life_simulator/app/game/widget/app_bar_stats.dart';
 import 'package:life_simulator/app/rules/cubit/rules_cubit.dart';
 import 'package:life_simulator/config/routes/routes.gr.dart';
@@ -28,15 +29,50 @@ class GameScreen extends StatelessWidget {
             body: Column(
               children: [
                 AppBarStats(),
-                SizedBox(
-                  height: 8,
+                ConstrainedBox(
+                  constraints: BoxConstraints(minHeight: 285),
+                  child: BlocBuilder<EventCubit, EventState>(
+                    builder: (context, state) {
+                      return state.maybeWhen(
+                          orElse: () => Container(),
+                          loaded: (events, database) {
+                            return ListView.separated(
+                                separatorBuilder: (context, index) {
+                                  if (index == 2)
+                                    return Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Text(
+                                        '18/01/01',
+                                        style: Theme.of(context).textTheme.bodyText2,
+                                      ),
+                                    );
+
+                                  return SizedBox();
+                                },
+                                physics: NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount: events.length < 10 ? events.length : 10,
+                                itemBuilder: (context, index) {
+                                  return Card(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Text(
+                                        'Event:',
+                                        style: Theme.of(context).textTheme.bodyText1,
+                                      ),
+                                    ),
+                                  );
+                                });
+                          });
+                    },
+                  ),
                 ),
                 Expanded(
                   child: GridView.count(
                     padding: const EdgeInsets.all(1),
                     crossAxisSpacing: 8,
                     mainAxisSpacing: 8,
-                    crossAxisCount: 3,
+                    crossAxisCount: 5,
                     children: <Widget>[
                       Card(
                         child: IconButton(

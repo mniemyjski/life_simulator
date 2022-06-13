@@ -1,3 +1,4 @@
+import 'package:life_simulator/app/event/models/game_event/game_event_model.dart';
 import 'package:life_simulator/app/skills/models/skills_model.dart';
 import 'package:uuid/uuid.dart';
 
@@ -358,6 +359,24 @@ class Data {
         monthlyCost: 200,
         commuting: 2,
         bonusToRelax: 1,
+      ),
+    ];
+  }
+  //#endregion
+
+  //#region events
+  static List<GameEvent> events() {
+    var uuid = Uuid();
+    return [
+      GameEvent(
+        id: uuid.v1(),
+        name: 'Ill',
+        description: 'You get sick',
+        dateGame: null,
+        eTypeEffect: ETypeEffect.ill,
+        value: 1,
+        duration: 7,
+        leftDuration: 7,
       ),
     ];
   }
