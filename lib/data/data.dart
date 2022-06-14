@@ -1,4 +1,5 @@
 import 'package:life_simulator/app/event/models/game_event/game_event_model.dart';
+import 'package:life_simulator/app/medicines/models/medicine_model.dart';
 import 'package:life_simulator/app/skills/models/skills_model.dart';
 import 'package:uuid/uuid.dart';
 
@@ -377,7 +378,7 @@ class Data {
         value: 0.02,
         duration: 3,
         leftDuration: 3,
-        frequency: 50,
+        frequency: 500,
       ),
       GameEvent(
         id: uuid.v1(),
@@ -387,7 +388,7 @@ class Data {
         value: 0.02,
         duration: 7,
         leftDuration: 7,
-        frequency: 80,
+        frequency: 800,
       ),
       GameEvent(
         id: uuid.v1(),
@@ -397,7 +398,7 @@ class Data {
         value: 0.02,
         duration: 14,
         leftDuration: 14,
-        frequency: 120,
+        frequency: 1200,
       ),
       GameEvent(
         id: uuid.v1(),
@@ -423,14 +424,42 @@ class Data {
       ),
       GameEvent(
         id: uuid.v1(),
-        name: 'You got the money',
-        description: 'You got the money',
+        name: 'Unpaid taxes',
+        description: 'Unpaid taxes',
         eTypeEffect: ETypeEffect.taxes,
         value: -0.3,
         duration: 0,
         leftDuration: 0,
         frequency: 120,
         active: false,
+      ),
+    ];
+  }
+  //#endregion
+
+  //#region medicines
+  static List<Medicine> medicines() {
+    var uuid = Uuid();
+    return [
+      Medicine(
+        id: uuid.v1(),
+        name: 'Medicine',
+        cost: 100,
+        satisfaction: 0,
+        health: 0.01,
+        tiredness: 0,
+        duration: 3,
+        leftDuration: 3,
+      ),
+      Medicine(
+        id: uuid.v1(),
+        name: 'Medicine',
+        cost: 200,
+        satisfaction: 0,
+        health: 0.01,
+        tiredness: 0,
+        duration: 7,
+        leftDuration: 7,
       ),
     ];
   }

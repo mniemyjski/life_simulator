@@ -3,6 +3,7 @@ import 'package:life_simulator/app/bank/bank_screen.dart';
 import 'package:life_simulator/app/income/income_screen.dart';
 import 'package:life_simulator/app/job/job_screen.dart';
 import 'package:life_simulator/app/learning/learning_screen.dart';
+import 'package:life_simulator/app/medicines/medicines_screen.dart';
 import 'package:life_simulator/app/personality/personality_screen.dart';
 import 'package:life_simulator/app/settings/screens/settings_screen.dart';
 import 'package:life_simulator/app/time_spend/time_spend_screen.dart';
@@ -26,6 +27,7 @@ import '../../app/personality/transport_screen.dart';
     AutoRoute(page: HouseScreen),
     AutoRoute(page: CarScreen),
     AutoRoute(page: BankScreen),
+    AutoRoute(page: MedicinesScreen),
   ],
 )
 class $AppRouter {}

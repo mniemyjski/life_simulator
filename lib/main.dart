@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:life_simulator/app/bank/cubit/deposit/deposit_cubit.dart';
 import 'package:life_simulator/app/bank/cubit/loan/loan_cubit.dart';
+import 'package:life_simulator/app/medicines/cubit/medicines_cubit.dart';
 import 'package:life_simulator/app/personality/cubit/transport/transport_cubit.dart';
 import 'package:life_simulator/app/rules/cubit/rules_cubit.dart';
 import 'package:life_simulator/app/settings/cubit/day_setting_cubit.dart';
@@ -146,6 +147,10 @@ class MyApp extends StatelessWidget {
             BlocProvider(
               lazy: false,
               create: (_) => getIt<EventCubit>(),
+            ),
+            BlocProvider(
+              lazy: false,
+              create: (_) => getIt<MedicinesCubit>(),
             ),
           ],
           child: MaterialApp.router(

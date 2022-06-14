@@ -14,16 +14,17 @@ import '../../app/event/cubit/event_cubit.dart' as _i12;
 import '../../app/income/cubit/income_cubit.dart' as _i13;
 import '../../app/job/cubit/job_cubit.dart' as _i14;
 import '../../app/learning/cubit/learning_cubit.dart' as _i9;
+import '../../app/medicines/cubit/medicines_cubit.dart' as _i17;
 import '../../app/money/cubit/money_cubit.dart' as _i8;
 import '../../app/new_game/new_game_cubit.dart' as _i5;
-import '../../app/personality/cubit/house/house_cubit.dart' as _i19;
+import '../../app/personality/cubit/house/house_cubit.dart' as _i20;
 import '../../app/personality/cubit/meal/meal_cubit.dart' as _i16;
-import '../../app/personality/cubit/transport/transport_cubit.dart' as _i18;
-import '../../app/rules/cubit/rules_cubit.dart' as _i20;
+import '../../app/personality/cubit/transport/transport_cubit.dart' as _i19;
+import '../../app/rules/cubit/rules_cubit.dart' as _i21;
 import '../../app/settings/cubit/dark_mode_cubit.dart' as _i3;
 import '../../app/settings/cubit/day_setting_cubit.dart' as _i4;
 import '../../app/skills/cubit/skills_cubit.dart' as _i6;
-import '../../app/stats/cubit/stats_cubit.dart' as _i17;
+import '../../app/stats/cubit/stats_cubit.dart' as _i18;
 import '../../app/time_spend/cubit/time_spend_cubit.dart'
     as _i7; // ignore_for_file: unnecessary_lambdas
 
@@ -68,24 +69,27 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       incomeCubit: get<_i13.IncomeCubit>(),
       newGameCubit: get<_i5.NewGameCubit>(),
       timeSpendCubit: get<_i7.TimeSpendCubit>()));
-  gh.lazySingleton<_i17.StatsCubit>(() => _i17.StatsCubit(
+  gh.lazySingleton<_i17.MedicinesCubit>(() => _i17.MedicinesCubit(
+      get<_i8.MoneyCubit>(), get<_i5.NewGameCubit>(), get<_i10.DateCubit>()));
+  gh.lazySingleton<_i18.StatsCubit>(() => _i18.StatsCubit(
       get<_i7.TimeSpendCubit>(),
       get<_i5.NewGameCubit>(),
       get<_i10.DateCubit>(),
-      get<_i12.EventCubit>()));
-  gh.lazySingleton<_i18.TransportCubit>(() => _i18.TransportCubit(
+      get<_i12.EventCubit>(),
+      get<_i17.MedicinesCubit>()));
+  gh.lazySingleton<_i19.TransportCubit>(() => _i19.TransportCubit(
       moneyCubit: get<_i8.MoneyCubit>(),
       incomeCubit: get<_i13.IncomeCubit>(),
       newGameCubit: get<_i5.NewGameCubit>(),
       timeSpendCubit: get<_i7.TimeSpendCubit>()));
-  gh.lazySingleton<_i19.HouseCubit>(() => _i19.HouseCubit(
+  gh.lazySingleton<_i20.HouseCubit>(() => _i20.HouseCubit(
       moneyCubit: get<_i8.MoneyCubit>(),
       incomeCubit: get<_i13.IncomeCubit>(),
       newGameCubit: get<_i5.NewGameCubit>(),
       timeSpendCubit: get<_i7.TimeSpendCubit>()));
-  gh.lazySingleton<_i20.RulesCubit>(() => _i20.RulesCubit(
+  gh.lazySingleton<_i21.RulesCubit>(() => _i21.RulesCubit(
       moneyCubit: get<_i8.MoneyCubit>(),
-      statsCubit: get<_i17.StatsCubit>(),
+      statsCubit: get<_i18.StatsCubit>(),
       saveCubit: get<_i5.NewGameCubit>()));
   return get;
 }

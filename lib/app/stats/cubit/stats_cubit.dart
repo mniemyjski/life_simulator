@@ -4,6 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:life_simulator/app/event/models/game_event/game_event_model.dart';
+import 'package:life_simulator/app/medicines/cubit/medicines_cubit.dart';
 
 import '../../date/cubit/date_cubit.dart';
 import '../../event/cubit/event_cubit.dart';
@@ -21,6 +22,7 @@ class StatsCubit extends HydratedCubit<StatsState> {
   final NewGameCubit _newGameCubit;
   final TimeSpendCubit _timeSpendCubit;
   final EventCubit _eventCubit;
+  final MedicinesCubit _medicinesCubit;
 
   late StreamSubscription _newGameSub;
 
@@ -32,10 +34,12 @@ class StatsCubit extends HydratedCubit<StatsState> {
     NewGameCubit saveCubit,
     DateCubit dateCubit,
     EventCubit eventCubit,
+    MedicinesCubit medicinesCubit,
   )   : _timeSpendCubit = timeSpend,
         _newGameCubit = saveCubit,
         _dateCubit = dateCubit,
         _eventCubit = eventCubit,
+        _medicinesCubit = medicinesCubit,
         super(StatsState.initial()) {
     _newGame();
     _dateSub = _dateCubit.stream.listen((d) => d.whenOrNull(loaded: (date) => _counting(date)));
@@ -92,7 +96,13 @@ class StatsCubit extends HydratedCubit<StatsState> {
 
         _eventCubit.state.whenOrNull(loaded: (events, database) {
           events.forEach((element) {
-            if (element.active && element.eTypeEffect == ETypeEffect.sick) sick = element.value;
+            if (element.active && element.eTypeEffect == ETypeEffect.sick) sick -= element.value;
+          });
+        });
+
+        _medicinesCubit.state.whenOrNull(loaded: (medicines) {
+          medicines.forEach((element) {
+            if (element.active) sick += element.health;
           });
         });
 
@@ -104,7 +114,10 @@ class StatsCubit extends HydratedCubit<StatsState> {
           _stats = _stats.copyWith(health: _stats.health > 1 ? 1 : _stats.health + 0.01);
         }
         if (sick > 0) {
-          _stats = _stats.copyWith(health: _stats.health < 0 ? 0 : _stats.health - sick);
+          _stats = _stats.copyWith(health: _stats.health > 1 ? 1 : _stats.health + sick);
+        }
+        if (sick < 0) {
+          _stats = _stats.copyWith(health: _stats.health < 0 ? 0 : _stats.health + sick);
         }
         //Tiredness
         if (sleep <= 0) {
