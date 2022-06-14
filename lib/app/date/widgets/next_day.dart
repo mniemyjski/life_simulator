@@ -34,7 +34,7 @@ class NextDayButton extends StatelessWidget {
             ),
           );
 
-          if (areYouSure ?? true) context.read<DateCubit>().nextDay();
+          if (areYouSure ?? false) context.read<DateCubit>().nextDay();
         } else {
           context.read<DateCubit>().nextDay();
         }
