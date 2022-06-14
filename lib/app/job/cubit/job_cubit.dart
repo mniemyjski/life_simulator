@@ -145,6 +145,7 @@ class JobCubit extends HydratedCubit<JobState> {
       _incomeCubit.state.whenOrNull(loaded: (incomes) {
         incomes
           ..forEach((element) {
+            //Todo if you left job you need get money
             // if (element.id == job!.id && element.timeLeft <= 20) {
             //   _moneyCubit.change(element.value / element.interval / element.timeLeft * 100);
             // }

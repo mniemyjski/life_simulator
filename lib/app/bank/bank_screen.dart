@@ -128,7 +128,7 @@ class BankScreen extends StatelessWidget {
                                     children: <TextSpan>[
                                       TextSpan(text: '${LocaleKeys.nextRate.tr()}: '),
                                       TextSpan(
-                                          text: '${element.nextToString()}\$',
+                                          text: '${element.nextToString()}',
                                           style: TextStyle(fontWeight: FontWeight.bold)),
                                     ],
                                   ),

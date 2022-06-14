@@ -378,7 +378,7 @@ class Data {
         value: 0.02,
         duration: 3,
         leftDuration: 3,
-        frequency: 500,
+        frequency: 200,
       ),
       GameEvent(
         id: uuid.v1(),
@@ -388,7 +388,7 @@ class Data {
         value: 0.02,
         duration: 7,
         leftDuration: 7,
-        frequency: 800,
+        frequency: 200,
       ),
       GameEvent(
         id: uuid.v1(),
@@ -398,7 +398,7 @@ class Data {
         value: 0.02,
         duration: 14,
         leftDuration: 14,
-        frequency: 1200,
+        frequency: 300,
       ),
       GameEvent(
         id: uuid.v1(),
@@ -408,7 +408,7 @@ class Data {
         value: 2000,
         duration: 0,
         leftDuration: 0,
-        frequency: 120,
+        frequency: 200,
         active: false,
       ),
       GameEvent(
@@ -419,7 +419,7 @@ class Data {
         value: -2000,
         duration: 0,
         leftDuration: 0,
-        frequency: 120,
+        frequency: 200,
         active: false,
       ),
       GameEvent(
@@ -427,10 +427,10 @@ class Data {
         name: 'Unpaid taxes',
         description: 'Unpaid taxes',
         eTypeEffect: ETypeEffect.taxes,
-        value: -0.3,
+        value: -0.1,
         duration: 0,
         leftDuration: 0,
-        frequency: 120,
+        frequency: 400,
         active: false,
       ),
     ];

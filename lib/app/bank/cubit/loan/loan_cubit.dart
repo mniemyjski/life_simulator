@@ -8,6 +8,7 @@ import 'package:life_simulator/app/date/cubit/date_cubit.dart';
 import 'package:life_simulator/app/money/cubit/money_cubit.dart';
 import 'package:life_simulator/app/new_game/new_game_cubit.dart';
 
+import '../../../../utilities/utilities.dart';
 import '../../models/loan/loan_model.dart';
 
 part 'loan_cubit.freezed.dart';
@@ -111,7 +112,7 @@ class LoanCubit extends HydratedCubit<LoanState> {
                 Loan _loan = element.copyWith(
                   leftLoan: element.leftLoan - element.getRate(),
                   leftMonths: element.leftMonths - 1,
-                  next: Jiffy(date).add(months: 1).dateTime,
+                  next: Jiffy(date).add(months: 1).dateTime.onlyDate(),
                 );
 
                 if (_loan.leftLoan > 0) result.add(_loan);

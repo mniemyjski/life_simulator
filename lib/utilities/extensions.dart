@@ -15,3 +15,7 @@ extension TaskX<T extends Either<Object, U>, U> on Task<T> {
     );
   }
 }
+
+extension DateT on DateTime {
+  DateTime onlyDate() => DateTime(this.year, this.month, this.day);
+}

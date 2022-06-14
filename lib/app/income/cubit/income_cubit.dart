@@ -4,6 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:jiffy/jiffy.dart';
+import 'package:life_simulator/utilities/utilities.dart';
 
 import '../../date/cubit/date_cubit.dart';
 import '../../money/cubit/money_cubit.dart';
@@ -56,16 +57,16 @@ class IncomeCubit extends HydratedCubit<IncomeState> {
         DateTime _nextDate;
         switch (income.eTypeFrequency) {
           case ETypeFrequency.annually:
-            _nextDate = Jiffy(date).add(years: 1).dateTime;
+            _nextDate = Jiffy(date).add(years: 1).dateTime.onlyDate();
             break;
           case ETypeFrequency.monthly:
-            _nextDate = Jiffy(date).add(months: 1).dateTime;
+            _nextDate = Jiffy(date).add(months: 1).dateTime.onlyDate();
             break;
           case ETypeFrequency.weekly:
-            _nextDate = Jiffy(date).add(weeks: 1).dateTime;
+            _nextDate = Jiffy(date).add(weeks: 1).dateTime.onlyDate();
             break;
           case ETypeFrequency.daily:
-            _nextDate = Jiffy(date).add(days: 1).dateTime;
+            _nextDate = Jiffy(date).add(days: 1).dateTime.onlyDate();
             break;
         }
         List<Income> refresh = List.from(incomes)..add(income.copyWith(next: _nextDate));
@@ -104,16 +105,16 @@ class IncomeCubit extends HydratedCubit<IncomeState> {
 
                 switch (element.eTypeFrequency) {
                   case ETypeFrequency.annually:
-                    _nextDate = Jiffy(date).add(years: 1).dateTime;
+                    _nextDate = Jiffy(date).add(years: 1).dateTime.onlyDate();
                     break;
                   case ETypeFrequency.monthly:
-                    _nextDate = Jiffy(date).add(months: 1).dateTime;
+                    _nextDate = Jiffy(date).add(months: 1).dateTime.onlyDate();
                     break;
                   case ETypeFrequency.weekly:
-                    _nextDate = Jiffy(date).add(weeks: 1).dateTime;
+                    _nextDate = Jiffy(date).add(weeks: 1).dateTime.onlyDate();
                     break;
                   case ETypeFrequency.daily:
-                    _nextDate = Jiffy(date).add(days: 1).dateTime;
+                    _nextDate = Jiffy(date).add(days: 1).dateTime.onlyDate();
                     break;
                 }
 

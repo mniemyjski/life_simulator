@@ -3,8 +3,10 @@ import 'dart:async';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:jiffy/jiffy.dart';
 import 'package:life_simulator/app/learning/cubit/learning_cubit.dart';
 import 'package:life_simulator/app/settings/cubit/day_setting_cubit.dart';
+import 'package:life_simulator/utilities/utilities.dart';
 
 import '../../new_game/new_game_cubit.dart';
 import '../../time_spend/cubit/time_spend_cubit.dart';
@@ -57,7 +59,7 @@ class DateCubit extends HydratedCubit<DateState> {
         });
 
         _timeSpendCubit.resetDay();
-        emit(DateState.loaded(date.add(Duration(days: 1))));
+        emit(DateState.loaded(Jiffy(date).add(days: 1).dateTime.onlyDate()));
       });
     }
   }
