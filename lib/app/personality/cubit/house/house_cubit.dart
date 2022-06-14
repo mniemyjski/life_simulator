@@ -60,13 +60,11 @@ class HouseCubit extends HydratedCubit<HouseState> {
         return "Before you can buy new house you must to sell your house";
 
       Income income = Income(
-        id: house.id,
-        source: ETypeSource.house,
-        typeIncome: ETypeIncome.expense,
-        value: -house.monthlyCost,
-        interval: 30,
-        timeLeft: 30,
-      );
+          id: house.id,
+          source: ETypeSource.house,
+          typeIncome: ETypeIncome.expense,
+          value: -house.monthlyCost,
+          eTypeFrequency: ETypeFrequency.monthly);
       _timeSpendCubit.removeBonuses(ETypeBonusSource.house);
 
       if (house.bonusToRelax != 0)

@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:life_simulator/app/income/models/income_model.dart';
 
 import '../../../skills/models/skills_model.dart';
 
@@ -13,7 +14,7 @@ class Experience with _$Experience {
     required int exp,
     required List<Skill> requirements,
     required double salary,
-    required int interval,
+    required ETypeFrequency eTypeFrequency,
     required int work,
     required int commuting,
     @Default(0) int bonusToRelax,

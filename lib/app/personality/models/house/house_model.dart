@@ -1,7 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../date/models/date_game_model.dart';
-
 part 'house_model.freezed.dart';
 part 'house_model.g.dart';
 
@@ -15,7 +13,7 @@ class House with _$House {
     required ETypeHouse eTypeHouse,
     required double cost,
     required double monthlyCost,
-    DateGame? dateBuy,
+    DateTime? dateBuy,
     @Default(0) int bonusToRelax,
     @Default(0) int bonusToSleep,
     @Default(0) int bonusToLearn,

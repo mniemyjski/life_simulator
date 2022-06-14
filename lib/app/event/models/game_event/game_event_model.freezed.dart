@@ -23,7 +23,7 @@ mixin _$GameEvent {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
-  DateGame? get dateGame => throw _privateConstructorUsedError;
+  DateTime? get dateGame => throw _privateConstructorUsedError;
   ETypeEffect get eTypeEffect => throw _privateConstructorUsedError;
   double get value => throw _privateConstructorUsedError;
   int get duration => throw _privateConstructorUsedError;
@@ -44,14 +44,12 @@ abstract class $GameEventCopyWith<$Res> {
       {String id,
       String name,
       String description,
-      DateGame? dateGame,
+      DateTime? dateGame,
       ETypeEffect eTypeEffect,
       double value,
       int duration,
       int leftDuration,
       bool active});
-
-  $DateGameCopyWith<$Res>? get dateGame;
 }
 
 /// @nodoc
@@ -90,7 +88,7 @@ class _$GameEventCopyWithImpl<$Res> implements $GameEventCopyWith<$Res> {
       dateGame: dateGame == freezed
           ? _value.dateGame
           : dateGame // ignore: cast_nullable_to_non_nullable
-              as DateGame?,
+              as DateTime?,
       eTypeEffect: eTypeEffect == freezed
           ? _value.eTypeEffect
           : eTypeEffect // ignore: cast_nullable_to_non_nullable
@@ -113,17 +111,6 @@ class _$GameEventCopyWithImpl<$Res> implements $GameEventCopyWith<$Res> {
               as bool,
     ));
   }
-
-  @override
-  $DateGameCopyWith<$Res>? get dateGame {
-    if (_value.dateGame == null) {
-      return null;
-    }
-
-    return $DateGameCopyWith<$Res>(_value.dateGame!, (value) {
-      return _then(_value.copyWith(dateGame: value));
-    });
-  }
 }
 
 /// @nodoc
@@ -135,15 +122,12 @@ abstract class _$$_EventCopyWith<$Res> implements $GameEventCopyWith<$Res> {
       {String id,
       String name,
       String description,
-      DateGame? dateGame,
+      DateTime? dateGame,
       ETypeEffect eTypeEffect,
       double value,
       int duration,
       int leftDuration,
       bool active});
-
-  @override
-  $DateGameCopyWith<$Res>? get dateGame;
 }
 
 /// @nodoc
@@ -183,7 +167,7 @@ class __$$_EventCopyWithImpl<$Res> extends _$GameEventCopyWithImpl<$Res>
       dateGame: dateGame == freezed
           ? _value.dateGame
           : dateGame // ignore: cast_nullable_to_non_nullable
-              as DateGame?,
+              as DateTime?,
       eTypeEffect: eTypeEffect == freezed
           ? _value.eTypeEffect
           : eTypeEffect // ignore: cast_nullable_to_non_nullable
@@ -232,7 +216,7 @@ class _$_Event implements _Event {
   @override
   final String description;
   @override
-  final DateGame? dateGame;
+  final DateTime? dateGame;
   @override
   final ETypeEffect eTypeEffect;
   @override
@@ -299,7 +283,7 @@ abstract class _Event implements GameEvent {
       {required final String id,
       required final String name,
       required final String description,
-      required final DateGame? dateGame,
+      required final DateTime? dateGame,
       required final ETypeEffect eTypeEffect,
       required final double value,
       required final int duration,
@@ -315,7 +299,7 @@ abstract class _Event implements GameEvent {
   @override
   String get description => throw _privateConstructorUsedError;
   @override
-  DateGame? get dateGame => throw _privateConstructorUsedError;
+  DateTime? get dateGame => throw _privateConstructorUsedError;
   @override
   ETypeEffect get eTypeEffect => throw _privateConstructorUsedError;
   @override

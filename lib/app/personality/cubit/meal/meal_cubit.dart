@@ -47,8 +47,7 @@ class MealCubit extends HydratedCubit<MealState> {
       source: ETypeSource.meal,
       typeIncome: ETypeIncome.expense,
       value: -list.first.cost,
-      interval: 1,
-      timeLeft: 1,
+      eTypeFrequency: ETypeFrequency.daily,
     );
 
     if (_newGameCubit.state) {
@@ -63,25 +62,6 @@ class MealCubit extends HydratedCubit<MealState> {
     });
   }
 
-  // _init() {
-  //   List<Meal> list = Data.meals();
-  //   Income income = Income(
-  //     id: list.first.id,
-  //     source: ETypeSource.meal,
-  //     typeIncome: ETypeIncome.expense,
-  //     value: -list.first.cost,
-  //     interval: 1,
-  //     timeLeft: 1,
-  //   );
-  //
-  //   state.whenOrNull(
-  //     initial: () {
-  //       emit(MealState.loaded(meal: list.first, meals: list));
-  //       _incomeCubit.add(income);
-  //     },
-  //   );
-  // }
-
   change(String text) {
     state.whenOrNull(loaded: (_meal, _meals) {
       _meals.forEach((meal) {
@@ -91,8 +71,7 @@ class MealCubit extends HydratedCubit<MealState> {
             source: ETypeSource.meal,
             typeIncome: ETypeIncome.expense,
             value: -meal.cost,
-            interval: 1,
-            timeLeft: 1,
+            eTypeFrequency: ETypeFrequency.daily,
           );
 
           _timeSpendCubit.removeBonuses(ETypeBonusSource.meal);

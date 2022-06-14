@@ -75,8 +75,7 @@ class JobCubit extends HydratedCubit<JobState> {
             source: ETypeSource.job,
             typeIncome: ETypeIncome.revenue,
             value: experience.salary,
-            interval: experience.interval,
-            timeLeft: experience.interval,
+            eTypeFrequency: experience.eTypeFrequency,
           );
 
           if (experience.bonusToRelax != 0)
@@ -146,9 +145,9 @@ class JobCubit extends HydratedCubit<JobState> {
       _incomeCubit.state.whenOrNull(loaded: (incomes) {
         incomes
           ..forEach((element) {
-            if (element.id == job!.id && element.timeLeft <= 20) {
-              _moneyCubit.change(element.value / element.interval / element.timeLeft * 100);
-            }
+            // if (element.id == job!.id && element.timeLeft <= 20) {
+            //   _moneyCubit.change(element.value / element.interval / element.timeLeft * 100);
+            // }
           });
       });
 

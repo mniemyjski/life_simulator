@@ -25,7 +25,7 @@ mixin _$House {
   ETypeHouse get eTypeHouse => throw _privateConstructorUsedError;
   double get cost => throw _privateConstructorUsedError;
   double get monthlyCost => throw _privateConstructorUsedError;
-  DateGame? get dateBuy => throw _privateConstructorUsedError;
+  DateTime? get dateBuy => throw _privateConstructorUsedError;
   int get bonusToRelax => throw _privateConstructorUsedError;
   int get bonusToSleep => throw _privateConstructorUsedError;
   int get bonusToLearn => throw _privateConstructorUsedError;
@@ -45,12 +45,10 @@ abstract class $HouseCopyWith<$Res> {
       ETypeHouse eTypeHouse,
       double cost,
       double monthlyCost,
-      DateGame? dateBuy,
+      DateTime? dateBuy,
       int bonusToRelax,
       int bonusToSleep,
       int bonusToLearn});
-
-  $DateGameCopyWith<$Res>? get dateBuy;
 }
 
 /// @nodoc
@@ -97,7 +95,7 @@ class _$HouseCopyWithImpl<$Res> implements $HouseCopyWith<$Res> {
       dateBuy: dateBuy == freezed
           ? _value.dateBuy
           : dateBuy // ignore: cast_nullable_to_non_nullable
-              as DateGame?,
+              as DateTime?,
       bonusToRelax: bonusToRelax == freezed
           ? _value.bonusToRelax
           : bonusToRelax // ignore: cast_nullable_to_non_nullable
@@ -112,17 +110,6 @@ class _$HouseCopyWithImpl<$Res> implements $HouseCopyWith<$Res> {
               as int,
     ));
   }
-
-  @override
-  $DateGameCopyWith<$Res>? get dateBuy {
-    if (_value.dateBuy == null) {
-      return null;
-    }
-
-    return $DateGameCopyWith<$Res>(_value.dateBuy!, (value) {
-      return _then(_value.copyWith(dateBuy: value));
-    });
-  }
 }
 
 /// @nodoc
@@ -136,13 +123,10 @@ abstract class _$$_HouseCopyWith<$Res> implements $HouseCopyWith<$Res> {
       ETypeHouse eTypeHouse,
       double cost,
       double monthlyCost,
-      DateGame? dateBuy,
+      DateTime? dateBuy,
       int bonusToRelax,
       int bonusToSleep,
       int bonusToLearn});
-
-  @override
-  $DateGameCopyWith<$Res>? get dateBuy;
 }
 
 /// @nodoc
@@ -190,7 +174,7 @@ class __$$_HouseCopyWithImpl<$Res> extends _$HouseCopyWithImpl<$Res>
       dateBuy: dateBuy == freezed
           ? _value.dateBuy
           : dateBuy // ignore: cast_nullable_to_non_nullable
-              as DateGame?,
+              as DateTime?,
       bonusToRelax: bonusToRelax == freezed
           ? _value.bonusToRelax
           : bonusToRelax // ignore: cast_nullable_to_non_nullable
@@ -235,7 +219,7 @@ class _$_House implements _House {
   @override
   final double monthlyCost;
   @override
-  final DateGame? dateBuy;
+  final DateTime? dateBuy;
   @override
   @JsonKey()
   final int bonusToRelax;
@@ -304,7 +288,7 @@ abstract class _House implements House {
       required final ETypeHouse eTypeHouse,
       required final double cost,
       required final double monthlyCost,
-      final DateGame? dateBuy,
+      final DateTime? dateBuy,
       final int bonusToRelax,
       final int bonusToSleep,
       final int bonusToLearn}) = _$_House;
@@ -322,7 +306,7 @@ abstract class _House implements House {
   @override
   double get monthlyCost => throw _privateConstructorUsedError;
   @override
-  DateGame? get dateBuy => throw _privateConstructorUsedError;
+  DateTime? get dateBuy => throw _privateConstructorUsedError;
   @override
   int get bonusToRelax => throw _privateConstructorUsedError;
   @override

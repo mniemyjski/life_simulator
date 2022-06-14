@@ -2,6 +2,7 @@ import 'package:life_simulator/app/event/models/game_event/game_event_model.dart
 import 'package:life_simulator/app/skills/models/skills_model.dart';
 import 'package:uuid/uuid.dart';
 
+import '../app/income/models/income_model.dart';
 import '../app/job/models/experience/experience_model.dart';
 import '../app/job/models/job/job_model.dart';
 import '../app/learning/models/learning_model.dart';
@@ -25,7 +26,7 @@ class Data {
             id: uuid.v1(),
             exp: 0,
             salary: 800,
-            interval: 30,
+            eTypeFrequency: ETypeFrequency.monthly,
             work: 8,
             commuting: 2,
             bonusToRelax: -1,
@@ -37,7 +38,7 @@ class Data {
             name: 'test 2',
             exp: 1,
             salary: 1200,
-            interval: 30,
+            eTypeFrequency: ETypeFrequency.monthly,
             work: 8,
             commuting: 2,
             bonusToRelax: -1,
@@ -49,7 +50,7 @@ class Data {
             name: 'test 3',
             exp: 2,
             salary: 2200,
-            interval: 30,
+            eTypeFrequency: ETypeFrequency.monthly,
             work: 8,
             commuting: 2,
             bonusToRelax: -1,
@@ -68,7 +69,7 @@ class Data {
             name: 'test 1',
             exp: 0,
             salary: 1000,
-            interval: 30,
+            eTypeFrequency: ETypeFrequency.monthly,
             work: 8,
             commuting: 2,
             bonusToRelax: -1,
@@ -80,7 +81,7 @@ class Data {
             name: 'test 2',
             exp: 1,
             salary: 1400,
-            interval: 30,
+            eTypeFrequency: ETypeFrequency.monthly,
             work: 8,
             commuting: 2,
             bonusToRelax: -1,
@@ -92,7 +93,7 @@ class Data {
             name: 'test 3',
             exp: 2,
             salary: 2400,
-            interval: 30,
+            eTypeFrequency: ETypeFrequency.monthly,
             work: 8,
             commuting: 2,
             bonusToRelax: -1,
@@ -111,7 +112,7 @@ class Data {
             name: 'test 1',
             exp: 0,
             salary: 1000,
-            interval: 30,
+            eTypeFrequency: ETypeFrequency.monthly,
             work: 8,
             commuting: 2,
             requirements: [
@@ -123,7 +124,7 @@ class Data {
             name: 'test 1',
             exp: 1,
             salary: 2000,
-            interval: 30,
+            eTypeFrequency: ETypeFrequency.monthly,
             work: 8,
             commuting: 2,
             requirements: [
@@ -135,7 +136,7 @@ class Data {
             name: 'test 2',
             exp: 2,
             salary: 4000,
-            interval: 30,
+            eTypeFrequency: ETypeFrequency.monthly,
             work: 8,
             commuting: 0,
             requirements: [
@@ -147,7 +148,7 @@ class Data {
             name: 'test 3',
             exp: 3,
             salary: 6000,
-            interval: 30,
+            eTypeFrequency: ETypeFrequency.monthly,
             work: 8,
             commuting: 0,
             requirements: [
@@ -159,7 +160,7 @@ class Data {
             name: 'test 4',
             exp: 4,
             salary: 10000,
-            interval: 30,
+            eTypeFrequency: ETypeFrequency.monthly,
             work: 8,
             commuting: 0,
             requirements: [
@@ -171,7 +172,7 @@ class Data {
             name: 'test 5',
             exp: 5,
             salary: 28000,
-            interval: 30,
+            eTypeFrequency: ETypeFrequency.monthly,
             work: 8,
             commuting: 0,
             requirements: [

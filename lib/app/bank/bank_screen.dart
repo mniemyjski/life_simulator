@@ -106,7 +106,7 @@ class BankScreen extends StatelessWidget {
                                     children: <TextSpan>[
                                       TextSpan(text: '${LocaleKeys.left.tr()}: '),
                                       TextSpan(
-                                          text: '${element.left.toInt()}\$',
+                                          text: '${element.leftLoan.toInt()}\$',
                                           style: TextStyle(fontWeight: FontWeight.bold)),
                                     ],
                                   ),
@@ -117,7 +117,7 @@ class BankScreen extends StatelessWidget {
                                     children: <TextSpan>[
                                       TextSpan(text: '${LocaleKeys.monthlyRate.tr()}: '),
                                       TextSpan(
-                                          text: '${element.monthlyRate}\$',
+                                          text: '${element.getRate()}\$',
                                           style: TextStyle(fontWeight: FontWeight.bold)),
                                     ],
                                   ),
@@ -126,9 +126,9 @@ class BankScreen extends StatelessWidget {
                                   text: TextSpan(
                                     style: Theme.of(context).textTheme.bodyText1,
                                     children: <TextSpan>[
-                                      TextSpan(text: '${LocaleKeys.turnsToEnd.tr()}: '),
+                                      TextSpan(text: '${LocaleKeys.nextRate.tr()}: '),
                                       TextSpan(
-                                          text: '${element.turnsToEnd.toInt()}',
+                                          text: '${element.nextToString()}\$',
                                           style: TextStyle(fontWeight: FontWeight.bold)),
                                     ],
                                   ),

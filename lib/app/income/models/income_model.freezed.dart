@@ -23,9 +23,9 @@ mixin _$Income {
   String get id => throw _privateConstructorUsedError;
   ETypeSource get source => throw _privateConstructorUsedError;
   ETypeIncome get typeIncome => throw _privateConstructorUsedError;
+  ETypeFrequency get eTypeFrequency => throw _privateConstructorUsedError;
   double get value => throw _privateConstructorUsedError;
-  int get interval => throw _privateConstructorUsedError;
-  int get timeLeft => throw _privateConstructorUsedError;
+  DateTime? get next => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -40,9 +40,9 @@ abstract class $IncomeCopyWith<$Res> {
       {String id,
       ETypeSource source,
       ETypeIncome typeIncome,
+      ETypeFrequency eTypeFrequency,
       double value,
-      int interval,
-      int timeLeft});
+      DateTime? next});
 }
 
 /// @nodoc
@@ -58,9 +58,9 @@ class _$IncomeCopyWithImpl<$Res> implements $IncomeCopyWith<$Res> {
     Object? id = freezed,
     Object? source = freezed,
     Object? typeIncome = freezed,
+    Object? eTypeFrequency = freezed,
     Object? value = freezed,
-    Object? interval = freezed,
-    Object? timeLeft = freezed,
+    Object? next = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -75,18 +75,18 @@ class _$IncomeCopyWithImpl<$Res> implements $IncomeCopyWith<$Res> {
           ? _value.typeIncome
           : typeIncome // ignore: cast_nullable_to_non_nullable
               as ETypeIncome,
+      eTypeFrequency: eTypeFrequency == freezed
+          ? _value.eTypeFrequency
+          : eTypeFrequency // ignore: cast_nullable_to_non_nullable
+              as ETypeFrequency,
       value: value == freezed
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
               as double,
-      interval: interval == freezed
-          ? _value.interval
-          : interval // ignore: cast_nullable_to_non_nullable
-              as int,
-      timeLeft: timeLeft == freezed
-          ? _value.timeLeft
-          : timeLeft // ignore: cast_nullable_to_non_nullable
-              as int,
+      next: next == freezed
+          ? _value.next
+          : next // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -100,9 +100,9 @@ abstract class _$$_IncomeCopyWith<$Res> implements $IncomeCopyWith<$Res> {
       {String id,
       ETypeSource source,
       ETypeIncome typeIncome,
+      ETypeFrequency eTypeFrequency,
       double value,
-      int interval,
-      int timeLeft});
+      DateTime? next});
 }
 
 /// @nodoc
@@ -119,9 +119,9 @@ class __$$_IncomeCopyWithImpl<$Res> extends _$IncomeCopyWithImpl<$Res>
     Object? id = freezed,
     Object? source = freezed,
     Object? typeIncome = freezed,
+    Object? eTypeFrequency = freezed,
     Object? value = freezed,
-    Object? interval = freezed,
-    Object? timeLeft = freezed,
+    Object? next = freezed,
   }) {
     return _then(_$_Income(
       id: id == freezed
@@ -136,32 +136,33 @@ class __$$_IncomeCopyWithImpl<$Res> extends _$IncomeCopyWithImpl<$Res>
           ? _value.typeIncome
           : typeIncome // ignore: cast_nullable_to_non_nullable
               as ETypeIncome,
+      eTypeFrequency: eTypeFrequency == freezed
+          ? _value.eTypeFrequency
+          : eTypeFrequency // ignore: cast_nullable_to_non_nullable
+              as ETypeFrequency,
       value: value == freezed
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
               as double,
-      interval: interval == freezed
-          ? _value.interval
-          : interval // ignore: cast_nullable_to_non_nullable
-              as int,
-      timeLeft: timeLeft == freezed
-          ? _value.timeLeft
-          : timeLeft // ignore: cast_nullable_to_non_nullable
-              as int,
+      next: next == freezed
+          ? _value.next
+          : next // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_Income implements _Income {
+class _$_Income extends _Income {
   const _$_Income(
       {required this.id,
       required this.source,
       required this.typeIncome,
+      required this.eTypeFrequency,
       required this.value,
-      required this.interval,
-      required this.timeLeft});
+      this.next})
+      : super._();
 
   factory _$_Income.fromJson(Map<String, dynamic> json) =>
       _$$_IncomeFromJson(json);
@@ -173,15 +174,15 @@ class _$_Income implements _Income {
   @override
   final ETypeIncome typeIncome;
   @override
+  final ETypeFrequency eTypeFrequency;
+  @override
   final double value;
   @override
-  final int interval;
-  @override
-  final int timeLeft;
+  final DateTime? next;
 
   @override
   String toString() {
-    return 'Income(id: $id, source: $source, typeIncome: $typeIncome, value: $value, interval: $interval, timeLeft: $timeLeft)';
+    return 'Income(id: $id, source: $source, typeIncome: $typeIncome, eTypeFrequency: $eTypeFrequency, value: $value, next: $next)';
   }
 
   @override
@@ -193,9 +194,10 @@ class _$_Income implements _Income {
             const DeepCollectionEquality().equals(other.source, source) &&
             const DeepCollectionEquality()
                 .equals(other.typeIncome, typeIncome) &&
+            const DeepCollectionEquality()
+                .equals(other.eTypeFrequency, eTypeFrequency) &&
             const DeepCollectionEquality().equals(other.value, value) &&
-            const DeepCollectionEquality().equals(other.interval, interval) &&
-            const DeepCollectionEquality().equals(other.timeLeft, timeLeft));
+            const DeepCollectionEquality().equals(other.next, next));
   }
 
   @JsonKey(ignore: true)
@@ -205,9 +207,9 @@ class _$_Income implements _Income {
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(source),
       const DeepCollectionEquality().hash(typeIncome),
+      const DeepCollectionEquality().hash(eTypeFrequency),
       const DeepCollectionEquality().hash(value),
-      const DeepCollectionEquality().hash(interval),
-      const DeepCollectionEquality().hash(timeLeft));
+      const DeepCollectionEquality().hash(next));
 
   @JsonKey(ignore: true)
   @override
@@ -220,14 +222,15 @@ class _$_Income implements _Income {
   }
 }
 
-abstract class _Income implements Income {
+abstract class _Income extends Income {
   const factory _Income(
       {required final String id,
       required final ETypeSource source,
       required final ETypeIncome typeIncome,
+      required final ETypeFrequency eTypeFrequency,
       required final double value,
-      required final int interval,
-      required final int timeLeft}) = _$_Income;
+      final DateTime? next}) = _$_Income;
+  const _Income._() : super._();
 
   factory _Income.fromJson(Map<String, dynamic> json) = _$_Income.fromJson;
 
@@ -238,11 +241,11 @@ abstract class _Income implements Income {
   @override
   ETypeIncome get typeIncome => throw _privateConstructorUsedError;
   @override
+  ETypeFrequency get eTypeFrequency => throw _privateConstructorUsedError;
+  @override
   double get value => throw _privateConstructorUsedError;
   @override
-  int get interval => throw _privateConstructorUsedError;
-  @override
-  int get timeLeft => throw _privateConstructorUsedError;
+  DateTime? get next => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_IncomeCopyWith<_$_Income> get copyWith =>

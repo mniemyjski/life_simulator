@@ -26,7 +26,7 @@ mixin _$Transport {
   ETypeTransport get eTypeTransport => throw _privateConstructorUsedError;
   double get cost => throw _privateConstructorUsedError;
   double get monthlyCost => throw _privateConstructorUsedError;
-  DateGame? get dateBuy => throw _privateConstructorUsedError;
+  DateTime? get dateBuy => throw _privateConstructorUsedError;
   int get bonusToRelax => throw _privateConstructorUsedError;
   int get bonusToSleep => throw _privateConstructorUsedError;
   int get bonusToLearn => throw _privateConstructorUsedError;
@@ -49,13 +49,11 @@ abstract class $TransportCopyWith<$Res> {
       ETypeTransport eTypeTransport,
       double cost,
       double monthlyCost,
-      DateGame? dateBuy,
+      DateTime? dateBuy,
       int bonusToRelax,
       int bonusToSleep,
       int bonusToLearn,
       int commuting});
-
-  $DateGameCopyWith<$Res>? get dateBuy;
 }
 
 /// @nodoc
@@ -108,7 +106,7 @@ class _$TransportCopyWithImpl<$Res> implements $TransportCopyWith<$Res> {
       dateBuy: dateBuy == freezed
           ? _value.dateBuy
           : dateBuy // ignore: cast_nullable_to_non_nullable
-              as DateGame?,
+              as DateTime?,
       bonusToRelax: bonusToRelax == freezed
           ? _value.bonusToRelax
           : bonusToRelax // ignore: cast_nullable_to_non_nullable
@@ -127,17 +125,6 @@ class _$TransportCopyWithImpl<$Res> implements $TransportCopyWith<$Res> {
               as int,
     ));
   }
-
-  @override
-  $DateGameCopyWith<$Res>? get dateBuy {
-    if (_value.dateBuy == null) {
-      return null;
-    }
-
-    return $DateGameCopyWith<$Res>(_value.dateBuy!, (value) {
-      return _then(_value.copyWith(dateBuy: value));
-    });
-  }
 }
 
 /// @nodoc
@@ -153,14 +140,11 @@ abstract class _$$_TransportCopyWith<$Res> implements $TransportCopyWith<$Res> {
       ETypeTransport eTypeTransport,
       double cost,
       double monthlyCost,
-      DateGame? dateBuy,
+      DateTime? dateBuy,
       int bonusToRelax,
       int bonusToSleep,
       int bonusToLearn,
       int commuting});
-
-  @override
-  $DateGameCopyWith<$Res>? get dateBuy;
 }
 
 /// @nodoc
@@ -215,7 +199,7 @@ class __$$_TransportCopyWithImpl<$Res> extends _$TransportCopyWithImpl<$Res>
       dateBuy: dateBuy == freezed
           ? _value.dateBuy
           : dateBuy // ignore: cast_nullable_to_non_nullable
-              as DateGame?,
+              as DateTime?,
       bonusToRelax: bonusToRelax == freezed
           ? _value.bonusToRelax
           : bonusToRelax // ignore: cast_nullable_to_non_nullable
@@ -268,7 +252,7 @@ class _$_Transport implements _Transport {
   @override
   final double monthlyCost;
   @override
-  final DateGame? dateBuy;
+  final DateTime? dateBuy;
   @override
   @JsonKey()
   final int bonusToRelax;
@@ -345,7 +329,7 @@ abstract class _Transport implements Transport {
       required final ETypeTransport eTypeTransport,
       required final double cost,
       required final double monthlyCost,
-      final DateGame? dateBuy,
+      final DateTime? dateBuy,
       final int bonusToRelax,
       final int bonusToSleep,
       final int bonusToLearn,
@@ -367,7 +351,7 @@ abstract class _Transport implements Transport {
   @override
   double get monthlyCost => throw _privateConstructorUsedError;
   @override
-  DateGame? get dateBuy => throw _privateConstructorUsedError;
+  DateTime? get dateBuy => throw _privateConstructorUsedError;
   @override
   int get bonusToRelax => throw _privateConstructorUsedError;
   @override

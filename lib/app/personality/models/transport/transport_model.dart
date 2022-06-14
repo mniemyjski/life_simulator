@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:life_simulator/app/date/models/date_game_model.dart';
 
 part 'transport_model.freezed.dart';
 part 'transport_model.g.dart';
@@ -15,7 +14,7 @@ class Transport with _$Transport {
     required ETypeTransport eTypeTransport,
     required double cost,
     required double monthlyCost,
-    DateGame? dateBuy,
+    DateTime? dateBuy,
     @Default(0) int bonusToRelax,
     @Default(0) int bonusToSleep,
     @Default(0) int bonusToLearn,

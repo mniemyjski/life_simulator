@@ -3,11 +3,11 @@ import 'dart:async';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:jiffy/jiffy.dart';
 import 'package:life_simulator/app/date/cubit/date_cubit.dart';
 import 'package:life_simulator/app/money/cubit/money_cubit.dart';
 import 'package:life_simulator/app/new_game/new_game_cubit.dart';
 
-import '../../../date/models/date_game_model.dart';
 import '../../models/loan/loan_model.dart';
 
 part 'loan_cubit.freezed.dart';
@@ -49,23 +49,27 @@ class LoanCubit extends HydratedCubit<LoanState> {
     });
   }
 
-  bool creditworthiness(double borrow) {
+  bool _creditworthiness(double borrow) {
     if (loan() + borrow > 50000) return true;
 
     return false;
   }
 
   String add(Loan loan) {
-    if (creditworthiness(loan.borrowed)) return "You don't have creditworthiness";
+    if (_creditworthiness(loan.borrowed)) return "You don't have creditworthiness";
 
-    return state.maybeWhen(
-        loaded: (loans) {
-          List<Loan> result = List.from(loans);
+    return _dateCubit.state.maybeWhen(
+        loaded: (date) {
+          return state.maybeWhen(
+              loaded: (loans) {
+                List<Loan> result = List.from(loans);
 
-          result.add(loan);
-          _moneyCubit.change(loan.borrowed);
-          emit(LoanState.loaded(result));
-          return "Succeed";
+                result.add(loan.copyWith(next: Jiffy(date).add(months: 1).dateTime));
+                _moneyCubit.change(loan.borrowed);
+                emit(LoanState.loaded(result));
+                return "Succeed";
+              },
+              orElse: () => 'error');
         },
         orElse: () => 'error');
   }
@@ -87,7 +91,7 @@ class LoanCubit extends HydratedCubit<LoanState> {
     state.whenOrNull(loaded: (loans) {
       loans
         ..forEach((element) {
-          value += element.left;
+          value += element.leftLoan;
         });
     });
 
@@ -97,30 +101,23 @@ class LoanCubit extends HydratedCubit<LoanState> {
   _counting() {
     _dateSub = _dateCubit.stream.listen((event) {
       event.whenOrNull(loaded: (date) {
-        if (date == DateGame(year: 18, month: 1, day: 1)) return;
+        if (date == DateTime(18, 1, 1)) return;
         state.whenOrNull(loaded: (loans) {
           List<Loan> result = [];
 
           loans
             ..forEach((element) {
-              if (element.turnsToEnd % 30 == 0) {
-                Loan newLoan = element.copyWith(
-                  left: element.left - element.monthlyRate,
-                  turnsToEnd: element.turnsToEnd - 1,
+              if (element.next == date) {
+                Loan _loan = element.copyWith(
+                  leftLoan: element.leftLoan - element.getRate(),
+                  leftMonths: element.leftMonths - 1,
+                  next: Jiffy(date).add(months: 1).dateTime,
                 );
 
-                if (newLoan.left > newLoan.monthlyRate) {
-                  result.add(newLoan);
-                  _moneyCubit.change(-element.monthlyRate);
-                } else {
-                  _moneyCubit.change(-element.left - element.monthlyRate);
-                }
+                if (_loan.leftLoan > 0) result.add(_loan);
+                _moneyCubit.change(-element.leftLoan - element.getRate());
               } else {
-                result.add(
-                  element.copyWith(
-                    turnsToEnd: element.turnsToEnd - 1,
-                  ),
-                );
+                result.add(element);
               }
             });
           emit(LoanState.loaded(result));

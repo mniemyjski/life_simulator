@@ -16,7 +16,7 @@ _$_Transport _$$_TransportFromJson(Map<String, dynamic> json) => _$_Transport(
       monthlyCost: (json['monthlyCost'] as num).toDouble(),
       dateBuy: json['dateBuy'] == null
           ? null
-          : DateGame.fromJson(json['dateBuy'] as Map<String, dynamic>),
+          : DateTime.parse(json['dateBuy'] as String),
       bonusToRelax: json['bonusToRelax'] as int? ?? 0,
       bonusToSleep: json['bonusToSleep'] as int? ?? 0,
       bonusToLearn: json['bonusToLearn'] as int? ?? 0,
@@ -31,7 +31,7 @@ Map<String, dynamic> _$$_TransportToJson(_$_Transport instance) =>
       'eTypeTransport': _$ETypeTransportEnumMap[instance.eTypeTransport],
       'cost': instance.cost,
       'monthlyCost': instance.monthlyCost,
-      'dateBuy': instance.dateBuy?.toJson(),
+      'dateBuy': instance.dateBuy?.toIso8601String(),
       'bonusToRelax': instance.bonusToRelax,
       'bonusToSleep': instance.bonusToSleep,
       'bonusToLearn': instance.bonusToLearn,

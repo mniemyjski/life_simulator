@@ -12,7 +12,7 @@ _$_Event _$$_EventFromJson(Map<String, dynamic> json) => _$_Event(
       description: json['description'] as String,
       dateGame: json['dateGame'] == null
           ? null
-          : DateGame.fromJson(json['dateGame'] as Map<String, dynamic>),
+          : DateTime.parse(json['dateGame'] as String),
       eTypeEffect: $enumDecode(_$ETypeEffectEnumMap, json['eTypeEffect']),
       value: (json['value'] as num).toDouble(),
       duration: json['duration'] as int,
@@ -24,7 +24,7 @@ Map<String, dynamic> _$$_EventToJson(_$_Event instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'description': instance.description,
-      'dateGame': instance.dateGame?.toJson(),
+      'dateGame': instance.dateGame?.toIso8601String(),
       'eTypeEffect': _$ETypeEffectEnumMap[instance.eTypeEffect],
       'value': instance.value,
       'duration': instance.duration,

@@ -101,11 +101,11 @@ class MyApp extends StatelessWidget {
             ),
             BlocProvider(
               lazy: false,
-              create: (_) => getIt<IncomeCubit>(),
+              create: (_) => getIt<MoneyCubit>(),
             ),
             BlocProvider(
               lazy: false,
-              create: (_) => getIt<MoneyCubit>(),
+              create: (_) => getIt<IncomeCubit>(),
             ),
             BlocProvider(
               lazy: false,

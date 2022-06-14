@@ -25,7 +25,7 @@ mixin _$Experience {
   int get exp => throw _privateConstructorUsedError;
   List<Skill> get requirements => throw _privateConstructorUsedError;
   double get salary => throw _privateConstructorUsedError;
-  int get interval => throw _privateConstructorUsedError;
+  ETypeFrequency get eTypeFrequency => throw _privateConstructorUsedError;
   int get work => throw _privateConstructorUsedError;
   int get commuting => throw _privateConstructorUsedError;
   int get bonusToRelax => throw _privateConstructorUsedError;
@@ -49,7 +49,7 @@ abstract class $ExperienceCopyWith<$Res> {
       int exp,
       List<Skill> requirements,
       double salary,
-      int interval,
+      ETypeFrequency eTypeFrequency,
       int work,
       int commuting,
       int bonusToRelax,
@@ -72,7 +72,7 @@ class _$ExperienceCopyWithImpl<$Res> implements $ExperienceCopyWith<$Res> {
     Object? exp = freezed,
     Object? requirements = freezed,
     Object? salary = freezed,
-    Object? interval = freezed,
+    Object? eTypeFrequency = freezed,
     Object? work = freezed,
     Object? commuting = freezed,
     Object? bonusToRelax = freezed,
@@ -100,10 +100,10 @@ class _$ExperienceCopyWithImpl<$Res> implements $ExperienceCopyWith<$Res> {
           ? _value.salary
           : salary // ignore: cast_nullable_to_non_nullable
               as double,
-      interval: interval == freezed
-          ? _value.interval
-          : interval // ignore: cast_nullable_to_non_nullable
-              as int,
+      eTypeFrequency: eTypeFrequency == freezed
+          ? _value.eTypeFrequency
+          : eTypeFrequency // ignore: cast_nullable_to_non_nullable
+              as ETypeFrequency,
       work: work == freezed
           ? _value.work
           : work // ignore: cast_nullable_to_non_nullable
@@ -141,7 +141,7 @@ abstract class _$$_ExperienceCopyWith<$Res>
       int exp,
       List<Skill> requirements,
       double salary,
-      int interval,
+      ETypeFrequency eTypeFrequency,
       int work,
       int commuting,
       int bonusToRelax,
@@ -166,7 +166,7 @@ class __$$_ExperienceCopyWithImpl<$Res> extends _$ExperienceCopyWithImpl<$Res>
     Object? exp = freezed,
     Object? requirements = freezed,
     Object? salary = freezed,
-    Object? interval = freezed,
+    Object? eTypeFrequency = freezed,
     Object? work = freezed,
     Object? commuting = freezed,
     Object? bonusToRelax = freezed,
@@ -194,10 +194,10 @@ class __$$_ExperienceCopyWithImpl<$Res> extends _$ExperienceCopyWithImpl<$Res>
           ? _value.salary
           : salary // ignore: cast_nullable_to_non_nullable
               as double,
-      interval: interval == freezed
-          ? _value.interval
-          : interval // ignore: cast_nullable_to_non_nullable
-              as int,
+      eTypeFrequency: eTypeFrequency == freezed
+          ? _value.eTypeFrequency
+          : eTypeFrequency // ignore: cast_nullable_to_non_nullable
+              as ETypeFrequency,
       work: work == freezed
           ? _value.work
           : work // ignore: cast_nullable_to_non_nullable
@@ -231,7 +231,7 @@ class _$_Experience implements _Experience {
       required this.exp,
       required final List<Skill> requirements,
       required this.salary,
-      required this.interval,
+      required this.eTypeFrequency,
       required this.work,
       required this.commuting,
       this.bonusToRelax = 0,
@@ -258,7 +258,7 @@ class _$_Experience implements _Experience {
   @override
   final double salary;
   @override
-  final int interval;
+  final ETypeFrequency eTypeFrequency;
   @override
   final int work;
   @override
@@ -275,7 +275,7 @@ class _$_Experience implements _Experience {
 
   @override
   String toString() {
-    return 'Experience(id: $id, name: $name, exp: $exp, requirements: $requirements, salary: $salary, interval: $interval, work: $work, commuting: $commuting, bonusToRelax: $bonusToRelax, bonusToSleep: $bonusToSleep, bonusToLearn: $bonusToLearn)';
+    return 'Experience(id: $id, name: $name, exp: $exp, requirements: $requirements, salary: $salary, eTypeFrequency: $eTypeFrequency, work: $work, commuting: $commuting, bonusToRelax: $bonusToRelax, bonusToSleep: $bonusToSleep, bonusToLearn: $bonusToLearn)';
   }
 
   @override
@@ -289,7 +289,8 @@ class _$_Experience implements _Experience {
             const DeepCollectionEquality()
                 .equals(other._requirements, _requirements) &&
             const DeepCollectionEquality().equals(other.salary, salary) &&
-            const DeepCollectionEquality().equals(other.interval, interval) &&
+            const DeepCollectionEquality()
+                .equals(other.eTypeFrequency, eTypeFrequency) &&
             const DeepCollectionEquality().equals(other.work, work) &&
             const DeepCollectionEquality().equals(other.commuting, commuting) &&
             const DeepCollectionEquality()
@@ -309,7 +310,7 @@ class _$_Experience implements _Experience {
       const DeepCollectionEquality().hash(exp),
       const DeepCollectionEquality().hash(_requirements),
       const DeepCollectionEquality().hash(salary),
-      const DeepCollectionEquality().hash(interval),
+      const DeepCollectionEquality().hash(eTypeFrequency),
       const DeepCollectionEquality().hash(work),
       const DeepCollectionEquality().hash(commuting),
       const DeepCollectionEquality().hash(bonusToRelax),
@@ -334,7 +335,7 @@ abstract class _Experience implements Experience {
       required final int exp,
       required final List<Skill> requirements,
       required final double salary,
-      required final int interval,
+      required final ETypeFrequency eTypeFrequency,
       required final int work,
       required final int commuting,
       final int bonusToRelax,
@@ -355,7 +356,7 @@ abstract class _Experience implements Experience {
   @override
   double get salary => throw _privateConstructorUsedError;
   @override
-  int get interval => throw _privateConstructorUsedError;
+  ETypeFrequency get eTypeFrequency => throw _privateConstructorUsedError;
   @override
   int get work => throw _privateConstructorUsedError;
   @override

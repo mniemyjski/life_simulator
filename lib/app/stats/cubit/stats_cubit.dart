@@ -5,7 +5,6 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../date/cubit/date_cubit.dart';
-import '../../date/models/date_game_model.dart';
 import '../../new_game/new_game_cubit.dart';
 import '../../time_spend/cubit/time_spend_cubit.dart';
 import '../../time_spend/models/bonus/bonus_model.dart';
@@ -74,8 +73,8 @@ class StatsCubit extends HydratedCubit<StatsState> {
     });
   }
 
-  _counting(DateGame dateGame) {
-    if (dateGame == DateGame(year: 18, month: 1, day: 1)) return;
+  _counting(DateTime date) {
+    if (date == DateTime(18, 1, 1)) return;
 
     _timeSpendCubit.state.whenOrNull(loaded: (timeSpend) {
       state.whenOrNull(loaded: (stats) {

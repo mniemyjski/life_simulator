@@ -34,11 +34,11 @@ class IncomeScreen extends StatelessWidget {
 
                 incomes.forEach((element) {
                   if (element.typeIncome == ETypeIncome.revenue) {
-                    _revenues += (element.value / element.interval * 30).toInt();
+                    _revenues += element.monthlyIncome().toInt();
                     _revenuesList.add(element);
                   }
                   if (element.typeIncome == ETypeIncome.expense) {
-                    _expenses += (element.value / element.interval * 30).toInt();
+                    _expenses += element.monthlyIncome().toInt();
                     _expensesList.add(element);
                   }
                 });
@@ -173,7 +173,7 @@ class IncomeScreen extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '${(element.value / element.interval * 30).toInt()}\$',
+                    '${element.monthlyIncome().toInt()}\$',
                     style: TextStyle(
                       color: Theme.of(context).textTheme.bodyText1!.color,
                     ),
@@ -190,7 +190,7 @@ class IncomeScreen extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '${element.interval}',
+                    '${element.frequencyToString()}',
                     style: TextStyle(
                       color: Theme.of(context).textTheme.bodyText1!.color,
                     ),
@@ -200,14 +200,14 @@ class IncomeScreen extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    'Time to left: ',
+                    'Next payment:',
                     style: TextStyle(
                       color: Theme.of(context).textTheme.bodyText1!.color,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
-                    '${element.timeLeft}',
+                    '${element.nextToString()}',
                     style: TextStyle(
                       color: Theme.of(context).textTheme.bodyText1!.color,
                     ),

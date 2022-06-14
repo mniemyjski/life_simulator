@@ -7,7 +7,6 @@ import 'package:injectable/injectable.dart';
 import 'package:life_simulator/app/date/cubit/date_cubit.dart';
 
 import '../../../data/data.dart';
-import '../../date/models/date_game_model.dart';
 import '../../new_game/new_game_cubit.dart';
 import '../models/game_event/game_event_model.dart';
 
@@ -56,7 +55,7 @@ class EventCubit extends HydratedCubit<EventState> {
   _draw() {
     _dateSub = _dateCubit.stream.listen((dateState) {
       dateState.whenOrNull(loaded: (date) {
-        if (date == DateGame(year: 18, month: 1, day: 1)) return;
+        if (date == DateTime(18, 1, 1)) return;
         state.whenOrNull(loaded: (events, database) {
           var rng = Random();
           int random = rng.nextInt(1);
@@ -72,7 +71,7 @@ class EventCubit extends HydratedCubit<EventState> {
   _counting() {
     _dateSub = _dateCubit.stream.listen((dateState) {
       dateState.whenOrNull(loaded: (date) {
-        if (date == DateGame(year: 18, month: 1, day: 1)) return;
+        if (date == DateTime(18, 1, 1)) return;
         state.whenOrNull(loaded: (events, database) {
           events.forEach((element) {
             List<GameEvent> result = [];

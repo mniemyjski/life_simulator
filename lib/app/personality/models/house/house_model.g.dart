@@ -14,7 +14,7 @@ _$_House _$$_HouseFromJson(Map<String, dynamic> json) => _$_House(
       monthlyCost: (json['monthlyCost'] as num).toDouble(),
       dateBuy: json['dateBuy'] == null
           ? null
-          : DateGame.fromJson(json['dateBuy'] as Map<String, dynamic>),
+          : DateTime.parse(json['dateBuy'] as String),
       bonusToRelax: json['bonusToRelax'] as int? ?? 0,
       bonusToSleep: json['bonusToSleep'] as int? ?? 0,
       bonusToLearn: json['bonusToLearn'] as int? ?? 0,
@@ -26,7 +26,7 @@ Map<String, dynamic> _$$_HouseToJson(_$_House instance) => <String, dynamic>{
       'eTypeHouse': _$ETypeHouseEnumMap[instance.eTypeHouse],
       'cost': instance.cost,
       'monthlyCost': instance.monthlyCost,
-      'dateBuy': instance.dateBuy?.toJson(),
+      'dateBuy': instance.dateBuy?.toIso8601String(),
       'bonusToRelax': instance.bonusToRelax,
       'bonusToSleep': instance.bonusToSleep,
       'bonusToLearn': instance.bonusToLearn,

@@ -15,7 +15,8 @@ _$_Experience _$$_ExperienceFromJson(Map<String, dynamic> json) =>
           .map((e) => Skill.fromJson(e as Map<String, dynamic>))
           .toList(),
       salary: (json['salary'] as num).toDouble(),
-      interval: json['interval'] as int,
+      eTypeFrequency:
+          $enumDecode(_$ETypeFrequencyEnumMap, json['eTypeFrequency']),
       work: json['work'] as int,
       commuting: json['commuting'] as int,
       bonusToRelax: json['bonusToRelax'] as int? ?? 0,
@@ -30,10 +31,17 @@ Map<String, dynamic> _$$_ExperienceToJson(_$_Experience instance) =>
       'exp': instance.exp,
       'requirements': instance.requirements.map((e) => e.toJson()).toList(),
       'salary': instance.salary,
-      'interval': instance.interval,
+      'eTypeFrequency': _$ETypeFrequencyEnumMap[instance.eTypeFrequency],
       'work': instance.work,
       'commuting': instance.commuting,
       'bonusToRelax': instance.bonusToRelax,
       'bonusToSleep': instance.bonusToSleep,
       'bonusToLearn': instance.bonusToLearn,
     };
+
+const _$ETypeFrequencyEnumMap = {
+  ETypeFrequency.annually: 'annually',
+  ETypeFrequency.monthly: 'monthly',
+  ETypeFrequency.weekly: 'weekly',
+  ETypeFrequency.daily: 'daily',
+};

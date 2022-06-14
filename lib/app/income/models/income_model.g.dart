@@ -10,18 +10,20 @@ _$_Income _$$_IncomeFromJson(Map<String, dynamic> json) => _$_Income(
       id: json['id'] as String,
       source: $enumDecode(_$ETypeSourceEnumMap, json['source']),
       typeIncome: $enumDecode(_$ETypeIncomeEnumMap, json['typeIncome']),
+      eTypeFrequency:
+          $enumDecode(_$ETypeFrequencyEnumMap, json['eTypeFrequency']),
       value: (json['value'] as num).toDouble(),
-      interval: json['interval'] as int,
-      timeLeft: json['timeLeft'] as int,
+      next:
+          json['next'] == null ? null : DateTime.parse(json['next'] as String),
     );
 
 Map<String, dynamic> _$$_IncomeToJson(_$_Income instance) => <String, dynamic>{
       'id': instance.id,
       'source': _$ETypeSourceEnumMap[instance.source],
       'typeIncome': _$ETypeIncomeEnumMap[instance.typeIncome],
+      'eTypeFrequency': _$ETypeFrequencyEnumMap[instance.eTypeFrequency],
       'value': instance.value,
-      'interval': instance.interval,
-      'timeLeft': instance.timeLeft,
+      'next': instance.next?.toIso8601String(),
     };
 
 const _$ETypeSourceEnumMap = {
@@ -34,4 +36,11 @@ const _$ETypeSourceEnumMap = {
 const _$ETypeIncomeEnumMap = {
   ETypeIncome.revenue: 'revenue',
   ETypeIncome.expense: 'expense',
+};
+
+const _$ETypeFrequencyEnumMap = {
+  ETypeFrequency.annually: 'annually',
+  ETypeFrequency.monthly: 'monthly',
+  ETypeFrequency.weekly: 'weekly',
+  ETypeFrequency.daily: 'daily',
 };

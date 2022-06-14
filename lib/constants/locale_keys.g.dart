@@ -28,5 +28,6 @@ abstract class  LocaleKeys {
   static const borrowed = 'borrowed';
   static const left = 'left';
   static const turnsToEnd = 'turnsToEnd';
+  static const nextRate = 'nextRate';
 
 }

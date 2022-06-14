@@ -80,8 +80,7 @@ class TransportCubit extends HydratedCubit<TransportState> {
         source: ETypeSource.car,
         typeIncome: ETypeIncome.expense,
         value: -transport.monthlyCost,
-        interval: 30,
-        timeLeft: 30,
+        eTypeFrequency: ETypeFrequency.monthly,
       );
 
       if (transport.commuting != 0)

@@ -23,11 +23,11 @@ Map<String, dynamic> _$$LoadingToJson(_$Loading instance) => <String, dynamic>{
     };
 
 _$Loaded _$$LoadedFromJson(Map<String, dynamic> json) => _$Loaded(
-      DateGame.fromJson(json['dateGame'] as Map<String, dynamic>),
+      DateTime.parse(json['dateTime'] as String),
       $type: json['runtimeType'] as String?,
     );
 
 Map<String, dynamic> _$$LoadedToJson(_$Loaded instance) => <String, dynamic>{
-      'dateGame': instance.dateGame.toJson(),
+      'dateTime': instance.dateTime.toIso8601String(),
       'runtimeType': instance.$type,
     };

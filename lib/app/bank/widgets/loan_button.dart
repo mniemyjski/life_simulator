@@ -102,12 +102,13 @@ class LoanButton extends StatelessWidget {
                             onPressed: () {
                               Loan loan = Loan(
                                 borrowed: _borrow.toInt().toDouble(),
-                                left: (_borrow + (_borrow * _turns * _interest)).toInt().toDouble(),
+                                leftLoan:
+                                    (_borrow + (_borrow * _turns * _interest)).toInt().toDouble(),
                                 monthlyRate: ((_borrow + (_borrow * _turns * _interest)) ~/ _turns)
                                     .toDouble(),
                                 interest: _interest,
-                                turns: (_turns * 30).toInt() - 1,
-                                turnsToEnd: (_turns * 30).toInt() - 1,
+                                months: _turns.toInt(),
+                                leftMonths: _turns.toInt(),
                               );
                               String? toast = context.read<LoanCubit>().add(loan);
                               BotToast.showText(text: toast, align: Alignment(0.1, 0.05));
