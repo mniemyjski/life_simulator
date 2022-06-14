@@ -5,7 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../data/data.dart';
+import '../../database/cubit/database_cubit.dart';
 import '../../income/cubit/income_cubit.dart';
 import '../../income/models/income_model.dart';
 import '../../money/cubit/money_cubit.dart';
@@ -23,23 +23,26 @@ part 'job_state.dart';
 @lazySingleton
 class JobCubit extends HydratedCubit<JobState> {
   final NewGameCubit _newGameCubit;
+  final DatabaseCubit _databaseCubit;
   final IncomeCubit _incomeCubit;
   final TimeSpendCubit _timeSpendCubit;
   final SkillsCubit _skillsCubit;
   final MoneyCubit _moneyCubit;
   late StreamSubscription _newGameSub;
 
-  JobCubit({
-    required NewGameCubit newGameCubit,
-    required IncomeCubit incomeCubit,
-    required TimeSpendCubit timeSpendCubit,
-    required SkillsCubit skillsCubit,
-    required MoneyCubit moneyCubit,
-  })  : _incomeCubit = incomeCubit,
+  JobCubit(
+    NewGameCubit newGameCubit,
+    IncomeCubit incomeCubit,
+    TimeSpendCubit timeSpendCubit,
+    SkillsCubit skillsCubit,
+    MoneyCubit moneyCubit,
+    DatabaseCubit databaseCubit,
+  )   : _incomeCubit = incomeCubit,
         _timeSpendCubit = timeSpendCubit,
         _skillsCubit = skillsCubit,
         _moneyCubit = moneyCubit,
         _newGameCubit = newGameCubit,
+        _databaseCubit = databaseCubit,
         super(JobState.initial()) {
     _newGame();
   }
@@ -51,9 +54,11 @@ class JobCubit extends HydratedCubit<JobState> {
   }
 
   _newGame() {
-    if (_newGameCubit.state) emit(JobState.loaded(job: null, experience: null, jobs: Data.jobs()));
+    if (_newGameCubit.state)
+      emit(JobState.loaded(job: null, experience: null, jobs: _databaseCubit.state.jobsDB));
     _newGameSub = _newGameCubit.stream.listen((newGame) {
-      if (newGame) emit(JobState.loaded(job: null, experience: null, jobs: Data.jobs()));
+      if (newGame)
+        emit(JobState.loaded(job: null, experience: null, jobs: _databaseCubit.state.jobsDB));
     });
   }
 

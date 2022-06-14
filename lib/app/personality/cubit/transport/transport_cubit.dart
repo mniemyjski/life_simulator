@@ -4,7 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../data/data.dart';
+import '../../../database/cubit/database_cubit.dart';
 import '../../../income/cubit/income_cubit.dart';
 import '../../../income/models/income_model.dart';
 import '../../../money/cubit/money_cubit.dart';
@@ -20,21 +20,24 @@ part 'transport_state.dart';
 @lazySingleton
 class TransportCubit extends HydratedCubit<TransportState> {
   final MoneyCubit _moneyCubit;
+  final DatabaseCubit _databaseCubit;
   final IncomeCubit _incomeCubit;
   final TimeSpendCubit _timeSpendCubit;
 
   final NewGameCubit _newGameCubit;
   late StreamSubscription _newGameSub;
 
-  TransportCubit({
-    required MoneyCubit moneyCubit,
-    required IncomeCubit incomeCubit,
-    required NewGameCubit newGameCubit,
-    required TimeSpendCubit timeSpendCubit,
-  })  : _moneyCubit = moneyCubit,
+  TransportCubit(
+    MoneyCubit moneyCubit,
+    IncomeCubit incomeCubit,
+    NewGameCubit newGameCubit,
+    TimeSpendCubit timeSpendCubit,
+    DatabaseCubit databaseCubit,
+  )   : _moneyCubit = moneyCubit,
         _incomeCubit = incomeCubit,
         _newGameCubit = newGameCubit,
         _timeSpendCubit = timeSpendCubit,
+        _databaseCubit = databaseCubit,
         super(TransportState.initial()) {
     _newGame();
   }
@@ -47,19 +50,11 @@ class TransportCubit extends HydratedCubit<TransportState> {
 
   _newGame() {
     if (_newGameCubit.state)
-      emit(TransportState.loaded(transport: null, transports: Data.transports()));
+      emit(TransportState.loaded(transport: null, transports: _databaseCubit.state.transportsDB));
     _newGameSub = _newGameCubit.stream.listen((newGame) {
-      if (newGame) emit(TransportState.loaded(transport: null, transports: Data.transports()));
+      if (newGame)
+        emit(TransportState.loaded(transport: null, transports: _databaseCubit.state.transportsDB));
     });
-  }
-
-  init(bool newGame) {
-    state.whenOrNull(
-      initial: () => emit(TransportState.loaded(transport: null, transports: Data.transports())),
-      loaded: (transport, transports) {
-        if (!newGame) emit(TransportState.loaded(transport: null, transports: Data.transports()));
-      },
-    );
   }
 
   buy(Transport transport) {

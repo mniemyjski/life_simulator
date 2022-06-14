@@ -4,7 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../data/data.dart';
+import '../../../database/cubit/database_cubit.dart';
 import '../../../income/cubit/income_cubit.dart';
 import '../../../income/models/income_model.dart';
 import '../../../money/cubit/money_cubit.dart';
@@ -19,21 +19,24 @@ part 'house_state.dart';
 
 @lazySingleton
 class HouseCubit extends HydratedCubit<HouseState> {
+  final DatabaseCubit _databaseCubit;
   final MoneyCubit _moneyCubit;
   final TimeSpendCubit _timeSpendCubit;
   final IncomeCubit _incomeCubit;
   final NewGameCubit _newGameCubit;
   late StreamSubscription _newGameSub;
 
-  HouseCubit({
-    required MoneyCubit moneyCubit,
-    required IncomeCubit incomeCubit,
-    required NewGameCubit newGameCubit,
-    required TimeSpendCubit timeSpendCubit,
-  })  : _moneyCubit = moneyCubit,
+  HouseCubit(
+    DatabaseCubit databaseCubit,
+    MoneyCubit moneyCubit,
+    IncomeCubit incomeCubit,
+    NewGameCubit newGameCubit,
+    TimeSpendCubit timeSpendCubit,
+  )   : _moneyCubit = moneyCubit,
         _incomeCubit = incomeCubit,
         _newGameCubit = newGameCubit,
         _timeSpendCubit = timeSpendCubit,
+        _databaseCubit = databaseCubit,
         super(HouseState.initial()) {
     _newGame();
   }
@@ -45,9 +48,10 @@ class HouseCubit extends HydratedCubit<HouseState> {
   }
 
   _newGame() {
-    if (_newGameCubit.state) emit(HouseState.loaded(house: null, houses: Data.houses()));
+    if (_newGameCubit.state)
+      emit(HouseState.loaded(house: null, houses: _databaseCubit.state.housesDB));
     _newGameSub = _newGameCubit.stream.listen((newGame) {
-      if (newGame) emit(HouseState.loaded(house: null, houses: Data.houses()));
+      if (newGame) emit(HouseState.loaded(house: null, houses: _databaseCubit.state.housesDB));
     });
   }
 

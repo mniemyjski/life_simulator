@@ -4,9 +4,9 @@ import 'dart:math';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:life_simulator/app/database/cubit/database_cubit.dart';
 import 'package:life_simulator/app/date/cubit/date_cubit.dart';
 
-import '../../../data/data.dart';
 import '../../money/cubit/money_cubit.dart';
 import '../../new_game/new_game_cubit.dart';
 import '../models/game_event/game_event_model.dart';
@@ -18,6 +18,7 @@ part 'event_state.dart';
 @lazySingleton
 class EventCubit extends HydratedCubit<EventState> {
   final NewGameCubit _newGameCubit;
+  final DatabaseCubit _databaseCubit;
   late StreamSubscription _newGameSub;
 
   final DateCubit _dateCubit;
@@ -26,12 +27,14 @@ class EventCubit extends HydratedCubit<EventState> {
   final MoneyCubit _moneyCubit;
 
   EventCubit(
+    DatabaseCubit databaseCubit,
     NewGameCubit newGameCubit,
     DateCubit dateCubit,
     MoneyCubit moneyCubit,
   )   : _newGameCubit = newGameCubit,
         _dateCubit = dateCubit,
         _moneyCubit = moneyCubit,
+        _databaseCubit = databaseCubit,
         super(EventState.initial()) {
     _newGame();
     _counting();
@@ -46,9 +49,10 @@ class EventCubit extends HydratedCubit<EventState> {
   }
 
   _newGame() {
-    if (_newGameCubit.state) emit(EventState.loaded(events: [], database: Data.events()));
+    if (_newGameCubit.state)
+      emit(EventState.loaded(events: [], database: _databaseCubit.state.eventsDB));
     _newGameSub = _newGameCubit.stream.listen((newGame) {
-      if (newGame) emit(EventState.loaded(events: [], database: Data.events()));
+      if (newGame) emit(EventState.loaded(events: [], database: _databaseCubit.state.eventsDB));
     });
   }
 

@@ -3,13 +3,13 @@ import 'package:life_simulator/app/medicines/models/medicine_model.dart';
 import 'package:life_simulator/app/skills/models/skills_model.dart';
 import 'package:uuid/uuid.dart';
 
-import '../app/income/models/income_model.dart';
-import '../app/job/models/experience/experience_model.dart';
-import '../app/job/models/job/job_model.dart';
-import '../app/learning/models/learning_model.dart';
-import '../app/personality/models/house/house_model.dart';
-import '../app/personality/models/meal/meal_model.dart';
-import '../app/personality/models/transport/transport_model.dart';
+import '../../income/models/income_model.dart';
+import '../../job/models/experience/experience_model.dart';
+import '../../job/models/job/job_model.dart';
+import '../../learning/models/learning_model.dart';
+import '../../personality/models/house/house_model.dart';
+import '../../personality/models/meal/meal_model.dart';
+import '../../personality/models/transport/transport_model.dart';
 
 class Data {
   //#region Jobs

@@ -4,7 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../data/data.dart';
+import '../../../database/cubit/database_cubit.dart';
 import '../../../income/cubit/income_cubit.dart';
 import '../../../income/models/income_model.dart';
 import '../../../new_game/new_game_cubit.dart';
@@ -19,17 +19,20 @@ part 'meal_state.dart';
 @lazySingleton
 class MealCubit extends HydratedCubit<MealState> {
   final IncomeCubit _incomeCubit;
+  final DatabaseCubit _databaseCubit;
   final NewGameCubit _newGameCubit;
   late StreamSubscription _newGameSub;
   final TimeSpendCubit _timeSpendCubit;
 
-  MealCubit({
-    required IncomeCubit incomeCubit,
-    required NewGameCubit newGameCubit,
-    required TimeSpendCubit timeSpendCubit,
-  })  : _incomeCubit = incomeCubit,
+  MealCubit(
+    IncomeCubit incomeCubit,
+    NewGameCubit newGameCubit,
+    TimeSpendCubit timeSpendCubit,
+    DatabaseCubit databaseCubit,
+  )   : _incomeCubit = incomeCubit,
         _newGameCubit = newGameCubit,
         _timeSpendCubit = timeSpendCubit,
+        _databaseCubit = databaseCubit,
         super(MealState.initial()) {
     _newGame();
   }
@@ -41,7 +44,7 @@ class MealCubit extends HydratedCubit<MealState> {
   }
 
   _newGame() {
-    List<Meal> list = Data.meals();
+    List<Meal> list = _databaseCubit.state.mealsDB;
     Income income = Income(
       id: list.first.id,
       source: ETypeSource.meal,

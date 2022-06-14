@@ -6,7 +6,7 @@ import 'package:injectable/injectable.dart';
 import 'package:life_simulator/app/date/cubit/date_cubit.dart';
 import 'package:life_simulator/app/money/cubit/money_cubit.dart';
 
-import '../../../data/data.dart';
+import '../../database/cubit/database_cubit.dart';
 import '../../new_game/new_game_cubit.dart';
 import '../models/medicine_model.dart';
 
@@ -19,15 +19,21 @@ class MedicinesCubit extends Cubit<MedicinesState> {
   final MoneyCubit _moneyCubit;
 
   final NewGameCubit _newGameCubit;
+  final DatabaseCubit _databaseCubit;
   late StreamSubscription _newGameSub;
 
   final DateCubit _dateCubit;
   late StreamSubscription _dateSub;
 
-  MedicinesCubit(MoneyCubit moneyCubit, NewGameCubit newGameCubit, DateCubit dateCubit)
-      : _moneyCubit = moneyCubit,
+  MedicinesCubit(
+    MoneyCubit moneyCubit,
+    NewGameCubit newGameCubit,
+    DateCubit dateCubit,
+    DatabaseCubit databaseCubit,
+  )   : _moneyCubit = moneyCubit,
         _newGameCubit = newGameCubit,
         _dateCubit = dateCubit,
+        _databaseCubit = databaseCubit,
         super(MedicinesState.initial()) {
     _newGame();
     _counting();
@@ -41,9 +47,9 @@ class MedicinesCubit extends Cubit<MedicinesState> {
   }
 
   _newGame() {
-    if (_newGameCubit.state) emit(MedicinesState.loaded(Data.medicines()));
+    if (_newGameCubit.state) emit(MedicinesState.loaded(_databaseCubit.state.medicinesDB));
     _newGameSub = _newGameCubit.stream.listen((newGame) {
-      if (newGame) emit(MedicinesState.loaded(Data.medicines()));
+      if (newGame) emit(MedicinesState.loaded(_databaseCubit.state.medicinesDB));
     });
   }
 

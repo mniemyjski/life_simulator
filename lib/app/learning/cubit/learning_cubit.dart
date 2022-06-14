@@ -4,7 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../data/data.dart';
+import '../../database/cubit/database_cubit.dart';
 import '../../money/cubit/money_cubit.dart';
 import '../../new_game/new_game_cubit.dart';
 import '../../skills/cubit/skills_cubit.dart';
@@ -17,17 +17,20 @@ part 'learning_state.dart';
 @lazySingleton
 class LearningCubit extends HydratedCubit<LearningState> {
   final NewGameCubit _newGameCubit;
+  final DatabaseCubit _databaseCubit;
   final SkillsCubit _skillsCubit;
   final MoneyCubit _moneyCubit;
   late StreamSubscription _newGameSub;
 
-  LearningCubit({
-    required NewGameCubit newGameCubit,
-    required SkillsCubit skillsCubit,
-    required MoneyCubit moneyCubit,
-  })  : _skillsCubit = skillsCubit,
+  LearningCubit(
+    NewGameCubit newGameCubit,
+    DatabaseCubit databaseCubit,
+    SkillsCubit skillsCubit,
+    MoneyCubit moneyCubit,
+  )   : _skillsCubit = skillsCubit,
         _moneyCubit = moneyCubit,
         _newGameCubit = newGameCubit,
+        _databaseCubit = databaseCubit,
         super(LearningState.initial()) {
     _newGame();
   }
@@ -39,9 +42,9 @@ class LearningCubit extends HydratedCubit<LearningState> {
   }
 
   _newGame() {
-    if (_newGameCubit.state) emit(LearningState.loaded(Data.learnings()));
+    if (_newGameCubit.state) emit(LearningState.loaded(_databaseCubit.state.learningsDB));
     _newGameSub = _newGameCubit.stream.listen((newGame) {
-      if (newGame) emit(LearningState.loaded(Data.learnings()));
+      if (newGame) emit(LearningState.loaded(_databaseCubit.state.learningsDB));
     });
   }
 
