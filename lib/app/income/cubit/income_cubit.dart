@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:collection/collection.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -120,6 +119,8 @@ class IncomeCubit extends HydratedCubit<IncomeState> {
 
                 result.add(element.copyWith(next: _nextDate));
                 _moneyCubit.change(element.value);
+              } else {
+                result.add(element);
               }
             });
 
