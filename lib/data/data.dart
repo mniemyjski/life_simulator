@@ -373,7 +373,6 @@ class Data {
         id: uuid.v1(),
         name: 'Ill',
         description: 'You get sick',
-        dateGame: null,
         eTypeEffect: ETypeEffect.ill,
         value: 1,
         duration: 7,

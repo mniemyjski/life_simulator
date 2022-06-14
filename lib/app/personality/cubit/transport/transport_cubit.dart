@@ -83,21 +83,19 @@ class TransportCubit extends HydratedCubit<TransportState> {
         eTypeFrequency: ETypeFrequency.monthly,
       );
 
-      if (transport.commuting != 0)
-        _timeSpendCubit.addBonuses(
-          Bonus(
-              eTypeBonus: ETypeBonus.commuting,
-              eTypeBonusSource: ETypeBonusSource.transport,
-              value: transport.commuting),
-        );
+      _timeSpendCubit.addBonuses(
+        Bonus(
+            eTypeBonus: ETypeBonus.commuting,
+            eTypeBonusSource: ETypeBonusSource.transport,
+            value: transport.commuting),
+      );
 
-      if (transport.bonusToRelax != 0)
-        _timeSpendCubit.addBonuses(
-          Bonus(
-              eTypeBonus: ETypeBonus.relax,
-              eTypeBonusSource: ETypeBonusSource.transport,
-              value: transport.bonusToRelax),
-        );
+      _timeSpendCubit.addBonuses(
+        Bonus(
+            eTypeBonus: ETypeBonus.relax,
+            eTypeBonusSource: ETypeBonusSource.transport,
+            value: transport.bonusToRelax),
+      );
       _moneyCubit.change(-transport.cost);
       _incomeCubit.add(income);
 

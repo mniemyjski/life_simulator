@@ -66,22 +66,6 @@ class TimeSpendCubit extends HydratedCubit<TimeSpendState> {
     );
   }
 
-  addBonuses(Bonus bonus) {
-    state.whenOrNull(loaded: (timeSpend) {
-      List<Bonus> result = List.from(timeSpend.bonuses)..add(bonus);
-      emit(TimeSpendState.loaded(timeSpend.copyWith(bonuses: result)));
-    });
-  }
-
-  removeBonuses(ETypeBonusSource eTypeBonusSource) {
-    state.whenOrNull(loaded: (timeSpend) {
-      List<Bonus> result = List.from(timeSpend.bonuses)
-        ..removeWhere((element) => element.eTypeBonusSource == eTypeBonusSource);
-
-      emit(TimeSpendState.loaded(timeSpend.copyWith(bonuses: result)));
-    });
-  }
-
   String? changeWork(int work) {
     var result = state.whenOrNull(loaded: (timeSpend) {
       TimeSpend refresh = timeSpend.copyWith(
@@ -161,6 +145,22 @@ class TimeSpendCubit extends HydratedCubit<TimeSpendState> {
     return result;
   }
 
+  addBonuses(Bonus bonus) {
+    state.whenOrNull(loaded: (timeSpend) {
+      List<Bonus> result = List.from(timeSpend.bonuses)..add(bonus);
+      emit(TimeSpendState.loaded(timeSpend.copyWith(bonuses: result)));
+    });
+  }
+
+  removeBonuses(ETypeBonusSource eTypeBonusSource) {
+    state.whenOrNull(loaded: (timeSpend) {
+      List<Bonus> result = List.from(timeSpend.bonuses)
+        ..removeWhere((element) => element.eTypeBonusSource == eTypeBonusSource);
+
+      emit(TimeSpendState.loaded(timeSpend.copyWith(bonuses: result)));
+    });
+  }
+
   int getBonus(ETypeBonus eTypeBonus) {
     return state.maybeWhen(
         loaded: (timeSpend) {
@@ -170,10 +170,15 @@ class TimeSpendCubit extends HydratedCubit<TimeSpendState> {
               if (element.eTypeBonus == eTypeBonus) bonus += element.value;
             });
 
-          if (ETypeBonus.commuting == eTypeBonus) {
-            return timeSpend.commuting < bonus ? timeSpend.commuting : bonus;
-          } else {
-            return bonus;
+          switch (eTypeBonus) {
+            case ETypeBonus.commuting:
+              return timeSpend.commuting < bonus ? timeSpend.commuting : bonus;
+            case ETypeBonus.relax:
+              return bonus - (checkBonusSource(ETypeBonusSource.house) ? 0 : 4);
+            case ETypeBonus.sleep:
+              return bonus - (checkBonusSource(ETypeBonusSource.house) ? 0 : 6);
+            case ETypeBonus.learn:
+              return bonus - (checkBonusSource(ETypeBonusSource.house) ? 0 : 2);
           }
         },
         orElse: () => 0);

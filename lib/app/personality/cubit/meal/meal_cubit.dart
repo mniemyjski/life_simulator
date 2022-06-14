@@ -76,29 +76,26 @@ class MealCubit extends HydratedCubit<MealState> {
 
           _timeSpendCubit.removeBonuses(ETypeBonusSource.meal);
 
-          if (meal.bonusToRelax != 0)
-            _timeSpendCubit.addBonuses(
-              Bonus(
-                  eTypeBonus: ETypeBonus.relax,
-                  eTypeBonusSource: ETypeBonusSource.meal,
-                  value: meal.bonusToRelax),
-            );
+          _timeSpendCubit.addBonuses(
+            Bonus(
+                eTypeBonus: ETypeBonus.relax,
+                eTypeBonusSource: ETypeBonusSource.meal,
+                value: meal.bonusToRelax),
+          );
 
-          if (meal.bonusToSleep != 0)
-            _timeSpendCubit.addBonuses(
-              Bonus(
-                  eTypeBonus: ETypeBonus.sleep,
-                  eTypeBonusSource: ETypeBonusSource.meal,
-                  value: meal.bonusToSleep),
-            );
+          _timeSpendCubit.addBonuses(
+            Bonus(
+                eTypeBonus: ETypeBonus.sleep,
+                eTypeBonusSource: ETypeBonusSource.meal,
+                value: meal.bonusToSleep),
+          );
 
-          if (meal.bonusToLearn != 0)
-            _timeSpendCubit.addBonuses(
-              Bonus(
-                  eTypeBonus: ETypeBonus.learn,
-                  eTypeBonusSource: ETypeBonusSource.meal,
-                  value: meal.bonusToLearn),
-            );
+          _timeSpendCubit.addBonuses(
+            Bonus(
+                eTypeBonus: ETypeBonus.learn,
+                eTypeBonusSource: ETypeBonusSource.meal,
+                value: meal.bonusToLearn),
+          );
 
           _incomeCubit.remove(_meal.id);
           _incomeCubit.add(income);

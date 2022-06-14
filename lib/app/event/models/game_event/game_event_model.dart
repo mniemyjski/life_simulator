@@ -16,7 +16,7 @@ class GameEvent with _$GameEvent {
     required String id,
     required String name,
     required String description,
-    required DateTime? dateGame,
+    DateTime? dateGame,
     required ETypeEffect eTypeEffect,
     required double value,
     required int duration,

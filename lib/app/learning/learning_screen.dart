@@ -9,7 +9,7 @@ import 'package:life_simulator/app/learning/widgets/learning_element.dart';
 import 'package:life_simulator/app/learning/widgets/skill_element.dart';
 import 'package:life_simulator/app/skills/cubit/skills_cubit.dart';
 
-import '../date/cubit/date_cubit.dart';
+import '../date/widgets/next_day.dart';
 
 class LearningScreen extends StatelessWidget {
   const LearningScreen({Key? key}) : super(key: key);
@@ -116,10 +116,7 @@ class LearningScreen extends StatelessWidget {
               onPressed: () => context.router.pop(),
               child: FaIcon(FontAwesomeIcons.arrowRotateLeft),
             ),
-            FloatingActionButton(
-              onPressed: () => context.read<DateCubit>().nextDay(),
-              child: FaIcon(FontAwesomeIcons.hourglass),
-            )
+            NextDayButton(),
           ],
         ),
       ),

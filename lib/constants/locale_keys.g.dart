@@ -29,5 +29,7 @@ abstract class  LocaleKeys {
   static const left = 'left';
   static const turnsToEnd = 'turnsToEnd';
   static const nextRate = 'nextRate';
+  static const youAreHomeless = 'youAreHomeless';
+  static const areYouSureGoToNextDay = 'areYouSureGoToNextDay';
 
 }

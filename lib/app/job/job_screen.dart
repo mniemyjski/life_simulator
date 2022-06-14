@@ -6,7 +6,7 @@ import 'package:life_simulator/app/job/cubit/job_cubit.dart';
 import 'package:life_simulator/app/job/widgets/looking_for_job.dart';
 import 'package:life_simulator/app/job/widgets/you_job.dart';
 
-import '../date/cubit/date_cubit.dart';
+import '../date/widgets/next_day.dart';
 import '../game/widget/app_bar_stats.dart';
 
 class JobScreen extends StatelessWidget {
@@ -47,10 +47,7 @@ class JobScreen extends StatelessWidget {
               onPressed: () => context.router.pop(),
               child: FaIcon(FontAwesomeIcons.arrowRotateLeft),
             ),
-            FloatingActionButton(
-              onPressed: () => context.read<DateCubit>().nextDay(),
-              child: FaIcon(FontAwesomeIcons.hourglass),
-            )
+            NextDayButton(),
           ],
         ),
       ),

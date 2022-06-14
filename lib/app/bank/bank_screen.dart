@@ -9,7 +9,7 @@ import 'package:life_simulator/app/bank/widgets/loan_button.dart';
 import 'package:life_simulator/constants/constants.dart';
 import 'package:life_simulator/utilities/utilities.dart';
 
-import '../date/cubit/date_cubit.dart';
+import '../date/widgets/next_day.dart';
 import '../game/widget/app_bar_stats.dart';
 import 'models/loan/loan_model.dart';
 
@@ -153,10 +153,7 @@ class BankScreen extends StatelessWidget {
               onPressed: () => context.router.pop(),
               child: FaIcon(FontAwesomeIcons.arrowRotateLeft),
             ),
-            FloatingActionButton(
-              onPressed: () => context.read<DateCubit>().nextDay(),
-              child: FaIcon(FontAwesomeIcons.hourglass),
-            )
+            NextDayButton(),
           ],
         ),
       ),

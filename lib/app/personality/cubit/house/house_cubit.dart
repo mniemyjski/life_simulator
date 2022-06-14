@@ -67,29 +67,26 @@ class HouseCubit extends HydratedCubit<HouseState> {
           eTypeFrequency: ETypeFrequency.monthly);
       _timeSpendCubit.removeBonuses(ETypeBonusSource.house);
 
-      if (house.bonusToRelax != 0)
-        _timeSpendCubit.addBonuses(
-          Bonus(
-              eTypeBonus: ETypeBonus.relax,
-              eTypeBonusSource: ETypeBonusSource.house,
-              value: house.bonusToRelax),
-        );
+      _timeSpendCubit.addBonuses(
+        Bonus(
+            eTypeBonus: ETypeBonus.relax,
+            eTypeBonusSource: ETypeBonusSource.house,
+            value: house.bonusToRelax),
+      );
 
-      if (house.bonusToSleep != 0)
-        _timeSpendCubit.addBonuses(
-          Bonus(
-              eTypeBonus: ETypeBonus.sleep,
-              eTypeBonusSource: ETypeBonusSource.house,
-              value: house.bonusToSleep),
-        );
+      _timeSpendCubit.addBonuses(
+        Bonus(
+            eTypeBonus: ETypeBonus.sleep,
+            eTypeBonusSource: ETypeBonusSource.house,
+            value: house.bonusToSleep),
+      );
 
-      if (house.bonusToLearn != 0)
-        _timeSpendCubit.addBonuses(
-          Bonus(
-              eTypeBonus: ETypeBonus.learn,
-              eTypeBonusSource: ETypeBonusSource.house,
-              value: house.bonusToLearn),
-        );
+      _timeSpendCubit.addBonuses(
+        Bonus(
+            eTypeBonus: ETypeBonus.learn,
+            eTypeBonusSource: ETypeBonusSource.house,
+            value: house.bonusToLearn),
+      );
 
       _moneyCubit.change(-house.cost);
       _incomeCubit.add(income);

@@ -7,7 +7,7 @@ import 'package:life_simulator/app/time_spend/cubit/time_spend_cubit.dart';
 import 'package:life_simulator/utilities/utilities.dart';
 
 import '../../constants/constants.dart';
-import '../date/cubit/date_cubit.dart';
+import '../date/widgets/next_day.dart';
 import '../game/widget/app_bar_stats.dart';
 
 class TimeSpendScreen extends StatelessWidget {
@@ -66,10 +66,7 @@ class TimeSpendScreen extends StatelessWidget {
               onPressed: () => context.router.pop(),
               child: FaIcon(FontAwesomeIcons.arrowRotateLeft),
             ),
-            FloatingActionButton(
-              onPressed: () => context.read<DateCubit>().nextDay(),
-              child: FaIcon(FontAwesomeIcons.hourglass),
-            )
+            NextDayButton(),
           ],
         ),
       ),

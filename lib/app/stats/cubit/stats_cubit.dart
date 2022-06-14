@@ -82,7 +82,6 @@ class StatsCubit extends HydratedCubit<StatsState> {
 
         int relax = _timeSpendCubit.getBonus(ETypeBonus.relax) + timeSpend.relax;
         int sleep = _timeSpendCubit.getBonus(ETypeBonus.sleep) + timeSpend.sleep;
-        bool hasHouse = _timeSpendCubit.checkBonusSource(ETypeBonusSource.house);
 
         //Health
         if (_stats.tiredness == 0) {
@@ -92,25 +91,25 @@ class StatsCubit extends HydratedCubit<StatsState> {
           _stats = _stats.copyWith(health: _stats.health > 1 ? 1 : _stats.health + 0.01);
         }
         //Tiredness
-        if (sleep <= 0 || !hasHouse) {
+        if (sleep <= 0) {
           _stats = _stats.copyWith(
             tiredness: (_stats.tiredness - 0.2) < 0 ? 0 : _stats.tiredness - 0.2,
             satisfaction: (_stats.satisfaction - 0.05) < 0 ? 0 : _stats.satisfaction - 0.05,
           );
         }
-        if (sleep > 0 && sleep < 4 && hasHouse) {
+        if (sleep > 0 && sleep < 4) {
           _stats = _stats.copyWith(
             tiredness: (_stats.tiredness - 0.05) < 0 ? 0 : _stats.tiredness - 0.05,
             satisfaction: (_stats.satisfaction - 0.02) < 0 ? 0 : _stats.satisfaction - 0.02,
           );
         }
-        if (sleep > 4 && sleep < 7 && hasHouse) {
+        if (sleep > 4 && sleep < 7) {
           _stats = _stats.copyWith(
             tiredness: (_stats.tiredness - 0.1) < 0 ? 0 : _stats.tiredness - 0.01,
             satisfaction: (_stats.satisfaction - 0.01) < 0 ? 0 : _stats.satisfaction - 0.01,
           );
         }
-        if (sleep > 7 && hasHouse) {
+        if (sleep > 7) {
           _stats = _stats.copyWith(
             tiredness: (_stats.tiredness + (timeSpend.sleep / 100) > 1
                 ? 1
@@ -118,17 +117,17 @@ class StatsCubit extends HydratedCubit<StatsState> {
           );
         }
         //Relax
-        if (relax <= 0 || !hasHouse) {
+        if (relax <= 0) {
           _stats = _stats.copyWith(
             satisfaction: (_stats.satisfaction - 0.05) < 0 ? 0 : _stats.satisfaction - 0.05,
           );
         }
-        if (relax < 2 && hasHouse) {
+        if (relax < 2) {
           _stats = _stats.copyWith(
             satisfaction: (_stats.satisfaction - 0.01) < 0 ? 0 : _stats.satisfaction - 0.01,
           );
         }
-        if (relax > 2 && hasHouse) {
+        if (relax > 2) {
           _stats = _stats.copyWith(
             satisfaction: (_stats.satisfaction + (timeSpend.relax / 100)) > 1
                 ? 1

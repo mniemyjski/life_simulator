@@ -57,7 +57,6 @@ class DateCubit extends HydratedCubit<DateState> {
         });
 
         _timeSpendCubit.resetDay();
-
         emit(DateState.loaded(date.add(Duration(days: 1))));
       });
     }

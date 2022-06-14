@@ -2,11 +2,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:life_simulator/app/date/widgets/next_day.dart';
 import 'package:life_simulator/app/game/widget/app_bar_stats.dart';
 import 'package:life_simulator/app/income/cubit/income_cubit.dart';
 
 import '../../utilities/utilities.dart';
-import '../date/cubit/date_cubit.dart';
 import 'models/income_model.dart';
 
 class IncomeScreen extends StatelessWidget {
@@ -113,10 +113,7 @@ class IncomeScreen extends StatelessWidget {
               onPressed: () => context.router.pop(),
               child: FaIcon(FontAwesomeIcons.arrowRotateLeft),
             ),
-            FloatingActionButton(
-              onPressed: () => context.read<DateCubit>().nextDay(),
-              child: FaIcon(FontAwesomeIcons.hourglass),
-            )
+            NextDayButton(),
           ],
         ),
       ),
