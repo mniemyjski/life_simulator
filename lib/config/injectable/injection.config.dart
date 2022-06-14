@@ -69,9 +69,10 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       newGameCubit: get<_i5.NewGameCubit>(),
       timeSpendCubit: get<_i7.TimeSpendCubit>()));
   gh.lazySingleton<_i17.StatsCubit>(() => _i17.StatsCubit(
-      timeSpend: get<_i7.TimeSpendCubit>(),
-      saveCubit: get<_i5.NewGameCubit>(),
-      dateCubit: get<_i10.DateCubit>()));
+      get<_i7.TimeSpendCubit>(),
+      get<_i5.NewGameCubit>(),
+      get<_i10.DateCubit>(),
+      get<_i12.EventCubit>()));
   gh.lazySingleton<_i18.TransportCubit>(() => _i18.TransportCubit(
       moneyCubit: get<_i8.MoneyCubit>(),
       incomeCubit: get<_i13.IncomeCubit>(),

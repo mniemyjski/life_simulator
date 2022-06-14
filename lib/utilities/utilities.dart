@@ -1,3 +1,4 @@
+export 'package:collection/collection.dart';
 export 'package:easy_localization/easy_localization.dart';
 export 'package:logger/logger.dart';
 export 'package:responsive_framework/responsive_framework.dart';

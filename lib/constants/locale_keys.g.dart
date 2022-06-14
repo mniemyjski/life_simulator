@@ -31,5 +31,6 @@ abstract class  LocaleKeys {
   static const nextRate = 'nextRate';
   static const youAreHomeless = 'youAreHomeless';
   static const areYouSureGoToNextDay = 'areYouSureGoToNextDay';
+  static const showMore = 'showMore';
 
 }

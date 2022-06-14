@@ -1,12 +1,14 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:collection/collection.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:life_simulator/app/date/cubit/date_cubit.dart';
 
 import '../../../data/data.dart';
+import '../../../utilities/utilities.dart';
 import '../../new_game/new_game_cubit.dart';
 import '../models/game_event/game_event_model.dart';
 
@@ -47,7 +49,10 @@ class EventCubit extends HydratedCubit<EventState> {
 
   add(GameEvent event) {
     state.whenOrNull(loaded: (events, database) {
-      List<GameEvent> result = List.from(events)..add(event);
+      List<GameEvent> result = List.from(events)
+        ..add(event)
+        ..sort((a, b) => b.datCre!.compareTo(a.datCre!));
+      ;
       emit(EventState.loaded(events: result, database: database));
     });
   }
@@ -55,14 +60,25 @@ class EventCubit extends HydratedCubit<EventState> {
   _draw() {
     _dateSub = _dateCubit.stream.listen((dateState) {
       dateState.whenOrNull(loaded: (date) {
-        if (date == DateTime(18, 1, 1)) return;
+        if (date.millisecondsSinceEpoch < DateTime(18, 1, 2).millisecondsSinceEpoch) return;
+        var rng = Random();
         state.whenOrNull(loaded: (events, database) {
-          var rng = Random();
-          int random = rng.nextInt(1);
+          database.forEach((elementFromDataBase) {
+            int random = rng.nextInt(elementFromDataBase.frequency);
 
-          if (database.length > random) {
-            add(database[random]);
-          }
+            if (random == 0) {
+              bool already = false;
+              events
+                ..forEach((e) {
+                  if (e.active && e.eTypeEffect == elementFromDataBase.eTypeEffect) {
+                    already = true;
+                    return;
+                  }
+                });
+
+              if (!already) add(elementFromDataBase.copyWith(datCre: date));
+            }
+          });
         });
       });
     });
@@ -73,18 +89,16 @@ class EventCubit extends HydratedCubit<EventState> {
       dateState.whenOrNull(loaded: (date) {
         if (date == DateTime(18, 1, 1)) return;
         state.whenOrNull(loaded: (events, database) {
+          List<GameEvent> result = [];
+
           events.forEach((element) {
-            List<GameEvent> result = [];
-
-            events.forEach((element) {
-              GameEvent gameEvent = element.copyWith(leftDuration: element.leftDuration - 1);
-              if (gameEvent.leftDuration == 0) gameEvent = element.copyWith(active: false);
-
-              result.add(gameEvent);
-            });
-
-            emit(EventState.loaded(events: result, database: database));
+            GameEvent gameEvent = element.copyWith(
+                leftDuration: element.leftDuration > 0 ? element.leftDuration - 1 : 0);
+            if (gameEvent.leftDuration == 0) gameEvent = gameEvent.copyWith(active: false);
+            result.add(gameEvent);
           });
+
+          emit(EventState.loaded(events: result, database: database));
         });
       });
     });

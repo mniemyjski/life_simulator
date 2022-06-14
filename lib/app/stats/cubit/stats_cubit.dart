@@ -3,8 +3,10 @@ import 'dart:async';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:life_simulator/app/event/models/game_event/game_event_model.dart';
 
 import '../../date/cubit/date_cubit.dart';
+import '../../event/cubit/event_cubit.dart';
 import '../../new_game/new_game_cubit.dart';
 import '../../time_spend/cubit/time_spend_cubit.dart';
 import '../../time_spend/models/bonus/bonus_model.dart';
@@ -18,18 +20,22 @@ part 'stats_state.dart';
 class StatsCubit extends HydratedCubit<StatsState> {
   final NewGameCubit _newGameCubit;
   final TimeSpendCubit _timeSpendCubit;
+  final EventCubit _eventCubit;
+
   late StreamSubscription _newGameSub;
 
   final DateCubit _dateCubit;
   late StreamSubscription _dateSub;
 
-  StatsCubit({
-    required TimeSpendCubit timeSpend,
-    required NewGameCubit saveCubit,
-    required DateCubit dateCubit,
-  })  : _timeSpendCubit = timeSpend,
+  StatsCubit(
+    TimeSpendCubit timeSpend,
+    NewGameCubit saveCubit,
+    DateCubit dateCubit,
+    EventCubit eventCubit,
+  )   : _timeSpendCubit = timeSpend,
         _newGameCubit = saveCubit,
         _dateCubit = dateCubit,
+        _eventCubit = eventCubit,
         super(StatsState.initial()) {
     _newGame();
     _dateSub = _dateCubit.stream.listen((d) => d.whenOrNull(loaded: (date) => _counting(date)));
@@ -82,6 +88,13 @@ class StatsCubit extends HydratedCubit<StatsState> {
 
         int relax = _timeSpendCubit.getBonus(ETypeBonus.relax) + timeSpend.relax;
         int sleep = _timeSpendCubit.getBonus(ETypeBonus.sleep) + timeSpend.sleep;
+        double sick = 0;
+
+        _eventCubit.state.whenOrNull(loaded: (events, database) {
+          events.forEach((element) {
+            if (element.active && element.eTypeEffect == ETypeEffect.sick) sick = element.value;
+          });
+        });
 
         //Health
         if (_stats.tiredness == 0) {
@@ -89,6 +102,9 @@ class StatsCubit extends HydratedCubit<StatsState> {
         }
         if (sleep > 14) {
           _stats = _stats.copyWith(health: _stats.health > 1 ? 1 : _stats.health + 0.01);
+        }
+        if (sick > 0) {
+          _stats = _stats.copyWith(health: _stats.health < 0 ? 0 : _stats.health - sick);
         }
         //Tiredness
         if (sleep <= 0) {

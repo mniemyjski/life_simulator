@@ -371,12 +371,33 @@ class Data {
     return [
       GameEvent(
         id: uuid.v1(),
-        name: 'Ill',
-        description: 'You get sick',
-        eTypeEffect: ETypeEffect.ill,
-        value: 1,
+        name: 'You are sick',
+        description: 'You are sick',
+        eTypeEffect: ETypeEffect.sick,
+        value: 0.02,
+        duration: 3,
+        leftDuration: 3,
+        frequency: 50,
+      ),
+      GameEvent(
+        id: uuid.v1(),
+        name: 'You are sick',
+        description: 'You are sick',
+        eTypeEffect: ETypeEffect.sick,
+        value: 0.02,
         duration: 7,
         leftDuration: 7,
+        frequency: 80,
+      ),
+      GameEvent(
+        id: uuid.v1(),
+        name: 'You are sick',
+        description: 'You are sick',
+        eTypeEffect: ETypeEffect.sick,
+        value: 0.02,
+        duration: 14,
+        leftDuration: 14,
+        frequency: 120,
       ),
     ];
   }

@@ -23,11 +23,12 @@ mixin _$GameEvent {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
-  DateTime? get dateGame => throw _privateConstructorUsedError;
+  DateTime? get datCre => throw _privateConstructorUsedError;
   ETypeEffect get eTypeEffect => throw _privateConstructorUsedError;
   double get value => throw _privateConstructorUsedError;
   int get duration => throw _privateConstructorUsedError;
   int get leftDuration => throw _privateConstructorUsedError;
+  int get frequency => throw _privateConstructorUsedError;
   bool get active => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -44,11 +45,12 @@ abstract class $GameEventCopyWith<$Res> {
       {String id,
       String name,
       String description,
-      DateTime? dateGame,
+      DateTime? datCre,
       ETypeEffect eTypeEffect,
       double value,
       int duration,
       int leftDuration,
+      int frequency,
       bool active});
 }
 
@@ -65,11 +67,12 @@ class _$GameEventCopyWithImpl<$Res> implements $GameEventCopyWith<$Res> {
     Object? id = freezed,
     Object? name = freezed,
     Object? description = freezed,
-    Object? dateGame = freezed,
+    Object? datCre = freezed,
     Object? eTypeEffect = freezed,
     Object? value = freezed,
     Object? duration = freezed,
     Object? leftDuration = freezed,
+    Object? frequency = freezed,
     Object? active = freezed,
   }) {
     return _then(_value.copyWith(
@@ -85,9 +88,9 @@ class _$GameEventCopyWithImpl<$Res> implements $GameEventCopyWith<$Res> {
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      dateGame: dateGame == freezed
-          ? _value.dateGame
-          : dateGame // ignore: cast_nullable_to_non_nullable
+      datCre: datCre == freezed
+          ? _value.datCre
+          : datCre // ignore: cast_nullable_to_non_nullable
               as DateTime?,
       eTypeEffect: eTypeEffect == freezed
           ? _value.eTypeEffect
@@ -104,6 +107,10 @@ class _$GameEventCopyWithImpl<$Res> implements $GameEventCopyWith<$Res> {
       leftDuration: leftDuration == freezed
           ? _value.leftDuration
           : leftDuration // ignore: cast_nullable_to_non_nullable
+              as int,
+      frequency: frequency == freezed
+          ? _value.frequency
+          : frequency // ignore: cast_nullable_to_non_nullable
               as int,
       active: active == freezed
           ? _value.active
@@ -122,11 +129,12 @@ abstract class _$$_EventCopyWith<$Res> implements $GameEventCopyWith<$Res> {
       {String id,
       String name,
       String description,
-      DateTime? dateGame,
+      DateTime? datCre,
       ETypeEffect eTypeEffect,
       double value,
       int duration,
       int leftDuration,
+      int frequency,
       bool active});
 }
 
@@ -144,11 +152,12 @@ class __$$_EventCopyWithImpl<$Res> extends _$GameEventCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = freezed,
     Object? description = freezed,
-    Object? dateGame = freezed,
+    Object? datCre = freezed,
     Object? eTypeEffect = freezed,
     Object? value = freezed,
     Object? duration = freezed,
     Object? leftDuration = freezed,
+    Object? frequency = freezed,
     Object? active = freezed,
   }) {
     return _then(_$_Event(
@@ -164,9 +173,9 @@ class __$$_EventCopyWithImpl<$Res> extends _$GameEventCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      dateGame: dateGame == freezed
-          ? _value.dateGame
-          : dateGame // ignore: cast_nullable_to_non_nullable
+      datCre: datCre == freezed
+          ? _value.datCre
+          : datCre // ignore: cast_nullable_to_non_nullable
               as DateTime?,
       eTypeEffect: eTypeEffect == freezed
           ? _value.eTypeEffect
@@ -184,6 +193,10 @@ class __$$_EventCopyWithImpl<$Res> extends _$GameEventCopyWithImpl<$Res>
           ? _value.leftDuration
           : leftDuration // ignore: cast_nullable_to_non_nullable
               as int,
+      frequency: frequency == freezed
+          ? _value.frequency
+          : frequency // ignore: cast_nullable_to_non_nullable
+              as int,
       active: active == freezed
           ? _value.active
           : active // ignore: cast_nullable_to_non_nullable
@@ -194,17 +207,19 @@ class __$$_EventCopyWithImpl<$Res> extends _$GameEventCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Event implements _Event {
+class _$_Event extends _Event {
   const _$_Event(
       {required this.id,
       required this.name,
       required this.description,
-      this.dateGame,
+      this.datCre,
       required this.eTypeEffect,
       required this.value,
       required this.duration,
       required this.leftDuration,
-      this.active = true});
+      required this.frequency,
+      this.active = true})
+      : super._();
 
   factory _$_Event.fromJson(Map<String, dynamic> json) =>
       _$$_EventFromJson(json);
@@ -216,7 +231,7 @@ class _$_Event implements _Event {
   @override
   final String description;
   @override
-  final DateTime? dateGame;
+  final DateTime? datCre;
   @override
   final ETypeEffect eTypeEffect;
   @override
@@ -226,12 +241,14 @@ class _$_Event implements _Event {
   @override
   final int leftDuration;
   @override
+  final int frequency;
+  @override
   @JsonKey()
   final bool active;
 
   @override
   String toString() {
-    return 'GameEvent(id: $id, name: $name, description: $description, dateGame: $dateGame, eTypeEffect: $eTypeEffect, value: $value, duration: $duration, leftDuration: $leftDuration, active: $active)';
+    return 'GameEvent(id: $id, name: $name, description: $description, datCre: $datCre, eTypeEffect: $eTypeEffect, value: $value, duration: $duration, leftDuration: $leftDuration, frequency: $frequency, active: $active)';
   }
 
   @override
@@ -243,13 +260,14 @@ class _$_Event implements _Event {
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality()
                 .equals(other.description, description) &&
-            const DeepCollectionEquality().equals(other.dateGame, dateGame) &&
+            const DeepCollectionEquality().equals(other.datCre, datCre) &&
             const DeepCollectionEquality()
                 .equals(other.eTypeEffect, eTypeEffect) &&
             const DeepCollectionEquality().equals(other.value, value) &&
             const DeepCollectionEquality().equals(other.duration, duration) &&
             const DeepCollectionEquality()
                 .equals(other.leftDuration, leftDuration) &&
+            const DeepCollectionEquality().equals(other.frequency, frequency) &&
             const DeepCollectionEquality().equals(other.active, active));
   }
 
@@ -260,11 +278,12 @@ class _$_Event implements _Event {
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(description),
-      const DeepCollectionEquality().hash(dateGame),
+      const DeepCollectionEquality().hash(datCre),
       const DeepCollectionEquality().hash(eTypeEffect),
       const DeepCollectionEquality().hash(value),
       const DeepCollectionEquality().hash(duration),
       const DeepCollectionEquality().hash(leftDuration),
+      const DeepCollectionEquality().hash(frequency),
       const DeepCollectionEquality().hash(active));
 
   @JsonKey(ignore: true)
@@ -278,17 +297,19 @@ class _$_Event implements _Event {
   }
 }
 
-abstract class _Event implements GameEvent {
+abstract class _Event extends GameEvent {
   const factory _Event(
       {required final String id,
       required final String name,
       required final String description,
-      final DateTime? dateGame,
+      final DateTime? datCre,
       required final ETypeEffect eTypeEffect,
       required final double value,
       required final int duration,
       required final int leftDuration,
+      required final int frequency,
       final bool active}) = _$_Event;
+  const _Event._() : super._();
 
   factory _Event.fromJson(Map<String, dynamic> json) = _$_Event.fromJson;
 
@@ -299,7 +320,7 @@ abstract class _Event implements GameEvent {
   @override
   String get description => throw _privateConstructorUsedError;
   @override
-  DateTime? get dateGame => throw _privateConstructorUsedError;
+  DateTime? get datCre => throw _privateConstructorUsedError;
   @override
   ETypeEffect get eTypeEffect => throw _privateConstructorUsedError;
   @override
@@ -308,6 +329,8 @@ abstract class _Event implements GameEvent {
   int get duration => throw _privateConstructorUsedError;
   @override
   int get leftDuration => throw _privateConstructorUsedError;
+  @override
+  int get frequency => throw _privateConstructorUsedError;
   @override
   bool get active => throw _privateConstructorUsedError;
   @override
