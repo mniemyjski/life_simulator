@@ -36,7 +36,6 @@ Map<String, dynamic> _$$_EventToJson(_$_Event instance) => <String, dynamic>{
 
 const _$ETypeEffectEnumMap = {
   ETypeEffect.sick: 'sick',
+  ETypeEffect.money: 'money',
   ETypeEffect.taxes: 'taxes',
-  ETypeEffect.inheritance: 'inheritance',
-  ETypeEffect.penalty: 'penalty',
 };

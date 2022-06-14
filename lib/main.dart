@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:life_simulator/app/bank/cubit/deposit/deposit_cubit.dart';
 import 'package:life_simulator/app/bank/cubit/loan/loan_cubit.dart';
-import 'package:life_simulator/app/event/cubit/event_cubit.dart';
 import 'package:life_simulator/app/personality/cubit/transport/transport_cubit.dart';
 import 'package:life_simulator/app/rules/cubit/rules_cubit.dart';
 import 'package:life_simulator/app/settings/cubit/day_setting_cubit.dart';
@@ -14,6 +13,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:url_strategy/url_strategy.dart';
 
 import 'app/date/cubit/date_cubit.dart';
+import 'app/event/cubit/event_cubit.dart';
 import 'app/income/cubit/income_cubit.dart';
 import 'app/job/cubit/job_cubit.dart';
 import 'app/learning/cubit/learning_cubit.dart';

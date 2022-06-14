@@ -10,9 +10,9 @@ class MoneyCubit extends HydratedCubit<double> {
   final NewGameCubit _newGameCubit;
   late StreamSubscription _newGameSub;
 
-  MoneyCubit({
-    required NewGameCubit newGameCubit,
-  })  : _newGameCubit = newGameCubit,
+  MoneyCubit(
+    NewGameCubit newGameCubit,
+  )   : _newGameCubit = newGameCubit,
         super(5000) {
     _newGame();
   }

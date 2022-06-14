@@ -1,14 +1,13 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:collection/collection.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:life_simulator/app/date/cubit/date_cubit.dart';
 
 import '../../../data/data.dart';
-import '../../../utilities/utilities.dart';
+import '../../money/cubit/money_cubit.dart';
 import '../../new_game/new_game_cubit.dart';
 import '../models/game_event/game_event_model.dart';
 
@@ -24,9 +23,15 @@ class EventCubit extends HydratedCubit<EventState> {
   final DateCubit _dateCubit;
   late StreamSubscription _dateSub;
 
-  EventCubit(NewGameCubit newGameCubit, DateCubit dateCubit)
-      : _newGameCubit = newGameCubit,
+  final MoneyCubit _moneyCubit;
+
+  EventCubit(
+    NewGameCubit newGameCubit,
+    DateCubit dateCubit,
+    MoneyCubit moneyCubit,
+  )   : _newGameCubit = newGameCubit,
         _dateCubit = dateCubit,
+        _moneyCubit = moneyCubit,
         super(EventState.initial()) {
     _newGame();
     _counting();
@@ -44,16 +49,6 @@ class EventCubit extends HydratedCubit<EventState> {
     if (_newGameCubit.state) emit(EventState.loaded(events: [], database: Data.events()));
     _newGameSub = _newGameCubit.stream.listen((newGame) {
       if (newGame) emit(EventState.loaded(events: [], database: Data.events()));
-    });
-  }
-
-  add(GameEvent event) {
-    state.whenOrNull(loaded: (events, database) {
-      List<GameEvent> result = List.from(events)
-        ..add(event)
-        ..sort((a, b) => b.datCre!.compareTo(a.datCre!));
-      ;
-      emit(EventState.loaded(events: result, database: database));
     });
   }
 
@@ -101,6 +96,31 @@ class EventCubit extends HydratedCubit<EventState> {
           emit(EventState.loaded(events: result, database: database));
         });
       });
+    });
+  }
+
+  add(GameEvent event) {
+    state.whenOrNull(loaded: (events, database) {
+      if (event.eTypeEffect == ETypeEffect.money) _moneyCubit.change(event.value);
+
+      if (event.eTypeEffect == ETypeEffect.taxes)
+        _moneyCubit.change(_moneyCubit.state * event.value);
+
+      List<GameEvent> result = List.from(events)
+        ..add(event)
+        ..sort((a, b) => b.datCre!.compareTo(a.datCre!));
+
+      emit(EventState.loaded(events: result, database: database));
+    });
+  }
+
+  change(GameEvent event) {
+    state.whenOrNull(loaded: (events, database) {
+      List<GameEvent> result = List.from(events)
+        ..removeWhere((element) => element.id == id)
+        ..add(event);
+
+      emit(EventState.loaded(events: result, database: database));
     });
   }
 
