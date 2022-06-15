@@ -27,6 +27,7 @@ mixin _$Database {
   List<Transport> get transportsDB => throw _privateConstructorUsedError;
   List<GameEvent> get eventsDB => throw _privateConstructorUsedError;
   List<Medicine> get medicinesDB => throw _privateConstructorUsedError;
+  List<Asset> get assetsDB => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,7 +46,8 @@ abstract class $DatabaseCopyWith<$Res> {
       List<House> housesDB,
       List<Transport> transportsDB,
       List<GameEvent> eventsDB,
-      List<Medicine> medicinesDB});
+      List<Medicine> medicinesDB,
+      List<Asset> assetsDB});
 }
 
 /// @nodoc
@@ -65,6 +67,7 @@ class _$DatabaseCopyWithImpl<$Res> implements $DatabaseCopyWith<$Res> {
     Object? transportsDB = freezed,
     Object? eventsDB = freezed,
     Object? medicinesDB = freezed,
+    Object? assetsDB = freezed,
   }) {
     return _then(_value.copyWith(
       jobsDB: jobsDB == freezed
@@ -95,6 +98,10 @@ class _$DatabaseCopyWithImpl<$Res> implements $DatabaseCopyWith<$Res> {
           ? _value.medicinesDB
           : medicinesDB // ignore: cast_nullable_to_non_nullable
               as List<Medicine>,
+      assetsDB: assetsDB == freezed
+          ? _value.assetsDB
+          : assetsDB // ignore: cast_nullable_to_non_nullable
+              as List<Asset>,
     ));
   }
 }
@@ -112,7 +119,8 @@ abstract class _$$_DatabaseCopyWith<$Res> implements $DatabaseCopyWith<$Res> {
       List<House> housesDB,
       List<Transport> transportsDB,
       List<GameEvent> eventsDB,
-      List<Medicine> medicinesDB});
+      List<Medicine> medicinesDB,
+      List<Asset> assetsDB});
 }
 
 /// @nodoc
@@ -134,6 +142,7 @@ class __$$_DatabaseCopyWithImpl<$Res> extends _$DatabaseCopyWithImpl<$Res>
     Object? transportsDB = freezed,
     Object? eventsDB = freezed,
     Object? medicinesDB = freezed,
+    Object? assetsDB = freezed,
   }) {
     return _then(_$_Database(
       jobsDB: jobsDB == freezed
@@ -164,6 +173,10 @@ class __$$_DatabaseCopyWithImpl<$Res> extends _$DatabaseCopyWithImpl<$Res>
           ? _value._medicinesDB
           : medicinesDB // ignore: cast_nullable_to_non_nullable
               as List<Medicine>,
+      assetsDB: assetsDB == freezed
+          ? _value._assetsDB
+          : assetsDB // ignore: cast_nullable_to_non_nullable
+              as List<Asset>,
     ));
   }
 }
@@ -178,14 +191,16 @@ class _$_Database implements _Database {
       required final List<House> housesDB,
       required final List<Transport> transportsDB,
       required final List<GameEvent> eventsDB,
-      required final List<Medicine> medicinesDB})
+      required final List<Medicine> medicinesDB,
+      required final List<Asset> assetsDB})
       : _jobsDB = jobsDB,
         _learningsDB = learningsDB,
         _mealsDB = mealsDB,
         _housesDB = housesDB,
         _transportsDB = transportsDB,
         _eventsDB = eventsDB,
-        _medicinesDB = medicinesDB;
+        _medicinesDB = medicinesDB,
+        _assetsDB = assetsDB;
 
   factory _$_Database.fromJson(Map<String, dynamic> json) =>
       _$$_DatabaseFromJson(json);
@@ -239,9 +254,16 @@ class _$_Database implements _Database {
     return EqualUnmodifiableListView(_medicinesDB);
   }
 
+  final List<Asset> _assetsDB;
+  @override
+  List<Asset> get assetsDB {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_assetsDB);
+  }
+
   @override
   String toString() {
-    return 'Database(jobsDB: $jobsDB, learningsDB: $learningsDB, mealsDB: $mealsDB, housesDB: $housesDB, transportsDB: $transportsDB, eventsDB: $eventsDB, medicinesDB: $medicinesDB)';
+    return 'Database(jobsDB: $jobsDB, learningsDB: $learningsDB, mealsDB: $mealsDB, housesDB: $housesDB, transportsDB: $transportsDB, eventsDB: $eventsDB, medicinesDB: $medicinesDB, assetsDB: $assetsDB)';
   }
 
   @override
@@ -258,7 +280,8 @@ class _$_Database implements _Database {
                 .equals(other._transportsDB, _transportsDB) &&
             const DeepCollectionEquality().equals(other._eventsDB, _eventsDB) &&
             const DeepCollectionEquality()
-                .equals(other._medicinesDB, _medicinesDB));
+                .equals(other._medicinesDB, _medicinesDB) &&
+            const DeepCollectionEquality().equals(other._assetsDB, _assetsDB));
   }
 
   @JsonKey(ignore: true)
@@ -271,7 +294,8 @@ class _$_Database implements _Database {
       const DeepCollectionEquality().hash(_housesDB),
       const DeepCollectionEquality().hash(_transportsDB),
       const DeepCollectionEquality().hash(_eventsDB),
-      const DeepCollectionEquality().hash(_medicinesDB));
+      const DeepCollectionEquality().hash(_medicinesDB),
+      const DeepCollectionEquality().hash(_assetsDB));
 
   @JsonKey(ignore: true)
   @override
@@ -292,7 +316,8 @@ abstract class _Database implements Database {
       required final List<House> housesDB,
       required final List<Transport> transportsDB,
       required final List<GameEvent> eventsDB,
-      required final List<Medicine> medicinesDB}) = _$_Database;
+      required final List<Medicine> medicinesDB,
+      required final List<Asset> assetsDB}) = _$_Database;
 
   factory _Database.fromJson(Map<String, dynamic> json) = _$_Database.fromJson;
 
@@ -310,6 +335,8 @@ abstract class _Database implements Database {
   List<GameEvent> get eventsDB => throw _privateConstructorUsedError;
   @override
   List<Medicine> get medicinesDB => throw _privateConstructorUsedError;
+  @override
+  List<Asset> get assetsDB => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_DatabaseCopyWith<_$_Database> get copyWith =>

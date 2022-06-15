@@ -7,6 +7,7 @@ import '../../medicines/models/medicine_model.dart';
 import '../../personality/models/house/house_model.dart';
 import '../../personality/models/meal/meal_model.dart';
 import '../../personality/models/transport/transport_model.dart';
+import '../../real_assets/models/asset/asset_model.dart';
 
 part 'database.freezed.dart';
 part 'database.g.dart';
@@ -21,6 +22,7 @@ class Database with _$Database {
     required List<Transport> transportsDB,
     required List<GameEvent> eventsDB,
     required List<Medicine> medicinesDB,
+    required List<Asset> assetsDB,
   }) = _Database;
 
   factory Database.fromJson(Map<String, dynamic> json) => _$DatabaseFromJson(json);

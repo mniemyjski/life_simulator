@@ -2,10 +2,17 @@ import 'dart:async';
 
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:life_simulator/app/database/data/data_assets.dart';
+import 'package:life_simulator/app/database/data/data_events.dart';
+import 'package:life_simulator/app/database/data/data_houses.dart';
+import 'package:life_simulator/app/database/data/data_jobs.dart';
+import 'package:life_simulator/app/database/data/data_learnings.dart';
+import 'package:life_simulator/app/database/data/data_meals.dart';
+import 'package:life_simulator/app/database/data/data_medicines.dart';
+import 'package:life_simulator/app/database/data/data_transports.dart';
 import 'package:life_simulator/app/database/models/database.dart';
 
 import '../../new_game/new_game_cubit.dart';
-import '../data/data.dart';
 
 @lazySingleton
 class DatabaseCubit extends HydratedCubit<Database> {
@@ -16,13 +23,14 @@ class DatabaseCubit extends HydratedCubit<Database> {
       : _newGameCubit = newGameCubit,
         super(
           Database(
-            jobsDB: Data.jobs(),
-            learningsDB: Data.learnings(),
-            mealsDB: Data.meals(),
-            housesDB: Data.houses(),
-            transportsDB: Data.transports(),
-            eventsDB: Data.events(),
-            medicinesDB: Data.medicines(),
+            jobsDB: DataJobs.db(),
+            learningsDB: DataLearnings.db(),
+            mealsDB: DataMeals.db(),
+            housesDB: DataHouses.db(),
+            transportsDB: DataTransports.db(),
+            eventsDB: DataEvents.db(),
+            medicinesDB: DataMedicines.db(),
+            assetsDB: DataAssets.db(),
           ),
         ) {
     _newGame();
@@ -37,24 +45,26 @@ class DatabaseCubit extends HydratedCubit<Database> {
   _newGame() {
     if (_newGameCubit.state)
       emit(Database(
-        jobsDB: Data.jobs(),
-        learningsDB: Data.learnings(),
-        mealsDB: Data.meals(),
-        housesDB: Data.houses(),
-        transportsDB: Data.transports(),
-        eventsDB: Data.events(),
-        medicinesDB: Data.medicines(),
+        jobsDB: DataJobs.db(),
+        learningsDB: DataLearnings.db(),
+        mealsDB: DataMeals.db(),
+        housesDB: DataHouses.db(),
+        transportsDB: DataTransports.db(),
+        eventsDB: DataEvents.db(),
+        medicinesDB: DataMedicines.db(),
+        assetsDB: DataAssets.db(),
       ));
     _newGameSub = _newGameCubit.stream.listen((newGame) {
       if (newGame)
         emit(Database(
-          jobsDB: Data.jobs(),
-          learningsDB: Data.learnings(),
-          mealsDB: Data.meals(),
-          housesDB: Data.houses(),
-          transportsDB: Data.transports(),
-          eventsDB: Data.events(),
-          medicinesDB: Data.medicines(),
+          jobsDB: DataJobs.db(),
+          learningsDB: DataLearnings.db(),
+          mealsDB: DataMeals.db(),
+          housesDB: DataHouses.db(),
+          transportsDB: DataTransports.db(),
+          eventsDB: DataEvents.db(),
+          medicinesDB: DataMedicines.db(),
+          assetsDB: DataAssets.db(),
         ));
     });
   }

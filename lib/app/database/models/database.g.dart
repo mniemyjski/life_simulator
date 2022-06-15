@@ -28,6 +28,9 @@ _$_Database _$$_DatabaseFromJson(Map<String, dynamic> json) => _$_Database(
       medicinesDB: (json['medicinesDB'] as List<dynamic>)
           .map((e) => Medicine.fromJson(e as Map<String, dynamic>))
           .toList(),
+      assetsDB: (json['assetsDB'] as List<dynamic>)
+          .map((e) => Asset.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$_DatabaseToJson(_$_Database instance) =>
@@ -39,4 +42,5 @@ Map<String, dynamic> _$$_DatabaseToJson(_$_Database instance) =>
       'transportsDB': instance.transportsDB.map((e) => e.toJson()).toList(),
       'eventsDB': instance.eventsDB.map((e) => e.toJson()).toList(),
       'medicinesDB': instance.medicinesDB.map((e) => e.toJson()).toList(),
+      'assetsDB': instance.assetsDB.map((e) => e.toJson()).toList(),
     };
