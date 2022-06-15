@@ -48,10 +48,9 @@ class HouseCubit extends HydratedCubit<HouseState> {
   }
 
   _newGame() {
-    if (_newGameCubit.state)
-      emit(HouseState.loaded(house: null, houses: _databaseCubit.state.housesDB));
+    if (_newGameCubit.state) emit(HouseState.loaded(house: null));
     _newGameSub = _newGameCubit.stream.listen((newGame) {
-      if (newGame) emit(HouseState.loaded(house: null, houses: _databaseCubit.state.housesDB));
+      if (newGame) emit(HouseState.loaded(house: null));
     });
   }
 
@@ -59,7 +58,7 @@ class HouseCubit extends HydratedCubit<HouseState> {
     if (_moneyCubit.state < house.cost && house.eTypeHouse == ETypeHouse.buy)
       return "You don't have enough money";
 
-    return state.whenOrNull(loaded: (_house, _houses) {
+    return state.whenOrNull(loaded: (_house) {
       if ((_house?.eTypeHouse ?? ETypeHouse.rent) == ETypeHouse.buy)
         return "Before you can buy new house you must to sell your house";
 
@@ -96,19 +95,19 @@ class HouseCubit extends HydratedCubit<HouseState> {
       _incomeCubit.add(income);
       if (_house != null && _house.eTypeHouse == ETypeHouse.rent) _incomeCubit.remove(_house.id);
 
-      emit(HouseState.loaded(house: house, houses: _houses));
+      emit(HouseState.loaded(house: house));
 
       return 'succeed';
     });
   }
 
   sell() {
-    state.whenOrNull(loaded: (_house, _houses) {
+    state.whenOrNull(loaded: (_house) {
       if (_house != null) {
         _timeSpendCubit.removeBonuses(ETypeBonusSource.house);
         _incomeCubit.remove(_house.id);
         _moneyCubit.change(_house.cost * 0.8);
-        emit(HouseState.loaded(house: null, houses: _houses));
+        emit(HouseState.loaded(house: null));
       }
     });
   }

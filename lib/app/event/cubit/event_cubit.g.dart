@@ -26,14 +26,10 @@ _$Loaded _$$LoadedFromJson(Map<String, dynamic> json) => _$Loaded(
       events: (json['events'] as List<dynamic>)
           .map((e) => GameEvent.fromJson(e as Map<String, dynamic>))
           .toList(),
-      database: (json['database'] as List<dynamic>)
-          .map((e) => GameEvent.fromJson(e as Map<String, dynamic>))
-          .toList(),
       $type: json['runtimeType'] as String?,
     );
 
 Map<String, dynamic> _$$LoadedToJson(_$Loaded instance) => <String, dynamic>{
       'events': instance.events.map((e) => e.toJson()).toList(),
-      'database': instance.database.map((e) => e.toJson()).toList(),
       'runtimeType': instance.$type,
     };

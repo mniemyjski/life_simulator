@@ -26,14 +26,10 @@ _$Loaded _$$LoadedFromJson(Map<String, dynamic> json) => _$Loaded(
       transport: json['transport'] == null
           ? null
           : Transport.fromJson(json['transport'] as Map<String, dynamic>),
-      transports: (json['transports'] as List<dynamic>)
-          .map((e) => Transport.fromJson(e as Map<String, dynamic>))
-          .toList(),
       $type: json['runtimeType'] as String?,
     );
 
 Map<String, dynamic> _$$LoadedToJson(_$Loaded instance) => <String, dynamic>{
       'transport': instance.transport?.toJson(),
-      'transports': instance.transports.map((e) => e.toJson()).toList(),
       'runtimeType': instance.$type,
     };

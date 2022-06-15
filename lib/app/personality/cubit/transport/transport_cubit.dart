@@ -49,18 +49,16 @@ class TransportCubit extends HydratedCubit<TransportState> {
   }
 
   _newGame() {
-    if (_newGameCubit.state)
-      emit(TransportState.loaded(transport: null, transports: _databaseCubit.state.transportsDB));
+    if (_newGameCubit.state) emit(TransportState.loaded(transport: null));
     _newGameSub = _newGameCubit.stream.listen((newGame) {
-      if (newGame)
-        emit(TransportState.loaded(transport: null, transports: _databaseCubit.state.transportsDB));
+      if (newGame) emit(TransportState.loaded(transport: null));
     });
   }
 
   buy(Transport transport) {
     if (_moneyCubit.state < transport.cost) return "You don't have enough money";
 
-    return state.whenOrNull(loaded: (_transport, _transports) {
+    return state.whenOrNull(loaded: (_transport) {
       if (_transport != null) {
         if (_transport.name != 'Ticket') {
           return "Before you can buy new car you must to sell your car";
@@ -94,20 +92,20 @@ class TransportCubit extends HydratedCubit<TransportState> {
       _moneyCubit.change(-transport.cost);
       _incomeCubit.add(income);
 
-      emit(TransportState.loaded(transport: transport, transports: _transports));
+      emit(TransportState.loaded(transport: transport));
 
       return 'succeed';
     });
   }
 
   sell() {
-    return state.whenOrNull(loaded: (_transport, _transports) {
+    return state.whenOrNull(loaded: (_transport) {
       if (_transport != null) {
         _timeSpendCubit.removeBonuses(ETypeBonusSource.transport);
         _incomeCubit.remove(_transport.id);
         _moneyCubit.change(_transport.cost * 0.8);
 
-        emit(TransportState.loaded(transport: null, transports: _transports));
+        emit(TransportState.loaded(transport: null));
       }
     });
   }

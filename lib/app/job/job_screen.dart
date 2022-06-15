@@ -20,7 +20,7 @@ class JobScreen extends StatelessWidget {
         builder: (context, state) {
           return state.maybeWhen(
               orElse: () => Container(),
-              loaded: (job, experience, jobs) {
+              loaded: (job, experience) {
                 return Column(
                   children: [
                     AppBarStats(),

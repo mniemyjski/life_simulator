@@ -49,10 +49,9 @@ class EventCubit extends HydratedCubit<EventState> {
   }
 
   _newGame() {
-    if (_newGameCubit.state)
-      emit(EventState.loaded(events: [], database: _databaseCubit.state.eventsDB));
+    if (_newGameCubit.state) emit(EventState.loaded(events: []));
     _newGameSub = _newGameCubit.stream.listen((newGame) {
-      if (newGame) emit(EventState.loaded(events: [], database: _databaseCubit.state.eventsDB));
+      if (newGame) emit(EventState.loaded(events: []));
     });
   }
 
@@ -61,8 +60,8 @@ class EventCubit extends HydratedCubit<EventState> {
       dateState.whenOrNull(loaded: (date) {
         if (date.millisecondsSinceEpoch < DateTime(18, 1, 2).millisecondsSinceEpoch) return;
         var rng = Random();
-        state.whenOrNull(loaded: (events, database) {
-          database.forEach((elementFromDataBase) {
+        state.whenOrNull(loaded: (events) {
+          _databaseCubit.state.eventsDB.forEach((elementFromDataBase) {
             int random = rng.nextInt(elementFromDataBase.frequency);
 
             if (random == 0) {
@@ -87,7 +86,7 @@ class EventCubit extends HydratedCubit<EventState> {
     _dateSub = _dateCubit.stream.listen((dateState) {
       dateState.whenOrNull(loaded: (date) {
         if (date == DateTime(18, 1, 1)) return;
-        state.whenOrNull(loaded: (events, database) {
+        state.whenOrNull(loaded: (events) {
           List<GameEvent> result = [];
 
           events.forEach((element) {
@@ -97,14 +96,14 @@ class EventCubit extends HydratedCubit<EventState> {
             result.add(gameEvent);
           });
 
-          emit(EventState.loaded(events: result, database: database));
+          emit(EventState.loaded(events: result));
         });
       });
     });
   }
 
   add(GameEvent event) {
-    state.whenOrNull(loaded: (events, database) {
+    state.whenOrNull(loaded: (events) {
       if (event.eTypeEffect == ETypeEffect.money) _moneyCubit.change(event.value);
 
       if (event.eTypeEffect == ETypeEffect.taxes)
@@ -114,17 +113,17 @@ class EventCubit extends HydratedCubit<EventState> {
         ..add(event)
         ..sort((a, b) => b.datCre!.compareTo(a.datCre!));
 
-      emit(EventState.loaded(events: result, database: database));
+      emit(EventState.loaded(events: result));
     });
   }
 
   change(GameEvent event) {
-    state.whenOrNull(loaded: (events, database) {
+    state.whenOrNull(loaded: (events) {
       List<GameEvent> result = List.from(events)
         ..removeWhere((element) => element.id == id)
         ..add(event);
 
-      emit(EventState.loaded(events: result, database: database));
+      emit(EventState.loaded(events: result));
     });
   }
 

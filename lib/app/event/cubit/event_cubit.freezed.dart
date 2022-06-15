@@ -35,22 +35,21 @@ mixin _$EventState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<GameEvent> events, List<GameEvent> database)
-        loaded,
+    required TResult Function(List<GameEvent> events) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<GameEvent> events, List<GameEvent> database)? loaded,
+    TResult Function(List<GameEvent> events)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<GameEvent> events, List<GameEvent> database)? loaded,
+    TResult Function(List<GameEvent> events)? loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -142,8 +141,7 @@ class _$Initial implements Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<GameEvent> events, List<GameEvent> database)
-        loaded,
+    required TResult Function(List<GameEvent> events) loaded,
   }) {
     return initial();
   }
@@ -153,7 +151,7 @@ class _$Initial implements Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<GameEvent> events, List<GameEvent> database)? loaded,
+    TResult Function(List<GameEvent> events)? loaded,
   }) {
     return initial?.call();
   }
@@ -163,7 +161,7 @@ class _$Initial implements Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<GameEvent> events, List<GameEvent> database)? loaded,
+    TResult Function(List<GameEvent> events)? loaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -265,8 +263,7 @@ class _$Loading implements Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<GameEvent> events, List<GameEvent> database)
-        loaded,
+    required TResult Function(List<GameEvent> events) loaded,
   }) {
     return loading();
   }
@@ -276,7 +273,7 @@ class _$Loading implements Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<GameEvent> events, List<GameEvent> database)? loaded,
+    TResult Function(List<GameEvent> events)? loaded,
   }) {
     return loading?.call();
   }
@@ -286,7 +283,7 @@ class _$Loading implements Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<GameEvent> events, List<GameEvent> database)? loaded,
+    TResult Function(List<GameEvent> events)? loaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -345,7 +342,7 @@ abstract class Loading implements EventState {
 abstract class _$$LoadedCopyWith<$Res> {
   factory _$$LoadedCopyWith(_$Loaded value, $Res Function(_$Loaded) then) =
       __$$LoadedCopyWithImpl<$Res>;
-  $Res call({List<GameEvent> events, List<GameEvent> database});
+  $Res call({List<GameEvent> events});
 }
 
 /// @nodoc
@@ -360,16 +357,11 @@ class __$$LoadedCopyWithImpl<$Res> extends _$EventStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? events = freezed,
-    Object? database = freezed,
   }) {
     return _then(_$Loaded(
       events: events == freezed
           ? _value._events
           : events // ignore: cast_nullable_to_non_nullable
-              as List<GameEvent>,
-      database: database == freezed
-          ? _value._database
-          : database // ignore: cast_nullable_to_non_nullable
               as List<GameEvent>,
     ));
   }
@@ -378,12 +370,8 @@ class __$$LoadedCopyWithImpl<$Res> extends _$EventStateCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$Loaded implements Loaded {
-  const _$Loaded(
-      {required final List<GameEvent> events,
-      required final List<GameEvent> database,
-      final String? $type})
+  const _$Loaded({required final List<GameEvent> events, final String? $type})
       : _events = events,
-        _database = database,
         $type = $type ?? 'loaded';
 
   factory _$Loaded.fromJson(Map<String, dynamic> json) =>
@@ -396,19 +384,12 @@ class _$Loaded implements Loaded {
     return EqualUnmodifiableListView(_events);
   }
 
-  final List<GameEvent> _database;
-  @override
-  List<GameEvent> get database {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_database);
-  }
-
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'EventState.loaded(events: $events, database: $database)';
+    return 'EventState.loaded(events: $events)';
   }
 
   @override
@@ -416,16 +397,13 @@ class _$Loaded implements Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$Loaded &&
-            const DeepCollectionEquality().equals(other._events, _events) &&
-            const DeepCollectionEquality().equals(other._database, _database));
+            const DeepCollectionEquality().equals(other._events, _events));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_events),
-      const DeepCollectionEquality().hash(_database));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_events));
 
   @JsonKey(ignore: true)
   @override
@@ -437,10 +415,9 @@ class _$Loaded implements Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<GameEvent> events, List<GameEvent> database)
-        loaded,
+    required TResult Function(List<GameEvent> events) loaded,
   }) {
-    return loaded(events, database);
+    return loaded(events);
   }
 
   @override
@@ -448,9 +425,9 @@ class _$Loaded implements Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<GameEvent> events, List<GameEvent> database)? loaded,
+    TResult Function(List<GameEvent> events)? loaded,
   }) {
-    return loaded?.call(events, database);
+    return loaded?.call(events);
   }
 
   @override
@@ -458,11 +435,11 @@ class _$Loaded implements Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<GameEvent> events, List<GameEvent> database)? loaded,
+    TResult Function(List<GameEvent> events)? loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(events, database);
+      return loaded(events);
     }
     return orElse();
   }
@@ -508,14 +485,11 @@ class _$Loaded implements Loaded {
 }
 
 abstract class Loaded implements EventState {
-  const factory Loaded(
-      {required final List<GameEvent> events,
-      required final List<GameEvent> database}) = _$Loaded;
+  const factory Loaded({required final List<GameEvent> events}) = _$Loaded;
 
   factory Loaded.fromJson(Map<String, dynamic> json) = _$Loaded.fromJson;
 
   List<GameEvent> get events => throw _privateConstructorUsedError;
-  List<GameEvent> get database => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$LoadedCopyWith<_$Loaded> get copyWith =>
       throw _privateConstructorUsedError;

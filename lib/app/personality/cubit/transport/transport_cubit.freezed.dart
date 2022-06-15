@@ -35,22 +35,21 @@ mixin _$TransportState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Transport? transport, List<Transport> transports)
-        loaded,
+    required TResult Function(Transport? transport) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Transport? transport, List<Transport> transports)? loaded,
+    TResult Function(Transport? transport)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Transport? transport, List<Transport> transports)? loaded,
+    TResult Function(Transport? transport)? loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -143,8 +142,7 @@ class _$Initial implements Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Transport? transport, List<Transport> transports)
-        loaded,
+    required TResult Function(Transport? transport) loaded,
   }) {
     return initial();
   }
@@ -154,7 +152,7 @@ class _$Initial implements Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Transport? transport, List<Transport> transports)? loaded,
+    TResult Function(Transport? transport)? loaded,
   }) {
     return initial?.call();
   }
@@ -164,7 +162,7 @@ class _$Initial implements Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Transport? transport, List<Transport> transports)? loaded,
+    TResult Function(Transport? transport)? loaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -266,8 +264,7 @@ class _$Loading implements Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Transport? transport, List<Transport> transports)
-        loaded,
+    required TResult Function(Transport? transport) loaded,
   }) {
     return loading();
   }
@@ -277,7 +274,7 @@ class _$Loading implements Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Transport? transport, List<Transport> transports)? loaded,
+    TResult Function(Transport? transport)? loaded,
   }) {
     return loading?.call();
   }
@@ -287,7 +284,7 @@ class _$Loading implements Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Transport? transport, List<Transport> transports)? loaded,
+    TResult Function(Transport? transport)? loaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -346,7 +343,7 @@ abstract class Loading implements TransportState {
 abstract class _$$LoadedCopyWith<$Res> {
   factory _$$LoadedCopyWith(_$Loaded value, $Res Function(_$Loaded) then) =
       __$$LoadedCopyWithImpl<$Res>;
-  $Res call({Transport? transport, List<Transport> transports});
+  $Res call({Transport? transport});
 
   $TransportCopyWith<$Res>? get transport;
 }
@@ -363,17 +360,12 @@ class __$$LoadedCopyWithImpl<$Res> extends _$TransportStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? transport = freezed,
-    Object? transports = freezed,
   }) {
     return _then(_$Loaded(
       transport: transport == freezed
           ? _value.transport
           : transport // ignore: cast_nullable_to_non_nullable
               as Transport?,
-      transports: transports == freezed
-          ? _value._transports
-          : transports // ignore: cast_nullable_to_non_nullable
-              as List<Transport>,
     ));
   }
 
@@ -392,31 +384,21 @@ class __$$LoadedCopyWithImpl<$Res> extends _$TransportStateCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$Loaded implements Loaded {
-  const _$Loaded(
-      {required this.transport,
-      required final List<Transport> transports,
-      final String? $type})
-      : _transports = transports,
-        $type = $type ?? 'loaded';
+  const _$Loaded({required this.transport, final String? $type})
+      : $type = $type ?? 'loaded';
 
   factory _$Loaded.fromJson(Map<String, dynamic> json) =>
       _$$LoadedFromJson(json);
 
   @override
   final Transport? transport;
-  final List<Transport> _transports;
-  @override
-  List<Transport> get transports {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_transports);
-  }
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'TransportState.loaded(transport: $transport, transports: $transports)';
+    return 'TransportState.loaded(transport: $transport)';
   }
 
   @override
@@ -424,17 +406,13 @@ class _$Loaded implements Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$Loaded &&
-            const DeepCollectionEquality().equals(other.transport, transport) &&
-            const DeepCollectionEquality()
-                .equals(other._transports, _transports));
+            const DeepCollectionEquality().equals(other.transport, transport));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(transport),
-      const DeepCollectionEquality().hash(_transports));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(transport));
 
   @JsonKey(ignore: true)
   @override
@@ -446,10 +424,9 @@ class _$Loaded implements Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Transport? transport, List<Transport> transports)
-        loaded,
+    required TResult Function(Transport? transport) loaded,
   }) {
-    return loaded(transport, transports);
+    return loaded(transport);
   }
 
   @override
@@ -457,9 +434,9 @@ class _$Loaded implements Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Transport? transport, List<Transport> transports)? loaded,
+    TResult Function(Transport? transport)? loaded,
   }) {
-    return loaded?.call(transport, transports);
+    return loaded?.call(transport);
   }
 
   @override
@@ -467,11 +444,11 @@ class _$Loaded implements Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Transport? transport, List<Transport> transports)? loaded,
+    TResult Function(Transport? transport)? loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(transport, transports);
+      return loaded(transport);
     }
     return orElse();
   }
@@ -517,14 +494,11 @@ class _$Loaded implements Loaded {
 }
 
 abstract class Loaded implements TransportState {
-  const factory Loaded(
-      {required final Transport? transport,
-      required final List<Transport> transports}) = _$Loaded;
+  const factory Loaded({required final Transport? transport}) = _$Loaded;
 
   factory Loaded.fromJson(Map<String, dynamic> json) = _$Loaded.fromJson;
 
   Transport? get transport => throw _privateConstructorUsedError;
-  List<Transport> get transports => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$LoadedCopyWith<_$Loaded> get copyWith =>
       throw _privateConstructorUsedError;

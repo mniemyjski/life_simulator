@@ -26,7 +26,7 @@ class PersonalityScreen extends StatelessWidget {
                   CustomDropDownList.toSelectedListItem(context.watch<MealCubit>().toListString()),
               selected: context.watch<MealCubit>().state.maybeWhen(
                     orElse: () => '',
-                    loaded: (meal, meals) => meal.name,
+                    loaded: (meal) => meal.name,
                   ),
               onChange: (value) => getIt<MealCubit>().change(value),
             ),

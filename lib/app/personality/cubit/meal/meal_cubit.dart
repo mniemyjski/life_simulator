@@ -54,20 +54,20 @@ class MealCubit extends HydratedCubit<MealState> {
     );
 
     if (_newGameCubit.state) {
-      emit(MealState.loaded(meal: list.first, meals: list));
+      emit(MealState.loaded(meal: list.first));
       _incomeCubit.add(income);
     }
     _newGameSub = _newGameCubit.stream.listen((newGame) {
       if (newGame) {
-        emit(MealState.loaded(meal: list.first, meals: list));
+        emit(MealState.loaded(meal: list.first));
         _incomeCubit.add(income);
       }
     });
   }
 
   change(String text) {
-    state.whenOrNull(loaded: (_meal, _meals) {
-      _meals.forEach((meal) {
+    state.whenOrNull(loaded: (_meal) {
+      _databaseCubit.state.mealsDB.forEach((meal) {
         if ('${meal.name}: ${meal.cost}\$' == text) {
           Income income = Income(
             id: meal.id,
@@ -102,7 +102,7 @@ class MealCubit extends HydratedCubit<MealState> {
 
           _incomeCubit.remove(_meal.id);
           _incomeCubit.add(income);
-          emit(MealState.loaded(meal: meal, meals: _meals));
+          emit(MealState.loaded(meal: meal));
           return;
         }
       });
@@ -112,9 +112,9 @@ class MealCubit extends HydratedCubit<MealState> {
   List<String> toListString() {
     return state.maybeWhen(
         orElse: () => [],
-        loaded: (meal, meals) {
+        loaded: (meal) {
           List<String> list = [];
-          meals
+          _databaseCubit.state.mealsDB
             ..forEach((element) {
               list.add('${element.name}: ${element.cost}\$');
             });

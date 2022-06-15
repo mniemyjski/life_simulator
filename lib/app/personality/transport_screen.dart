@@ -3,6 +3,7 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:life_simulator/app/database/cubit/database_cubit.dart';
 import 'package:life_simulator/app/game/widget/app_bar_stats.dart';
 import 'package:life_simulator/app/personality/cubit/transport/transport_cubit.dart';
 
@@ -22,12 +23,14 @@ class CarScreen extends StatelessWidget {
               builder: (context, state) {
                 return state.maybeWhen(
                     orElse: () => Container(),
-                    loaded: (car, cars) {
+                    loaded: (car) {
+                      List<Transport> carsDB = context.watch<DatabaseCubit>().state.transportsDB;
+
                       return Expanded(
                         child: ListView.builder(
-                            itemCount: cars.length,
+                            itemCount: carsDB.length,
                             itemBuilder: (context, index) {
-                              final element = cars[index];
+                              final element = carsDB[index];
                               final bool owned = element.id == (car?.id ?? 'xyz');
 
                               return _element(

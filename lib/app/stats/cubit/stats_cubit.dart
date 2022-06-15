@@ -94,7 +94,7 @@ class StatsCubit extends HydratedCubit<StatsState> {
         int sleep = _timeSpendCubit.getBonus(ETypeBonus.sleep) + timeSpend.sleep;
         double sick = 0;
 
-        _eventCubit.state.whenOrNull(loaded: (events, database) {
+        _eventCubit.state.whenOrNull(loaded: (events) {
           events.forEach((element) {
             if (element.active && element.eTypeEffect == ETypeEffect.sick) sick -= element.value;
           });

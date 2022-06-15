@@ -29,15 +29,11 @@ _$Loaded _$$LoadedFromJson(Map<String, dynamic> json) => _$Loaded(
       experience: json['experience'] == null
           ? null
           : Experience.fromJson(json['experience'] as Map<String, dynamic>),
-      jobs: (json['jobs'] as List<dynamic>)
-          .map((e) => Job.fromJson(e as Map<String, dynamic>))
-          .toList(),
       $type: json['runtimeType'] as String?,
     );
 
 Map<String, dynamic> _$$LoadedToJson(_$Loaded instance) => <String, dynamic>{
       'job': instance.job?.toJson(),
       'experience': instance.experience?.toJson(),
-      'jobs': instance.jobs.map((e) => e.toJson()).toList(),
       'runtimeType': instance.$type,
     };

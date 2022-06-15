@@ -3,6 +3,7 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:life_simulator/app/database/cubit/database_cubit.dart';
 import 'package:life_simulator/app/game/widget/app_bar_stats.dart';
 import 'package:life_simulator/app/personality/cubit/house/house_cubit.dart';
 import 'package:life_simulator/app/personality/models/house/house_model.dart';
@@ -23,9 +24,13 @@ class HouseScreen extends StatelessWidget {
               builder: (context, state) {
                 return state.maybeWhen(
                     orElse: () => Container(),
-                    loaded: (house, houses) {
-                      final List<House> list =
-                          houses.where((element) => element.eTypeHouse == eTypeHouse).toList();
+                    loaded: (house) {
+                      final List<House> list = context
+                          .watch<DatabaseCubit>()
+                          .state
+                          .housesDB
+                          .where((element) => element.eTypeHouse == eTypeHouse)
+                          .toList();
 
                       return Expanded(
                         child: ListView.builder(

@@ -54,11 +54,9 @@ class JobCubit extends HydratedCubit<JobState> {
   }
 
   _newGame() {
-    if (_newGameCubit.state)
-      emit(JobState.loaded(job: null, experience: null, jobs: _databaseCubit.state.jobsDB));
+    if (_newGameCubit.state) emit(JobState.loaded(job: null, experience: null));
     _newGameSub = _newGameCubit.stream.listen((newGame) {
-      if (newGame)
-        emit(JobState.loaded(job: null, experience: null, jobs: _databaseCubit.state.jobsDB));
+      if (newGame) emit(JobState.loaded(job: null, experience: null));
     });
   }
 
@@ -71,7 +69,7 @@ class JobCubit extends HydratedCubit<JobState> {
     if (test) return "You didn't get a job";
 
     return state.maybeWhen(
-        loaded: (_job, _experience, jobs) {
+        loaded: (_job, _experience) {
           _timeSpendCubit.changeWork(experience.work);
           _timeSpendCubit.changeCommuting(experience.commuting);
 
@@ -107,7 +105,7 @@ class JobCubit extends HydratedCubit<JobState> {
                   value: experience.bonusToLearn),
             );
           _incomeCubit.add(income);
-          emit(JobState.loaded(job: job, experience: experience, jobs: jobs));
+          emit(JobState.loaded(job: job, experience: experience));
           return "succeed";
         },
         orElse: () => 'error');
@@ -146,7 +144,7 @@ class JobCubit extends HydratedCubit<JobState> {
   }
 
   leaveJob() {
-    state.whenOrNull(loaded: (job, experience, jobs) {
+    state.whenOrNull(loaded: (job, experience) {
       _incomeCubit.state.whenOrNull(loaded: (incomes) {
         incomes
           ..forEach((element) {
@@ -162,13 +160,13 @@ class JobCubit extends HydratedCubit<JobState> {
       _timeSpendCubit.changeWork(-experience!.work);
       _timeSpendCubit.changeCommuting(-experience.commuting);
 
-      emit(JobState.loaded(job: null, experience: null, jobs: jobs));
+      emit(JobState.loaded(job: null, experience: null));
     });
   }
 
   String applyForPromotion() {
     return state.maybeWhen(
-        loaded: (job, experience, jobs) {
+        loaded: (job, experience) {
           int exp = experience!.exp + 1;
 
           if (exp >= job!.experiences.length) return 'max';
@@ -212,7 +210,7 @@ class JobCubit extends HydratedCubit<JobState> {
             );
 
           _incomeCubit.update(id: job.id, value: newExperience.salary);
-          emit(JobState.loaded(job: job, experience: newExperience, jobs: jobs));
+          emit(JobState.loaded(job: job, experience: newExperience));
           return 'succeed';
         },
         orElse: () => 'error');
