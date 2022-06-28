@@ -18,6 +18,7 @@ class DepositButton extends StatelessWidget {
       child: CustomButton(
           onPressed: () async {
             showModalBottomSheet<void>(
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
               context: context,
               builder: (BuildContext context) {
                 double _newDeposit = context.read<DepositCubit>().state;
@@ -34,17 +35,23 @@ class DepositButton extends StatelessWidget {
                       children: [
                         Text(
                           '${LocaleKeys.deposit.tr()}:',
-                          style: TextStyle(
-                              color: Theme.of(context).textTheme.bodyText1!.color,
-                              fontWeight: FontWeight.bold),
+                          style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        Slider(
-                          value: _newDeposit,
-                          min: 0,
-                          max: _max,
-                          divisions: _max ~/ 10,
-                          label: '${_newDeposit.toInt()}',
-                          onChanged: (double value) => setState(() => _newDeposit = value),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Slider(
+                                value: _newDeposit,
+                                activeColor: Colors.white70,
+                                inactiveColor: Colors.white70,
+                                min: 0,
+                                max: _max,
+                                divisions: _max ~/ 10,
+                                onChanged: (double value) => setState(() => _newDeposit = value),
+                              ),
+                            ),
+                            Text('${Converter.numberToString(_newDeposit)} \$'),
+                          ],
                         ),
                         CustomButton(
                             onPressed: () {

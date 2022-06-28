@@ -25,6 +25,7 @@ class LoanButton extends StatelessWidget {
       child: CustomButton(
           onPressed: () async {
             showModalBottomSheet<void>(
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
               context: context,
               builder: (BuildContext context) {
                 return StatefulBuilder(builder: (context, setState) {
@@ -36,43 +37,53 @@ class LoanButton extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           '${LocaleKeys.loan.tr()}:',
-                          style: TextStyle(
-                              color: Theme.of(context).textTheme.bodyText1!.color,
-                              fontWeight: FontWeight.bold),
+                          style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        Slider(
-                          value: _borrow,
-                          min: 1000,
-                          max: _maxBorrow,
-                          divisions: _maxBorrow ~/ 1000,
-                          label: '${_borrow.toInt()}',
-                          onChanged: (double value) => setState(() => _borrow = value),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Slider(
+                                value: _borrow,
+                                min: 1000,
+                                max: _maxBorrow,
+                                activeColor: Colors.white70,
+                                inactiveColor: Colors.white70,
+                                divisions: _maxBorrow ~/ 1000,
+                                onChanged: (double value) => setState(() => _borrow = value),
+                              ),
+                            ),
+                            Text('${Converter.numberToString(_borrow)} \$')
+                          ],
                         ),
                         Text(
                           '${LocaleKeys.months.tr()}:',
-                          style: TextStyle(
-                              color: Theme.of(context).textTheme.bodyText1!.color,
-                              fontWeight: FontWeight.bold),
+                          style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        Slider(
-                          value: _turns,
-                          min: 3,
-                          max: _maxTurns,
-                          divisions: _maxTurns.toInt(),
-                          label: '${_turns.toInt()}',
-                          onChanged: (double value) => setState(() => _turns = value),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Slider(
+                                value: _turns,
+                                min: 3,
+                                max: _maxTurns,
+                                activeColor: Colors.white70,
+                                inactiveColor: Colors.white70,
+                                divisions: _maxTurns.toInt(),
+                                onChanged: (double value) => setState(() => _turns = value),
+                              ),
+                            ),
+                            Text(_turns.toInt().toString()),
+                          ],
                         ),
                         Padding(
                           padding: const EdgeInsets.all(4.0),
                           child: RichText(
                             text: TextSpan(
-                              style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                    color: Theme.of(context).textTheme.bodyText1!.color,
-                                  ),
+                              style: Theme.of(context).textTheme.bodyText2,
                               children: <TextSpan>[
                                 TextSpan(
                                     text: '${LocaleKeys.monthlyRate.tr()}: ',
-                                    style: TextStyle(fontWeight: FontWeight.bold)),
+                                    style: const TextStyle(fontWeight: FontWeight.bold)),
                                 TextSpan(
                                     text:
                                         '${(_borrow + (_borrow * _turns * _interest)) ~/ _turns}\$')
@@ -84,13 +95,11 @@ class LoanButton extends StatelessWidget {
                           padding: const EdgeInsets.all(4.0),
                           child: RichText(
                             text: TextSpan(
-                              style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                    color: Theme.of(context).textTheme.bodyText1!.color,
-                                  ),
+                              style: Theme.of(context).textTheme.bodyText2,
                               children: <TextSpan>[
                                 TextSpan(
                                     text: '${LocaleKeys.cost.tr()}: ',
-                                    style: TextStyle(fontWeight: FontWeight.bold)),
+                                    style: const TextStyle(fontWeight: FontWeight.bold)),
                                 TextSpan(
                                   text: '${(_borrow + (_borrow * _turns * _interest)).toInt()}\$',
                                 ),
@@ -111,7 +120,7 @@ class LoanButton extends StatelessWidget {
                                 leftMonths: _turns.toInt(),
                               );
                               String? toast = context.read<LoanCubit>().add(loan);
-                              BotToast.showText(text: toast, align: Alignment(0.1, 0.05));
+                              BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
                               context.router.pop();
                             },
                             child: Text(
