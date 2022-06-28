@@ -28,37 +28,68 @@ class IncomeScreen extends StatelessWidget {
                   );
                 }
 
-                int _revenues = 0;
-                int _expenses = 0;
+                double _revenues = 0;
+                double _expenses = 0;
                 List<Income> _revenuesList = [];
                 List<Income> _expensesList = [];
 
                 incomes.forEach((element) {
                   if (element.typeIncome == ETypeIncome.revenue) {
-                    _revenues += element.monthlyIncome().toInt();
+                    _revenues += element.monthlyIncome();
                     _revenuesList.add(element);
                   }
                   if (element.typeIncome == ETypeIncome.expense) {
-                    _expenses += element.monthlyIncome().toInt();
+                    _expenses += element.monthlyIncome();
                     _expensesList.add(element);
                   }
                 });
 
                 return Expanded(
-                  child: Row(
+                  child: Column(
                     children: [
-                      Expanded(
-                        child: Column(
-                          children: [
-                            Card(
-                                child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                'Revenue: ${_revenues.toString()}\$',
-                                style:
-                                    TextStyle(color: Theme.of(context).textTheme.bodyText1!.color),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Card(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  'Revenue: ${Converter.numberToString(_revenues)} \$',
+                                  style: TextStyle(
+                                      color: Theme.of(context).textTheme.bodyText1!.color),
+                                ),
                               ),
-                            )),
+                            ),
+                          ),
+                          Expanded(
+                            child: Card(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  'Netto: ${Converter.numberToString(_revenues + _expenses)} \$',
+                                  style: TextStyle(
+                                      color: Theme.of(context).textTheme.bodyText1!.color),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Card(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  'Expense: ${Converter.numberToString(_expenses)} \$',
+                                  style: TextStyle(
+                                      color: Theme.of(context).textTheme.bodyText1!.color),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Expanded(
+                        child: Row(
+                          children: [
                             Expanded(
                               child: ListView.builder(
                                 itemCount: _revenuesList.length,
@@ -69,21 +100,6 @@ class IncomeScreen extends StatelessWidget {
                                 },
                               ),
                             ),
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            Card(
-                                child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                'Expense: ${_expenses.toString()}\$',
-                                style:
-                                    TextStyle(color: Theme.of(context).textTheme.bodyText1!.color),
-                              ),
-                            )),
                             Expanded(
                               child: ListView.builder(
                                 itemCount: _expensesList.length,
@@ -112,9 +128,9 @@ class IncomeScreen extends StatelessWidget {
             FloatingActionButton(
               heroTag: null,
               onPressed: () => context.router.pop(),
-              child: FaIcon(FontAwesomeIcons.arrowRotateLeft),
+              child: const FaIcon(FontAwesomeIcons.arrowRotateLeft),
             ),
-            NextDayButton(),
+            const NextDayButton(),
           ],
         ),
       ),
@@ -154,7 +170,7 @@ class IncomeScreen extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '${element.value}\$',
+                    '${Converter.numberToString(element.value)} \$',
                     style: TextStyle(
                       color: Theme.of(context).textTheme.bodyText1!.color,
                     ),
@@ -171,7 +187,7 @@ class IncomeScreen extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '${element.monthlyIncome().toInt()}\$',
+                    '${Converter.numberToString(element.monthlyIncome())} \$',
                     style: TextStyle(
                       color: Theme.of(context).textTheme.bodyText1!.color,
                     ),

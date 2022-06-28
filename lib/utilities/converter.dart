@@ -14,10 +14,12 @@ class DateTimeConverter implements JsonConverter<DateTime, int> {
 
 abstract class Converter {
   static String numberToString(double value) {
-    if (value < 999) return value.toString();
-    if (value <= 1000000) return '${(value / 1000).toStringAsFixed(1)} tyś';
-    if (value <= 1000000000) return '${(value / 1000000).toStringAsFixed(1)} mln';
-    if (value <= 1000000000000) return '${(value / 1000000000).toStringAsFixed(1)} mld';
+    double test = value < 0 ? value * -1 : value;
+
+    if (test < 999) return value.toString();
+    if (test <= 1000000) return '${(value / 1000).toStringAsFixed(1)} tyś';
+    if (test <= 1000000000) return '${(value / 1000000).toStringAsFixed(1)} mln';
+    if (test <= 1000000000000) return '${(value / 1000000000).toStringAsFixed(1)} mld';
     return '${(value / 1000000000000).toStringAsFixed(1)} bln';
   }
 }
