@@ -219,7 +219,7 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
         }
         if (t.rating == 3) {
           int r = rng.nextInt(100);
-          if (r >= 70 && result.renovation <= 100) {
+          if (r >= 70 && result.renovation < 100) {
             result = result.copyWith(renovation: result.renovation + 1 - hasAnimal);
           }
           if (r < 70 && result.renovation > 0) {
@@ -228,7 +228,7 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
         }
         if (t.rating == 4) {
           int r = rng.nextInt(100);
-          if (r >= 20 && result.renovation <= 100) {
+          if (r >= 20 && result.renovation < 100) {
             result = result.copyWith(renovation: result.renovation + 1 - hasAnimal);
           }
           if (r < 20 && result.renovation > 0) {
@@ -237,7 +237,7 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
         }
         if (t.rating == 5) {
           int r = rng.nextInt(100);
-          if (r >= 5 && result.renovation <= 100) {
+          if (r >= 5 && result.renovation < 100) {
             result = result.copyWith(renovation: result.renovation + 1 - hasAnimal);
           }
           if (r < 5 && result.renovation > 0) {

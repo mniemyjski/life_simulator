@@ -6,6 +6,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:life_simulator/app/income/models/income_model.dart';
 import 'package:life_simulator/app/real_assets/models/asset/asset_model.dart';
+import 'package:life_simulator/utilities/utilities.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../database/cubit/database_cubit.dart';
@@ -111,8 +112,9 @@ class TenantsCubit extends HydratedCubit<TenantsState> {
     return List.from(_databaseCubit.state.tenantsDB
         .where(
           (e) =>
-              asset.minRating >= e.rating &&
-              e.minLevel == asset.level &&
+              asset.minRating <= e.rating &&
+              asset.level >= e.minLevel &&
+              e.rent >= asset.minRent &&
               (asset.friendlyAnimal == e.hasAnimal || e.hasAnimal == false),
         )
         .toList());

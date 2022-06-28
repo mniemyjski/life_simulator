@@ -24,9 +24,9 @@ class MoneyCubit extends HydratedCubit<double> {
   }
 
   _newGame() {
-    if (_newGameCubit.state) emit(5000000);
+    if (_newGameCubit.state) emit(500000000);
     _newGameSub = _newGameCubit.stream.listen((newGame) {
-      if (newGame) emit(5000000);
+      if (newGame) emit(500000000);
     });
   }
 
