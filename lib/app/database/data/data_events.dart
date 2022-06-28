@@ -13,7 +13,7 @@ class DataEvents {
         value: 0.02,
         duration: 3,
         leftDuration: 3,
-        frequency: 200,
+        frequency: 400,
       ),
       GameEvent(
         id: uuid.v1(),
@@ -23,7 +23,7 @@ class DataEvents {
         value: 0.02,
         duration: 7,
         leftDuration: 7,
-        frequency: 200,
+        frequency: 400,
       ),
       GameEvent(
         id: uuid.v1(),
@@ -33,7 +33,7 @@ class DataEvents {
         value: 0.02,
         duration: 14,
         leftDuration: 14,
-        frequency: 300,
+        frequency: 600,
       ),
       GameEvent(
         id: uuid.v1(),
@@ -43,7 +43,7 @@ class DataEvents {
         value: 2000,
         duration: 0,
         leftDuration: 0,
-        frequency: 200,
+        frequency: 500,
         active: false,
       ),
       GameEvent(
@@ -54,7 +54,7 @@ class DataEvents {
         value: -2000,
         duration: 0,
         leftDuration: 0,
-        frequency: 200,
+        frequency: 500,
         active: false,
       ),
       GameEvent(
@@ -65,7 +65,7 @@ class DataEvents {
         value: -0.1,
         duration: 0,
         leftDuration: 0,
-        frequency: 400,
+        frequency: 800,
         active: false,
       ),
     ];
