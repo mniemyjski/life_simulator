@@ -9,6 +9,10 @@ import 'package:life_simulator/app/bank/cubit/loan/loan_cubit.dart';
 import 'package:life_simulator/app/database/cubit/database_cubit.dart';
 import 'package:life_simulator/app/medicines/cubit/medicines_cubit.dart';
 import 'package:life_simulator/app/personality/cubit/transport/transport_cubit.dart';
+import 'package:life_simulator/app/real_assets/cubit/assets/assets_cubit.dart';
+import 'package:life_simulator/app/real_assets/cubit/build/build_asset_cubit.dart';
+import 'package:life_simulator/app/real_assets/cubit/buy/buy_asset_cubit.dart';
+import 'package:life_simulator/app/real_assets/cubit/tenant/tenants_cubit.dart';
 import 'package:life_simulator/app/rules/cubit/rules_cubit.dart';
 import 'package:life_simulator/app/settings/cubit/day_setting_cubit.dart';
 import 'package:path_provider/path_provider.dart';
@@ -38,12 +42,12 @@ void main() {
     () => runApp(
       EasyLocalization(
         useOnlyLangCode: true,
-        supportedLocales: [
+        supportedLocales: const [
           Locale('en'),
-          Locale('pl'),
+          // Locale('pl'),
         ],
         path: 'assets/translations',
-        fallbackLocale: Locale('en'),
+        fallbackLocale: const Locale('en'),
         child: MyApp(),
       ),
     ),
@@ -156,6 +160,22 @@ class MyApp extends StatelessWidget {
             BlocProvider(
               lazy: false,
               create: (_) => getIt<MedicinesCubit>(),
+            ),
+            BlocProvider(
+              lazy: false,
+              create: (_) => getIt<TenantsCubit>(),
+            ),
+            BlocProvider(
+              lazy: false,
+              create: (_) => getIt<AssetsCubit>(),
+            ),
+            BlocProvider(
+              lazy: false,
+              create: (_) => getIt<BuyAssetCubit>(),
+            ),
+            BlocProvider(
+              lazy: false,
+              create: (_) => getIt<BuildAssetCubit>(),
             ),
           ],
           child: MaterialApp.router(

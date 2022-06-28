@@ -31,25 +31,23 @@ class SettingsScreen extends StatelessWidget {
                   onChanged: (String? state) => context.setLocale(Locale(state!)),
                 ),
               ),
-              Container(
-                child: Row(
-                  children: <Widget>[
-                    BlocBuilder<DarkModeCubit, bool>(
-                      builder: (context, state) {
-                        return Switch(
-                          value: state,
-                          onChanged: (state) {
-                            context.read<DarkModeCubit>().change();
-                          },
-                        );
-                      },
-                    ),
-                    Text(
-                      LocaleKeys.darkMode.tr(),
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ],
-                ),
+              Row(
+                children: <Widget>[
+                  BlocBuilder<DarkModeCubit, bool>(
+                    builder: (context, state) {
+                      return Switch(
+                        value: state,
+                        onChanged: (state) {
+                          context.read<DarkModeCubit>().change();
+                        },
+                      );
+                    },
+                  ),
+                  Text(
+                    LocaleKeys.darkMode.tr(),
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                ],
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),

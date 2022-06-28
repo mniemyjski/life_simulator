@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:jiffy/jiffy.dart';
 import 'package:life_simulator/app/learning/cubit/learning_cubit.dart';
 import 'package:life_simulator/app/settings/cubit/day_setting_cubit.dart';
 import 'package:life_simulator/utilities/utilities.dart';
@@ -33,7 +32,7 @@ class DateCubit extends HydratedCubit<DateState> {
         _learningCubit = learningCubit,
         _newGameCubit = newGameCubit,
         _daySettingCubit = daySettingCubit,
-        super(DateState.initial()) {
+        super(const DateState.initial()) {
     _newGame();
   }
 
@@ -59,7 +58,12 @@ class DateCubit extends HydratedCubit<DateState> {
         });
 
         _timeSpendCubit.resetDay();
-        emit(DateState.loaded(Jiffy(date).add(days: 1).dateTime.onlyDate()));
+
+        //ToDo date do not change, why?
+        DateTime dateTime = date.onlyDate().add(const Duration(days: 1)).onlyDate();
+        if (date == dateTime) dateTime = date.onlyDate().add(const Duration(days: 2)).onlyDate();
+
+        emit(DateState.loaded(dateTime));
       });
     }
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:life_simulator/utilities/utilities.dart';
 
 import '../cubit/event_cubit.dart';
 
@@ -12,7 +13,7 @@ class EventsList extends StatelessWidget {
       padding: const EdgeInsets.all(4.0),
       child: Container(
         height: 280,
-        decoration: BoxDecoration(border: Border.all(color: Colors.grey)),
+        decoration: BoxDecoration(border: Border.all(color: Theme.of(context).primaryColor)),
         child: BlocBuilder<EventCubit, EventState>(
           builder: (context, state) {
             return state.maybeWhen(
@@ -22,7 +23,7 @@ class EventsList extends StatelessWidget {
                       itemCount: events.length + 1,
                       itemBuilder: (context, index) {
                         if (index == 0 || index == events.length + 1) {
-                          return SizedBox();
+                          return const SizedBox();
                         }
 
                         final element = events[index - 1];
@@ -40,7 +41,7 @@ class EventsList extends StatelessWidget {
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         Text(
-                                          '${element.dateToString()}',
+                                          element.datCre!.onlyDateToString(),
                                           style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                 fontStyle: FontStyle.italic,
                                                 color: element.active ? null : Colors.grey,
@@ -57,14 +58,14 @@ class EventsList extends StatelessWidget {
                                                       color: element.active ? null : Colors.grey,
                                                     ),
                                                 children: <TextSpan>[
-                                                  TextSpan(
+                                                  const TextSpan(
                                                     text: 'Event: ',
                                                     style: TextStyle(
                                                       fontWeight: FontWeight.bold,
                                                     ),
                                                   ),
                                                   TextSpan(
-                                                    text: '${element.name}',
+                                                    text: element.name,
                                                   ),
                                                 ],
                                               ),
@@ -77,14 +78,14 @@ class EventsList extends StatelessWidget {
                                                   color: element.active ? null : Colors.grey,
                                                 ),
                                             children: <TextSpan>[
-                                              TextSpan(
+                                              const TextSpan(
                                                 text: 'Description: ',
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
                                               TextSpan(
-                                                text: '${element.description}',
+                                                text: element.description,
                                               ),
                                             ],
                                           ),
@@ -95,7 +96,7 @@ class EventsList extends StatelessWidget {
                                                   color: element.active ? null : Colors.grey,
                                                 ),
                                             children: <TextSpan>[
-                                              TextSpan(
+                                              const TextSpan(
                                                 text: 'Duration: ',
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.bold,
@@ -124,20 +125,20 @@ class EventsList extends StatelessWidget {
                                       ),
                                   children: <TextSpan>[
                                     TextSpan(
-                                      text: '${element.dateToString()} | ',
-                                      style: TextStyle(fontStyle: FontStyle.italic),
+                                      text: '${element.datCre!.onlyDateToString()} | ',
+                                      style: const TextStyle(fontStyle: FontStyle.italic),
                                     ),
-                                    TextSpan(
+                                    const TextSpan(
                                       text: 'Event: ',
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
                                     TextSpan(
-                                      text: '${element.name}',
+                                      text: element.name,
                                     ),
                                     if (element.active)
-                                      TextSpan(
+                                      const TextSpan(
                                         text: ' | Duration: ',
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,

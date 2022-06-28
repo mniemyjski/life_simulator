@@ -8,15 +8,24 @@ class DataAssets {
     return [
       Asset(
         id: uuid.v1(),
-        name: 'test',
-        description: 'test',
+        address: 'test 1',
         eTypeAsset: ETypeAsset.apartment,
         tenantsMax: 1,
-        tenants: [],
+        baseValue: 150000,
         value: 150000,
         level: 0,
-        renovation: 10,
-      )
+        renovation: 80,
+      ),
+      Asset(
+        id: uuid.v1(),
+        address: 'test 2',
+        eTypeAsset: ETypeAsset.apartment,
+        tenantsMax: 1,
+        baseValue: 200000,
+        value: 200000,
+        level: 1,
+        renovation: 100,
+      ),
     ];
   }
 }

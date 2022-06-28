@@ -10,6 +10,7 @@ enum ETypeSource {
   meal,
   house,
   car,
+  asset,
 }
 
 enum ETypeIncome {
@@ -40,7 +41,7 @@ class Income with _$Income {
   factory Income.fromJson(Map<String, dynamic> json) => _$IncomeFromJson(json);
 
   double monthlyIncome() {
-    switch (this.eTypeFrequency) {
+    switch (eTypeFrequency) {
       case ETypeFrequency.annually:
         return value / 12;
 
@@ -59,10 +60,10 @@ class Income with _$Income {
     return Enums.toText(this.eTypeFrequency).tr();
   }
 
-  String nextToString() {
-    if (this.next == null) throw 'Next date is null';
-    if (this.next!.year < 99) return DateFormat('yy-MM-dd').format(this.next!);
-    if (this.next!.year < 999) return DateFormat('yyy-MM-dd').format(this.next!);
-    return DateFormat('yyyy-MM-dd').format(this.next!);
-  }
+  // String nextToString() {
+  //   if (this.next == null) throw 'Next date is null';
+  //   if (this.next!.year < 99) return DateFormat('yy-MM-dd').format(this.next!);
+  //   if (this.next!.year < 999) return DateFormat('yyy-MM-dd').format(this.next!);
+  //   return DateFormat('yyyy-MM-dd').format(this.next!);
+  // }
 }

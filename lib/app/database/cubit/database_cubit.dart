@@ -9,6 +9,7 @@ import 'package:life_simulator/app/database/data/data_jobs.dart';
 import 'package:life_simulator/app/database/data/data_learnings.dart';
 import 'package:life_simulator/app/database/data/data_meals.dart';
 import 'package:life_simulator/app/database/data/data_medicines.dart';
+import 'package:life_simulator/app/database/data/data_tenants.dart';
 import 'package:life_simulator/app/database/data/data_transports.dart';
 import 'package:life_simulator/app/database/models/database.dart';
 
@@ -31,6 +32,7 @@ class DatabaseCubit extends HydratedCubit<Database> {
             eventsDB: DataEvents.db(),
             medicinesDB: DataMedicines.db(),
             assetsDB: DataAssets.db(),
+            tenantsDB: DataTenants.db(),
           ),
         ) {
     _newGame();
@@ -43,7 +45,7 @@ class DatabaseCubit extends HydratedCubit<Database> {
   }
 
   _newGame() {
-    if (_newGameCubit.state)
+    if (_newGameCubit.state) {
       emit(Database(
         jobsDB: DataJobs.db(),
         learningsDB: DataLearnings.db(),
@@ -53,9 +55,11 @@ class DatabaseCubit extends HydratedCubit<Database> {
         eventsDB: DataEvents.db(),
         medicinesDB: DataMedicines.db(),
         assetsDB: DataAssets.db(),
+        tenantsDB: DataTenants.db(),
       ));
+    }
     _newGameSub = _newGameCubit.stream.listen((newGame) {
-      if (newGame)
+      if (newGame) {
         emit(Database(
           jobsDB: DataJobs.db(),
           learningsDB: DataLearnings.db(),
@@ -65,7 +69,9 @@ class DatabaseCubit extends HydratedCubit<Database> {
           eventsDB: DataEvents.db(),
           medicinesDB: DataMedicines.db(),
           assetsDB: DataAssets.db(),
+          tenantsDB: DataTenants.db(),
         ));
+      }
     });
   }
 

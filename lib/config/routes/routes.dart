@@ -5,6 +5,11 @@ import 'package:life_simulator/app/job/job_screen.dart';
 import 'package:life_simulator/app/learning/learning_screen.dart';
 import 'package:life_simulator/app/medicines/medicines_screen.dart';
 import 'package:life_simulator/app/personality/personality_screen.dart';
+import 'package:life_simulator/app/real_assets/asset_screen.dart';
+import 'package:life_simulator/app/real_assets/build_assets_screen.dart';
+import 'package:life_simulator/app/real_assets/buy_assets_screen.dart';
+import 'package:life_simulator/app/real_assets/real_assets_screen.dart';
+import 'package:life_simulator/app/real_assets/tenants_screen.dart';
 import 'package:life_simulator/app/settings/screens/settings_screen.dart';
 import 'package:life_simulator/app/time_spend/time_spend_screen.dart';
 
@@ -28,6 +33,11 @@ import '../../app/personality/transport_screen.dart';
     AutoRoute(page: CarScreen),
     AutoRoute(page: BankScreen),
     AutoRoute(page: MedicinesScreen),
+    AutoRoute(page: RealAssetsScreen),
+    AutoRoute(page: BuildAssetsScreen),
+    AutoRoute(page: BuyAssetsScreen),
+    AutoRoute(page: AssetScreen),
+    AutoRoute(page: TenantsScreen),
   ],
 )
 class $AppRouter {}

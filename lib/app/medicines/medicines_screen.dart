@@ -17,7 +17,7 @@ class MedicinesScreen extends StatelessWidget {
       child: Scaffold(
         body: Column(
           children: [
-            AppBarStats(),
+            const AppBarStats(),
             Expanded(child: BlocBuilder<MedicinesCubit, MedicinesState>(
               builder: (context, state) {
                 return state.maybeWhen(
@@ -103,7 +103,7 @@ class MedicinesScreen extends StatelessWidget {
                                     IconButton(
                                       onPressed: () =>
                                           context.read<MedicinesCubit>().buy(medicine.id),
-                                      icon: FaIcon(FontAwesomeIcons.circleCheck),
+                                      icon: const FaIcon(FontAwesomeIcons.circleCheck),
                                       color: medicine.active ? Colors.white : Colors.black,
                                     ),
                                   ],
@@ -125,9 +125,9 @@ class MedicinesScreen extends StatelessWidget {
               FloatingActionButton(
                 heroTag: null,
                 onPressed: () => context.router.pop(),
-                child: FaIcon(FontAwesomeIcons.arrowRotateLeft),
+                child: const FaIcon(FontAwesomeIcons.arrowRotateLeft),
               ),
-              NextDayButton(),
+              const NextDayButton(),
             ],
           ),
         ),

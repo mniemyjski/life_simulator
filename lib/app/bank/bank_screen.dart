@@ -66,13 +66,13 @@ class BankScreen extends StatelessWidget {
                   TextSpan(text: '${LocaleKeys.monthlyRate.tr()}: '),
                   TextSpan(
                       text: '${context.watch<LoanCubit>().monthlyRate().toInt()}\$',
-                      style: TextStyle(fontWeight: FontWeight.bold)),
+                      style: const TextStyle(fontWeight: FontWeight.bold)),
                 ],
               ),
             ),
           ),
-          DepositButton(),
-          LoanButton(),
+          const DepositButton(),
+          const LoanButton(),
           Expanded(child: BlocBuilder<LoanCubit, LoanState>(
             builder: (context, state) {
               return state.maybeWhen(
@@ -96,7 +96,7 @@ class BankScreen extends StatelessWidget {
                                       TextSpan(text: '${LocaleKeys.borrowed.tr()}: '),
                                       TextSpan(
                                           text: '${element.borrowed.toInt()}\$',
-                                          style: TextStyle(fontWeight: FontWeight.bold)),
+                                          style: const TextStyle(fontWeight: FontWeight.bold)),
                                     ],
                                   ),
                                 ),
@@ -107,7 +107,7 @@ class BankScreen extends StatelessWidget {
                                       TextSpan(text: '${LocaleKeys.left.tr()}: '),
                                       TextSpan(
                                           text: '${element.leftLoan.toInt()}\$',
-                                          style: TextStyle(fontWeight: FontWeight.bold)),
+                                          style: const TextStyle(fontWeight: FontWeight.bold)),
                                     ],
                                   ),
                                 ),
@@ -118,7 +118,7 @@ class BankScreen extends StatelessWidget {
                                       TextSpan(text: '${LocaleKeys.monthlyRate.tr()}: '),
                                       TextSpan(
                                           text: '${element.getRate()}\$',
-                                          style: TextStyle(fontWeight: FontWeight.bold)),
+                                          style: const TextStyle(fontWeight: FontWeight.bold)),
                                     ],
                                   ),
                                 ),
@@ -128,8 +128,8 @@ class BankScreen extends StatelessWidget {
                                     children: <TextSpan>[
                                       TextSpan(text: '${LocaleKeys.nextRate.tr()}: '),
                                       TextSpan(
-                                          text: '${element.nextToString()}',
-                                          style: TextStyle(fontWeight: FontWeight.bold)),
+                                          text: element.next!.onlyDateToString(),
+                                          style: const TextStyle(fontWeight: FontWeight.bold)),
                                     ],
                                   ),
                                 ),
@@ -151,9 +151,9 @@ class BankScreen extends StatelessWidget {
             FloatingActionButton(
               heroTag: null,
               onPressed: () => context.router.pop(),
-              child: FaIcon(FontAwesomeIcons.arrowRotateLeft),
+              child: const FaIcon(FontAwesomeIcons.arrowRotateLeft),
             ),
-            NextDayButton(),
+            const NextDayButton(),
           ],
         ),
       ),

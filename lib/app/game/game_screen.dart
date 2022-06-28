@@ -21,7 +21,7 @@ class GameScreen extends StatelessWidget {
           listener: (context, state) {
             state.whenOrNull(loaded: (rules) {
               if (rules) {
-                BotToast.showText(text: 'End Game', align: Alignment(0.1, 0.05));
+                BotToast.showText(text: 'End Game', align: const Alignment(0.1, 0.05));
                 context.router.push(const HomeRoute());
               }
             });
@@ -32,8 +32,8 @@ class GameScreen extends StatelessWidget {
         child: Scaffold(
             body: Column(
               children: [
-                AppBarStats(),
-                EventsList(),
+                const AppBarStats(),
+                const EventsList(),
                 Expanded(
                   child: GridView.count(
                     padding: const EdgeInsets.all(1),
@@ -46,7 +46,7 @@ class GameScreen extends StatelessWidget {
                           onPressed: () {
                             context.router.push(const PersonalityRoute());
                           },
-                          icon: FaIcon(FontAwesomeIcons.userLarge),
+                          icon: const FaIcon(FontAwesomeIcons.userLarge),
                         ),
                       ),
                       Card(
@@ -54,7 +54,7 @@ class GameScreen extends StatelessWidget {
                           onPressed: () {
                             context.router.push(const IncomeRoute());
                           },
-                          icon: FaIcon(FontAwesomeIcons.scaleBalanced),
+                          icon: const FaIcon(FontAwesomeIcons.scaleBalanced),
                         ),
                       ),
                       Card(
@@ -62,7 +62,15 @@ class GameScreen extends StatelessWidget {
                           onPressed: () {
                             context.router.push(const JobRoute());
                           },
-                          icon: FaIcon(FontAwesomeIcons.briefcase),
+                          icon: const FaIcon(FontAwesomeIcons.briefcase),
+                        ),
+                      ),
+                      Card(
+                        child: IconButton(
+                          onPressed: () {
+                            context.router.push(const RealAssetsRoute());
+                          },
+                          icon: const FaIcon(FontAwesomeIcons.city),
                         ),
                       ),
                       Card(
@@ -70,7 +78,7 @@ class GameScreen extends StatelessWidget {
                           onPressed: () {
                             context.router.push(const LearningRoute());
                           },
-                          icon: FaIcon(FontAwesomeIcons.graduationCap),
+                          icon: const FaIcon(FontAwesomeIcons.graduationCap),
                         ),
                       ),
                       Card(
@@ -78,7 +86,7 @@ class GameScreen extends StatelessWidget {
                           onPressed: () {
                             context.router.push(const BankRoute());
                           },
-                          icon: FaIcon(FontAwesomeIcons.piggyBank),
+                          icon: const FaIcon(FontAwesomeIcons.piggyBank),
                         ),
                       ),
                       Card(
@@ -86,7 +94,7 @@ class GameScreen extends StatelessWidget {
                           onPressed: () {
                             context.router.push(const MedicinesRoute());
                           },
-                          icon: FaIcon(FontAwesomeIcons.capsules),
+                          icon: const FaIcon(FontAwesomeIcons.capsules),
                         ),
                       ),
                       Card(
@@ -94,7 +102,7 @@ class GameScreen extends StatelessWidget {
                           onPressed: () {
                             context.router.pop();
                           },
-                          icon: FaIcon(FontAwesomeIcons.xmark),
+                          icon: const FaIcon(FontAwesomeIcons.xmark),
                         ),
                       ),
                     ],
@@ -102,7 +110,7 @@ class GameScreen extends StatelessWidget {
                 ),
               ],
             ),
-            floatingActionButton: NextDayButton()),
+            floatingActionButton: const NextDayButton()),
       ),
     );
   }

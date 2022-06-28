@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:life_simulator/app/date/cubit/date_cubit.dart';
 import 'package:life_simulator/app/money/cubit/money_cubit.dart';
@@ -15,7 +15,7 @@ part 'medicines_cubit.g.dart';
 part 'medicines_state.dart';
 
 @lazySingleton
-class MedicinesCubit extends Cubit<MedicinesState> {
+class MedicinesCubit extends HydratedCubit<MedicinesState> {
   final MoneyCubit _moneyCubit;
 
   final NewGameCubit _newGameCubit;
@@ -34,7 +34,7 @@ class MedicinesCubit extends Cubit<MedicinesState> {
         _newGameCubit = newGameCubit,
         _dateCubit = dateCubit,
         _databaseCubit = databaseCubit,
-        super(MedicinesState.initial()) {
+        super(const MedicinesState.initial()) {
     _newGame();
     _counting();
   }
@@ -83,5 +83,15 @@ class MedicinesCubit extends Cubit<MedicinesState> {
       result = result..sort(((a, b) => a.id.compareTo(b.id)));
       emit(MedicinesState.loaded(result));
     });
+  }
+
+  @override
+  MedicinesState? fromJson(Map<String, dynamic> json) {
+    return MedicinesState.fromJson(json);
+  }
+
+  @override
+  Map<String, dynamic>? toJson(MedicinesState state) {
+    return state.toJson();
   }
 }

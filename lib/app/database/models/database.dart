@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:life_simulator/app/learning/models/learning_model.dart';
+import 'package:life_simulator/app/real_assets/models/tenant/tenant_model.dart';
 
 import '../../event/models/game_event/game_event_model.dart';
 import '../../job/models/job/job_model.dart';
@@ -23,6 +24,7 @@ class Database with _$Database {
     required List<GameEvent> eventsDB,
     required List<Medicine> medicinesDB,
     required List<Asset> assetsDB,
+    required List<Tenant> tenantsDB,
   }) = _Database;
 
   factory Database.fromJson(Map<String, dynamic> json) => _$DatabaseFromJson(json);

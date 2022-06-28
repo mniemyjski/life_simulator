@@ -30,8 +30,26 @@
   "nextRate": "Next rate",
   "youAreHomeless": "You are homeless",
   "areYouSureGoToNextDay": "Are you sure go to next day?",
-  "showMore": "Show more"
-
-
+  "showMore": "Show more",
+  "buy": "Buy",
+  "sell": "Sell",
+  "build": "Build",
+  "address": "Address",
+  "description": "Description",
+  "value": "Value",
+  "type": "Type",
+  "tenants": "Tenants",
+  "renovation": "Renovation",
+  "upgrade": "Upgrade",
+  "rent": "Rent",
+  "renovationCost": "Renovation cost",
+  "levelCost": "Level cost",
+  "minRating": "Min rating",
+  "friendlyAnimal": "Friendly Animal",
+  "duration": "Duration",
+  "datEnd": "Date end",
+  "hasAnimal": "Has animal",
+  "rating": "Rating",
+  "level": "Level"
 
 }

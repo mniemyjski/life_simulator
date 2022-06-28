@@ -9,7 +9,7 @@ class DateChange extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return context.watch<DateCubit>().state.maybeWhen(
-          orElse: () => Column(),
+          orElse: () => const SizedBox(),
           loaded: (dateGame) {
             return Column(
               children: [

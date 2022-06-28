@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_simulator/app/date/widgets/date_view.dart';
 import 'package:life_simulator/app/money/cubit/money_cubit.dart';
+import 'package:life_simulator/utilities/utilities.dart';
 
 import '../../stats/widgets/stats_indicator.dart';
 import '../../time_spend/widgets/time_spend_indicator.dart';
@@ -31,7 +32,7 @@ class AppBarStats extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        '${context.watch<MoneyCubit>().state.toInt().toString()}\$',
+                        '${Converter.numberToString(context.watch<MoneyCubit>().state)} \$',
                         style: TextStyle(color: Theme.of(context).textTheme.bodyText1!.color),
                       ),
                     ),

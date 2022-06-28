@@ -32,5 +32,25 @@ abstract class  LocaleKeys {
   static const youAreHomeless = 'youAreHomeless';
   static const areYouSureGoToNextDay = 'areYouSureGoToNextDay';
   static const showMore = 'showMore';
+  static const buy = 'buy';
+  static const sell = 'sell';
+  static const build = 'build';
+  static const address = 'address';
+  static const description = 'description';
+  static const value = 'value';
+  static const type = 'type';
+  static const tenants = 'tenants';
+  static const renovation = 'renovation';
+  static const upgrade = 'upgrade';
+  static const rent = 'rent';
+  static const renovationCost = 'renovationCost';
+  static const levelCost = 'levelCost';
+  static const minRating = 'minRating';
+  static const friendlyAnimal = 'friendlyAnimal';
+  static const duration = 'duration';
+  static const datEnd = 'datEnd';
+  static const hasAnimal = 'hasAnimal';
+  static const rating = 'rating';
+  static const level = 'level';
 
 }

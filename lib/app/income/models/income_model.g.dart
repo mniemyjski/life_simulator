@@ -31,6 +31,7 @@ const _$ETypeSourceEnumMap = {
   ETypeSource.meal: 'meal',
   ETypeSource.house: 'house',
   ETypeSource.car: 'car',
+  ETypeSource.asset: 'asset',
 };
 
 const _$ETypeIncomeEnumMap = {

@@ -32,7 +32,7 @@ class IncomeCubit extends HydratedCubit<IncomeState> {
   )   : _moneyCubit = moneyCubit,
         _newGameCubit = saveCubit,
         _dateCubit = dateCubit,
-        super(IncomeState.initial()) {
+        super(const IncomeState.initial()) {
     _newGame();
     _counting();
   }
@@ -45,9 +45,9 @@ class IncomeCubit extends HydratedCubit<IncomeState> {
   }
 
   _newGame() {
-    if (_newGameCubit.state) emit(IncomeState.loaded([]));
+    if (_newGameCubit.state) emit(const IncomeState.loaded([]));
     _newGameSub = _newGameCubit.stream.listen((newGame) {
-      if (newGame) emit(IncomeState.loaded([]));
+      if (newGame) emit(const IncomeState.loaded([]));
     });
   }
 

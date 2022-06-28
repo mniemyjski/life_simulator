@@ -18,14 +18,15 @@ class IncomeScreen extends StatelessWidget {
         child: Scaffold(
       body: Column(
         children: [
-          AppBarStats(),
+          const AppBarStats(),
           context.watch<IncomeCubit>().state.maybeWhen(
               orElse: () => Container(),
               loaded: (incomes) {
-                if (incomes.length == 0)
-                  return Expanded(
+                if (incomes.length == 0) {
+                  return const Expanded(
                     child: Center(child: Text("You don't have any income yet!")),
                   );
+                }
 
                 int _revenues = 0;
                 int _expenses = 0;
@@ -204,7 +205,7 @@ class IncomeScreen extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '${element.nextToString()}',
+                    element.next!.onlyDateToString(),
                     style: TextStyle(
                       color: Theme.of(context).textTheme.bodyText1!.color,
                     ),
