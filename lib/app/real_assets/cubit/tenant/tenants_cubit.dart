@@ -69,11 +69,11 @@ class TenantsCubit extends HydratedCubit<TenantsState> {
 
   removeTenantInAsset(Asset asset) {
     state.whenOrNull(loaded: (tenants) {
-      List<Tenant> result = List.from(tenants
+      List<Tenant> result = List.from(tenants)
         ..removeWhere((e) {
           if (e.idAsset == asset.id) _incomeCubit.remove(e.id!);
           return e.idAsset == asset.id;
-        }));
+        });
       emit(TenantsState.loaded(result));
     });
   }
