@@ -51,6 +51,11 @@ abstract class  LocaleKeys {
   static const datEnd = 'datEnd';
   static const hasAnimal = 'hasAnimal';
   static const rating = 'rating';
+  static const symbols = 'symbols';
+  static const price = 'price';
+  static const change = 'change';
+  static const amount = 'amount';
+  static const average = 'average';
   static const level = 'level';
 
 }

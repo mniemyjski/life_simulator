@@ -14,6 +14,7 @@ import 'package:life_simulator/app/database/data/data_transports.dart';
 import 'package:life_simulator/app/database/models/database.dart';
 
 import '../../new_game/new_game_cubit.dart';
+import '../data/data_instruments.dart';
 
 @lazySingleton
 class DatabaseCubit extends HydratedCubit<Database> {
@@ -33,6 +34,7 @@ class DatabaseCubit extends HydratedCubit<Database> {
             medicinesDB: DataMedicines.db(),
             assetsDB: DataAssets.db(),
             tenantsDB: DataTenants.db(),
+            instrumentDB: DataInstruments.db(),
           ),
         ) {
     _newGame();
@@ -56,6 +58,7 @@ class DatabaseCubit extends HydratedCubit<Database> {
         medicinesDB: DataMedicines.db(),
         assetsDB: DataAssets.db(),
         tenantsDB: DataTenants.db(),
+        instrumentDB: DataInstruments.db(),
       ));
     }
     _newGameSub = _newGameCubit.stream.listen((newGame) {
@@ -70,6 +73,7 @@ class DatabaseCubit extends HydratedCubit<Database> {
           medicinesDB: DataMedicines.db(),
           assetsDB: DataAssets.db(),
           tenantsDB: DataTenants.db(),
+          instrumentDB: DataInstruments.db(),
         ));
       }
     });

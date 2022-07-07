@@ -142,7 +142,7 @@ class AssetElement extends StatelessWidget {
                         ),
                         TextSpan(
                           text:
-                              '${Converter.numberToString(context.watch<TenantsCubit>().getTotalRentInAsset(asset))} \$',
+                              '${context.watch<TenantsCubit>().getTotalRentInAsset(asset).toMoney()}',
                         ),
                       ],
                     ),

@@ -54,7 +54,7 @@ class IncomeScreen extends StatelessWidget {
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
-                                  'Revenue: ${Converter.numberToString(_revenues)} \$',
+                                  'Revenue: ${_revenues.toMoney()}',
                                   style: TextStyle(
                                       color: Theme.of(context).textTheme.bodyText1!.color),
                                 ),
@@ -66,7 +66,7 @@ class IncomeScreen extends StatelessWidget {
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
-                                  'Netto: ${Converter.numberToString(_revenues + _expenses)} \$',
+                                  'Netto: ${(_revenues + _expenses).toMoney()}',
                                   style: TextStyle(
                                       color: Theme.of(context).textTheme.bodyText1!.color),
                                 ),
@@ -78,7 +78,7 @@ class IncomeScreen extends StatelessWidget {
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
-                                  'Expense: ${Converter.numberToString(_expenses)} \$',
+                                  'Expense: ${_expenses.toMoney()}',
                                   style: TextStyle(
                                       color: Theme.of(context).textTheme.bodyText1!.color),
                                 ),
@@ -170,7 +170,7 @@ class IncomeScreen extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '${Converter.numberToString(element.value)} \$',
+                    element.value.toMoney(),
                     style: TextStyle(
                       color: Theme.of(context).textTheme.bodyText1!.color,
                     ),
@@ -187,7 +187,7 @@ class IncomeScreen extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '${Converter.numberToString(element.monthlyIncome())} \$',
+                    element.monthlyIncome().toMoney(),
                     style: TextStyle(
                       color: Theme.of(context).textTheme.bodyText1!.color,
                     ),
@@ -204,7 +204,7 @@ class IncomeScreen extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '${element.frequencyToString()}',
+                    element.frequencyToString(),
                     style: TextStyle(
                       color: Theme.of(context).textTheme.bodyText1!.color,
                     ),

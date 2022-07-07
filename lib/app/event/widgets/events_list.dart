@@ -12,7 +12,7 @@ class EventsList extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(4.0),
       child: Container(
-        height: 280,
+        height: 400,
         decoration: BoxDecoration(border: Border.all(color: Theme.of(context).primaryColor)),
         child: BlocBuilder<EventCubit, EventState>(
           builder: (context, state) {

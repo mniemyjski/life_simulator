@@ -183,7 +183,7 @@ class _BuildAssetsScreenState extends State<BuildAssetsScreen> {
                                   fontWeight: FontWeight.bold),
                             ),
                             Text(
-                              '${Converter.numberToString(cost)} \$',
+                              '${cost.toMoney()}',
                               style: TextStyle(
                                   color: Theme.of(context).textTheme.bodyText1!.color,
                                   fontWeight: FontWeight.bold),
@@ -210,7 +210,7 @@ class _BuildAssetsScreenState extends State<BuildAssetsScreen> {
                                   fontWeight: FontWeight.bold),
                             ),
                             Text(
-                              '${Converter.numberToString(value)} \$',
+                              '${value.toMoney()}',
                               style: TextStyle(
                                   color: Theme.of(context).textTheme.bodyText1!.color,
                                   fontWeight: FontWeight.bold),

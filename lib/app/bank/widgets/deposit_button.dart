@@ -50,7 +50,7 @@ class DepositButton extends StatelessWidget {
                                 onChanged: (double value) => setState(() => _newDeposit = value),
                               ),
                             ),
-                            Text('${Converter.numberToString(_newDeposit)} \$'),
+                            Text('${_newDeposit.toMoney()}'),
                           ],
                         ),
                         CustomButton(

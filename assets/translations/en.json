@@ -50,6 +50,11 @@
   "datEnd": "Date end",
   "hasAnimal": "Has animal",
   "rating": "Rating",
+  "symbols": "Symbols",
+  "price": "Price",
+  "change": "Change",
+  "amount": "Amount",
+  "average": "Average",
   "level": "Level"
 
 }

@@ -11,6 +11,8 @@ import 'package:life_simulator/app/real_assets/buy_assets_screen.dart';
 import 'package:life_simulator/app/real_assets/real_assets_screen.dart';
 import 'package:life_simulator/app/real_assets/tenants_screen.dart';
 import 'package:life_simulator/app/settings/screens/settings_screen.dart';
+import 'package:life_simulator/app/stock_market/instrument_screen.dart';
+import 'package:life_simulator/app/stock_market/stock_market_screen.dart';
 import 'package:life_simulator/app/time_spend/time_spend_screen.dart';
 
 import '../../app/game/game_screen.dart';
@@ -38,6 +40,8 @@ import '../../app/personality/transport_screen.dart';
     AutoRoute(page: BuyAssetsScreen),
     AutoRoute(page: AssetScreen),
     AutoRoute(page: TenantsScreen),
+    AutoRoute(page: StockMarketScreen),
+    AutoRoute(page: InstrumentScreen),
   ],
 )
 class $AppRouter {}

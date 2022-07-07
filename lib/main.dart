@@ -15,6 +15,8 @@ import 'package:life_simulator/app/real_assets/cubit/buy/buy_asset_cubit.dart';
 import 'package:life_simulator/app/real_assets/cubit/tenant/tenants_cubit.dart';
 import 'package:life_simulator/app/rules/cubit/rules_cubit.dart';
 import 'package:life_simulator/app/settings/cubit/day_setting_cubit.dart';
+import 'package:life_simulator/app/stock_market/cubit/stock_market/stock_market_cubit.dart';
+import 'package:life_simulator/app/stock_market/cubit/transactions/transactions_cubit.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:url_strategy/url_strategy.dart';
 
@@ -176,6 +178,14 @@ class MyApp extends StatelessWidget {
             BlocProvider(
               lazy: false,
               create: (_) => getIt<BuildAssetCubit>(),
+            ),
+            BlocProvider(
+              lazy: false,
+              create: (_) => getIt<StockMarketCubit>(),
+            ),
+            BlocProvider(
+              lazy: false,
+              create: (_) => getIt<TransactionsCubit>(),
             ),
           ],
           child: MaterialApp.router(

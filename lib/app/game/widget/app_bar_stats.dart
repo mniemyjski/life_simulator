@@ -32,7 +32,7 @@ class AppBarStats extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        '${Converter.numberToString(context.watch<MoneyCubit>().state)} \$',
+                        '${context.watch<MoneyCubit>().state.toMoney()}',
                         style: TextStyle(color: Theme.of(context).textTheme.bodyText1!.color),
                       ),
                     ),

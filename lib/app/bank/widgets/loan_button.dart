@@ -52,7 +52,7 @@ class LoanButton extends StatelessWidget {
                                 onChanged: (double value) => setState(() => _borrow = value),
                               ),
                             ),
-                            Text('${Converter.numberToString(_borrow)} \$')
+                            Text('${_borrow.toMoney()}')
                           ],
                         ),
                         Text(

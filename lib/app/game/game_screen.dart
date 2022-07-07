@@ -37,8 +37,8 @@ class GameScreen extends StatelessWidget {
                 Expanded(
                   child: GridView.count(
                     padding: const EdgeInsets.all(1),
-                    crossAxisSpacing: 8,
-                    mainAxisSpacing: 8,
+                    crossAxisSpacing: 4,
+                    mainAxisSpacing: 4,
                     crossAxisCount: 5,
                     children: <Widget>[
                       Card(
@@ -71,6 +71,14 @@ class GameScreen extends StatelessWidget {
                             context.router.push(const RealAssetsRoute());
                           },
                           icon: const FaIcon(FontAwesomeIcons.city),
+                        ),
+                      ),
+                      Card(
+                        child: IconButton(
+                          onPressed: () {
+                            context.router.push(const StockMarketRoute());
+                          },
+                          icon: const FaIcon(FontAwesomeIcons.chartLine),
                         ),
                       ),
                       Card(
