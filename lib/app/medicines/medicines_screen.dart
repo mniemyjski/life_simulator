@@ -40,6 +40,9 @@ class MedicinesScreen extends StatelessWidget {
 
                             return Card(
                               color: medicine.active ? Theme.of(context).primaryColor : null,
+                              shape: BeveledRectangleBorder(
+                                borderRadius: BorderRadius.circular(0),
+                              ),
                               child: Padding(
                                 padding: const EdgeInsets.all(4.0),
                                 child: Row(
@@ -48,9 +51,12 @@ class MedicinesScreen extends StatelessWidget {
                                     Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          medicine.name,
-                                          style: txtStyle,
+                                        Padding(
+                                          padding: const EdgeInsets.only(bottom: 2.0),
+                                          child: Text(
+                                            medicine.name,
+                                            style: txtStyle,
+                                          ),
                                         ),
                                         RichText(
                                           text: TextSpan(
