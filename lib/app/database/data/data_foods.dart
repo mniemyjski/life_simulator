@@ -1,38 +1,39 @@
-import 'package:life_simulator/app/personality/models/meal/meal_model.dart';
 import 'package:uuid/uuid.dart';
 
-class DataMeals {
-  static List<Meal> db() {
-    var uuid = Uuid();
+import '../../personality/models/food/food_model.dart';
+
+class DataFoods {
+  static List<Food> db() {
+    var uuid = const Uuid();
     return [
-      Meal(
+      Food(
         id: uuid.v1(),
-        name: 'food 1',
+        name: 'foods 1',
         cost: 10,
         bonusToRelax: -1,
         bonusToSleep: -1,
       ),
-      Meal(
+      Food(
         id: uuid.v1(),
-        name: 'food 2',
+        name: 'foods 2',
         cost: 20,
       ),
-      Meal(
+      Food(
         id: uuid.v1(),
-        name: 'food 3',
+        name: 'foods 3',
         cost: 40,
         bonusToRelax: 1,
       ),
-      Meal(
+      Food(
         id: uuid.v1(),
-        name: 'food 4',
+        name: 'foods 4',
         cost: 80,
         bonusToRelax: 1,
         bonusToSleep: 1,
       ),
-      Meal(
+      Food(
         id: uuid.v1(),
-        name: 'food 5',
+        name: 'foods 5',
         cost: 150,
         bonusToRelax: 2,
         bonusToSleep: 1,

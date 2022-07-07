@@ -22,7 +22,7 @@ Database _$DatabaseFromJson(Map<String, dynamic> json) {
 mixin _$Database {
   List<Job> get jobsDB => throw _privateConstructorUsedError;
   List<Learning> get learningsDB => throw _privateConstructorUsedError;
-  List<Meal> get mealsDB => throw _privateConstructorUsedError;
+  List<Food> get foodsDB => throw _privateConstructorUsedError;
   List<House> get housesDB => throw _privateConstructorUsedError;
   List<Transport> get transportsDB => throw _privateConstructorUsedError;
   List<GameEvent> get eventsDB => throw _privateConstructorUsedError;
@@ -44,7 +44,7 @@ abstract class $DatabaseCopyWith<$Res> {
   $Res call(
       {List<Job> jobsDB,
       List<Learning> learningsDB,
-      List<Meal> mealsDB,
+      List<Food> foodsDB,
       List<House> housesDB,
       List<Transport> transportsDB,
       List<GameEvent> eventsDB,
@@ -66,7 +66,7 @@ class _$DatabaseCopyWithImpl<$Res> implements $DatabaseCopyWith<$Res> {
   $Res call({
     Object? jobsDB = freezed,
     Object? learningsDB = freezed,
-    Object? mealsDB = freezed,
+    Object? foodsDB = freezed,
     Object? housesDB = freezed,
     Object? transportsDB = freezed,
     Object? eventsDB = freezed,
@@ -84,10 +84,10 @@ class _$DatabaseCopyWithImpl<$Res> implements $DatabaseCopyWith<$Res> {
           ? _value.learningsDB
           : learningsDB // ignore: cast_nullable_to_non_nullable
               as List<Learning>,
-      mealsDB: mealsDB == freezed
-          ? _value.mealsDB
-          : mealsDB // ignore: cast_nullable_to_non_nullable
-              as List<Meal>,
+      foodsDB: foodsDB == freezed
+          ? _value.foodsDB
+          : foodsDB // ignore: cast_nullable_to_non_nullable
+              as List<Food>,
       housesDB: housesDB == freezed
           ? _value.housesDB
           : housesDB // ignore: cast_nullable_to_non_nullable
@@ -129,7 +129,7 @@ abstract class _$$_DatabaseCopyWith<$Res> implements $DatabaseCopyWith<$Res> {
   $Res call(
       {List<Job> jobsDB,
       List<Learning> learningsDB,
-      List<Meal> mealsDB,
+      List<Food> foodsDB,
       List<House> housesDB,
       List<Transport> transportsDB,
       List<GameEvent> eventsDB,
@@ -153,7 +153,7 @@ class __$$_DatabaseCopyWithImpl<$Res> extends _$DatabaseCopyWithImpl<$Res>
   $Res call({
     Object? jobsDB = freezed,
     Object? learningsDB = freezed,
-    Object? mealsDB = freezed,
+    Object? foodsDB = freezed,
     Object? housesDB = freezed,
     Object? transportsDB = freezed,
     Object? eventsDB = freezed,
@@ -171,10 +171,10 @@ class __$$_DatabaseCopyWithImpl<$Res> extends _$DatabaseCopyWithImpl<$Res>
           ? _value._learningsDB
           : learningsDB // ignore: cast_nullable_to_non_nullable
               as List<Learning>,
-      mealsDB: mealsDB == freezed
-          ? _value._mealsDB
-          : mealsDB // ignore: cast_nullable_to_non_nullable
-              as List<Meal>,
+      foodsDB: foodsDB == freezed
+          ? _value._foodsDB
+          : foodsDB // ignore: cast_nullable_to_non_nullable
+              as List<Food>,
       housesDB: housesDB == freezed
           ? _value._housesDB
           : housesDB // ignore: cast_nullable_to_non_nullable
@@ -213,7 +213,7 @@ class _$_Database implements _Database {
   const _$_Database(
       {required final List<Job> jobsDB,
       required final List<Learning> learningsDB,
-      required final List<Meal> mealsDB,
+      required final List<Food> foodsDB,
       required final List<House> housesDB,
       required final List<Transport> transportsDB,
       required final List<GameEvent> eventsDB,
@@ -223,7 +223,7 @@ class _$_Database implements _Database {
       required final List<Instrument> instrumentDB})
       : _jobsDB = jobsDB,
         _learningsDB = learningsDB,
-        _mealsDB = mealsDB,
+        _foodsDB = foodsDB,
         _housesDB = housesDB,
         _transportsDB = transportsDB,
         _eventsDB = eventsDB,
@@ -249,11 +249,11 @@ class _$_Database implements _Database {
     return EqualUnmodifiableListView(_learningsDB);
   }
 
-  final List<Meal> _mealsDB;
+  final List<Food> _foodsDB;
   @override
-  List<Meal> get mealsDB {
+  List<Food> get foodsDB {
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_mealsDB);
+    return EqualUnmodifiableListView(_foodsDB);
   }
 
   final List<House> _housesDB;
@@ -307,7 +307,7 @@ class _$_Database implements _Database {
 
   @override
   String toString() {
-    return 'Database(jobsDB: $jobsDB, learningsDB: $learningsDB, mealsDB: $mealsDB, housesDB: $housesDB, transportsDB: $transportsDB, eventsDB: $eventsDB, medicinesDB: $medicinesDB, assetsDB: $assetsDB, tenantsDB: $tenantsDB, instrumentDB: $instrumentDB)';
+    return 'Database(jobsDB: $jobsDB, learningsDB: $learningsDB, foodsDB: $foodsDB, housesDB: $housesDB, transportsDB: $transportsDB, eventsDB: $eventsDB, medicinesDB: $medicinesDB, assetsDB: $assetsDB, tenantsDB: $tenantsDB, instrumentDB: $instrumentDB)';
   }
 
   @override
@@ -318,7 +318,7 @@ class _$_Database implements _Database {
             const DeepCollectionEquality().equals(other._jobsDB, _jobsDB) &&
             const DeepCollectionEquality()
                 .equals(other._learningsDB, _learningsDB) &&
-            const DeepCollectionEquality().equals(other._mealsDB, _mealsDB) &&
+            const DeepCollectionEquality().equals(other._foodsDB, _foodsDB) &&
             const DeepCollectionEquality().equals(other._housesDB, _housesDB) &&
             const DeepCollectionEquality()
                 .equals(other._transportsDB, _transportsDB) &&
@@ -338,7 +338,7 @@ class _$_Database implements _Database {
       runtimeType,
       const DeepCollectionEquality().hash(_jobsDB),
       const DeepCollectionEquality().hash(_learningsDB),
-      const DeepCollectionEquality().hash(_mealsDB),
+      const DeepCollectionEquality().hash(_foodsDB),
       const DeepCollectionEquality().hash(_housesDB),
       const DeepCollectionEquality().hash(_transportsDB),
       const DeepCollectionEquality().hash(_eventsDB),
@@ -362,7 +362,7 @@ abstract class _Database implements Database {
   const factory _Database(
       {required final List<Job> jobsDB,
       required final List<Learning> learningsDB,
-      required final List<Meal> mealsDB,
+      required final List<Food> foodsDB,
       required final List<House> housesDB,
       required final List<Transport> transportsDB,
       required final List<GameEvent> eventsDB,
@@ -378,7 +378,7 @@ abstract class _Database implements Database {
   @override
   List<Learning> get learningsDB => throw _privateConstructorUsedError;
   @override
-  List<Meal> get mealsDB => throw _privateConstructorUsedError;
+  List<Food> get foodsDB => throw _privateConstructorUsedError;
   @override
   List<House> get housesDB => throw _privateConstructorUsedError;
   @override

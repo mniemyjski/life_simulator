@@ -13,8 +13,8 @@ _$_Database _$$_DatabaseFromJson(Map<String, dynamic> json) => _$_Database(
       learningsDB: (json['learningsDB'] as List<dynamic>)
           .map((e) => Learning.fromJson(e as Map<String, dynamic>))
           .toList(),
-      mealsDB: (json['mealsDB'] as List<dynamic>)
-          .map((e) => Meal.fromJson(e as Map<String, dynamic>))
+      foodsDB: (json['foodsDB'] as List<dynamic>)
+          .map((e) => Food.fromJson(e as Map<String, dynamic>))
           .toList(),
       housesDB: (json['housesDB'] as List<dynamic>)
           .map((e) => House.fromJson(e as Map<String, dynamic>))
@@ -43,7 +43,7 @@ Map<String, dynamic> _$$_DatabaseToJson(_$_Database instance) =>
     <String, dynamic>{
       'jobsDB': instance.jobsDB.map((e) => e.toJson()).toList(),
       'learningsDB': instance.learningsDB.map((e) => e.toJson()).toList(),
-      'mealsDB': instance.mealsDB.map((e) => e.toJson()).toList(),
+      'foodsDB': instance.foodsDB.map((e) => e.toJson()).toList(),
       'housesDB': instance.housesDB.map((e) => e.toJson()).toList(),
       'transportsDB': instance.transportsDB.map((e) => e.toJson()).toList(),
       'eventsDB': instance.eventsDB.map((e) => e.toJson()).toList(),

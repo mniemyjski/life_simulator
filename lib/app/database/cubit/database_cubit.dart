@@ -4,10 +4,10 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:life_simulator/app/database/data/data_assets.dart';
 import 'package:life_simulator/app/database/data/data_events.dart';
+import 'package:life_simulator/app/database/data/data_foods.dart';
 import 'package:life_simulator/app/database/data/data_houses.dart';
 import 'package:life_simulator/app/database/data/data_jobs.dart';
 import 'package:life_simulator/app/database/data/data_learnings.dart';
-import 'package:life_simulator/app/database/data/data_meals.dart';
 import 'package:life_simulator/app/database/data/data_medicines.dart';
 import 'package:life_simulator/app/database/data/data_tenants.dart';
 import 'package:life_simulator/app/database/data/data_transports.dart';
@@ -27,7 +27,7 @@ class DatabaseCubit extends HydratedCubit<Database> {
           Database(
             jobsDB: DataJobs.db(),
             learningsDB: DataLearnings.db(),
-            mealsDB: DataMeals.db(),
+            foodsDB: DataFoods.db(),
             housesDB: DataHouses.db(),
             transportsDB: DataTransports.db(),
             eventsDB: DataEvents.db(),
@@ -51,7 +51,7 @@ class DatabaseCubit extends HydratedCubit<Database> {
       emit(Database(
         jobsDB: DataJobs.db(),
         learningsDB: DataLearnings.db(),
-        mealsDB: DataMeals.db(),
+        foodsDB: DataFoods.db(),
         housesDB: DataHouses.db(),
         transportsDB: DataTransports.db(),
         eventsDB: DataEvents.db(),
@@ -66,7 +66,7 @@ class DatabaseCubit extends HydratedCubit<Database> {
         emit(Database(
           jobsDB: DataJobs.db(),
           learningsDB: DataLearnings.db(),
-          mealsDB: DataMeals.db(),
+          foodsDB: DataFoods.db(),
           housesDB: DataHouses.db(),
           transportsDB: DataTransports.db(),
           eventsDB: DataEvents.db(),

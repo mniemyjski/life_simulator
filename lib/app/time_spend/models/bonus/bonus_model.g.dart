@@ -8,8 +8,7 @@ part of 'bonus_model.dart';
 
 _$_Bonus _$$_BonusFromJson(Map<String, dynamic> json) => _$_Bonus(
       eTypeBonus: $enumDecode(_$ETypeBonusEnumMap, json['eTypeBonus']),
-      eTypeBonusSource:
-          $enumDecode(_$ETypeBonusSourceEnumMap, json['eTypeBonusSource']),
+      eTypeBonusSource: $enumDecode(_$ETypeBonusSourceEnumMap, json['eTypeBonusSource']),
       value: json['value'] as int,
     );
 
@@ -28,7 +27,7 @@ const _$ETypeBonusEnumMap = {
 
 const _$ETypeBonusSourceEnumMap = {
   ETypeBonusSource.transport: 'transport',
-  ETypeBonusSource.meal: 'meal',
+  ETypeBonusSource.meal: 'foods',
   ETypeBonusSource.house: 'house',
   ETypeBonusSource.job: 'job',
 };

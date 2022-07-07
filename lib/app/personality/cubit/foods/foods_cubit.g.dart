@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'meal_cubit.dart';
+part of 'foods_cubit.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -23,11 +23,11 @@ Map<String, dynamic> _$$LoadingToJson(_$Loading instance) => <String, dynamic>{
     };
 
 _$Loaded _$$LoadedFromJson(Map<String, dynamic> json) => _$Loaded(
-      meal: Meal.fromJson(json['meal'] as Map<String, dynamic>),
+      food: Food.fromJson(json['food'] as Map<String, dynamic>),
       $type: json['runtimeType'] as String?,
     );
 
 Map<String, dynamic> _$$LoadedToJson(_$Loaded instance) => <String, dynamic>{
-      'meal': instance.meal.toJson(),
+      'food': instance.food.toJson(),
       'runtimeType': instance.$type,
     };

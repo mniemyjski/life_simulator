@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'meal_model.dart';
+part of 'food_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Meal _$$_MealFromJson(Map<String, dynamic> json) => _$_Meal(
+_$_Food _$$_FoodFromJson(Map<String, dynamic> json) => _$_Food(
       id: json['id'] as String,
       name: json['name'] as String,
       cost: (json['cost'] as num).toDouble(),
@@ -15,7 +15,7 @@ _$_Meal _$$_MealFromJson(Map<String, dynamic> json) => _$_Meal(
       bonusToLearn: json['bonusToLearn'] as int? ?? 0,
     );
 
-Map<String, dynamic> _$$_MealToJson(_$_Meal instance) => <String, dynamic>{
+Map<String, dynamic> _$$_FoodToJson(_$_Food instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'cost': instance.cost,

@@ -28,10 +28,15 @@ class MedicinesScreen extends StatelessWidget {
                           itemBuilder: (context, index) {
                             final Medicine medicine = medicines[index];
 
-                            TextStyle txtStyle = Theme.of(context)
-                                .textTheme
-                                .bodyText2!
-                                .copyWith(color: medicine.active ? Colors.white : Colors.grey);
+                            TextStyle txtStyle = medicine.active
+                                ? TextStyle(
+                                    color: Theme.of(context).textTheme.bodyText2?.color ??
+                                        Colors.white,
+                                    fontSize: 10)
+                                : TextStyle(
+                                    color: Theme.of(context).textTheme.bodyText1?.color ??
+                                        Colors.black,
+                                    fontSize: 10);
 
                             return Card(
                               color: medicine.active ? Theme.of(context).primaryColor : null,
@@ -95,12 +100,12 @@ class MedicinesScreen extends StatelessWidget {
                                         ),
                                       ],
                                     ),
-                                    IconButton(
-                                      onPressed: () =>
-                                          context.read<MedicinesCubit>().buy(medicine.id),
-                                      icon: const FaIcon(FontAwesomeIcons.circleCheck),
-                                      color: medicine.active ? Colors.white : Colors.grey,
-                                    ),
+                                    if (!medicine.active)
+                                      IconButton(
+                                        onPressed: () =>
+                                            context.read<MedicinesCubit>().buy(medicine.id),
+                                        icon: const FaIcon(FontAwesomeIcons.plus),
+                                      ),
                                   ],
                                 ),
                               ),

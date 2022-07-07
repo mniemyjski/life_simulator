@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'meal_cubit.dart';
+part of 'foods_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-MealState _$MealStateFromJson(Map<String, dynamic> json) {
+FoodsState _$FoodsStateFromJson(Map<String, dynamic> json) {
   switch (json['runtimeType']) {
     case 'initial':
       return Initial.fromJson(json);
@@ -24,32 +24,32 @@ MealState _$MealStateFromJson(Map<String, dynamic> json) {
       return Loaded.fromJson(json);
 
     default:
-      throw CheckedFromJsonException(json, 'runtimeType', 'MealState',
+      throw CheckedFromJsonException(json, 'runtimeType', 'FoodsState',
           'Invalid union type "${json['runtimeType']}"!');
   }
 }
 
 /// @nodoc
-mixin _$MealState {
+mixin _$FoodsState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Meal meal) loaded,
+    required TResult Function(Food food) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Meal meal)? loaded,
+    TResult Function(Food food)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Meal meal)? loaded,
+    TResult Function(Food food)? loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -79,18 +79,19 @@ mixin _$MealState {
 }
 
 /// @nodoc
-abstract class $MealStateCopyWith<$Res> {
-  factory $MealStateCopyWith(MealState value, $Res Function(MealState) then) =
-      _$MealStateCopyWithImpl<$Res>;
+abstract class $FoodsStateCopyWith<$Res> {
+  factory $FoodsStateCopyWith(
+          FoodsState value, $Res Function(FoodsState) then) =
+      _$FoodsStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$MealStateCopyWithImpl<$Res> implements $MealStateCopyWith<$Res> {
-  _$MealStateCopyWithImpl(this._value, this._then);
+class _$FoodsStateCopyWithImpl<$Res> implements $FoodsStateCopyWith<$Res> {
+  _$FoodsStateCopyWithImpl(this._value, this._then);
 
-  final MealState _value;
+  final FoodsState _value;
   // ignore: unused_field
-  final $Res Function(MealState) _then;
+  final $Res Function(FoodsState) _then;
 }
 
 /// @nodoc
@@ -100,7 +101,7 @@ abstract class _$$InitialCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$InitialCopyWithImpl<$Res> extends _$MealStateCopyWithImpl<$Res>
+class __$$InitialCopyWithImpl<$Res> extends _$FoodsStateCopyWithImpl<$Res>
     implements _$$InitialCopyWith<$Res> {
   __$$InitialCopyWithImpl(_$Initial _value, $Res Function(_$Initial) _then)
       : super(_value, (v) => _then(v as _$Initial));
@@ -122,7 +123,7 @@ class _$Initial implements Initial {
 
   @override
   String toString() {
-    return 'MealState.initial()';
+    return 'FoodsState.initial()';
   }
 
   @override
@@ -140,7 +141,7 @@ class _$Initial implements Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Meal meal) loaded,
+    required TResult Function(Food food) loaded,
   }) {
     return initial();
   }
@@ -150,7 +151,7 @@ class _$Initial implements Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Meal meal)? loaded,
+    TResult Function(Food food)? loaded,
   }) {
     return initial?.call();
   }
@@ -160,7 +161,7 @@ class _$Initial implements Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Meal meal)? loaded,
+    TResult Function(Food food)? loaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -209,7 +210,7 @@ class _$Initial implements Initial {
   }
 }
 
-abstract class Initial implements MealState {
+abstract class Initial implements FoodsState {
   const factory Initial() = _$Initial;
 
   factory Initial.fromJson(Map<String, dynamic> json) = _$Initial.fromJson;
@@ -222,7 +223,7 @@ abstract class _$$LoadingCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$LoadingCopyWithImpl<$Res> extends _$MealStateCopyWithImpl<$Res>
+class __$$LoadingCopyWithImpl<$Res> extends _$FoodsStateCopyWithImpl<$Res>
     implements _$$LoadingCopyWith<$Res> {
   __$$LoadingCopyWithImpl(_$Loading _value, $Res Function(_$Loading) _then)
       : super(_value, (v) => _then(v as _$Loading));
@@ -244,7 +245,7 @@ class _$Loading implements Loading {
 
   @override
   String toString() {
-    return 'MealState.loading()';
+    return 'FoodsState.loading()';
   }
 
   @override
@@ -262,7 +263,7 @@ class _$Loading implements Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Meal meal) loaded,
+    required TResult Function(Food food) loaded,
   }) {
     return loading();
   }
@@ -272,7 +273,7 @@ class _$Loading implements Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Meal meal)? loaded,
+    TResult Function(Food food)? loaded,
   }) {
     return loading?.call();
   }
@@ -282,7 +283,7 @@ class _$Loading implements Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Meal meal)? loaded,
+    TResult Function(Food food)? loaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -331,7 +332,7 @@ class _$Loading implements Loading {
   }
 }
 
-abstract class Loading implements MealState {
+abstract class Loading implements FoodsState {
   const factory Loading() = _$Loading;
 
   factory Loading.fromJson(Map<String, dynamic> json) = _$Loading.fromJson;
@@ -341,13 +342,13 @@ abstract class Loading implements MealState {
 abstract class _$$LoadedCopyWith<$Res> {
   factory _$$LoadedCopyWith(_$Loaded value, $Res Function(_$Loaded) then) =
       __$$LoadedCopyWithImpl<$Res>;
-  $Res call({Meal meal});
+  $Res call({Food food});
 
-  $MealCopyWith<$Res> get meal;
+  $FoodCopyWith<$Res> get food;
 }
 
 /// @nodoc
-class __$$LoadedCopyWithImpl<$Res> extends _$MealStateCopyWithImpl<$Res>
+class __$$LoadedCopyWithImpl<$Res> extends _$FoodsStateCopyWithImpl<$Res>
     implements _$$LoadedCopyWith<$Res> {
   __$$LoadedCopyWithImpl(_$Loaded _value, $Res Function(_$Loaded) _then)
       : super(_value, (v) => _then(v as _$Loaded));
@@ -357,20 +358,20 @@ class __$$LoadedCopyWithImpl<$Res> extends _$MealStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? meal = freezed,
+    Object? food = freezed,
   }) {
     return _then(_$Loaded(
-      meal: meal == freezed
-          ? _value.meal
-          : meal // ignore: cast_nullable_to_non_nullable
-              as Meal,
+      food: food == freezed
+          ? _value.food
+          : food // ignore: cast_nullable_to_non_nullable
+              as Food,
     ));
   }
 
   @override
-  $MealCopyWith<$Res> get meal {
-    return $MealCopyWith<$Res>(_value.meal, (value) {
-      return _then(_value.copyWith(meal: value));
+  $FoodCopyWith<$Res> get food {
+    return $FoodCopyWith<$Res>(_value.food, (value) {
+      return _then(_value.copyWith(food: value));
     });
   }
 }
@@ -378,21 +379,21 @@ class __$$LoadedCopyWithImpl<$Res> extends _$MealStateCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$Loaded implements Loaded {
-  const _$Loaded({required this.meal, final String? $type})
+  const _$Loaded({required this.food, final String? $type})
       : $type = $type ?? 'loaded';
 
   factory _$Loaded.fromJson(Map<String, dynamic> json) =>
       _$$LoadedFromJson(json);
 
   @override
-  final Meal meal;
+  final Food food;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'MealState.loaded(meal: $meal)';
+    return 'FoodsState.loaded(food: $food)';
   }
 
   @override
@@ -400,13 +401,13 @@ class _$Loaded implements Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$Loaded &&
-            const DeepCollectionEquality().equals(other.meal, meal));
+            const DeepCollectionEquality().equals(other.food, food));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(meal));
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(food));
 
   @JsonKey(ignore: true)
   @override
@@ -418,9 +419,9 @@ class _$Loaded implements Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Meal meal) loaded,
+    required TResult Function(Food food) loaded,
   }) {
-    return loaded(meal);
+    return loaded(food);
   }
 
   @override
@@ -428,9 +429,9 @@ class _$Loaded implements Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Meal meal)? loaded,
+    TResult Function(Food food)? loaded,
   }) {
-    return loaded?.call(meal);
+    return loaded?.call(food);
   }
 
   @override
@@ -438,11 +439,11 @@ class _$Loaded implements Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Meal meal)? loaded,
+    TResult Function(Food food)? loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(meal);
+      return loaded(food);
     }
     return orElse();
   }
@@ -487,12 +488,12 @@ class _$Loaded implements Loaded {
   }
 }
 
-abstract class Loaded implements MealState {
-  const factory Loaded({required final Meal meal}) = _$Loaded;
+abstract class Loaded implements FoodsState {
+  const factory Loaded({required final Food food}) = _$Loaded;
 
   factory Loaded.fromJson(Map<String, dynamic> json) = _$Loaded.fromJson;
 
-  Meal get meal => throw _privateConstructorUsedError;
+  Food get food => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$LoadedCopyWith<_$Loaded> get copyWith =>
       throw _privateConstructorUsedError;

@@ -7,6 +7,7 @@ import 'package:life_simulator/app/database/cubit/database_cubit.dart';
 import 'package:life_simulator/app/game/widget/app_bar_stats.dart';
 import 'package:life_simulator/app/personality/cubit/transport/transport_cubit.dart';
 
+import '../settings/cubit/dark_mode_cubit.dart';
 import 'models/transport/transport_model.dart';
 
 class CarScreen extends StatelessWidget {
@@ -166,8 +167,10 @@ class CarScreen extends StatelessWidget {
                 IconButton(
                     onPressed: onPressed,
                     icon: FaIcon(
-                      owned ? Icons.sell : FontAwesomeIcons.cartShopping,
-                      color: owned ? Colors.white : Colors.black,
+                      owned ? FontAwesomeIcons.minus : FontAwesomeIcons.plus,
+                      color: owned || context.read<DarkModeCubit>().state
+                          ? Colors.white
+                          : Colors.black,
                     ))
               ],
             ),

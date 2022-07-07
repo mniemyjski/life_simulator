@@ -1,13 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:life_simulator/app/game/widget/app_bar_stats.dart';
 import 'package:life_simulator/config/routes/routes.gr.dart';
+import 'package:life_simulator/constants/constants.dart';
+import 'package:life_simulator/utilities/utilities.dart';
 import 'package:life_simulator/widgets/widgets.dart';
 
-import '../../config/injectable/injection.dart';
-import 'cubit/meal/meal_cubit.dart';
 import 'models/house/house_model.dart';
 
 class PersonalityScreen extends StatelessWidget {
@@ -20,43 +19,57 @@ class PersonalityScreen extends StatelessWidget {
         body: Column(
           children: [
             AppBarStats(),
-            CustomDropDownList(
-              title: 'Choose your meal:',
-              list:
-                  CustomDropDownList.toSelectedListItem(context.watch<MealCubit>().toListString()),
-              selected: context.watch<MealCubit>().state.maybeWhen(
-                    orElse: () => '',
-                    loaded: (meal) => meal.name,
+            // CustomDropDownList(
+            //   title: 'Choose your meal:',
+            //   list:
+            //       CustomDropDownList.toSelectedListItem(context.watch<MealCubit>().toListString()),
+            //   selected: context.watch<MealCubit>().state.maybeWhen(
+            //         orElse: () => '',
+            //         loaded: (meal) => meal.name,
+            //       ),
+            //   onChange: (value) => getIt<MealCubit>().change(value),
+            // ),
+            Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: CustomButton(
+                        onPressed: () =>
+                            context.router.push(HouseRoute(eTypeHouse: ETypeHouse.rent)),
+                        child: Text(LocaleKeys.rentHouse.tr())),
                   ),
-              onChange: (value) => getIt<MealCubit>().change(value),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: CustomButton(
+                        onPressed: () =>
+                            context.router.push(HouseRoute(eTypeHouse: ETypeHouse.buy)),
+                        child: Text(LocaleKeys.buyHouse.tr())),
+                  ),
+                ),
+              ],
             ),
             Row(
               children: [
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(4.0),
                     child: CustomButton(
-                        onPressed: () =>
-                            context.router.push(HouseRoute(eTypeHouse: ETypeHouse.rent)),
-                        child: Text('rent house')),
+                        onPressed: () => context.router.push(const CarRoute()),
+                        child: Text(LocaleKeys.buyTransport.tr())),
                   ),
                 ),
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(4.0),
                     child: CustomButton(
-                        onPressed: () =>
-                            context.router.push(HouseRoute(eTypeHouse: ETypeHouse.buy)),
-                        child: Text('buy house')),
+                        onPressed: () => context.router.push(const FoodsRoute()),
+                        child: Text(LocaleKeys.food.tr())),
                   ),
                 ),
               ],
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: CustomButton(
-                  onPressed: () => context.router.push(const CarRoute()),
-                  child: Text('buy transport')),
             ),
           ],
         ),
@@ -66,7 +79,7 @@ class PersonalityScreen extends StatelessWidget {
           child: FloatingActionButton(
             heroTag: null,
             onPressed: () => context.router.pop(),
-            child: FaIcon(FontAwesomeIcons.arrowRotateLeft),
+            child: const FaIcon(FontAwesomeIcons.arrowRotateLeft),
           ),
         ),
       ),

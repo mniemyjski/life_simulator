@@ -55,6 +55,10 @@
   "change": "Change",
   "amount": "Amount",
   "average": "Average",
+  "buyTransport": "Buy transport",
+  "buyHouse": "Buy house",
+  "rentHouse": "Rent house",
+  "food": "Food",
   "level": "Level"
 
 }

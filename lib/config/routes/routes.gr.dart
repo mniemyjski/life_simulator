@@ -10,8 +10,8 @@
 //
 // ignore_for_file: type=lint
 
-import 'package:auto_route/auto_route.dart' as _i20;
-import 'package:flutter/material.dart' as _i21;
+import 'package:auto_route/auto_route.dart' as _i21;
+import 'package:flutter/material.dart' as _i22;
 
 import '../../app/bank/bank_screen.dart' as _i11;
 import '../../app/game/game_screen.dart' as _i3;
@@ -20,8 +20,9 @@ import '../../app/income/income_screen.dart' as _i7;
 import '../../app/job/job_screen.dart' as _i4;
 import '../../app/learning/learning_screen.dart' as _i6;
 import '../../app/medicines/medicines_screen.dart' as _i12;
+import '../../app/personality/foods_screen.dart' as _i20;
 import '../../app/personality/house_screen.dart' as _i9;
-import '../../app/personality/models/house/house_model.dart' as _i22;
+import '../../app/personality/models/house/house_model.dart' as _i23;
 import '../../app/personality/personality_screen.dart' as _i8;
 import '../../app/personality/transport_screen.dart' as _i10;
 import '../../app/real_assets/asset_screen.dart' as _i16;
@@ -34,123 +35,128 @@ import '../../app/stock_market/instrument_screen.dart' as _i19;
 import '../../app/stock_market/stock_market_screen.dart' as _i18;
 import '../../app/time_spend/time_spend_screen.dart' as _i5;
 
-class AppRouter extends _i20.RootStackRouter {
-  AppRouter([_i21.GlobalKey<_i21.NavigatorState>? navigatorKey])
+class AppRouter extends _i21.RootStackRouter {
+  AppRouter([_i22.GlobalKey<_i22.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
-  final Map<String, _i20.PageFactory> pagesMap = {
+  final Map<String, _i21.PageFactory> pagesMap = {
     HomeRoute.name: (routeData) {
-      return _i20.MaterialPageX<dynamic>(
+      return _i21.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i1.HomeScreen());
     },
     SettingsRoute.name: (routeData) {
-      return _i20.MaterialPageX<dynamic>(
+      return _i21.MaterialPageX<dynamic>(
           routeData: routeData, child: _i2.SettingsScreen());
     },
     GameRoute.name: (routeData) {
-      return _i20.MaterialPageX<dynamic>(
+      return _i21.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i3.GameScreen());
     },
     JobRoute.name: (routeData) {
-      return _i20.MaterialPageX<dynamic>(
+      return _i21.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i4.JobScreen());
     },
     TimeSpendRoute.name: (routeData) {
-      return _i20.MaterialPageX<dynamic>(
+      return _i21.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i5.TimeSpendScreen());
     },
     LearningRoute.name: (routeData) {
-      return _i20.MaterialPageX<dynamic>(
+      return _i21.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i6.LearningScreen());
     },
     IncomeRoute.name: (routeData) {
-      return _i20.MaterialPageX<dynamic>(
+      return _i21.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i7.IncomeScreen());
     },
     PersonalityRoute.name: (routeData) {
-      return _i20.MaterialPageX<dynamic>(
+      return _i21.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i8.PersonalityScreen());
     },
     HouseRoute.name: (routeData) {
       final args = routeData.argsAs<HouseRouteArgs>();
-      return _i20.MaterialPageX<dynamic>(
+      return _i21.MaterialPageX<dynamic>(
           routeData: routeData,
           child: _i9.HouseScreen(key: args.key, eTypeHouse: args.eTypeHouse));
     },
     CarRoute.name: (routeData) {
-      return _i20.MaterialPageX<dynamic>(
+      return _i21.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i10.CarScreen());
     },
     BankRoute.name: (routeData) {
-      return _i20.MaterialPageX<dynamic>(
+      return _i21.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i11.BankScreen());
     },
     MedicinesRoute.name: (routeData) {
-      return _i20.MaterialPageX<dynamic>(
+      return _i21.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i12.MedicinesScreen());
     },
     RealAssetsRoute.name: (routeData) {
-      return _i20.MaterialPageX<dynamic>(
+      return _i21.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i13.RealAssetsScreen());
     },
     BuildAssetsRoute.name: (routeData) {
-      return _i20.MaterialPageX<dynamic>(
+      return _i21.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i14.BuildAssetsScreen());
     },
     BuyAssetsRoute.name: (routeData) {
-      return _i20.MaterialPageX<dynamic>(
+      return _i21.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i15.BuyAssetsScreen());
     },
     AssetRoute.name: (routeData) {
       final args = routeData.argsAs<AssetRouteArgs>();
-      return _i20.MaterialPageX<dynamic>(
+      return _i21.MaterialPageX<dynamic>(
           routeData: routeData,
           child: _i16.AssetScreen(key: args.key, id: args.id));
     },
     TenantsRoute.name: (routeData) {
-      return _i20.MaterialPageX<dynamic>(
+      return _i21.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i17.TenantsScreen());
     },
     StockMarketRoute.name: (routeData) {
-      return _i20.MaterialPageX<dynamic>(
+      return _i21.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i18.StockMarketScreen());
     },
     InstrumentRoute.name: (routeData) {
       final args = routeData.argsAs<InstrumentRouteArgs>();
-      return _i20.MaterialPageX<dynamic>(
+      return _i21.MaterialPageX<dynamic>(
           routeData: routeData,
           child: _i19.InstrumentScreen(key: args.key, id: args.id));
+    },
+    FoodsRoute.name: (routeData) {
+      return _i21.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i20.FoodsScreen());
     }
   };
 
   @override
-  List<_i20.RouteConfig> get routes => [
-        _i20.RouteConfig(HomeRoute.name, path: '/'),
-        _i20.RouteConfig(SettingsRoute.name, path: '/settings-screen'),
-        _i20.RouteConfig(GameRoute.name, path: '/game-screen'),
-        _i20.RouteConfig(JobRoute.name, path: '/job-screen'),
-        _i20.RouteConfig(TimeSpendRoute.name, path: '/time-spend-screen'),
-        _i20.RouteConfig(LearningRoute.name, path: '/learning-screen'),
-        _i20.RouteConfig(IncomeRoute.name, path: '/income-screen'),
-        _i20.RouteConfig(PersonalityRoute.name, path: '/personality-screen'),
-        _i20.RouteConfig(HouseRoute.name, path: '/house-screen'),
-        _i20.RouteConfig(CarRoute.name, path: '/car-screen'),
-        _i20.RouteConfig(BankRoute.name, path: '/bank-screen'),
-        _i20.RouteConfig(MedicinesRoute.name, path: '/medicines-screen'),
-        _i20.RouteConfig(RealAssetsRoute.name, path: '/real-assets-screen'),
-        _i20.RouteConfig(BuildAssetsRoute.name, path: '/build-assets-screen'),
-        _i20.RouteConfig(BuyAssetsRoute.name, path: '/buy-assets-screen'),
-        _i20.RouteConfig(AssetRoute.name, path: '/asset-screen'),
-        _i20.RouteConfig(TenantsRoute.name, path: '/tenants-screen'),
-        _i20.RouteConfig(StockMarketRoute.name, path: '/stock-market-screen'),
-        _i20.RouteConfig(InstrumentRoute.name, path: '/instrument-screen')
+  List<_i21.RouteConfig> get routes => [
+        _i21.RouteConfig(HomeRoute.name, path: '/'),
+        _i21.RouteConfig(SettingsRoute.name, path: '/settings-screen'),
+        _i21.RouteConfig(GameRoute.name, path: '/game-screen'),
+        _i21.RouteConfig(JobRoute.name, path: '/job-screen'),
+        _i21.RouteConfig(TimeSpendRoute.name, path: '/time-spend-screen'),
+        _i21.RouteConfig(LearningRoute.name, path: '/learning-screen'),
+        _i21.RouteConfig(IncomeRoute.name, path: '/income-screen'),
+        _i21.RouteConfig(PersonalityRoute.name, path: '/personality-screen'),
+        _i21.RouteConfig(HouseRoute.name, path: '/house-screen'),
+        _i21.RouteConfig(CarRoute.name, path: '/car-screen'),
+        _i21.RouteConfig(BankRoute.name, path: '/bank-screen'),
+        _i21.RouteConfig(MedicinesRoute.name, path: '/medicines-screen'),
+        _i21.RouteConfig(RealAssetsRoute.name, path: '/real-assets-screen'),
+        _i21.RouteConfig(BuildAssetsRoute.name, path: '/build-assets-screen'),
+        _i21.RouteConfig(BuyAssetsRoute.name, path: '/buy-assets-screen'),
+        _i21.RouteConfig(AssetRoute.name, path: '/asset-screen'),
+        _i21.RouteConfig(TenantsRoute.name, path: '/tenants-screen'),
+        _i21.RouteConfig(StockMarketRoute.name, path: '/stock-market-screen'),
+        _i21.RouteConfig(InstrumentRoute.name, path: '/instrument-screen'),
+        _i21.RouteConfig(FoodsRoute.name, path: '/foods-screen')
       ];
 }
 
 /// generated route for
 /// [_i1.HomeScreen]
-class HomeRoute extends _i20.PageRouteInfo<void> {
+class HomeRoute extends _i21.PageRouteInfo<void> {
   const HomeRoute() : super(HomeRoute.name, path: '/');
 
   static const String name = 'HomeRoute';
@@ -158,7 +164,7 @@ class HomeRoute extends _i20.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.SettingsScreen]
-class SettingsRoute extends _i20.PageRouteInfo<void> {
+class SettingsRoute extends _i21.PageRouteInfo<void> {
   const SettingsRoute() : super(SettingsRoute.name, path: '/settings-screen');
 
   static const String name = 'SettingsRoute';
@@ -166,7 +172,7 @@ class SettingsRoute extends _i20.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.GameScreen]
-class GameRoute extends _i20.PageRouteInfo<void> {
+class GameRoute extends _i21.PageRouteInfo<void> {
   const GameRoute() : super(GameRoute.name, path: '/game-screen');
 
   static const String name = 'GameRoute';
@@ -174,7 +180,7 @@ class GameRoute extends _i20.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.JobScreen]
-class JobRoute extends _i20.PageRouteInfo<void> {
+class JobRoute extends _i21.PageRouteInfo<void> {
   const JobRoute() : super(JobRoute.name, path: '/job-screen');
 
   static const String name = 'JobRoute';
@@ -182,7 +188,7 @@ class JobRoute extends _i20.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.TimeSpendScreen]
-class TimeSpendRoute extends _i20.PageRouteInfo<void> {
+class TimeSpendRoute extends _i21.PageRouteInfo<void> {
   const TimeSpendRoute()
       : super(TimeSpendRoute.name, path: '/time-spend-screen');
 
@@ -191,7 +197,7 @@ class TimeSpendRoute extends _i20.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i6.LearningScreen]
-class LearningRoute extends _i20.PageRouteInfo<void> {
+class LearningRoute extends _i21.PageRouteInfo<void> {
   const LearningRoute() : super(LearningRoute.name, path: '/learning-screen');
 
   static const String name = 'LearningRoute';
@@ -199,7 +205,7 @@ class LearningRoute extends _i20.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i7.IncomeScreen]
-class IncomeRoute extends _i20.PageRouteInfo<void> {
+class IncomeRoute extends _i21.PageRouteInfo<void> {
   const IncomeRoute() : super(IncomeRoute.name, path: '/income-screen');
 
   static const String name = 'IncomeRoute';
@@ -207,7 +213,7 @@ class IncomeRoute extends _i20.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i8.PersonalityScreen]
-class PersonalityRoute extends _i20.PageRouteInfo<void> {
+class PersonalityRoute extends _i21.PageRouteInfo<void> {
   const PersonalityRoute()
       : super(PersonalityRoute.name, path: '/personality-screen');
 
@@ -216,8 +222,8 @@ class PersonalityRoute extends _i20.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i9.HouseScreen]
-class HouseRoute extends _i20.PageRouteInfo<HouseRouteArgs> {
-  HouseRoute({_i21.Key? key, required _i22.ETypeHouse eTypeHouse})
+class HouseRoute extends _i21.PageRouteInfo<HouseRouteArgs> {
+  HouseRoute({_i22.Key? key, required _i23.ETypeHouse eTypeHouse})
       : super(HouseRoute.name,
             path: '/house-screen',
             args: HouseRouteArgs(key: key, eTypeHouse: eTypeHouse));
@@ -228,9 +234,9 @@ class HouseRoute extends _i20.PageRouteInfo<HouseRouteArgs> {
 class HouseRouteArgs {
   const HouseRouteArgs({this.key, required this.eTypeHouse});
 
-  final _i21.Key? key;
+  final _i22.Key? key;
 
-  final _i22.ETypeHouse eTypeHouse;
+  final _i23.ETypeHouse eTypeHouse;
 
   @override
   String toString() {
@@ -240,7 +246,7 @@ class HouseRouteArgs {
 
 /// generated route for
 /// [_i10.CarScreen]
-class CarRoute extends _i20.PageRouteInfo<void> {
+class CarRoute extends _i21.PageRouteInfo<void> {
   const CarRoute() : super(CarRoute.name, path: '/car-screen');
 
   static const String name = 'CarRoute';
@@ -248,7 +254,7 @@ class CarRoute extends _i20.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i11.BankScreen]
-class BankRoute extends _i20.PageRouteInfo<void> {
+class BankRoute extends _i21.PageRouteInfo<void> {
   const BankRoute() : super(BankRoute.name, path: '/bank-screen');
 
   static const String name = 'BankRoute';
@@ -256,7 +262,7 @@ class BankRoute extends _i20.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i12.MedicinesScreen]
-class MedicinesRoute extends _i20.PageRouteInfo<void> {
+class MedicinesRoute extends _i21.PageRouteInfo<void> {
   const MedicinesRoute()
       : super(MedicinesRoute.name, path: '/medicines-screen');
 
@@ -265,7 +271,7 @@ class MedicinesRoute extends _i20.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i13.RealAssetsScreen]
-class RealAssetsRoute extends _i20.PageRouteInfo<void> {
+class RealAssetsRoute extends _i21.PageRouteInfo<void> {
   const RealAssetsRoute()
       : super(RealAssetsRoute.name, path: '/real-assets-screen');
 
@@ -274,7 +280,7 @@ class RealAssetsRoute extends _i20.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i14.BuildAssetsScreen]
-class BuildAssetsRoute extends _i20.PageRouteInfo<void> {
+class BuildAssetsRoute extends _i21.PageRouteInfo<void> {
   const BuildAssetsRoute()
       : super(BuildAssetsRoute.name, path: '/build-assets-screen');
 
@@ -283,7 +289,7 @@ class BuildAssetsRoute extends _i20.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i15.BuyAssetsScreen]
-class BuyAssetsRoute extends _i20.PageRouteInfo<void> {
+class BuyAssetsRoute extends _i21.PageRouteInfo<void> {
   const BuyAssetsRoute()
       : super(BuyAssetsRoute.name, path: '/buy-assets-screen');
 
@@ -292,8 +298,8 @@ class BuyAssetsRoute extends _i20.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i16.AssetScreen]
-class AssetRoute extends _i20.PageRouteInfo<AssetRouteArgs> {
-  AssetRoute({_i21.Key? key, required String id})
+class AssetRoute extends _i21.PageRouteInfo<AssetRouteArgs> {
+  AssetRoute({_i22.Key? key, required String id})
       : super(AssetRoute.name,
             path: '/asset-screen', args: AssetRouteArgs(key: key, id: id));
 
@@ -303,7 +309,7 @@ class AssetRoute extends _i20.PageRouteInfo<AssetRouteArgs> {
 class AssetRouteArgs {
   const AssetRouteArgs({this.key, required this.id});
 
-  final _i21.Key? key;
+  final _i22.Key? key;
 
   final String id;
 
@@ -315,7 +321,7 @@ class AssetRouteArgs {
 
 /// generated route for
 /// [_i17.TenantsScreen]
-class TenantsRoute extends _i20.PageRouteInfo<void> {
+class TenantsRoute extends _i21.PageRouteInfo<void> {
   const TenantsRoute() : super(TenantsRoute.name, path: '/tenants-screen');
 
   static const String name = 'TenantsRoute';
@@ -323,7 +329,7 @@ class TenantsRoute extends _i20.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i18.StockMarketScreen]
-class StockMarketRoute extends _i20.PageRouteInfo<void> {
+class StockMarketRoute extends _i21.PageRouteInfo<void> {
   const StockMarketRoute()
       : super(StockMarketRoute.name, path: '/stock-market-screen');
 
@@ -332,8 +338,8 @@ class StockMarketRoute extends _i20.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i19.InstrumentScreen]
-class InstrumentRoute extends _i20.PageRouteInfo<InstrumentRouteArgs> {
-  InstrumentRoute({_i21.Key? key, required String id})
+class InstrumentRoute extends _i21.PageRouteInfo<InstrumentRouteArgs> {
+  InstrumentRoute({_i22.Key? key, required String id})
       : super(InstrumentRoute.name,
             path: '/instrument-screen',
             args: InstrumentRouteArgs(key: key, id: id));
@@ -344,7 +350,7 @@ class InstrumentRoute extends _i20.PageRouteInfo<InstrumentRouteArgs> {
 class InstrumentRouteArgs {
   const InstrumentRouteArgs({this.key, required this.id});
 
-  final _i21.Key? key;
+  final _i22.Key? key;
 
   final String id;
 
@@ -352,4 +358,12 @@ class InstrumentRouteArgs {
   String toString() {
     return 'InstrumentRouteArgs{key: $key, id: $id}';
   }
+}
+
+/// generated route for
+/// [_i20.FoodsScreen]
+class FoodsRoute extends _i21.PageRouteInfo<void> {
+  const FoodsRoute() : super(FoodsRoute.name, path: '/foods-screen');
+
+  static const String name = 'FoodsRoute';
 }

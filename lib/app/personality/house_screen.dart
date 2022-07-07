@@ -7,6 +7,7 @@ import 'package:life_simulator/app/database/cubit/database_cubit.dart';
 import 'package:life_simulator/app/game/widget/app_bar_stats.dart';
 import 'package:life_simulator/app/personality/cubit/house/house_cubit.dart';
 import 'package:life_simulator/app/personality/models/house/house_model.dart';
+import 'package:life_simulator/app/settings/cubit/dark_mode_cubit.dart';
 
 class HouseScreen extends StatelessWidget {
   final ETypeHouse eTypeHouse;
@@ -173,8 +174,10 @@ class HouseScreen extends StatelessWidget {
                 IconButton(
                     onPressed: onPressed,
                     icon: FaIcon(
-                      owned ? Icons.sell : FontAwesomeIcons.cartShopping,
-                      color: owned ? Colors.white : Colors.black,
+                      owned ? FontAwesomeIcons.minus : FontAwesomeIcons.plus,
+                      color: owned || context.read<DarkModeCubit>().state
+                          ? Colors.white
+                          : Colors.black,
                     ))
               ],
             ),

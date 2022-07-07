@@ -10,11 +10,9 @@ _$_Income _$$_IncomeFromJson(Map<String, dynamic> json) => _$_Income(
       id: json['id'] as String,
       source: $enumDecode(_$ETypeSourceEnumMap, json['source']),
       typeIncome: $enumDecode(_$ETypeIncomeEnumMap, json['typeIncome']),
-      eTypeFrequency:
-          $enumDecode(_$ETypeFrequencyEnumMap, json['eTypeFrequency']),
+      eTypeFrequency: $enumDecode(_$ETypeFrequencyEnumMap, json['eTypeFrequency']),
       value: (json['value'] as num).toDouble(),
-      next:
-          json['next'] == null ? null : DateTime.parse(json['next'] as String),
+      next: json['next'] == null ? null : DateTime.parse(json['next'] as String),
     );
 
 Map<String, dynamic> _$$_IncomeToJson(_$_Income instance) => <String, dynamic>{
@@ -28,7 +26,7 @@ Map<String, dynamic> _$$_IncomeToJson(_$_Income instance) => <String, dynamic>{
 
 const _$ETypeSourceEnumMap = {
   ETypeSource.job: 'job',
-  ETypeSource.meal: 'meal',
+  ETypeSource.meal: 'foods',
   ETypeSource.house: 'house',
   ETypeSource.car: 'car',
   ETypeSource.asset: 'asset',
