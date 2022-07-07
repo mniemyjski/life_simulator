@@ -239,6 +239,9 @@ class AssetScreen extends StatelessWidget {
                     );
                   });
             }),
+          ),
+          SizedBox(
+            height: 80,
           )
         ],
       );

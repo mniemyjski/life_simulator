@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:interactive_chart/interactive_chart.dart';
+import 'package:life_simulator/app/date/widgets/next_day.dart';
 import 'package:life_simulator/app/game/widget/app_bar_stats.dart';
 import 'package:life_simulator/app/stock_market/cubit/stock_market/stock_market_cubit.dart';
 import 'package:life_simulator/app/stock_market/cubit/transactions/transactions_cubit.dart';
@@ -291,6 +292,7 @@ class InstrumentScreen extends StatelessWidget {
                 onPressed: () => context.router.pop(),
                 child: const FaIcon(FontAwesomeIcons.arrowRotateLeft),
               ),
+              const NextDayButton(),
             ],
           ),
         ),

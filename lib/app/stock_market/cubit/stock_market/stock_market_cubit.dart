@@ -104,14 +104,14 @@ class StockMarketCubit extends HydratedCubit<StockMarketState> {
 
           for (var i in instruments) {
             Instrument newInstrument = i;
-            List<Candle> newCandles = List.from(newInstrument.candles);
             Candle newCandle;
 
-            newInstrument = _valorization(newInstrument.copyWith(candles: newCandles));
+            newInstrument = _valorization(newInstrument);
 
-            if (newCandles.last.dateTime.millisecondsSinceEpoch >
+            if (newInstrument.candles.last.dateTime.millisecondsSinceEpoch >
                 newInstrument.datTrendEnd.millisecondsSinceEpoch) {
-              newInstrument = _randomChangeTrend(newInstrument, newCandles.last.dateTime);
+              newInstrument =
+                  _randomChangeTrend(newInstrument, newInstrument.candles.last.dateTime);
             }
 
             switch (newInstrument.eTypeTrend) {
@@ -135,7 +135,9 @@ class StockMarketCubit extends HydratedCubit<StockMarketState> {
                 break;
             }
 
-            newCandles.add(newCandle);
+            List<Candle> newCandles = List.of(newInstrument.candles)
+              ..removeAt(0)
+              ..add(newCandle);
             newInstruments.add(newInstrument.copyWith(candles: newCandles));
           }
 

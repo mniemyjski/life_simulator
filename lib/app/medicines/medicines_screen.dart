@@ -28,15 +28,10 @@ class MedicinesScreen extends StatelessWidget {
                           itemBuilder: (context, index) {
                             final Medicine medicine = medicines[index];
 
-                            TextStyle txtStyle = medicine.active
-                                ? Theme.of(context)
-                                    .textTheme
-                                    .bodyText2!
-                                    .copyWith(color: Colors.white)
-                                : Theme.of(context)
-                                    .textTheme
-                                    .bodyText1!
-                                    .copyWith(color: Colors.black);
+                            TextStyle txtStyle = Theme.of(context)
+                                .textTheme
+                                .bodyText2!
+                                .copyWith(color: medicine.active ? Colors.white : Colors.grey);
 
                             return Card(
                               color: medicine.active ? Theme.of(context).primaryColor : null,
@@ -104,7 +99,7 @@ class MedicinesScreen extends StatelessWidget {
                                       onPressed: () =>
                                           context.read<MedicinesCubit>().buy(medicine.id),
                                       icon: const FaIcon(FontAwesomeIcons.circleCheck),
-                                      color: medicine.active ? Colors.white : Colors.black,
+                                      color: medicine.active ? Colors.white : Colors.grey,
                                     ),
                                   ],
                                 ),

@@ -54,7 +54,8 @@ class RealAssetsScreen extends StatelessWidget {
                       });
                 },
               ),
-            )
+            ),
+            SizedBox(height: 80),
           ],
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

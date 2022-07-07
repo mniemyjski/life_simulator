@@ -56,9 +56,10 @@ class IncomeScreen extends StatelessWidget {
                                 child: Text(
                                   'Revenue: ${_revenues.toMoney()}',
                                   style: TextStyle(
-                                      color: Theme.of(context).textTheme.bodyText1!.color),
+                                      color: Theme.of(context).textTheme.bodyText2!.color),
                                 ),
                               ),
+                              color: Colors.green.withOpacity(0.6),
                             ),
                           ),
                           Expanded(
@@ -80,9 +81,10 @@ class IncomeScreen extends StatelessWidget {
                                 child: Text(
                                   'Expense: ${_expenses.toMoney()}',
                                   style: TextStyle(
-                                      color: Theme.of(context).textTheme.bodyText1!.color),
+                                      color: Theme.of(context).textTheme.bodyText2!.color),
                                 ),
                               ),
+                              color: Colors.red.withOpacity(0.6),
                             ),
                           ),
                         ],

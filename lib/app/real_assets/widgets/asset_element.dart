@@ -21,7 +21,7 @@ class AssetElement extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
         child: Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(4.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -89,7 +89,7 @@ class AssetElement extends StatelessWidget {
                               .copyWith(fontWeight: FontWeight.bold),
                         ),
                         TextSpan(
-                          text: asset.value.round().toString(),
+                          text: asset.value.toMoney(),
                         ),
                       ],
                     ),

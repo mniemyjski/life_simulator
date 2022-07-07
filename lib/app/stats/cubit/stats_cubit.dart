@@ -40,7 +40,7 @@ class StatsCubit extends HydratedCubit<StatsState> {
         _dateCubit = dateCubit,
         _eventCubit = eventCubit,
         _medicinesCubit = medicinesCubit,
-        super(StatsState.initial()) {
+        super(const StatsState.initial()) {
     _newGame();
     _dateSub = _dateCubit.stream.listen((d) => d.whenOrNull(loaded: (date) => _counting(date)));
   }
@@ -111,10 +111,10 @@ class StatsCubit extends HydratedCubit<StatsState> {
           _stats = _stats.copyWith(health: _stats.health < 0 ? 0 : _stats.health - 0.05);
         }
         if (sleep > 14) {
-          _stats = _stats.copyWith(health: _stats.health > 1 ? 1 : _stats.health + 0.01);
+          _stats = _stats.copyWith(health: _stats.health >= 1 ? 1 : _stats.health + 0.01);
         }
         if (sick > 0) {
-          _stats = _stats.copyWith(health: _stats.health > 1 ? 1 : _stats.health + sick);
+          _stats = _stats.copyWith(health: _stats.health >= 1 ? 1 : _stats.health + sick);
         }
         if (sick < 0) {
           _stats = _stats.copyWith(health: _stats.health < 0 ? 0 : _stats.health + sick);

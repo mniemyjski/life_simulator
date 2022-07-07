@@ -82,7 +82,7 @@ class SettingsScreen extends StatelessWidget {
                     itemHeight: 40,
                     buttonPadding: const EdgeInsets.only(left: 14, right: 14),
                     buttonDecoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Theme.of(context).cardColor,
                     ),
                   ),
                 ),
