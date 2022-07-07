@@ -99,15 +99,14 @@ class AssetElement extends StatelessWidget {
                       style: Theme.of(context).textTheme.bodyText1,
                       children: <TextSpan>[
                         TextSpan(
-                          text: '${LocaleKeys.tenants.tr()}: ',
+                          text: '${LocaleKeys.renovation.tr()}: ',
                           style: Theme.of(context)
                               .textTheme
                               .bodyText1!
                               .copyWith(fontWeight: FontWeight.bold),
                         ),
                         TextSpan(
-                          text:
-                              '${context.watch<TenantsCubit>().getTenantInAsset(asset).length.toString()}/${asset.tenantsMax.toString()}',
+                          text: '${(asset.renovation).round().toString()}%',
                         ),
                       ],
                     ),
@@ -117,14 +116,15 @@ class AssetElement extends StatelessWidget {
                       style: Theme.of(context).textTheme.bodyText1,
                       children: <TextSpan>[
                         TextSpan(
-                          text: '${LocaleKeys.renovation.tr()}: ',
+                          text: '${LocaleKeys.tenants.tr()}: ',
                           style: Theme.of(context)
                               .textTheme
                               .bodyText1!
                               .copyWith(fontWeight: FontWeight.bold),
                         ),
                         TextSpan(
-                          text: '${(asset.renovation).round().toString()}%',
+                          text:
+                              '${context.watch<TenantsCubit>().getTenantInAsset(asset).length.toString()}/${asset.tenantsMax.toString()}',
                         ),
                       ],
                     ),

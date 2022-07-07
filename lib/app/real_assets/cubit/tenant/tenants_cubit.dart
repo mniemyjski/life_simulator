@@ -60,7 +60,7 @@ class TenantsCubit extends HydratedCubit<TenantsState> {
         orElse: () => 0,
         loaded: (tenants) {
           double rent = 0;
-          for (var element in tenants) {
+          for (var element in tenants.where((element) => element.idAsset == asset.id)) {
             rent += element.rent;
           }
           return rent;
@@ -83,15 +83,15 @@ class TenantsCubit extends HydratedCubit<TenantsState> {
 
     state.whenOrNull(loaded: (tenants) {
       List<Tenant> tenantsDB = _getTenantsDB(asset);
-      List<Tenant> result = List.from(tenants);
+      List<Tenant> result = List.from(tenants.where((element) => element.idAsset == asset.id));
 
-      if (tenants.length < asset.tenantsMax && asset.renovation > 70) {
+      if (result.length < asset.tenantsMax && asset.renovation > 70) {
         final int random = Random().nextInt(tenantsDB.length);
         Tenant newTenant = tenantsDB[random].copyWith(id: const Uuid().v1(), idAsset: asset.id);
         _addIncome(newTenant);
         result.add(newTenant);
 
-        emit(TenantsState.loaded(result));
+        emit(TenantsState.loaded(result..addAll(tenants)));
       }
     });
   }
@@ -135,7 +135,7 @@ class TenantsCubit extends HydratedCubit<TenantsState> {
       for (var e in tenants) {
         if (asset.renovation < 80) {
           int random = Random().nextInt(100);
-          if (random > 95 && e.satisfaction > 0) {
+          if (random > 90 && e.satisfaction > 0) {
             result.add(e.copyWith(satisfaction: e.satisfaction - 1));
           } else {
             result.add(e);
