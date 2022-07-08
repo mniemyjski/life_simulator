@@ -150,7 +150,7 @@ class StockMarketCubit extends HydratedCubit<StockMarketState> {
   Candle _increase({required List<Candle> candles, required DateTime dateTime}) {
     var rng = Random();
 
-    double change = rng.nextInt(5) > 1
+    double change = rng.nextInt(5) > 2
         ? (rng.nextDoubleInRange(0, 5) / 100)
         : (-rng.nextDoubleInRange(0, 2) / 100);
     double newClose = candles.last.close + (candles.last.close * change);
@@ -167,7 +167,7 @@ class StockMarketCubit extends HydratedCubit<StockMarketState> {
   Candle _decrease({required List<Candle> candles, required DateTime dateTime}) {
     var rng = Random();
 
-    double change = rng.nextInt(5) > 1
+    double change = rng.nextInt(5) > 2
         ? (-rng.nextDoubleInRange(0, 5) / 100)
         : (rng.nextDoubleInRange(0, 2) / 100);
     double newClose = candles.last.close + (candles.last.close * change);
