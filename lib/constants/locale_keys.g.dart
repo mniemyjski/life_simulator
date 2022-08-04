@@ -1,6 +1,6 @@
 // DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
 
-abstract class LocaleKeys {
+abstract class  LocaleKeys {
   static const continueGame = 'continueGame';
   static const darkMode = 'darkMode';
   static const exit = 'exit';
@@ -59,6 +59,8 @@ abstract class LocaleKeys {
   static const buyTransport = 'buyTransport';
   static const buyHouse = 'buyHouse';
   static const rentHouse = 'rentHouse';
-  static const food = 'foods';
+  static const food = 'food';
+  static const create = 'create';
   static const level = 'level';
+
 }

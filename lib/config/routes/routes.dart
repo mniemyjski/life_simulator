@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:life_simulator/app/bank/bank_screen.dart';
+import 'package:life_simulator/app/freelance/freelance_screen.dart';
 import 'package:life_simulator/app/income/income_screen.dart';
 import 'package:life_simulator/app/job/job_screen.dart';
 import 'package:life_simulator/app/learning/learning_screen.dart';
@@ -44,6 +45,7 @@ import '../../app/personality/transport_screen.dart';
     AutoRoute(page: StockMarketScreen),
     AutoRoute(page: InstrumentScreen),
     AutoRoute(page: FoodsScreen),
+    AutoRoute(page: FreelanceScreen),
   ],
 )
 class $AppRouter {}

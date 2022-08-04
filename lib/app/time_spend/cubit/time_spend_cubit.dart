@@ -21,7 +21,7 @@ class TimeSpendCubit extends HydratedCubit<TimeSpendState> {
   TimeSpendCubit({
     required NewGameCubit newGameCubit,
   })  : _newGameCubit = newGameCubit,
-        super(TimeSpendState.initial()) {
+        super(const TimeSpendState.initial()) {
     _newGame();
   }
 
@@ -33,8 +33,8 @@ class TimeSpendCubit extends HydratedCubit<TimeSpendState> {
   }
 
   _newGame() {
-    if (_newGameCubit.state)
-      emit(TimeSpendState.loaded(TimeSpend(
+    if (_newGameCubit.state) {
+      emit(const TimeSpendState.loaded(TimeSpend(
         free: 14,
         work: 0,
         commuting: 0,
@@ -44,9 +44,10 @@ class TimeSpendCubit extends HydratedCubit<TimeSpendState> {
         used: 0,
         bonuses: [],
       )));
+    }
     _newGameSub = _newGameCubit.stream.listen((newGame) {
-      if (newGame)
-        emit(TimeSpendState.loaded(TimeSpend(
+      if (newGame) {
+        emit(const TimeSpendState.loaded(TimeSpend(
           free: 14,
           work: 0,
           commuting: 0,
@@ -56,6 +57,7 @@ class TimeSpendCubit extends HydratedCubit<TimeSpendState> {
           used: 0,
           bonuses: [],
         )));
+      }
     });
   }
 
@@ -165,10 +167,9 @@ class TimeSpendCubit extends HydratedCubit<TimeSpendState> {
     return state.maybeWhen(
         loaded: (timeSpend) {
           int bonus = 0;
-          timeSpend.bonuses
-            ..forEach((element) {
-              if (element.eTypeBonus == eTypeBonus) bonus += element.value;
-            });
+          for (var element in timeSpend.bonuses) {
+            if (element.eTypeBonus == eTypeBonus) bonus += element.value;
+          }
 
           switch (eTypeBonus) {
             case ETypeBonus.commuting:
@@ -199,7 +200,7 @@ class TimeSpendCubit extends HydratedCubit<TimeSpendState> {
 
   resetDay() {
     return state.whenOrNull(loaded: (timeSpend) {
-      int _commuting = getBonus(ETypeBonus.commuting);
+      int commuting = getBonus(ETypeBonus.commuting);
 
       TimeSpend refresh = timeSpend.copyWith(
         used: 0,
@@ -208,7 +209,7 @@ class TimeSpendCubit extends HydratedCubit<TimeSpendState> {
             timeSpend.work -
             timeSpend.relax -
             timeSpend.sleep -
-            (timeSpend.commuting - _commuting),
+            (timeSpend.commuting - commuting),
       );
       emit(TimeSpendState.loaded(refresh));
     });
