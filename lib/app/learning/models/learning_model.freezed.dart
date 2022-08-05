@@ -22,7 +22,9 @@ Learning _$LearningFromJson(Map<String, dynamic> json) {
 mixin _$Learning {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  List<Skill> get skills => throw _privateConstructorUsedError;
+  ETypeSkills get skillType => throw _privateConstructorUsedError;
+  int get baseTime => throw _privateConstructorUsedError;
+  int get exp => throw _privateConstructorUsedError;
   int get time => throw _privateConstructorUsedError;
   double get cost => throw _privateConstructorUsedError;
   ETypeStatus get status => throw _privateConstructorUsedError;
@@ -40,7 +42,9 @@ abstract class $LearningCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      List<Skill> skills,
+      ETypeSkills skillType,
+      int baseTime,
+      int exp,
       int time,
       double cost,
       ETypeStatus status});
@@ -58,7 +62,9 @@ class _$LearningCopyWithImpl<$Res> implements $LearningCopyWith<$Res> {
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
-    Object? skills = freezed,
+    Object? skillType = freezed,
+    Object? baseTime = freezed,
+    Object? exp = freezed,
     Object? time = freezed,
     Object? cost = freezed,
     Object? status = freezed,
@@ -72,10 +78,18 @@ class _$LearningCopyWithImpl<$Res> implements $LearningCopyWith<$Res> {
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      skills: skills == freezed
-          ? _value.skills
-          : skills // ignore: cast_nullable_to_non_nullable
-              as List<Skill>,
+      skillType: skillType == freezed
+          ? _value.skillType
+          : skillType // ignore: cast_nullable_to_non_nullable
+              as ETypeSkills,
+      baseTime: baseTime == freezed
+          ? _value.baseTime
+          : baseTime // ignore: cast_nullable_to_non_nullable
+              as int,
+      exp: exp == freezed
+          ? _value.exp
+          : exp // ignore: cast_nullable_to_non_nullable
+              as int,
       time: time == freezed
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
@@ -101,7 +115,9 @@ abstract class _$$_LearningCopyWith<$Res> implements $LearningCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      List<Skill> skills,
+      ETypeSkills skillType,
+      int baseTime,
+      int exp,
       int time,
       double cost,
       ETypeStatus status});
@@ -121,7 +137,9 @@ class __$$_LearningCopyWithImpl<$Res> extends _$LearningCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
-    Object? skills = freezed,
+    Object? skillType = freezed,
+    Object? baseTime = freezed,
+    Object? exp = freezed,
     Object? time = freezed,
     Object? cost = freezed,
     Object? status = freezed,
@@ -135,10 +153,18 @@ class __$$_LearningCopyWithImpl<$Res> extends _$LearningCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      skills: skills == freezed
-          ? _value._skills
-          : skills // ignore: cast_nullable_to_non_nullable
-              as List<Skill>,
+      skillType: skillType == freezed
+          ? _value.skillType
+          : skillType // ignore: cast_nullable_to_non_nullable
+              as ETypeSkills,
+      baseTime: baseTime == freezed
+          ? _value.baseTime
+          : baseTime // ignore: cast_nullable_to_non_nullable
+              as int,
+      exp: exp == freezed
+          ? _value.exp
+          : exp // ignore: cast_nullable_to_non_nullable
+              as int,
       time: time == freezed
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
@@ -161,11 +187,12 @@ class _$_Learning implements _Learning {
   const _$_Learning(
       {required this.id,
       required this.name,
-      required final List<Skill> skills,
+      required this.skillType,
+      required this.baseTime,
+      required this.exp,
       required this.time,
       required this.cost,
-      this.status = ETypeStatus.base})
-      : _skills = skills;
+      this.status = ETypeStatus.base});
 
   factory _$_Learning.fromJson(Map<String, dynamic> json) =>
       _$$_LearningFromJson(json);
@@ -174,13 +201,12 @@ class _$_Learning implements _Learning {
   final String id;
   @override
   final String name;
-  final List<Skill> _skills;
   @override
-  List<Skill> get skills {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_skills);
-  }
-
+  final ETypeSkills skillType;
+  @override
+  final int baseTime;
+  @override
+  final int exp;
   @override
   final int time;
   @override
@@ -191,7 +217,7 @@ class _$_Learning implements _Learning {
 
   @override
   String toString() {
-    return 'Learning(id: $id, name: $name, skills: $skills, time: $time, cost: $cost, status: $status)';
+    return 'Learning(id: $id, name: $name, skillType: $skillType, baseTime: $baseTime, exp: $exp, time: $time, cost: $cost, status: $status)';
   }
 
   @override
@@ -201,7 +227,9 @@ class _$_Learning implements _Learning {
             other is _$_Learning &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other._skills, _skills) &&
+            const DeepCollectionEquality().equals(other.skillType, skillType) &&
+            const DeepCollectionEquality().equals(other.baseTime, baseTime) &&
+            const DeepCollectionEquality().equals(other.exp, exp) &&
             const DeepCollectionEquality().equals(other.time, time) &&
             const DeepCollectionEquality().equals(other.cost, cost) &&
             const DeepCollectionEquality().equals(other.status, status));
@@ -213,7 +241,9 @@ class _$_Learning implements _Learning {
       runtimeType,
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(_skills),
+      const DeepCollectionEquality().hash(skillType),
+      const DeepCollectionEquality().hash(baseTime),
+      const DeepCollectionEquality().hash(exp),
       const DeepCollectionEquality().hash(time),
       const DeepCollectionEquality().hash(cost),
       const DeepCollectionEquality().hash(status));
@@ -233,7 +263,9 @@ abstract class _Learning implements Learning {
   const factory _Learning(
       {required final String id,
       required final String name,
-      required final List<Skill> skills,
+      required final ETypeSkills skillType,
+      required final int baseTime,
+      required final int exp,
       required final int time,
       required final double cost,
       final ETypeStatus status}) = _$_Learning;
@@ -245,7 +277,11 @@ abstract class _Learning implements Learning {
   @override
   String get name => throw _privateConstructorUsedError;
   @override
-  List<Skill> get skills => throw _privateConstructorUsedError;
+  ETypeSkills get skillType => throw _privateConstructorUsedError;
+  @override
+  int get baseTime => throw _privateConstructorUsedError;
+  @override
+  int get exp => throw _privateConstructorUsedError;
   @override
   int get time => throw _privateConstructorUsedError;
   @override

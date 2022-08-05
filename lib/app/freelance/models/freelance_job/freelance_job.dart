@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../skills/models/skills_model.dart';
+import '../../../skills/models/skill_model.dart';
 
 part 'freelance_job.freezed.dart';
 part 'freelance_job.g.dart';

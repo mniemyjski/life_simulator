@@ -3,7 +3,7 @@ import 'package:uuid/uuid.dart';
 
 import '../../income/models/income_model.dart';
 import '../../job/models/experience/experience_model.dart';
-import '../../skills/models/skills_model.dart';
+import '../../skills/models/skill_model.dart';
 
 class DataJobs {
   static List<Job> db() {
@@ -109,7 +109,7 @@ class DataJobs {
             work: 8,
             commuting: 2,
             requirements: [
-              Skill(name: ETypeSkills.programming, exp: 1),
+              Skill(name: ETypeSkills.programming, lvl: 1),
             ],
           ),
           Experience(
@@ -121,7 +121,7 @@ class DataJobs {
             work: 8,
             commuting: 2,
             requirements: [
-              Skill(name: ETypeSkills.programming, exp: 2),
+              Skill(name: ETypeSkills.programming, lvl: 2),
             ],
           ),
           Experience(
@@ -133,7 +133,7 @@ class DataJobs {
             work: 8,
             commuting: 0,
             requirements: [
-              Skill(name: ETypeSkills.programming, exp: 3),
+              Skill(name: ETypeSkills.programming, lvl: 3),
             ],
           ),
           Experience(
@@ -145,7 +145,7 @@ class DataJobs {
             work: 8,
             commuting: 0,
             requirements: [
-              Skill(name: ETypeSkills.programming, exp: 4),
+              Skill(name: ETypeSkills.programming, lvl: 4),
             ],
           ),
           Experience(
@@ -157,7 +157,7 @@ class DataJobs {
             work: 8,
             commuting: 0,
             requirements: [
-              Skill(name: ETypeSkills.programming, exp: 5),
+              Skill(name: ETypeSkills.programming, lvl: 5),
             ],
           ),
           Experience(
@@ -169,7 +169,7 @@ class DataJobs {
             work: 8,
             commuting: 0,
             requirements: [
-              Skill(name: ETypeSkills.programming, exp: 6),
+              Skill(name: ETypeSkills.programming, lvl: 6),
             ],
           ),
         ],

@@ -117,14 +117,14 @@ class JobCubit extends HydratedCubit<JobState> {
     int _skills = 0;
     int random = 0;
 
-    if (experience.requirements.length == 0) return true;
+    if (experience.requirements.isEmpty) return true;
 
     bool? test = _skillsCubit.state.whenOrNull(loaded: (skills) {
       for (var r = 0; r < experience.requirements.length; r++) {
-        _req += experience.requirements[r].exp;
+        _req += experience.requirements[r].lvl;
         for (var s = 0; s < skills.length; s++) {
           if (experience.requirements[r].name == skills[s].name) {
-            _skills += skills[s].exp;
+            _skills += skills[s].lvl;
           }
         }
       }
@@ -134,7 +134,6 @@ class JobCubit extends HydratedCubit<JobState> {
 
       if (_skills == 0) return false;
 
-      // random = rng.nextInt(_skills);
       if (_skills < _req) return false;
 
       return true;

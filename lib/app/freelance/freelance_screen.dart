@@ -11,7 +11,7 @@ import 'package:life_simulator/utilities/utilities.dart';
 import '../../constants/constants.dart';
 import '../../widgets/widgets.dart';
 import '../skills/cubit/skills_cubit.dart';
-import '../skills/models/skills_model.dart';
+import '../skills/models/skill_model.dart';
 
 class FreelanceScreen extends StatelessWidget {
   const FreelanceScreen({Key? key}) : super(key: key);
@@ -189,16 +189,16 @@ class FreelanceScreen extends StatelessWidget {
   List<Skill> _getList(ETypeWork selected) {
     switch (selected) {
       case ETypeWork.book:
-        return [const Skill(name: ETypeSkills.communicativeness, exp: 1)];
+        return [const Skill(name: ETypeSkills.communicativeness, lvl: 1)];
       case ETypeWork.course:
-        return [const Skill(name: ETypeSkills.confidence, exp: 1)];
+        return [const Skill(name: ETypeSkills.confidence, lvl: 1)];
       case ETypeWork.youtube:
         return [
-          const Skill(name: ETypeSkills.communicativeness, exp: 1),
-          const Skill(name: ETypeSkills.confidence, exp: 1),
+          const Skill(name: ETypeSkills.communicativeness, lvl: 1),
+          const Skill(name: ETypeSkills.confidence, lvl: 1),
         ];
       case ETypeWork.application:
-        return [const Skill(name: ETypeSkills.programming, exp: 1)];
+        return [const Skill(name: ETypeSkills.programming, lvl: 1)];
     }
   }
 

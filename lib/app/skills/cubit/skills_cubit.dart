@@ -6,7 +6,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../new_game/new_game_cubit.dart';
-import '../models/skills_model.dart';
+import '../models/skill_model.dart';
 
 part 'skills_cubit.freezed.dart';
 part 'skills_cubit.g.dart';
@@ -20,7 +20,7 @@ class SkillsCubit extends HydratedCubit<SkillsState> {
   SkillsCubit({
     required NewGameCubit newGameCubit,
   })  : _newGameCubit = newGameCubit,
-        super(SkillsState.initial()) {
+        super(const SkillsState.initial()) {
     _newGame();
   }
 
@@ -31,36 +31,29 @@ class SkillsCubit extends HydratedCubit<SkillsState> {
   }
 
   _newGame() {
-    if (_newGameCubit.state) emit(SkillsState.loaded([]));
+    List<Skill> skills = [];
+    for (var element in ETypeSkills.values) {
+      skills.add(Skill(name: element));
+    }
+
+    if (_newGameCubit.state) emit(SkillsState.loaded(skills));
     _newGameSub = _newGameCubit.stream.listen((newGame) {
-      if (newGame) emit(SkillsState.loaded([]));
+      if (newGame) emit(SkillsState.loaded(skills));
     });
   }
 
-  init(bool newGame) {
-    state.whenOrNull(
-      initial: () => emit(SkillsState.loaded([])),
-      loaded: (data) {
-        if (!newGame) emit(SkillsState.loaded([]));
-      },
-    );
-  }
-
-  update(Skill skill) {
+  update({required ETypeSkills skill, required double exp}) {
     state.maybeWhen(
         orElse: () => 'error',
         loaded: (skills) {
-          Skill? _skill = skills.firstWhereOrNull((element) => element.name == skill.name);
-
-          if (_skill == null) emit(SkillsState.loaded(List.from(skills)..add(skill)));
-
           for (var i = 0; i < skills.length; i++) {
             Skill element = skills[i];
 
-            if (element.name == skill.name) {
-              List<Skill> _result = List.from(skills);
-              _result[i] = element.copyWith(exp: element.exp + skill.exp);
-              emit(SkillsState.loaded(_result));
+            if (element.name == skill) {
+              List<Skill> result = List.from(skills);
+
+              result[i] = element.copyWith(exp: element.exp + exp, lvl: element.getLevel());
+              emit(SkillsState.loaded(result));
             }
           }
         });

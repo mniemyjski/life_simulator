@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:life_simulator/app/game/widget/app_bar_stats.dart';
 import 'package:life_simulator/config/routes/routes.gr.dart';
@@ -7,6 +8,8 @@ import 'package:life_simulator/constants/constants.dart';
 import 'package:life_simulator/utilities/utilities.dart';
 import 'package:life_simulator/widgets/widgets.dart';
 
+import '../skills/cubit/skills_cubit.dart';
+import '../skills/models/skill_model.dart';
 import 'models/house/house_model.dart';
 
 class PersonalityScreen extends StatelessWidget {
@@ -17,18 +20,9 @@ class PersonalityScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AppBarStats(),
-            // CustomDropDownList(
-            //   title: 'Choose your meal:',
-            //   list:
-            //       CustomDropDownList.toSelectedListItem(context.watch<MealCubit>().toListString()),
-            //   selected: context.watch<MealCubit>().state.maybeWhen(
-            //         orElse: () => '',
-            //         loaded: (meal) => meal.name,
-            //       ),
-            //   onChange: (value) => getIt<MealCubit>().change(value),
-            // ),
+            const AppBarStats(),
             Row(
               children: [
                 Expanded(
@@ -71,6 +65,74 @@ class PersonalityScreen extends StatelessWidget {
                 ),
               ],
             ),
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                'Skills:',
+                style: Theme.of(context).textTheme.headline6!.copyWith(color: Colors.white),
+              ),
+            ),
+            Expanded(
+              child: BlocBuilder<SkillsCubit, SkillsState>(
+                builder: (context, state) {
+                  return state.maybeWhen(
+                    orElse: () => Container(),
+                    loaded: (skills) {
+                      return ListView.builder(
+                          itemCount: skills.length,
+                          itemBuilder: (context, i) {
+                            Skill element = skills[i];
+
+                            return Card(
+                              child: Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    RichText(
+                                      text: TextSpan(
+                                        style: TextStyle(
+                                          color: Theme.of(context).textTheme.bodyText1!.color,
+                                        ),
+                                        children: <TextSpan>[
+                                          TextSpan(
+                                              text: '${Enums.toText(element.name).tr()}: ',
+                                              style: const TextStyle(fontWeight: FontWeight.bold)),
+                                          TextSpan(text: '${element.lvl.toString()} lvl'),
+                                        ],
+                                      ),
+                                    ),
+                                    Stack(
+                                      alignment: Alignment.center,
+                                      children: [
+                                        Text(
+                                          '${(element.getPercentToNextLvl() * 100).toInt()}%',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1!
+                                              .copyWith(fontSize: 10),
+                                        ),
+                                        CircularProgressIndicator(
+                                          backgroundColor: Colors.grey[400],
+                                          value: element.getPercentToNextLvl(),
+                                          strokeWidth: 3,
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            );
+                          });
+                      // return Wrap(children: list);
+                    },
+                  );
+                },
+              ),
+            ),
+            SizedBox(
+              height: 85,
+            )
           ],
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,

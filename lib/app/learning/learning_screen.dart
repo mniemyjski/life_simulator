@@ -6,8 +6,6 @@ import 'package:life_simulator/app/game/widget/app_bar_stats.dart';
 import 'package:life_simulator/app/learning/cubit/learning_cubit.dart';
 import 'package:life_simulator/app/learning/models/learning_model.dart';
 import 'package:life_simulator/app/learning/widgets/learning_element.dart';
-import 'package:life_simulator/app/learning/widgets/skill_element.dart';
-import 'package:life_simulator/app/skills/cubit/skills_cubit.dart';
 
 import '../date/widgets/next_day.dart';
 
@@ -19,33 +17,18 @@ class LearningScreen extends StatelessWidget {
     return SafeArea(
         child: Scaffold(
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          AppBarStats(),
+          const AppBarStats(),
           Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text('Skills'),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: BlocBuilder<SkillsCubit, SkillsState>(
-              builder: (context, state) {
-                return state.maybeWhen(
-                  orElse: () => Container(),
-                  loaded: (skills) {
-                    List<Widget> list =
-                        skills.map((element) => SkillElement(element: element)).toList();
-
-                    return Wrap(children: list);
-                  },
-                );
-              },
+            padding: EdgeInsets.all(8.0),
+            child: Text(
+              'Queue',
+              style: Theme.of(context).textTheme.headline6!.copyWith(color: Colors.white),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text('Queue'),
-          ),
           Expanded(
+            flex: 1,
             child: Padding(
               padding: const EdgeInsets.all(4.0),
               child: BlocBuilder<LearningCubit, LearningState>(
@@ -72,10 +55,14 @@ class LearningScreen extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text('Materials'),
+            padding: EdgeInsets.all(8.0),
+            child: Text(
+              'Materials',
+              style: Theme.of(context).textTheme.headline6!.copyWith(color: Colors.white),
+            ),
           ),
           Expanded(
+            flex: 2,
             child: Padding(
               padding: const EdgeInsets.all(4.0),
               child: BlocBuilder<LearningCubit, LearningState>(
@@ -100,7 +87,7 @@ class LearningScreen extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 80,
           )
         ],
@@ -114,9 +101,9 @@ class LearningScreen extends StatelessWidget {
             FloatingActionButton(
               heroTag: null,
               onPressed: () => context.router.pop(),
-              child: FaIcon(FontAwesomeIcons.arrowRotateLeft),
+              child: const FaIcon(FontAwesomeIcons.arrowRotateLeft),
             ),
-            NextDayButton(),
+            const NextDayButton(),
           ],
         ),
       ),

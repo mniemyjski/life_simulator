@@ -9,9 +9,9 @@ part of 'learning_model.dart';
 _$_Learning _$$_LearningFromJson(Map<String, dynamic> json) => _$_Learning(
       id: json['id'] as String,
       name: json['name'] as String,
-      skills: (json['skills'] as List<dynamic>)
-          .map((e) => Skill.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      skillType: $enumDecode(_$ETypeSkillsEnumMap, json['skillType']),
+      baseTime: json['baseTime'] as int,
+      exp: json['exp'] as int,
       time: json['time'] as int,
       cost: (json['cost'] as num).toDouble(),
       status: $enumDecodeNullable(_$ETypeStatusEnumMap, json['status']) ??
@@ -22,11 +22,23 @@ Map<String, dynamic> _$$_LearningToJson(_$_Learning instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'skills': instance.skills.map((e) => e.toJson()).toList(),
+      'skillType': _$ETypeSkillsEnumMap[instance.skillType],
+      'baseTime': instance.baseTime,
+      'exp': instance.exp,
       'time': instance.time,
       'cost': instance.cost,
       'status': _$ETypeStatusEnumMap[instance.status],
     };
+
+const _$ETypeSkillsEnumMap = {
+  ETypeSkills.programming: 'programming',
+  ETypeSkills.analytics: 'analytics',
+  ETypeSkills.bookkeeping: 'bookkeeping',
+  ETypeSkills.business: 'business',
+  ETypeSkills.management: 'management',
+  ETypeSkills.confidence: 'confidence',
+  ETypeSkills.communicativeness: 'communicativeness',
+};
 
 const _$ETypeStatusEnumMap = {
   ETypeStatus.base: 'base',

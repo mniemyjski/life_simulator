@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:life_simulator/app/income/models/income_model.dart';
 
-import '../../../skills/models/skills_model.dart';
+import '../../../skills/models/skill_model.dart';
 
 part 'experience_model.freezed.dart';
 part 'experience_model.g.dart';

@@ -1,18 +1,20 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'skills_model.dart';
+part of 'skill_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Skills _$$_SkillsFromJson(Map<String, dynamic> json) => _$_Skills(
+_$_Skill _$$_SkillFromJson(Map<String, dynamic> json) => _$_Skill(
       name: $enumDecode(_$ETypeSkillsEnumMap, json['name']),
-      exp: json['exp'] as int,
+      lvl: json['lvl'] as int? ?? 0,
+      exp: (json['exp'] as num?)?.toDouble() ?? 0,
     );
 
-Map<String, dynamic> _$$_SkillsToJson(_$_Skills instance) => <String, dynamic>{
+Map<String, dynamic> _$$_SkillToJson(_$_Skill instance) => <String, dynamic>{
       'name': _$ETypeSkillsEnumMap[instance.name],
+      'lvl': instance.lvl,
       'exp': instance.exp,
     };
 
