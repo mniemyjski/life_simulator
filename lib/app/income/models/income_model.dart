@@ -57,13 +57,6 @@ class Income with _$Income {
   }
 
   String frequencyToString() {
-    return Enums.toText(this.eTypeFrequency).tr();
+    return Enums.toText(eTypeFrequency).tr();
   }
-
-  // String nextToString() {
-  //   if (this.next == null) throw 'Next date is null';
-  //   if (this.next!.year < 99) return DateFormat('yy-MM-dd').format(this.next!);
-  //   if (this.next!.year < 999) return DateFormat('yyy-MM-dd').format(this.next!);
-  //   return DateFormat('yyyy-MM-dd').format(this.next!);
-  // }
 }

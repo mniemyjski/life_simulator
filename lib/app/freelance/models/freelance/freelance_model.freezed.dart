@@ -21,7 +21,7 @@ Freelance _$FreelanceFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Freelance {
   int get fame => throw _privateConstructorUsedError;
-  List<FreelanceJob> get works => throw _privateConstructorUsedError;
+  List<FreelanceWork> get works => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -33,7 +33,7 @@ mixin _$Freelance {
 abstract class $FreelanceCopyWith<$Res> {
   factory $FreelanceCopyWith(Freelance value, $Res Function(Freelance) then) =
       _$FreelanceCopyWithImpl<$Res>;
-  $Res call({int fame, List<FreelanceJob> works});
+  $Res call({int fame, List<FreelanceWork> works});
 }
 
 /// @nodoc
@@ -57,7 +57,7 @@ class _$FreelanceCopyWithImpl<$Res> implements $FreelanceCopyWith<$Res> {
       works: works == freezed
           ? _value.works
           : works // ignore: cast_nullable_to_non_nullable
-              as List<FreelanceJob>,
+              as List<FreelanceWork>,
     ));
   }
 }
@@ -68,7 +68,7 @@ abstract class _$$_FreelanceCopyWith<$Res> implements $FreelanceCopyWith<$Res> {
           _$_Freelance value, $Res Function(_$_Freelance) then) =
       __$$_FreelanceCopyWithImpl<$Res>;
   @override
-  $Res call({int fame, List<FreelanceJob> works});
+  $Res call({int fame, List<FreelanceWork> works});
 }
 
 /// @nodoc
@@ -94,7 +94,7 @@ class __$$_FreelanceCopyWithImpl<$Res> extends _$FreelanceCopyWithImpl<$Res>
       works: works == freezed
           ? _value._works
           : works // ignore: cast_nullable_to_non_nullable
-              as List<FreelanceJob>,
+              as List<FreelanceWork>,
     ));
   }
 }
@@ -103,7 +103,7 @@ class __$$_FreelanceCopyWithImpl<$Res> extends _$FreelanceCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Freelance implements _Freelance {
   const _$_Freelance(
-      {required this.fame, required final List<FreelanceJob> works})
+      {required this.fame, required final List<FreelanceWork> works})
       : _works = works;
 
   factory _$_Freelance.fromJson(Map<String, dynamic> json) =>
@@ -111,9 +111,9 @@ class _$_Freelance implements _Freelance {
 
   @override
   final int fame;
-  final List<FreelanceJob> _works;
+  final List<FreelanceWork> _works;
   @override
-  List<FreelanceJob> get works {
+  List<FreelanceWork> get works {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_works);
   }
@@ -153,7 +153,7 @@ class _$_Freelance implements _Freelance {
 abstract class _Freelance implements Freelance {
   const factory _Freelance(
       {required final int fame,
-      required final List<FreelanceJob> works}) = _$_Freelance;
+      required final List<FreelanceWork> works}) = _$_Freelance;
 
   factory _Freelance.fromJson(Map<String, dynamic> json) =
       _$_Freelance.fromJson;
@@ -161,7 +161,7 @@ abstract class _Freelance implements Freelance {
   @override
   int get fame => throw _privateConstructorUsedError;
   @override
-  List<FreelanceJob> get works => throw _privateConstructorUsedError;
+  List<FreelanceWork> get works => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_FreelanceCopyWith<_$_Freelance> get copyWith =>

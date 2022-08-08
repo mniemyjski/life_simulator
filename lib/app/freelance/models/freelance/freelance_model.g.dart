@@ -9,7 +9,7 @@ part of 'freelance_model.dart';
 _$_Freelance _$$_FreelanceFromJson(Map<String, dynamic> json) => _$_Freelance(
       fame: json['fame'] as int,
       works: (json['works'] as List<dynamic>)
-          .map((e) => FreelanceJob.fromJson(e as Map<String, dynamic>))
+          .map((e) => FreelanceWork.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

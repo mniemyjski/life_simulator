@@ -17,6 +17,7 @@ import 'package:life_simulator/app/stock_market/instrument_screen.dart';
 import 'package:life_simulator/app/stock_market/stock_market_screen.dart';
 import 'package:life_simulator/app/time_spend/time_spend_screen.dart';
 
+import '../../app/freelance/freelance_jobs_screen.dart';
 import '../../app/game/game_screen.dart';
 import '../../app/home/home_screen.dart';
 import '../../app/personality/house_screen.dart';
@@ -46,6 +47,7 @@ import '../../app/personality/transport_screen.dart';
     AutoRoute(page: InstrumentScreen),
     AutoRoute(page: FoodsScreen),
     AutoRoute(page: FreelanceScreen),
+    AutoRoute(page: FreelanceJobsScreen),
   ],
 )
 class $AppRouter {}

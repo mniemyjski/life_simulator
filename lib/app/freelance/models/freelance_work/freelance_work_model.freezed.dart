@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'freelance_job.dart';
+part of 'freelance_work_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,67 +14,66 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-FreelanceJob _$FreelanceJobFromJson(Map<String, dynamic> json) {
-  return _FreelanceJob.fromJson(json);
+FreelanceWork _$FreelanceWorkFromJson(Map<String, dynamic> json) {
+  return _FreelanceWork.fromJson(json);
 }
 
 /// @nodoc
-mixin _$FreelanceJob {
+mixin _$FreelanceWork {
+//Base
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  ETypeWork get eTypeWork => throw _privateConstructorUsedError;
+  ETypeFreelance get eTypeFreelance => throw _privateConstructorUsedError;
+  double get fame => throw _privateConstructorUsedError;
+  double get price => throw _privateConstructorUsedError; //EndBase
   int get workTime => throw _privateConstructorUsedError;
   int get leftWorkTime => throw _privateConstructorUsedError;
   List<Skill> get reqSkills => throw _privateConstructorUsedError;
-  int get fame => throw _privateConstructorUsedError;
-  int get leftTime => throw _privateConstructorUsedError;
-  double get price => throw _privateConstructorUsedError;
-  bool get finished => throw _privateConstructorUsedError;
+  List<Skill> get userSkills => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $FreelanceJobCopyWith<FreelanceJob> get copyWith =>
+  $FreelanceWorkCopyWith<FreelanceWork> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $FreelanceJobCopyWith<$Res> {
-  factory $FreelanceJobCopyWith(
-          FreelanceJob value, $Res Function(FreelanceJob) then) =
-      _$FreelanceJobCopyWithImpl<$Res>;
+abstract class $FreelanceWorkCopyWith<$Res> {
+  factory $FreelanceWorkCopyWith(
+          FreelanceWork value, $Res Function(FreelanceWork) then) =
+      _$FreelanceWorkCopyWithImpl<$Res>;
   $Res call(
       {String id,
       String name,
-      ETypeWork eTypeWork,
+      ETypeFreelance eTypeFreelance,
+      double fame,
+      double price,
       int workTime,
       int leftWorkTime,
       List<Skill> reqSkills,
-      int fame,
-      int leftTime,
-      double price,
-      bool finished});
+      List<Skill> userSkills});
 }
 
 /// @nodoc
-class _$FreelanceJobCopyWithImpl<$Res> implements $FreelanceJobCopyWith<$Res> {
-  _$FreelanceJobCopyWithImpl(this._value, this._then);
+class _$FreelanceWorkCopyWithImpl<$Res>
+    implements $FreelanceWorkCopyWith<$Res> {
+  _$FreelanceWorkCopyWithImpl(this._value, this._then);
 
-  final FreelanceJob _value;
+  final FreelanceWork _value;
   // ignore: unused_field
-  final $Res Function(FreelanceJob) _then;
+  final $Res Function(FreelanceWork) _then;
 
   @override
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
-    Object? eTypeWork = freezed,
+    Object? eTypeFreelance = freezed,
+    Object? fame = freezed,
+    Object? price = freezed,
     Object? workTime = freezed,
     Object? leftWorkTime = freezed,
     Object? reqSkills = freezed,
-    Object? fame = freezed,
-    Object? leftTime = freezed,
-    Object? price = freezed,
-    Object? finished = freezed,
+    Object? userSkills = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -85,10 +84,18 @@ class _$FreelanceJobCopyWithImpl<$Res> implements $FreelanceJobCopyWith<$Res> {
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      eTypeWork: eTypeWork == freezed
-          ? _value.eTypeWork
-          : eTypeWork // ignore: cast_nullable_to_non_nullable
-              as ETypeWork,
+      eTypeFreelance: eTypeFreelance == freezed
+          ? _value.eTypeFreelance
+          : eTypeFreelance // ignore: cast_nullable_to_non_nullable
+              as ETypeFreelance,
+      fame: fame == freezed
+          ? _value.fame
+          : fame // ignore: cast_nullable_to_non_nullable
+              as double,
+      price: price == freezed
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as double,
       workTime: workTime == freezed
           ? _value.workTime
           : workTime // ignore: cast_nullable_to_non_nullable
@@ -101,71 +108,57 @@ class _$FreelanceJobCopyWithImpl<$Res> implements $FreelanceJobCopyWith<$Res> {
           ? _value.reqSkills
           : reqSkills // ignore: cast_nullable_to_non_nullable
               as List<Skill>,
-      fame: fame == freezed
-          ? _value.fame
-          : fame // ignore: cast_nullable_to_non_nullable
-              as int,
-      leftTime: leftTime == freezed
-          ? _value.leftTime
-          : leftTime // ignore: cast_nullable_to_non_nullable
-              as int,
-      price: price == freezed
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as double,
-      finished: finished == freezed
-          ? _value.finished
-          : finished // ignore: cast_nullable_to_non_nullable
-              as bool,
+      userSkills: userSkills == freezed
+          ? _value.userSkills
+          : userSkills // ignore: cast_nullable_to_non_nullable
+              as List<Skill>,
     ));
   }
 }
 
 /// @nodoc
-abstract class _$$_FreelanceJobCopyWith<$Res>
-    implements $FreelanceJobCopyWith<$Res> {
-  factory _$$_FreelanceJobCopyWith(
-          _$_FreelanceJob value, $Res Function(_$_FreelanceJob) then) =
-      __$$_FreelanceJobCopyWithImpl<$Res>;
+abstract class _$$_FreelanceWorkCopyWith<$Res>
+    implements $FreelanceWorkCopyWith<$Res> {
+  factory _$$_FreelanceWorkCopyWith(
+          _$_FreelanceWork value, $Res Function(_$_FreelanceWork) then) =
+      __$$_FreelanceWorkCopyWithImpl<$Res>;
   @override
   $Res call(
       {String id,
       String name,
-      ETypeWork eTypeWork,
+      ETypeFreelance eTypeFreelance,
+      double fame,
+      double price,
       int workTime,
       int leftWorkTime,
       List<Skill> reqSkills,
-      int fame,
-      int leftTime,
-      double price,
-      bool finished});
+      List<Skill> userSkills});
 }
 
 /// @nodoc
-class __$$_FreelanceJobCopyWithImpl<$Res>
-    extends _$FreelanceJobCopyWithImpl<$Res>
-    implements _$$_FreelanceJobCopyWith<$Res> {
-  __$$_FreelanceJobCopyWithImpl(
-      _$_FreelanceJob _value, $Res Function(_$_FreelanceJob) _then)
-      : super(_value, (v) => _then(v as _$_FreelanceJob));
+class __$$_FreelanceWorkCopyWithImpl<$Res>
+    extends _$FreelanceWorkCopyWithImpl<$Res>
+    implements _$$_FreelanceWorkCopyWith<$Res> {
+  __$$_FreelanceWorkCopyWithImpl(
+      _$_FreelanceWork _value, $Res Function(_$_FreelanceWork) _then)
+      : super(_value, (v) => _then(v as _$_FreelanceWork));
 
   @override
-  _$_FreelanceJob get _value => super._value as _$_FreelanceJob;
+  _$_FreelanceWork get _value => super._value as _$_FreelanceWork;
 
   @override
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
-    Object? eTypeWork = freezed,
+    Object? eTypeFreelance = freezed,
+    Object? fame = freezed,
+    Object? price = freezed,
     Object? workTime = freezed,
     Object? leftWorkTime = freezed,
     Object? reqSkills = freezed,
-    Object? fame = freezed,
-    Object? leftTime = freezed,
-    Object? price = freezed,
-    Object? finished = freezed,
+    Object? userSkills = freezed,
   }) {
-    return _then(_$_FreelanceJob(
+    return _then(_$_FreelanceWork(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -174,10 +167,18 @@ class __$$_FreelanceJobCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      eTypeWork: eTypeWork == freezed
-          ? _value.eTypeWork
-          : eTypeWork // ignore: cast_nullable_to_non_nullable
-              as ETypeWork,
+      eTypeFreelance: eTypeFreelance == freezed
+          ? _value.eTypeFreelance
+          : eTypeFreelance // ignore: cast_nullable_to_non_nullable
+              as ETypeFreelance,
+      fame: fame == freezed
+          ? _value.fame
+          : fame // ignore: cast_nullable_to_non_nullable
+              as double,
+      price: price == freezed
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as double,
       workTime: workTime == freezed
           ? _value.workTime
           : workTime // ignore: cast_nullable_to_non_nullable
@@ -190,51 +191,46 @@ class __$$_FreelanceJobCopyWithImpl<$Res>
           ? _value._reqSkills
           : reqSkills // ignore: cast_nullable_to_non_nullable
               as List<Skill>,
-      fame: fame == freezed
-          ? _value.fame
-          : fame // ignore: cast_nullable_to_non_nullable
-              as int,
-      leftTime: leftTime == freezed
-          ? _value.leftTime
-          : leftTime // ignore: cast_nullable_to_non_nullable
-              as int,
-      price: price == freezed
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as double,
-      finished: finished == freezed
-          ? _value.finished
-          : finished // ignore: cast_nullable_to_non_nullable
-              as bool,
+      userSkills: userSkills == freezed
+          ? _value._userSkills
+          : userSkills // ignore: cast_nullable_to_non_nullable
+              as List<Skill>,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_FreelanceJob implements _FreelanceJob {
-  const _$_FreelanceJob(
+class _$_FreelanceWork extends _FreelanceWork {
+  const _$_FreelanceWork(
       {required this.id,
       required this.name,
-      required this.eTypeWork,
+      required this.eTypeFreelance,
+      required this.fame,
+      required this.price,
       required this.workTime,
       required this.leftWorkTime,
       required final List<Skill> reqSkills,
-      required this.fame,
-      required this.leftTime,
-      required this.price,
-      required this.finished})
-      : _reqSkills = reqSkills;
+      required final List<Skill> userSkills})
+      : _reqSkills = reqSkills,
+        _userSkills = userSkills,
+        super._();
 
-  factory _$_FreelanceJob.fromJson(Map<String, dynamic> json) =>
-      _$$_FreelanceJobFromJson(json);
+  factory _$_FreelanceWork.fromJson(Map<String, dynamic> json) =>
+      _$$_FreelanceWorkFromJson(json);
 
+//Base
   @override
   final String id;
   @override
   final String name;
   @override
-  final ETypeWork eTypeWork;
+  final ETypeFreelance eTypeFreelance;
+  @override
+  final double fame;
+  @override
+  final double price;
+//EndBase
   @override
   final int workTime;
   @override
@@ -246,37 +242,36 @@ class _$_FreelanceJob implements _FreelanceJob {
     return EqualUnmodifiableListView(_reqSkills);
   }
 
+  final List<Skill> _userSkills;
   @override
-  final int fame;
-  @override
-  final int leftTime;
-  @override
-  final double price;
-  @override
-  final bool finished;
+  List<Skill> get userSkills {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_userSkills);
+  }
 
   @override
   String toString() {
-    return 'FreelanceJob(id: $id, name: $name, eTypeWork: $eTypeWork, workTime: $workTime, leftWorkTime: $leftWorkTime, reqSkills: $reqSkills, fame: $fame, leftTime: $leftTime, price: $price, finished: $finished)';
+    return 'FreelanceWork(id: $id, name: $name, eTypeFreelance: $eTypeFreelance, fame: $fame, price: $price, workTime: $workTime, leftWorkTime: $leftWorkTime, reqSkills: $reqSkills, userSkills: $userSkills)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FreelanceJob &&
+            other is _$_FreelanceWork &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.eTypeWork, eTypeWork) &&
+            const DeepCollectionEquality()
+                .equals(other.eTypeFreelance, eTypeFreelance) &&
+            const DeepCollectionEquality().equals(other.fame, fame) &&
+            const DeepCollectionEquality().equals(other.price, price) &&
             const DeepCollectionEquality().equals(other.workTime, workTime) &&
             const DeepCollectionEquality()
                 .equals(other.leftWorkTime, leftWorkTime) &&
             const DeepCollectionEquality()
                 .equals(other._reqSkills, _reqSkills) &&
-            const DeepCollectionEquality().equals(other.fame, fame) &&
-            const DeepCollectionEquality().equals(other.leftTime, leftTime) &&
-            const DeepCollectionEquality().equals(other.price, price) &&
-            const DeepCollectionEquality().equals(other.finished, finished));
+            const DeepCollectionEquality()
+                .equals(other._userSkills, _userSkills));
   }
 
   @JsonKey(ignore: true)
@@ -285,64 +280,61 @@ class _$_FreelanceJob implements _FreelanceJob {
       runtimeType,
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(eTypeWork),
+      const DeepCollectionEquality().hash(eTypeFreelance),
+      const DeepCollectionEquality().hash(fame),
+      const DeepCollectionEquality().hash(price),
       const DeepCollectionEquality().hash(workTime),
       const DeepCollectionEquality().hash(leftWorkTime),
       const DeepCollectionEquality().hash(_reqSkills),
-      const DeepCollectionEquality().hash(fame),
-      const DeepCollectionEquality().hash(leftTime),
-      const DeepCollectionEquality().hash(price),
-      const DeepCollectionEquality().hash(finished));
+      const DeepCollectionEquality().hash(_userSkills));
 
   @JsonKey(ignore: true)
   @override
-  _$$_FreelanceJobCopyWith<_$_FreelanceJob> get copyWith =>
-      __$$_FreelanceJobCopyWithImpl<_$_FreelanceJob>(this, _$identity);
+  _$$_FreelanceWorkCopyWith<_$_FreelanceWork> get copyWith =>
+      __$$_FreelanceWorkCopyWithImpl<_$_FreelanceWork>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_FreelanceJobToJson(this);
+    return _$$_FreelanceWorkToJson(this);
   }
 }
 
-abstract class _FreelanceJob implements FreelanceJob {
-  const factory _FreelanceJob(
+abstract class _FreelanceWork extends FreelanceWork {
+  const factory _FreelanceWork(
       {required final String id,
       required final String name,
-      required final ETypeWork eTypeWork,
+      required final ETypeFreelance eTypeFreelance,
+      required final double fame,
+      required final double price,
       required final int workTime,
       required final int leftWorkTime,
       required final List<Skill> reqSkills,
-      required final int fame,
-      required final int leftTime,
-      required final double price,
-      required final bool finished}) = _$_FreelanceJob;
+      required final List<Skill> userSkills}) = _$_FreelanceWork;
+  const _FreelanceWork._() : super._();
 
-  factory _FreelanceJob.fromJson(Map<String, dynamic> json) =
-      _$_FreelanceJob.fromJson;
+  factory _FreelanceWork.fromJson(Map<String, dynamic> json) =
+      _$_FreelanceWork.fromJson;
 
-  @override
+  @override //Base
   String get id => throw _privateConstructorUsedError;
   @override
   String get name => throw _privateConstructorUsedError;
   @override
-  ETypeWork get eTypeWork => throw _privateConstructorUsedError;
+  ETypeFreelance get eTypeFreelance => throw _privateConstructorUsedError;
   @override
+  double get fame => throw _privateConstructorUsedError;
+  @override
+  double get price => throw _privateConstructorUsedError;
+  @override //EndBase
   int get workTime => throw _privateConstructorUsedError;
   @override
   int get leftWorkTime => throw _privateConstructorUsedError;
   @override
   List<Skill> get reqSkills => throw _privateConstructorUsedError;
   @override
-  int get fame => throw _privateConstructorUsedError;
-  @override
-  int get leftTime => throw _privateConstructorUsedError;
-  @override
-  double get price => throw _privateConstructorUsedError;
-  @override
-  bool get finished => throw _privateConstructorUsedError;
+  List<Skill> get userSkills => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$$_FreelanceJobCopyWith<_$_FreelanceJob> get copyWith =>
+  _$$_FreelanceWorkCopyWith<_$_FreelanceWork> get copyWith =>
       throw _privateConstructorUsedError;
 }
