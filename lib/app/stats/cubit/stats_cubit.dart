@@ -30,17 +30,12 @@ class StatsCubit extends HydratedCubit<StatsState> {
   late StreamSubscription _dateSub;
 
   StatsCubit(
-    TimeSpendCubit timeSpend,
-    NewGameCubit saveCubit,
-    DateCubit dateCubit,
-    EventCubit eventCubit,
-    MedicinesCubit medicinesCubit,
-  )   : _timeSpendCubit = timeSpend,
-        _newGameCubit = saveCubit,
-        _dateCubit = dateCubit,
-        _eventCubit = eventCubit,
-        _medicinesCubit = medicinesCubit,
-        super(const StatsState.initial()) {
+    this._newGameCubit,
+    this._timeSpendCubit,
+    this._eventCubit,
+    this._medicinesCubit,
+    this._dateCubit,
+  ) : super(const StatsState.initial()) {
     _newGame();
     _dateSub = _dateCubit.stream.listen((d) => d.whenOrNull(loaded: (date) => _counting(date)));
   }
@@ -53,9 +48,9 @@ class StatsCubit extends HydratedCubit<StatsState> {
   }
 
   _newGame() {
-    if (_newGameCubit.state)
+    if (_newGameCubit.state) {
       emit(
-        StatsState.loaded(
+        const StatsState.loaded(
           Stats(
             health: 1,
             satisfaction: 1,
@@ -66,10 +61,11 @@ class StatsCubit extends HydratedCubit<StatsState> {
           ),
         ),
       );
+    }
     _newGameSub = _newGameCubit.stream.listen((newGame) {
-      if (newGame)
+      if (newGame) {
         emit(
-          StatsState.loaded(
+          const StatsState.loaded(
             Stats(
               health: 1,
               satisfaction: 1,
@@ -80,6 +76,7 @@ class StatsCubit extends HydratedCubit<StatsState> {
             ),
           ),
         );
+      }
     });
   }
 

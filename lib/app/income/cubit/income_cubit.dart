@@ -26,13 +26,10 @@ class IncomeCubit extends HydratedCubit<IncomeState> {
   late StreamSubscription _dateSub;
 
   IncomeCubit(
-    MoneyCubit moneyCubit,
-    NewGameCubit saveCubit,
-    DateCubit dateCubit,
-  )   : _moneyCubit = moneyCubit,
-        _newGameCubit = saveCubit,
-        _dateCubit = dateCubit,
-        super(const IncomeState.initial()) {
+    this._moneyCubit,
+    this._newGameCubit,
+    this._dateCubit,
+  ) : super(const IncomeState.initial()) {
     _newGame();
     _counting();
   }
@@ -54,22 +51,22 @@ class IncomeCubit extends HydratedCubit<IncomeState> {
   add(Income income) {
     _dateCubit.state.whenOrNull(loaded: (date) {
       state.whenOrNull(loaded: (incomes) {
-        DateTime _nextDate;
+        DateTime nextDate;
         switch (income.eTypeFrequency) {
           case ETypeFrequency.annually:
-            _nextDate = Jiffy(date).add(years: 1).dateTime.onlyDate();
+            nextDate = Jiffy(date).add(years: 1).dateTime.onlyDate();
             break;
           case ETypeFrequency.monthly:
-            _nextDate = Jiffy(date).add(months: 1).dateTime.onlyDate();
+            nextDate = Jiffy(date).add(months: 1).dateTime.onlyDate();
             break;
           case ETypeFrequency.weekly:
-            _nextDate = Jiffy(date).add(weeks: 1).dateTime.onlyDate();
+            nextDate = Jiffy(date).add(weeks: 1).dateTime.onlyDate();
             break;
           case ETypeFrequency.daily:
-            _nextDate = Jiffy(date).add(days: 1).dateTime.onlyDate();
+            nextDate = Jiffy(date).add(days: 1).dateTime.onlyDate();
             break;
         }
-        List<Income> refresh = List.from(incomes)..add(income.copyWith(next: _nextDate));
+        List<Income> refresh = List.from(incomes)..add(income.copyWith(next: nextDate));
         emit(IncomeState.loaded(refresh));
       });
     });
@@ -98,32 +95,31 @@ class IncomeCubit extends HydratedCubit<IncomeState> {
         state.whenOrNull(loaded: (incomes) {
           List<Income> result = [];
 
-          incomes
-            ..forEach((element) {
-              if (element.next == date) {
-                DateTime _nextDate;
+          for (var element in incomes) {
+            if (element.next == date) {
+              DateTime nextDate;
 
-                switch (element.eTypeFrequency) {
-                  case ETypeFrequency.annually:
-                    _nextDate = Jiffy(date).add(years: 1).dateTime.onlyDate();
-                    break;
-                  case ETypeFrequency.monthly:
-                    _nextDate = Jiffy(date).add(months: 1).dateTime.onlyDate();
-                    break;
-                  case ETypeFrequency.weekly:
-                    _nextDate = Jiffy(date).add(weeks: 1).dateTime.onlyDate();
-                    break;
-                  case ETypeFrequency.daily:
-                    _nextDate = Jiffy(date).add(days: 1).dateTime.onlyDate();
-                    break;
-                }
-
-                result.add(element.copyWith(next: _nextDate));
-                _moneyCubit.change(element.value);
-              } else {
-                result.add(element);
+              switch (element.eTypeFrequency) {
+                case ETypeFrequency.annually:
+                  nextDate = Jiffy(date).add(years: 1).dateTime.onlyDate();
+                  break;
+                case ETypeFrequency.monthly:
+                  nextDate = Jiffy(date).add(months: 1).dateTime.onlyDate();
+                  break;
+                case ETypeFrequency.weekly:
+                  nextDate = Jiffy(date).add(weeks: 1).dateTime.onlyDate();
+                  break;
+                case ETypeFrequency.daily:
+                  nextDate = Jiffy(date).add(days: 1).dateTime.onlyDate();
+                  break;
               }
-            });
+
+              result.add(element.copyWith(next: nextDate));
+              _moneyCubit.change(element.value);
+            } else {
+              result.add(element);
+            }
+          }
 
           emit(IncomeState.loaded(result));
         });

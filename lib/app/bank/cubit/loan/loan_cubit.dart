@@ -25,13 +25,10 @@ class LoanCubit extends HydratedCubit<LoanState> {
   late StreamSubscription _newGameSub;
 
   LoanCubit(
-    MoneyCubit moneyCubit,
-    DateCubit dateCubit,
-    NewGameCubit saveCubit,
-  )   : _dateCubit = dateCubit,
-        _newGameCubit = saveCubit,
-        _moneyCubit = moneyCubit,
-        super(LoanState.initial()) {
+    this._moneyCubit,
+    this._dateCubit,
+    this._newGameCubit,
+  ) : super(const LoanState.initial()) {
     _newGame();
     _counting();
   }
@@ -44,9 +41,9 @@ class LoanCubit extends HydratedCubit<LoanState> {
   }
 
   _newGame() {
-    if (_newGameCubit.state) emit(LoanState.loaded([]));
+    if (_newGameCubit.state) emit(const LoanState.loaded([]));
     _newGameSub = _newGameCubit.stream.listen((newGame) {
-      if (newGame) emit(LoanState.loaded([]));
+      if (newGame) emit(const LoanState.loaded([]));
     });
   }
 
@@ -78,10 +75,9 @@ class LoanCubit extends HydratedCubit<LoanState> {
   double monthlyRate() {
     double value = 0;
     state.whenOrNull(loaded: (loans) {
-      loans
-        ..forEach((element) {
-          value += element.monthlyRate;
-        });
+      for (var element in loans) {
+        value += element.monthlyRate;
+      }
     });
 
     return value;

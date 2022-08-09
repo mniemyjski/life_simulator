@@ -24,15 +24,11 @@ class LearningCubit extends HydratedCubit<LearningState> {
   late StreamSubscription _newGameSub;
 
   LearningCubit(
-    NewGameCubit newGameCubit,
-    DatabaseCubit databaseCubit,
-    SkillsCubit skillsCubit,
-    MoneyCubit moneyCubit,
-  )   : _skillsCubit = skillsCubit,
-        _moneyCubit = moneyCubit,
-        _newGameCubit = newGameCubit,
-        _databaseCubit = databaseCubit,
-        super(const LearningState.initial()) {
+    this._newGameCubit,
+    this._databaseCubit,
+    this._skillsCubit,
+    this._moneyCubit,
+  ) : super(const LearningState.initial()) {
     _newGame();
   }
 
@@ -86,7 +82,7 @@ class LearningCubit extends HydratedCubit<LearningState> {
             break;
           } else if (result[i].time == hours) {
             result[i] = _databaseCubit.state.learningsDB
-                .where((element) => element.skillType == result[i].skillType)
+                .where((element) => element.id == result[i].id)
                 .first;
             _skillsCubit.update(
                 skill: result[i].skillType, exp: (result[i].exp / result[i].baseTime) * hours);
@@ -94,7 +90,7 @@ class LearningCubit extends HydratedCubit<LearningState> {
           } else {
             hours -= result[i].time;
             result[i] = _databaseCubit.state.learningsDB
-                .where((element) => element.skillType == result[i].skillType)
+                .where((element) => element.id == result[i].id)
                 .first;
             _skillsCubit.update(
                 skill: result[i].skillType, exp: (result[i].exp / result[i].baseTime) * hours);

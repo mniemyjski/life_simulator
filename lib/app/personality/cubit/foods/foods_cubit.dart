@@ -25,15 +25,11 @@ class FoodsCubit extends HydratedCubit<FoodsState> {
   final TimeSpendCubit _timeSpendCubit;
 
   FoodsCubit(
-    IncomeCubit incomeCubit,
-    NewGameCubit newGameCubit,
-    TimeSpendCubit timeSpendCubit,
-    DatabaseCubit databaseCubit,
-  )   : _incomeCubit = incomeCubit,
-        _newGameCubit = newGameCubit,
-        _timeSpendCubit = timeSpendCubit,
-        _databaseCubit = databaseCubit,
-        super(const FoodsState.initial()) {
+    this._incomeCubit,
+    this._databaseCubit,
+    this._newGameCubit,
+    this._timeSpendCubit,
+  ) : super(const FoodsState.initial()) {
     _newGame();
   }
 

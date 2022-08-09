@@ -23,23 +23,25 @@ class Skill with _$Skill {
   }) = _Skill;
 
   double getPercentToNextLvl() {
-    List<int> lvl = _getProgress();
-    int level = getLevel();
-    return exp / lvl[level];
+    List<double> progressList = getProgress();
+    if ((lvl + 1) >= progressList.length) return 1;
+    if (lvl == 0) return exp / progressList[lvl + 1];
+
+    return (exp - progressList[lvl]) / (progressList[lvl + 1] - progressList[lvl]);
   }
 
-  int getLevel() {
-    List<int> lvl = _getProgress();
-
+  int getNewLevel(double newExp) {
+    List<double> lvl = getProgress();
     for (var i = 0; i < lvl.length; i++) {
-      if (exp >= lvl[i]) return lvl[i] + 1;
+      if (newExp >= lvl.last) return lvl.length - 1;
+      if (newExp >= lvl[i] && newExp < lvl[i + 1]) return i;
     }
 
     return 0;
   }
 
-  List<int> _getProgress() {
-    return [1000, 2000, 4000, 8000, 16000, 32000, 64000, 128000, 256000, 512000];
+  static List<double> getProgress() {
+    return [0, 1000, 2000, 4000, 8000, 16000, 32000, 64000, 128000, 256000, 512000];
   }
 
   factory Skill.fromJson(Map<String, dynamic> json) => _$SkillFromJson(json);

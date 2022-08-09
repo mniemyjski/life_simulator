@@ -24,15 +24,11 @@ class DateCubit extends HydratedCubit<DateState> {
   late StreamSubscription _newGameSub;
 
   DateCubit(
-      {required NewGameCubit newGameCubit,
-      required TimeSpendCubit timeSpendCubit,
-      required LearningCubit learningCubit,
-      required DaySettingCubit daySettingCubit})
-      : _timeSpendCubit = timeSpendCubit,
-        _learningCubit = learningCubit,
-        _newGameCubit = newGameCubit,
-        _daySettingCubit = daySettingCubit,
-        super(const DateState.initial()) {
+    this._newGameCubit,
+    this._timeSpendCubit,
+    this._daySettingCubit,
+    this._learningCubit,
+  ) : super(const DateState.initial()) {
     _newGame();
   }
 

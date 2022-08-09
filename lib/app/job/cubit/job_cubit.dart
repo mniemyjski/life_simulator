@@ -31,19 +31,13 @@ class JobCubit extends HydratedCubit<JobState> {
   late StreamSubscription _newGameSub;
 
   JobCubit(
-    NewGameCubit newGameCubit,
-    IncomeCubit incomeCubit,
-    TimeSpendCubit timeSpendCubit,
-    SkillsCubit skillsCubit,
-    MoneyCubit moneyCubit,
-    DatabaseCubit databaseCubit,
-  )   : _incomeCubit = incomeCubit,
-        _timeSpendCubit = timeSpendCubit,
-        _skillsCubit = skillsCubit,
-        _moneyCubit = moneyCubit,
-        _newGameCubit = newGameCubit,
-        _databaseCubit = databaseCubit,
-        super(JobState.initial()) {
+    this._newGameCubit,
+    this._databaseCubit,
+    this._incomeCubit,
+    this._timeSpendCubit,
+    this._skillsCubit,
+    this._moneyCubit,
+  ) : super(const JobState.initial()) {
     _newGame();
   }
 
@@ -54,9 +48,9 @@ class JobCubit extends HydratedCubit<JobState> {
   }
 
   _newGame() {
-    if (_newGameCubit.state) emit(JobState.loaded(job: null, experience: null));
+    if (_newGameCubit.state) emit(const JobState.loaded(job: null, experience: null));
     _newGameSub = _newGameCubit.stream.listen((newGame) {
-      if (newGame) emit(JobState.loaded(job: null, experience: null));
+      if (newGame) emit(const JobState.loaded(job: null, experience: null));
     });
   }
 
@@ -81,29 +75,32 @@ class JobCubit extends HydratedCubit<JobState> {
             eTypeFrequency: experience.eTypeFrequency,
           );
 
-          if (experience.bonusToRelax != 0)
+          if (experience.bonusToRelax != 0) {
             _timeSpendCubit.addBonuses(
               Bonus(
                   eTypeBonus: ETypeBonus.relax,
                   eTypeBonusSource: ETypeBonusSource.job,
                   value: experience.bonusToRelax),
             );
+          }
 
-          if (experience.bonusToSleep != 0)
+          if (experience.bonusToSleep != 0) {
             _timeSpendCubit.addBonuses(
               Bonus(
                   eTypeBonus: ETypeBonus.sleep,
                   eTypeBonusSource: ETypeBonusSource.job,
                   value: experience.bonusToSleep),
             );
+          }
 
-          if (experience.bonusToLearn != 0)
+          if (experience.bonusToLearn != 0) {
             _timeSpendCubit.addBonuses(
               Bonus(
                   eTypeBonus: ETypeBonus.learn,
                   eTypeBonusSource: ETypeBonusSource.job,
                   value: experience.bonusToLearn),
             );
+          }
           _incomeCubit.add(income);
           emit(JobState.loaded(job: job, experience: experience));
           return "succeed";
@@ -145,13 +142,12 @@ class JobCubit extends HydratedCubit<JobState> {
   leaveJob() {
     state.whenOrNull(loaded: (job, experience) {
       _incomeCubit.state.whenOrNull(loaded: (incomes) {
-        incomes
-          ..forEach((element) {
-            //Todo if you left job you need get money
-            // if (element.id == job!.id && element.timeLeft <= 20) {
-            //   _moneyCubit.change(element.value / element.interval / element.timeLeft * 100);
-            // }
-          });
+        for (var element in incomes) {
+          //Todo if you left job you need get money
+          // if (element.id == job!.id && element.timeLeft <= 20) {
+          //   _moneyCubit.change(element.value / element.interval / element.timeLeft * 100);
+          // }
+        }
       });
 
       _timeSpendCubit.removeBonuses(ETypeBonusSource.job);
@@ -159,7 +155,7 @@ class JobCubit extends HydratedCubit<JobState> {
       _timeSpendCubit.changeWork(-experience!.work);
       _timeSpendCubit.changeCommuting(-experience.commuting);
 
-      emit(JobState.loaded(job: null, experience: null));
+      emit(const JobState.loaded(job: null, experience: null));
     });
   }
 
@@ -184,29 +180,32 @@ class JobCubit extends HydratedCubit<JobState> {
           _timeSpendCubit.changeCommuting(newExperience.commuting - experience.commuting);
 
           _timeSpendCubit.removeBonuses(ETypeBonusSource.job);
-          if (newExperience.bonusToRelax != 0)
+          if (newExperience.bonusToRelax != 0) {
             _timeSpendCubit.addBonuses(
               Bonus(
                   eTypeBonus: ETypeBonus.relax,
                   eTypeBonusSource: ETypeBonusSource.job,
                   value: newExperience.bonusToRelax),
             );
+          }
 
-          if (newExperience.bonusToSleep != 0)
+          if (newExperience.bonusToSleep != 0) {
             _timeSpendCubit.addBonuses(
               Bonus(
                   eTypeBonus: ETypeBonus.sleep,
                   eTypeBonusSource: ETypeBonusSource.job,
                   value: newExperience.bonusToSleep),
             );
+          }
 
-          if (newExperience.bonusToLearn != 0)
+          if (newExperience.bonusToLearn != 0) {
             _timeSpendCubit.addBonuses(
               Bonus(
                   eTypeBonus: ETypeBonus.learn,
                   eTypeBonusSource: ETypeBonusSource.job,
                   value: newExperience.bonusToLearn),
             );
+          }
 
           _incomeCubit.update(id: job.id, value: newExperience.salary);
           emit(JobState.loaded(job: job, experience: newExperience));

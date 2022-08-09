@@ -60,6 +60,8 @@
   "rentHouse": "Rent house",
   "food": "Food",
   "create": "create",
-  "level": "Level"
+  "level": "Level",
+  "name": "Name",
+  "exp": "EXP"
 
 }

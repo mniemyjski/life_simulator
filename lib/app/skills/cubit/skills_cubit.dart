@@ -17,10 +17,9 @@ class SkillsCubit extends HydratedCubit<SkillsState> {
   final NewGameCubit _newGameCubit;
   late StreamSubscription _newGameSub;
 
-  SkillsCubit({
-    required NewGameCubit newGameCubit,
-  })  : _newGameCubit = newGameCubit,
-        super(const SkillsState.initial()) {
+  SkillsCubit(
+    this._newGameCubit,
+  ) : super(const SkillsState.initial()) {
     _newGame();
   }
 
@@ -52,7 +51,8 @@ class SkillsCubit extends HydratedCubit<SkillsState> {
             if (element.name == skill) {
               List<Skill> result = List.from(skills);
 
-              result[i] = element.copyWith(exp: element.exp + exp, lvl: element.getLevel());
+              result[i] = element.copyWith(
+                  exp: element.exp + exp, lvl: element.getNewLevel(element.exp + exp));
               emit(SkillsState.loaded(result));
             }
           }

@@ -8,6 +8,7 @@ import 'package:life_simulator/constants/constants.dart';
 import 'package:life_simulator/utilities/utilities.dart';
 import 'package:life_simulator/widgets/widgets.dart';
 
+import '../date/widgets/next_day.dart';
 import '../skills/cubit/skills_cubit.dart';
 import '../skills/models/skill_model.dart';
 import 'models/house/house_model.dart';
@@ -66,7 +67,7 @@ class PersonalityScreen extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Text(
                 'Skills:',
                 style: Theme.of(context).textTheme.headline6!.copyWith(color: Colors.white),
@@ -89,18 +90,34 @@ class PersonalityScreen extends StatelessWidget {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    RichText(
-                                      text: TextSpan(
-                                        style: TextStyle(
-                                          color: Theme.of(context).textTheme.bodyText1!.color,
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        RichText(
+                                          text: TextSpan(
+                                            style: Theme.of(context).textTheme.bodyText1,
+                                            children: <TextSpan>[
+                                              TextSpan(
+                                                  text: '${Enums.toText(element.name).tr()}: ',
+                                                  style:
+                                                      const TextStyle(fontWeight: FontWeight.bold)),
+                                              TextSpan(text: '${element.lvl.toString()} lvl'),
+                                            ],
+                                          ),
                                         ),
-                                        children: <TextSpan>[
-                                          TextSpan(
-                                              text: '${Enums.toText(element.name).tr()}: ',
-                                              style: const TextStyle(fontWeight: FontWeight.bold)),
-                                          TextSpan(text: '${element.lvl.toString()} lvl'),
-                                        ],
-                                      ),
+                                        RichText(
+                                          text: TextSpan(
+                                            style: Theme.of(context).textTheme.bodyText1,
+                                            children: <TextSpan>[
+                                              TextSpan(
+                                                  text: '${LocaleKeys.exp.tr()}: ',
+                                                  style:
+                                                      const TextStyle(fontWeight: FontWeight.bold)),
+                                              TextSpan(text: element.exp.toInt().toString()),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                     Stack(
                                       alignment: Alignment.center,
@@ -130,18 +147,27 @@ class PersonalityScreen extends StatelessWidget {
                 },
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 85,
             )
           ],
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: Padding(
           padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-          child: FloatingActionButton(
-            heroTag: null,
-            onPressed: () => context.router.pop(),
-            child: const FaIcon(FontAwesomeIcons.arrowRotateLeft),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              FloatingActionButton(
+                heroTag: null,
+                onPressed: () => context.router.pop(),
+                child: const FaIcon(FontAwesomeIcons.arrowRotateLeft),
+              ),
+              const NextDayButton(),
+              const SizedBox(
+                width: 55,
+              ),
+            ],
           ),
         ),
       ),

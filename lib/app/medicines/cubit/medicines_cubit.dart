@@ -26,15 +26,11 @@ class MedicinesCubit extends HydratedCubit<MedicinesState> {
   late StreamSubscription _dateSub;
 
   MedicinesCubit(
-    MoneyCubit moneyCubit,
-    NewGameCubit newGameCubit,
-    DateCubit dateCubit,
-    DatabaseCubit databaseCubit,
-  )   : _moneyCubit = moneyCubit,
-        _newGameCubit = newGameCubit,
-        _dateCubit = dateCubit,
-        _databaseCubit = databaseCubit,
-        super(const MedicinesState.initial()) {
+    this._moneyCubit,
+    this._newGameCubit,
+    this._databaseCubit,
+    this._dateCubit,
+  ) : super(const MedicinesState.initial()) {
     _newGame();
     _counting();
   }
@@ -60,10 +56,11 @@ class MedicinesCubit extends HydratedCubit<MedicinesState> {
 
         medicines.forEach((element) {
           if (element.active) {
-            Medicine _medicine = element.copyWith(leftDuration: element.leftDuration - 1);
-            if (_medicine.leftDuration == 0)
-              _medicine = element.copyWith(leftDuration: element.duration, active: false);
-            result.add(_medicine);
+            Medicine medicine = element.copyWith(leftDuration: element.leftDuration - 1);
+            if (medicine.leftDuration == 0) {
+              medicine = element.copyWith(leftDuration: element.duration, active: false);
+            }
+            result.add(medicine);
           } else {
             result.add(element);
           }

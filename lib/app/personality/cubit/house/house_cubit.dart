@@ -26,18 +26,9 @@ class HouseCubit extends HydratedCubit<HouseState> {
   final NewGameCubit _newGameCubit;
   late StreamSubscription _newGameSub;
 
-  HouseCubit(
-    DatabaseCubit databaseCubit,
-    MoneyCubit moneyCubit,
-    IncomeCubit incomeCubit,
-    NewGameCubit newGameCubit,
-    TimeSpendCubit timeSpendCubit,
-  )   : _moneyCubit = moneyCubit,
-        _incomeCubit = incomeCubit,
-        _newGameCubit = newGameCubit,
-        _timeSpendCubit = timeSpendCubit,
-        _databaseCubit = databaseCubit,
-        super(HouseState.initial()) {
+  HouseCubit(this._databaseCubit, this._moneyCubit, this._timeSpendCubit, this._incomeCubit,
+      this._newGameCubit)
+      : super(const HouseState.initial()) {
     _newGame();
   }
 
@@ -48,19 +39,21 @@ class HouseCubit extends HydratedCubit<HouseState> {
   }
 
   _newGame() {
-    if (_newGameCubit.state) emit(HouseState.loaded(house: null));
+    if (_newGameCubit.state) emit(const HouseState.loaded(house: null));
     _newGameSub = _newGameCubit.stream.listen((newGame) {
-      if (newGame) emit(HouseState.loaded(house: null));
+      if (newGame) emit(const HouseState.loaded(house: null));
     });
   }
 
   String? getHouse(House house) {
-    if (_moneyCubit.state < house.cost && house.eTypeHouse == ETypeHouse.buy)
+    if (_moneyCubit.state < house.cost && house.eTypeHouse == ETypeHouse.buy) {
       return "You don't have enough money";
+    }
 
     return state.whenOrNull(loaded: (_house) {
-      if ((_house?.eTypeHouse ?? ETypeHouse.rent) == ETypeHouse.buy)
+      if ((_house?.eTypeHouse ?? ETypeHouse.rent) == ETypeHouse.buy) {
         return "Before you can buy new house you must to sell your house";
+      }
 
       Income income = Income(
           id: house.id,
@@ -107,7 +100,7 @@ class HouseCubit extends HydratedCubit<HouseState> {
         _timeSpendCubit.removeBonuses(ETypeBonusSource.house);
         _incomeCubit.remove(_house.id);
         _moneyCubit.change(_house.cost * 0.8);
-        emit(HouseState.loaded(house: null));
+        emit(const HouseState.loaded(house: null));
       }
     });
   }

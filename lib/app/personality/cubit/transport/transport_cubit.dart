@@ -28,17 +28,12 @@ class TransportCubit extends HydratedCubit<TransportState> {
   late StreamSubscription _newGameSub;
 
   TransportCubit(
-    MoneyCubit moneyCubit,
-    IncomeCubit incomeCubit,
-    NewGameCubit newGameCubit,
-    TimeSpendCubit timeSpendCubit,
-    DatabaseCubit databaseCubit,
-  )   : _moneyCubit = moneyCubit,
-        _incomeCubit = incomeCubit,
-        _newGameCubit = newGameCubit,
-        _timeSpendCubit = timeSpendCubit,
-        _databaseCubit = databaseCubit,
-        super(TransportState.initial()) {
+    this._moneyCubit,
+    this._databaseCubit,
+    this._incomeCubit,
+    this._timeSpendCubit,
+    this._newGameCubit,
+  ) : super(const TransportState.initial()) {
     _newGame();
   }
 
@@ -49,9 +44,9 @@ class TransportCubit extends HydratedCubit<TransportState> {
   }
 
   _newGame() {
-    if (_newGameCubit.state) emit(TransportState.loaded(transport: null));
+    if (_newGameCubit.state) emit(const TransportState.loaded(transport: null));
     _newGameSub = _newGameCubit.stream.listen((newGame) {
-      if (newGame) emit(TransportState.loaded(transport: null));
+      if (newGame) emit(const TransportState.loaded(transport: null));
     });
   }
 
@@ -105,7 +100,7 @@ class TransportCubit extends HydratedCubit<TransportState> {
         _incomeCubit.remove(_transport.id);
         _moneyCubit.change(_transport.cost * 0.8);
 
-        emit(TransportState.loaded(transport: null));
+        emit(const TransportState.loaded(transport: null));
       }
     });
   }

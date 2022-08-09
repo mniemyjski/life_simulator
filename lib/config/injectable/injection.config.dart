@@ -46,9 +46,9 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   gh.lazySingleton<_i4.DaySettingCubit>(() => _i4.DaySettingCubit());
   gh.lazySingleton<_i5.NewGameCubit>(() => _i5.NewGameCubit());
   gh.lazySingleton<_i6.SkillsCubit>(
-      () => _i6.SkillsCubit(newGameCubit: get<_i5.NewGameCubit>()));
+      () => _i6.SkillsCubit(get<_i5.NewGameCubit>()));
   gh.lazySingleton<_i7.TimeSpendCubit>(
-      () => _i7.TimeSpendCubit(newGameCubit: get<_i5.NewGameCubit>()));
+      () => _i7.TimeSpendCubit(get<_i5.NewGameCubit>()));
   gh.lazySingleton<_i8.DatabaseCubit>(
       () => _i8.DatabaseCubit(get<_i5.NewGameCubit>()));
   gh.lazySingleton<_i9.MoneyCubit>(
@@ -61,39 +61,39 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       get<_i6.SkillsCubit>(),
       get<_i9.MoneyCubit>()));
   gh.lazySingleton<_i12.DateCubit>(() => _i12.DateCubit(
-      newGameCubit: get<_i5.NewGameCubit>(),
-      timeSpendCubit: get<_i7.TimeSpendCubit>(),
-      learningCubit: get<_i11.LearningCubit>(),
-      daySettingCubit: get<_i4.DaySettingCubit>()));
-  gh.lazySingleton<_i13.DepositCubit>(() => _i13.DepositCubit(
-      dateCubit: get<_i12.DateCubit>(), newGameCubit: get<_i5.NewGameCubit>()));
-  gh.lazySingleton<_i14.EventCubit>(() => _i14.EventCubit(
-      get<_i8.DatabaseCubit>(),
       get<_i5.NewGameCubit>(),
+      get<_i7.TimeSpendCubit>(),
+      get<_i4.DaySettingCubit>(),
+      get<_i11.LearningCubit>()));
+  gh.lazySingleton<_i13.DepositCubit>(
+      () => _i13.DepositCubit(get<_i12.DateCubit>(), get<_i5.NewGameCubit>()));
+  gh.lazySingleton<_i14.EventCubit>(() => _i14.EventCubit(
+      get<_i5.NewGameCubit>(),
+      get<_i8.DatabaseCubit>(),
       get<_i12.DateCubit>(),
       get<_i9.MoneyCubit>()));
   gh.lazySingleton<_i15.IncomeCubit>(() => _i15.IncomeCubit(
       get<_i9.MoneyCubit>(), get<_i5.NewGameCubit>(), get<_i12.DateCubit>()));
   gh.lazySingleton<_i16.JobCubit>(() => _i16.JobCubit(
       get<_i5.NewGameCubit>(),
+      get<_i8.DatabaseCubit>(),
       get<_i15.IncomeCubit>(),
       get<_i7.TimeSpendCubit>(),
       get<_i6.SkillsCubit>(),
-      get<_i9.MoneyCubit>(),
-      get<_i8.DatabaseCubit>()));
+      get<_i9.MoneyCubit>()));
   gh.lazySingleton<_i17.LoanCubit>(() => _i17.LoanCubit(
       get<_i9.MoneyCubit>(), get<_i12.DateCubit>(), get<_i5.NewGameCubit>()));
   gh.lazySingleton<_i18.MedicinesCubit>(() => _i18.MedicinesCubit(
       get<_i9.MoneyCubit>(),
       get<_i5.NewGameCubit>(),
-      get<_i12.DateCubit>(),
-      get<_i8.DatabaseCubit>()));
+      get<_i8.DatabaseCubit>(),
+      get<_i12.DateCubit>()));
   gh.lazySingleton<_i19.StatsCubit>(() => _i19.StatsCubit(
-      get<_i7.TimeSpendCubit>(),
       get<_i5.NewGameCubit>(),
-      get<_i12.DateCubit>(),
+      get<_i7.TimeSpendCubit>(),
       get<_i14.EventCubit>(),
-      get<_i18.MedicinesCubit>()));
+      get<_i18.MedicinesCubit>(),
+      get<_i12.DateCubit>()));
   gh.lazySingleton<_i20.StockMarketCubit>(() => _i20.StockMarketCubit(
       get<_i5.NewGameCubit>(),
       get<_i12.DateCubit>(),
@@ -109,10 +109,10 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       get<_i9.MoneyCubit>()));
   gh.lazySingleton<_i23.TransportCubit>(() => _i23.TransportCubit(
       get<_i9.MoneyCubit>(),
+      get<_i8.DatabaseCubit>(),
       get<_i15.IncomeCubit>(),
-      get<_i5.NewGameCubit>(),
       get<_i7.TimeSpendCubit>(),
-      get<_i8.DatabaseCubit>()));
+      get<_i5.NewGameCubit>()));
   gh.lazySingleton<_i24.AssetsCubit>(() => _i24.AssetsCubit(
       get<_i5.NewGameCubit>(),
       get<_i9.MoneyCubit>(),
@@ -127,18 +127,16 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       get<_i12.DateCubit>()));
   gh.lazySingleton<_i26.FoodsCubit>(() => _i26.FoodsCubit(
       get<_i15.IncomeCubit>(),
+      get<_i8.DatabaseCubit>(),
       get<_i5.NewGameCubit>(),
-      get<_i7.TimeSpendCubit>(),
-      get<_i8.DatabaseCubit>()));
+      get<_i7.TimeSpendCubit>()));
   gh.lazySingleton<_i27.HouseCubit>(() => _i27.HouseCubit(
       get<_i8.DatabaseCubit>(),
       get<_i9.MoneyCubit>(),
+      get<_i7.TimeSpendCubit>(),
       get<_i15.IncomeCubit>(),
-      get<_i5.NewGameCubit>(),
-      get<_i7.TimeSpendCubit>()));
+      get<_i5.NewGameCubit>()));
   gh.lazySingleton<_i28.RulesCubit>(() => _i28.RulesCubit(
-      moneyCubit: get<_i9.MoneyCubit>(),
-      statsCubit: get<_i19.StatsCubit>(),
-      saveCubit: get<_i5.NewGameCubit>()));
+      get<_i9.MoneyCubit>(), get<_i19.StatsCubit>(), get<_i5.NewGameCubit>()));
   return get;
 }

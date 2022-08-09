@@ -22,14 +22,11 @@ class RulesCubit extends Cubit<RulesState> {
 
   final NewGameCubit _newGameCubit;
 
-  RulesCubit({
-    required MoneyCubit moneyCubit,
-    required StatsCubit statsCubit,
-    required NewGameCubit saveCubit,
-  })  : _moneyCubit = moneyCubit,
-        _statsCubit = statsCubit,
-        _newGameCubit = saveCubit,
-        super(RulesState.loaded(false)) {
+  RulesCubit(
+    this._moneyCubit,
+    this._statsCubit,
+    this._newGameCubit,
+  ) : super(const RulesState.loaded(false)) {
     _listen();
   }
 
@@ -45,8 +42,8 @@ class RulesCubit extends Cubit<RulesState> {
       state.whenOrNull(loaded: (stats) {
         if (stats.health <= 0) {
           _newGameCubit.change(false);
-          emit(RulesState.loaded(true));
-          emit(RulesState.loaded(false));
+          emit(const RulesState.loaded(true));
+          emit(const RulesState.loaded(false));
         }
       });
     });
@@ -54,8 +51,8 @@ class RulesCubit extends Cubit<RulesState> {
     _moneySub = _moneyCubit.stream.listen((money) {
       if (money < -5000) {
         _newGameCubit.change(false);
-        emit(RulesState.loaded(true));
-        emit(RulesState.loaded(false));
+        emit(const RulesState.loaded(true));
+        emit(const RulesState.loaded(false));
       }
     });
   }

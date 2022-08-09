@@ -27,8 +27,12 @@ class TransactionsCubit extends HydratedCubit<TransactionsState> {
   final StockMarketCubit _stockMarketCubit;
   final MoneyCubit _moneyCubit;
 
-  TransactionsCubit(this._newGameCubit, this._dateCubit, this._stockMarketCubit, this._moneyCubit)
-      : super(const TransactionsState.initial()) {
+  TransactionsCubit(
+    this._newGameCubit,
+    this._dateCubit,
+    this._stockMarketCubit,
+    this._moneyCubit,
+  ) : super(const TransactionsState.initial()) {
     _newGame();
   }
 

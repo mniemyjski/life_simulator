@@ -14,12 +14,10 @@ class DepositCubit extends HydratedCubit<double> {
   final NewGameCubit _newGameCubit;
   late StreamSubscription _newGameSub;
 
-  DepositCubit({
-    required DateCubit dateCubit,
-    required NewGameCubit newGameCubit,
-  })  : _dateCubit = dateCubit,
-        _newGameCubit = newGameCubit,
-        super(0) {
+  DepositCubit(
+    this._dateCubit,
+    this._newGameCubit,
+  ) : super(0) {
     _newGame();
     _counting();
   }

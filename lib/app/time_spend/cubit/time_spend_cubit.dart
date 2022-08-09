@@ -18,10 +18,9 @@ class TimeSpendCubit extends HydratedCubit<TimeSpendState> {
   late StreamSubscription _newGameSub;
   late StreamSubscription _transportSub;
 
-  TimeSpendCubit({
-    required NewGameCubit newGameCubit,
-  })  : _newGameCubit = newGameCubit,
-        super(const TimeSpendState.initial()) {
+  TimeSpendCubit(
+    this._newGameCubit,
+  ) : super(const TimeSpendState.initial()) {
     _newGame();
   }
 

@@ -21,9 +21,8 @@ class DatabaseCubit extends HydratedCubit<Database> {
   final NewGameCubit _newGameCubit;
   late StreamSubscription _newGameSub;
 
-  DatabaseCubit(NewGameCubit newGameCubit)
-      : _newGameCubit = newGameCubit,
-        super(
+  DatabaseCubit(this._newGameCubit)
+      : super(
           Database(
             jobsDB: DataJobs.db(),
             learningsDB: DataLearnings.db(),

@@ -27,15 +27,11 @@ class EventCubit extends HydratedCubit<EventState> {
   final MoneyCubit _moneyCubit;
 
   EventCubit(
-    DatabaseCubit databaseCubit,
-    NewGameCubit newGameCubit,
-    DateCubit dateCubit,
-    MoneyCubit moneyCubit,
-  )   : _newGameCubit = newGameCubit,
-        _dateCubit = dateCubit,
-        _moneyCubit = moneyCubit,
-        _databaseCubit = databaseCubit,
-        super(EventState.initial()) {
+    this._newGameCubit,
+    this._databaseCubit,
+    this._dateCubit,
+    this._moneyCubit,
+  ) : super(const EventState.initial()) {
     _newGame();
     _counting();
     _draw();
@@ -49,9 +45,9 @@ class EventCubit extends HydratedCubit<EventState> {
   }
 
   _newGame() {
-    if (_newGameCubit.state) emit(EventState.loaded(events: []));
+    if (_newGameCubit.state) emit(const EventState.loaded(events: []));
     _newGameSub = _newGameCubit.stream.listen((newGame) {
-      if (newGame) emit(EventState.loaded(events: []));
+      if (newGame) emit(const EventState.loaded(events: []));
     });
   }
 
@@ -66,13 +62,12 @@ class EventCubit extends HydratedCubit<EventState> {
 
             if (random == 0) {
               bool already = false;
-              events
-                ..forEach((e) {
-                  if (e.active && e.eTypeEffect == elementFromDataBase.eTypeEffect) {
-                    already = true;
-                    return;
-                  }
-                });
+              for (var e in events) {
+                if (e.active && e.eTypeEffect == elementFromDataBase.eTypeEffect) {
+                  already = true;
+                  continue;
+                }
+              }
 
               if (!already) add(elementFromDataBase.copyWith(datCre: date));
             }
@@ -106,8 +101,9 @@ class EventCubit extends HydratedCubit<EventState> {
     state.whenOrNull(loaded: (events) {
       if (event.eTypeEffect == ETypeEffect.money) _moneyCubit.change(event.value);
 
-      if (event.eTypeEffect == ETypeEffect.taxes)
+      if (event.eTypeEffect == ETypeEffect.taxes) {
         _moneyCubit.change(_moneyCubit.state * event.value);
+      }
 
       List<GameEvent> result = List.from(events)
         ..add(event)
