@@ -36,7 +36,21 @@ class FreelanceWorkCubit extends Cubit<FreelanceWorkState> {
     });
   }
 
-  counting() {}
-  add() {}
-  remove() {}
+  _counting() {}
+
+  add(FreelanceWork freelanceWork) {
+    state.maybeWhen(
+        orElse: () => 'error',
+        loaded: (list) {
+          emit(FreelanceWorkState.loaded(List.from(list)..add(freelanceWork)));
+        });
+  }
+
+  remove(String id) {
+    state.maybeWhen(
+        orElse: () => 'error',
+        loaded: (list) {
+          emit(FreelanceWorkState.loaded(List.from(list)..removeWhere((e) => e.id == id)));
+        });
+  }
 }
