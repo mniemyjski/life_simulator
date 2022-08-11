@@ -1,19 +1,19 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'freelance_work_model.dart';
+part of 'freelance_job_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_FreelanceWork _$$_FreelanceWorkFromJson(Map<String, dynamic> json) =>
-    _$_FreelanceWork(
+_$_FreelanceJob _$$_FreelanceJobFromJson(Map<String, dynamic> json) =>
+    _$_FreelanceJob(
       id: json['id'] as String,
       name: json['name'] as String,
       eTypeFreelance:
           $enumDecode(_$ETypeFreelanceEnumMap, json['eTypeFreelance']),
-      fame: (json['fame'] as num).toDouble(),
-      price: (json['price'] as num).toDouble(),
+      fame: (json['fame'] as num?)?.toDouble() ?? 0,
+      price: (json['price'] as num?)?.toDouble() ?? 0,
       workTime: json['workTime'] as int,
       leftWorkTime: json['leftWorkTime'] as int,
       reqSkills: (json['reqSkills'] as List<dynamic>)
@@ -24,7 +24,7 @@ _$_FreelanceWork _$$_FreelanceWorkFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$$_FreelanceWorkToJson(_$_FreelanceWork instance) =>
+Map<String, dynamic> _$$_FreelanceJobToJson(_$_FreelanceJob instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

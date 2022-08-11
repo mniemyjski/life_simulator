@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'freelance_work_cubit.dart';
+part of 'freelance_job_cubit.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -24,7 +24,7 @@ Map<String, dynamic> _$$LoadingToJson(_$Loading instance) => <String, dynamic>{
 
 _$Loaded _$$LoadedFromJson(Map<String, dynamic> json) => _$Loaded(
       (json['list'] as List<dynamic>)
-          .map((e) => FreelanceWork.fromJson(e as Map<String, dynamic>))
+          .map((e) => FreelanceJob.fromJson(e as Map<String, dynamic>))
           .toList(),
       $type: json['runtimeType'] as String?,
     );

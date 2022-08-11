@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'freelance_work_cubit.dart';
+part of 'freelance_job_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -35,21 +35,21 @@ mixin _$FreelanceWorkState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<FreelanceWork> list) loaded,
+    required TResult Function(List<FreelanceJob> list) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<FreelanceWork> list)? loaded,
+    TResult Function(List<FreelanceJob> list)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<FreelanceWork> list)? loaded,
+    TResult Function(List<FreelanceJob> list)? loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -143,7 +143,7 @@ class _$Initial implements Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<FreelanceWork> list) loaded,
+    required TResult Function(List<FreelanceJob> list) loaded,
   }) {
     return initial();
   }
@@ -153,7 +153,7 @@ class _$Initial implements Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<FreelanceWork> list)? loaded,
+    TResult Function(List<FreelanceJob> list)? loaded,
   }) {
     return initial?.call();
   }
@@ -163,7 +163,7 @@ class _$Initial implements Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<FreelanceWork> list)? loaded,
+    TResult Function(List<FreelanceJob> list)? loaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -266,7 +266,7 @@ class _$Loading implements Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<FreelanceWork> list) loaded,
+    required TResult Function(List<FreelanceJob> list) loaded,
   }) {
     return loading();
   }
@@ -276,7 +276,7 @@ class _$Loading implements Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<FreelanceWork> list)? loaded,
+    TResult Function(List<FreelanceJob> list)? loaded,
   }) {
     return loading?.call();
   }
@@ -286,7 +286,7 @@ class _$Loading implements Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<FreelanceWork> list)? loaded,
+    TResult Function(List<FreelanceJob> list)? loaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -345,7 +345,7 @@ abstract class Loading implements FreelanceWorkState {
 abstract class _$$LoadedCopyWith<$Res> {
   factory _$$LoadedCopyWith(_$Loaded value, $Res Function(_$Loaded) then) =
       __$$LoadedCopyWithImpl<$Res>;
-  $Res call({List<FreelanceWork> list});
+  $Res call({List<FreelanceJob> list});
 }
 
 /// @nodoc
@@ -366,7 +366,7 @@ class __$$LoadedCopyWithImpl<$Res>
       list == freezed
           ? _value._list
           : list // ignore: cast_nullable_to_non_nullable
-              as List<FreelanceWork>,
+              as List<FreelanceJob>,
     ));
   }
 }
@@ -374,16 +374,16 @@ class __$$LoadedCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$Loaded implements Loaded {
-  const _$Loaded(final List<FreelanceWork> list, {final String? $type})
+  const _$Loaded(final List<FreelanceJob> list, {final String? $type})
       : _list = list,
         $type = $type ?? 'loaded';
 
   factory _$Loaded.fromJson(Map<String, dynamic> json) =>
       _$$LoadedFromJson(json);
 
-  final List<FreelanceWork> _list;
+  final List<FreelanceJob> _list;
   @override
-  List<FreelanceWork> get list {
+  List<FreelanceJob> get list {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_list);
   }
@@ -419,7 +419,7 @@ class _$Loaded implements Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<FreelanceWork> list) loaded,
+    required TResult Function(List<FreelanceJob> list) loaded,
   }) {
     return loaded(list);
   }
@@ -429,7 +429,7 @@ class _$Loaded implements Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<FreelanceWork> list)? loaded,
+    TResult Function(List<FreelanceJob> list)? loaded,
   }) {
     return loaded?.call(list);
   }
@@ -439,7 +439,7 @@ class _$Loaded implements Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<FreelanceWork> list)? loaded,
+    TResult Function(List<FreelanceJob> list)? loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -489,11 +489,11 @@ class _$Loaded implements Loaded {
 }
 
 abstract class Loaded implements FreelanceWorkState {
-  const factory Loaded(final List<FreelanceWork> list) = _$Loaded;
+  const factory Loaded(final List<FreelanceJob> list) = _$Loaded;
 
   factory Loaded.fromJson(Map<String, dynamic> json) = _$Loaded.fromJson;
 
-  List<FreelanceWork> get list => throw _privateConstructorUsedError;
+  List<FreelanceJob> get list => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$LoadedCopyWith<_$Loaded> get copyWith =>
       throw _privateConstructorUsedError;

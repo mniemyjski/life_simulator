@@ -2,21 +2,23 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../database/cubit/database_cubit.dart';
 import '../../../new_game/new_game_cubit.dart';
-import '../../models/freelance_work/freelance_work_model.dart';
+import '../../models/freelance_job/freelance_job_model.dart';
 
-part 'freelance_work_cubit.freezed.dart';
-part 'freelance_work_cubit.g.dart';
-part 'freelance_work_state.dart';
+part 'freelance_job_cubit.freezed.dart';
+part 'freelance_job_cubit.g.dart';
+part 'freelance_job_state.dart';
 
-class FreelanceWorkCubit extends Cubit<FreelanceWorkState> {
+@lazySingleton
+class FreelanceJobCubit extends Cubit<FreelanceWorkState> {
   final NewGameCubit _newGameCubit;
   final DatabaseCubit _databaseCubit;
   late StreamSubscription _newGameSub;
 
-  FreelanceWorkCubit(
+  FreelanceJobCubit(
     this._newGameCubit,
     this._databaseCubit,
   ) : super(const FreelanceWorkState.initial()) {
@@ -38,7 +40,7 @@ class FreelanceWorkCubit extends Cubit<FreelanceWorkState> {
 
   _counting() {}
 
-  add(FreelanceWork freelanceWork) {
+  add(FreelanceJob freelanceWork) {
     state.maybeWhen(
         orElse: () => 'error',
         loaded: (list) {

@@ -34,14 +34,12 @@ mixin _$Experience {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ExperienceCopyWith<Experience> get copyWith =>
-      throw _privateConstructorUsedError;
+  $ExperienceCopyWith<Experience> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $ExperienceCopyWith<$Res> {
-  factory $ExperienceCopyWith(
-          Experience value, $Res Function(Experience) then) =
+  factory $ExperienceCopyWith(Experience value, $Res Function(Experience) then) =
       _$ExperienceCopyWithImpl<$Res>;
   $Res call(
       {String id,
@@ -129,10 +127,8 @@ class _$ExperienceCopyWithImpl<$Res> implements $ExperienceCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$$_ExperienceCopyWith<$Res>
-    implements $ExperienceCopyWith<$Res> {
-  factory _$$_ExperienceCopyWith(
-          _$_Experience value, $Res Function(_$_Experience) then) =
+abstract class _$$_ExperienceCopyWith<$Res> implements $ExperienceCopyWith<$Res> {
+  factory _$$_ExperienceCopyWith(_$_Experience value, $Res Function(_$_Experience) then) =
       __$$_ExperienceCopyWithImpl<$Res>;
   @override
   $Res call(
@@ -152,8 +148,7 @@ abstract class _$$_ExperienceCopyWith<$Res>
 /// @nodoc
 class __$$_ExperienceCopyWithImpl<$Res> extends _$ExperienceCopyWithImpl<$Res>
     implements _$$_ExperienceCopyWith<$Res> {
-  __$$_ExperienceCopyWithImpl(
-      _$_Experience _value, $Res Function(_$_Experience) _then)
+  __$$_ExperienceCopyWithImpl(_$_Experience _value, $Res Function(_$_Experience) _then)
       : super(_value, (v) => _then(v as _$_Experience));
 
   @override
@@ -239,8 +234,7 @@ class _$_Experience implements _Experience {
       this.bonusToLearn = 0})
       : _requirements = requirements;
 
-  factory _$_Experience.fromJson(Map<String, dynamic> json) =>
-      _$$_ExperienceFromJson(json);
+  factory _$_Experience.fromJson(Map<String, dynamic> json) => _$$_ExperienceFromJson(json);
 
   @override
   final String id;
@@ -275,7 +269,7 @@ class _$_Experience implements _Experience {
 
   @override
   String toString() {
-    return 'Experience(id: $id, name: $name, exp: $exp, requirements: $requirements, salary: $salary, eTypeFrequency: $eTypeFrequency, work: $work, commuting: $commuting, bonusToRelax: $bonusToRelax, bonusToSleep: $bonusToSleep, bonusToLearn: $bonusToLearn)';
+    return 'Experience(id: $id, name: $name, exp: $exp, requirements: $requirements, salary: $salary, eTypeFrequency: $eTypeFrequency, job: $work, commuting: $commuting, bonusToRelax: $bonusToRelax, bonusToSleep: $bonusToSleep, bonusToLearn: $bonusToLearn)';
   }
 
   @override
@@ -286,19 +280,14 @@ class _$_Experience implements _Experience {
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.exp, exp) &&
-            const DeepCollectionEquality()
-                .equals(other._requirements, _requirements) &&
+            const DeepCollectionEquality().equals(other._requirements, _requirements) &&
             const DeepCollectionEquality().equals(other.salary, salary) &&
-            const DeepCollectionEquality()
-                .equals(other.eTypeFrequency, eTypeFrequency) &&
+            const DeepCollectionEquality().equals(other.eTypeFrequency, eTypeFrequency) &&
             const DeepCollectionEquality().equals(other.work, work) &&
             const DeepCollectionEquality().equals(other.commuting, commuting) &&
-            const DeepCollectionEquality()
-                .equals(other.bonusToRelax, bonusToRelax) &&
-            const DeepCollectionEquality()
-                .equals(other.bonusToSleep, bonusToSleep) &&
-            const DeepCollectionEquality()
-                .equals(other.bonusToLearn, bonusToLearn));
+            const DeepCollectionEquality().equals(other.bonusToRelax, bonusToRelax) &&
+            const DeepCollectionEquality().equals(other.bonusToSleep, bonusToSleep) &&
+            const DeepCollectionEquality().equals(other.bonusToLearn, bonusToLearn));
   }
 
   @JsonKey(ignore: true)
@@ -342,8 +331,7 @@ abstract class _Experience implements Experience {
       final int bonusToSleep,
       final int bonusToLearn}) = _$_Experience;
 
-  factory _Experience.fromJson(Map<String, dynamic> json) =
-      _$_Experience.fromJson;
+  factory _Experience.fromJson(Map<String, dynamic> json) = _$_Experience.fromJson;
 
   @override
   String get id => throw _privateConstructorUsedError;
@@ -369,6 +357,5 @@ abstract class _Experience implements Experience {
   int get bonusToLearn => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$$_ExperienceCopyWith<_$_Experience> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_ExperienceCopyWith<_$_Experience> get copyWith => throw _privateConstructorUsedError;
 }

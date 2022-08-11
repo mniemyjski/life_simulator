@@ -7,6 +7,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:life_simulator/app/bank/cubit/deposit/deposit_cubit.dart';
 import 'package:life_simulator/app/bank/cubit/loan/loan_cubit.dart';
 import 'package:life_simulator/app/database/cubit/database_cubit.dart';
+import 'package:life_simulator/app/freelance/cubit/done/freelance_done_cubit.dart';
 import 'package:life_simulator/app/medicines/cubit/medicines_cubit.dart';
 import 'package:life_simulator/app/personality/cubit/foods/foods_cubit.dart';
 import 'package:life_simulator/app/personality/cubit/transport/transport_cubit.dart';
@@ -23,6 +24,7 @@ import 'package:url_strategy/url_strategy.dart';
 
 import 'app/date/cubit/date_cubit.dart';
 import 'app/event/cubit/event_cubit.dart';
+import 'app/freelance/cubit/job/freelance_job_cubit.dart';
 import 'app/income/cubit/income_cubit.dart';
 import 'app/job/cubit/job_cubit.dart';
 import 'app/learning/cubit/learning_cubit.dart';
@@ -187,6 +189,14 @@ class MyApp extends StatelessWidget {
             BlocProvider(
               lazy: false,
               create: (_) => getIt<TransactionsCubit>(),
+            ),
+            BlocProvider(
+              lazy: false,
+              create: (_) => getIt<FreelanceJobCubit>(),
+            ),
+            BlocProvider(
+              lazy: false,
+              create: (_) => getIt<FreelanceDoneCubit>(),
             ),
           ],
           child: MaterialApp.router(

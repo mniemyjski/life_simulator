@@ -31,8 +31,7 @@ mixin _$TimeSpend {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $TimeSpendCopyWith<TimeSpend> get copyWith =>
-      throw _privateConstructorUsedError;
+  $TimeSpendCopyWith<TimeSpend> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -108,8 +107,7 @@ class _$TimeSpendCopyWithImpl<$Res> implements $TimeSpendCopyWith<$Res> {
 
 /// @nodoc
 abstract class _$$_TimeSpendCopyWith<$Res> implements $TimeSpendCopyWith<$Res> {
-  factory _$$_TimeSpendCopyWith(
-          _$_TimeSpend value, $Res Function(_$_TimeSpend) then) =
+  factory _$$_TimeSpendCopyWith(_$_TimeSpend value, $Res Function(_$_TimeSpend) then) =
       __$$_TimeSpendCopyWithImpl<$Res>;
   @override
   $Res call(
@@ -126,8 +124,7 @@ abstract class _$$_TimeSpendCopyWith<$Res> implements $TimeSpendCopyWith<$Res> {
 /// @nodoc
 class __$$_TimeSpendCopyWithImpl<$Res> extends _$TimeSpendCopyWithImpl<$Res>
     implements _$$_TimeSpendCopyWith<$Res> {
-  __$$_TimeSpendCopyWithImpl(
-      _$_TimeSpend _value, $Res Function(_$_TimeSpend) _then)
+  __$$_TimeSpendCopyWithImpl(_$_TimeSpend _value, $Res Function(_$_TimeSpend) _then)
       : super(_value, (v) => _then(v as _$_TimeSpend));
 
   @override
@@ -195,8 +192,7 @@ class _$_TimeSpend implements _TimeSpend {
       required final List<Bonus> bonuses})
       : _bonuses = bonuses;
 
-  factory _$_TimeSpend.fromJson(Map<String, dynamic> json) =>
-      _$$_TimeSpendFromJson(json);
+  factory _$_TimeSpend.fromJson(Map<String, dynamic> json) => _$$_TimeSpendFromJson(json);
 
   @override
   final int free;
@@ -221,7 +217,7 @@ class _$_TimeSpend implements _TimeSpend {
 
   @override
   String toString() {
-    return 'TimeSpend(free: $free, work: $work, commuting: $commuting, learn: $learn, relax: $relax, sleep: $sleep, used: $used, bonuses: $bonuses)';
+    return 'TimeSpend(free: $free, job: $work, commuting: $commuting, learn: $learn, relax: $relax, sleep: $sleep, used: $used, bonuses: $bonuses)';
   }
 
   @override
@@ -274,8 +270,7 @@ abstract class _TimeSpend implements TimeSpend {
       required final int used,
       required final List<Bonus> bonuses}) = _$_TimeSpend;
 
-  factory _TimeSpend.fromJson(Map<String, dynamic> json) =
-      _$_TimeSpend.fromJson;
+  factory _TimeSpend.fromJson(Map<String, dynamic> json) = _$_TimeSpend.fromJson;
 
   @override
   int get free => throw _privateConstructorUsedError;
@@ -295,6 +290,5 @@ abstract class _TimeSpend implements TimeSpend {
   List<Bonus> get bonuses => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$$_TimeSpendCopyWith<_$_TimeSpend> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_TimeSpendCopyWith<_$_TimeSpend> get copyWith => throw _privateConstructorUsedError;
 }

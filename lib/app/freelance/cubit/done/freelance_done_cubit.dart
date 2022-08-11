@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../database/cubit/database_cubit.dart';
 import '../../../new_game/new_game_cubit.dart';
@@ -11,6 +12,7 @@ part 'freelance_done_cubit.freezed.dart';
 part 'freelance_done_cubit.g.dart';
 part 'freelance_done_state.dart';
 
+@lazySingleton
 class FreelanceDoneCubit extends Cubit<FreelanceDoneState> {
   final NewGameCubit _newGameCubit;
   final DatabaseCubit _databaseCubit;

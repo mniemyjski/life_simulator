@@ -6,28 +6,28 @@ import 'package:life_simulator/app/freelance/models/freelance_done/freelance_don
 
 import '../../../skills/models/skill_model.dart';
 
-part 'freelance_work_model.freezed.dart';
-part 'freelance_work_model.g.dart';
+part 'freelance_job_model.freezed.dart';
+part 'freelance_job_model.g.dart';
 
 @freezed
-class FreelanceWork with _$FreelanceWork implements FreelanceBase {
-  FreelanceWork._();
+class FreelanceJob with _$FreelanceJob implements FreelanceBase {
+  const FreelanceJob._();
 
-  const factory FreelanceWork({
+  const factory FreelanceJob({
     //Base
     required String id,
     required String name,
     required ETypeFreelance eTypeFreelance,
-    required double fame,
-    required double price,
+    @Default(0) double fame,
+    @Default(0) double price,
     //EndBase
     required int workTime,
     required int leftWorkTime,
     required List<Skill> reqSkills,
     required List<Skill> userSkills,
-  }) = _FreelanceWork;
+  }) = _FreelanceJob;
 
-  factory FreelanceWork.fromJson(Map<String, dynamic> json) => _$FreelanceWorkFromJson(json);
+  factory FreelanceJob.fromJson(Map<String, dynamic> json) => _$FreelanceJobFromJson(json);
 
   int _generateRating() {
     int skills = 0;
