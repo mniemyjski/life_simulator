@@ -8,21 +8,24 @@ part of 'time_spend_model.dart';
 
 _$_TimeSpend _$$_TimeSpendFromJson(Map<String, dynamic> json) => _$_TimeSpend(
       free: json['free'] as int,
-      work: json['job'] as int,
+      work: json['work'] as int,
       commuting: json['commuting'] as int,
+      freelance: json['freelance'] as int,
       learn: json['learn'] as int,
       relax: json['relax'] as int,
       sleep: json['sleep'] as int,
       used: json['used'] as int,
       bonuses: (json['bonuses'] as List<dynamic>)
-          .map((e) => Bonus.fromJson(e as Map<String, dynamic>))
+          .map((e) => TimeBonus.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$$_TimeSpendToJson(_$_TimeSpend instance) => <String, dynamic>{
+Map<String, dynamic> _$$_TimeSpendToJson(_$_TimeSpend instance) =>
+    <String, dynamic>{
       'free': instance.free,
-      'job': instance.work,
+      'work': instance.work,
       'commuting': instance.commuting,
+      'freelance': instance.freelance,
       'learn': instance.learn,
       'relax': instance.relax,
       'sleep': instance.sleep,

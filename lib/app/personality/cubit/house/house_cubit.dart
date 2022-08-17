@@ -10,7 +10,7 @@ import '../../../income/models/income_model.dart';
 import '../../../money/cubit/money_cubit.dart';
 import '../../../new_game/new_game_cubit.dart';
 import '../../../time_spend/cubit/time_spend_cubit.dart';
-import '../../../time_spend/models/bonus/bonus_model.dart';
+import '../../../time_spend/models/time_bonus/time_bonus_model.dart';
 import '../../models/house/house_model.dart';
 
 part 'house_cubit.freezed.dart';
@@ -61,27 +61,22 @@ class HouseCubit extends HydratedCubit<HouseState> {
           typeIncome: ETypeIncome.expense,
           value: -house.monthlyCost,
           eTypeFrequency: ETypeFrequency.monthly);
-      _timeSpendCubit.removeBonuses(ETypeBonusSource.house);
 
-      _timeSpendCubit.addBonuses(
-        Bonus(
-            eTypeBonus: ETypeBonus.relax,
-            eTypeBonusSource: ETypeBonusSource.house,
-            value: house.bonusToRelax),
-      );
-
-      _timeSpendCubit.addBonuses(
-        Bonus(
-            eTypeBonus: ETypeBonus.sleep,
-            eTypeBonusSource: ETypeBonusSource.house,
-            value: house.bonusToSleep),
-      );
-
-      _timeSpendCubit.addBonuses(
-        Bonus(
-            eTypeBonus: ETypeBonus.learn,
-            eTypeBonusSource: ETypeBonusSource.house,
-            value: house.bonusToLearn),
+      _timeSpendCubit.addBonus(
+        [
+          TimeBonus(
+              eTypeBonus: ETypeBonus.relax,
+              eTypeBonusSource: ETypeBonusSource.house,
+              value: house.bonusToRelax),
+          TimeBonus(
+              eTypeBonus: ETypeBonus.sleep,
+              eTypeBonusSource: ETypeBonusSource.house,
+              value: house.bonusToSleep),
+          TimeBonus(
+              eTypeBonus: ETypeBonus.learn,
+              eTypeBonusSource: ETypeBonusSource.house,
+              value: house.bonusToLearn),
+        ],
       );
 
       _moneyCubit.change(-house.cost);
@@ -97,7 +92,7 @@ class HouseCubit extends HydratedCubit<HouseState> {
   sell() {
     state.whenOrNull(loaded: (_house) {
       if (_house != null) {
-        _timeSpendCubit.removeBonuses(ETypeBonusSource.house);
+        _timeSpendCubit.removeBonus(ETypeBonusSource.house);
         _incomeCubit.remove(_house.id);
         _moneyCubit.change(_house.cost * 0.8);
         emit(const HouseState.loaded(house: null));

@@ -9,7 +9,7 @@ import '../../../income/cubit/income_cubit.dart';
 import '../../../income/models/income_model.dart';
 import '../../../new_game/new_game_cubit.dart';
 import '../../../time_spend/cubit/time_spend_cubit.dart';
-import '../../../time_spend/models/bonus/bonus_model.dart';
+import '../../../time_spend/models/time_bonus/time_bonus_model.dart';
 import '../../models/food/food_model.dart';
 
 part 'foods_cubit.freezed.dart';
@@ -52,11 +52,49 @@ class FoodsCubit extends HydratedCubit<FoodsState> {
     if (_newGameCubit.state) {
       emit(FoodsState.loaded(food: list.first));
       _incomeCubit.add(income);
+      _timeSpendCubit.addBonus(
+        [
+          TimeBonus(
+            eTypeBonus: ETypeBonus.relax,
+            eTypeBonusSource: ETypeBonusSource.meal,
+            value: _databaseCubit.state.foodsDB.first.bonusToRelax,
+          ),
+          TimeBonus(
+            eTypeBonus: ETypeBonus.sleep,
+            eTypeBonusSource: ETypeBonusSource.meal,
+            value: _databaseCubit.state.foodsDB.first.bonusToSleep,
+          ),
+          TimeBonus(
+            eTypeBonus: ETypeBonus.learn,
+            eTypeBonusSource: ETypeBonusSource.meal,
+            value: _databaseCubit.state.foodsDB.first.bonusToLearn,
+          ),
+        ],
+      );
     }
     _newGameSub = _newGameCubit.stream.listen((newGame) {
       if (newGame) {
         emit(FoodsState.loaded(food: list.first));
         _incomeCubit.add(income);
+        _timeSpendCubit.addBonus(
+          [
+            TimeBonus(
+              eTypeBonus: ETypeBonus.relax,
+              eTypeBonusSource: ETypeBonusSource.meal,
+              value: _databaseCubit.state.foodsDB.first.bonusToRelax,
+            ),
+            TimeBonus(
+              eTypeBonus: ETypeBonus.sleep,
+              eTypeBonusSource: ETypeBonusSource.meal,
+              value: _databaseCubit.state.foodsDB.first.bonusToSleep,
+            ),
+            TimeBonus(
+              eTypeBonus: ETypeBonus.learn,
+              eTypeBonusSource: ETypeBonusSource.meal,
+              value: _databaseCubit.state.foodsDB.first.bonusToLearn,
+            ),
+          ],
+        );
       }
     });
   }
@@ -71,27 +109,21 @@ class FoodsCubit extends HydratedCubit<FoodsState> {
         eTypeFrequency: ETypeFrequency.daily,
       );
 
-      _timeSpendCubit.removeBonuses(ETypeBonusSource.meal);
-
-      _timeSpendCubit.addBonuses(
-        Bonus(
-            eTypeBonus: ETypeBonus.relax,
-            eTypeBonusSource: ETypeBonusSource.meal,
-            value: food.bonusToRelax),
-      );
-
-      _timeSpendCubit.addBonuses(
-        Bonus(
-            eTypeBonus: ETypeBonus.sleep,
-            eTypeBonusSource: ETypeBonusSource.meal,
-            value: food.bonusToSleep),
-      );
-
-      _timeSpendCubit.addBonuses(
-        Bonus(
-            eTypeBonus: ETypeBonus.learn,
-            eTypeBonusSource: ETypeBonusSource.meal,
-            value: food.bonusToLearn),
+      _timeSpendCubit.addBonus(
+        [
+          TimeBonus(
+              eTypeBonus: ETypeBonus.relax,
+              eTypeBonusSource: ETypeBonusSource.meal,
+              value: food.bonusToRelax),
+          TimeBonus(
+              eTypeBonus: ETypeBonus.sleep,
+              eTypeBonusSource: ETypeBonusSource.meal,
+              value: food.bonusToSleep),
+          TimeBonus(
+              eTypeBonus: ETypeBonus.learn,
+              eTypeBonusSource: ETypeBonusSource.meal,
+              value: food.bonusToLearn),
+        ],
       );
 
       _incomeCubit.remove(oldFood.id);

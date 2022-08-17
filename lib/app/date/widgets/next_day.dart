@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:life_simulator/app/time_spend/cubit/time_spend_cubit.dart';
-import 'package:life_simulator/app/time_spend/models/bonus/bonus_model.dart';
+import 'package:life_simulator/app/time_spend/models/time_bonus/time_bonus_model.dart';
 import 'package:life_simulator/constants/constants.dart';
 
 import '../cubit/date_cubit.dart';

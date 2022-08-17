@@ -300,7 +300,7 @@ class _$_FreelanceJob extends _FreelanceJob {
   }
 }
 
-abstract class _FreelanceJob extends FreelanceJob {
+abstract class _FreelanceJob extends FreelanceJob implements FreelanceBase {
   const factory _FreelanceJob(
       {required final String id,
       required final String name,

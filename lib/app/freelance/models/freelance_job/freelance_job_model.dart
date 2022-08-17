@@ -10,9 +10,10 @@ part 'freelance_job_model.freezed.dart';
 part 'freelance_job_model.g.dart';
 
 @freezed
-class FreelanceJob with _$FreelanceJob implements FreelanceBase {
+class FreelanceJob with _$FreelanceJob {
   const FreelanceJob._();
 
+  @Implements<FreelanceBase>()
   const factory FreelanceJob({
     //Base
     required String id,

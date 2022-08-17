@@ -23,15 +23,17 @@ mixin _$TimeSpend {
   int get free => throw _privateConstructorUsedError;
   int get work => throw _privateConstructorUsedError;
   int get commuting => throw _privateConstructorUsedError;
+  int get freelance => throw _privateConstructorUsedError;
   int get learn => throw _privateConstructorUsedError;
   int get relax => throw _privateConstructorUsedError;
   int get sleep => throw _privateConstructorUsedError;
   int get used => throw _privateConstructorUsedError;
-  List<Bonus> get bonuses => throw _privateConstructorUsedError;
+  List<TimeBonus> get bonuses => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $TimeSpendCopyWith<TimeSpend> get copyWith => throw _privateConstructorUsedError;
+  $TimeSpendCopyWith<TimeSpend> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -42,11 +44,12 @@ abstract class $TimeSpendCopyWith<$Res> {
       {int free,
       int work,
       int commuting,
+      int freelance,
       int learn,
       int relax,
       int sleep,
       int used,
-      List<Bonus> bonuses});
+      List<TimeBonus> bonuses});
 }
 
 /// @nodoc
@@ -62,6 +65,7 @@ class _$TimeSpendCopyWithImpl<$Res> implements $TimeSpendCopyWith<$Res> {
     Object? free = freezed,
     Object? work = freezed,
     Object? commuting = freezed,
+    Object? freelance = freezed,
     Object? learn = freezed,
     Object? relax = freezed,
     Object? sleep = freezed,
@@ -80,6 +84,10 @@ class _$TimeSpendCopyWithImpl<$Res> implements $TimeSpendCopyWith<$Res> {
       commuting: commuting == freezed
           ? _value.commuting
           : commuting // ignore: cast_nullable_to_non_nullable
+              as int,
+      freelance: freelance == freezed
+          ? _value.freelance
+          : freelance // ignore: cast_nullable_to_non_nullable
               as int,
       learn: learn == freezed
           ? _value.learn
@@ -100,31 +108,34 @@ class _$TimeSpendCopyWithImpl<$Res> implements $TimeSpendCopyWith<$Res> {
       bonuses: bonuses == freezed
           ? _value.bonuses
           : bonuses // ignore: cast_nullable_to_non_nullable
-              as List<Bonus>,
+              as List<TimeBonus>,
     ));
   }
 }
 
 /// @nodoc
 abstract class _$$_TimeSpendCopyWith<$Res> implements $TimeSpendCopyWith<$Res> {
-  factory _$$_TimeSpendCopyWith(_$_TimeSpend value, $Res Function(_$_TimeSpend) then) =
+  factory _$$_TimeSpendCopyWith(
+          _$_TimeSpend value, $Res Function(_$_TimeSpend) then) =
       __$$_TimeSpendCopyWithImpl<$Res>;
   @override
   $Res call(
       {int free,
       int work,
       int commuting,
+      int freelance,
       int learn,
       int relax,
       int sleep,
       int used,
-      List<Bonus> bonuses});
+      List<TimeBonus> bonuses});
 }
 
 /// @nodoc
 class __$$_TimeSpendCopyWithImpl<$Res> extends _$TimeSpendCopyWithImpl<$Res>
     implements _$$_TimeSpendCopyWith<$Res> {
-  __$$_TimeSpendCopyWithImpl(_$_TimeSpend _value, $Res Function(_$_TimeSpend) _then)
+  __$$_TimeSpendCopyWithImpl(
+      _$_TimeSpend _value, $Res Function(_$_TimeSpend) _then)
       : super(_value, (v) => _then(v as _$_TimeSpend));
 
   @override
@@ -135,6 +146,7 @@ class __$$_TimeSpendCopyWithImpl<$Res> extends _$TimeSpendCopyWithImpl<$Res>
     Object? free = freezed,
     Object? work = freezed,
     Object? commuting = freezed,
+    Object? freelance = freezed,
     Object? learn = freezed,
     Object? relax = freezed,
     Object? sleep = freezed,
@@ -153,6 +165,10 @@ class __$$_TimeSpendCopyWithImpl<$Res> extends _$TimeSpendCopyWithImpl<$Res>
       commuting: commuting == freezed
           ? _value.commuting
           : commuting // ignore: cast_nullable_to_non_nullable
+              as int,
+      freelance: freelance == freezed
+          ? _value.freelance
+          : freelance // ignore: cast_nullable_to_non_nullable
               as int,
       learn: learn == freezed
           ? _value.learn
@@ -173,26 +189,29 @@ class __$$_TimeSpendCopyWithImpl<$Res> extends _$TimeSpendCopyWithImpl<$Res>
       bonuses: bonuses == freezed
           ? _value._bonuses
           : bonuses // ignore: cast_nullable_to_non_nullable
-              as List<Bonus>,
+              as List<TimeBonus>,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_TimeSpend implements _TimeSpend {
+class _$_TimeSpend extends _TimeSpend {
   const _$_TimeSpend(
       {required this.free,
       required this.work,
       required this.commuting,
+      required this.freelance,
       required this.learn,
       required this.relax,
       required this.sleep,
       required this.used,
-      required final List<Bonus> bonuses})
-      : _bonuses = bonuses;
+      required final List<TimeBonus> bonuses})
+      : _bonuses = bonuses,
+        super._();
 
-  factory _$_TimeSpend.fromJson(Map<String, dynamic> json) => _$$_TimeSpendFromJson(json);
+  factory _$_TimeSpend.fromJson(Map<String, dynamic> json) =>
+      _$$_TimeSpendFromJson(json);
 
   @override
   final int free;
@@ -201,6 +220,8 @@ class _$_TimeSpend implements _TimeSpend {
   @override
   final int commuting;
   @override
+  final int freelance;
+  @override
   final int learn;
   @override
   final int relax;
@@ -208,16 +229,16 @@ class _$_TimeSpend implements _TimeSpend {
   final int sleep;
   @override
   final int used;
-  final List<Bonus> _bonuses;
+  final List<TimeBonus> _bonuses;
   @override
-  List<Bonus> get bonuses {
+  List<TimeBonus> get bonuses {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_bonuses);
   }
 
   @override
   String toString() {
-    return 'TimeSpend(free: $free, job: $work, commuting: $commuting, learn: $learn, relax: $relax, sleep: $sleep, used: $used, bonuses: $bonuses)';
+    return 'TimeSpend(free: $free, work: $work, commuting: $commuting, freelance: $freelance, learn: $learn, relax: $relax, sleep: $sleep, used: $used, bonuses: $bonuses)';
   }
 
   @override
@@ -228,6 +249,7 @@ class _$_TimeSpend implements _TimeSpend {
             const DeepCollectionEquality().equals(other.free, free) &&
             const DeepCollectionEquality().equals(other.work, work) &&
             const DeepCollectionEquality().equals(other.commuting, commuting) &&
+            const DeepCollectionEquality().equals(other.freelance, freelance) &&
             const DeepCollectionEquality().equals(other.learn, learn) &&
             const DeepCollectionEquality().equals(other.relax, relax) &&
             const DeepCollectionEquality().equals(other.sleep, sleep) &&
@@ -242,6 +264,7 @@ class _$_TimeSpend implements _TimeSpend {
       const DeepCollectionEquality().hash(free),
       const DeepCollectionEquality().hash(work),
       const DeepCollectionEquality().hash(commuting),
+      const DeepCollectionEquality().hash(freelance),
       const DeepCollectionEquality().hash(learn),
       const DeepCollectionEquality().hash(relax),
       const DeepCollectionEquality().hash(sleep),
@@ -259,18 +282,21 @@ class _$_TimeSpend implements _TimeSpend {
   }
 }
 
-abstract class _TimeSpend implements TimeSpend {
+abstract class _TimeSpend extends TimeSpend {
   const factory _TimeSpend(
       {required final int free,
       required final int work,
       required final int commuting,
+      required final int freelance,
       required final int learn,
       required final int relax,
       required final int sleep,
       required final int used,
-      required final List<Bonus> bonuses}) = _$_TimeSpend;
+      required final List<TimeBonus> bonuses}) = _$_TimeSpend;
+  const _TimeSpend._() : super._();
 
-  factory _TimeSpend.fromJson(Map<String, dynamic> json) = _$_TimeSpend.fromJson;
+  factory _TimeSpend.fromJson(Map<String, dynamic> json) =
+      _$_TimeSpend.fromJson;
 
   @override
   int get free => throw _privateConstructorUsedError;
@@ -278,6 +304,8 @@ abstract class _TimeSpend implements TimeSpend {
   int get work => throw _privateConstructorUsedError;
   @override
   int get commuting => throw _privateConstructorUsedError;
+  @override
+  int get freelance => throw _privateConstructorUsedError;
   @override
   int get learn => throw _privateConstructorUsedError;
   @override
@@ -287,8 +315,9 @@ abstract class _TimeSpend implements TimeSpend {
   @override
   int get used => throw _privateConstructorUsedError;
   @override
-  List<Bonus> get bonuses => throw _privateConstructorUsedError;
+  List<TimeBonus> get bonuses => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$$_TimeSpendCopyWith<_$_TimeSpend> get copyWith => throw _privateConstructorUsedError;
+  _$$_TimeSpendCopyWith<_$_TimeSpend> get copyWith =>
+      throw _privateConstructorUsedError;
 }

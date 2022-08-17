@@ -5,10 +5,12 @@ enum ETypeFreelance {
   application,
 }
 
-mixin FreelanceBase {
-  String get id;
-  String get name;
-  ETypeFreelance get eTypeFreelance;
-  double get fame;
-  double get price;
+abstract class FreelanceBase {
+  final String id;
+  final String name;
+  final ETypeFreelance eTypeFreelance;
+  final double fame;
+  final double price;
+
+  const FreelanceBase(this.id, this.name, this.eTypeFreelance, this.fame, this.price);
 }

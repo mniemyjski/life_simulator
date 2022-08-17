@@ -250,7 +250,7 @@ class _$_FreelanceDone extends _FreelanceDone {
   }
 }
 
-abstract class _FreelanceDone extends FreelanceDone {
+abstract class _FreelanceDone extends FreelanceDone implements FreelanceBase {
   const factory _FreelanceDone(
       {required final String id,
       required final String name,

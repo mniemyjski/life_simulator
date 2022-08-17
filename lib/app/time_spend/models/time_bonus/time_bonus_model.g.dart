@@ -1,19 +1,20 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'bonus_model.dart';
+part of 'time_bonus_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Bonus _$$_BonusFromJson(Map<String, dynamic> json) => _$_Bonus(
+_$_TimeBonus _$$_TimeBonusFromJson(Map<String, dynamic> json) => _$_TimeBonus(
       eTypeBonus: $enumDecode(_$ETypeBonusEnumMap, json['eTypeBonus']),
       eTypeBonusSource:
           $enumDecode(_$ETypeBonusSourceEnumMap, json['eTypeBonusSource']),
       value: json['value'] as int,
     );
 
-Map<String, dynamic> _$$_BonusToJson(_$_Bonus instance) => <String, dynamic>{
+Map<String, dynamic> _$$_TimeBonusToJson(_$_TimeBonus instance) =>
+    <String, dynamic>{
       'eTypeBonus': _$ETypeBonusEnumMap[instance.eTypeBonus],
       'eTypeBonusSource': _$ETypeBonusSourceEnumMap[instance.eTypeBonusSource],
       'value': instance.value,

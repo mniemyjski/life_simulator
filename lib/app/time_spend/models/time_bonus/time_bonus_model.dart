@@ -1,19 +1,19 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'bonus_model.freezed.dart';
-part 'bonus_model.g.dart';
+part 'time_bonus_model.freezed.dart';
+part 'time_bonus_model.g.dart';
 
 enum ETypeBonus { commuting, relax, sleep, learn }
 
 enum ETypeBonusSource { transport, meal, house, job }
 
 @freezed
-class Bonus with _$Bonus {
-  const factory Bonus({
+class TimeBonus with _$TimeBonus {
+  const factory TimeBonus({
     required ETypeBonus eTypeBonus,
     required ETypeBonusSource eTypeBonusSource,
     required int value,
-  }) = _Bonus;
+  }) = _TimeBonus;
 
-  factory Bonus.fromJson(Map<String, dynamic> json) => _$BonusFromJson(json);
+  factory TimeBonus.fromJson(Map<String, dynamic> json) => _$TimeBonusFromJson(json);
 }

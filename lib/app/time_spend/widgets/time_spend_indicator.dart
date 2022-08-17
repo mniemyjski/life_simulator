@@ -7,7 +7,7 @@ import 'package:life_simulator/config/routes/routes.gr.dart';
 import 'package:life_simulator/utilities/utilities.dart';
 
 import '../../../constants/constants.dart';
-import '../models/bonus/bonus_model.dart';
+import '../models/time_bonus/time_bonus_model.dart';
 
 class TimeSpend extends StatelessWidget {
   const TimeSpend({Key? key}) : super(key: key);
@@ -16,18 +16,19 @@ class TimeSpend extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (context.router.current.name.toString() != 'TimeSpendRoute')
+        if (context.router.current.name.toString() != 'TimeSpendRoute') {
           context.router.push(const TimeSpendRoute());
+        }
       },
       child: BlocBuilder<TimeSpendCubit, TimeSpendState>(
         builder: (context, state) {
           return state.maybeWhen(
               orElse: () => Container(),
               loaded: (timeSpend) {
-                int bonusCommuting = context.watch<TimeSpendCubit>().getBonus(ETypeBonus.commuting);
-                int bonusRelax = context.watch<TimeSpendCubit>().getBonus(ETypeBonus.relax);
-                int bonusLearn = context.watch<TimeSpendCubit>().getBonus(ETypeBonus.learn);
-                int bonusSleep = context.watch<TimeSpendCubit>().getBonus(ETypeBonus.sleep);
+                int bonusCommuting = timeSpend.getBonus(ETypeBonus.commuting);
+                int bonusRelax = timeSpend.getBonus(ETypeBonus.relax);
+                int bonusLearn = timeSpend.getBonus(ETypeBonus.learn);
+                int bonusSleep = timeSpend.getBonus(ETypeBonus.sleep);
 
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -40,31 +41,30 @@ class TimeSpend extends StatelessWidget {
                     ),
                     TimeSpendElement(
                       value: timeSpend.work,
-                      valueName:
-                          '${(timeSpend.work + timeSpend.commuting - bonusCommuting).round()} (${-bonusCommuting})',
+                      valueName: '${timeSpend.getTotalWorkTime()} ($bonusCommuting)',
                       name: LocaleKeys.work.tr(),
                       color: Colors.yellow[800]!.withOpacity(0.7),
                     ),
                     TimeSpendElement(
                       value: timeSpend.learn,
-                      valueName: '${(timeSpend.learn).round()} ($bonusLearn)',
+                      valueName: '${timeSpend.getTotalLearnTime()} ($bonusLearn)',
                       name: LocaleKeys.learn,
                       color: Colors.purple[800]!.withOpacity(0.7),
                     ),
                     TimeSpendElement(
                       value: timeSpend.relax,
-                      valueName: '${(timeSpend.relax).round()} ($bonusRelax)',
+                      valueName: '${timeSpend.getTotalRelaxTime()} ($bonusRelax)',
                       name: LocaleKeys.relax.tr(),
                       color: Colors.green[800]!.withOpacity(0.7),
                     ),
                     TimeSpendElement(
                       value: timeSpend.sleep,
-                      valueName: '${(timeSpend.sleep).round()} ($bonusSleep)',
+                      valueName: '${timeSpend.getTotalSleepTime()} ($bonusSleep)',
                       name: LocaleKeys.sleep.tr(),
                     ),
                     TimeSpendElement(
                       value: timeSpend.used,
-                      valueName: '${(timeSpend.used).round()}',
+                      valueName: '${timeSpend.used}',
                       name: LocaleKeys.used.tr(),
                       color: Colors.red[800]!.withOpacity(0.7),
                     ),

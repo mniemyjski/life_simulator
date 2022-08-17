@@ -10,7 +10,7 @@ import '../../../income/models/income_model.dart';
 import '../../../money/cubit/money_cubit.dart';
 import '../../../new_game/new_game_cubit.dart';
 import '../../../time_spend/cubit/time_spend_cubit.dart';
-import '../../../time_spend/models/bonus/bonus_model.dart';
+import '../../../time_spend/models/time_bonus/time_bonus_model.dart';
 import '../../models/transport/transport_model.dart';
 
 part 'transport_cubit.freezed.dart';
@@ -58,7 +58,6 @@ class TransportCubit extends HydratedCubit<TransportState> {
         if (_transport.name != 'Ticket') {
           return "Before you can buy new car you must to sell your car";
         } else {
-          _timeSpendCubit.removeBonuses(ETypeBonusSource.transport);
           _incomeCubit.remove(_transport.id);
         }
       }
@@ -71,19 +70,19 @@ class TransportCubit extends HydratedCubit<TransportState> {
         eTypeFrequency: ETypeFrequency.monthly,
       );
 
-      _timeSpendCubit.addBonuses(
-        Bonus(
-            eTypeBonus: ETypeBonus.commuting,
-            eTypeBonusSource: ETypeBonusSource.transport,
-            value: transport.commuting),
+      _timeSpendCubit.addBonus(
+        [
+          TimeBonus(
+              eTypeBonus: ETypeBonus.commuting,
+              eTypeBonusSource: ETypeBonusSource.transport,
+              value: transport.commuting),
+          TimeBonus(
+              eTypeBonus: ETypeBonus.relax,
+              eTypeBonusSource: ETypeBonusSource.transport,
+              value: transport.bonusToRelax),
+        ],
       );
 
-      _timeSpendCubit.addBonuses(
-        Bonus(
-            eTypeBonus: ETypeBonus.relax,
-            eTypeBonusSource: ETypeBonusSource.transport,
-            value: transport.bonusToRelax),
-      );
       _moneyCubit.change(-transport.cost);
       _incomeCubit.add(income);
 
@@ -96,7 +95,7 @@ class TransportCubit extends HydratedCubit<TransportState> {
   sell() {
     return state.whenOrNull(loaded: (_transport) {
       if (_transport != null) {
-        _timeSpendCubit.removeBonuses(ETypeBonusSource.transport);
+        _timeSpendCubit.removeBonus(ETypeBonusSource.transport);
         _incomeCubit.remove(_transport.id);
         _moneyCubit.change(_transport.cost * 0.8);
 

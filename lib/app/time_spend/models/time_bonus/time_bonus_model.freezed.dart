@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'bonus_model.dart';
+part of 'time_bonus_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,36 +14,37 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Bonus _$BonusFromJson(Map<String, dynamic> json) {
-  return _Bonus.fromJson(json);
+TimeBonus _$TimeBonusFromJson(Map<String, dynamic> json) {
+  return _TimeBonus.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Bonus {
+mixin _$TimeBonus {
   ETypeBonus get eTypeBonus => throw _privateConstructorUsedError;
   ETypeBonusSource get eTypeBonusSource => throw _privateConstructorUsedError;
   int get value => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $BonusCopyWith<Bonus> get copyWith => throw _privateConstructorUsedError;
+  $TimeBonusCopyWith<TimeBonus> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $BonusCopyWith<$Res> {
-  factory $BonusCopyWith(Bonus value, $Res Function(Bonus) then) =
-      _$BonusCopyWithImpl<$Res>;
+abstract class $TimeBonusCopyWith<$Res> {
+  factory $TimeBonusCopyWith(TimeBonus value, $Res Function(TimeBonus) then) =
+      _$TimeBonusCopyWithImpl<$Res>;
   $Res call(
       {ETypeBonus eTypeBonus, ETypeBonusSource eTypeBonusSource, int value});
 }
 
 /// @nodoc
-class _$BonusCopyWithImpl<$Res> implements $BonusCopyWith<$Res> {
-  _$BonusCopyWithImpl(this._value, this._then);
+class _$TimeBonusCopyWithImpl<$Res> implements $TimeBonusCopyWith<$Res> {
+  _$TimeBonusCopyWithImpl(this._value, this._then);
 
-  final Bonus _value;
+  final TimeBonus _value;
   // ignore: unused_field
-  final $Res Function(Bonus) _then;
+  final $Res Function(TimeBonus) _then;
 
   @override
   $Res call({
@@ -69,22 +70,24 @@ class _$BonusCopyWithImpl<$Res> implements $BonusCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$$_BonusCopyWith<$Res> implements $BonusCopyWith<$Res> {
-  factory _$$_BonusCopyWith(_$_Bonus value, $Res Function(_$_Bonus) then) =
-      __$$_BonusCopyWithImpl<$Res>;
+abstract class _$$_TimeBonusCopyWith<$Res> implements $TimeBonusCopyWith<$Res> {
+  factory _$$_TimeBonusCopyWith(
+          _$_TimeBonus value, $Res Function(_$_TimeBonus) then) =
+      __$$_TimeBonusCopyWithImpl<$Res>;
   @override
   $Res call(
       {ETypeBonus eTypeBonus, ETypeBonusSource eTypeBonusSource, int value});
 }
 
 /// @nodoc
-class __$$_BonusCopyWithImpl<$Res> extends _$BonusCopyWithImpl<$Res>
-    implements _$$_BonusCopyWith<$Res> {
-  __$$_BonusCopyWithImpl(_$_Bonus _value, $Res Function(_$_Bonus) _then)
-      : super(_value, (v) => _then(v as _$_Bonus));
+class __$$_TimeBonusCopyWithImpl<$Res> extends _$TimeBonusCopyWithImpl<$Res>
+    implements _$$_TimeBonusCopyWith<$Res> {
+  __$$_TimeBonusCopyWithImpl(
+      _$_TimeBonus _value, $Res Function(_$_TimeBonus) _then)
+      : super(_value, (v) => _then(v as _$_TimeBonus));
 
   @override
-  _$_Bonus get _value => super._value as _$_Bonus;
+  _$_TimeBonus get _value => super._value as _$_TimeBonus;
 
   @override
   $Res call({
@@ -92,7 +95,7 @@ class __$$_BonusCopyWithImpl<$Res> extends _$BonusCopyWithImpl<$Res>
     Object? eTypeBonusSource = freezed,
     Object? value = freezed,
   }) {
-    return _then(_$_Bonus(
+    return _then(_$_TimeBonus(
       eTypeBonus: eTypeBonus == freezed
           ? _value.eTypeBonus
           : eTypeBonus // ignore: cast_nullable_to_non_nullable
@@ -111,14 +114,14 @@ class __$$_BonusCopyWithImpl<$Res> extends _$BonusCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Bonus implements _Bonus {
-  const _$_Bonus(
+class _$_TimeBonus implements _TimeBonus {
+  const _$_TimeBonus(
       {required this.eTypeBonus,
       required this.eTypeBonusSource,
       required this.value});
 
-  factory _$_Bonus.fromJson(Map<String, dynamic> json) =>
-      _$$_BonusFromJson(json);
+  factory _$_TimeBonus.fromJson(Map<String, dynamic> json) =>
+      _$$_TimeBonusFromJson(json);
 
   @override
   final ETypeBonus eTypeBonus;
@@ -129,14 +132,14 @@ class _$_Bonus implements _Bonus {
 
   @override
   String toString() {
-    return 'Bonus(eTypeBonus: $eTypeBonus, eTypeBonusSource: $eTypeBonusSource, value: $value)';
+    return 'TimeBonus(eTypeBonus: $eTypeBonus, eTypeBonusSource: $eTypeBonusSource, value: $value)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Bonus &&
+            other is _$_TimeBonus &&
             const DeepCollectionEquality()
                 .equals(other.eTypeBonus, eTypeBonus) &&
             const DeepCollectionEquality()
@@ -154,22 +157,23 @@ class _$_Bonus implements _Bonus {
 
   @JsonKey(ignore: true)
   @override
-  _$$_BonusCopyWith<_$_Bonus> get copyWith =>
-      __$$_BonusCopyWithImpl<_$_Bonus>(this, _$identity);
+  _$$_TimeBonusCopyWith<_$_TimeBonus> get copyWith =>
+      __$$_TimeBonusCopyWithImpl<_$_TimeBonus>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_BonusToJson(this);
+    return _$$_TimeBonusToJson(this);
   }
 }
 
-abstract class _Bonus implements Bonus {
-  const factory _Bonus(
+abstract class _TimeBonus implements TimeBonus {
+  const factory _TimeBonus(
       {required final ETypeBonus eTypeBonus,
       required final ETypeBonusSource eTypeBonusSource,
-      required final int value}) = _$_Bonus;
+      required final int value}) = _$_TimeBonus;
 
-  factory _Bonus.fromJson(Map<String, dynamic> json) = _$_Bonus.fromJson;
+  factory _TimeBonus.fromJson(Map<String, dynamic> json) =
+      _$_TimeBonus.fromJson;
 
   @override
   ETypeBonus get eTypeBonus => throw _privateConstructorUsedError;
@@ -179,6 +183,6 @@ abstract class _Bonus implements Bonus {
   int get value => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$$_BonusCopyWith<_$_Bonus> get copyWith =>
+  _$$_TimeBonusCopyWith<_$_TimeBonus> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -5,8 +5,10 @@ part 'freelance_done_model.freezed.dart';
 part 'freelance_done_model.g.dart';
 
 @freezed
-class FreelanceDone with _$FreelanceDone implements FreelanceBase {
+class FreelanceDone with _$FreelanceDone {
   const FreelanceDone._();
+
+  @Implements<FreelanceBase>()
   @Assert('rating > 0', 'rating < 6')
   const factory FreelanceDone({
     //Base
