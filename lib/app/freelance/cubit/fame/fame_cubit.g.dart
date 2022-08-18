@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'freelance_done_cubit.dart';
+part of 'fame_cubit.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -23,13 +23,11 @@ Map<String, dynamic> _$$LoadingToJson(_$Loading instance) => <String, dynamic>{
     };
 
 _$Loaded _$$LoadedFromJson(Map<String, dynamic> json) => _$Loaded(
-      (json['freelances'] as List<dynamic>)
-          .map((e) => FreelanceDone.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      (json['fame'] as num).toDouble(),
       $type: json['runtimeType'] as String?,
     );
 
 Map<String, dynamic> _$$LoadedToJson(_$Loaded instance) => <String, dynamic>{
-      'freelances': instance.freelances.map((e) => e.toJson()).toList(),
+      'fame': instance.fame,
       'runtimeType': instance.$type,
     };

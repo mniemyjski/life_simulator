@@ -21,6 +21,7 @@ class FreelanceJob with _$FreelanceJob {
     required ETypeFreelance eTypeFreelance,
     @Default(0) double fame,
     @Default(0) double price,
+    required int level,
     //EndBase
     required int workTime,
     required int leftWorkTime,
@@ -78,15 +79,46 @@ class FreelanceJob with _$FreelanceJob {
     return rating;
   }
 
+  double getFameMultiplier() {
+    double v = fame == 0 ? 10 : fame;
+
+    for (var r in reqSkills) {
+      for (var u in userSkills) {
+        if (r.name == u.name) v *= u.lvl;
+      }
+    }
+    return v;
+  }
+
   FreelanceDone toDone(DateTime d) {
+    double price;
+    int rating = _generateRating();
+    double fame = 10;
+
+    switch (eTypeFreelance) {
+      case ETypeFreelance.book:
+        price = 5;
+        break;
+      case ETypeFreelance.course:
+        price = 10;
+        break;
+      case ETypeFreelance.youtube:
+        price = 0.5;
+        break;
+      case ETypeFreelance.application:
+        price = 10;
+        break;
+    }
+
     return FreelanceDone(
       id: id,
       name: name,
       eTypeFreelance: eTypeFreelance,
-      fame: fame * _generateRating(),
-      price: price,
-      dateDone: d,
+      fame: fame * rating * level,
+      price: price * rating,
+      dateCre: d,
       rating: _generateRating(),
+      level: level,
     );
   }
 }

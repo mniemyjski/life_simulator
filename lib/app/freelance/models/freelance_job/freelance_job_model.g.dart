@@ -14,6 +14,7 @@ _$_FreelanceJob _$$_FreelanceJobFromJson(Map<String, dynamic> json) =>
           $enumDecode(_$ETypeFreelanceEnumMap, json['eTypeFreelance']),
       fame: (json['fame'] as num?)?.toDouble() ?? 0,
       price: (json['price'] as num?)?.toDouble() ?? 0,
+      level: json['level'] as int,
       workTime: json['workTime'] as int,
       leftWorkTime: json['leftWorkTime'] as int,
       reqSkills: (json['reqSkills'] as List<dynamic>)
@@ -31,6 +32,7 @@ Map<String, dynamic> _$$_FreelanceJobToJson(_$_FreelanceJob instance) =>
       'eTypeFreelance': _$ETypeFreelanceEnumMap[instance.eTypeFreelance],
       'fame': instance.fame,
       'price': instance.price,
+      'level': instance.level,
       'workTime': instance.workTime,
       'leftWorkTime': instance.leftWorkTime,
       'reqSkills': instance.reqSkills.map((e) => e.toJson()).toList(),

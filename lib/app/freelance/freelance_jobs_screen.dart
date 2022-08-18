@@ -1,10 +1,15 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:life_simulator/app/freelance/widgets/freelance_job_creator.dart';
 import 'package:life_simulator/app/freelance/widgets/freelance_job_element.dart';
+import 'package:life_simulator/app/time_spend/cubit/time_spend_cubit.dart';
+import 'package:life_simulator/utilities/utilities.dart';
 
+import '../../constants/constants.dart';
+import '../date/widgets/next_day.dart';
 import '../game/widget/app_bar_stats.dart';
 import 'cubit/job/freelance_job_cubit.dart';
 
@@ -18,6 +23,54 @@ class FreelanceJobsScreen extends StatelessWidget {
         body: Column(
           children: [
             const AppBarStats(),
+            Row(
+              children: [
+                Expanded(
+                  child: Card(
+                      child: IconButton(
+                          onPressed: () {
+                            String? toast = context.read<TimeSpendCubit>().changeFreelance(-1);
+                            if (toast != null) {
+                              BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
+                            }
+                          },
+                          icon: const FaIcon(Icons.remove))),
+                ),
+                Expanded(
+                  child: Column(
+                    children: [
+                      Text(
+                        '${LocaleKeys.freelanceTime.tr()}:',
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText2!
+                            .copyWith(fontWeight: FontWeight.bold),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          context.watch<TimeSpendCubit>().state.maybeWhen(
+                              orElse: () => '0h',
+                              loaded: (timeSpend) => '${timeSpend.freelance.toString()}h'),
+                          style: Theme.of(context).textTheme.bodyText2!,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Card(
+                      child: IconButton(
+                          onPressed: () {
+                            String? toast = context.read<TimeSpendCubit>().changeFreelance(1);
+                            if (toast != null) {
+                              BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
+                            }
+                          },
+                          icon: const FaIcon(Icons.add))),
+                ),
+              ],
+            ),
             Expanded(
               child: BlocBuilder<FreelanceJobCubit, FreelanceWorkState>(
                 builder: (context, state) {
@@ -27,7 +80,7 @@ class FreelanceJobsScreen extends StatelessWidget {
                         return ListView.builder(
                             itemCount: listJobs.length,
                             itemBuilder: (context, index) {
-                              return FreelanceJobElement(listJobs[index]);
+                              return FreelanceJobElement(listJobs[index], index + 1);
                             });
                       });
                 },
@@ -46,6 +99,7 @@ class FreelanceJobsScreen extends StatelessWidget {
                 onPressed: () => context.router.pop(),
                 child: const FaIcon(FontAwesomeIcons.arrowRotateLeft),
               ),
+              const NextDayButton(),
               FloatingActionButton(
                 heroTag: null,
                 onPressed: () => showModalBottomSheet<void>(

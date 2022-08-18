@@ -21,9 +21,10 @@ class FreelanceJobCreator extends StatefulWidget {
 }
 
 class _FreelanceJobCreatorState extends State<FreelanceJobCreator> {
-  late int duration = 30;
+  late int duration = 40;
+  late int lvl = 1;
   late ETypeFreelance typeJob = ETypeFreelance.book;
-  late List<Skill> req = _getList(typeJob);
+  late List<Skill> req = _getList(typeJob, lvl);
   late TextEditingController controller;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -83,6 +84,35 @@ class _FreelanceJobCreatorState extends State<FreelanceJobCreator> {
               ),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: Text(
+              '${LocaleKeys.level.tr()}:',
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: Slider(
+                  value: lvl.toDouble(),
+                  activeColor: Colors.white70,
+                  inactiveColor: Colors.white70,
+                  min: 1,
+                  max: 10,
+                  divisions: 10,
+                  onChanged: (double v) {
+                    setState(() {
+                      lvl = v.toInt();
+                      req = _getList(typeJob, lvl);
+                      calcDuration();
+                    });
+                  },
+                ),
+              ),
+              Text('${lvl.toInt()}'),
+            ],
+          ),
           const Padding(
             padding: EdgeInsets.only(bottom: 4),
             child: Text(
@@ -92,43 +122,70 @@ class _FreelanceJobCreatorState extends State<FreelanceJobCreator> {
           ),
           Padding(
             padding: const EdgeInsets.all(4),
-            child: DropdownButtonHideUnderline(
-              child: DropdownButton2(
-                items: (Enums.toList(ETypeFreelance.values) as List<String>)
-                    .map((item) => DropdownMenuItem<String>(
-                          value: item,
-                          child: Text(
-                            item,
-                            style: const TextStyle(
-                              fontSize: 14,
-                            ),
-                          ),
-                        ))
-                    .toList(),
-                value: Enums.toText(typeJob),
-                onChanged: (v) => setState(() {
-                  typeJob = Enums.toEnum(v as String, ETypeFreelance.values);
-                  req = _getList(typeJob);
-                }),
-                buttonHeight: 40,
-                buttonWidth: 140,
-                itemHeight: 40,
-                buttonPadding: const EdgeInsets.only(left: 14, right: 14),
-                buttonDecoration: BoxDecoration(
-                  color: Theme.of(context).cardColor,
+            child: Row(
+              children: [
+                DropdownButtonHideUnderline(
+                  child: DropdownButton2(
+                    items: (Enums.toList(ETypeFreelance.values) as List<String>)
+                        .map((item) => DropdownMenuItem<String>(
+                              value: item,
+                              child: Text(
+                                item,
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ))
+                        .toList(),
+                    value: Enums.toText(typeJob),
+                    onChanged: (v) => setState(() {
+                      typeJob = Enums.toEnum(v as String, ETypeFreelance.values);
+                      req = _getList(typeJob, lvl);
+                      calcDuration();
+                    }),
+                    buttonHeight: 40,
+                    buttonWidth: 140,
+                    itemHeight: 40,
+                    buttonPadding: const EdgeInsets.only(left: 14, right: 14),
+                    buttonDecoration: BoxDecoration(
+                      color: Theme.of(context).cardColor,
+                    ),
+                  ),
                 ),
-              ),
+                Card(
+                  child: SizedBox(
+                    height: 40,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                        child: RichText(
+                          text: TextSpan(
+                            style: Theme.of(context).textTheme.bodyText1,
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: '${LocaleKeys.duration.tr()}: ',
+                                style: const TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              TextSpan(text: '${duration}h'),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
           const Padding(
-            padding: EdgeInsets.only(bottom: 4, top: 8),
+            padding: EdgeInsets.only(bottom: 4),
             child: Text(
               'Req:',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(right: 4.0),
+            padding: const EdgeInsets.only(right: 4.0, bottom: 8),
             child: BlocBuilder<SkillsCubit, SkillsState>(
               builder: (context, state) {
                 return state.maybeWhen(
@@ -140,29 +197,6 @@ class _FreelanceJobCreatorState extends State<FreelanceJobCreator> {
               },
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: Text(
-              '${LocaleKeys.duration.tr()}:',
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: Slider(
-                  value: duration.toDouble(),
-                  activeColor: Colors.white70,
-                  inactiveColor: Colors.white70,
-                  min: 30,
-                  max: 100,
-                  divisions: 100,
-                  onChanged: (double v) => setState(() => duration = v.toInt()),
-                ),
-              ),
-              Text('${duration.toInt().toString()}h'),
-            ],
-          ),
           CustomButton(
               onPressed: () {
                 if (formKey.currentState!.validate()) {
@@ -170,12 +204,11 @@ class _FreelanceJobCreatorState extends State<FreelanceJobCreator> {
                     id: const Uuid().v1(),
                     name: controller.text,
                     eTypeFreelance: typeJob,
-                    fame: 0,
-                    price: 0,
                     workTime: duration,
                     leftWorkTime: duration,
                     reqSkills: req,
                     userSkills: req,
+                    level: lvl,
                   );
 
                   context.read<FreelanceJobCubit>().add(freelanceWork);
@@ -190,19 +223,42 @@ class _FreelanceJobCreatorState extends State<FreelanceJobCreator> {
     );
   }
 
-  List<Skill> _getList(ETypeFreelance selected) {
+  List<Skill> _getList(ETypeFreelance selected, int lvl) {
     switch (selected) {
       case ETypeFreelance.book:
-        return [const Skill(name: ETypeSkills.communicativeness, lvl: 1)];
+        return [
+          Skill(name: ETypeSkills.communicativeness, lvl: lvl),
+        ];
       case ETypeFreelance.course:
-        return [const Skill(name: ETypeSkills.confidence, lvl: 1)];
+        return [
+          Skill(name: ETypeSkills.confidence, lvl: lvl),
+        ];
       case ETypeFreelance.youtube:
         return [
-          const Skill(name: ETypeSkills.communicativeness, lvl: 1),
-          const Skill(name: ETypeSkills.confidence, lvl: 1),
+          Skill(name: ETypeSkills.communicativeness, lvl: lvl),
+          Skill(name: ETypeSkills.confidence, lvl: lvl),
         ];
       case ETypeFreelance.application:
-        return [const Skill(name: ETypeSkills.programming, lvl: 1)];
+        return [
+          Skill(name: ETypeSkills.programming, lvl: lvl),
+        ];
+    }
+  }
+
+  calcDuration() {
+    switch (typeJob) {
+      case ETypeFreelance.book:
+        duration = (40 * lvl).toInt();
+        break;
+      case ETypeFreelance.course:
+        duration = (40 * lvl).toInt();
+        break;
+      case ETypeFreelance.youtube:
+        duration = (4 * lvl).toInt();
+        break;
+      case ETypeFreelance.application:
+        duration = (40 * lvl).toInt();
+        break;
     }
   }
 

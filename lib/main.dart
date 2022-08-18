@@ -24,6 +24,7 @@ import 'package:url_strategy/url_strategy.dart';
 
 import 'app/date/cubit/date_cubit.dart';
 import 'app/event/cubit/event_cubit.dart';
+import 'app/freelance/cubit/fame/fame_cubit.dart';
 import 'app/freelance/cubit/job/freelance_job_cubit.dart';
 import 'app/income/cubit/income_cubit.dart';
 import 'app/job/cubit/job_cubit.dart';
@@ -189,6 +190,10 @@ class MyApp extends StatelessWidget {
             BlocProvider(
               lazy: false,
               create: (_) => getIt<TransactionsCubit>(),
+            ),
+            BlocProvider(
+              lazy: false,
+              create: (_) => getIt<FameCubit>(),
             ),
             BlocProvider(
               lazy: false,

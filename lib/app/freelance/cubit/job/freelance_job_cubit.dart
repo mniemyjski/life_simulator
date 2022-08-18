@@ -1,33 +1,45 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../database/cubit/database_cubit.dart';
+import '../../../../utilities/utilities.dart';
+import '../../../date/cubit/date_cubit.dart';
 import '../../../new_game/new_game_cubit.dart';
+import '../../../time_spend/cubit/time_spend_cubit.dart';
 import '../../models/freelance_job/freelance_job_model.dart';
+import '../done/freelance_done_cubit.dart';
 
 part 'freelance_job_cubit.freezed.dart';
 part 'freelance_job_cubit.g.dart';
 part 'freelance_job_state.dart';
 
 @lazySingleton
-class FreelanceJobCubit extends Cubit<FreelanceWorkState> {
+class FreelanceJobCubit extends HydratedCubit<FreelanceWorkState> {
   final NewGameCubit _newGameCubit;
-  final DatabaseCubit _databaseCubit;
   late StreamSubscription _newGameSub;
+
+  final DateCubit _dateCubit;
+  late StreamSubscription _dateSub;
+
+  final TimeSpendCubit _timeSpendCubit;
+  final FreelanceDoneCubit _freelanceDoneCubit;
 
   FreelanceJobCubit(
     this._newGameCubit,
-    this._databaseCubit,
+    this._dateCubit,
+    this._timeSpendCubit,
+    this._freelanceDoneCubit,
   ) : super(const FreelanceWorkState.initial()) {
     _newGame();
+    _counting();
   }
 
   @override
   Future<void> close() async {
     _newGameSub.cancel();
+    _dateSub.cancel();
     super.close();
   }
 
@@ -38,13 +50,43 @@ class FreelanceJobCubit extends Cubit<FreelanceWorkState> {
     });
   }
 
-  _counting() {}
+  _counting() {
+    _dateSub = _dateCubit.stream.listen((event) {
+      event.whenOrNull(loaded: (date) {
+        _timeSpendCubit.state.whenOrNull(loaded: (timeSpend) {
+          state.whenOrNull(loaded: (freelanceJobs) {
+            int time = timeSpend.freelance;
+            List<FreelanceJob> result = [];
+
+            for (var e in freelanceJobs) {
+              if (e.leftWorkTime > time) {
+                result.add(e.copyWith(
+                    leftWorkTime: e.leftWorkTime - time,
+                    fame: e.getFameMultiplier() * (time - e.leftWorkTime)));
+                time = 0;
+              }
+              if (e.leftWorkTime <= time) {
+                _freelanceDoneCubit
+                    .add(e.copyWith(fame: e.getFameMultiplier() * e.leftWorkTime).toDone(date));
+                time = time - e.leftWorkTime;
+              }
+            }
+            if (result.isEmpty) {
+              _timeSpendCubit.changeFreelance(-timeSpend.freelance);
+            }
+            emit(FreelanceWorkState.loaded(result));
+          });
+        });
+      });
+    });
+  }
 
   add(FreelanceJob freelanceWork) {
     state.maybeWhen(
         orElse: () => 'error',
         loaded: (list) {
-          emit(FreelanceWorkState.loaded(List.from(list)..add(freelanceWork)));
+          emit(FreelanceWorkState.loaded(List.from(list)
+            ..add(freelanceWork.copyWith(fame: freelanceWork.getFameMultiplier()))));
         });
   }
 
@@ -54,5 +96,15 @@ class FreelanceJobCubit extends Cubit<FreelanceWorkState> {
         loaded: (list) {
           emit(FreelanceWorkState.loaded(List.from(list)..removeWhere((e) => e.id == id)));
         });
+  }
+
+  @override
+  FreelanceWorkState? fromJson(Map<String, dynamic> json) {
+    return FreelanceWorkState.fromJson(json);
+  }
+
+  @override
+  Map<String, dynamic>? toJson(FreelanceWorkState state) {
+    return state.toJson();
   }
 }

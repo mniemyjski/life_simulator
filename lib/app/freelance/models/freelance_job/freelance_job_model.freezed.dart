@@ -25,7 +25,8 @@ mixin _$FreelanceJob {
   String get name => throw _privateConstructorUsedError;
   ETypeFreelance get eTypeFreelance => throw _privateConstructorUsedError;
   double get fame => throw _privateConstructorUsedError;
-  double get price => throw _privateConstructorUsedError; //EndBase
+  double get price => throw _privateConstructorUsedError;
+  int get level => throw _privateConstructorUsedError; //EndBase
   int get workTime => throw _privateConstructorUsedError;
   int get leftWorkTime => throw _privateConstructorUsedError;
   List<Skill> get reqSkills => throw _privateConstructorUsedError;
@@ -48,6 +49,7 @@ abstract class $FreelanceJobCopyWith<$Res> {
       ETypeFreelance eTypeFreelance,
       double fame,
       double price,
+      int level,
       int workTime,
       int leftWorkTime,
       List<Skill> reqSkills,
@@ -69,6 +71,7 @@ class _$FreelanceJobCopyWithImpl<$Res> implements $FreelanceJobCopyWith<$Res> {
     Object? eTypeFreelance = freezed,
     Object? fame = freezed,
     Object? price = freezed,
+    Object? level = freezed,
     Object? workTime = freezed,
     Object? leftWorkTime = freezed,
     Object? reqSkills = freezed,
@@ -95,6 +98,10 @@ class _$FreelanceJobCopyWithImpl<$Res> implements $FreelanceJobCopyWith<$Res> {
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as double,
+      level: level == freezed
+          ? _value.level
+          : level // ignore: cast_nullable_to_non_nullable
+              as int,
       workTime: workTime == freezed
           ? _value.workTime
           : workTime // ignore: cast_nullable_to_non_nullable
@@ -128,6 +135,7 @@ abstract class _$$_FreelanceJobCopyWith<$Res>
       ETypeFreelance eTypeFreelance,
       double fame,
       double price,
+      int level,
       int workTime,
       int leftWorkTime,
       List<Skill> reqSkills,
@@ -152,6 +160,7 @@ class __$$_FreelanceJobCopyWithImpl<$Res>
     Object? eTypeFreelance = freezed,
     Object? fame = freezed,
     Object? price = freezed,
+    Object? level = freezed,
     Object? workTime = freezed,
     Object? leftWorkTime = freezed,
     Object? reqSkills = freezed,
@@ -178,6 +187,10 @@ class __$$_FreelanceJobCopyWithImpl<$Res>
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as double,
+      level: level == freezed
+          ? _value.level
+          : level // ignore: cast_nullable_to_non_nullable
+              as int,
       workTime: workTime == freezed
           ? _value.workTime
           : workTime // ignore: cast_nullable_to_non_nullable
@@ -207,6 +220,7 @@ class _$_FreelanceJob extends _FreelanceJob {
       required this.eTypeFreelance,
       this.fame = 0,
       this.price = 0,
+      required this.level,
       required this.workTime,
       required this.leftWorkTime,
       required final List<Skill> reqSkills,
@@ -231,6 +245,8 @@ class _$_FreelanceJob extends _FreelanceJob {
   @override
   @JsonKey()
   final double price;
+  @override
+  final int level;
 //EndBase
   @override
   final int workTime;
@@ -252,7 +268,7 @@ class _$_FreelanceJob extends _FreelanceJob {
 
   @override
   String toString() {
-    return 'FreelanceJob(id: $id, name: $name, eTypeFreelance: $eTypeFreelance, fame: $fame, price: $price, workTime: $workTime, leftWorkTime: $leftWorkTime, reqSkills: $reqSkills, userSkills: $userSkills)';
+    return 'FreelanceJob(id: $id, name: $name, eTypeFreelance: $eTypeFreelance, fame: $fame, price: $price, level: $level, workTime: $workTime, leftWorkTime: $leftWorkTime, reqSkills: $reqSkills, userSkills: $userSkills)';
   }
 
   @override
@@ -266,6 +282,7 @@ class _$_FreelanceJob extends _FreelanceJob {
                 .equals(other.eTypeFreelance, eTypeFreelance) &&
             const DeepCollectionEquality().equals(other.fame, fame) &&
             const DeepCollectionEquality().equals(other.price, price) &&
+            const DeepCollectionEquality().equals(other.level, level) &&
             const DeepCollectionEquality().equals(other.workTime, workTime) &&
             const DeepCollectionEquality()
                 .equals(other.leftWorkTime, leftWorkTime) &&
@@ -284,6 +301,7 @@ class _$_FreelanceJob extends _FreelanceJob {
       const DeepCollectionEquality().hash(eTypeFreelance),
       const DeepCollectionEquality().hash(fame),
       const DeepCollectionEquality().hash(price),
+      const DeepCollectionEquality().hash(level),
       const DeepCollectionEquality().hash(workTime),
       const DeepCollectionEquality().hash(leftWorkTime),
       const DeepCollectionEquality().hash(_reqSkills),
@@ -307,6 +325,7 @@ abstract class _FreelanceJob extends FreelanceJob implements FreelanceBase {
       required final ETypeFreelance eTypeFreelance,
       final double fame,
       final double price,
+      required final int level,
       required final int workTime,
       required final int leftWorkTime,
       required final List<Skill> reqSkills,
@@ -326,6 +345,8 @@ abstract class _FreelanceJob extends FreelanceJob implements FreelanceBase {
   double get fame => throw _privateConstructorUsedError;
   @override
   double get price => throw _privateConstructorUsedError;
+  @override
+  int get level => throw _privateConstructorUsedError;
   @override //EndBase
   int get workTime => throw _privateConstructorUsedError;
   @override

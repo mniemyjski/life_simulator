@@ -17,18 +17,11 @@ class FreelanceDone with _$FreelanceDone {
     required ETypeFreelance eTypeFreelance,
     required double fame,
     required double price,
+    required int level,
     //EndBase
-    required DateTime dateDone,
+    required DateTime dateCre,
     required int rating,
   }) = _FreelanceDone;
 
   factory FreelanceDone.fromJson(Map<String, dynamic> json) => _$FreelanceDoneFromJson(json);
-
-  int generateFame() {
-    return 0;
-  }
-
-  double generateEarn() {
-    return 0;
-  }
 }

@@ -25,8 +25,9 @@ mixin _$FreelanceDone {
   String get name => throw _privateConstructorUsedError;
   ETypeFreelance get eTypeFreelance => throw _privateConstructorUsedError;
   double get fame => throw _privateConstructorUsedError;
-  double get price => throw _privateConstructorUsedError; //EndBase
-  DateTime get dateDone => throw _privateConstructorUsedError;
+  double get price => throw _privateConstructorUsedError;
+  int get level => throw _privateConstructorUsedError; //EndBase
+  DateTime get dateCre => throw _privateConstructorUsedError;
   int get rating => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -46,7 +47,8 @@ abstract class $FreelanceDoneCopyWith<$Res> {
       ETypeFreelance eTypeFreelance,
       double fame,
       double price,
-      DateTime dateDone,
+      int level,
+      DateTime dateCre,
       int rating});
 }
 
@@ -66,7 +68,8 @@ class _$FreelanceDoneCopyWithImpl<$Res>
     Object? eTypeFreelance = freezed,
     Object? fame = freezed,
     Object? price = freezed,
-    Object? dateDone = freezed,
+    Object? level = freezed,
+    Object? dateCre = freezed,
     Object? rating = freezed,
   }) {
     return _then(_value.copyWith(
@@ -90,9 +93,13 @@ class _$FreelanceDoneCopyWithImpl<$Res>
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as double,
-      dateDone: dateDone == freezed
-          ? _value.dateDone
-          : dateDone // ignore: cast_nullable_to_non_nullable
+      level: level == freezed
+          ? _value.level
+          : level // ignore: cast_nullable_to_non_nullable
+              as int,
+      dateCre: dateCre == freezed
+          ? _value.dateCre
+          : dateCre // ignore: cast_nullable_to_non_nullable
               as DateTime,
       rating: rating == freezed
           ? _value.rating
@@ -115,7 +122,8 @@ abstract class _$$_FreelanceDoneCopyWith<$Res>
       ETypeFreelance eTypeFreelance,
       double fame,
       double price,
-      DateTime dateDone,
+      int level,
+      DateTime dateCre,
       int rating});
 }
 
@@ -137,7 +145,8 @@ class __$$_FreelanceDoneCopyWithImpl<$Res>
     Object? eTypeFreelance = freezed,
     Object? fame = freezed,
     Object? price = freezed,
-    Object? dateDone = freezed,
+    Object? level = freezed,
+    Object? dateCre = freezed,
     Object? rating = freezed,
   }) {
     return _then(_$_FreelanceDone(
@@ -161,9 +170,13 @@ class __$$_FreelanceDoneCopyWithImpl<$Res>
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as double,
-      dateDone: dateDone == freezed
-          ? _value.dateDone
-          : dateDone // ignore: cast_nullable_to_non_nullable
+      level: level == freezed
+          ? _value.level
+          : level // ignore: cast_nullable_to_non_nullable
+              as int,
+      dateCre: dateCre == freezed
+          ? _value.dateCre
+          : dateCre // ignore: cast_nullable_to_non_nullable
               as DateTime,
       rating: rating == freezed
           ? _value.rating
@@ -182,7 +195,8 @@ class _$_FreelanceDone extends _FreelanceDone {
       required this.eTypeFreelance,
       required this.fame,
       required this.price,
-      required this.dateDone,
+      required this.level,
+      required this.dateCre,
       required this.rating})
       : assert(rating > 0, 'rating < 6'),
         super._();
@@ -201,15 +215,17 @@ class _$_FreelanceDone extends _FreelanceDone {
   final double fame;
   @override
   final double price;
+  @override
+  final int level;
 //EndBase
   @override
-  final DateTime dateDone;
+  final DateTime dateCre;
   @override
   final int rating;
 
   @override
   String toString() {
-    return 'FreelanceDone(id: $id, name: $name, eTypeFreelance: $eTypeFreelance, fame: $fame, price: $price, dateDone: $dateDone, rating: $rating)';
+    return 'FreelanceDone(id: $id, name: $name, eTypeFreelance: $eTypeFreelance, fame: $fame, price: $price, level: $level, dateCre: $dateCre, rating: $rating)';
   }
 
   @override
@@ -223,7 +239,8 @@ class _$_FreelanceDone extends _FreelanceDone {
                 .equals(other.eTypeFreelance, eTypeFreelance) &&
             const DeepCollectionEquality().equals(other.fame, fame) &&
             const DeepCollectionEquality().equals(other.price, price) &&
-            const DeepCollectionEquality().equals(other.dateDone, dateDone) &&
+            const DeepCollectionEquality().equals(other.level, level) &&
+            const DeepCollectionEquality().equals(other.dateCre, dateCre) &&
             const DeepCollectionEquality().equals(other.rating, rating));
   }
 
@@ -236,7 +253,8 @@ class _$_FreelanceDone extends _FreelanceDone {
       const DeepCollectionEquality().hash(eTypeFreelance),
       const DeepCollectionEquality().hash(fame),
       const DeepCollectionEquality().hash(price),
-      const DeepCollectionEquality().hash(dateDone),
+      const DeepCollectionEquality().hash(level),
+      const DeepCollectionEquality().hash(dateCre),
       const DeepCollectionEquality().hash(rating));
 
   @JsonKey(ignore: true)
@@ -257,7 +275,8 @@ abstract class _FreelanceDone extends FreelanceDone implements FreelanceBase {
       required final ETypeFreelance eTypeFreelance,
       required final double fame,
       required final double price,
-      required final DateTime dateDone,
+      required final int level,
+      required final DateTime dateCre,
       required final int rating}) = _$_FreelanceDone;
   const _FreelanceDone._() : super._();
 
@@ -274,8 +293,10 @@ abstract class _FreelanceDone extends FreelanceDone implements FreelanceBase {
   double get fame => throw _privateConstructorUsedError;
   @override
   double get price => throw _privateConstructorUsedError;
+  @override
+  int get level => throw _privateConstructorUsedError;
   @override //EndBase
-  DateTime get dateDone => throw _privateConstructorUsedError;
+  DateTime get dateCre => throw _privateConstructorUsedError;
   @override
   int get rating => throw _privateConstructorUsedError;
   @override

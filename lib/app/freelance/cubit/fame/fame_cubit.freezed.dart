@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'freelance_done_cubit.dart';
+part of 'fame_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-FreelanceDoneState _$FreelanceDoneStateFromJson(Map<String, dynamic> json) {
+FameState _$FameStateFromJson(Map<String, dynamic> json) {
   switch (json['runtimeType']) {
     case 'initial':
       return Initial.fromJson(json);
@@ -24,32 +24,32 @@ FreelanceDoneState _$FreelanceDoneStateFromJson(Map<String, dynamic> json) {
       return Loaded.fromJson(json);
 
     default:
-      throw CheckedFromJsonException(json, 'runtimeType', 'FreelanceDoneState',
+      throw CheckedFromJsonException(json, 'runtimeType', 'FameState',
           'Invalid union type "${json['runtimeType']}"!');
   }
 }
 
 /// @nodoc
-mixin _$FreelanceDoneState {
+mixin _$FameState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<FreelanceDone> freelances) loaded,
+    required TResult Function(double fame) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<FreelanceDone> freelances)? loaded,
+    TResult Function(double fame)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<FreelanceDone> freelances)? loaded,
+    TResult Function(double fame)? loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -79,20 +79,18 @@ mixin _$FreelanceDoneState {
 }
 
 /// @nodoc
-abstract class $FreelanceDoneStateCopyWith<$Res> {
-  factory $FreelanceDoneStateCopyWith(
-          FreelanceDoneState value, $Res Function(FreelanceDoneState) then) =
-      _$FreelanceDoneStateCopyWithImpl<$Res>;
+abstract class $FameStateCopyWith<$Res> {
+  factory $FameStateCopyWith(FameState value, $Res Function(FameState) then) =
+      _$FameStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$FreelanceDoneStateCopyWithImpl<$Res>
-    implements $FreelanceDoneStateCopyWith<$Res> {
-  _$FreelanceDoneStateCopyWithImpl(this._value, this._then);
+class _$FameStateCopyWithImpl<$Res> implements $FameStateCopyWith<$Res> {
+  _$FameStateCopyWithImpl(this._value, this._then);
 
-  final FreelanceDoneState _value;
+  final FameState _value;
   // ignore: unused_field
-  final $Res Function(FreelanceDoneState) _then;
+  final $Res Function(FameState) _then;
 }
 
 /// @nodoc
@@ -102,8 +100,7 @@ abstract class _$$InitialCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$InitialCopyWithImpl<$Res>
-    extends _$FreelanceDoneStateCopyWithImpl<$Res>
+class __$$InitialCopyWithImpl<$Res> extends _$FameStateCopyWithImpl<$Res>
     implements _$$InitialCopyWith<$Res> {
   __$$InitialCopyWithImpl(_$Initial _value, $Res Function(_$Initial) _then)
       : super(_value, (v) => _then(v as _$Initial));
@@ -125,7 +122,7 @@ class _$Initial implements Initial {
 
   @override
   String toString() {
-    return 'FreelanceDoneState.initial()';
+    return 'FameState.initial()';
   }
 
   @override
@@ -143,7 +140,7 @@ class _$Initial implements Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<FreelanceDone> freelances) loaded,
+    required TResult Function(double fame) loaded,
   }) {
     return initial();
   }
@@ -153,7 +150,7 @@ class _$Initial implements Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<FreelanceDone> freelances)? loaded,
+    TResult Function(double fame)? loaded,
   }) {
     return initial?.call();
   }
@@ -163,7 +160,7 @@ class _$Initial implements Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<FreelanceDone> freelances)? loaded,
+    TResult Function(double fame)? loaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -212,7 +209,7 @@ class _$Initial implements Initial {
   }
 }
 
-abstract class Initial implements FreelanceDoneState {
+abstract class Initial implements FameState {
   const factory Initial() = _$Initial;
 
   factory Initial.fromJson(Map<String, dynamic> json) = _$Initial.fromJson;
@@ -225,8 +222,7 @@ abstract class _$$LoadingCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$LoadingCopyWithImpl<$Res>
-    extends _$FreelanceDoneStateCopyWithImpl<$Res>
+class __$$LoadingCopyWithImpl<$Res> extends _$FameStateCopyWithImpl<$Res>
     implements _$$LoadingCopyWith<$Res> {
   __$$LoadingCopyWithImpl(_$Loading _value, $Res Function(_$Loading) _then)
       : super(_value, (v) => _then(v as _$Loading));
@@ -248,7 +244,7 @@ class _$Loading implements Loading {
 
   @override
   String toString() {
-    return 'FreelanceDoneState.loading()';
+    return 'FameState.loading()';
   }
 
   @override
@@ -266,7 +262,7 @@ class _$Loading implements Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<FreelanceDone> freelances) loaded,
+    required TResult Function(double fame) loaded,
   }) {
     return loading();
   }
@@ -276,7 +272,7 @@ class _$Loading implements Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<FreelanceDone> freelances)? loaded,
+    TResult Function(double fame)? loaded,
   }) {
     return loading?.call();
   }
@@ -286,7 +282,7 @@ class _$Loading implements Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<FreelanceDone> freelances)? loaded,
+    TResult Function(double fame)? loaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -335,7 +331,7 @@ class _$Loading implements Loading {
   }
 }
 
-abstract class Loading implements FreelanceDoneState {
+abstract class Loading implements FameState {
   const factory Loading() = _$Loading;
 
   factory Loading.fromJson(Map<String, dynamic> json) = _$Loading.fromJson;
@@ -345,12 +341,11 @@ abstract class Loading implements FreelanceDoneState {
 abstract class _$$LoadedCopyWith<$Res> {
   factory _$$LoadedCopyWith(_$Loaded value, $Res Function(_$Loaded) then) =
       __$$LoadedCopyWithImpl<$Res>;
-  $Res call({List<FreelanceDone> freelances});
+  $Res call({double fame});
 }
 
 /// @nodoc
-class __$$LoadedCopyWithImpl<$Res>
-    extends _$FreelanceDoneStateCopyWithImpl<$Res>
+class __$$LoadedCopyWithImpl<$Res> extends _$FameStateCopyWithImpl<$Res>
     implements _$$LoadedCopyWith<$Res> {
   __$$LoadedCopyWithImpl(_$Loaded _value, $Res Function(_$Loaded) _then)
       : super(_value, (v) => _then(v as _$Loaded));
@@ -360,13 +355,13 @@ class __$$LoadedCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? freelances = freezed,
+    Object? fame = freezed,
   }) {
     return _then(_$Loaded(
-      freelances == freezed
-          ? _value._freelances
-          : freelances // ignore: cast_nullable_to_non_nullable
-              as List<FreelanceDone>,
+      fame == freezed
+          ? _value.fame
+          : fame // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -374,26 +369,20 @@ class __$$LoadedCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$Loaded implements Loaded {
-  const _$Loaded(final List<FreelanceDone> freelances, {final String? $type})
-      : _freelances = freelances,
-        $type = $type ?? 'loaded';
+  const _$Loaded(this.fame, {final String? $type}) : $type = $type ?? 'loaded';
 
   factory _$Loaded.fromJson(Map<String, dynamic> json) =>
       _$$LoadedFromJson(json);
 
-  final List<FreelanceDone> _freelances;
   @override
-  List<FreelanceDone> get freelances {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_freelances);
-  }
+  final double fame;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'FreelanceDoneState.loaded(freelances: $freelances)';
+    return 'FameState.loaded(fame: $fame)';
   }
 
   @override
@@ -401,14 +390,13 @@ class _$Loaded implements Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$Loaded &&
-            const DeepCollectionEquality()
-                .equals(other._freelances, _freelances));
+            const DeepCollectionEquality().equals(other.fame, fame));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_freelances));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(fame));
 
   @JsonKey(ignore: true)
   @override
@@ -420,9 +408,9 @@ class _$Loaded implements Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<FreelanceDone> freelances) loaded,
+    required TResult Function(double fame) loaded,
   }) {
-    return loaded(freelances);
+    return loaded(fame);
   }
 
   @override
@@ -430,9 +418,9 @@ class _$Loaded implements Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<FreelanceDone> freelances)? loaded,
+    TResult Function(double fame)? loaded,
   }) {
-    return loaded?.call(freelances);
+    return loaded?.call(fame);
   }
 
   @override
@@ -440,11 +428,11 @@ class _$Loaded implements Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<FreelanceDone> freelances)? loaded,
+    TResult Function(double fame)? loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(freelances);
+      return loaded(fame);
     }
     return orElse();
   }
@@ -489,12 +477,12 @@ class _$Loaded implements Loaded {
   }
 }
 
-abstract class Loaded implements FreelanceDoneState {
-  const factory Loaded(final List<FreelanceDone> freelances) = _$Loaded;
+abstract class Loaded implements FameState {
+  const factory Loaded(final double fame) = _$Loaded;
 
   factory Loaded.fromJson(Map<String, dynamic> json) = _$Loaded.fromJson;
 
-  List<FreelanceDone> get freelances => throw _privateConstructorUsedError;
+  double get fame => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$LoadedCopyWith<_$Loaded> get copyWith =>
       throw _privateConstructorUsedError;

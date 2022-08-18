@@ -14,7 +14,8 @@ _$_FreelanceDone _$$_FreelanceDoneFromJson(Map<String, dynamic> json) =>
           $enumDecode(_$ETypeFreelanceEnumMap, json['eTypeFreelance']),
       fame: (json['fame'] as num).toDouble(),
       price: (json['price'] as num).toDouble(),
-      dateDone: DateTime.parse(json['dateDone'] as String),
+      level: json['level'] as int,
+      dateCre: DateTime.parse(json['dateCre'] as String),
       rating: json['rating'] as int,
     );
 
@@ -25,7 +26,8 @@ Map<String, dynamic> _$$_FreelanceDoneToJson(_$_FreelanceDone instance) =>
       'eTypeFreelance': _$ETypeFreelanceEnumMap[instance.eTypeFreelance],
       'fame': instance.fame,
       'price': instance.price,
-      'dateDone': instance.dateDone.toIso8601String(),
+      'level': instance.level,
+      'dateCre': instance.dateCre.toIso8601String(),
       'rating': instance.rating,
     };
 

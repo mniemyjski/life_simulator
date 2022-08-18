@@ -121,7 +121,7 @@ class TimeSpendCubit extends HydratedCubit<TimeSpendState> {
       if (timeSpend.free < hours) return "You don't have free time";
 
       TimeSpend refresh = timeSpend.copyWith(
-        sleep: timeSpend.freelance + hours,
+        freelance: timeSpend.freelance + hours,
         free: timeSpend.free - hours,
       );
       emit(TimeSpendState.loaded(refresh));
