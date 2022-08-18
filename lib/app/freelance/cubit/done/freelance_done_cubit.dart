@@ -88,7 +88,7 @@ class FreelanceDoneCubit extends HydratedCubit<FreelanceDoneState> {
               addMoney = e.price * fame10;
             }
             //Todo add transaction money
-            Logger().wtf(addMoney.toMoney());
+            if (addMoney > 0) Logger().wtf(addMoney.toMoney());
           });
 
           emit(FreelanceDoneState.loaded(result));
