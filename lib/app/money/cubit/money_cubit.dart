@@ -40,21 +40,21 @@ class MoneyCubit extends HydratedCubit<double> {
     required double value,
     required ETypeTransactionSource eTypeTransactionSource,
   }) {
-    // _dateCubit.state.whenOrNull(loaded: (date) {
-    //   Transaction transaction = Transaction(
-    //     id: const Uuid().v1(),
-    //     value: value,
-    //     eTypeTransaction: value > 0 ? ETypeTransaction.revenue : ETypeTransaction.expense,
-    //     eTypeTransactionSource: eTypeTransactionSource,
-    //     dateCre: date,
-    //   );
-    //   bool done = _transactionCubit.add(transaction);
-    //   if (done) {
-    //     _change(value);
-    //   } else {
-    //     throw 'Error when add transaction';
-    //   }
-    // });
+    _dateCubit.state.whenOrNull(loaded: (date) {
+      Transaction transaction = Transaction(
+        id: const Uuid().v1(),
+        value: value,
+        eTypeTransaction: value > 0 ? ETypeTransaction.revenue : ETypeTransaction.expense,
+        eTypeTransactionSource: eTypeTransactionSource,
+        dateCre: date,
+      );
+      bool done = _transactionCubit.add(transaction);
+      if (done) {
+        _change(value);
+      } else {
+        throw 'Error when add transaction';
+      }
+    });
   }
 
   _change(double money) {
