@@ -6,6 +6,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:life_simulator/app/database/cubit/database_cubit.dart';
 import 'package:life_simulator/app/date/cubit/date_cubit.dart';
+import 'package:life_simulator/app/money/models/transaction/transaction_model.dart';
 
 import '../../money/cubit/money_cubit.dart';
 import '../../new_game/new_game_cubit.dart';
@@ -99,10 +100,20 @@ class EventCubit extends HydratedCubit<EventState> {
 
   add(GameEvent event) {
     state.whenOrNull(loaded: (events) {
-      if (event.eTypeEffect == ETypeEffect.money) _moneyCubit.change(event.value);
+      if (event.eTypeEffect == ETypeEffect.addMoney) {
+        _moneyCubit.addTransaction(
+            value: event.value, eTypeTransactionSource: ETypeTransactionSource.addMoney);
+      }
+
+      if (event.eTypeEffect == ETypeEffect.lostMoney) {
+        _moneyCubit.addTransaction(
+            value: event.value, eTypeTransactionSource: ETypeTransactionSource.lostMoney);
+      }
 
       if (event.eTypeEffect == ETypeEffect.taxes) {
-        _moneyCubit.change(_moneyCubit.state * event.value);
+        _moneyCubit.addTransaction(
+            value: _moneyCubit.state * event.value,
+            eTypeTransactionSource: ETypeTransactionSource.unpaidTaxes);
       }
 
       List<GameEvent> result = List.from(events)

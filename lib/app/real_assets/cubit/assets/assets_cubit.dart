@@ -5,6 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:life_simulator/app/database/cubit/database_cubit.dart';
+import 'package:life_simulator/app/money/models/transaction/transaction_model.dart';
 import 'package:life_simulator/app/real_assets/cubit/buy/buy_asset_cubit.dart';
 import 'package:life_simulator/app/real_assets/cubit/tenant/tenants_cubit.dart';
 
@@ -67,7 +68,9 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
         orElse: () => 'error',
         loaded: (assets) {
           List<Asset> result = List.from(assets)..add(asset);
-          _moneyCubit.change(-asset.value);
+
+          _moneyCubit.addTransaction(
+              value: -asset.value, eTypeTransactionSource: ETypeTransactionSource.asset);
           _buyAssetCubit.remove(asset);
           emit(AssetsState.loaded(result));
           return 'succeed';
@@ -80,7 +83,8 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
         orElse: () => 'error',
         loaded: (assets) {
           List<Asset> result = List.from(assets)..remove(asset);
-          _moneyCubit.change(asset.value);
+          _moneyCubit.addTransaction(
+              value: asset.value, eTypeTransactionSource: ETypeTransactionSource.asset);
           _buyAssetCubit.add(asset.copyWith(friendlyAnimal: true, minRent: 800));
           _tenantsCubit.removeTenantInAsset(asset);
           emit(AssetsState.loaded(result));
@@ -100,7 +104,8 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
         orElse: () => 'error',
         loaded: (assets) {
           List<Asset> result = List.from(assets)..remove(asset);
-          _moneyCubit.change(cost);
+          _moneyCubit.addTransaction(
+              value: cost, eTypeTransactionSource: ETypeTransactionSource.asset);
           Asset newAsset = asset.copyWith(
               renovation: asset.renovation + renovation, value: asset.value + (-cost * 1.5));
           result.add(newAsset);
@@ -121,7 +126,8 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
         orElse: () => 'error',
         loaded: (assets) {
           List<Asset> result = List.from(assets)..remove(asset);
-          _moneyCubit.change(-cost);
+          _moneyCubit.addTransaction(
+              value: -cost, eTypeTransactionSource: ETypeTransactionSource.asset);
           Asset newAsset =
               asset.copyWith(level: asset.level + level, value: asset.value + (-cost * 1.5));
           result.add(newAsset);

@@ -30,7 +30,7 @@ const _$ETypeSourceEnumMap = {
   ETypeSource.job: 'job',
   ETypeSource.meal: 'meal',
   ETypeSource.house: 'house',
-  ETypeSource.car: 'car',
+  ETypeSource.transport: 'transport',
   ETypeSource.asset: 'asset',
 };
 

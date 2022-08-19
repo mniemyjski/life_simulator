@@ -4,7 +4,7 @@ import '../../real_assets/models/asset/asset_model.dart';
 
 class DataAssets {
   static List<Asset> db() {
-    var uuid = Uuid();
+    var uuid = const Uuid();
     return [
       Asset(
         id: uuid.v1(),

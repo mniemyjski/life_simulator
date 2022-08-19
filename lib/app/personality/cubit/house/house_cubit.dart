@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:life_simulator/app/money/models/transaction/transaction_model.dart';
 
 import '../../../database/cubit/database_cubit.dart';
 import '../../../income/cubit/income_cubit.dart';
@@ -79,7 +80,9 @@ class HouseCubit extends HydratedCubit<HouseState> {
         ],
       );
 
-      _moneyCubit.change(-house.cost);
+      _moneyCubit.addTransaction(
+          value: -house.cost, eTypeTransactionSource: ETypeTransactionSource.house);
+
       _incomeCubit.add(income);
       if (_house != null && _house.eTypeHouse == ETypeHouse.rent) _incomeCubit.remove(_house.id);
 
@@ -94,7 +97,8 @@ class HouseCubit extends HydratedCubit<HouseState> {
       if (_house != null) {
         _timeSpendCubit.removeBonus(ETypeBonusSource.house);
         _incomeCubit.remove(_house.id);
-        _moneyCubit.change(_house.cost * 0.8);
+        _moneyCubit.addTransaction(
+            value: _house.cost * 0.8, eTypeTransactionSource: ETypeTransactionSource.house);
         emit(const HouseState.loaded(house: null));
       }
     });

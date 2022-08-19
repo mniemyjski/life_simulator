@@ -7,17 +7,18 @@ import 'package:uuid/uuid.dart';
 
 import '../../../date/cubit/date_cubit.dart';
 import '../../../money/cubit/money_cubit.dart';
+import '../../../money/models/transaction/transaction_model.dart';
 import '../../../new_game/new_game_cubit.dart';
+import '../../models/exchange/exchange.dart';
 import '../../models/instrument/instrument.dart';
-import '../../models/transaction/transaction.dart';
 import '../stock_market/stock_market_cubit.dart';
 
-part 'transactions_cubit.freezed.dart';
-part 'transactions_cubit.g.dart';
-part 'transactions_state.dart';
+part 'exchanges_cubit.freezed.dart';
+part 'exchanges_cubit.g.dart';
+part 'exchanges_state.dart';
 
 @lazySingleton
-class TransactionsCubit extends HydratedCubit<TransactionsState> {
+class ExchangesCubit extends HydratedCubit<ExchangesState> {
   final NewGameCubit _newGameCubit;
   late StreamSubscription _newGameSub;
 
@@ -27,12 +28,12 @@ class TransactionsCubit extends HydratedCubit<TransactionsState> {
   final StockMarketCubit _stockMarketCubit;
   final MoneyCubit _moneyCubit;
 
-  TransactionsCubit(
+  ExchangesCubit(
     this._newGameCubit,
     this._dateCubit,
     this._stockMarketCubit,
     this._moneyCubit,
-  ) : super(const TransactionsState.initial()) {
+  ) : super(const ExchangesState.initial()) {
     _newGame();
   }
 
@@ -44,9 +45,9 @@ class TransactionsCubit extends HydratedCubit<TransactionsState> {
   }
 
   _newGame() {
-    if (_newGameCubit.state) emit(const TransactionsState.loaded([]));
+    if (_newGameCubit.state) emit(const ExchangesState.loaded([]));
     _newGameSub = _newGameCubit.stream.listen((newGame) {
-      if (newGame) emit(const TransactionsState.loaded([]));
+      if (newGame) emit(const ExchangesState.loaded([]));
     });
   }
 
@@ -67,13 +68,16 @@ class TransactionsCubit extends HydratedCubit<TransactionsState> {
                 return state.maybeWhen(
                     loaded: (transactions) {
                       var uuid = const Uuid();
-                      List<Transaction> result = List.from(transactions);
-                      Transaction newTransaction = Transaction(
+                      List<Exchange> result = List.from(transactions);
+                      Exchange newTransaction = Exchange(
                           id: uuid.v1(), instrument: instrument, count: count, datCre: date);
 
                       result.add(newTransaction);
-                      _moneyCubit.change(-instrument.candles.last.close * count);
-                      emit(TransactionsState.loaded(result));
+
+                      _moneyCubit.addTransaction(
+                          value: -instrument.candles.last.close * count,
+                          eTypeTransactionSource: ETypeTransactionSource.market);
+                      emit(ExchangesState.loaded(result));
                       return 'Succeed';
                     },
                     orElse: () => 'error');
@@ -92,13 +96,13 @@ class TransactionsCubit extends HydratedCubit<TransactionsState> {
               loaded: (date) {
                 return state.maybeWhen(
                     loaded: (transactions) {
-                      List<Transaction> oldTransactions =
+                      List<Exchange> oldTransactions =
                           List.from(transactions.where((e) => e.instrument.id == instrument.id));
-                      List<Transaction> result = [];
+                      List<Exchange> result = [];
                       double addMoney = 0;
                       double tCount = count;
 
-                      for (Transaction i in oldTransactions) {
+                      for (Exchange i in oldTransactions) {
                         if (i.count > tCount && tCount > 0) {
                           result.add(i.copyWith(count: i.count - tCount));
                           tCount -= i.count;
@@ -114,8 +118,9 @@ class TransactionsCubit extends HydratedCubit<TransactionsState> {
                         }
                       }
 
-                      _moneyCubit.change(addMoney);
-                      emit(TransactionsState.loaded(result));
+                      _moneyCubit.addTransaction(
+                          value: addMoney, eTypeTransactionSource: ETypeTransactionSource.market);
+                      emit(ExchangesState.loaded(result));
                       return 'Succeed';
                     },
                     orElse: () => 'error');
@@ -126,12 +131,12 @@ class TransactionsCubit extends HydratedCubit<TransactionsState> {
   }
 
   @override
-  TransactionsState? fromJson(Map<String, dynamic> json) {
-    return TransactionsState.fromJson(json);
+  ExchangesState? fromJson(Map<String, dynamic> json) {
+    return ExchangesState.fromJson(json);
   }
 
   @override
-  Map<String, dynamic>? toJson(TransactionsState state) {
+  Map<String, dynamic>? toJson(ExchangesState state) {
     return state.toJson();
   }
 }

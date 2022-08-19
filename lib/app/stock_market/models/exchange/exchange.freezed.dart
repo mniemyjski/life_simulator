@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'transaction.dart';
+part of 'exchange.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Transaction _$TransactionFromJson(Map<String, dynamic> json) {
-  return _Transaction.fromJson(json);
+Exchange _$ExchangeFromJson(Map<String, dynamic> json) {
+  return _Exchange.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Transaction {
+mixin _$Exchange {
   String get id => throw _privateConstructorUsedError;
   Instrument get instrument => throw _privateConstructorUsedError;
   double get count => throw _privateConstructorUsedError;
@@ -28,15 +28,14 @@ mixin _$Transaction {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $TransactionCopyWith<Transaction> get copyWith =>
+  $ExchangeCopyWith<Exchange> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $TransactionCopyWith<$Res> {
-  factory $TransactionCopyWith(
-          Transaction value, $Res Function(Transaction) then) =
-      _$TransactionCopyWithImpl<$Res>;
+abstract class $ExchangeCopyWith<$Res> {
+  factory $ExchangeCopyWith(Exchange value, $Res Function(Exchange) then) =
+      _$ExchangeCopyWithImpl<$Res>;
   $Res call(
       {String id,
       Instrument instrument,
@@ -48,12 +47,12 @@ abstract class $TransactionCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$TransactionCopyWithImpl<$Res> implements $TransactionCopyWith<$Res> {
-  _$TransactionCopyWithImpl(this._value, this._then);
+class _$ExchangeCopyWithImpl<$Res> implements $ExchangeCopyWith<$Res> {
+  _$ExchangeCopyWithImpl(this._value, this._then);
 
-  final Transaction _value;
+  final Exchange _value;
   // ignore: unused_field
-  final $Res Function(Transaction) _then;
+  final $Res Function(Exchange) _then;
 
   @override
   $Res call({
@@ -96,11 +95,10 @@ class _$TransactionCopyWithImpl<$Res> implements $TransactionCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$$_TransactionCopyWith<$Res>
-    implements $TransactionCopyWith<$Res> {
-  factory _$$_TransactionCopyWith(
-          _$_Transaction value, $Res Function(_$_Transaction) then) =
-      __$$_TransactionCopyWithImpl<$Res>;
+abstract class _$$_ExchangeCopyWith<$Res> implements $ExchangeCopyWith<$Res> {
+  factory _$$_ExchangeCopyWith(
+          _$_Exchange value, $Res Function(_$_Exchange) then) =
+      __$$_ExchangeCopyWithImpl<$Res>;
   @override
   $Res call(
       {String id,
@@ -114,14 +112,14 @@ abstract class _$$_TransactionCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_TransactionCopyWithImpl<$Res> extends _$TransactionCopyWithImpl<$Res>
-    implements _$$_TransactionCopyWith<$Res> {
-  __$$_TransactionCopyWithImpl(
-      _$_Transaction _value, $Res Function(_$_Transaction) _then)
-      : super(_value, (v) => _then(v as _$_Transaction));
+class __$$_ExchangeCopyWithImpl<$Res> extends _$ExchangeCopyWithImpl<$Res>
+    implements _$$_ExchangeCopyWith<$Res> {
+  __$$_ExchangeCopyWithImpl(
+      _$_Exchange _value, $Res Function(_$_Exchange) _then)
+      : super(_value, (v) => _then(v as _$_Exchange));
 
   @override
-  _$_Transaction get _value => super._value as _$_Transaction;
+  _$_Exchange get _value => super._value as _$_Exchange;
 
   @override
   $Res call({
@@ -131,7 +129,7 @@ class __$$_TransactionCopyWithImpl<$Res> extends _$TransactionCopyWithImpl<$Res>
     Object? datCre = freezed,
     Object? close = freezed,
   }) {
-    return _then(_$_Transaction(
+    return _then(_$_Exchange(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -158,16 +156,16 @@ class __$$_TransactionCopyWithImpl<$Res> extends _$TransactionCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Transaction implements _Transaction {
-  const _$_Transaction(
+class _$_Exchange implements _Exchange {
+  const _$_Exchange(
       {required this.id,
       required this.instrument,
       required this.count,
       required this.datCre,
       this.close = false});
 
-  factory _$_Transaction.fromJson(Map<String, dynamic> json) =>
-      _$$_TransactionFromJson(json);
+  factory _$_Exchange.fromJson(Map<String, dynamic> json) =>
+      _$$_ExchangeFromJson(json);
 
   @override
   final String id;
@@ -183,14 +181,14 @@ class _$_Transaction implements _Transaction {
 
   @override
   String toString() {
-    return 'Transaction(id: $id, instrument: $instrument, count: $count, datCre: $datCre, close: $close)';
+    return 'Exchange(id: $id, instrument: $instrument, count: $count, datCre: $datCre, close: $close)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Transaction &&
+            other is _$_Exchange &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality()
                 .equals(other.instrument, instrument) &&
@@ -211,25 +209,24 @@ class _$_Transaction implements _Transaction {
 
   @JsonKey(ignore: true)
   @override
-  _$$_TransactionCopyWith<_$_Transaction> get copyWith =>
-      __$$_TransactionCopyWithImpl<_$_Transaction>(this, _$identity);
+  _$$_ExchangeCopyWith<_$_Exchange> get copyWith =>
+      __$$_ExchangeCopyWithImpl<_$_Exchange>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TransactionToJson(this);
+    return _$$_ExchangeToJson(this);
   }
 }
 
-abstract class _Transaction implements Transaction {
-  const factory _Transaction(
+abstract class _Exchange implements Exchange {
+  const factory _Exchange(
       {required final String id,
       required final Instrument instrument,
       required final double count,
       required final DateTime datCre,
-      final bool close}) = _$_Transaction;
+      final bool close}) = _$_Exchange;
 
-  factory _Transaction.fromJson(Map<String, dynamic> json) =
-      _$_Transaction.fromJson;
+  factory _Exchange.fromJson(Map<String, dynamic> json) = _$_Exchange.fromJson;
 
   @override
   String get id => throw _privateConstructorUsedError;
@@ -243,6 +240,6 @@ abstract class _Transaction implements Transaction {
   bool get close => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$$_TransactionCopyWith<_$_Transaction> get copyWith =>
+  _$$_ExchangeCopyWith<_$_Exchange> get copyWith =>
       throw _privateConstructorUsedError;
 }

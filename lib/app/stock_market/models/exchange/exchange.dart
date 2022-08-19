@@ -2,18 +2,18 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../instrument/instrument.dart';
 
-part 'transaction.freezed.dart';
-part 'transaction.g.dart';
+part 'exchange.freezed.dart';
+part 'exchange.g.dart';
 
 @freezed
-class Transaction with _$Transaction {
-  const factory Transaction({
+class Exchange with _$Exchange {
+  const factory Exchange({
     required String id,
     required Instrument instrument,
     required double count,
     required DateTime datCre,
     @Default(false) bool close,
-  }) = _Transaction;
+  }) = _Exchange;
 
-  factory Transaction.fromJson(Map<String, dynamic> json) => _$TransactionFromJson(json);
+  factory Exchange.fromJson(Map<String, dynamic> json) => _$ExchangeFromJson(json);
 }

@@ -7,7 +7,8 @@ part 'game_event_model.g.dart';
 
 enum ETypeEffect {
   sick,
-  money,
+  addMoney,
+  lostMoney,
   taxes,
 }
 

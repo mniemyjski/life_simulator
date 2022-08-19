@@ -5,7 +5,7 @@ import 'package:life_simulator/constants/constants.dart';
 import 'package:life_simulator/utilities/utilities.dart';
 
 import '../../../widgets/widgets.dart';
-import '../cubit/transactions/transactions_cubit.dart';
+import '../cubit/exchanges/exchanges_cubit.dart';
 import '../models/instrument/instrument.dart';
 
 class BuyButton extends StatelessWidget {
@@ -49,9 +49,7 @@ class BuyButton extends StatelessWidget {
                 ),
                 CustomButton(
                     onPressed: () {
-                      context
-                          .read<TransactionsCubit>()
-                          .buy(idInstrument: instrument.id, count: buy);
+                      context.read<ExchangesCubit>().buy(idInstrument: instrument.id, count: buy);
                       context.router.pop();
                     },
                     child: Text(

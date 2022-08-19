@@ -9,7 +9,7 @@ enum ETypeSource {
   job,
   meal,
   house,
-  car,
+  transport,
   asset,
 }
 

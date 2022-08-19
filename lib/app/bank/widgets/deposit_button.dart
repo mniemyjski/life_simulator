@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:life_simulator/app/money/models/transaction/transaction_model.dart';
 import 'package:life_simulator/utilities/utilities.dart';
 
 import '../../../constants/constants.dart';
@@ -57,10 +58,15 @@ class DepositButton extends StatelessWidget {
                             onPressed: () {
                               if (_newDeposit > _oldDeposit) {
                                 context.read<DepositCubit>().change(_newDeposit);
-                                context.read<MoneyCubit>().change(-_newDeposit);
+
+                                context.read<MoneyCubit>().addTransaction(
+                                    value: -_newDeposit,
+                                    eTypeTransactionSource: ETypeTransactionSource.bankDeposit);
                               } else if (_newDeposit < _oldDeposit) {
                                 context.read<DepositCubit>().change(-_oldDeposit + _newDeposit);
-                                context.read<MoneyCubit>().change(_oldDeposit - _newDeposit);
+                                context.read<MoneyCubit>().addTransaction(
+                                    value: _oldDeposit - _newDeposit,
+                                    eTypeTransactionSource: ETypeTransactionSource.bankDeposit);
                               }
                               context.router.pop();
                             },

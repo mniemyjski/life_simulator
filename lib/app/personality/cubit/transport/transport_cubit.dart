@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:life_simulator/app/money/models/transaction/transaction_model.dart';
 
 import '../../../database/cubit/database_cubit.dart';
 import '../../../income/cubit/income_cubit.dart';
@@ -64,7 +65,7 @@ class TransportCubit extends HydratedCubit<TransportState> {
 
       Income income = Income(
         id: transport.id,
-        source: ETypeSource.car,
+        source: ETypeSource.transport,
         typeIncome: ETypeIncome.expense,
         value: -transport.monthlyCost,
         eTypeFrequency: ETypeFrequency.monthly,
@@ -83,7 +84,9 @@ class TransportCubit extends HydratedCubit<TransportState> {
         ],
       );
 
-      _moneyCubit.change(-transport.cost);
+      _moneyCubit.addTransaction(
+          value: -transport.cost, eTypeTransactionSource: ETypeTransactionSource.transport);
+
       _incomeCubit.add(income);
 
       emit(TransportState.loaded(transport: transport));
@@ -97,7 +100,8 @@ class TransportCubit extends HydratedCubit<TransportState> {
       if (_transport != null) {
         _timeSpendCubit.removeBonus(ETypeBonusSource.transport);
         _incomeCubit.remove(_transport.id);
-        _moneyCubit.change(_transport.cost * 0.8);
+        _moneyCubit.addTransaction(
+            value: _transport.cost * 0.8, eTypeTransactionSource: ETypeTransactionSource.transport);
 
         emit(const TransportState.loaded(transport: null));
       }

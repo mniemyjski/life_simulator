@@ -4,6 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:jiffy/jiffy.dart';
+import 'package:life_simulator/app/money/models/transaction/transaction_model.dart';
 import 'package:life_simulator/utilities/utilities.dart';
 
 import '../../date/cubit/date_cubit.dart';
@@ -115,7 +116,31 @@ class IncomeCubit extends HydratedCubit<IncomeState> {
               }
 
               result.add(element.copyWith(next: nextDate));
-              _moneyCubit.change(element.value);
+
+              //Todo change income source to transaction source
+              switch (element.source) {
+                case ETypeSource.job:
+                  _moneyCubit.addTransaction(
+                      value: element.value, eTypeTransactionSource: ETypeTransactionSource.job);
+                  break;
+                case ETypeSource.meal:
+                  _moneyCubit.addTransaction(
+                      value: element.value, eTypeTransactionSource: ETypeTransactionSource.food);
+                  break;
+                case ETypeSource.house:
+                  _moneyCubit.addTransaction(
+                      value: element.value, eTypeTransactionSource: ETypeTransactionSource.house);
+                  break;
+                case ETypeSource.transport:
+                  _moneyCubit.addTransaction(
+                      value: element.value,
+                      eTypeTransactionSource: ETypeTransactionSource.transport);
+                  break;
+                case ETypeSource.asset:
+                  _moneyCubit.addTransaction(
+                      value: element.value, eTypeTransactionSource: ETypeTransactionSource.asset);
+                  break;
+              }
             } else {
               result.add(element);
             }

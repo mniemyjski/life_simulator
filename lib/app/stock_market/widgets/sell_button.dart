@@ -6,8 +6,8 @@ import 'package:life_simulator/constants/constants.dart';
 import 'package:life_simulator/utilities/utilities.dart';
 
 import '../../../widgets/widgets.dart';
-import '../cubit/transactions/transactions_cubit.dart';
-import '../models/transaction/transaction.dart';
+import '../cubit/exchanges/exchanges_cubit.dart';
+import '../models/exchange/exchange.dart';
 
 class SellButton extends StatelessWidget {
   final Instrument instrument;
@@ -50,9 +50,7 @@ class SellButton extends StatelessWidget {
                 ),
                 CustomButton(
                     onPressed: () {
-                      context
-                          .read<TransactionsCubit>()
-                          .sell(idInstrument: instrument.id, count: sell);
+                      context.read<ExchangesCubit>().sell(idInstrument: instrument.id, count: sell);
                       context.router.pop();
                     },
                     child: Text(
@@ -71,12 +69,12 @@ class SellButton extends StatelessWidget {
     return Expanded(
         child: Padding(
       padding: const EdgeInsets.only(right: 4),
-      child: BlocBuilder<TransactionsCubit, TransactionsState>(
+      child: BlocBuilder<ExchangesCubit, ExchangesState>(
         builder: (context, state) {
           return state.maybeWhen(
               orElse: () => Container(),
               loaded: (t) {
-                List<Transaction> transactions =
+                List<Exchange> transactions =
                     List.from(t.where((e) => e.instrument.id == instrument.id));
 
                 double amount = 0;

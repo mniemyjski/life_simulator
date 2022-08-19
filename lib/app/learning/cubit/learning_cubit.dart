@@ -3,6 +3,9 @@ import 'dart:async';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:life_simulator/app/date/cubit/date_cubit.dart';
+import 'package:life_simulator/app/money/models/transaction/transaction_model.dart';
+import 'package:life_simulator/app/time_spend/cubit/time_spend_cubit.dart';
 
 import '../../../utilities/utilities.dart';
 import '../../database/cubit/database_cubit.dart';
@@ -21,20 +24,28 @@ class LearningCubit extends HydratedCubit<LearningState> {
   final DatabaseCubit _databaseCubit;
   final SkillsCubit _skillsCubit;
   final MoneyCubit _moneyCubit;
+  final TimeSpendCubit _timeSpendCubit;
+  final DateCubit _dateCubit;
+
   late StreamSubscription _newGameSub;
+  late StreamSubscription _dateSub;
 
   LearningCubit(
     this._newGameCubit,
     this._databaseCubit,
     this._skillsCubit,
     this._moneyCubit,
+    this._timeSpendCubit,
+    this._dateCubit,
   ) : super(const LearningState.initial()) {
     _newGame();
+    _counting();
   }
 
   @override
   Future<void> close() async {
     _newGameSub.cancel();
+    _dateSub.cancel();
     super.close();
   }
 
@@ -45,13 +56,56 @@ class LearningCubit extends HydratedCubit<LearningState> {
     });
   }
 
+  _counting() {
+    _dateSub = _dateCubit.stream.listen((event) {
+      _timeSpendCubit.state.whenOrNull(loaded: (timeSpend) {
+        state.whenOrNull(loaded: (learnings) {
+          List<Learning> result = List.from(learnings);
+          int hours = timeSpend.learn;
+
+          for (var i = 0; i < result.length; i++) {
+            if (result[i].status == ETypeStatus.queue) {
+              if (result[i].time > hours) {
+                result[i] = result[i].copyWith(time: result[i].time - hours);
+                _skillsCubit.update(
+                    skill: result[i].skillType, exp: (result[i].exp / result[i].baseTime) * hours);
+                break;
+              } else if (result[i].time == hours) {
+                result[i] = _databaseCubit.state.learningsDB
+                    .where((element) => element.id == result[i].id)
+                    .first;
+                _skillsCubit.update(
+                    skill: result[i].skillType, exp: (result[i].exp / result[i].baseTime) * hours);
+                break;
+              } else {
+                hours -= result[i].time;
+                result[i] = _databaseCubit.state.learningsDB
+                    .where((element) => element.id == result[i].id)
+                    .first;
+                _skillsCubit.update(
+                    skill: result[i].skillType, exp: (result[i].exp / result[i].baseTime) * hours);
+              }
+            }
+          }
+          result = result..sort((a, b) => a.id.compareTo(b.id));
+          if (result.where((element) => element.status == ETypeStatus.queue).isEmpty) {
+            _timeSpendCubit.changeLearn(-timeSpend.learn);
+          }
+
+          emit(LearningState.loaded(result));
+        });
+      });
+    });
+  }
+
   add(Learning learning) {
     state.whenOrNull(loaded: (learnings) {
       List<Learning> result = List.from(learnings)
         ..removeWhere((element) => element.id == learning.id)
         ..add(learning.copyWith(status: ETypeStatus.queue, cost: 0));
 
-      _moneyCubit.change(-learning.cost);
+      _moneyCubit.addTransaction(
+          value: -learning.cost, eTypeTransactionSource: ETypeTransactionSource.learning);
       emit(LearningState.loaded(result));
     });
   }
@@ -65,47 +119,6 @@ class LearningCubit extends HydratedCubit<LearningState> {
       result = result..sort((a, b) => a.id.compareTo(b.id));
       emit(LearningState.loaded(result));
     });
-  }
-
-  bool counting(int h) {
-    int hours = h;
-
-    bool? reset = state.whenOrNull(loaded: (learnings) {
-      List<Learning> result = List.from(learnings);
-
-      for (var i = 0; i < result.length; i++) {
-        if (result[i].status == ETypeStatus.queue) {
-          if (result[i].time > hours) {
-            result[i] = result[i].copyWith(time: result[i].time - hours);
-            _skillsCubit.update(
-                skill: result[i].skillType, exp: (result[i].exp / result[i].baseTime) * hours);
-            break;
-          } else if (result[i].time == hours) {
-            result[i] = _databaseCubit.state.learningsDB
-                .where((element) => element.id == result[i].id)
-                .first;
-            _skillsCubit.update(
-                skill: result[i].skillType, exp: (result[i].exp / result[i].baseTime) * hours);
-            break;
-          } else {
-            hours -= result[i].time;
-            result[i] = _databaseCubit.state.learningsDB
-                .where((element) => element.id == result[i].id)
-                .first;
-            _skillsCubit.update(
-                skill: result[i].skillType, exp: (result[i].exp / result[i].baseTime) * hours);
-          }
-        }
-      }
-      result = result..sort((a, b) => a.id.compareTo(b.id));
-
-      emit(LearningState.loaded(result));
-
-      if (result.where((element) => element.status == ETypeStatus.queue).isEmpty) return true;
-      return false;
-    });
-
-    return reset ?? false;
   }
 
   @override

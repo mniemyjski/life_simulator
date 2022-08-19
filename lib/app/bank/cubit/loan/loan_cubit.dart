@@ -6,6 +6,7 @@ import 'package:injectable/injectable.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:life_simulator/app/date/cubit/date_cubit.dart';
 import 'package:life_simulator/app/money/cubit/money_cubit.dart';
+import 'package:life_simulator/app/money/models/transaction/transaction_model.dart';
 import 'package:life_simulator/app/new_game/new_game_cubit.dart';
 
 import '../../../../utilities/utilities.dart';
@@ -63,7 +64,11 @@ class LoanCubit extends HydratedCubit<LoanState> {
                 List<Loan> result = List.from(loans);
 
                 result.add(loan.copyWith(next: Jiffy(date).add(months: 1).dateTime));
-                _moneyCubit.change(loan.borrowed);
+
+                _moneyCubit.addTransaction(
+                    value: loan.borrowed,
+                    eTypeTransactionSource: ETypeTransactionSource.bankBorrowed);
+
                 emit(LoanState.loaded(result));
                 return "Succeed";
               },
@@ -102,21 +107,23 @@ class LoanCubit extends HydratedCubit<LoanState> {
         state.whenOrNull(loaded: (loans) {
           List<Loan> result = [];
 
-          loans
-            ..forEach((element) {
-              if (element.next == date) {
-                Loan _loan = element.copyWith(
-                  leftLoan: element.leftLoan - element.getRate(),
-                  leftMonths: element.leftMonths - 1,
-                  next: Jiffy(date).add(months: 1).dateTime.onlyDate(),
-                );
+          for (var element in loans) {
+            if (element.next == date) {
+              Loan loan = element.copyWith(
+                leftLoan: element.leftLoan - element.getRate(),
+                leftMonths: element.leftMonths - 1,
+                next: Jiffy(date).add(months: 1).dateTime.onlyDate(),
+              );
 
-                if (_loan.leftLoan > 0) result.add(_loan);
-                _moneyCubit.change(-element.leftLoan - element.getRate());
-              } else {
-                result.add(element);
-              }
-            });
+              if (loan.leftLoan > 0) result.add(loan);
+
+              _moneyCubit.addTransaction(
+                  value: -element.leftLoan - element.getRate(),
+                  eTypeTransactionSource: ETypeTransactionSource.bankInterest);
+            } else {
+              result.add(element);
+            }
+          }
           emit(LoanState.loaded(result));
         });
       });

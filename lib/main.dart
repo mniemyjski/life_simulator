@@ -9,6 +9,7 @@ import 'package:life_simulator/app/bank/cubit/loan/loan_cubit.dart';
 import 'package:life_simulator/app/database/cubit/database_cubit.dart';
 import 'package:life_simulator/app/freelance/cubit/done/freelance_done_cubit.dart';
 import 'package:life_simulator/app/medicines/cubit/medicines_cubit.dart';
+import 'package:life_simulator/app/money/cubit/transactions/transactions_cubit.dart';
 import 'package:life_simulator/app/personality/cubit/foods/foods_cubit.dart';
 import 'package:life_simulator/app/personality/cubit/transport/transport_cubit.dart';
 import 'package:life_simulator/app/real_assets/cubit/assets/assets_cubit.dart';
@@ -17,8 +18,8 @@ import 'package:life_simulator/app/real_assets/cubit/buy/buy_asset_cubit.dart';
 import 'package:life_simulator/app/real_assets/cubit/tenant/tenants_cubit.dart';
 import 'package:life_simulator/app/rules/cubit/rules_cubit.dart';
 import 'package:life_simulator/app/settings/cubit/day_setting_cubit.dart';
+import 'package:life_simulator/app/stock_market/cubit/exchanges/exchanges_cubit.dart';
 import 'package:life_simulator/app/stock_market/cubit/stock_market/stock_market_cubit.dart';
-import 'package:life_simulator/app/stock_market/cubit/transactions/transactions_cubit.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:url_strategy/url_strategy.dart';
 
@@ -117,6 +118,10 @@ class MyApp extends StatelessWidget {
             ),
             BlocProvider(
               lazy: false,
+              create: (_) => getIt<TransactionsCubit>(),
+            ),
+            BlocProvider(
+              lazy: false,
               create: (_) => getIt<MoneyCubit>(),
             ),
             BlocProvider(
@@ -189,7 +194,7 @@ class MyApp extends StatelessWidget {
             ),
             BlocProvider(
               lazy: false,
-              create: (_) => getIt<TransactionsCubit>(),
+              create: (_) => getIt<ExchangesCubit>(),
             ),
             BlocProvider(
               lazy: false,

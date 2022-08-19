@@ -4,6 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../date/cubit/date_cubit.dart';
 import '../../new_game/new_game_cubit.dart';
 import '../models/time_bonus/time_bonus_model.dart';
 import '../models/time_spend_model/time_spend_model.dart';
@@ -16,18 +17,22 @@ part 'time_spend_state.dart';
 class TimeSpendCubit extends HydratedCubit<TimeSpendState> {
   final NewGameCubit _newGameCubit;
   late StreamSubscription _newGameSub;
-  late StreamSubscription _transportSub;
+
+  final DateCubit _dateCubit;
+  late StreamSubscription _dateSub;
 
   TimeSpendCubit(
     this._newGameCubit,
+    this._dateCubit,
   ) : super(const TimeSpendState.initial()) {
     _newGame();
+    _counting();
   }
 
   @override
   Future<void> close() async {
     _newGameSub.cancel();
-    _transportSub.cancel();
+    _dateSub.cancel();
     super.close();
   }
 
@@ -39,6 +44,26 @@ class TimeSpendCubit extends HydratedCubit<TimeSpendState> {
       if (newGame) {
         emit(TimeSpendState.loaded(TimeSpend.newGame()));
       }
+    });
+  }
+
+  _counting() {
+    _dateSub = _dateCubit.stream.listen((event) {
+      state.whenOrNull(loaded: (timeSpend) {
+        int commuting = timeSpend.getBonus(ETypeBonus.commuting);
+
+        TimeSpend refresh = timeSpend.copyWith(
+          used: 0,
+          free: 24 -
+              timeSpend.learn -
+              timeSpend.work -
+              timeSpend.relax -
+              timeSpend.sleep -
+              timeSpend.freelance -
+              (timeSpend.commuting - commuting),
+        );
+        emit(TimeSpendState.loaded(refresh));
+      });
     });
   }
 
@@ -168,24 +193,24 @@ class TimeSpendCubit extends HydratedCubit<TimeSpendState> {
       loaded: (timeSpend) => timeSpend.checkBonusSource(eTypeBonusSource) ? true : false,
     );
   }
-
-  resetDay() {
-    return state.whenOrNull(loaded: (timeSpend) {
-      int commuting = timeSpend.getBonus(ETypeBonus.commuting);
-
-      TimeSpend refresh = timeSpend.copyWith(
-        used: 0,
-        free: 24 -
-            timeSpend.learn -
-            timeSpend.work -
-            timeSpend.relax -
-            timeSpend.sleep -
-            timeSpend.freelance -
-            (timeSpend.commuting - commuting),
-      );
-      emit(TimeSpendState.loaded(refresh));
-    });
-  }
+  //
+  // resetDay() {
+  //   return state.whenOrNull(loaded: (timeSpend) {
+  //     int commuting = timeSpend.getBonus(ETypeBonus.commuting);
+  //
+  //     TimeSpend refresh = timeSpend.copyWith(
+  //       used: 0,
+  //       free: 24 -
+  //           timeSpend.learn -
+  //           timeSpend.work -
+  //           timeSpend.relax -
+  //           timeSpend.sleep -
+  //           timeSpend.freelance -
+  //           (timeSpend.commuting - commuting),
+  //     );
+  //     emit(TimeSpendState.loaded(refresh));
+  //   });
+  // }
 
   @override
   TimeSpendState? fromJson(Map<String, dynamic> json) {

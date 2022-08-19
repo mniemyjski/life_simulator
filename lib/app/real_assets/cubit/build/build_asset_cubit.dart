@@ -9,6 +9,7 @@ import 'package:life_simulator/utilities/utilities.dart';
 
 import '../../../date/cubit/date_cubit.dart';
 import '../../../money/cubit/money_cubit.dart';
+import '../../../money/models/transaction/transaction_model.dart';
 import '../../../new_game/new_game_cubit.dart';
 import '../../models/asset/asset_model.dart';
 import '../assets/assets_cubit.dart';
@@ -64,7 +65,8 @@ class BuildAssetCubit extends HydratedCubit<BuildAssetState> {
               datEnd: Jiffy(date).add(months: 12).dateTime.onlyDate(),
             ),
           );
-        _moneyCubit.change(-buildAsset.cost);
+        _moneyCubit.addTransaction(
+            value: -buildAsset.cost, eTypeTransactionSource: ETypeTransactionSource.asset);
         emit(BuildAssetState.loaded(result));
       });
     });

@@ -1,13 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'transaction.dart';
+part of 'exchange.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Transaction _$$_TransactionFromJson(Map<String, dynamic> json) =>
-    _$_Transaction(
+_$_Exchange _$$_ExchangeFromJson(Map<String, dynamic> json) => _$_Exchange(
       id: json['id'] as String,
       instrument:
           Instrument.fromJson(json['instrument'] as Map<String, dynamic>),
@@ -16,7 +15,7 @@ _$_Transaction _$$_TransactionFromJson(Map<String, dynamic> json) =>
       close: json['close'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$$_TransactionToJson(_$_Transaction instance) =>
+Map<String, dynamic> _$$_ExchangeToJson(_$_Exchange instance) =>
     <String, dynamic>{
       'id': instance.id,
       'instrument': instance.instrument.toJson(),
