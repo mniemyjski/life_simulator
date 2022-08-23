@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,6 +7,7 @@ import 'package:life_simulator/app/time_spend/cubit/time_spend_cubit.dart';
 import 'package:life_simulator/app/time_spend/models/time_bonus/time_bonus_model.dart';
 import 'package:life_simulator/constants/constants.dart';
 
+import '../../../config/routes/routes.gr.dart';
 import '../cubit/date_cubit.dart';
 
 class NextDayButton extends StatelessWidget {
@@ -25,6 +27,13 @@ class NextDayButton extends StatelessWidget {
                 TextButton(
                   onPressed: () => Navigator.pop(context, false),
                   child: Text(LocaleKeys.cancel.tr()),
+                ),
+                TextButton(
+                  onPressed: () {
+                    context.router.push(const GameRoute());
+                    context.router.push(const PersonalityRoute());
+                  },
+                  child: Text(LocaleKeys.rentHouse.tr()),
                 ),
                 TextButton(
                   onPressed: () => Navigator.pop(context, true),
