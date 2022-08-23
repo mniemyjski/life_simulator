@@ -5,7 +5,7 @@ import 'package:life_simulator/app/income/income_screen.dart';
 import 'package:life_simulator/app/job/job_screen.dart';
 import 'package:life_simulator/app/learning/learning_screen.dart';
 import 'package:life_simulator/app/medicines/medicines_screen.dart';
-import 'package:life_simulator/app/personality/foods_screen.dart';
+import 'package:life_simulator/app/personality/food_screen.dart';
 import 'package:life_simulator/app/personality/personality_screen.dart';
 import 'package:life_simulator/app/real_assets/asset_screen.dart';
 import 'package:life_simulator/app/real_assets/build_assets_screen.dart';
@@ -45,7 +45,7 @@ import '../../app/personality/transport_screen.dart';
     AutoRoute(page: TenantsScreen),
     AutoRoute(page: StockMarketScreen),
     AutoRoute(page: InstrumentScreen),
-    AutoRoute(page: FoodsScreen),
+    AutoRoute(page: FoodScreen),
     AutoRoute(page: FreelanceScreen),
     AutoRoute(page: FreelanceJobsScreen),
   ],

@@ -66,5 +66,6 @@ abstract class  LocaleKeys {
   static const exp = 'exp';
   static const freelanceTime = 'freelanceTime';
   static const dateCre = 'dateCre';
+  static const skills = 'skills';
 
 }

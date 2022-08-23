@@ -64,6 +64,7 @@
   "name": "Name",
   "exp": "EXP",
   "freelanceTime": "Freelance Time",
-  "dateCre": "Date Creation"
+  "dateCre": "Date Creation",
+  "skills": "Skills"
 
 }
