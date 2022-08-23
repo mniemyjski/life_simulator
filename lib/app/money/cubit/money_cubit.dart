@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../date/cubit/date_cubit.dart';
 import '../../new_game/new_game_cubit.dart';

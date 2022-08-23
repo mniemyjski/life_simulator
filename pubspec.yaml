@@ -17,6 +17,7 @@ dependencies:
   easy_localization: ^3.0.1
   easy_localization_loader: ^1.0.0
 
+  flutter_gen: ^4.3.0
   url_strategy: ^0.2.0
   flutter_bloc: ^8.0.1
   hydrated_bloc: ^9.0.0-dev.2
