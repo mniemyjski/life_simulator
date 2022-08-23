@@ -3,20 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:life_simulator/utilities/utilities.dart';
 
-import '../../../../config/routes/routes.gr.dart';
-import '../../../../constants/constants.dart';
-import '../../../../widgets/menu_animate_element.dart';
-import '../../../date/widgets/next_day.dart';
-import '../../models/house/house_model.dart';
+import '../../../config/routes/routes.gr.dart';
+import '../../../constants/constants.dart';
+import '../../../widgets/menu_animate_element.dart';
+import '../../date/widgets/next_day.dart';
 
-class PersonalityMenu extends StatefulWidget {
-  const PersonalityMenu({Key? key}) : super(key: key);
+class AssetsMenu extends StatefulWidget {
+  const AssetsMenu({Key? key}) : super(key: key);
 
   @override
-  State<PersonalityMenu> createState() => _PersonalityMenuState();
+  State<AssetsMenu> createState() => _AssetsMenuState();
 }
 
-class _PersonalityMenuState extends State<PersonalityMenu> {
+class _AssetsMenuState extends State<AssetsMenu> {
   bool open = false;
 
   _nextScreen() => setState(() {
@@ -48,33 +47,17 @@ class _PersonalityMenuState extends State<PersonalityMenu> {
             children: [
               MenuAnimateElement(
                 open: open,
-                txt: LocaleKeys.rentHouse.tr(),
+                txt: LocaleKeys.buy.tr(),
                 onPressed: () {
-                  context.router.push(HouseRoute(eTypeHouse: ETypeHouse.rent));
+                  context.router.push(const BuyAssetsRoute());
                   _nextScreen();
                 },
               ),
               MenuAnimateElement(
                 open: open,
-                txt: LocaleKeys.buyHouse.tr(),
+                txt: LocaleKeys.build.tr(),
                 onPressed: () {
-                  context.router.push(HouseRoute(eTypeHouse: ETypeHouse.buy));
-                  _nextScreen();
-                },
-              ),
-              MenuAnimateElement(
-                open: open,
-                txt: LocaleKeys.buyTransport.tr(),
-                onPressed: () {
-                  context.router.push(const TransportRoute());
-                  _nextScreen();
-                },
-              ),
-              MenuAnimateElement(
-                open: open,
-                txt: LocaleKeys.food.tr(),
-                onPressed: () {
-                  context.router.push(const FoodRoute());
+                  context.router.push(const BuildAssetsRoute());
                   _nextScreen();
                 },
               ),
