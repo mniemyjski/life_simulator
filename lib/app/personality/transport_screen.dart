@@ -10,8 +10,8 @@ import 'package:life_simulator/app/personality/cubit/transport/transport_cubit.d
 import '../settings/cubit/dark_mode_cubit.dart';
 import 'models/transport/transport_model.dart';
 
-class CarScreen extends StatelessWidget {
-  const CarScreen({Key? key}) : super(key: key);
+class TransportScreen extends StatelessWidget {
+  const TransportScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

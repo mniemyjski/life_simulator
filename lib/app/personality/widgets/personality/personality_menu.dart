@@ -66,7 +66,7 @@ class _PersonalityMenuState extends State<PersonalityMenu> {
                 open: open,
                 txt: LocaleKeys.buyTransport.tr(),
                 onPressed: () {
-                  context.router.push(const CarRoute());
+                  context.router.push(const TransportRoute());
                   _nextScreen();
                 },
               ),
@@ -74,7 +74,7 @@ class _PersonalityMenuState extends State<PersonalityMenu> {
                 open: open,
                 txt: LocaleKeys.food.tr(),
                 onPressed: () {
-                  context.router.push(const FoodsRoute());
+                  context.router.push(const FoodRoute());
                   _nextScreen();
                 },
               ),
