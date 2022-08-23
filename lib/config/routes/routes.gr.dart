@@ -13,6 +13,11 @@
 import 'package:auto_route/auto_route.dart' as _i23;
 import 'package:flutter/material.dart' as _i24;
 
+import '../../app/assets/asset_screen.dart' as _i17;
+import '../../app/assets/assets_screen.dart' as _i14;
+import '../../app/assets/build_assets_screen.dart' as _i15;
+import '../../app/assets/buy_assets_screen.dart' as _i16;
+import '../../app/assets/tenants_screen.dart' as _i18;
 import '../../app/bank/bank_screen.dart' as _i12;
 import '../../app/freelance/freelance_jobs_screen.dart' as _i22;
 import '../../app/freelance/freelance_screen.dart' as _i21;
@@ -27,11 +32,6 @@ import '../../app/personality/house_screen.dart' as _i9;
 import '../../app/personality/models/house/house_model.dart' as _i25;
 import '../../app/personality/personality_screen.dart' as _i8;
 import '../../app/personality/transport_screen.dart' as _i10;
-import '../../app/real_assets/asset_screen.dart' as _i17;
-import '../../app/real_assets/build_assets_screen.dart' as _i15;
-import '../../app/real_assets/buy_assets_screen.dart' as _i16;
-import '../../app/real_assets/real_assets_screen.dart' as _i14;
-import '../../app/real_assets/tenants_screen.dart' as _i18;
 import '../../app/settings/screens/settings_screen.dart' as _i2;
 import '../../app/stock_market/instrument_screen.dart' as _i20;
 import '../../app/stock_market/stock_market_screen.dart' as _i19;
@@ -111,9 +111,9 @@ class AppRouter extends _i23.RootStackRouter {
       return _i23.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i13.MedicinesScreen());
     },
-    RealAssetsRoute.name: (routeData) {
+    AssetsRoute.name: (routeData) {
       return _i23.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i14.RealAssetsScreen());
+          routeData: routeData, child: const _i14.AssetsScreen());
     },
     BuildAssetsRoute.name: (routeData) {
       return _i23.MaterialPageX<dynamic>(
@@ -168,7 +168,7 @@ class AppRouter extends _i23.RootStackRouter {
         _i23.RouteConfig(FoodRoute.name, path: '/food-screen'),
         _i23.RouteConfig(BankRoute.name, path: '/bank-screen'),
         _i23.RouteConfig(MedicinesRoute.name, path: '/medicines-screen'),
-        _i23.RouteConfig(RealAssetsRoute.name, path: '/real-assets-screen'),
+        _i23.RouteConfig(AssetsRoute.name, path: '/assets-screen'),
         _i23.RouteConfig(BuildAssetsRoute.name, path: '/build-assets-screen'),
         _i23.RouteConfig(BuyAssetsRoute.name, path: '/buy-assets-screen'),
         _i23.RouteConfig(AssetRoute.name, path: '/asset-screen'),
@@ -306,12 +306,11 @@ class MedicinesRoute extends _i23.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i14.RealAssetsScreen]
-class RealAssetsRoute extends _i23.PageRouteInfo<void> {
-  const RealAssetsRoute()
-      : super(RealAssetsRoute.name, path: '/real-assets-screen');
+/// [_i14.AssetsScreen]
+class AssetsRoute extends _i23.PageRouteInfo<void> {
+  const AssetsRoute() : super(AssetsRoute.name, path: '/assets-screen');
 
-  static const String name = 'RealAssetsRoute';
+  static const String name = 'AssetsRoute';
 }
 
 /// generated route for

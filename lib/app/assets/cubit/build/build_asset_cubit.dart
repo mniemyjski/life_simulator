@@ -4,7 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:jiffy/jiffy.dart';
-import 'package:life_simulator/app/real_assets/models/build/build_asset_model.dart';
+import 'package:life_simulator/app/assets/models/build/build_asset_model.dart';
 import 'package:life_simulator/utilities/utilities.dart';
 
 import '../../../date/cubit/date_cubit.dart';

@@ -3,9 +3,9 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:life_simulator/app/real_assets/cubit/build/build_asset_cubit.dart';
-import 'package:life_simulator/app/real_assets/models/asset/asset_model.dart';
-import 'package:life_simulator/app/real_assets/models/build/build_asset_model.dart';
+import 'package:life_simulator/app/assets/cubit/build/build_asset_cubit.dart';
+import 'package:life_simulator/app/assets/models/asset/asset_model.dart';
+import 'package:life_simulator/app/assets/models/build/build_asset_model.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../constants/locale_keys.g.dart';

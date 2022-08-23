@@ -1,4 +1,9 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:life_simulator/app/assets/asset_screen.dart';
+import 'package:life_simulator/app/assets/assets_screen.dart';
+import 'package:life_simulator/app/assets/build_assets_screen.dart';
+import 'package:life_simulator/app/assets/buy_assets_screen.dart';
+import 'package:life_simulator/app/assets/tenants_screen.dart';
 import 'package:life_simulator/app/bank/bank_screen.dart';
 import 'package:life_simulator/app/freelance/freelance_screen.dart';
 import 'package:life_simulator/app/income/income_screen.dart';
@@ -7,11 +12,6 @@ import 'package:life_simulator/app/learning/learning_screen.dart';
 import 'package:life_simulator/app/medicines/medicines_screen.dart';
 import 'package:life_simulator/app/personality/food_screen.dart';
 import 'package:life_simulator/app/personality/personality_screen.dart';
-import 'package:life_simulator/app/real_assets/asset_screen.dart';
-import 'package:life_simulator/app/real_assets/build_assets_screen.dart';
-import 'package:life_simulator/app/real_assets/buy_assets_screen.dart';
-import 'package:life_simulator/app/real_assets/real_assets_screen.dart';
-import 'package:life_simulator/app/real_assets/tenants_screen.dart';
 import 'package:life_simulator/app/settings/screens/settings_screen.dart';
 import 'package:life_simulator/app/stock_market/instrument_screen.dart';
 import 'package:life_simulator/app/stock_market/stock_market_screen.dart';
@@ -51,7 +51,7 @@ import '../../app/personality/transport_screen.dart';
     ),
     AutoRoute(page: BankScreen),
     AutoRoute(page: MedicinesScreen),
-    AutoRoute(page: RealAssetsScreen),
+    AutoRoute(page: AssetsScreen),
     AutoRoute(page: BuildAssetsScreen),
     AutoRoute(page: BuyAssetsScreen),
     AutoRoute(page: AssetScreen),

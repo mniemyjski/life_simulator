@@ -7,6 +7,10 @@
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
+import '../../app/assets/cubit/assets/assets_cubit.dart' as _i28;
+import '../../app/assets/cubit/build/build_asset_cubit.dart' as _i29;
+import '../../app/assets/cubit/buy/buy_asset_cubit.dart' as _i16;
+import '../../app/assets/cubit/tenant/tenants_cubit.dart' as _i26;
 import '../../app/bank/cubit/deposit/deposit_cubit.dart' as _i10;
 import '../../app/bank/cubit/loan/loan_cubit.dart' as _i23;
 import '../../app/database/cubit/database_cubit.dart' as _i8;
@@ -25,10 +29,6 @@ import '../../app/new_game/new_game_cubit.dart' as _i5;
 import '../../app/personality/cubit/foods/foods_cubit.dart' as _i30;
 import '../../app/personality/cubit/house/house_cubit.dart' as _i31;
 import '../../app/personality/cubit/transport/transport_cubit.dart' as _i27;
-import '../../app/real_assets/cubit/assets/assets_cubit.dart' as _i28;
-import '../../app/real_assets/cubit/build/build_asset_cubit.dart' as _i29;
-import '../../app/real_assets/cubit/buy/buy_asset_cubit.dart' as _i16;
-import '../../app/real_assets/cubit/tenant/tenants_cubit.dart' as _i26;
 import '../../app/rules/cubit/rules_cubit.dart' as _i32;
 import '../../app/settings/cubit/dark_mode_cubit.dart' as _i3;
 import '../../app/settings/cubit/day_setting_cubit.dart' as _i4;

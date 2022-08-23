@@ -76,7 +76,7 @@ class GameScreen extends StatelessWidget {
                       Card(
                         child: IconButton(
                           onPressed: () {
-                            context.router.push(const RealAssetsRoute());
+                            context.router.push(const AssetsRoute());
                           },
                           icon: const FaIcon(FontAwesomeIcons.city),
                         ),

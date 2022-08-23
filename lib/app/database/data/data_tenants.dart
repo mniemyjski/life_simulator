@@ -1,4 +1,4 @@
-import 'package:life_simulator/app/real_assets/models/tenant/tenant_model.dart';
+import 'package:life_simulator/app/assets/models/tenant/tenant_model.dart';
 
 class DataTenants {
   static List<Tenant> db() {

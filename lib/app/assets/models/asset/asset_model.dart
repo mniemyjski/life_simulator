@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:life_simulator/app/real_assets/models/tenant/tenant_model.dart';
 
 part 'asset_model.freezed.dart';
 part 'asset_model.g.dart';

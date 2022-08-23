@@ -1,6 +1,6 @@
 import 'package:uuid/uuid.dart';
 
-import '../../real_assets/models/asset/asset_model.dart';
+import '../../assets/models/asset/asset_model.dart';
 
 class DataAssets {
   static List<Asset> db() {
