@@ -135,7 +135,7 @@ import '../../app/personality/transport_screen.dart';
     ),
     CustomRoute(
       page: FreelanceJobsScreen,
-      transitionsBuilder: TransitionsBuilders.fadeIn,
+      transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
       durationInMilliseconds: 300,
     ),
   ],

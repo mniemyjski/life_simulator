@@ -244,7 +244,7 @@ class AppRouter extends _i24.RootStackRouter {
       return _i24.CustomPage<dynamic>(
           routeData: routeData,
           child: const _i23.FreelanceJobsScreen(),
-          transitionsBuilder: _i24.TransitionsBuilders.fadeIn,
+          transitionsBuilder: _i24.TransitionsBuilders.slideLeftWithFade,
           durationInMilliseconds: 300,
           opaque: true,
           barrierDismissible: false);

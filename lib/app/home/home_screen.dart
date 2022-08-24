@@ -23,10 +23,30 @@ class HomeScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Placeholder(
-                  fallbackHeight: 200,
+              // const Padding(
+              //   padding: EdgeInsets.all(8.0),
+              //   child: Placeholder(
+              //     fallbackHeight: 200,
+              //   ),
+              // ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 24.0),
+                child: RichText(
+                  text: TextSpan(
+                    style: Theme.of(context).textTheme.headline2!.copyWith(color: Colors.white),
+                    children: <TextSpan>[
+                      const TextSpan(
+                        text: 'Riche',
+                      ),
+                      TextSpan(
+                        text: 'Able',
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline2!
+                            .copyWith(color: Theme.of(context).appBarTheme.foregroundColor),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               BlocBuilder<NewGameCubit, bool>(
