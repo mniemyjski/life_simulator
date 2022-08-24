@@ -362,14 +362,40 @@ class BankScreen extends StatelessWidget {
               overlayOpacity: 0.5,
               children: [
                 SpeedDialChild(
-                  label: LocaleKeys.deposit.tr(),
-                  labelStyle: Theme.of(context).textTheme.bodyText1,
+                  labelWidget: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Card(
+                      child: Container(
+                        width: 100,
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(
+                          child: Text(
+                            LocaleKeys.deposit.tr(),
+                            style: Theme.of(context).textTheme.bodyText1,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                   child: const FaIcon(FontAwesomeIcons.house),
                   onTap: () => _onTapDeposit(context),
                 ),
                 SpeedDialChild(
-                  label: LocaleKeys.loan.tr(),
-                  labelStyle: Theme.of(context).textTheme.bodyText1,
+                  labelWidget: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Card(
+                      child: Container(
+                        width: 100,
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(
+                          child: Text(
+                            LocaleKeys.loan.tr(),
+                            style: Theme.of(context).textTheme.bodyText1,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                   child: const FaIcon(FontAwesomeIcons.moneyBill),
                   onTap: () => _onTapLoan(context),
                 ),
