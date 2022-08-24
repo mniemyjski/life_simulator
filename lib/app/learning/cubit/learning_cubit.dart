@@ -78,7 +78,7 @@ class LearningCubit extends HydratedCubit<LearningState> {
               result.removeAt(i);
             }
           }
-          result = result..sort((a, b) => a.id.compareTo(b.id));
+
           if (result.isEmpty) {
             _timeSpendCubit.changeLearn(-timeSpend.learn);
           }
@@ -95,6 +95,20 @@ class LearningCubit extends HydratedCubit<LearningState> {
 
       _moneyCubit.addTransaction(
           value: -learning.cost, eTypeTransactionSource: ETypeTransactionSource.learning);
+      emit(LearningState.loaded(result));
+    });
+  }
+
+  reorderAble({required int oldIndex, required int newIndex}) {
+    state.whenOrNull(loaded: (learnings) {
+      List<Learning> result = List.from(learnings);
+
+      if (oldIndex < newIndex) {
+        newIndex -= 1;
+      }
+      final Learning item = result.removeAt(oldIndex);
+      result.insert(newIndex, item);
+
       emit(LearningState.loaded(result));
     });
   }

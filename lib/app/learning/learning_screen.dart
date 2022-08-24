@@ -106,10 +106,14 @@ class LearningScreen extends StatelessWidget {
                           );
                         }
 
-                        return ListView.builder(
+                        return ReorderableListView.builder(
                           itemCount: list.length,
+                          onReorder: (oldIndex, newIndex) => context
+                              .read<LearningCubit>()
+                              .reorderAble(oldIndex: oldIndex, newIndex: newIndex),
                           itemBuilder: (context, index) {
                             return LearningElement(
+                              key: ValueKey(list[index]),
                               element: list[index],
                               iconData: Icons.remove,
                             );
