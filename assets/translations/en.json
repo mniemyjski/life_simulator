@@ -65,6 +65,12 @@
   "exp": "EXP",
   "freelanceTime": "Freelance Time",
   "dateCre": "Date Creation",
-  "skills": "Skills"
+  "skills": "Skills",
+  "youDontHaveAnyAssets": "You don't have any assets",
+  "queueIsEmpty": "Queue is empty",
+  "queue": "Queue",
+  "materials": "Materials",
+  "learningTime": "Learning time",
+  "freelance": "Freelance"
 
 }

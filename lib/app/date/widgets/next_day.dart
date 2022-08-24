@@ -16,6 +16,7 @@ class NextDayButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
+      heroTag: null,
       onPressed: () async {
         if (!context.read<TimeSpendCubit>().checkBonusSource(ETypeBonusSource.house)) {
           bool? areYouSure = await showDialog<bool>(

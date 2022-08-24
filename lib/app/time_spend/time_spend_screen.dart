@@ -19,38 +19,49 @@ class TimeSpendScreen extends StatelessWidget {
         child: Scaffold(
       body: Column(
         children: [
-          AppBarStats(),
+          const AppBarStats(),
+          buildElement(
+            name: LocaleKeys.freelance.tr(),
+            add: () {
+              String? toast = context.read<TimeSpendCubit>().changeFreelance(1);
+              if (toast != null) BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
+            },
+            remove: () {
+              String? toast = context.read<TimeSpendCubit>().changeFreelance(-1);
+              if (toast != null) BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
+            },
+          ),
           buildElement(
             name: LocaleKeys.learn.tr(),
             add: () {
               String? toast = context.read<TimeSpendCubit>().changeLearn(1);
-              if (toast != null) BotToast.showText(text: toast, align: Alignment(0.1, 0.05));
+              if (toast != null) BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
             },
             remove: () {
               String? toast = context.read<TimeSpendCubit>().changeLearn(-1);
-              if (toast != null) BotToast.showText(text: toast, align: Alignment(0.1, 0.05));
+              if (toast != null) BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
             },
           ),
           buildElement(
             name: LocaleKeys.relax.tr(),
             add: () {
               String? toast = context.read<TimeSpendCubit>().changeRelax(1);
-              if (toast != null) BotToast.showText(text: toast, align: Alignment(0.1, 0.05));
+              if (toast != null) BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
             },
             remove: () {
               String? toast = context.read<TimeSpendCubit>().changeRelax(-1);
-              if (toast != null) BotToast.showText(text: toast, align: Alignment(0.1, 0.05));
+              if (toast != null) BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
             },
           ),
           buildElement(
             name: LocaleKeys.sleep.tr(),
             add: () {
               String? toast = context.read<TimeSpendCubit>().changeSleep(1);
-              if (toast != null) BotToast.showText(text: toast, align: Alignment(0.1, 0.05));
+              if (toast != null) BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
             },
             remove: () {
               String? toast = context.read<TimeSpendCubit>().changeSleep(-1);
-              if (toast != null) BotToast.showText(text: toast, align: Alignment(0.1, 0.05));
+              if (toast != null) BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
             },
           ),
         ],
@@ -64,9 +75,9 @@ class TimeSpendScreen extends StatelessWidget {
             FloatingActionButton(
               heroTag: null,
               onPressed: () => context.router.pop(),
-              child: FaIcon(FontAwesomeIcons.arrowRotateLeft),
+              child: const FaIcon(FontAwesomeIcons.arrowRotateLeft),
             ),
-            NextDayButton(),
+            const NextDayButton(),
           ],
         ),
       ),
@@ -90,8 +101,8 @@ class TimeSpendScreen extends StatelessWidget {
               ),
             )),
           ),
-          Card(child: IconButton(onPressed: add, icon: FaIcon(Icons.add))),
-          Card(child: IconButton(onPressed: remove, icon: FaIcon(Icons.remove))),
+          Card(child: IconButton(onPressed: add, icon: const FaIcon(Icons.add))),
+          Card(child: IconButton(onPressed: remove, icon: const FaIcon(Icons.remove))),
         ],
       );
     });

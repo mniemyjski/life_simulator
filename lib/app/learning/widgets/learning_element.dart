@@ -65,28 +65,11 @@ class LearningElement extends StatelessWidget {
             ),
           ),
         ),
-        // Column(
-        //   children: [
-        //     Padding(
-        //       padding: const EdgeInsets.all(8.0),
-        //       child: Text(
-        //         'Time: ${element.time}h',
-        //         style: TextStyle(color: Theme.of(context).textTheme.bodyText1!.color),
-        //       ),
-        //     ),
-        //     Padding(
-        //       padding: const EdgeInsets.all(8.0),
-        //       child: Text(
-        //         'Cost: ${element.cost}\$',
-        //         style: TextStyle(color: Theme.of(context).textTheme.bodyText1!.color),
-        //       ),
-        //     ),
-        //   ],
-        // ),
-        IconButton(
-          onPressed: onPressed,
-          icon: FaIcon(iconData ?? FontAwesomeIcons.moneyBill),
-        )
+        if (onPressed != null)
+          IconButton(
+            onPressed: onPressed,
+            icon: FaIcon(iconData ?? FontAwesomeIcons.moneyBill),
+          )
       ],
     ));
   }

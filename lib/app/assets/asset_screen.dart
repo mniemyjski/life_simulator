@@ -240,7 +240,7 @@ class AssetScreen extends StatelessWidget {
                   });
             }),
           ),
-          SizedBox(
+          const SizedBox(
             height: 80,
           )
         ],
@@ -273,7 +273,7 @@ class AssetScreen extends StatelessWidget {
                 onPressed: () => context.router.pop(),
                 child: const FaIcon(FontAwesomeIcons.arrowRotateLeft),
               ),
-              NextDayButton(),
+              const NextDayButton(),
             ],
           ),
         ),

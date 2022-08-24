@@ -6,8 +6,9 @@ import 'package:life_simulator/app/assets/cubit/assets/assets_cubit.dart';
 import 'package:life_simulator/app/assets/widgets/assets_menu.dart';
 import 'package:life_simulator/app/game/widget/app_bar_stats.dart';
 import 'package:life_simulator/config/routes/routes.gr.dart';
+import 'package:life_simulator/constants/constants.dart';
+import 'package:life_simulator/utilities/utilities.dart';
 
-import 'models/asset/asset_model.dart';
 import 'widgets/asset_element.dart';
 
 class AssetsScreen extends StatelessWidget {
@@ -26,16 +27,23 @@ class AssetsScreen extends StatelessWidget {
                   return state.maybeWhen(
                       orElse: () => Container(),
                       loaded: (assets) {
+                        if (assets.isEmpty) {
+                          return Center(
+                            child: Text(LocaleKeys.youDontHaveAnyAssets.tr(),
+                                style: Theme.of(context).textTheme.bodyText2),
+                          );
+                        }
+
                         return ListView.builder(
                             itemCount: assets.length,
                             itemBuilder: (context, index) {
-                              final Asset element = assets[index];
                               return AssetElement(
                                 iconButton: IconButton(
-                                  onPressed: () => context.router.push(AssetRoute(id: element.id)),
+                                  onPressed: () =>
+                                      context.router.push(AssetRoute(id: assets[index].id)),
                                   icon: const FaIcon(FontAwesomeIcons.pencil),
                                 ),
-                                asset: element,
+                                asset: assets[index],
                               );
                             });
                       });

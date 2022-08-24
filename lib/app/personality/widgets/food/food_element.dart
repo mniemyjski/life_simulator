@@ -14,14 +14,14 @@ class FoodElement extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle txtStyle = chosen.name == chosen.name
+    TextStyle txtStyle = food.name == chosen.name
         ? TextStyle(
             color: Theme.of(context).textTheme.bodyText2?.color ?? Colors.white, fontSize: 10)
         : TextStyle(
             color: Theme.of(context).textTheme.bodyText1?.color ?? Colors.black, fontSize: 10);
 
     return Card(
-        color: chosen.name == chosen.name ? Theme.of(context).primaryColor : null,
+        color: food.name == chosen.name ? Theme.of(context).primaryColor : null,
         child: Padding(
           padding: const EdgeInsets.all(4.0),
           child: Row(

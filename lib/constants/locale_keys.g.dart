@@ -67,5 +67,11 @@ abstract class  LocaleKeys {
   static const freelanceTime = 'freelanceTime';
   static const dateCre = 'dateCre';
   static const skills = 'skills';
+  static const youDontHaveAnyAssets = 'youDontHaveAnyAssets';
+  static const queueIsEmpty = 'queueIsEmpty';
+  static const queue = 'queue';
+  static const materials = 'materials';
+  static const learningTime = 'learningTime';
+  static const freelance = 'freelance';
 
 }

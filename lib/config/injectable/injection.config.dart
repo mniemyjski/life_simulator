@@ -98,7 +98,6 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       get<_i13.MoneyCubit>()));
   gh.lazySingleton<_i22.LearningCubit>(() => _i22.LearningCubit(
       get<_i5.NewGameCubit>(),
-      get<_i8.DatabaseCubit>(),
       get<_i6.SkillsCubit>(),
       get<_i13.MoneyCubit>(),
       get<_i15.TimeSpendCubit>(),

@@ -9,6 +9,7 @@ import 'package:life_simulator/app/freelance/freelance_screen.dart';
 import 'package:life_simulator/app/income/income_screen.dart';
 import 'package:life_simulator/app/job/job_screen.dart';
 import 'package:life_simulator/app/learning/learning_screen.dart';
+import 'package:life_simulator/app/learning/materials_screen.dart';
 import 'package:life_simulator/app/medicines/medicines_screen.dart';
 import 'package:life_simulator/app/personality/food_screen.dart';
 import 'package:life_simulator/app/personality/personality_screen.dart';
@@ -27,39 +28,116 @@ import '../../app/personality/transport_screen.dart';
   replaceInRouteName: 'Screen,Route',
   routes: <AutoRoute>[
     AutoRoute(page: HomeScreen, initial: true),
-    AutoRoute(page: SettingsScreen),
-    AutoRoute(page: GameScreen),
-    AutoRoute(page: JobScreen),
-    AutoRoute(page: TimeSpendScreen),
-    AutoRoute(page: LearningScreen),
-    AutoRoute(page: IncomeScreen),
-    AutoRoute(page: PersonalityScreen),
+    CustomRoute(
+      page: SettingsScreen,
+      transitionsBuilder: TransitionsBuilders.fadeIn,
+      durationInMilliseconds: 300,
+    ),
+    CustomRoute(
+      page: GameScreen,
+      transitionsBuilder: TransitionsBuilders.zoomIn,
+      durationInMilliseconds: 300,
+    ),
+    CustomRoute(
+      page: JobScreen,
+      transitionsBuilder: TransitionsBuilders.fadeIn,
+      durationInMilliseconds: 300,
+    ),
+    CustomRoute(
+      page: TimeSpendScreen,
+      transitionsBuilder: TransitionsBuilders.fadeIn,
+      durationInMilliseconds: 300,
+    ),
+    CustomRoute(
+      page: LearningScreen,
+      transitionsBuilder: TransitionsBuilders.fadeIn,
+      durationInMilliseconds: 300,
+    ),
+    CustomRoute(
+      page: MaterialsScreen,
+      transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
+      durationInMilliseconds: 300,
+    ),
+    CustomRoute(
+      page: IncomeScreen,
+      transitionsBuilder: TransitionsBuilders.fadeIn,
+      durationInMilliseconds: 300,
+    ),
+    CustomRoute(
+      page: PersonalityScreen,
+      transitionsBuilder: TransitionsBuilders.fadeIn,
+      durationInMilliseconds: 300,
+    ),
     CustomRoute(
       page: HouseScreen,
       transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
-      durationInMilliseconds: 500,
+      durationInMilliseconds: 300,
     ),
     CustomRoute(
       page: TransportScreen,
       transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
-      durationInMilliseconds: 500,
+      durationInMilliseconds: 300,
     ),
     CustomRoute(
       page: FoodScreen,
       transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
       durationInMilliseconds: 500,
     ),
-    AutoRoute(page: BankScreen),
-    AutoRoute(page: MedicinesScreen),
-    AutoRoute(page: AssetsScreen),
-    AutoRoute(page: BuildAssetsScreen),
-    AutoRoute(page: BuyAssetsScreen),
-    AutoRoute(page: AssetScreen),
-    AutoRoute(page: TenantsScreen),
-    AutoRoute(page: StockMarketScreen),
-    AutoRoute(page: InstrumentScreen),
-    AutoRoute(page: FreelanceScreen),
-    AutoRoute(page: FreelanceJobsScreen),
+    CustomRoute(
+      page: BankScreen,
+      transitionsBuilder: TransitionsBuilders.fadeIn,
+      durationInMilliseconds: 300,
+    ),
+    CustomRoute(
+      page: MedicinesScreen,
+      transitionsBuilder: TransitionsBuilders.fadeIn,
+      durationInMilliseconds: 300,
+    ),
+    CustomRoute(
+      page: AssetsScreen,
+      transitionsBuilder: TransitionsBuilders.fadeIn,
+      durationInMilliseconds: 300,
+    ),
+    CustomRoute(
+      page: BuildAssetsScreen,
+      transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
+      durationInMilliseconds: 300,
+    ),
+    CustomRoute(
+      page: BuyAssetsScreen,
+      transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
+      durationInMilliseconds: 300,
+    ),
+    CustomRoute(
+      page: AssetScreen,
+      transitionsBuilder: TransitionsBuilders.fadeIn,
+      durationInMilliseconds: 300,
+    ),
+    CustomRoute(
+      page: TenantsScreen,
+      transitionsBuilder: TransitionsBuilders.fadeIn,
+      durationInMilliseconds: 300,
+    ),
+    CustomRoute(
+      page: StockMarketScreen,
+      transitionsBuilder: TransitionsBuilders.fadeIn,
+      durationInMilliseconds: 300,
+    ),
+    CustomRoute(
+      page: InstrumentScreen,
+      transitionsBuilder: TransitionsBuilders.fadeIn,
+      durationInMilliseconds: 300,
+    ),
+    CustomRoute(
+      page: FreelanceScreen,
+      transitionsBuilder: TransitionsBuilders.fadeIn,
+      durationInMilliseconds: 300,
+    ),
+    CustomRoute(
+      page: FreelanceJobsScreen,
+      transitionsBuilder: TransitionsBuilders.fadeIn,
+      durationInMilliseconds: 300,
+    ),
   ],
 )
 class $AppRouter {}

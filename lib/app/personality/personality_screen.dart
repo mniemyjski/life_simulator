@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_simulator/app/game/widget/app_bar_stats.dart';
 import 'package:life_simulator/constants/constants.dart';
+import 'package:life_simulator/utilities/utilities.dart';
 
 import '../skills/cubit/skills_cubit.dart';
 import 'widgets/personality/personality_menu.dart';
@@ -26,7 +27,7 @@ class _PersonalityScreenState extends State<PersonalityScreen> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                '${LocaleKeys.skills}:',
+                '${LocaleKeys.skills.tr()}:',
                 style: Theme.of(context).textTheme.headline6!.copyWith(color: Colors.white),
               ),
             ),

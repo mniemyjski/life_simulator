@@ -12,6 +12,7 @@ import '../../constants/locale_keys.g.dart';
 import '../../utilities/utilities.dart';
 import '../../widgets/widgets.dart';
 import '../game/widget/app_bar_stats.dart';
+import 'widgets/asset_build_element.dart';
 
 class BuildAssetsScreen extends StatefulWidget {
   const BuildAssetsScreen({Key? key}) : super(key: key);
@@ -302,93 +303,26 @@ class _BuildAssetsScreenState extends State<BuildAssetsScreen> {
                   return state.maybeWhen(
                       orElse: () => Container(),
                       loaded: (buildAssets) {
+                        if (buildAssets.isEmpty) {
+                          return Center(
+                            child: Text(
+                              LocaleKeys.queueIsEmpty.tr(),
+                              style: Theme.of(context).textTheme.bodyText2,
+                            ),
+                          );
+                        }
+
                         return ListView.builder(
                             itemCount: buildAssets.length,
                             itemBuilder: (context, index) {
                               final BuildAsset element = buildAssets[index];
-                              return Card(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      RichText(
-                                        text: TextSpan(
-                                          style: Theme.of(context).textTheme.bodyText1,
-                                          children: <TextSpan>[
-                                            TextSpan(
-                                              text: '${LocaleKeys.address.tr()}: ',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyText1!
-                                                  .copyWith(fontWeight: FontWeight.bold),
-                                            ),
-                                            TextSpan(
-                                              text: element.address,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      RichText(
-                                        text: TextSpan(
-                                          style: Theme.of(context).textTheme.bodyText1,
-                                          children: <TextSpan>[
-                                            TextSpan(
-                                              text: '${LocaleKeys.type.tr()}: ',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyText1!
-                                                  .copyWith(fontWeight: FontWeight.bold),
-                                            ),
-                                            TextSpan(
-                                              text: Enums.toText(element.eTypeAsset),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      RichText(
-                                        text: TextSpan(
-                                          style: Theme.of(context).textTheme.bodyText1,
-                                          children: <TextSpan>[
-                                            TextSpan(
-                                              text: '${LocaleKeys.value.tr()}: ',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyText1!
-                                                  .copyWith(fontWeight: FontWeight.bold),
-                                            ),
-                                            TextSpan(
-                                              text: '${element.value.toInt().toString()}\$',
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      RichText(
-                                        text: TextSpan(
-                                          style: Theme.of(context).textTheme.bodyText1,
-                                          children: <TextSpan>[
-                                            TextSpan(
-                                              text: '${LocaleKeys.datEnd.tr()}: ',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyText1!
-                                                  .copyWith(fontWeight: FontWeight.bold),
-                                            ),
-                                            TextSpan(
-                                              text: element.datEnd!.onlyDateToString(),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              );
+                              return AssetBuildElement(element);
                             });
                       });
                 },
               ),
             ),
+            const SizedBox(height: 80),
           ],
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

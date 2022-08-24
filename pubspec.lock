@@ -508,6 +508,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.1"
+  flutter_speed_dial:
+    dependency: "direct main"
+    description:
+      name: flutter_speed_dial
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "6.0.0"
   flutter_spinkit:
     dependency: "direct main"
     description:
@@ -581,13 +588,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
-  hawk_fab_menu:
-    dependency: "direct main"
-    description:
-      name: hawk_fab_menu
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.2.0"
   hive:
     dependency: transitive
     description:

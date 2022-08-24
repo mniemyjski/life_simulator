@@ -27,7 +27,6 @@ mixin _$Learning {
   int get exp => throw _privateConstructorUsedError;
   int get time => throw _privateConstructorUsedError;
   double get cost => throw _privateConstructorUsedError;
-  ETypeStatus get status => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -46,8 +45,7 @@ abstract class $LearningCopyWith<$Res> {
       int baseTime,
       int exp,
       int time,
-      double cost,
-      ETypeStatus status});
+      double cost});
 }
 
 /// @nodoc
@@ -67,7 +65,6 @@ class _$LearningCopyWithImpl<$Res> implements $LearningCopyWith<$Res> {
     Object? exp = freezed,
     Object? time = freezed,
     Object? cost = freezed,
-    Object? status = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -98,10 +95,6 @@ class _$LearningCopyWithImpl<$Res> implements $LearningCopyWith<$Res> {
           ? _value.cost
           : cost // ignore: cast_nullable_to_non_nullable
               as double,
-      status: status == freezed
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as ETypeStatus,
     ));
   }
 }
@@ -119,8 +112,7 @@ abstract class _$$_LearningCopyWith<$Res> implements $LearningCopyWith<$Res> {
       int baseTime,
       int exp,
       int time,
-      double cost,
-      ETypeStatus status});
+      double cost});
 }
 
 /// @nodoc
@@ -142,7 +134,6 @@ class __$$_LearningCopyWithImpl<$Res> extends _$LearningCopyWithImpl<$Res>
     Object? exp = freezed,
     Object? time = freezed,
     Object? cost = freezed,
-    Object? status = freezed,
   }) {
     return _then(_$_Learning(
       id: id == freezed
@@ -173,10 +164,6 @@ class __$$_LearningCopyWithImpl<$Res> extends _$LearningCopyWithImpl<$Res>
           ? _value.cost
           : cost // ignore: cast_nullable_to_non_nullable
               as double,
-      status: status == freezed
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as ETypeStatus,
     ));
   }
 }
@@ -191,8 +178,7 @@ class _$_Learning implements _Learning {
       required this.baseTime,
       required this.exp,
       required this.time,
-      required this.cost,
-      this.status = ETypeStatus.base});
+      required this.cost});
 
   factory _$_Learning.fromJson(Map<String, dynamic> json) =>
       _$$_LearningFromJson(json);
@@ -211,13 +197,10 @@ class _$_Learning implements _Learning {
   final int time;
   @override
   final double cost;
-  @override
-  @JsonKey()
-  final ETypeStatus status;
 
   @override
   String toString() {
-    return 'Learning(id: $id, name: $name, skillType: $skillType, baseTime: $baseTime, exp: $exp, time: $time, cost: $cost, status: $status)';
+    return 'Learning(id: $id, name: $name, skillType: $skillType, baseTime: $baseTime, exp: $exp, time: $time, cost: $cost)';
   }
 
   @override
@@ -231,8 +214,7 @@ class _$_Learning implements _Learning {
             const DeepCollectionEquality().equals(other.baseTime, baseTime) &&
             const DeepCollectionEquality().equals(other.exp, exp) &&
             const DeepCollectionEquality().equals(other.time, time) &&
-            const DeepCollectionEquality().equals(other.cost, cost) &&
-            const DeepCollectionEquality().equals(other.status, status));
+            const DeepCollectionEquality().equals(other.cost, cost));
   }
 
   @JsonKey(ignore: true)
@@ -245,8 +227,7 @@ class _$_Learning implements _Learning {
       const DeepCollectionEquality().hash(baseTime),
       const DeepCollectionEquality().hash(exp),
       const DeepCollectionEquality().hash(time),
-      const DeepCollectionEquality().hash(cost),
-      const DeepCollectionEquality().hash(status));
+      const DeepCollectionEquality().hash(cost));
 
   @JsonKey(ignore: true)
   @override
@@ -267,8 +248,7 @@ abstract class _Learning implements Learning {
       required final int baseTime,
       required final int exp,
       required final int time,
-      required final double cost,
-      final ETypeStatus status}) = _$_Learning;
+      required final double cost}) = _$_Learning;
 
   factory _Learning.fromJson(Map<String, dynamic> json) = _$_Learning.fromJson;
 
@@ -286,8 +266,6 @@ abstract class _Learning implements Learning {
   int get time => throw _privateConstructorUsedError;
   @override
   double get cost => throw _privateConstructorUsedError;
-  @override
-  ETypeStatus get status => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_LearningCopyWith<_$_Learning> get copyWith =>

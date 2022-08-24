@@ -14,8 +14,6 @@ _$_Learning _$$_LearningFromJson(Map<String, dynamic> json) => _$_Learning(
       exp: json['exp'] as int,
       time: json['time'] as int,
       cost: (json['cost'] as num).toDouble(),
-      status: $enumDecodeNullable(_$ETypeStatusEnumMap, json['status']) ??
-          ETypeStatus.base,
     );
 
 Map<String, dynamic> _$$_LearningToJson(_$_Learning instance) =>
@@ -27,7 +25,6 @@ Map<String, dynamic> _$$_LearningToJson(_$_Learning instance) =>
       'exp': instance.exp,
       'time': instance.time,
       'cost': instance.cost,
-      'status': _$ETypeStatusEnumMap[instance.status],
     };
 
 const _$ETypeSkillsEnumMap = {
@@ -38,10 +35,4 @@ const _$ETypeSkillsEnumMap = {
   ETypeSkills.management: 'management',
   ETypeSkills.confidence: 'confidence',
   ETypeSkills.communicativeness: 'communicativeness',
-};
-
-const _$ETypeStatusEnumMap = {
-  ETypeStatus.base: 'base',
-  ETypeStatus.queue: 'queue',
-  ETypeStatus.done: 'done',
 };

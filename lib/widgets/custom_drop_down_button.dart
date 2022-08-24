@@ -1,78 +1,90 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 
-class CustomDropDownButton extends StatelessWidget {
-  final String name;
-  final String? value;
-  final List<String> list;
-  final ValueChanged<String?> onChanged;
-  final bool description;
-  final Function? descFunc;
-  final bool enabled;
+class CustomDropDownButton extends StatefulWidget {
+  final List<String> items;
+  final String? initialValue;
+  final ValueChanged<String>? onChanged;
+  const CustomDropDownButton({Key? key, required this.items, this.initialValue, this.onChanged})
+      : super(key: key);
 
-  const CustomDropDownButton({
-    Key? key,
-    required this.name,
-    this.value,
-    required this.list,
-    required this.onChanged,
-    this.description = false,
-    this.descFunc,
-    this.enabled = true,
-  }) : super(key: key);
+  @override
+  State<CustomDropDownButton> createState() => _CustomDropDownButtonState();
+}
+
+class _CustomDropDownButtonState extends State<CustomDropDownButton> {
+  late String selectedItem;
+
+  @override
+  void initState() {
+    selectedItem = widget.initialValue ?? widget.items.first;
+    super.initState();
+  }
+
+  List<int> _getDividersIndexes() {
+    List<int> dividersIndexes = [];
+    for (var i = 0; i < (widget.items.length * 2) - 1; i++) {
+      if (i.isOdd) {
+        dividersIndexes.add(i);
+      }
+    }
+    return dividersIndexes;
+  }
+
+  List<DropdownMenuItem<String>> _addDividersAfterItems() {
+    List<DropdownMenuItem<String>> menuItems = [];
+    for (var item in widget.items) {
+      menuItems.addAll(
+        [
+          DropdownMenuItem<String>(
+            value: item,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Text(
+                item,
+                style: const TextStyle(
+                  fontSize: 14,
+                ),
+              ),
+            ),
+          ),
+          if (item != widget.items.last)
+            const DropdownMenuItem<String>(
+              enabled: false,
+              child: Divider(),
+            ),
+        ],
+      );
+    }
+    return menuItems;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.only(left: 5, bottom: 8.5, right: 5, top: 8.5),
-      child: Column(
-        children: <Widget>[
-          Container(
-            margin: EdgeInsets.only(left: 6, top: 5, bottom: 2),
-            width: double.infinity,
-            child: Text(
-              name,
-              style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-            ),
+    return DropdownButtonHideUnderline(
+      child: DropdownButton2(
+        isExpanded: true,
+        items: _addDividersAfterItems(),
+        customItemsIndexes: _getDividersIndexes(),
+        customItemsHeight: 4,
+        value: selectedItem,
+        onChanged: (value) {
+          setState(() {
+            selectedItem = value as String;
+            widget.onChanged!(value);
+          });
+        },
+        buttonDecoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.black26,
           ),
-          IgnorePointer(
-            ignoring: !enabled,
-            child: DropdownButton<String>(
-              isDense: !description,
-              isExpanded: true,
-              value: value,
-              hint: Text(''),
-              underline: Container(
-                color: Colors.transparent,
-              ),
-              onChanged: onChanged,
-              items: list.map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                          margin: EdgeInsets.only(left: 6),
-                          child: Text(
-                            value,
-                            style: Theme.of(context).textTheme.bodyText1,
-                          )),
-                      if (description)
-                        Container(
-                            margin: EdgeInsets.only(left: 6),
-                            child: Text(
-                              descFunc!(value).toString(),
-                              style: Theme.of(context).textTheme.bodyText1,
-                            )),
-                    ],
-                  ),
-                );
-              }).toList(),
-            ),
-          ),
-        ],
+          color: Colors.white,
+        ),
+        buttonHeight: 40,
+        buttonWidth: 180,
+        itemHeight: 40,
+        itemPadding: const EdgeInsets.symmetric(horizontal: 8.0),
+        buttonElevation: 2,
       ),
     );
   }

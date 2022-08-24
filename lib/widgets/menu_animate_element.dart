@@ -18,6 +18,7 @@ class MenuAnimateElement extends StatelessWidget {
         width: open ? 140 : 0,
         padding: const EdgeInsets.only(bottom: 4.0),
         child: FloatingActionButton.extended(
+          heroTag: null,
           onPressed: onPressed,
           label: Text(txt),
         ),

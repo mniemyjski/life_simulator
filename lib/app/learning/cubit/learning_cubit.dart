@@ -8,7 +8,6 @@ import 'package:life_simulator/app/money/models/transaction/transaction_model.da
 import 'package:life_simulator/app/time_spend/cubit/time_spend_cubit.dart';
 
 import '../../../utilities/utilities.dart';
-import '../../database/cubit/database_cubit.dart';
 import '../../money/cubit/money_cubit.dart';
 import '../../new_game/new_game_cubit.dart';
 import '../../skills/cubit/skills_cubit.dart';
@@ -21,7 +20,6 @@ part 'learning_state.dart';
 @lazySingleton
 class LearningCubit extends HydratedCubit<LearningState> {
   final NewGameCubit _newGameCubit;
-  final DatabaseCubit _databaseCubit;
   final SkillsCubit _skillsCubit;
   final MoneyCubit _moneyCubit;
   final TimeSpendCubit _timeSpendCubit;
@@ -32,7 +30,6 @@ class LearningCubit extends HydratedCubit<LearningState> {
 
   LearningCubit(
     this._newGameCubit,
-    this._databaseCubit,
     this._skillsCubit,
     this._moneyCubit,
     this._timeSpendCubit,
@@ -50,9 +47,9 @@ class LearningCubit extends HydratedCubit<LearningState> {
   }
 
   _newGame() {
-    if (_newGameCubit.state) emit(LearningState.loaded(_databaseCubit.state.learningsDB));
+    if (_newGameCubit.state) emit(const LearningState.loaded([]));
     _newGameSub = _newGameCubit.stream.listen((newGame) {
-      if (newGame) emit(LearningState.loaded(_databaseCubit.state.learningsDB));
+      if (newGame) emit(const LearningState.loaded([]));
     });
   }
 
@@ -64,31 +61,25 @@ class LearningCubit extends HydratedCubit<LearningState> {
           int hours = timeSpend.learn;
 
           for (var i = 0; i < result.length; i++) {
-            if (result[i].status == ETypeStatus.queue) {
-              if (result[i].time > hours) {
-                result[i] = result[i].copyWith(time: result[i].time - hours);
-                _skillsCubit.update(
-                    skill: result[i].skillType, exp: (result[i].exp / result[i].baseTime) * hours);
-                break;
-              } else if (result[i].time == hours) {
-                result[i] = _databaseCubit.state.learningsDB
-                    .where((element) => element.id == result[i].id)
-                    .first;
-                _skillsCubit.update(
-                    skill: result[i].skillType, exp: (result[i].exp / result[i].baseTime) * hours);
-                break;
-              } else {
-                hours -= result[i].time;
-                result[i] = _databaseCubit.state.learningsDB
-                    .where((element) => element.id == result[i].id)
-                    .first;
-                _skillsCubit.update(
-                    skill: result[i].skillType, exp: (result[i].exp / result[i].baseTime) * hours);
-              }
+            if (result[i].time > hours) {
+              result[i] = result[i].copyWith(time: result[i].time - hours);
+              _skillsCubit.update(
+                  skill: result[i].skillType, exp: (result[i].exp / result[i].baseTime) * hours);
+              break;
+            } else if (result[i].time == hours) {
+              _skillsCubit.update(
+                  skill: result[i].skillType, exp: (result[i].exp / result[i].baseTime) * hours);
+              result.removeAt(i);
+              break;
+            } else {
+              hours -= result[i].time;
+              _skillsCubit.update(
+                  skill: result[i].skillType, exp: (result[i].exp / result[i].baseTime) * hours);
+              result.removeAt(i);
             }
           }
           result = result..sort((a, b) => a.id.compareTo(b.id));
-          if (result.where((element) => element.status == ETypeStatus.queue).isEmpty) {
+          if (result.isEmpty) {
             _timeSpendCubit.changeLearn(-timeSpend.learn);
           }
 
@@ -100,23 +91,10 @@ class LearningCubit extends HydratedCubit<LearningState> {
 
   add(Learning learning) {
     state.whenOrNull(loaded: (learnings) {
-      List<Learning> result = List.from(learnings)
-        ..removeWhere((element) => element.id == learning.id)
-        ..add(learning.copyWith(status: ETypeStatus.queue, cost: 0));
+      List<Learning> result = List.from(learnings)..add(learning);
 
       _moneyCubit.addTransaction(
           value: -learning.cost, eTypeTransactionSource: ETypeTransactionSource.learning);
-      emit(LearningState.loaded(result));
-    });
-  }
-
-  remove(Learning learning) {
-    state.whenOrNull(loaded: (learnings) {
-      List<Learning> result = List.from(learnings)
-        ..removeWhere((element) => element.id == learning.id)
-        ..add(learning.copyWith(status: ETypeStatus.base));
-
-      result = result..sort((a, b) => a.id.compareTo(b.id));
       emit(LearningState.loaded(result));
     });
   }
