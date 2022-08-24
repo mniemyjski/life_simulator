@@ -14,7 +14,7 @@ import 'package:life_simulator/app/database/cubit/database_cubit.dart';
 import 'package:life_simulator/app/freelance/cubit/done/freelance_done_cubit.dart';
 import 'package:life_simulator/app/medicines/cubit/medicines_cubit.dart';
 import 'package:life_simulator/app/money/cubit/transactions/transactions_cubit.dart';
-import 'package:life_simulator/app/personality/cubit/foods/foods_cubit.dart';
+import 'package:life_simulator/app/personality/cubit/food/food_cubit.dart';
 import 'package:life_simulator/app/personality/cubit/transport/transport_cubit.dart';
 import 'package:life_simulator/app/rules/cubit/rules_cubit.dart';
 import 'package:life_simulator/app/settings/cubit/day_setting_cubit.dart';
@@ -32,7 +32,7 @@ import 'app/job/cubit/job_cubit.dart';
 import 'app/learning/cubit/learning_cubit.dart';
 import 'app/money/cubit/money_cubit.dart';
 import 'app/new_game/new_game_cubit.dart';
-import 'app/personality/cubit/foods/foods_cubit.dart';
+import 'app/personality/cubit/food/food_cubit.dart';
 import 'app/personality/cubit/house/house_cubit.dart';
 import 'app/settings/cubit/dark_mode_cubit.dart';
 import 'app/skills/cubit/skills_cubit.dart';
@@ -142,7 +142,7 @@ class MyApp extends StatelessWidget {
             ),
             BlocProvider(
               lazy: false,
-              create: (_) => getIt<FoodsCubit>(),
+              create: (_) => getIt<FoodCubit>(),
             ),
             BlocProvider(
               lazy: false,

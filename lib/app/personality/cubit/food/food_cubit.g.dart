@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'foods_cubit.dart';
+part of 'food_cubit.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

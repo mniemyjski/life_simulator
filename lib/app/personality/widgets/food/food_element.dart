@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:life_simulator/utilities/utilities.dart';
 
 import '../../../../constants/constants.dart';
-import '../../cubit/foods/foods_cubit.dart';
+import '../../cubit/food/food_cubit.dart';
 import '../../models/food/food_model.dart';
 
 class FoodElement extends StatelessWidget {
@@ -34,7 +34,7 @@ class FoodElement extends StatelessWidget {
                     text: TextSpan(
                       style: txtStyle.copyWith(fontWeight: FontWeight.bold),
                       children: <TextSpan>[
-                        TextSpan(text: chosen.name),
+                        TextSpan(text: food.name),
                       ],
                     ),
                   ),
@@ -55,7 +55,7 @@ class FoodElement extends StatelessWidget {
                             text: '${LocaleKeys.relax.tr()}: ',
                             style: txtStyle.copyWith(fontWeight: FontWeight.bold),
                           ),
-                          TextSpan(text: '${chosen.bonusToRelax}')
+                          TextSpan(text: '${food.bonusToRelax}')
                         ],
                       ),
                     ),
@@ -70,7 +70,7 @@ class FoodElement extends StatelessWidget {
                             text: '${LocaleKeys.sleep.tr()}: ',
                             style: txtStyle.copyWith(fontWeight: FontWeight.bold),
                           ),
-                          TextSpan(text: '${chosen.bonusToSleep}')
+                          TextSpan(text: '${food.bonusToSleep}')
                         ],
                       ),
                     ),
@@ -85,7 +85,7 @@ class FoodElement extends StatelessWidget {
                             text: '${LocaleKeys.learn.tr()}: ',
                             style: txtStyle.copyWith(fontWeight: FontWeight.bold),
                           ),
-                          TextSpan(text: '${chosen.bonusToLearn}')
+                          TextSpan(text: '${food.bonusToLearn}')
                         ],
                       ),
                     ),
@@ -100,7 +100,7 @@ class FoodElement extends StatelessWidget {
                             text: '${LocaleKeys.cost.tr()}: ',
                             style: txtStyle.copyWith(fontWeight: FontWeight.bold),
                           ),
-                          TextSpan(text: '${chosen.cost.toMoney()}')
+                          TextSpan(text: '${food.cost.toMoney()}')
                         ],
                       ),
                     ),
@@ -109,7 +109,7 @@ class FoodElement extends StatelessWidget {
               ),
               if (chosen.name != food.name)
                 IconButton(
-                  onPressed: () => context.read<FoodsCubit>().change(food),
+                  onPressed: () => context.read<FoodCubit>().change(food),
                   icon: const FaIcon(FontAwesomeIcons.plus),
                 )
             ],

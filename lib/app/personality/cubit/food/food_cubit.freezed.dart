@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'foods_cubit.dart';
+part of 'food_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-FoodsState _$FoodsStateFromJson(Map<String, dynamic> json) {
+FoodState _$FoodStateFromJson(Map<String, dynamic> json) {
   switch (json['runtimeType']) {
     case 'initial':
       return Initial.fromJson(json);
@@ -24,13 +24,13 @@ FoodsState _$FoodsStateFromJson(Map<String, dynamic> json) {
       return Loaded.fromJson(json);
 
     default:
-      throw CheckedFromJsonException(json, 'runtimeType', 'FoodsState',
+      throw CheckedFromJsonException(json, 'runtimeType', 'FoodState',
           'Invalid union type "${json['runtimeType']}"!');
   }
 }
 
 /// @nodoc
-mixin _$FoodsState {
+mixin _$FoodState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
@@ -79,19 +79,18 @@ mixin _$FoodsState {
 }
 
 /// @nodoc
-abstract class $FoodsStateCopyWith<$Res> {
-  factory $FoodsStateCopyWith(
-          FoodsState value, $Res Function(FoodsState) then) =
-      _$FoodsStateCopyWithImpl<$Res>;
+abstract class $FoodStateCopyWith<$Res> {
+  factory $FoodStateCopyWith(FoodState value, $Res Function(FoodState) then) =
+      _$FoodStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$FoodsStateCopyWithImpl<$Res> implements $FoodsStateCopyWith<$Res> {
-  _$FoodsStateCopyWithImpl(this._value, this._then);
+class _$FoodStateCopyWithImpl<$Res> implements $FoodStateCopyWith<$Res> {
+  _$FoodStateCopyWithImpl(this._value, this._then);
 
-  final FoodsState _value;
+  final FoodState _value;
   // ignore: unused_field
-  final $Res Function(FoodsState) _then;
+  final $Res Function(FoodState) _then;
 }
 
 /// @nodoc
@@ -101,7 +100,7 @@ abstract class _$$InitialCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$InitialCopyWithImpl<$Res> extends _$FoodsStateCopyWithImpl<$Res>
+class __$$InitialCopyWithImpl<$Res> extends _$FoodStateCopyWithImpl<$Res>
     implements _$$InitialCopyWith<$Res> {
   __$$InitialCopyWithImpl(_$Initial _value, $Res Function(_$Initial) _then)
       : super(_value, (v) => _then(v as _$Initial));
@@ -123,7 +122,7 @@ class _$Initial implements Initial {
 
   @override
   String toString() {
-    return 'FoodsState.initial()';
+    return 'FoodState.initial()';
   }
 
   @override
@@ -210,7 +209,7 @@ class _$Initial implements Initial {
   }
 }
 
-abstract class Initial implements FoodsState {
+abstract class Initial implements FoodState {
   const factory Initial() = _$Initial;
 
   factory Initial.fromJson(Map<String, dynamic> json) = _$Initial.fromJson;
@@ -223,7 +222,7 @@ abstract class _$$LoadingCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$LoadingCopyWithImpl<$Res> extends _$FoodsStateCopyWithImpl<$Res>
+class __$$LoadingCopyWithImpl<$Res> extends _$FoodStateCopyWithImpl<$Res>
     implements _$$LoadingCopyWith<$Res> {
   __$$LoadingCopyWithImpl(_$Loading _value, $Res Function(_$Loading) _then)
       : super(_value, (v) => _then(v as _$Loading));
@@ -245,7 +244,7 @@ class _$Loading implements Loading {
 
   @override
   String toString() {
-    return 'FoodsState.loading()';
+    return 'FoodState.loading()';
   }
 
   @override
@@ -332,7 +331,7 @@ class _$Loading implements Loading {
   }
 }
 
-abstract class Loading implements FoodsState {
+abstract class Loading implements FoodState {
   const factory Loading() = _$Loading;
 
   factory Loading.fromJson(Map<String, dynamic> json) = _$Loading.fromJson;
@@ -348,7 +347,7 @@ abstract class _$$LoadedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$LoadedCopyWithImpl<$Res> extends _$FoodsStateCopyWithImpl<$Res>
+class __$$LoadedCopyWithImpl<$Res> extends _$FoodStateCopyWithImpl<$Res>
     implements _$$LoadedCopyWith<$Res> {
   __$$LoadedCopyWithImpl(_$Loaded _value, $Res Function(_$Loaded) _then)
       : super(_value, (v) => _then(v as _$Loaded));
@@ -393,7 +392,7 @@ class _$Loaded implements Loaded {
 
   @override
   String toString() {
-    return 'FoodsState.loaded(food: $food)';
+    return 'FoodState.loaded(food: $food)';
   }
 
   @override
@@ -488,7 +487,7 @@ class _$Loaded implements Loaded {
   }
 }
 
-abstract class Loaded implements FoodsState {
+abstract class Loaded implements FoodState {
   const factory Loaded({required final Food food}) = _$Loaded;
 
   factory Loaded.fromJson(Map<String, dynamic> json) = _$Loaded.fromJson;

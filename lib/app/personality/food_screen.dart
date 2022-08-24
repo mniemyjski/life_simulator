@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:life_simulator/app/database/cubit/database_cubit.dart';
 import 'package:life_simulator/app/game/widget/app_bar_stats.dart';
-import 'package:life_simulator/app/personality/cubit/foods/foods_cubit.dart';
+import 'package:life_simulator/app/personality/cubit/food/food_cubit.dart';
 import 'package:life_simulator/app/personality/widgets/food/food_element.dart';
 
 class FoodScreen extends StatelessWidget {
@@ -17,7 +17,7 @@ class FoodScreen extends StatelessWidget {
           body: Column(
             children: [
               const AppBarStats(),
-              BlocBuilder<FoodsCubit, FoodsState>(
+              BlocBuilder<FoodCubit, FoodState>(
                 builder: (context, state) {
                   return state.maybeWhen(
                       orElse: () => Container(),
@@ -27,8 +27,8 @@ class FoodScreen extends StatelessWidget {
                               itemCount: context.watch<DatabaseCubit>().state.foodsDB.length,
                               itemBuilder: (context, index) {
                                 return FoodElement(
-                                  food: chosenFood,
-                                  chosen: context.watch<DatabaseCubit>().state.foodsDB[index],
+                                  food: context.watch<DatabaseCubit>().state.foodsDB[index],
+                                  chosen: chosenFood,
                                 );
                               }),
                         );

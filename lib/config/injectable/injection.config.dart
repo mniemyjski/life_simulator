@@ -26,7 +26,7 @@ import '../../app/medicines/cubit/medicines_cubit.dart' as _i24;
 import '../../app/money/cubit/money_cubit.dart' as _i13;
 import '../../app/money/cubit/transactions/transactions_cubit.dart' as _i7;
 import '../../app/new_game/new_game_cubit.dart' as _i5;
-import '../../app/personality/cubit/foods/foods_cubit.dart' as _i30;
+import '../../app/personality/cubit/food/food_cubit.dart' as _i30;
 import '../../app/personality/cubit/house/house_cubit.dart' as _i31;
 import '../../app/personality/cubit/transport/transport_cubit.dart' as _i27;
 import '../../app/rules/cubit/rules_cubit.dart' as _i32;
@@ -137,7 +137,7 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       get<_i13.MoneyCubit>(),
       get<_i28.AssetsCubit>(),
       get<_i9.DateCubit>()));
-  gh.lazySingleton<_i30.FoodsCubit>(() => _i30.FoodsCubit(
+  gh.lazySingleton<_i30.FoodCubit>(() => _i30.FoodCubit(
       get<_i20.IncomeCubit>(),
       get<_i8.DatabaseCubit>(),
       get<_i5.NewGameCubit>(),

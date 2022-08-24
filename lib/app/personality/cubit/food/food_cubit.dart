@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:logger/logger.dart';
 
 import '../../../database/cubit/database_cubit.dart';
 import '../../../income/cubit/income_cubit.dart';
@@ -12,24 +13,24 @@ import '../../../time_spend/cubit/time_spend_cubit.dart';
 import '../../../time_spend/models/time_bonus/time_bonus_model.dart';
 import '../../models/food/food_model.dart';
 
-part 'foods_cubit.freezed.dart';
-part 'foods_cubit.g.dart';
-part 'foods_state.dart';
+part 'food_cubit.freezed.dart';
+part 'food_cubit.g.dart';
+part 'food_state.dart';
 
 @lazySingleton
-class FoodsCubit extends HydratedCubit<FoodsState> {
+class FoodCubit extends HydratedCubit<FoodState> {
   final IncomeCubit _incomeCubit;
   final DatabaseCubit _databaseCubit;
   final NewGameCubit _newGameCubit;
   late StreamSubscription _newGameSub;
   final TimeSpendCubit _timeSpendCubit;
 
-  FoodsCubit(
+  FoodCubit(
     this._incomeCubit,
     this._databaseCubit,
     this._newGameCubit,
     this._timeSpendCubit,
-  ) : super(const FoodsState.initial()) {
+  ) : super(const FoodState.initial()) {
     _newGame();
   }
 
@@ -50,7 +51,7 @@ class FoodsCubit extends HydratedCubit<FoodsState> {
     );
 
     if (_newGameCubit.state) {
-      emit(FoodsState.loaded(food: list.first));
+      emit(FoodState.loaded(food: list.first));
       _incomeCubit.add(income);
       _timeSpendCubit.addBonus(
         [
@@ -74,7 +75,7 @@ class FoodsCubit extends HydratedCubit<FoodsState> {
     }
     _newGameSub = _newGameCubit.stream.listen((newGame) {
       if (newGame) {
-        emit(FoodsState.loaded(food: list.first));
+        emit(FoodState.loaded(food: list.first));
         _incomeCubit.add(income);
         _timeSpendCubit.addBonus(
           [
@@ -128,18 +129,18 @@ class FoodsCubit extends HydratedCubit<FoodsState> {
 
       _incomeCubit.remove(oldFood.id);
       _incomeCubit.add(income);
-      emit(FoodsState.loaded(food: food));
-      return;
+      Logger().wtf(food);
+      emit(FoodState.loaded(food: food));
     });
   }
 
   @override
-  FoodsState? fromJson(Map<String, dynamic> json) {
-    return FoodsState.fromJson(json);
+  FoodState? fromJson(Map<String, dynamic> json) {
+    return FoodState.fromJson(json);
   }
 
   @override
-  Map<String, dynamic>? toJson(FoodsState state) {
+  Map<String, dynamic>? toJson(FoodState state) {
     return state.toJson();
   }
 }
