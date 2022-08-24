@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:life_simulator/app/time_spend/cubit/time_spend_cubit.dart';
+import 'package:life_simulator/app/time_spend/models/time_bonus/time_bonus_model.dart';
 import 'package:life_simulator/utilities/utilities.dart';
 
 import '../../constants/constants.dart';
@@ -20,48 +21,155 @@ class TimeSpendScreen extends StatelessWidget {
       body: Column(
         children: [
           const AppBarStats(),
-          buildElement(
-            name: LocaleKeys.freelance.tr(),
-            add: () {
-              String? toast = context.read<TimeSpendCubit>().changeFreelance(1);
-              if (toast != null) BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
-            },
-            remove: () {
-              String? toast = context.read<TimeSpendCubit>().changeFreelance(-1);
-              if (toast != null) BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
-            },
-          ),
-          buildElement(
-            name: LocaleKeys.learn.tr(),
-            add: () {
-              String? toast = context.read<TimeSpendCubit>().changeLearn(1);
-              if (toast != null) BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
-            },
-            remove: () {
-              String? toast = context.read<TimeSpendCubit>().changeLearn(-1);
-              if (toast != null) BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
-            },
-          ),
-          buildElement(
-            name: LocaleKeys.relax.tr(),
-            add: () {
-              String? toast = context.read<TimeSpendCubit>().changeRelax(1);
-              if (toast != null) BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
-            },
-            remove: () {
-              String? toast = context.read<TimeSpendCubit>().changeRelax(-1);
-              if (toast != null) BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
-            },
-          ),
-          buildElement(
-            name: LocaleKeys.sleep.tr(),
-            add: () {
-              String? toast = context.read<TimeSpendCubit>().changeSleep(1);
-              if (toast != null) BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
-            },
-            remove: () {
-              String? toast = context.read<TimeSpendCubit>().changeSleep(-1);
-              if (toast != null) BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
+          BlocBuilder<TimeSpendCubit, TimeSpendState>(
+            builder: (context, state) {
+              return state.maybeWhen(
+                  orElse: () => Container(),
+                  loaded: (timeSpend) {
+                    return Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          buildNonChangedElement(
+                            name: LocaleKeys.free.tr(),
+                            value: timeSpend.free,
+                          ),
+                          buildNonChangedElement(
+                            name: LocaleKeys.work.tr(),
+                            value: timeSpend.work,
+                          ),
+                          buildNonChangedElement(
+                            name: LocaleKeys.commuting.tr(),
+                            value: timeSpend.commuting,
+                          ),
+                          buildElement(
+                            value: timeSpend.freelance,
+                            name: LocaleKeys.freelance.tr(),
+                            add: () {
+                              String? toast = context.read<TimeSpendCubit>().changeFreelance(1);
+                              if (toast != null) {
+                                BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
+                              }
+                            },
+                            remove: () {
+                              String? toast = context.read<TimeSpendCubit>().changeFreelance(-1);
+                              if (toast != null) {
+                                BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
+                              }
+                            },
+                          ),
+                          buildElement(
+                            value: timeSpend.learn,
+                            name: LocaleKeys.learn.tr(),
+                            add: () {
+                              String? toast = context.read<TimeSpendCubit>().changeLearn(1);
+                              if (toast != null) {
+                                BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
+                              }
+                            },
+                            remove: () {
+                              String? toast = context.read<TimeSpendCubit>().changeLearn(-1);
+                              if (toast != null) {
+                                BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
+                              }
+                            },
+                          ),
+                          buildElement(
+                            value: timeSpend.relax,
+                            name: LocaleKeys.relax.tr(),
+                            add: () {
+                              String? toast = context.read<TimeSpendCubit>().changeRelax(1);
+                              if (toast != null) {
+                                BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
+                              }
+                            },
+                            remove: () {
+                              String? toast = context.read<TimeSpendCubit>().changeRelax(-1);
+                              if (toast != null) {
+                                BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
+                              }
+                            },
+                          ),
+                          buildElement(
+                            value: timeSpend.sleep,
+                            name: LocaleKeys.sleep.tr(),
+                            add: () {
+                              String? toast = context.read<TimeSpendCubit>().changeSleep(1);
+                              if (toast != null) {
+                                BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
+                              }
+                            },
+                            remove: () {
+                              String? toast = context.read<TimeSpendCubit>().changeSleep(-1);
+                              if (toast != null) {
+                                BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
+                              }
+                            },
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              '${LocaleKeys.bonuses.tr()}:',
+                              style: Theme.of(context).textTheme.headline1,
+                            ),
+                          ),
+                          Expanded(
+                            child: ListView.builder(
+                              itemCount: timeSpend.bonuses.length,
+                              itemBuilder: (context, index) {
+                                TimeBonus element = timeSpend.bonuses[index];
+                                return Card(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        RichText(
+                                          text: TextSpan(
+                                            style: Theme.of(context).textTheme.bodyText1,
+                                            children: <TextSpan>[
+                                              TextSpan(
+                                                text: '${LocaleKeys.source.tr()}: ',
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyText1!
+                                                    .copyWith(fontWeight: FontWeight.bold),
+                                              ),
+                                              TextSpan(
+                                                text: Enums.toText(element.eTypeBonusSource),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        RichText(
+                                          text: TextSpan(
+                                            style: Theme.of(context).textTheme.bodyText1,
+                                            children: <TextSpan>[
+                                              TextSpan(
+                                                text: '${Enums.toText(element.eTypeBonus)}: ',
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyText1!
+                                                    .copyWith(fontWeight: FontWeight.bold),
+                                              ),
+                                              TextSpan(
+                                                text: element.value.toString(),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                          SizedBox(height: 80),
+                        ],
+                      ),
+                    );
+                  });
             },
           ),
         ],
@@ -84,14 +192,52 @@ class TimeSpendScreen extends StatelessWidget {
     ));
   }
 
-  Builder buildElement({required String name, VoidCallback? add, VoidCallback? remove}) {
+  Builder buildNonChangedElement({required String name, required int value}) {
+    return Builder(builder: (context) {
+      return Row(
+        children: [
+          Expanded(
+            child: Card(
+              child: Container(
+                width: double.infinity,
+                height: 47,
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text(
+                    name,
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Card(
+            child: Container(
+              width: 48,
+              height: 48,
+              padding: const EdgeInsets.all(8.0),
+              child: Center(
+                child: Text(
+                  value.toString(),
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
+              ),
+            ),
+          ),
+        ],
+      );
+    });
+  }
+
+  Builder buildElement(
+      {required String name, VoidCallback? add, VoidCallback? remove, required int value}) {
     return Builder(builder: (context) {
       return Row(
         children: [
           Expanded(
             child: Card(
                 child: Container(
-              height: 47,
+              height: 48,
               padding: const EdgeInsets.all(8.0),
               child: Center(
                 child: Text(
@@ -100,6 +246,19 @@ class TimeSpendScreen extends StatelessWidget {
                 ),
               ),
             )),
+          ),
+          Card(
+            child: Container(
+              width: 48,
+              height: 48,
+              padding: const EdgeInsets.all(8.0),
+              child: Center(
+                child: Text(
+                  value.toString(),
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
+              ),
+            ),
           ),
           Card(child: IconButton(onPressed: add, icon: const FaIcon(Icons.add))),
           Card(child: IconButton(onPressed: remove, icon: const FaIcon(Icons.remove))),

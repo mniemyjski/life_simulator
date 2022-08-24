@@ -14,20 +14,19 @@ class AppBarStats extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Container(
-        width: double.infinity,
-        height: 100,
         color: Theme.of(context).primaryColor,
         child: Padding(
           padding: const EdgeInsets.all(4.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisSize: MainAxisSize.min,
             children: [
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  DateChange(),
+                  const DateChange(),
                   Card(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -37,10 +36,10 @@ class AppBarStats extends StatelessWidget {
                       ),
                     ),
                   ),
-                  StatsIndicator(),
+                  const StatsIndicator(),
                 ],
               ),
-              TimeSpend(),
+              const TimeSpend(),
             ],
           ),
         ),

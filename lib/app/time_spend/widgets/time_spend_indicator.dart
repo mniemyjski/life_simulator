@@ -30,45 +30,52 @@ class TimeSpend extends StatelessWidget {
                 int bonusLearn = timeSpend.getBonus(ETypeBonus.learn);
                 int bonusSleep = timeSpend.getBonus(ETypeBonus.sleep);
 
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    TimeSpendElement(
-                      value: timeSpend.free,
-                      valueName: '${(timeSpend.free).round()}',
-                      name: LocaleKeys.free.tr(),
-                      color: Colors.grey[400],
+                return Card(
+                  color: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                  child: Container(
+                    padding: const EdgeInsets.only(top: 8.0, left: 4.0, right: 4.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        TimeSpendElement(
+                          value: timeSpend.free,
+                          valueName: '${(timeSpend.free).round()}',
+                          name: LocaleKeys.free.tr(),
+                          color: Colors.grey[400],
+                        ),
+                        TimeSpendElement(
+                          value: timeSpend.getTotalWorkTime(),
+                          valueName: '${timeSpend.getTotalWorkTime()} ($bonusCommuting)',
+                          name: LocaleKeys.work.tr(),
+                          color: Colors.yellow[800]!.withOpacity(0.7),
+                        ),
+                        TimeSpendElement(
+                          value: timeSpend.getTotalLearnTime(),
+                          valueName: '${timeSpend.getTotalLearnTime()} ($bonusLearn)',
+                          name: LocaleKeys.learn,
+                          color: Colors.purple[800]!.withOpacity(0.7),
+                        ),
+                        TimeSpendElement(
+                          value: timeSpend.getTotalRelaxTime(),
+                          valueName: '${timeSpend.getTotalRelaxTime()} ($bonusRelax)',
+                          name: LocaleKeys.relax.tr(),
+                          color: Colors.green[800]!.withOpacity(0.7),
+                        ),
+                        TimeSpendElement(
+                          value: timeSpend.getTotalSleepTime(),
+                          valueName: '${timeSpend.getTotalSleepTime()} ($bonusSleep)',
+                          name: LocaleKeys.sleep.tr(),
+                        ),
+                        TimeSpendElement(
+                          value: timeSpend.used,
+                          valueName: '${timeSpend.used}',
+                          name: LocaleKeys.used.tr(),
+                          color: Colors.red[800]!.withOpacity(0.7),
+                        ),
+                      ],
                     ),
-                    TimeSpendElement(
-                      value: timeSpend.getTotalWorkTime(),
-                      valueName: '${timeSpend.getTotalWorkTime()} ($bonusCommuting)',
-                      name: LocaleKeys.work.tr(),
-                      color: Colors.yellow[800]!.withOpacity(0.7),
-                    ),
-                    TimeSpendElement(
-                      value: timeSpend.getTotalLearnTime(),
-                      valueName: '${timeSpend.getTotalLearnTime()} ($bonusLearn)',
-                      name: LocaleKeys.learn,
-                      color: Colors.purple[800]!.withOpacity(0.7),
-                    ),
-                    TimeSpendElement(
-                      value: timeSpend.getTotalRelaxTime(),
-                      valueName: '${timeSpend.getTotalRelaxTime()} ($bonusRelax)',
-                      name: LocaleKeys.relax.tr(),
-                      color: Colors.green[800]!.withOpacity(0.7),
-                    ),
-                    TimeSpendElement(
-                      value: timeSpend.getTotalSleepTime(),
-                      valueName: '${timeSpend.getTotalSleepTime()} ($bonusSleep)',
-                      name: LocaleKeys.sleep.tr(),
-                    ),
-                    TimeSpendElement(
-                      value: timeSpend.used,
-                      valueName: '${timeSpend.used}',
-                      name: LocaleKeys.used.tr(),
-                      color: Colors.red[800]!.withOpacity(0.7),
-                    ),
-                  ],
+                  ),
                 );
               });
         },

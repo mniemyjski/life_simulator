@@ -73,5 +73,8 @@ abstract class  LocaleKeys {
   static const materials = 'materials';
   static const learningTime = 'learningTime';
   static const freelance = 'freelance';
+  static const commuting = 'commuting';
+  static const bonuses = 'bonuses';
+  static const source = 'source';
 
 }

@@ -71,6 +71,9 @@
   "queue": "Queue",
   "materials": "Materials",
   "learningTime": "Learning time",
-  "freelance": "Freelance"
+  "freelance": "Freelance",
+  "commuting": "Commuting",
+  "bonuses": "Bonuses",
+  "source": "Source"
 
 }
