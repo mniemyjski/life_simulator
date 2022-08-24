@@ -23,14 +23,14 @@ class JobScreen extends StatelessWidget {
               loaded: (job, experience) {
                 return Column(
                   children: [
-                    AppBarStats(),
+                    const AppBarStats(),
                     job != null
                         ? YourJob(
                             job: job,
                             experience: experience!,
                           )
-                        : LookingForJob(),
-                    SizedBox(height: 80),
+                        : const LookingForJob(),
+                    const SizedBox(height: 80),
                   ],
                 );
               });
@@ -45,9 +45,10 @@ class JobScreen extends StatelessWidget {
             FloatingActionButton(
               heroTag: null,
               onPressed: () => context.router.pop(),
-              child: FaIcon(FontAwesomeIcons.arrowRotateLeft),
+              child: const FaIcon(FontAwesomeIcons.arrowRotateLeft),
             ),
-            NextDayButton(),
+            const NextDayButton(),
+            const SizedBox(width: 56),
           ],
         ),
       ),

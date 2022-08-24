@@ -166,6 +166,7 @@ class _StockMarketScreenState extends State<StockMarketScreen> {
                 child: const FaIcon(FontAwesomeIcons.arrowRotateLeft),
               ),
               const NextDayButton(),
+              const SizedBox(width: 56),
             ],
           ),
         ),

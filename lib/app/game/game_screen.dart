@@ -126,7 +126,15 @@ class GameScreen extends StatelessWidget {
                 ),
               ],
             ),
-            floatingActionButton: const NextDayButton()),
+            floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+            floatingActionButton: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: const [
+                SizedBox(width: 45),
+                NextDayButton(),
+                SizedBox(width: 45),
+              ],
+            )),
       ),
     );
   }
