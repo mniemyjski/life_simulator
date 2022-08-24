@@ -33,97 +33,97 @@ class GameScreen extends StatelessWidget {
             body: Column(
               children: [
                 const AppBarStats(),
-                const EventsList(),
-                Expanded(
-                  child: GridView.count(
-                    padding: const EdgeInsets.all(1),
-                    crossAxisSpacing: 4,
-                    mainAxisSpacing: 4,
-                    crossAxisCount: 5,
-                    children: <Widget>[
-                      Card(
-                        child: IconButton(
-                          onPressed: () {
-                            context.router.push(const PersonalityRoute());
-                          },
-                          icon: const FaIcon(FontAwesomeIcons.userLarge),
-                        ),
+                const Expanded(child: EventsList()),
+                GridView.count(
+                  padding: const EdgeInsets.all(1),
+                  crossAxisSpacing: 4,
+                  mainAxisSpacing: 4,
+                  crossAxisCount: 5,
+                  shrinkWrap: true,
+                  children: <Widget>[
+                    Card(
+                      child: IconButton(
+                        onPressed: () {
+                          context.router.push(const PersonalityRoute());
+                        },
+                        icon: const FaIcon(FontAwesomeIcons.userLarge),
                       ),
-                      Card(
-                        child: IconButton(
-                          onPressed: () {
-                            context.router.push(const IncomeRoute());
-                          },
-                          icon: const FaIcon(FontAwesomeIcons.scaleBalanced),
-                        ),
+                    ),
+                    Card(
+                      child: IconButton(
+                        onPressed: () {
+                          context.router.push(const IncomeRoute());
+                        },
+                        icon: const FaIcon(FontAwesomeIcons.scaleBalanced),
                       ),
-                      Card(
-                        child: IconButton(
-                          onPressed: () {
-                            context.router.push(const JobRoute());
-                          },
-                          icon: const FaIcon(FontAwesomeIcons.briefcase),
-                        ),
+                    ),
+                    Card(
+                      child: IconButton(
+                        onPressed: () {
+                          context.router.push(const JobRoute());
+                        },
+                        icon: const FaIcon(FontAwesomeIcons.briefcase),
                       ),
-                      Card(
-                        child: IconButton(
-                          onPressed: () {
-                            context.router.push(const FreelanceRoute());
-                          },
-                          icon: const FaIcon(FontAwesomeIcons.computer),
-                        ),
+                    ),
+                    Card(
+                      child: IconButton(
+                        onPressed: () {
+                          context.router.push(const FreelanceRoute());
+                        },
+                        icon: const FaIcon(FontAwesomeIcons.computer),
                       ),
-                      Card(
-                        child: IconButton(
-                          onPressed: () {
-                            context.router.push(const AssetsRoute());
-                          },
-                          icon: const FaIcon(FontAwesomeIcons.city),
-                        ),
+                    ),
+                    Card(
+                      child: IconButton(
+                        onPressed: () {
+                          context.router.push(const AssetsRoute());
+                        },
+                        icon: const FaIcon(FontAwesomeIcons.city),
                       ),
-                      Card(
-                        child: IconButton(
-                          onPressed: () {
-                            context.router.push(const StockMarketRoute());
-                          },
-                          icon: const FaIcon(FontAwesomeIcons.chartLine),
-                        ),
+                    ),
+                    Card(
+                      child: IconButton(
+                        onPressed: () {
+                          context.router.push(const StockMarketRoute());
+                        },
+                        icon: const FaIcon(FontAwesomeIcons.chartLine),
                       ),
-                      Card(
-                        child: IconButton(
-                          onPressed: () {
-                            context.router.push(const LearningRoute());
-                          },
-                          icon: const FaIcon(FontAwesomeIcons.graduationCap),
-                        ),
+                    ),
+                    Card(
+                      child: IconButton(
+                        onPressed: () {
+                          context.router.push(const LearningRoute());
+                        },
+                        icon: const FaIcon(FontAwesomeIcons.graduationCap),
                       ),
-                      Card(
-                        child: IconButton(
-                          onPressed: () {
-                            context.router.push(const BankRoute());
-                          },
-                          icon: const FaIcon(FontAwesomeIcons.piggyBank),
-                        ),
+                    ),
+                    Card(
+                      child: IconButton(
+                        onPressed: () {
+                          context.router.push(const BankRoute());
+                        },
+                        icon: const FaIcon(FontAwesomeIcons.piggyBank),
                       ),
-                      Card(
-                        child: IconButton(
-                          onPressed: () {
-                            context.router.push(const MedicinesRoute());
-                          },
-                          icon: const FaIcon(FontAwesomeIcons.capsules),
-                        ),
+                    ),
+                    Card(
+                      child: IconButton(
+                        onPressed: () {
+                          context.router.push(const MedicinesRoute());
+                        },
+                        icon: const FaIcon(FontAwesomeIcons.capsules),
                       ),
-                      Card(
-                        child: IconButton(
-                          onPressed: () {
-                            context.router.pop();
-                          },
-                          icon: const FaIcon(FontAwesomeIcons.xmark),
-                        ),
+                    ),
+                    Card(
+                      child: IconButton(
+                        onPressed: () {
+                          context.router.pop();
+                        },
+                        icon: const FaIcon(FontAwesomeIcons.xmark),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
+                const SizedBox(height: 80),
               ],
             ),
             floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
