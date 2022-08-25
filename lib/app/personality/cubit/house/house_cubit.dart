@@ -5,7 +5,6 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:life_simulator/app/money/models/transaction/transaction_model.dart';
 
-import '../../../database/cubit/database_cubit.dart';
 import '../../../income/cubit/income_cubit.dart';
 import '../../../income/models/income_model.dart';
 import '../../../money/cubit/money_cubit.dart';
@@ -20,16 +19,18 @@ part 'house_state.dart';
 
 @lazySingleton
 class HouseCubit extends HydratedCubit<HouseState> {
-  final DatabaseCubit _databaseCubit;
   final MoneyCubit _moneyCubit;
   final TimeSpendCubit _timeSpendCubit;
   final IncomeCubit _incomeCubit;
   final NewGameCubit _newGameCubit;
   late StreamSubscription _newGameSub;
 
-  HouseCubit(this._databaseCubit, this._moneyCubit, this._timeSpendCubit, this._incomeCubit,
-      this._newGameCubit)
-      : super(const HouseState.initial()) {
+  HouseCubit(
+    this._moneyCubit,
+    this._timeSpendCubit,
+    this._incomeCubit,
+    this._newGameCubit,
+  ) : super(const HouseState.initial()) {
     _newGame();
   }
 

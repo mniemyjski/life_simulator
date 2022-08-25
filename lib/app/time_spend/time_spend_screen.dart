@@ -26,6 +26,9 @@ class TimeSpendScreen extends StatelessWidget {
               return state.maybeWhen(
                   orElse: () => Container(),
                   loaded: (timeSpend) {
+                    List<TimeBonus> bonuses =
+                        timeSpend.bonuses.where((element) => element.value != 0).toList();
+
                     return Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,7 +43,7 @@ class TimeSpendScreen extends StatelessWidget {
                           ),
                           buildNonChangedElement(
                             name: LocaleKeys.commuting.tr(),
-                            value: timeSpend.commuting,
+                            value: timeSpend.getBonus(ETypeBonus.commuting),
                           ),
                           buildElement(
                             value: timeSpend.freelance,
@@ -115,9 +118,9 @@ class TimeSpendScreen extends StatelessWidget {
                           ),
                           Expanded(
                             child: ListView.builder(
-                              itemCount: timeSpend.bonuses.length,
+                              itemCount: bonuses.length,
                               itemBuilder: (context, index) {
-                                TimeBonus element = timeSpend.bonuses[index];
+                                TimeBonus element = bonuses[index];
                                 return Card(
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),

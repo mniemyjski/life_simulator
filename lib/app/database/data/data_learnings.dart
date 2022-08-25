@@ -12,18 +12,18 @@ class DataLearnings {
         cost: 50,
         skillType: element,
         exp: 500,
-        time: 3000,
-        baseTime: 3000,
+        time: 1000,
+        baseTime: 1000,
       );
       result.add(learning);
 
       learning = Learning(
         name: 'OnlineCourse',
-        cost: 200,
+        cost: 300,
         skillType: element,
-        exp: 1500,
-        time: 2500,
-        baseTime: 2500,
+        exp: 1000,
+        time: 1000,
+        baseTime: 1000,
       );
       result.add(learning);
 
@@ -31,9 +31,9 @@ class DataLearnings {
         name: 'fullTimeCourse',
         cost: 5000,
         skillType: element,
-        exp: 5000,
-        time: 2000,
-        baseTime: 2000,
+        exp: 4000,
+        time: 1000,
+        baseTime: 1000,
       );
       result.add(learning);
     }

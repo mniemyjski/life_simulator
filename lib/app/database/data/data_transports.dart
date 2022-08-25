@@ -13,7 +13,6 @@ class DataTransports {
         cost: 50,
         monthlyCost: 50,
         commuting: -1,
-        bonusToRelax: -1,
       ),
       Transport(
         id: uuid.v1(),
@@ -23,6 +22,7 @@ class DataTransports {
         cost: 2000,
         monthlyCost: 200,
         commuting: -2,
+        bonusToRelax: 1,
       ),
       Transport(
         id: uuid.v1(),
@@ -33,6 +33,7 @@ class DataTransports {
         monthlyCost: 200,
         commuting: -2,
         bonusToRelax: 1,
+        bonusToSleep: 1,
       ),
     ];
   }

@@ -5,7 +5,6 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:life_simulator/app/money/models/transaction/transaction_model.dart';
 
-import '../../../database/cubit/database_cubit.dart';
 import '../../../income/cubit/income_cubit.dart';
 import '../../../income/models/income_model.dart';
 import '../../../money/cubit/money_cubit.dart';
@@ -21,7 +20,6 @@ part 'transport_state.dart';
 @lazySingleton
 class TransportCubit extends HydratedCubit<TransportState> {
   final MoneyCubit _moneyCubit;
-  final DatabaseCubit _databaseCubit;
   final IncomeCubit _incomeCubit;
   final TimeSpendCubit _timeSpendCubit;
 
@@ -30,7 +28,6 @@ class TransportCubit extends HydratedCubit<TransportState> {
 
   TransportCubit(
     this._moneyCubit,
-    this._databaseCubit,
     this._incomeCubit,
     this._timeSpendCubit,
     this._newGameCubit,
@@ -81,6 +78,14 @@ class TransportCubit extends HydratedCubit<TransportState> {
               eTypeBonus: ETypeBonus.relax,
               eTypeBonusSource: ETypeBonusSource.transport,
               value: transport.bonusToRelax),
+          TimeBonus(
+              eTypeBonus: ETypeBonus.sleep,
+              eTypeBonusSource: ETypeBonusSource.transport,
+              value: transport.bonusToSleep),
+          TimeBonus(
+              eTypeBonus: ETypeBonus.learn,
+              eTypeBonusSource: ETypeBonusSource.transport,
+              value: transport.bonusToLearn),
         ],
       );
 

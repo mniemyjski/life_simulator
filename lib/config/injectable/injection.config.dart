@@ -125,7 +125,6 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       get<_i20.IncomeCubit>()));
   gh.lazySingleton<_i27.TransportCubit>(() => _i27.TransportCubit(
       get<_i12.MoneyCubit>(),
-      get<_i8.DatabaseCubit>(),
       get<_i20.IncomeCubit>(),
       get<_i14.TimeSpendCubit>(),
       get<_i5.NewGameCubit>()));
@@ -147,7 +146,6 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       get<_i5.NewGameCubit>(),
       get<_i14.TimeSpendCubit>()));
   gh.lazySingleton<_i31.HouseCubit>(() => _i31.HouseCubit(
-      get<_i8.DatabaseCubit>(),
       get<_i12.MoneyCubit>(),
       get<_i14.TimeSpendCubit>(),
       get<_i20.IncomeCubit>(),

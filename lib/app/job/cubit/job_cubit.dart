@@ -69,7 +69,7 @@ class JobCubit extends HydratedCubit<JobState> {
                 for (var u in userSkills) {
                   if (r.name == u.name) {
                     _skillsCubit.update(
-                        skill: u.name, exp: ((u.lvl + 1) * timeSpend.work).toDouble());
+                        skill: u.name, exp: ((u.lvl + 1) * (timeSpend.work / 2)).toDouble());
                   }
                 }
               }

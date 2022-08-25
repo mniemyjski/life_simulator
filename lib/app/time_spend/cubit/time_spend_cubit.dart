@@ -50,8 +50,6 @@ class TimeSpendCubit extends HydratedCubit<TimeSpendState> {
   _counting() {
     _dateSub = _dateCubit.stream.listen((event) {
       state.whenOrNull(loaded: (timeSpend) {
-        int commuting = timeSpend.getBonus(ETypeBonus.commuting);
-
         TimeSpend refresh = timeSpend.copyWith(
           used: 0,
           free: 24 -
@@ -60,7 +58,7 @@ class TimeSpendCubit extends HydratedCubit<TimeSpendState> {
               timeSpend.relax -
               timeSpend.sleep -
               timeSpend.freelance -
-              (timeSpend.commuting - commuting),
+              timeSpend.getBonus(ETypeBonus.commuting),
         );
         emit(TimeSpendState.loaded(refresh));
       });
@@ -193,24 +191,6 @@ class TimeSpendCubit extends HydratedCubit<TimeSpendState> {
       loaded: (timeSpend) => timeSpend.checkBonusSource(eTypeBonusSource) ? true : false,
     );
   }
-  //
-  // resetDay() {
-  //   return state.whenOrNull(loaded: (timeSpend) {
-  //     int commuting = timeSpend.getBonus(ETypeBonus.commuting);
-  //
-  //     TimeSpend refresh = timeSpend.copyWith(
-  //       used: 0,
-  //       free: 24 -
-  //           timeSpend.learn -
-  //           timeSpend.work -
-  //           timeSpend.relax -
-  //           timeSpend.sleep -
-  //           timeSpend.freelance -
-  //           (timeSpend.commuting - commuting),
-  //     );
-  //     emit(TimeSpendState.loaded(refresh));
-  //   });
-  // }
 
   @override
   TimeSpendState? fromJson(Map<String, dynamic> json) {
