@@ -105,7 +105,7 @@ class FoodCubit extends HydratedCubit<FoodState> {
         id: food.id,
         source: ETypeSource.meal,
         typeIncome: ETypeIncome.expense,
-        value: -food.cost,
+        value: food.cost,
         eTypeFrequency: ETypeFrequency.daily,
       );
 

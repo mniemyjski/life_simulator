@@ -8,7 +8,7 @@ class DataMedicines {
       Medicine(
         id: uuid.v1(),
         name: 'Medicine 1',
-        cost: 50,
+        cost: -50,
         satisfaction: 0,
         health: 0.01,
         tiredness: 0,
@@ -18,7 +18,7 @@ class DataMedicines {
       Medicine(
         id: uuid.v1(),
         name: 'Medicine 2',
-        cost: 100,
+        cost: -100,
         satisfaction: 0,
         health: 0.02,
         tiredness: 0,
@@ -28,7 +28,7 @@ class DataMedicines {
       Medicine(
         id: uuid.v1(),
         name: 'Medicine 3',
-        cost: 200,
+        cost: -200,
         satisfaction: 0,
         health: 0.01,
         tiredness: 0,
@@ -38,7 +38,7 @@ class DataMedicines {
       Medicine(
         id: uuid.v1(),
         name: 'Medicine 4',
-        cost: 400,
+        cost: -400,
         satisfaction: 0,
         health: 0.02,
         tiredness: 0,
@@ -48,7 +48,7 @@ class DataMedicines {
       Medicine(
         id: uuid.v1(),
         name: 'Medicine 5',
-        cost: 600,
+        cost: -600,
         satisfaction: 0,
         health: 0.01,
         tiredness: 0,
@@ -58,7 +58,7 @@ class DataMedicines {
       Medicine(
         id: uuid.v1(),
         name: 'Medicine 6',
-        cost: 1200,
+        cost: -1200,
         satisfaction: 0,
         health: 0.02,
         tiredness: 0,

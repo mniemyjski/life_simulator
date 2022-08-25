@@ -9,31 +9,31 @@ class DataLearnings {
     for (var element in ETypeSkills.values) {
       Learning learning = Learning(
         name: 'book',
-        cost: 50,
+        cost: -50,
         skillType: element,
         exp: 500,
-        time: 1000,
-        baseTime: 1000,
+        time: 500,
+        baseTime: 500,
       );
       result.add(learning);
 
       learning = Learning(
         name: 'OnlineCourse',
-        cost: 300,
+        cost: -300,
         skillType: element,
         exp: 1000,
-        time: 1000,
-        baseTime: 1000,
+        time: 500,
+        baseTime: 500,
       );
       result.add(learning);
 
       learning = Learning(
         name: 'fullTimeCourse',
-        cost: 5000,
+        cost: -5000,
         skillType: element,
         exp: 4000,
-        time: 1000,
-        baseTime: 1000,
+        time: 500,
+        baseTime: 500,
       );
       result.add(learning);
     }

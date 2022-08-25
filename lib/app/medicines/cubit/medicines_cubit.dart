@@ -5,6 +5,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:life_simulator/app/date/cubit/date_cubit.dart';
 import 'package:life_simulator/app/money/cubit/money_cubit.dart';
+import 'package:life_simulator/app/money/models/transaction/transaction_model.dart';
 
 import '../../database/cubit/database_cubit.dart';
 import '../../new_game/new_game_cubit.dart';
@@ -54,7 +55,7 @@ class MedicinesCubit extends HydratedCubit<MedicinesState> {
       state.whenOrNull(loaded: (medicines) {
         List<Medicine> result = [];
 
-        medicines.forEach((element) {
+        for (var element in medicines) {
           if (element.active) {
             Medicine medicine = element.copyWith(leftDuration: element.leftDuration - 1);
             if (medicine.leftDuration == 0) {
@@ -64,7 +65,7 @@ class MedicinesCubit extends HydratedCubit<MedicinesState> {
           } else {
             result.add(element);
           }
-        });
+        }
 
         emit(MedicinesState.loaded(result));
       });
@@ -74,9 +75,14 @@ class MedicinesCubit extends HydratedCubit<MedicinesState> {
   buy(String id) {
     state.whenOrNull(loaded: (medicines) {
       List<Medicine> result = List.from(medicines)..removeWhere((element) => element.id == id);
-      medicines.forEach((element) {
-        if (element.id == id) result.add(element.copyWith(active: true));
-      });
+      for (var element in medicines) {
+        if (element.id == id) {
+          result.add(element.copyWith(active: true));
+          _moneyCubit.addTransaction(
+              value: element.cost, eTypeTransactionSource: ETypeTransactionSource.medicine);
+        }
+      }
+
       result = result..sort(((a, b) => a.id.compareTo(b.id)));
       emit(MedicinesState.loaded(result));
     });

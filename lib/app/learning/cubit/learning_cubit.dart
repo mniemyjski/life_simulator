@@ -95,7 +95,7 @@ class LearningCubit extends HydratedCubit<LearningState> {
       List<Learning> result = List.from(learnings)..add(learning.copyWith(id: Uuid().v1()));
 
       _moneyCubit.addTransaction(
-          value: -learning.cost, eTypeTransactionSource: ETypeTransactionSource.learning);
+          value: learning.cost, eTypeTransactionSource: ETypeTransactionSource.learning);
       emit(LearningState.loaded(result));
     });
   }
