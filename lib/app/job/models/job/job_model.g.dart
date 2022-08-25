@@ -9,7 +9,7 @@ part of 'job_model.dart';
 _$_Job _$$_JobFromJson(Map<String, dynamic> json) => _$_Job(
       id: json['id'] as String,
       company: json['company'] as String,
-      industry: json['industry'] as String,
+      industry: $enumDecode(_$ETypeIndustryEnumMap, json['industry']),
       experiences: (json['experiences'] as List<dynamic>)
           .map((e) => Experience.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -18,6 +18,12 @@ _$_Job _$$_JobFromJson(Map<String, dynamic> json) => _$_Job(
 Map<String, dynamic> _$$_JobToJson(_$_Job instance) => <String, dynamic>{
       'id': instance.id,
       'company': instance.company,
-      'industry': instance.industry,
+      'industry': _$ETypeIndustryEnumMap[instance.industry],
       'experiences': instance.experiences.map((e) => e.toJson()).toList(),
     };
+
+const _$ETypeIndustryEnumMap = {
+  ETypeIndustry.it: 'it',
+  ETypeIndustry.shop: 'shop',
+  ETypeIndustry.customerService: 'customerService',
+};

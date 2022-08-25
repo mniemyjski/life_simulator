@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:logger/logger.dart';
 
 import '../../../database/cubit/database_cubit.dart';
 import '../../../income/cubit/income_cubit.dart';
@@ -129,7 +128,6 @@ class FoodCubit extends HydratedCubit<FoodState> {
 
       _incomeCubit.remove(oldFood.id);
       _incomeCubit.add(income);
-      Logger().wtf(food);
       emit(FoodState.loaded(food: food));
     });
   }

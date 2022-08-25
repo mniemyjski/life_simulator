@@ -1,5 +1,6 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:life_simulator/utilities/utilities.dart';
 
 class CustomDropDownButton extends StatefulWidget {
   final List<String> items;
@@ -41,7 +42,7 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Text(
-                item,
+                item.tr(),
                 style: const TextStyle(
                   fontSize: 14,
                 ),

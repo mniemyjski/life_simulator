@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_simulator/app/job/cubit/job_cubit.dart';
 
+import '../../../utilities/utilities.dart';
 import '../../../widgets/widgets.dart';
 import '../models/experience/experience_model.dart';
 import '../models/job/job_model.dart';
@@ -26,7 +27,7 @@ class YourJob extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     buildText(name: 'Company', value: job.company),
-                    buildText(name: 'Industry', value: job.industry),
+                    buildText(name: 'Industry', value: Enums.toText(job.industry)),
                     buildText(name: 'Experience', value: experience.exp.toString()),
                     buildText(name: 'Salary', value: '${experience.salary.toString()}\$'),
                   ],

@@ -5,7 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../database/cubit/database_cubit.dart';
+import '../../date/cubit/date_cubit.dart';
 import '../../income/cubit/income_cubit.dart';
 import '../../income/models/income_model.dart';
 import '../../money/cubit/money_cubit.dart';
@@ -22,28 +22,33 @@ part 'job_state.dart';
 
 @lazySingleton
 class JobCubit extends HydratedCubit<JobState> {
-  final NewGameCubit _newGameCubit;
-  final DatabaseCubit _databaseCubit;
   final IncomeCubit _incomeCubit;
   final TimeSpendCubit _timeSpendCubit;
   final SkillsCubit _skillsCubit;
   final MoneyCubit _moneyCubit;
+
+  final NewGameCubit _newGameCubit;
   late StreamSubscription _newGameSub;
+
+  final DateCubit _dateCubit;
+  late StreamSubscription _dateSub;
 
   JobCubit(
     this._newGameCubit,
-    this._databaseCubit,
     this._incomeCubit,
     this._timeSpendCubit,
     this._skillsCubit,
     this._moneyCubit,
+    this._dateCubit,
   ) : super(const JobState.initial()) {
     _newGame();
+    _counting();
   }
 
   @override
   Future<void> close() async {
     _newGameSub.cancel();
+    _dateSub.cancel();
     super.close();
   }
 
@@ -51,6 +56,27 @@ class JobCubit extends HydratedCubit<JobState> {
     if (_newGameCubit.state) emit(const JobState.loaded(job: null, experience: null));
     _newGameSub = _newGameCubit.stream.listen((newGame) {
       if (newGame) emit(const JobState.loaded(job: null, experience: null));
+    });
+  }
+
+  _counting() {
+    _dateSub = _dateCubit.stream.listen((event) {
+      state.whenOrNull(loaded: (job, experience) {
+        if (job != null && experience != null) {
+          _timeSpendCubit.state.whenOrNull(loaded: (timeSpend) {
+            _skillsCubit.state.whenOrNull(loaded: (userSkills) {
+              for (var r in experience.requirements) {
+                for (var u in userSkills) {
+                  if (r.name == u.name) {
+                    _skillsCubit.update(
+                        skill: u.name, exp: ((u.lvl + 1) * timeSpend.work).toDouble());
+                  }
+                }
+              }
+            });
+          });
+        }
+      });
     });
   }
 
@@ -104,33 +130,23 @@ class JobCubit extends HydratedCubit<JobState> {
 
   bool _testSkills(Experience experience) {
     var rng = Random();
-    int _req = 0;
-    int _skills = 0;
-    int random = 0;
 
     if (experience.requirements.isEmpty) return true;
 
-    bool? test = _skillsCubit.state.whenOrNull(loaded: (skills) {
-      for (var r = 0; r < experience.requirements.length; r++) {
-        _req += experience.requirements[r].lvl;
-        for (var s = 0; s < skills.length; s++) {
-          if (experience.requirements[r].name == skills[s].name) {
-            _skills += skills[s].lvl;
+    return _skillsCubit.state.maybeWhen(
+        loaded: (skills) {
+          List<bool> test = [];
+          for (var r in experience.requirements) {
+            for (var u in skills) {
+              if (u.name == r.name && u.lvl >= r.lvl) test.add(true);
+            }
           }
-        }
-      }
 
-      _req = (_req).toInt();
-      _skills = (_skills).toInt();
-
-      if (_skills == 0) return false;
-
-      if (_skills < _req) return false;
-
-      return true;
-    });
-
-    return test ?? false;
+          return test.length == experience.requirements.length
+              ? (rng.nextBool() ? true : false)
+              : false;
+        },
+        orElse: () => false);
   }
 
   leaveJob() {

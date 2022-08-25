@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CustomDropDownButton extends StatelessWidget {
+class CustomDropDownButtonOld extends StatelessWidget {
   final String name;
   final String? value;
   final List<String> list;
@@ -9,7 +9,7 @@ class CustomDropDownButton extends StatelessWidget {
   final Function? descFunc;
   final bool enabled;
 
-  const CustomDropDownButton({
+  const CustomDropDownButtonOld({
     Key? key,
     required this.name,
     this.value,

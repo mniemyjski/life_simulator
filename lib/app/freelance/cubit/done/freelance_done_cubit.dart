@@ -3,9 +3,11 @@ import 'dart:async';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:life_simulator/app/money/models/transaction/transaction_model.dart';
 import 'package:life_simulator/utilities/utilities.dart';
 
 import '../../../date/cubit/date_cubit.dart';
+import '../../../money/cubit/money_cubit.dart';
 import '../../../new_game/new_game_cubit.dart';
 import '../../models/freelance_done/freelance_done_model.dart';
 import '../fame/fame_cubit.dart';
@@ -24,10 +26,13 @@ class FreelanceDoneCubit extends HydratedCubit<FreelanceDoneState> {
 
   final FameCubit _fameCubit;
 
+  final MoneyCubit _moneyCubit;
+
   FreelanceDoneCubit(
     this._newGameCubit,
     this._dateCubit,
     this._fameCubit,
+    this._moneyCubit,
   ) : super(const FreelanceDoneState.initial()) {
     _newGame();
     _counting();
@@ -87,8 +92,11 @@ class FreelanceDoneCubit extends HydratedCubit<FreelanceDoneState> {
             for (var e in result) {
               addMoney = e.price * fame10;
             }
-            //Todo add transaction money
-            if (addMoney > 0) Logger().wtf(addMoney.toMoney());
+
+            if (addMoney > 0) {
+              _moneyCubit.addTransaction(
+                  value: addMoney, eTypeTransactionSource: ETypeTransactionSource.freelance);
+            }
           });
 
           emit(FreelanceDoneState.loaded(result));

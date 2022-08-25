@@ -22,7 +22,7 @@ Job _$JobFromJson(Map<String, dynamic> json) {
 mixin _$Job {
   String get id => throw _privateConstructorUsedError;
   String get company => throw _privateConstructorUsedError;
-  String get industry => throw _privateConstructorUsedError;
+  ETypeIndustry get industry => throw _privateConstructorUsedError;
   List<Experience> get experiences => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -37,7 +37,7 @@ abstract class $JobCopyWith<$Res> {
   $Res call(
       {String id,
       String company,
-      String industry,
+      ETypeIndustry industry,
       List<Experience> experiences});
 }
 
@@ -68,7 +68,7 @@ class _$JobCopyWithImpl<$Res> implements $JobCopyWith<$Res> {
       industry: industry == freezed
           ? _value.industry
           : industry // ignore: cast_nullable_to_non_nullable
-              as String,
+              as ETypeIndustry,
       experiences: experiences == freezed
           ? _value.experiences
           : experiences // ignore: cast_nullable_to_non_nullable
@@ -85,7 +85,7 @@ abstract class _$$_JobCopyWith<$Res> implements $JobCopyWith<$Res> {
   $Res call(
       {String id,
       String company,
-      String industry,
+      ETypeIndustry industry,
       List<Experience> experiences});
 }
 
@@ -117,7 +117,7 @@ class __$$_JobCopyWithImpl<$Res> extends _$JobCopyWithImpl<$Res>
       industry: industry == freezed
           ? _value.industry
           : industry // ignore: cast_nullable_to_non_nullable
-              as String,
+              as ETypeIndustry,
       experiences: experiences == freezed
           ? _value._experiences
           : experiences // ignore: cast_nullable_to_non_nullable
@@ -143,7 +143,7 @@ class _$_Job implements _Job {
   @override
   final String company;
   @override
-  final String industry;
+  final ETypeIndustry industry;
   final List<Experience> _experiences;
   @override
   List<Experience> get experiences {
@@ -192,7 +192,7 @@ abstract class _Job implements Job {
   const factory _Job(
       {required final String id,
       required final String company,
-      required final String industry,
+      required final ETypeIndustry industry,
       required final List<Experience> experiences}) = _$_Job;
 
   factory _Job.fromJson(Map<String, dynamic> json) = _$_Job.fromJson;
@@ -202,7 +202,7 @@ abstract class _Job implements Job {
   @override
   String get company => throw _privateConstructorUsedError;
   @override
-  String get industry => throw _privateConstructorUsedError;
+  ETypeIndustry get industry => throw _privateConstructorUsedError;
   @override
   List<Experience> get experiences => throw _privateConstructorUsedError;
   @override

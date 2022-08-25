@@ -23,7 +23,6 @@ class ExchangesCubit extends HydratedCubit<ExchangesState> {
   late StreamSubscription _newGameSub;
 
   final DateCubit _dateCubit;
-  late StreamSubscription _dateSub;
 
   final StockMarketCubit _stockMarketCubit;
   final MoneyCubit _moneyCubit;
@@ -40,7 +39,6 @@ class ExchangesCubit extends HydratedCubit<ExchangesState> {
   @override
   Future<void> close() async {
     _newGameSub.cancel();
-    _dateSub.cancel();
     super.close();
   }
 

@@ -5,12 +5,14 @@ import '../experience/experience_model.dart';
 part 'job_model.freezed.dart';
 part 'job_model.g.dart';
 
+enum ETypeIndustry { it, shop, customerService }
+
 @freezed
 class Job with _$Job {
   const factory Job({
     required String id,
     required String company,
-    required String industry,
+    required ETypeIndustry industry,
     required List<Experience> experiences,
   }) = _Job;
 

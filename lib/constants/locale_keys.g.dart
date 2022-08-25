@@ -78,5 +78,9 @@ abstract class  LocaleKeys {
   static const source = 'source';
   static const loans = 'loans';
   static const youDontHaveAnyLoans = 'youDontHaveAnyLoans';
+  static const company = 'company';
+  static const industry = 'industry';
+  static const salary = 'salary';
+  static const experience = 'experience';
 
 }

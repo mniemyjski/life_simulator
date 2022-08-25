@@ -7,12 +7,12 @@ import '../../skills/models/skill_model.dart';
 
 class DataJobs {
   static List<Job> db() {
-    var uuid = Uuid();
+    var uuid = const Uuid();
     return [
       Job(
         id: uuid.v1(),
         company: 'Call Center',
-        industry: '?',
+        industry: ETypeIndustry.customerService,
         experiences: [
           Experience(
             name: 'test 1',
@@ -24,7 +24,10 @@ class DataJobs {
             commuting: 2,
             bonusToRelax: -1,
             bonusToSleep: -1,
-            requirements: [],
+            requirements: [
+              const Skill(name: ETypeSkills.confidence),
+              const Skill(name: ETypeSkills.communicativeness),
+            ],
           ),
           Experience(
             id: uuid.v1(),
@@ -36,7 +39,10 @@ class DataJobs {
             commuting: 2,
             bonusToRelax: -1,
             bonusToSleep: -1,
-            requirements: [],
+            requirements: [
+              const Skill(name: ETypeSkills.confidence, lvl: 1),
+              const Skill(name: ETypeSkills.communicativeness, lvl: 1),
+            ],
           ),
           Experience(
             id: uuid.v1(),
@@ -48,14 +54,17 @@ class DataJobs {
             commuting: 2,
             bonusToRelax: -1,
             bonusToSleep: -1,
-            requirements: [],
+            requirements: [
+              const Skill(name: ETypeSkills.confidence, lvl: 3),
+              const Skill(name: ETypeSkills.communicativeness, lvl: 3),
+            ],
           ),
         ],
       ),
       Job(
         id: uuid.v1(),
         company: 'Lidl',
-        industry: 'Shop',
+        industry: ETypeIndustry.shop,
         experiences: [
           Experience(
             id: uuid.v1(),
@@ -67,7 +76,10 @@ class DataJobs {
             commuting: 2,
             bonusToRelax: -1,
             bonusToSleep: -1,
-            requirements: [],
+            requirements: [
+              const Skill(name: ETypeSkills.confidence),
+              const Skill(name: ETypeSkills.communicativeness),
+            ],
           ),
           Experience(
             id: uuid.v1(),
@@ -79,7 +91,10 @@ class DataJobs {
             commuting: 2,
             bonusToRelax: -1,
             bonusToSleep: -1,
-            requirements: [],
+            requirements: [
+              const Skill(name: ETypeSkills.confidence, lvl: 1),
+              const Skill(name: ETypeSkills.communicativeness, lvl: 1),
+            ],
           ),
           Experience(
             id: uuid.v1(),
@@ -91,25 +106,28 @@ class DataJobs {
             commuting: 2,
             bonusToRelax: -1,
             bonusToSleep: -1,
-            requirements: [],
+            requirements: [
+              const Skill(name: ETypeSkills.confidence, lvl: 3),
+              const Skill(name: ETypeSkills.communicativeness, lvl: 3),
+            ],
           ),
         ],
       ),
       Job(
         id: uuid.v1(),
         company: 'Miquide',
-        industry: 'IT',
+        industry: ETypeIndustry.it,
         experiences: [
           Experience(
             id: uuid.v1(),
-            name: 'test 1',
+            name: 'test 0',
             exp: 0,
             salary: 1000,
             eTypeFrequency: ETypeFrequency.monthly,
             work: 8,
             commuting: 2,
             requirements: [
-              Skill(name: ETypeSkills.programming, lvl: 1),
+              const Skill(name: ETypeSkills.programming, lvl: 1),
             ],
           ),
           Experience(
@@ -121,7 +139,9 @@ class DataJobs {
             work: 8,
             commuting: 2,
             requirements: [
-              Skill(name: ETypeSkills.programming, lvl: 2),
+              const Skill(name: ETypeSkills.programming, lvl: 2),
+              const Skill(name: ETypeSkills.confidence, lvl: 0),
+              const Skill(name: ETypeSkills.communicativeness, lvl: 0),
             ],
           ),
           Experience(
@@ -133,7 +153,9 @@ class DataJobs {
             work: 8,
             commuting: 0,
             requirements: [
-              Skill(name: ETypeSkills.programming, lvl: 3),
+              const Skill(name: ETypeSkills.programming, lvl: 4),
+              const Skill(name: ETypeSkills.confidence, lvl: 0),
+              const Skill(name: ETypeSkills.communicativeness, lvl: 0),
             ],
           ),
           Experience(
@@ -145,7 +167,9 @@ class DataJobs {
             work: 8,
             commuting: 0,
             requirements: [
-              Skill(name: ETypeSkills.programming, lvl: 4),
+              const Skill(name: ETypeSkills.programming, lvl: 5),
+              const Skill(name: ETypeSkills.confidence, lvl: 0),
+              const Skill(name: ETypeSkills.communicativeness, lvl: 0),
             ],
           ),
           Experience(
@@ -157,7 +181,10 @@ class DataJobs {
             work: 8,
             commuting: 0,
             requirements: [
-              Skill(name: ETypeSkills.programming, lvl: 5),
+              const Skill(name: ETypeSkills.programming, lvl: 5),
+              const Skill(name: ETypeSkills.analytics, lvl: 1),
+              const Skill(name: ETypeSkills.confidence, lvl: 1),
+              const Skill(name: ETypeSkills.communicativeness, lvl: 1),
             ],
           ),
           Experience(
@@ -169,7 +196,11 @@ class DataJobs {
             work: 8,
             commuting: 0,
             requirements: [
-              Skill(name: ETypeSkills.programming, lvl: 6),
+              const Skill(name: ETypeSkills.programming, lvl: 6),
+              const Skill(name: ETypeSkills.management, lvl: 6),
+              const Skill(name: ETypeSkills.analytics, lvl: 3),
+              const Skill(name: ETypeSkills.confidence, lvl: 4),
+              const Skill(name: ETypeSkills.communicativeness, lvl: 4),
             ],
           ),
         ],

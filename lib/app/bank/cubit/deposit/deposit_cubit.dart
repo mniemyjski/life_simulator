@@ -41,7 +41,7 @@ class DepositCubit extends HydratedCubit<double> {
   }
 
   _counting() {
-    _newGameSub = _dateCubit.stream.listen((event) {
+    _dateSub = _dateCubit.stream.listen((event) {
       event.whenOrNull(loaded: (date) {
         if (date == DateTime(18, 1, 1)) return;
         double result = state + (state * (0.12 / 360));

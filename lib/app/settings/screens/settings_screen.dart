@@ -27,7 +27,7 @@ class SettingsScreen extends StatelessWidget {
               children: [
                 ConstrainedBox(
                   constraints: BoxConstraints(maxWidth: 300),
-                  child: CustomDropDownButton(
+                  child: CustomDropDownButtonOld(
                     name: LocaleKeys.localeApp.tr(),
                     value: context.locale.languageCode,
                     list: const <String>['pl', 'en'],

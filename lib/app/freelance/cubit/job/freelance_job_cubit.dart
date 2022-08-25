@@ -4,9 +4,10 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../utilities/utilities.dart';
 import '../../../date/cubit/date_cubit.dart';
 import '../../../new_game/new_game_cubit.dart';
+import '../../../skills/cubit/skills_cubit.dart';
+import '../../../skills/models/skill_model.dart';
 import '../../../time_spend/cubit/time_spend_cubit.dart';
 import '../../models/freelance_job/freelance_job_model.dart';
 import '../done/freelance_done_cubit.dart';
@@ -25,12 +26,14 @@ class FreelanceJobCubit extends HydratedCubit<FreelanceWorkState> {
 
   final TimeSpendCubit _timeSpendCubit;
   final FreelanceDoneCubit _freelanceDoneCubit;
+  final SkillsCubit _skillsCubit;
 
   FreelanceJobCubit(
     this._newGameCubit,
     this._dateCubit,
     this._timeSpendCubit,
     this._freelanceDoneCubit,
+    this._skillsCubit,
   ) : super(const FreelanceWorkState.initial()) {
     _newGame();
     _counting();
@@ -60,14 +63,26 @@ class FreelanceJobCubit extends HydratedCubit<FreelanceWorkState> {
 
             for (var e in freelanceJobs) {
               if (e.leftWorkTime > time) {
-                result.add(e.copyWith(
-                    leftWorkTime: e.leftWorkTime - time,
-                    fame: e.getFameMultiplier() * (time - e.leftWorkTime)));
+                result.add(
+                  e.copyWith(
+                      leftWorkTime: e.leftWorkTime - time,
+                      fame: e.getFameMultiplier() * (time - e.leftWorkTime)),
+                );
+                _countingExp(
+                  reqSkills: e.reqSkills,
+                  userSkills: e.userSkills,
+                  hours: time,
+                );
                 time = 0;
               }
               if (e.leftWorkTime <= time) {
                 _freelanceDoneCubit
                     .add(e.copyWith(fame: e.getFameMultiplier() * e.leftWorkTime).toDone(date));
+                _countingExp(
+                  reqSkills: e.reqSkills,
+                  userSkills: e.userSkills,
+                  hours: e.leftWorkTime,
+                );
                 time = time - e.leftWorkTime;
               }
             }
@@ -79,6 +94,20 @@ class FreelanceJobCubit extends HydratedCubit<FreelanceWorkState> {
         });
       });
     });
+  }
+
+  _countingExp({
+    required List<Skill> reqSkills,
+    required List<Skill> userSkills,
+    required int hours,
+  }) {
+    for (var r in reqSkills) {
+      for (var u in userSkills) {
+        if (u.name == r.name) {
+          _skillsCubit.update(skill: u.name, exp: ((u.lvl + 1) * hours).toDouble());
+        }
+      }
+    }
   }
 
   add(FreelanceJob freelanceWork) {
