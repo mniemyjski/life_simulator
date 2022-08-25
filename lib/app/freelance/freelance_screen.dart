@@ -164,9 +164,7 @@ class FreelanceScreen extends StatelessWidget {
                 },
               ),
             ),
-            SizedBox(
-              height: 85,
-            ),
+            const SizedBox(height: 85),
           ],
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

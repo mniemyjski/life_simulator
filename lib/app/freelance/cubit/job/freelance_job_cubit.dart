@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:life_simulator/utilities/utilities.dart';
 
 import '../../../date/cubit/date_cubit.dart';
 import '../../../new_game/new_game_cubit.dart';
@@ -110,13 +111,35 @@ class FreelanceJobCubit extends HydratedCubit<FreelanceWorkState> {
     }
   }
 
-  add(FreelanceJob freelanceWork) {
-    state.maybeWhen(
+  String? add(FreelanceJob freelanceWork) {
+    bool test =
+        _testReqSkill(reqSkill: freelanceWork.reqSkills, userSkills: freelanceWork.userSkills);
+    Logger().wtf(!test);
+    if (!test) {
+      return "YouCannotDoThis";
+    }
+
+    return state.maybeWhen(
         orElse: () => 'error',
         loaded: (list) {
           emit(FreelanceWorkState.loaded(List.from(list)
             ..add(freelanceWork.copyWith(fame: freelanceWork.getFameMultiplier()))));
+          return null;
         });
+  }
+
+  _testReqSkill({required List<Skill> reqSkill, required List<Skill> userSkills}) {
+    List<bool> test = [];
+    for (var r in reqSkill) {
+      for (var u in userSkills) {
+        if (u.name == r.name && u.lvl >= r.lvl) test.add(true);
+      }
+    }
+
+    Logger().wtf(reqSkill);
+    Logger().wtf(userSkills);
+    Logger().i(test);
+    return test.length == reqSkill.length ? true : false;
   }
 
   remove(String id) {
