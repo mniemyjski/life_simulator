@@ -6,6 +6,7 @@ import 'package:injectable/injectable.dart';
 import 'package:life_simulator/app/date/cubit/date_cubit.dart';
 import 'package:life_simulator/app/money/models/transaction/transaction_model.dart';
 import 'package:life_simulator/app/time_spend/cubit/time_spend_cubit.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../utilities/utilities.dart';
 import '../../money/cubit/money_cubit.dart';
@@ -91,7 +92,7 @@ class LearningCubit extends HydratedCubit<LearningState> {
 
   add(Learning learning) {
     state.whenOrNull(loaded: (learnings) {
-      List<Learning> result = List.from(learnings)..add(learning);
+      List<Learning> result = List.from(learnings)..add(learning.copyWith(id: Uuid().v1()));
 
       _moneyCubit.addTransaction(
           value: -learning.cost, eTypeTransactionSource: ETypeTransactionSource.learning);

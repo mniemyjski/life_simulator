@@ -74,6 +74,8 @@
   "freelance": "Freelance",
   "commuting": "Commuting",
   "bonuses": "Bonuses",
-  "source": "Source"
+  "source": "Source",
+  "loans": "Loans",
+  "youDontHaveAnyLoans": "You don't have any loans",
 
 }

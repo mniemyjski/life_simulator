@@ -77,6 +77,15 @@ class FreelanceJobsScreen extends StatelessWidget {
                   return state.maybeWhen(
                       orElse: () => Container(),
                       loaded: (listJobs) {
+                        if (listJobs.isEmpty) {
+                          return Center(
+                            child: Text(
+                              LocaleKeys.queueIsEmpty.tr(),
+                              style: Theme.of(context).textTheme.bodyText2,
+                            ),
+                          );
+                        }
+
                         return ListView.builder(
                             itemCount: listJobs.length,
                             itemBuilder: (context, index) {
@@ -103,8 +112,11 @@ class FreelanceJobsScreen extends StatelessWidget {
               FloatingActionButton(
                 heroTag: null,
                 onPressed: () => showModalBottomSheet<void>(
+                    isScrollControlled: true,
                     backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                     context: context,
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(top: Radius.circular(8.0))),
                     builder: (BuildContext context) => const FreelanceJobCreator()),
                 child: const FaIcon(FontAwesomeIcons.plus),
               ),

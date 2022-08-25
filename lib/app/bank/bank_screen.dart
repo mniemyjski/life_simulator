@@ -21,6 +21,8 @@ class BankScreen extends StatelessWidget {
 
   _onTapDeposit(BuildContext context) async {
     return showModalBottomSheet<void>(
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(8.0))),
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       context: context,
       builder: (BuildContext context) {
@@ -85,6 +87,8 @@ class BankScreen extends StatelessWidget {
 
   _onTapLoan(BuildContext context) async {
     showModalBottomSheet<void>(
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(8.0))),
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       context: context,
       builder: (BuildContext context) {
@@ -273,11 +277,27 @@ class BankScreen extends StatelessWidget {
               ),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.only(top: 8.0, left: 4.0),
+            child: Text(
+              '${LocaleKeys.loans.tr()}:',
+              style: Theme.of(context).textTheme.headline1,
+            ),
+          ),
           Expanded(child: BlocBuilder<LoanCubit, LoanState>(
             builder: (context, state) {
               return state.maybeWhen(
                   orElse: () => Container(),
                   loaded: (loans) {
+                    if (loans.isEmpty) {
+                      return Center(
+                        child: Text(
+                          LocaleKeys.youDontHaveAnyLoans.tr(),
+                          style: Theme.of(context).textTheme.bodyText2,
+                        ),
+                      );
+                    }
+
                     return ListView.builder(
                         itemCount: loans.length,
                         itemBuilder: (context, index) {

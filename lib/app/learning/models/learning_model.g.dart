@@ -7,7 +7,7 @@ part of 'learning_model.dart';
 // **************************************************************************
 
 _$_Learning _$$_LearningFromJson(Map<String, dynamic> json) => _$_Learning(
-      id: json['id'] as String,
+      id: json['id'] as String? ?? '0',
       name: json['name'] as String,
       skillType: $enumDecode(_$ETypeSkillsEnumMap, json['skillType']),
       baseTime: json['baseTime'] as int,

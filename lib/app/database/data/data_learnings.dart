@@ -1,17 +1,13 @@
 import 'package:life_simulator/app/learning/models/learning_model.dart';
-import 'package:uuid/uuid.dart';
 
 import '../../skills/models/skill_model.dart';
 
 class DataLearnings {
   static List<Learning> db() {
-    var uuid = Uuid();
-
     List<Learning> result = [];
 
     for (var element in ETypeSkills.values) {
       Learning learning = Learning(
-        id: uuid.v1(),
         name: 'book',
         cost: 50,
         skillType: element,
@@ -22,7 +18,6 @@ class DataLearnings {
       result.add(learning);
 
       learning = Learning(
-        id: uuid.v1(),
         name: 'OnlineCourse',
         cost: 200,
         skillType: element,
@@ -33,7 +28,6 @@ class DataLearnings {
       result.add(learning);
 
       learning = Learning(
-        id: uuid.v1(),
         name: 'fullTimeCourse',
         cost: 5000,
         skillType: element,

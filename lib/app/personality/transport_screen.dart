@@ -1,11 +1,11 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:life_simulator/app/database/cubit/database_cubit.dart';
-import 'package:life_simulator/app/game/widget/app_bar_stats.dart';
 import 'package:life_simulator/app/personality/cubit/transport/transport_cubit.dart';
+import 'package:life_simulator/constants/constants.dart';
+import 'package:life_simulator/utilities/utilities.dart';
 
 import '../settings/cubit/dark_mode_cubit.dart';
 import 'models/transport/transport_model.dart';
@@ -17,49 +17,45 @@ class TransportScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          children: [
-            AppBarStats(),
-            BlocBuilder<TransportCubit, TransportState>(
-              builder: (context, state) {
-                return state.maybeWhen(
-                    orElse: () => Container(),
-                    loaded: (car) {
-                      List<Transport> carsDB = context.watch<DatabaseCubit>().state.transportsDB;
+        appBar: AppBar(title: Text(LocaleKeys.buyTransport.tr())),
+        body: Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: Column(
+            children: [
+              BlocBuilder<TransportCubit, TransportState>(
+                builder: (context, state) {
+                  return state.maybeWhen(
+                      orElse: () => Container(),
+                      loaded: (car) {
+                        List<Transport> carsDB = context.watch<DatabaseCubit>().state.transportsDB;
 
-                      return Expanded(
-                        child: ListView.builder(
-                            itemCount: carsDB.length,
-                            itemBuilder: (context, index) {
-                              final element = carsDB[index];
-                              final bool owned = element.id == (car?.id ?? 'xyz');
+                        return Expanded(
+                          child: ListView.builder(
+                              itemCount: carsDB.length,
+                              itemBuilder: (context, index) {
+                                final element = carsDB[index];
+                                final bool owned = element.id == (car?.id ?? 'xyz');
 
-                              return _element(
-                                  element: element,
-                                  owned: owned,
-                                  onPressed: () async {
-                                    if (owned) {
-                                      context.read<TransportCubit>().sell();
-                                    } else {
-                                      var toast = await context.read<TransportCubit>().buy(element);
-                                      if (toast != null)
-                                        BotToast.showText(text: toast, align: Alignment(0.1, 0.05));
-                                    }
-                                  });
-                            }),
-                      );
-                    });
-              },
-            ),
-          ],
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
-        floatingActionButton: Padding(
-          padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-          child: FloatingActionButton(
-            heroTag: null,
-            onPressed: () => context.router.pop(),
-            child: FaIcon(FontAwesomeIcons.arrowRotateLeft),
+                                return _element(
+                                    element: element,
+                                    owned: owned,
+                                    onPressed: () async {
+                                      if (owned) {
+                                        context.read<TransportCubit>().sell();
+                                      } else {
+                                        var toast =
+                                            await context.read<TransportCubit>().buy(element);
+                                        if (toast != null)
+                                          BotToast.showText(
+                                              text: toast, align: Alignment(0.1, 0.05));
+                                      }
+                                    });
+                              }),
+                        );
+                      });
+                },
+              ),
+            ],
           ),
         ),
       ),

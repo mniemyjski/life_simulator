@@ -100,7 +100,7 @@ class LearningScreen extends StatelessWidget {
                         if (list.isEmpty) {
                           return Center(
                             child: Text(
-                              LocaleKeys.queueIsEmpty,
+                              LocaleKeys.queueIsEmpty.tr(),
                               style: Theme.of(context).textTheme.bodyText2,
                             ),
                           );
@@ -113,7 +113,7 @@ class LearningScreen extends StatelessWidget {
                               .reorderAble(oldIndex: oldIndex, newIndex: newIndex),
                           itemBuilder: (context, index) {
                             return LearningElement(
-                              key: ValueKey(list[index]),
+                              key: ValueKey(list[index].id),
                               element: list[index],
                               iconData: Icons.remove,
                             );

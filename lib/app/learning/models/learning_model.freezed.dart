@@ -172,7 +172,7 @@ class __$$_LearningCopyWithImpl<$Res> extends _$LearningCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Learning implements _Learning {
   const _$_Learning(
-      {required this.id,
+      {this.id = '0',
       required this.name,
       required this.skillType,
       required this.baseTime,
@@ -184,6 +184,7 @@ class _$_Learning implements _Learning {
       _$$_LearningFromJson(json);
 
   @override
+  @JsonKey()
   final String id;
   @override
   final String name;
@@ -242,7 +243,7 @@ class _$_Learning implements _Learning {
 
 abstract class _Learning implements Learning {
   const factory _Learning(
-      {required final String id,
+      {final String id,
       required final String name,
       required final ETypeSkills skillType,
       required final int baseTime,

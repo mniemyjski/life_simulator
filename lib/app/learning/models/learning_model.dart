@@ -7,7 +7,7 @@ part 'learning_model.g.dart';
 @freezed
 class Learning with _$Learning {
   const factory Learning({
-    required String id,
+    @Default('0') String id,
     required String name,
     required ETypeSkills skillType,
     required int baseTime,

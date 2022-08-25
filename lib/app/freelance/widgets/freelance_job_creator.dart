@@ -43,182 +43,185 @@ class _FreelanceJobCreatorState extends State<FreelanceJobCreator> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(18.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 8, top: 4),
-            child: Form(
-              key: formKey,
-              child: TextFormField(
-                style: const TextStyle(color: Colors.white),
-                decoration: InputDecoration(
-                  labelText: LocaleKeys.name.tr(),
-                  labelStyle: const TextStyle(color: Colors.white),
-                  contentPadding: const EdgeInsets.all(12),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(4),
-                    borderSide: const BorderSide(
-                      color: Colors.white38,
+      padding: MediaQuery.of(context).viewInsets,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8, top: 4),
+              child: Form(
+                key: formKey,
+                child: TextFormField(
+                  style: const TextStyle(color: Colors.white),
+                  decoration: InputDecoration(
+                    labelText: LocaleKeys.name.tr(),
+                    labelStyle: const TextStyle(color: Colors.white),
+                    contentPadding: const EdgeInsets.all(12),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(4),
+                      borderSide: const BorderSide(
+                        color: Colors.white38,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(4),
+                      borderSide: const BorderSide(
+                        color: Colors.white,
+                      ),
                     ),
                   ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(4),
-                    borderSide: const BorderSide(
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                controller: controller,
-                validator: (v) {
-                  if (v == null || v.isEmpty) {
-                    return 'Can\'t be empty';
-                  }
-                  if (v.length < 4) {
-                    return 'Too short';
-                  }
-                  return null;
-                },
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: Text(
-              '${LocaleKeys.level.tr()}:',
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: Slider(
-                  value: lvl.toDouble(),
-                  activeColor: Colors.white70,
-                  inactiveColor: Colors.white70,
-                  min: 1,
-                  max: 10,
-                  divisions: 10,
-                  onChanged: (double v) {
-                    setState(() {
-                      lvl = v.toInt();
-                      req = _getList(typeJob, lvl);
-                      calcDuration();
-                    });
+                  controller: controller,
+                  validator: (v) {
+                    if (v == null || v.isEmpty) {
+                      return 'Can\'t be empty';
+                    }
+                    if (v.length < 4) {
+                      return 'Too short';
+                    }
+                    return null;
                   },
                 ),
               ),
-              Text('${lvl.toInt()}'),
-            ],
-          ),
-          const Padding(
-            padding: EdgeInsets.only(bottom: 4),
-            child: Text(
-              'Type:',
-              style: TextStyle(fontWeight: FontWeight.bold),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(4),
-            child: Row(
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Text(
+                '${LocaleKeys.level.tr()}:',
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+            Row(
               children: [
-                DropdownButtonHideUnderline(
-                  child: DropdownButton2(
-                    items: (Enums.toList(ETypeFreelance.values) as List<String>)
-                        .map((item) => DropdownMenuItem<String>(
-                              value: item,
-                              child: Text(
-                                item,
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ))
-                        .toList(),
-                    value: Enums.toText(typeJob),
-                    onChanged: (v) => setState(() {
-                      typeJob = Enums.toEnum(v as String, ETypeFreelance.values);
-                      req = _getList(typeJob, lvl);
-                      calcDuration();
-                    }),
-                    buttonHeight: 40,
-                    buttonWidth: 140,
-                    itemHeight: 40,
-                    buttonPadding: const EdgeInsets.only(left: 14, right: 14),
-                    buttonDecoration: BoxDecoration(
-                      color: Theme.of(context).cardColor,
-                    ),
+                Expanded(
+                  child: Slider(
+                    value: lvl.toDouble(),
+                    activeColor: Colors.white70,
+                    inactiveColor: Colors.white70,
+                    min: 1,
+                    max: 10,
+                    divisions: 10,
+                    onChanged: (double v) {
+                      setState(() {
+                        lvl = v.toInt();
+                        req = _getList(typeJob, lvl);
+                        calcDuration();
+                      });
+                    },
                   ),
                 ),
-                Card(
-                  child: SizedBox(
-                    height: 40,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Center(
-                        child: RichText(
-                          text: TextSpan(
-                            style: Theme.of(context).textTheme.bodyText1,
-                            children: <TextSpan>[
-                              TextSpan(
-                                text: '${LocaleKeys.duration.tr()}: ',
-                                style: const TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                              TextSpan(text: '${duration}h'),
-                            ],
+                Text('${lvl.toInt()}'),
+              ],
+            ),
+            const Padding(
+              padding: EdgeInsets.only(bottom: 4),
+              child: Text(
+                'Type:',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(4),
+              child: Row(
+                children: [
+                  DropdownButtonHideUnderline(
+                    child: DropdownButton2(
+                      items: (Enums.toList(ETypeFreelance.values) as List<String>)
+                          .map((item) => DropdownMenuItem<String>(
+                                value: item,
+                                child: Text(
+                                  item,
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ))
+                          .toList(),
+                      value: Enums.toText(typeJob),
+                      onChanged: (v) => setState(() {
+                        typeJob = Enums.toEnum(v as String, ETypeFreelance.values);
+                        req = _getList(typeJob, lvl);
+                        calcDuration();
+                      }),
+                      buttonHeight: 40,
+                      buttonWidth: 140,
+                      itemHeight: 40,
+                      buttonPadding: const EdgeInsets.only(left: 14, right: 14),
+                      buttonDecoration: BoxDecoration(
+                        color: Theme.of(context).cardColor,
+                      ),
+                    ),
+                  ),
+                  Card(
+                    child: SizedBox(
+                      height: 40,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(
+                          child: RichText(
+                            text: TextSpan(
+                              style: Theme.of(context).textTheme.bodyText1,
+                              children: <TextSpan>[
+                                TextSpan(
+                                  text: '${LocaleKeys.duration.tr()}: ',
+                                  style: const TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                TextSpan(text: '${duration}h'),
+                              ],
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          const Padding(
-            padding: EdgeInsets.only(bottom: 4),
-            child: Text(
-              'Req:',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(right: 4.0, bottom: 8),
-            child: BlocBuilder<SkillsCubit, SkillsState>(
-              builder: (context, state) {
-                return state.maybeWhen(
-                  orElse: () => Container(),
-                  loaded: (skills) {
-                    return Wrap(children: _buildWidgetReq(req, context));
-                  },
-                );
-              },
-            ),
-          ),
-          CustomButton(
-              onPressed: () {
-                if (formKey.currentState!.validate()) {
-                  FreelanceJob freelanceWork = FreelanceJob(
-                    id: const Uuid().v1(),
-                    name: controller.text,
-                    eTypeFreelance: typeJob,
-                    workTime: duration,
-                    leftWorkTime: duration,
-                    reqSkills: req,
-                    userSkills: req,
-                    level: lvl,
-                  );
-
-                  context.read<FreelanceJobCubit>().add(freelanceWork);
-                  context.router.pop();
-                }
-              },
+            const Padding(
+              padding: EdgeInsets.only(bottom: 4),
               child: Text(
-                LocaleKeys.create.tr(),
-              ))
-        ],
+                'Req:',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 4.0, bottom: 8),
+              child: BlocBuilder<SkillsCubit, SkillsState>(
+                builder: (context, state) {
+                  return state.maybeWhen(
+                    orElse: () => Container(),
+                    loaded: (skills) {
+                      return Wrap(children: _buildWidgetReq(req, context));
+                    },
+                  );
+                },
+              ),
+            ),
+            CustomButton(
+                onPressed: () {
+                  if (formKey.currentState!.validate()) {
+                    FreelanceJob freelanceWork = FreelanceJob(
+                      id: const Uuid().v1(),
+                      name: controller.text,
+                      eTypeFreelance: typeJob,
+                      workTime: duration,
+                      leftWorkTime: duration,
+                      reqSkills: req,
+                      userSkills: req,
+                      level: lvl,
+                    );
+
+                    context.read<FreelanceJobCubit>().add(freelanceWork);
+                    context.router.pop();
+                  }
+                },
+                child: Text(
+                  LocaleKeys.create.tr(),
+                ))
+          ],
+        ),
       ),
     );
   }

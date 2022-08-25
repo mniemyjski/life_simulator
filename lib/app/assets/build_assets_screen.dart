@@ -341,6 +341,8 @@ class _BuildAssetsScreenState extends State<BuildAssetsScreen> {
                 onPressed: () async {
                   final GlobalKey<FormState> formKey = GlobalKey();
                   var result = await showModalBottomSheet<String>(
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(top: Radius.circular(8.0))),
                     backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                     context: context,
                     isScrollControlled: true,

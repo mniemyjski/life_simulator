@@ -76,5 +76,7 @@ abstract class  LocaleKeys {
   static const commuting = 'commuting';
   static const bonuses = 'bonuses';
   static const source = 'source';
+  static const loans = 'loans';
+  static const youDontHaveAnyLoans = 'youDontHaveAnyLoans';
 
 }
