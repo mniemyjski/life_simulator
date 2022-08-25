@@ -82,5 +82,8 @@ abstract class  LocaleKeys {
   static const industry = 'industry';
   static const salary = 'salary';
   static const experience = 'experience';
+  static const it = 'it';
+  static const customerService = 'customerService';
+  static const shop = 'shop';
 
 }

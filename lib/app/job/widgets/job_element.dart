@@ -21,88 +21,106 @@ class JobElement extends StatelessWidget {
       child: Column(
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Expanded(
-                child: Column(
+                child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    RichText(
-                      text: TextSpan(
-                        style: Theme.of(context).textTheme.bodyText1,
-                        children: <TextSpan>[
-                          TextSpan(
-                            text: '${LocaleKeys.company.tr()}: ',
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          TextSpan(text: element.company),
-                        ],
-                      ),
-                    ),
-                    RichText(
-                      text: TextSpan(
-                        style: Theme.of(context).textTheme.bodyText1,
-                        children: <TextSpan>[
-                          TextSpan(
-                            text: '${LocaleKeys.industry.tr()}: ',
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          TextSpan(text: Enums.toText(element.industry)),
-                        ],
-                      ),
-                    ),
-                    RichText(
-                      text: TextSpan(
-                        style: Theme.of(context).textTheme.bodyText1,
-                        children: <TextSpan>[
-                          TextSpan(
-                            text: '${LocaleKeys.salary.tr()}: ',
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          TextSpan(text: element.experiences.first.salary.toMoney()),
-                        ],
-                      ),
-                    ),
-                    RichText(
-                      text: TextSpan(
-                        style: Theme.of(context).textTheme.bodyText1,
-                        children: <TextSpan>[
-                          TextSpan(
-                            text: '${LocaleKeys.experience.tr()}: ',
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          TextSpan(text: element.experiences.first.exp.toString()),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '${LocaleKeys.skills.tr()}:',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText1!
-                          .copyWith(fontWeight: FontWeight.bold),
-                    ),
-                    ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: element.experiences.first.requirements.length,
-                        itemBuilder: (context, index) {
-                          var skill = element.experiences.first.requirements[index];
-                          return Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: Text(
-                              '${Enums.toText(skill.name).tr()}: ${skill.lvl}',
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          RichText(
+                            text: TextSpan(
                               style: Theme.of(context).textTheme.bodyText1,
+                              children: <TextSpan>[
+                                TextSpan(
+                                  text: '${LocaleKeys.name.tr()}: ',
+                                  style: const TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                TextSpan(text: element.experiences.first.name),
+                              ],
                             ),
-                          );
-                        }),
+                          ),
+                          RichText(
+                            text: TextSpan(
+                              style: Theme.of(context).textTheme.bodyText1,
+                              children: <TextSpan>[
+                                TextSpan(
+                                  text: '${LocaleKeys.company.tr()}: ',
+                                  style: const TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                TextSpan(text: element.company),
+                              ],
+                            ),
+                          ),
+                          RichText(
+                            text: TextSpan(
+                              style: Theme.of(context).textTheme.bodyText1,
+                              children: <TextSpan>[
+                                TextSpan(
+                                  text: '${LocaleKeys.industry.tr()}: ',
+                                  style: const TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                TextSpan(text: Enums.toText(element.industry).tr()),
+                              ],
+                            ),
+                          ),
+                          RichText(
+                            text: TextSpan(
+                              style: Theme.of(context).textTheme.bodyText1,
+                              children: <TextSpan>[
+                                TextSpan(
+                                  text: '${LocaleKeys.salary.tr()}: ',
+                                  style: const TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                TextSpan(text: element.experiences.first.salary.toMoney()),
+                              ],
+                            ),
+                          ),
+                          RichText(
+                            text: TextSpan(
+                              style: Theme.of(context).textTheme.bodyText1,
+                              children: <TextSpan>[
+                                TextSpan(
+                                  text: '${LocaleKeys.experience.tr()}: ',
+                                  style: const TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                TextSpan(text: element.experiences.first.exp.toString()),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '${LocaleKeys.skills.tr()}:',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText1!
+                                .copyWith(fontWeight: FontWeight.bold),
+                          ),
+                          ListView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: element.experiences.first.requirements.length,
+                              itemBuilder: (context, index) {
+                                var skill = element.experiences.first.requirements[index];
+                                return Padding(
+                                  padding: const EdgeInsets.only(left: 8.0),
+                                  child: Text(
+                                    '${Enums.toText(skill.name).tr()}: ${skill.lvl}',
+                                    style: Theme.of(context).textTheme.bodyText1,
+                                  ),
+                                );
+                              }),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),

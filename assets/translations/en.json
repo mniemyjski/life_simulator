@@ -80,6 +80,10 @@
   "company": "Company",
   "industry": "Industry",
   "salary": "Salary",
-  "experience": "Experience"
+  "experience": "Experience",
+  "it": "IT",
+  "customerService": "Customer Service",
+  "shop": "Shop"
+
 
 }
