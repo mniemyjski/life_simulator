@@ -24,12 +24,12 @@ class TimeSpend with _$TimeSpend {
 
   static TimeSpend newGame() {
     return const TimeSpend(
-      free: 14,
+      free: 13,
       work: 0,
       commuting: 0,
       freelance: 0,
       learn: 0,
-      relax: 2,
+      relax: 3,
       sleep: 8,
       used: 0,
       bonuses: [],

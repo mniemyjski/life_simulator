@@ -5,6 +5,7 @@ class TimeSpendElement extends StatelessWidget {
   final String valueName;
   final Color? color;
   final int value;
+  final int? minValue;
 
   const TimeSpendElement({
     Key? key,
@@ -12,10 +13,18 @@ class TimeSpendElement extends StatelessWidget {
     this.color,
     required this.value,
     required this.valueName,
+    this.minValue,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    TextStyle textStyle = value > (minValue ?? -1)
+        ? Theme.of(context).textTheme.bodyText1!
+        : Theme.of(context)
+            .textTheme
+            .bodyText1!
+            .copyWith(color: Colors.red[600], fontWeight: FontWeight.bold);
+
     return Padding(
       padding: const EdgeInsets.only(bottom: 8.0),
       child: Column(
@@ -37,8 +46,7 @@ class TimeSpendElement extends StatelessWidget {
                   alignment: Alignment.center,
                   child: Text(
                     valueName,
-                    style:
-                        TextStyle(fontSize: 8, color: Theme.of(context).textTheme.bodyText1!.color),
+                    style: textStyle,
                   ),
                 ),
               ),

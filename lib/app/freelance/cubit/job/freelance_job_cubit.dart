@@ -114,7 +114,6 @@ class FreelanceJobCubit extends HydratedCubit<FreelanceWorkState> {
   String? add(FreelanceJob freelanceWork) {
     bool test =
         _testReqSkill(reqSkill: freelanceWork.reqSkills, userSkills: freelanceWork.userSkills);
-    Logger().wtf(!test);
     if (!test) {
       return "YouCannotDoThis";
     }

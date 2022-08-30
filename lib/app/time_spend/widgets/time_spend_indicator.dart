@@ -61,11 +61,13 @@ class TimeSpend extends StatelessWidget {
                           valueName: '${timeSpend.getTotalRelaxTime()} ($bonusRelax)',
                           name: LocaleKeys.relax.tr(),
                           color: Colors.green[800]!.withOpacity(0.7),
+                          minValue: 1,
                         ),
                         TimeSpendElement(
                           value: timeSpend.getTotalSleepTime(),
                           valueName: '${timeSpend.getTotalSleepTime()} ($bonusSleep)',
                           name: LocaleKeys.sleep.tr(),
+                          minValue: 6,
                         ),
                         TimeSpendElement(
                           value: timeSpend.used,
