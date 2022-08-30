@@ -83,7 +83,11 @@
   "experience": "Experience",
   "it": "IT",
   "customerService": "Customer Service",
-  "shop": "Shop"
+  "shop": "Shop",
+  "revenue": "Revenue",
+  "net": "Net",
+  "expense": "Expense",
+  "monthly": "Monthly"
 
 
 }

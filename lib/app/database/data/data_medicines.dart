@@ -3,7 +3,7 @@ import 'package:uuid/uuid.dart';
 
 class DataMedicines {
   static List<Medicine> db() {
-    var uuid = Uuid();
+    var uuid = const Uuid();
     return [
       Medicine(
         id: uuid.v1(),

@@ -47,21 +47,21 @@ class HouseCubit extends HydratedCubit<HouseState> {
     });
   }
 
-  String? getHouse(House house) {
-    if (_moneyCubit.state < house.cost && house.eTypeHouse == ETypeHouse.buy) {
+  Future<String?> getHouse(House newHouse) async {
+    if (_moneyCubit.state < newHouse.cost && newHouse.eTypeHouse == ETypeHouse.buy) {
       return "You don't have enough money";
     }
 
-    return state.whenOrNull(loaded: (_house) {
-      if ((_house?.eTypeHouse ?? ETypeHouse.rent) == ETypeHouse.buy) {
+    return state.whenOrNull(loaded: (oldHouse) {
+      if ((oldHouse?.eTypeHouse ?? ETypeHouse.rent) == ETypeHouse.buy) {
         return "Before you can buy new house you must to sell your house";
       }
 
       Income income = Income(
-          id: house.id,
+          id: newHouse.id,
           source: ETypeSource.house,
           typeIncome: ETypeIncome.expense,
-          value: -house.monthlyCost,
+          value: newHouse.monthlyCost,
           eTypeFrequency: ETypeFrequency.monthly);
 
       _timeSpendCubit.addBonus(
@@ -69,25 +69,27 @@ class HouseCubit extends HydratedCubit<HouseState> {
           TimeBonus(
               eTypeBonus: ETypeBonus.relax,
               eTypeBonusSource: ETypeBonusSource.house,
-              value: house.bonusToRelax),
+              value: newHouse.bonusToRelax),
           TimeBonus(
               eTypeBonus: ETypeBonus.sleep,
               eTypeBonusSource: ETypeBonusSource.house,
-              value: house.bonusToSleep),
+              value: newHouse.bonusToSleep),
           TimeBonus(
               eTypeBonus: ETypeBonus.learn,
               eTypeBonusSource: ETypeBonusSource.house,
-              value: house.bonusToLearn),
+              value: newHouse.bonusToLearn),
         ],
       );
 
       _moneyCubit.addTransaction(
-          value: -house.cost, eTypeTransactionSource: ETypeTransactionSource.house);
+          value: -newHouse.cost, eTypeTransactionSource: ETypeTransactionSource.house);
 
       _incomeCubit.add(income);
-      if (_house != null && _house.eTypeHouse == ETypeHouse.rent) _incomeCubit.remove(_house.id);
+      if (oldHouse != null && oldHouse.eTypeHouse == ETypeHouse.rent) {
+        _incomeCubit.remove(oldHouse.id);
+      }
 
-      emit(HouseState.loaded(house: house));
+      emit(HouseState.loaded(house: newHouse));
 
       return 'succeed';
     });

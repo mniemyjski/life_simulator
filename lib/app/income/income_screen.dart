@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:life_simulator/app/date/widgets/next_day.dart';
 import 'package:life_simulator/app/game/widget/app_bar_stats.dart';
 import 'package:life_simulator/app/income/cubit/income_cubit.dart';
+import 'package:life_simulator/constants/constants.dart';
 
 import '../../utilities/utilities.dart';
 import 'models/income_model.dart';
@@ -22,27 +23,27 @@ class IncomeScreen extends StatelessWidget {
           context.watch<IncomeCubit>().state.maybeWhen(
               orElse: () => Container(),
               loaded: (incomes) {
-                if (incomes.length == 0) {
+                if (incomes.isEmpty) {
                   return const Expanded(
                     child: Center(child: Text("You don't have any income yet!")),
                   );
                 }
 
-                double _revenues = 0;
-                double _expenses = 0;
-                List<Income> _revenuesList = [];
-                List<Income> _expensesList = [];
+                double revenues = 0;
+                double expenses = 0;
+                List<Income> revenuesList = [];
+                List<Income> expensesList = [];
 
-                incomes.forEach((element) {
+                for (var element in incomes) {
                   if (element.typeIncome == ETypeIncome.revenue) {
-                    _revenues += element.monthlyIncome();
-                    _revenuesList.add(element);
+                    revenues += element.monthlyIncome();
+                    revenuesList.add(element);
                   }
                   if (element.typeIncome == ETypeIncome.expense) {
-                    _expenses += element.monthlyIncome();
-                    _expensesList.add(element);
+                    expenses += element.monthlyIncome();
+                    expensesList.add(element);
                   }
-                });
+                }
 
                 return Expanded(
                   child: Column(
@@ -51,15 +52,15 @@ class IncomeScreen extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Card(
+                              color: Colors.green.withOpacity(0.6),
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
-                                  'Revenue: ${_revenues.toMoney()}',
+                                  '${LocaleKeys.revenue.tr()}: ${revenues.toMoney()}',
                                   style: TextStyle(
                                       color: Theme.of(context).textTheme.bodyText2!.color),
                                 ),
                               ),
-                              color: Colors.green.withOpacity(0.6),
                             ),
                           ),
                           Expanded(
@@ -67,7 +68,7 @@ class IncomeScreen extends StatelessWidget {
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
-                                  'Netto: ${(_revenues + _expenses).toMoney()}',
+                                  '${LocaleKeys.net.tr()}: ${(revenues + expenses).toMoney()}',
                                   style: TextStyle(
                                       color: Theme.of(context).textTheme.bodyText1!.color),
                                 ),
@@ -76,15 +77,15 @@ class IncomeScreen extends StatelessWidget {
                           ),
                           Expanded(
                             child: Card(
+                              color: Colors.red.withOpacity(0.6),
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
-                                  'Expense: ${_expenses.toMoney()}',
+                                  '${LocaleKeys.expense.tr()}: ${expenses.toMoney()}',
                                   style: TextStyle(
                                       color: Theme.of(context).textTheme.bodyText2!.color),
                                 ),
                               ),
-                              color: Colors.red.withOpacity(0.6),
                             ),
                           ),
                         ],
@@ -94,9 +95,9 @@ class IncomeScreen extends StatelessWidget {
                           children: [
                             Expanded(
                               child: ListView.builder(
-                                itemCount: _revenuesList.length,
+                                itemCount: revenuesList.length,
                                 itemBuilder: (context, index) {
-                                  Income element = _revenuesList[index];
+                                  Income element = revenuesList[index];
 
                                   return _elementList(element);
                                 },
@@ -104,9 +105,9 @@ class IncomeScreen extends StatelessWidget {
                             ),
                             Expanded(
                               child: ListView.builder(
-                                itemCount: _expensesList.length,
+                                itemCount: expensesList.length,
                                 itemBuilder: (context, index) {
-                                  Income element = _expensesList[index];
+                                  Income element = expensesList[index];
 
                                   return _elementList(element);
                                 },

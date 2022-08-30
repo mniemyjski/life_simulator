@@ -60,9 +60,10 @@ class HouseScreen extends StatelessWidget {
                                       } else {
                                         var toast =
                                             await context.read<HouseCubit>().getHouse(element);
-                                        if (toast != null)
+                                        if (toast != null) {
                                           BotToast.showText(
-                                              text: toast, align: Alignment(0.1, 0.05));
+                                              text: toast, align: const Alignment(0.1, 0.05));
+                                        }
                                       }
                                     });
                               }),
@@ -100,11 +101,11 @@ class HouseScreen extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          'Cost: ',
+                          '${LocaleKeys.cost.tr()}: ',
                           style: txtStyle.copyWith(fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          '${element.cost.toString()}\$',
+                          '${element.cost.toMoney()}\$',
                           style: txtStyle,
                         ),
                       ],
@@ -112,11 +113,11 @@ class HouseScreen extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          'Monthly: ',
+                          '${LocaleKeys.monthly.tr()}: ',
                           style: txtStyle.copyWith(fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          '${element.monthlyCost.toString()}\$',
+                          '${element.monthlyCost.toMoney()}\$',
                           style: txtStyle,
                         ),
                       ],
@@ -124,7 +125,7 @@ class HouseScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(top: 8),
                       child: Text(
-                        'Bonuses: ',
+                        '${LocaleKeys.bonuses.tr()}: ',
                         style: txtStyle.copyWith(fontWeight: FontWeight.bold),
                       ),
                     ),
@@ -133,11 +134,11 @@ class HouseScreen extends StatelessWidget {
                       child: Row(
                         children: [
                           Text(
-                            'Learn: ',
+                            '${LocaleKeys.learn.tr()}: ',
                             style: txtStyle.copyWith(fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            '${element.bonusToLearn.toString()}',
+                            element.bonusToLearn.toString(),
                             style: txtStyle,
                           ),
                         ],
@@ -148,11 +149,11 @@ class HouseScreen extends StatelessWidget {
                       child: Row(
                         children: [
                           Text(
-                            'Relax: ',
+                            '${LocaleKeys.relax.tr()}: ',
                             style: txtStyle.copyWith(fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            '${element.bonusToRelax.toString()}',
+                            element.bonusToRelax.toString(),
                             style: txtStyle,
                           ),
                         ],
@@ -163,11 +164,11 @@ class HouseScreen extends StatelessWidget {
                       child: Row(
                         children: [
                           Text(
-                            'Sleep: ',
+                            '${LocaleKeys.sleep.tr()}: ',
                             style: txtStyle.copyWith(fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            '${element.bonusToSleep.toString()}',
+                            element.bonusToSleep.toString(),
                             style: txtStyle,
                           ),
                         ],

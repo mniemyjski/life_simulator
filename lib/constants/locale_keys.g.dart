@@ -85,5 +85,9 @@ abstract class  LocaleKeys {
   static const it = 'it';
   static const customerService = 'customerService';
   static const shop = 'shop';
+  static const revenue = 'revenue';
+  static const net = 'net';
+  static const expense = 'expense';
+  static const monthly = 'monthly';
 
 }

@@ -23,8 +23,7 @@ mixin _$Asset {
   String get id => throw _privateConstructorUsedError;
   String get address => throw _privateConstructorUsedError;
   ETypeAsset get eTypeAsset => throw _privateConstructorUsedError;
-  int get tenantsMax =>
-      throw _privateConstructorUsedError; // required List<Tenant> tenants,
+  int get tenantsMax => throw _privateConstructorUsedError;
   double get baseValue => throw _privateConstructorUsedError;
   double get value => throw _privateConstructorUsedError;
   int get level => throw _privateConstructorUsedError;
@@ -220,7 +219,7 @@ class __$$_AssetCopyWithImpl<$Res> extends _$AssetCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Asset implements _Asset {
+class _$_Asset extends _Asset {
   const _$_Asset(
       {required this.id,
       required this.address,
@@ -233,7 +232,9 @@ class _$_Asset implements _Asset {
       this.minRent = 800,
       this.friendlyAnimal = true,
       this.minRating = 1})
-      : assert(minRating > 0, 'minRating <= 5');
+      : assert(minRating > 0, 'minRating <= 5'),
+        assert(baseValue > 0),
+        super._();
 
   factory _$_Asset.fromJson(Map<String, dynamic> json) =>
       _$$_AssetFromJson(json);
@@ -246,7 +247,6 @@ class _$_Asset implements _Asset {
   final ETypeAsset eTypeAsset;
   @override
   final int tenantsMax;
-// required List<Tenant> tenants,
   @override
   final double baseValue;
   @override
@@ -319,7 +319,7 @@ class _$_Asset implements _Asset {
   }
 }
 
-abstract class _Asset implements Asset {
+abstract class _Asset extends Asset {
   const factory _Asset(
       {required final String id,
       required final String address,
@@ -332,6 +332,7 @@ abstract class _Asset implements Asset {
       final double minRent,
       final bool friendlyAnimal,
       final int minRating}) = _$_Asset;
+  const _Asset._() : super._();
 
   factory _Asset.fromJson(Map<String, dynamic> json) = _$_Asset.fromJson;
 
@@ -343,7 +344,7 @@ abstract class _Asset implements Asset {
   ETypeAsset get eTypeAsset => throw _privateConstructorUsedError;
   @override
   int get tenantsMax => throw _privateConstructorUsedError;
-  @override // required List<Tenant> tenants,
+  @override
   double get baseValue => throw _privateConstructorUsedError;
   @override
   double get value => throw _privateConstructorUsedError;
