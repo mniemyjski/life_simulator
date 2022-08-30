@@ -89,5 +89,7 @@ abstract class  LocaleKeys {
   static const net = 'net';
   static const expense = 'expense';
   static const monthly = 'monthly';
+  static const transactions = 'transactions';
+  static const plan = 'plan';
 
 }

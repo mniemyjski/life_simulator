@@ -127,7 +127,7 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
         loaded: (assets) {
           List<Asset> result = List.from(assets)..remove(asset);
           _moneyCubit.addTransaction(
-              value: -cost, eTypeTransactionSource: ETypeTransactionSource.asset);
+              value: cost, eTypeTransactionSource: ETypeTransactionSource.asset);
           Asset newAsset =
               asset.copyWith(level: asset.level + level, value: asset.value + (-cost * 1.5));
           result.add(newAsset);

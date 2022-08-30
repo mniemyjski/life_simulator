@@ -1,8 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:life_simulator/utilities/utilities.dart';
 import 'package:uuid/uuid.dart';
 
@@ -58,38 +60,52 @@ class _FreelanceJobCreatorState extends State<FreelanceJobCreator> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(bottom: 8, top: 4),
-                        child: Form(
-                          key: formKey,
-                          child: TextFormField(
-                            style: const TextStyle(color: Colors.white),
-                            decoration: InputDecoration(
-                              labelText: LocaleKeys.name.tr(),
-                              labelStyle: const TextStyle(color: Colors.white),
-                              contentPadding: const EdgeInsets.all(12),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(4),
-                                borderSide: const BorderSide(
-                                  color: Colors.white38,
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(4),
-                                borderSide: const BorderSide(
-                                  color: Colors.white,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Form(
+                                key: formKey,
+                                child: TextFormField(
+                                  style: const TextStyle(color: Colors.white),
+                                  decoration: InputDecoration(
+                                    labelText: LocaleKeys.name.tr(),
+                                    labelStyle: const TextStyle(color: Colors.white),
+                                    contentPadding: const EdgeInsets.all(12),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(4),
+                                      borderSide: const BorderSide(
+                                        color: Colors.white38,
+                                      ),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(4),
+                                      borderSide: const BorderSide(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                  controller: controller,
+                                  validator: (v) {
+                                    if (v == null || v.isEmpty) {
+                                      return 'Can\'t be empty';
+                                    }
+                                    if (v.length < 4) {
+                                      return 'Too short';
+                                    }
+                                    return null;
+                                  },
                                 ),
                               ),
                             ),
-                            controller: controller,
-                            validator: (v) {
-                              if (v == null || v.isEmpty) {
-                                return 'Can\'t be empty';
-                              }
-                              if (v.length < 4) {
-                                return 'Too short';
-                              }
-                              return null;
-                            },
-                          ),
+                            Card(
+                                child: IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        controller.text = faker.lorem.word();
+                                      });
+                                    },
+                                    icon: const Icon(FontAwesomeIcons.shuffle)))
+                          ],
                         ),
                       ),
                       Padding(

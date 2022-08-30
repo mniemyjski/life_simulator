@@ -3,11 +3,13 @@ import 'dart:async';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:life_simulator/app/database/cubit/database_cubit.dart';
 import 'package:life_simulator/app/money/models/transaction/transaction_model.dart';
 
-import '../../../income/cubit/income_cubit.dart';
-import '../../../income/models/income_model.dart';
+import '../../../../utilities/utilities.dart';
+import '../../../money/cubit/income/income_cubit.dart';
 import '../../../money/cubit/money_cubit.dart';
+import '../../../money/models/income/income_model.dart';
 import '../../../new_game/new_game_cubit.dart';
 import '../../../time_spend/cubit/time_spend_cubit.dart';
 import '../../../time_spend/models/time_bonus/time_bonus_model.dart';
@@ -22,6 +24,7 @@ class HouseCubit extends HydratedCubit<HouseState> {
   final MoneyCubit _moneyCubit;
   final TimeSpendCubit _timeSpendCubit;
   final IncomeCubit _incomeCubit;
+  final DatabaseCubit _databaseCubit;
   final NewGameCubit _newGameCubit;
   late StreamSubscription _newGameSub;
 
@@ -30,6 +33,7 @@ class HouseCubit extends HydratedCubit<HouseState> {
     this._timeSpendCubit,
     this._incomeCubit,
     this._newGameCubit,
+    this._databaseCubit,
   ) : super(const HouseState.initial()) {
     _newGame();
   }
@@ -41,20 +45,77 @@ class HouseCubit extends HydratedCubit<HouseState> {
   }
 
   _newGame() {
-    if (_newGameCubit.state) emit(const HouseState.loaded(house: null));
+    if (_newGameCubit.state) {
+      House house = _databaseCubit.state.housesDB.first;
+      Income income = Income(
+        id: house.id,
+        source: ETypeSource.house,
+        typeIncome: ETypeIncome.expense,
+        value: house.monthlyCost,
+        eTypeFrequency: ETypeFrequency.monthly,
+      );
+      _timeSpendCubit.addBonus(
+        [
+          TimeBonus(
+              eTypeBonus: ETypeBonus.relax,
+              eTypeBonusSource: ETypeBonusSource.house,
+              value: house.bonusToRelax),
+          TimeBonus(
+              eTypeBonus: ETypeBonus.sleep,
+              eTypeBonusSource: ETypeBonusSource.house,
+              value: house.bonusToSleep),
+          TimeBonus(
+              eTypeBonus: ETypeBonus.learn,
+              eTypeBonusSource: ETypeBonusSource.house,
+              value: house.bonusToLearn),
+        ],
+      );
+
+      _incomeCubit.add(income);
+      emit(HouseState.loaded(house: house));
+    }
+
     _newGameSub = _newGameCubit.stream.listen((newGame) {
-      if (newGame) emit(const HouseState.loaded(house: null));
+      if (newGame) {
+        House house = _databaseCubit.state.housesDB.first;
+        Income income = Income(
+          id: house.id,
+          source: ETypeSource.house,
+          typeIncome: ETypeIncome.expense,
+          value: house.monthlyCost,
+          eTypeFrequency: ETypeFrequency.monthly,
+        );
+        _timeSpendCubit.addBonus(
+          [
+            TimeBonus(
+                eTypeBonus: ETypeBonus.relax,
+                eTypeBonusSource: ETypeBonusSource.house,
+                value: house.bonusToRelax),
+            TimeBonus(
+                eTypeBonus: ETypeBonus.sleep,
+                eTypeBonusSource: ETypeBonusSource.house,
+                value: house.bonusToSleep),
+            TimeBonus(
+                eTypeBonus: ETypeBonus.learn,
+                eTypeBonusSource: ETypeBonusSource.house,
+                value: house.bonusToLearn),
+          ],
+        );
+
+        _incomeCubit.add(income);
+        emit(HouseState.loaded(house: house));
+      }
     });
   }
 
   Future<String?> getHouse(House newHouse) async {
-    if (_moneyCubit.state < newHouse.cost && newHouse.eTypeHouse == ETypeHouse.buy) {
-      return "You don't have enough money";
+    if (_moneyCubit.state < -newHouse.cost) {
+      return "You don't have enough money.";
     }
 
     return state.whenOrNull(loaded: (oldHouse) {
       if ((oldHouse?.eTypeHouse ?? ETypeHouse.rent) == ETypeHouse.buy) {
-        return "Before you can buy new house you must to sell your house";
+        return "Before you can buy new house you must to sell your house.";
       }
 
       Income income = Income(
@@ -82,7 +143,7 @@ class HouseCubit extends HydratedCubit<HouseState> {
       );
 
       _moneyCubit.addTransaction(
-          value: -newHouse.cost, eTypeTransactionSource: ETypeTransactionSource.house);
+          value: newHouse.cost, eTypeTransactionSource: ETypeTransactionSource.house);
 
       _incomeCubit.add(income);
       if (oldHouse != null && oldHouse.eTypeHouse == ETypeHouse.rent) {

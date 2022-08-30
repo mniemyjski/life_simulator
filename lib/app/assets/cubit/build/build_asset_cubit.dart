@@ -53,7 +53,7 @@ class BuildAssetCubit extends HydratedCubit<BuildAssetState> {
     });
   }
 
-  build(BuildAsset buildAsset, months) {
+  String? build(BuildAsset buildAsset, months) {
     if (_moneyCubit.state < buildAsset.cost) return 'not_enought_money';
 
     state.whenOrNull(loaded: (buildAssets) {
@@ -70,6 +70,7 @@ class BuildAssetCubit extends HydratedCubit<BuildAssetState> {
         emit(BuildAssetState.loaded(result));
       });
     });
+    return null;
   }
 
   _counting() {

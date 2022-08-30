@@ -6,11 +6,12 @@ import 'package:life_simulator/app/assets/buy_assets_screen.dart';
 import 'package:life_simulator/app/assets/tenants_screen.dart';
 import 'package:life_simulator/app/bank/bank_screen.dart';
 import 'package:life_simulator/app/freelance/freelance_screen.dart';
-import 'package:life_simulator/app/income/income_screen.dart';
 import 'package:life_simulator/app/job/job_screen.dart';
 import 'package:life_simulator/app/learning/learning_screen.dart';
 import 'package:life_simulator/app/learning/materials_screen.dart';
 import 'package:life_simulator/app/medicines/medicines_screen.dart';
+import 'package:life_simulator/app/money/income_screen.dart';
+import 'package:life_simulator/app/money/transactions_screen.dart';
 import 'package:life_simulator/app/personality/food_screen.dart';
 import 'package:life_simulator/app/personality/personality_screen.dart';
 import 'package:life_simulator/app/settings/screens/settings_screen.dart';
@@ -60,6 +61,11 @@ import '../../app/personality/transport_screen.dart';
     ),
     CustomRoute(
       page: IncomeScreen,
+      transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
+      durationInMilliseconds: 300,
+    ),
+    CustomRoute(
+      page: TransactionsScreen,
       transitionsBuilder: TransitionsBuilders.fadeIn,
       durationInMilliseconds: 300,
     ),

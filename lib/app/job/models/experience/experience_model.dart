@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:life_simulator/app/income/models/income_model.dart';
+import 'package:life_simulator/app/money/models/income/income_model.dart';
 
 import '../../../skills/models/skill_model.dart';
 

@@ -6,9 +6,9 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../date/cubit/date_cubit.dart';
-import '../../income/cubit/income_cubit.dart';
-import '../../income/models/income_model.dart';
+import '../../money/cubit/income/income_cubit.dart';
 import '../../money/cubit/money_cubit.dart';
+import '../../money/models/income/income_model.dart';
 import '../../new_game/new_game_cubit.dart';
 import '../../skills/cubit/skills_cubit.dart';
 import '../../time_spend/cubit/time_spend_cubit.dart';

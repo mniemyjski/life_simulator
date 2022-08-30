@@ -27,9 +27,9 @@ import 'app/date/cubit/date_cubit.dart';
 import 'app/event/cubit/event_cubit.dart';
 import 'app/freelance/cubit/fame/fame_cubit.dart';
 import 'app/freelance/cubit/job/freelance_job_cubit.dart';
-import 'app/income/cubit/income_cubit.dart';
 import 'app/job/cubit/job_cubit.dart';
 import 'app/learning/cubit/learning_cubit.dart';
+import 'app/money/cubit/income/income_cubit.dart';
 import 'app/money/cubit/money_cubit.dart';
 import 'app/new_game/new_game_cubit.dart';
 import 'app/personality/cubit/food/food_cubit.dart';
@@ -85,19 +85,19 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<DarkModeCubit>(
-          lazy: false,
+          // lazy: false,
           create: (_) => getIt<DarkModeCubit>(),
         ),
         BlocProvider<DaySettingCubit>(
-          lazy: false,
+          // lazy: false,
           create: (_) => getIt<DaySettingCubit>(),
         ),
         BlocProvider<NewGameCubit>(
-          lazy: false,
+          // lazy: false,
           create: (_) => getIt<NewGameCubit>(),
         ),
         BlocProvider(
-          lazy: false,
+          // lazy: false,
           create: (_) => getIt<DatabaseCubit>(),
         ),
       ],

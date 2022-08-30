@@ -11,7 +11,7 @@ class DataLearnings {
         name: 'book',
         cost: -50,
         skillType: element,
-        exp: 500,
+        exp: 1000,
         time: 500,
         baseTime: 500,
       );
@@ -21,7 +21,7 @@ class DataLearnings {
         name: 'OnlineCourse',
         cost: -300,
         skillType: element,
-        exp: 1000,
+        exp: 1500,
         time: 500,
         baseTime: 500,
       );

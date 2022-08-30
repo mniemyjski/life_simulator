@@ -87,7 +87,9 @@
   "revenue": "Revenue",
   "net": "Net",
   "expense": "Expense",
-  "monthly": "Monthly"
+  "monthly": "Monthly",
+  "transactions": "Transactions",
+  "plan": "Plan"
 
 
 }

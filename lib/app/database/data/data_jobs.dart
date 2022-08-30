@@ -1,8 +1,8 @@
 import 'package:life_simulator/app/job/models/job/job_model.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../income/models/income_model.dart';
 import '../../job/models/experience/experience_model.dart';
+import '../../money/models/income/income_model.dart';
 import '../../skills/models/skill_model.dart';
 
 class DataJobs {

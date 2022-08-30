@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:life_simulator/app/assets/cubit/buy/buy_asset_cubit.dart';
 import 'package:life_simulator/app/assets/widgets/asset_element.dart';
-import 'package:life_simulator/app/game/widget/app_bar_stats.dart';
 
 import 'cubit/assets/assets_cubit.dart';
 import 'models/asset/asset_model.dart';
@@ -16,9 +15,10 @@ class BuyAssetsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(),
         body: Column(
           children: [
-            const AppBarStats(),
+            const SizedBox(height: 8),
             BlocBuilder<BuyAssetCubit, BuyAssetState>(
               builder: (context, state) {
                 return state.maybeWhen(
@@ -46,20 +46,6 @@ class BuyAssetsScreen extends StatelessWidget {
               },
             ),
           ],
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: Padding(
-          padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              FloatingActionButton(
-                heroTag: null,
-                onPressed: () => context.router.pop(),
-                child: const FaIcon(FontAwesomeIcons.arrowRotateLeft),
-              ),
-            ],
-          ),
         ),
       ),
     );

@@ -2,13 +2,12 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:life_simulator/app/date/widgets/next_day.dart';
 import 'package:life_simulator/app/game/widget/app_bar_stats.dart';
-import 'package:life_simulator/app/income/cubit/income_cubit.dart';
+import 'package:life_simulator/app/money/cubit/income/income_cubit.dart';
 import 'package:life_simulator/constants/constants.dart';
 
 import '../../utilities/utilities.dart';
-import 'models/income_model.dart';
+import 'models/income/income_model.dart';
 
 class IncomeScreen extends StatelessWidget {
   const IncomeScreen({Key? key}) : super(key: key);
@@ -133,7 +132,7 @@ class IncomeScreen extends StatelessWidget {
               onPressed: () => context.router.pop(),
               child: const FaIcon(FontAwesomeIcons.arrowRotateLeft),
             ),
-            const NextDayButton(),
+            const SizedBox(width: 56),
             const SizedBox(width: 56),
           ],
         ),

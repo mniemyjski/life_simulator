@@ -5,8 +5,8 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../database/cubit/database_cubit.dart';
-import '../../../income/cubit/income_cubit.dart';
-import '../../../income/models/income_model.dart';
+import '../../../money/cubit/income/income_cubit.dart';
+import '../../../money/models/income/income_model.dart';
 import '../../../new_game/new_game_cubit.dart';
 import '../../../time_spend/cubit/time_spend_cubit.dart';
 import '../../../time_spend/models/time_bonus/time_bonus_model.dart';
@@ -40,16 +40,15 @@ class FoodCubit extends HydratedCubit<FoodState> {
   }
 
   _newGame() {
-    List<Food> list = _databaseCubit.state.foodsDB;
-    Income income = Income(
-      id: list.first.id,
-      source: ETypeSource.meal,
-      typeIncome: ETypeIncome.expense,
-      value: list.first.cost,
-      eTypeFrequency: ETypeFrequency.daily,
-    );
-
     if (_newGameCubit.state) {
+      List<Food> list = _databaseCubit.state.foodsDB;
+      Income income = Income(
+        id: list.first.id,
+        source: ETypeSource.meal,
+        typeIncome: ETypeIncome.expense,
+        value: list.first.cost,
+        eTypeFrequency: ETypeFrequency.daily,
+      );
       emit(FoodState.loaded(food: list.first));
       _incomeCubit.add(income);
       _timeSpendCubit.addBonus(
@@ -74,6 +73,14 @@ class FoodCubit extends HydratedCubit<FoodState> {
     }
     _newGameSub = _newGameCubit.stream.listen((newGame) {
       if (newGame) {
+        List<Food> list = _databaseCubit.state.foodsDB;
+        Income income = Income(
+          id: list.first.id,
+          source: ETypeSource.meal,
+          typeIncome: ETypeIncome.expense,
+          value: list.first.cost,
+          eTypeFrequency: ETypeFrequency.daily,
+        );
         emit(FoodState.loaded(food: list.first));
         _incomeCubit.add(income);
         _timeSpendCubit.addBonus(

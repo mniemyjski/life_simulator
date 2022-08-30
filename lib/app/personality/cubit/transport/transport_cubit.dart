@@ -5,9 +5,9 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:life_simulator/app/money/models/transaction/transaction_model.dart';
 
-import '../../../income/cubit/income_cubit.dart';
-import '../../../income/models/income_model.dart';
+import '../../../money/cubit/income/income_cubit.dart';
 import '../../../money/cubit/money_cubit.dart';
+import '../../../money/models/income/income_model.dart';
 import '../../../new_game/new_game_cubit.dart';
 import '../../../time_spend/cubit/time_spend_cubit.dart';
 import '../../../time_spend/models/time_bonus/time_bonus_model.dart';
@@ -51,12 +51,12 @@ class TransportCubit extends HydratedCubit<TransportState> {
   buy(Transport transport) {
     if (_moneyCubit.state < transport.cost) return "You don't have enough money";
 
-    return state.whenOrNull(loaded: (_transport) {
-      if (_transport != null) {
-        if (_transport.name != 'Ticket') {
+    return state.whenOrNull(loaded: (oldTransport) {
+      if (oldTransport != null) {
+        if (oldTransport.name != 'Ticket') {
           return "Before you can buy new car you must to sell your car";
         } else {
-          _incomeCubit.remove(_transport.id);
+          _incomeCubit.remove(oldTransport.id);
         }
       }
 
@@ -90,7 +90,7 @@ class TransportCubit extends HydratedCubit<TransportState> {
       );
 
       _moneyCubit.addTransaction(
-          value: -transport.cost, eTypeTransactionSource: ETypeTransactionSource.transport);
+          value: transport.cost, eTypeTransactionSource: ETypeTransactionSource.transport);
 
       _incomeCubit.add(income);
 
@@ -101,12 +101,12 @@ class TransportCubit extends HydratedCubit<TransportState> {
   }
 
   sell() {
-    return state.whenOrNull(loaded: (_transport) {
-      if (_transport != null) {
+    return state.whenOrNull(loaded: (transport) {
+      if (transport != null) {
         _timeSpendCubit.removeBonus(ETypeBonusSource.transport);
-        _incomeCubit.remove(_transport.id);
+        _incomeCubit.remove(transport.id);
         _moneyCubit.addTransaction(
-            value: _transport.cost * 0.8, eTypeTransactionSource: ETypeTransactionSource.transport);
+            value: transport.cost * 0.8, eTypeTransactionSource: ETypeTransactionSource.transport);
 
         emit(const TransportState.loaded(transport: null));
       }

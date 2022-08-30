@@ -52,7 +52,7 @@ class GameScreen extends StatelessWidget {
                     Card(
                       child: IconButton(
                         onPressed: () {
-                          context.router.push(const IncomeRoute());
+                          context.router.push(const TransactionsRoute());
                         },
                         icon: const FaIcon(FontAwesomeIcons.scaleBalanced),
                       ),

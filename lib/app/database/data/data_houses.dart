@@ -3,7 +3,7 @@ import 'package:uuid/uuid.dart';
 
 class DataHouses {
   static List<House> db() {
-    var uuid = Uuid();
+    var uuid = const Uuid();
     return [
       House(
         id: uuid.v1(),

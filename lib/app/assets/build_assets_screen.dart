@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -11,7 +13,6 @@ import 'package:uuid/uuid.dart';
 import '../../constants/locale_keys.g.dart';
 import '../../utilities/utilities.dart';
 import '../../widgets/widgets.dart';
-import '../game/widget/app_bar_stats.dart';
 import 'widgets/asset_build_element.dart';
 
 class BuildAssetsScreen extends StatefulWidget {
@@ -133,170 +134,11 @@ class _BuildAssetsScreenState extends State<BuildAssetsScreen> {
 
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const AppBarStats(),
-            Padding(
-              padding: const EdgeInsets.only(left: 4),
-              child: Row(
-                children: [
-                  DropdownButtonHideUnderline(
-                    child: DropdownButton2(
-                      isExpanded: true,
-                      items: _addDividersAfterItems(items),
-                      customItemsIndexes: _getDividersIndexes(),
-                      customItemsHeight: 4,
-                      value: Enums.toText(selectedAssetType),
-                      onChanged: (value) {
-                        setState(() {
-                          selectedAssetType = Enums.toEnum(value as String, ETypeAsset.values);
-                          resetSliders();
-                        });
-                      },
-                      buttonDecoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.black26,
-                        ),
-                        color: Colors.white,
-                      ),
-                      buttonHeight: 40,
-                      buttonWidth: 180,
-                      itemHeight: 40,
-                      itemPadding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      buttonElevation: 2,
-                    ),
-                  ),
-                  Expanded(
-                    child: Card(
-                      shape: BeveledRectangleBorder(
-                        borderRadius: BorderRadius.circular(0),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              '${LocaleKeys.cost.tr()}:',
-                              style: TextStyle(
-                                  color: Theme.of(context).textTheme.bodyText1!.color,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              '${cost.toMoney()}',
-                              style: TextStyle(
-                                  color: Theme.of(context).textTheme.bodyText1!.color,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Card(
-                      shape: BeveledRectangleBorder(
-                        borderRadius: BorderRadius.circular(0),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              '${LocaleKeys.value.tr()}:',
-                              style: TextStyle(
-                                  color: Theme.of(context).textTheme.bodyText1!.color,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              '${value.toMoney()}',
-                              style: TextStyle(
-                                  color: Theme.of(context).textTheme.bodyText1!.color,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Card(
-              shape: BeveledRectangleBorder(
-                borderRadius: BorderRadius.circular(0),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                    Text(
-                      '${LocaleKeys.tenants.tr()}:',
-                      style: TextStyle(
-                          color: Theme.of(context).textTheme.bodyText1!.color,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    Expanded(
-                      child: Slider(
-                        value: selectedTenant.toDouble(),
-                        min: minTenant().toDouble(),
-                        max: maxTenant().toDouble(),
-                        divisions: maxTenant(),
-                        onChanged: (double value) => setState(() => selectedTenant = value.toInt()),
-                      ),
-                    ),
-                    Text(
-                      '$selectedTenant',
-                      style: TextStyle(
-                          color: Theme.of(context).textTheme.bodyText1!.color,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Card(
-              shape: BeveledRectangleBorder(
-                borderRadius: BorderRadius.circular(0),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                    Text(
-                      '${LocaleKeys.duration.tr()}:',
-                      style: TextStyle(
-                          color: Theme.of(context).textTheme.bodyText1!.color,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    Expanded(
-                      child: Slider(
-                        value: selectedDuration.toDouble(),
-                        min: 12,
-                        max: 60,
-                        divisions: 60,
-                        onChanged: (double value) =>
-                            setState(() => selectedDuration = value.toInt()),
-                      ),
-                    ),
-                    Text(
-                      '$selectedDuration months',
-                      style: TextStyle(
-                          color: Theme.of(context).textTheme.bodyText1!.color,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.all(4.0),
-              child: Divider(
-                color: Colors.white,
-              ),
-            ),
+            const SizedBox(height: 8),
             Expanded(
               child: BlocBuilder<BuildAssetCubit, BuildAssetState>(
                 builder: (context, state) {
@@ -325,95 +167,274 @@ class _BuildAssetsScreenState extends State<BuildAssetsScreen> {
             const SizedBox(height: 80),
           ],
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: Padding(
-          padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              FloatingActionButton(
-                heroTag: null,
-                onPressed: () => context.router.pop(),
-                child: const FaIcon(FontAwesomeIcons.arrowRotateLeft),
-              ),
-              FloatingActionButton(
-                heroTag: null,
-                onPressed: () async {
-                  final GlobalKey<FormState> formKey = GlobalKey();
-                  var result = await showModalBottomSheet<String>(
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.vertical(top: Radius.circular(8.0))),
-                    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                    context: context,
-                    isScrollControlled: true,
-                    builder: (BuildContext context) {
-                      String name = '';
+        floatingActionButton: FloatingActionButton(
+          heroTag: null,
+          onPressed: () async {
+            final GlobalKey<FormState> formKey = GlobalKey();
+            showModalBottomSheet<String>(
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(8.0))),
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              context: context,
+              isScrollControlled: true,
+              builder: (BuildContext context) {
+                final TextEditingController controller = TextEditingController(text: '');
 
-                      return Padding(
-                        padding: MediaQuery.of(context).viewInsets,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
+                return Padding(
+                  padding: MediaQuery.of(context).viewInsets,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 4),
+                          child: Row(
                             children: [
-                              Text(
-                                '${LocaleKeys.address.tr()}:',
-                                style: TextStyle(
-                                    color: Theme.of(context).textTheme.bodyText2!.color,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
+                              Expanded(
                                 child: Form(
                                   key: formKey,
                                   child: TextFormField(
+                                    style: const TextStyle(color: Colors.white),
+                                    decoration: InputDecoration(
+                                      labelText: LocaleKeys.address.tr(),
+                                      labelStyle: const TextStyle(color: Colors.white),
+                                      contentPadding: const EdgeInsets.all(12),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(4),
+                                        borderSide: const BorderSide(
+                                          color: Colors.white38,
+                                        ),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(4),
+                                        borderSide: const BorderSide(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                    controller: controller,
                                     validator: (v) {
-                                      if ((v?.length ?? 0) < 2) return 'To short';
-                                      if ((v?.length ?? 0) > 30) return 'To long';
+                                      if (v == null || v.isEmpty) {
+                                        return 'Can\'t be empty';
+                                      }
+                                      if (v.length < 4) {
+                                        return 'Too short';
+                                      }
+                                      if (v.length > 30) {
+                                        return 'Too short';
+                                      }
                                       return null;
-                                    },
-                                    onChanged: (value) {
-                                      name = value;
                                     },
                                   ),
                                 ),
                               ),
-                              CustomButton(
-                                  onPressed: () {
-                                    if (formKey.currentState!.validate()) context.router.pop(name);
-                                  },
-                                  child: Text(
-                                    LocaleKeys.confirm.tr(),
-                                  ))
+                              Card(
+                                  child: IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          controller.text = faker.address.streetAddress();
+                                        });
+                                      },
+                                      icon: const Icon(FontAwesomeIcons.shuffle)))
                             ],
                           ),
                         ),
-                      );
-                    },
-                  );
-
-                  if (!mounted) return;
-
-                  if (result != null) {
-                    var uuid = const Uuid();
-                    context.read<BuildAssetCubit>().build(
-                          BuildAsset(
-                            id: uuid.v1(),
-                            address: result,
-                            eTypeAsset: selectedAssetType,
-                            tenantsMax: selectedTenant,
-                            cost: cost,
-                            value: value,
+                        Padding(
+                          padding: const EdgeInsets.only(left: 4),
+                          child: Row(
+                            children: [
+                              DropdownButtonHideUnderline(
+                                child: DropdownButton2(
+                                  isExpanded: true,
+                                  items: _addDividersAfterItems(items),
+                                  customItemsIndexes: _getDividersIndexes(),
+                                  customItemsHeight: 4,
+                                  value: Enums.toText(selectedAssetType),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      selectedAssetType =
+                                          Enums.toEnum(value as String, ETypeAsset.values);
+                                      resetSliders();
+                                    });
+                                  },
+                                  buttonDecoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: Colors.black26,
+                                    ),
+                                    color: Colors.white,
+                                  ),
+                                  buttonHeight: 40,
+                                  buttonWidth: 180,
+                                  itemHeight: 40,
+                                  itemPadding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                  buttonElevation: 2,
+                                ),
+                              ),
+                              Expanded(
+                                child: Card(
+                                  shape: BeveledRectangleBorder(
+                                    borderRadius: BorderRadius.circular(0),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          '${LocaleKeys.cost.tr()}:',
+                                          style: TextStyle(
+                                              color: Theme.of(context).textTheme.bodyText1!.color,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        Text(
+                                          '${cost.toMoney()}',
+                                          style: TextStyle(
+                                              color: Theme.of(context).textTheme.bodyText1!.color,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: Card(
+                                  shape: BeveledRectangleBorder(
+                                    borderRadius: BorderRadius.circular(0),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          '${LocaleKeys.value.tr()}:',
+                                          style: TextStyle(
+                                              color: Theme.of(context).textTheme.bodyText1!.color,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        Text(
+                                          '${value.toMoney()}',
+                                          style: TextStyle(
+                                              color: Theme.of(context).textTheme.bodyText1!.color,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                          selectedDuration,
-                        );
-                  }
-                },
-                child: const FaIcon(FontAwesomeIcons.plus),
-              ),
-            ],
-          ),
+                        ),
+                        Card(
+                          shape: BeveledRectangleBorder(
+                            borderRadius: BorderRadius.circular(0),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                Text(
+                                  '${LocaleKeys.tenants.tr()}:',
+                                  style: TextStyle(
+                                      color: Theme.of(context).textTheme.bodyText1!.color,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Expanded(
+                                  child: Slider(
+                                    value: selectedTenant.toDouble(),
+                                    min: minTenant().toDouble(),
+                                    max: maxTenant().toDouble(),
+                                    divisions: maxTenant(),
+                                    onChanged: (double value) =>
+                                        setState(() => selectedTenant = value.toInt()),
+                                  ),
+                                ),
+                                Text(
+                                  '$selectedTenant',
+                                  style: TextStyle(
+                                      color: Theme.of(context).textTheme.bodyText1!.color,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Card(
+                          shape: BeveledRectangleBorder(
+                            borderRadius: BorderRadius.circular(0),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                Text(
+                                  '${LocaleKeys.duration.tr()}:',
+                                  style: TextStyle(
+                                      color: Theme.of(context).textTheme.bodyText1!.color,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Expanded(
+                                  child: Slider(
+                                    value: selectedDuration.toDouble(),
+                                    min: 12,
+                                    max: 60,
+                                    divisions: 60,
+                                    onChanged: (double value) =>
+                                        setState(() => selectedDuration = value.toInt()),
+                                  ),
+                                ),
+                                Text(
+                                  '$selectedDuration months',
+                                  style: TextStyle(
+                                      color: Theme.of(context).textTheme.bodyText1!.color,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: CustomButton(
+                              onPressed: () {
+                                if (formKey.currentState!.validate()) {
+                                  var uuid = const Uuid();
+
+                                  String? test = context.read<BuildAssetCubit>().build(
+                                        BuildAsset(
+                                          id: uuid.v1(),
+                                          address: controller.text,
+                                          eTypeAsset: selectedAssetType,
+                                          tenantsMax: selectedTenant,
+                                          cost: cost,
+                                          value: value,
+                                        ),
+                                        selectedDuration,
+                                      );
+                                  if (test != null) {
+                                    BotToast.showText(
+                                        text: test, align: const Alignment(0.1, 0.05));
+                                  } else {
+                                    context.router.pop();
+                                  }
+                                }
+                              },
+                              child: Text(
+                                LocaleKeys.confirm.tr(),
+                              )),
+                        )
+                      ],
+                    ),
+                  ),
+                );
+              },
+            );
+          },
+          child: const FaIcon(FontAwesomeIcons.plus),
         ),
       ),
     );

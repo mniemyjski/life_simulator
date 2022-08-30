@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../utilities/utilities.dart';
+import '../../../../utilities/utilities.dart';
 
 part 'income_model.freezed.dart';
 part 'income_model.g.dart';

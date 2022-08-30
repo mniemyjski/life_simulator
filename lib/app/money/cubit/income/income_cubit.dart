@@ -7,10 +7,10 @@ import 'package:jiffy/jiffy.dart';
 import 'package:life_simulator/app/money/models/transaction/transaction_model.dart';
 import 'package:life_simulator/utilities/utilities.dart';
 
-import '../../date/cubit/date_cubit.dart';
-import '../../money/cubit/money_cubit.dart';
-import '../../new_game/new_game_cubit.dart';
-import '../models/income_model.dart';
+import '../../../date/cubit/date_cubit.dart';
+import '../../../new_game/new_game_cubit.dart';
+import '../../models/income/income_model.dart';
+import '../money_cubit.dart';
 
 part 'income_cubit.freezed.dart';
 part 'income_cubit.g.dart';
