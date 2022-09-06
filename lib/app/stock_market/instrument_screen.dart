@@ -8,13 +8,13 @@ import 'package:life_simulator/app/game/widget/app_bar_stats.dart';
 import 'package:life_simulator/app/stock_market/cubit/exchanges/exchanges_cubit.dart';
 import 'package:life_simulator/app/stock_market/cubit/stock_market/stock_market_cubit.dart';
 import 'package:life_simulator/app/stock_market/models/exchange/exchange.dart';
-import 'package:life_simulator/app/stock_market/widgets/buy_button.dart';
-import 'package:life_simulator/app/stock_market/widgets/sell_button.dart';
 import 'package:life_simulator/utilities/utilities.dart';
 
 import '../../constants/locale_keys.g.dart';
 import 'models/candle/candle.dart';
 import 'models/instrument/instrument.dart';
+import 'widgets/buy_button.dart';
+import 'widgets/sell_button.dart';
 
 class InstrumentScreen extends StatelessWidget {
   final String id;
@@ -74,19 +74,19 @@ class InstrumentScreen extends StatelessWidget {
                                         .onlyDateToString(),
                                 priceLabel: (price) => price.toMoney(),
                                 overlayInfo: (candle) => {
-                                  "Date":
+                                  LocaleKeys.date.tr():
                                       DateTime.fromMillisecondsSinceEpoch(candle.timestamp * 1000)
                                           .onlyDateToString(),
-                                  "Open": "${candle.open?.toMoney()}",
-                                  "High": "${candle.high?.toMoney()}",
-                                  "Low": "${candle.low?.toMoney()}",
-                                  "Close": "${candle.close?.toMoney()}",
+                                  LocaleKeys.open.tr(): "${candle.open?.toMoney()}",
+                                  LocaleKeys.high.tr(): "${candle.high?.toMoney()}",
+                                  LocaleKeys.low.tr(): "${candle.low?.toMoney()}",
+                                  LocaleKeys.close.tr(): "${candle.close?.toMoney()}",
                                 },
                               ),
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(4.0),
+                            padding: const EdgeInsets.only(left: 4.0, right: 4.0),
                             child: Divider(
                               color: Theme.of(context).primaryColor,
                               thickness: 2,
@@ -94,16 +94,12 @@ class InstrumentScreen extends StatelessWidget {
                           ),
                           Row(
                             children: [
-                              BuyButton(
-                                instrument: instrument,
-                              ),
-                              SellButton(
-                                instrument: instrument,
-                              ),
+                              BuyButton(instrument: instrument),
+                              SellButton(instrument: instrument),
                             ],
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(4.0),
+                            padding: const EdgeInsets.only(left: 4.0, right: 4.0),
                             child: Divider(
                               color: Theme.of(context).primaryColor,
                               thickness: 2,
@@ -293,6 +289,7 @@ class InstrumentScreen extends StatelessWidget {
                 child: const FaIcon(FontAwesomeIcons.arrowRotateLeft),
               ),
               const NextDayButton(),
+              const SizedBox(width: 56),
             ],
           ),
         ),

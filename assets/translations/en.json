@@ -89,7 +89,12 @@
   "expense": "Expense",
   "monthly": "Monthly",
   "transactions": "Transactions",
-  "plan": "Plan"
+  "plan": "Plan",
+  "date": "Date",
+  "open": "Open",
+  "close": "Close",
+  "high": "High",
+  "low": "Low"
 
 
 }

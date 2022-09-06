@@ -1,94 +1,63 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:life_simulator/app/stock_market/models/instrument/instrument.dart';
-import 'package:life_simulator/constants/constants.dart';
 import 'package:life_simulator/utilities/utilities.dart';
 
-import '../../../widgets/widgets.dart';
+import '../../../constants/constants.dart';
 import '../cubit/exchanges/exchanges_cubit.dart';
 import '../models/exchange/exchange.dart';
+import '../models/instrument/instrument.dart';
+import 'sell_bottom_sheet.dart';
 
 class SellButton extends StatelessWidget {
+  const SellButton({
+    Key? key,
+    required this.instrument,
+  }) : super(key: key);
+
   final Instrument instrument;
-  const SellButton({Key? key, required this.instrument}) : super(key: key);
-
-  onPressed({required BuildContext context, required double amount}) {
-    return showModalBottomSheet<void>(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      context: context,
-      builder: (BuildContext context) {
-        double sell = 0;
-
-        return StatefulBuilder(builder: (context, setState) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Row(
-                  children: [
-                    Expanded(
-                      child: Slider(
-                        value: sell,
-                        min: 0,
-                        max: amount,
-                        activeColor: Colors.white70,
-                        inactiveColor: Colors.white70,
-                        divisions: amount.toInt(),
-                        onChanged: (double value) => setState(() => sell = value),
-                      ),
-                    ),
-                    Column(
-                      children: [
-                        Text('${sell.toStringAsFixed(4)} ${instrument.name}'),
-                        Text('${(sell * instrument.candles.last.close).toMoney()}'),
-                      ],
-                    )
-                  ],
-                ),
-                CustomButton(
-                    onPressed: () {
-                      context.read<ExchangesCubit>().sell(idInstrument: instrument.id, count: sell);
-                      context.router.pop();
-                    },
-                    child: Text(
-                      LocaleKeys.sell.tr(),
-                    )),
-              ],
-            ),
-          );
-        });
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
-        child: Padding(
-      padding: const EdgeInsets.only(right: 4),
-      child: BlocBuilder<ExchangesCubit, ExchangesState>(
-        builder: (context, state) {
-          return state.maybeWhen(
-              orElse: () => Container(),
-              loaded: (t) {
-                List<Exchange> transactions =
-                    List.from(t.where((e) => e.instrument.id == instrument.id));
+      child: Padding(
+        padding: const EdgeInsets.only(right: 4.9),
+        child: BlocBuilder<ExchangesCubit, ExchangesState>(
+          builder: (context, state) {
+            return state.maybeWhen(
+                orElse: () => Container(),
+                loaded: (t) {
+                  List<Exchange> transactions =
+                      List.from(t.where((e) => e.instrument.id == instrument.id));
 
-                double amount = 0;
+                  double amount = 0;
 
-                for (var element in transactions) {
-                  amount += element.count;
-                }
+                  for (var element in transactions) {
+                    amount += element.count;
+                  }
 
-                return CustomButton(
-                    onPressed: () => onPressed(context: context, amount: amount),
-                    child: Text(LocaleKeys.sell.tr()));
-              });
-        },
+                  return ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: amount > 0 ? null : MaterialStateProperty.all(Colors.grey),
+                      ),
+                      onPressed: amount == 0
+                          ? null
+                          : () async {
+                              return showModalBottomSheet<void>(
+                                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return SellBottomSheet(
+                                      instrument: instrument,
+                                      buttonName: LocaleKeys.sell.tr(),
+                                      amount: amount,
+                                    );
+                                  });
+                            },
+                      child: Text(LocaleKeys.sell.tr()));
+                });
+          },
+        ),
       ),
-    ));
+    );
   }
 }

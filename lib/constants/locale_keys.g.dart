@@ -91,5 +91,10 @@ abstract class  LocaleKeys {
   static const monthly = 'monthly';
   static const transactions = 'transactions';
   static const plan = 'plan';
+  static const date = 'date';
+  static const open = 'open';
+  static const close = 'close';
+  static const high = 'high';
+  static const low = 'low';
 
 }
