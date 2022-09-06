@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:life_simulator/app/settings/cubit/day_setting_cubit.dart';
-import 'package:life_simulator/utilities/utilities.dart';
+import 'package:richeable/utilities/utilities.dart';
 
 import '../../new_game/new_game_cubit.dart';
+import '../../settings/cubit/day_setting_cubit.dart';
 
 part 'date_cubit.freezed.dart';
 part 'date_cubit.g.dart';

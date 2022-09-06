@@ -2,19 +2,19 @@ import 'dart:async';
 
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:life_simulator/app/database/data/data_assets.dart';
-import 'package:life_simulator/app/database/data/data_events.dart';
-import 'package:life_simulator/app/database/data/data_foods.dart';
-import 'package:life_simulator/app/database/data/data_houses.dart';
-import 'package:life_simulator/app/database/data/data_jobs.dart';
-import 'package:life_simulator/app/database/data/data_learnings.dart';
-import 'package:life_simulator/app/database/data/data_medicines.dart';
-import 'package:life_simulator/app/database/data/data_tenants.dart';
-import 'package:life_simulator/app/database/data/data_transports.dart';
-import 'package:life_simulator/app/database/models/database.dart';
 
 import '../../new_game/new_game_cubit.dart';
+import '../data/data_assets.dart';
+import '../data/data_events.dart';
+import '../data/data_foods.dart';
+import '../data/data_houses.dart';
 import '../data/data_instruments.dart';
+import '../data/data_jobs.dart';
+import '../data/data_learnings.dart';
+import '../data/data_medicines.dart';
+import '../data/data_tenants.dart';
+import '../data/data_transports.dart';
+import '../models/database.dart';
 
 @lazySingleton
 class DatabaseCubit extends HydratedCubit<Database> {

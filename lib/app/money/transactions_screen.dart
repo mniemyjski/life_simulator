@@ -2,16 +2,16 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:life_simulator/app/money/cubit/screen_transactions/screen_transactions_cubit.dart';
-import 'package:life_simulator/app/money/models/sum_transactions/sum_transactions_model.dart';
-import 'package:life_simulator/app/money/models/transaction/transaction_model.dart';
-import 'package:life_simulator/config/routes/routes.gr.dart';
-import 'package:life_simulator/utilities/utilities.dart';
 
 import '../../config/injectable/injection.dart';
+import '../../config/routes/routes.gr.dart';
 import '../../constants/locale_keys.g.dart';
+import '../../utilities/utilities.dart';
 import '../date/widgets/next_day.dart';
 import '../game/widget/app_bar_stats.dart';
+import 'cubit/screen_transactions/screen_transactions_cubit.dart';
+import 'models/sum_transactions/sum_transactions_model.dart';
+import 'models/transaction/transaction_model.dart';
 
 class TransactionsScreen extends StatelessWidget {
   const TransactionsScreen({Key? key}) : super(key: key);

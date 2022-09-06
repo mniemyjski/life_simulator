@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:life_simulator/utilities/utilities.dart';
+import 'package:richeable/utilities/utilities.dart';
 
 import '../../../constants/constants.dart';
 import '../../money/cubit/money_cubit.dart';

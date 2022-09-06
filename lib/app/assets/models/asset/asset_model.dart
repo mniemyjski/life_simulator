@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:life_simulator/utilities/utilities.dart';
+import 'package:richeable/utilities/utilities.dart';
 import 'package:uuid/uuid.dart';
 
 part 'asset_model.freezed.dart';

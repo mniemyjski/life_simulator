@@ -2,11 +2,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:life_simulator/app/assets/cubit/buy/buy_asset_cubit.dart';
-import 'package:life_simulator/app/assets/widgets/asset_element.dart';
 
 import 'cubit/assets/assets_cubit.dart';
+import 'cubit/buy/buy_asset_cubit.dart';
 import 'models/asset/asset_model.dart';
+import 'widgets/asset_element.dart';
 
 class BuyAssetsScreen extends StatelessWidget {
   const BuyAssetsScreen({Key? key}) : super(key: key);

@@ -2,14 +2,14 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:life_simulator/app/assets/cubit/assets/assets_cubit.dart';
-import 'package:life_simulator/app/assets/widgets/assets_menu.dart';
-import 'package:life_simulator/app/game/widget/app_bar_stats.dart';
-import 'package:life_simulator/config/routes/routes.gr.dart';
-import 'package:life_simulator/constants/constants.dart';
-import 'package:life_simulator/utilities/utilities.dart';
+import 'package:richeable/utilities/utilities.dart';
 
+import '../../config/routes/routes.gr.dart';
+import '../../constants/constants.dart';
+import '../game/widget/app_bar_stats.dart';
+import 'cubit/assets/assets_cubit.dart';
 import 'widgets/asset_element.dart';
+import 'widgets/assets_menu.dart';
 
 class AssetsScreen extends StatelessWidget {
   const AssetsScreen({Key? key}) : super(key: key);

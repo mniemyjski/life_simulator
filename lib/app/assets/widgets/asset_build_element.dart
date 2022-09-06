@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:life_simulator/utilities/utilities.dart';
+import 'package:richeable/utilities/utilities.dart';
 
 import '../../../constants/constants.dart';
 import '../models/build/build_asset_model.dart';

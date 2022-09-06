@@ -2,11 +2,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:life_simulator/app/assets/cubit/assets/assets_cubit.dart';
-import 'package:life_simulator/utilities/utilities.dart';
+import 'package:richeable/utilities/utilities.dart';
 
 import '../../../constants/constants.dart';
 import '../../../widgets/widgets.dart';
+import '../cubit/assets/assets_cubit.dart';
 import '../models/asset/asset_model.dart';
 
 class UpgradeButton extends StatelessWidget {

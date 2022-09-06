@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:life_simulator/app/date/widgets/date_view.dart';
-import 'package:life_simulator/app/money/cubit/money_cubit.dart';
-import 'package:life_simulator/utilities/utilities.dart';
+import 'package:richeable/utilities/utilities.dart';
 
+import '../../date/widgets/date_view.dart';
+import '../../money/cubit/money_cubit.dart';
 import '../../stats/widgets/stats_indicator.dart';
 import '../../time_spend/widgets/time_spend_indicator.dart';
 

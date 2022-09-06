@@ -1,12 +1,12 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:life_simulator/app/settings/cubit/day_setting_cubit.dart';
 
 import '../../../constants/constants.dart';
 import '../../../utilities/utilities.dart';
 import '../../../widgets/widgets.dart';
 import '../cubit/dark_mode_cubit.dart';
+import '../cubit/day_setting_cubit.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({Key? key}) : super(key: key);

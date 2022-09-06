@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:life_simulator/app/skills/models/skill_model.dart';
+
+import '../../skills/models/skill_model.dart';
 
 part 'learning_model.freezed.dart';
 part 'learning_model.g.dart';

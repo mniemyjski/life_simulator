@@ -3,16 +3,16 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:life_simulator/app/game/widget/app_bar_stats.dart';
-import 'package:life_simulator/app/learning/cubit/learning_cubit.dart';
-import 'package:life_simulator/app/learning/models/learning_model.dart';
-import 'package:life_simulator/app/learning/widgets/learning_element.dart';
-import 'package:life_simulator/constants/locale_keys.g.dart';
-import 'package:life_simulator/utilities/utilities.dart';
+import 'package:richeable/utilities/utilities.dart';
 
 import '../../config/routes/routes.gr.dart';
+import '../../constants/constants.dart';
 import '../date/widgets/next_day.dart';
+import '../game/widget/app_bar_stats.dart';
 import '../time_spend/cubit/time_spend_cubit.dart';
+import 'cubit/learning_cubit.dart';
+import 'models/learning_model.dart';
+import 'widgets/learning_element.dart';
 
 class LearningScreen extends StatelessWidget {
   const LearningScreen({Key? key}) : super(key: key);

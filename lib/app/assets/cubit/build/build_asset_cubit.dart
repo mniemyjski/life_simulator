@@ -4,14 +4,14 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:jiffy/jiffy.dart';
-import 'package:life_simulator/app/assets/models/build/build_asset_model.dart';
-import 'package:life_simulator/utilities/utilities.dart';
+import 'package:richeable/utilities/utilities.dart';
 
 import '../../../date/cubit/date_cubit.dart';
 import '../../../money/cubit/money_cubit.dart';
 import '../../../money/models/transaction/transaction_model.dart';
 import '../../../new_game/new_game_cubit.dart';
 import '../../models/asset/asset_model.dart';
+import '../../models/build/build_asset_model.dart';
 import '../assets/assets_cubit.dart';
 
 part 'build_asset_cubit.freezed.dart';

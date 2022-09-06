@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:life_simulator/app/freelance/cubit/job/freelance_job_cubit.dart';
-import 'package:life_simulator/constants/constants.dart';
 
+import '../../../constants/constants.dart';
 import '../../../utilities/utilities.dart';
+import '../cubit/job/freelance_job_cubit.dart';
 import '../models/freelance_job/freelance_job_model.dart';
 
 class FreelanceJobElement extends StatelessWidget {

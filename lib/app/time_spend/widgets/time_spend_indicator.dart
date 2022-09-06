@@ -1,13 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:life_simulator/app/time_spend/cubit/time_spend_cubit.dart';
-import 'package:life_simulator/app/time_spend/widgets/time_spend_element.dart';
-import 'package:life_simulator/config/routes/routes.gr.dart';
-import 'package:life_simulator/utilities/utilities.dart';
+import 'package:richeable/utilities/utilities.dart';
 
+import '../../../config/routes/routes.gr.dart';
 import '../../../constants/constants.dart';
+import '../cubit/time_spend_cubit.dart';
 import '../models/time_bonus/time_bonus_model.dart';
+import 'time_spend_element.dart';
 
 class TimeSpend extends StatelessWidget {
   const TimeSpend({Key? key}) : super(key: key);

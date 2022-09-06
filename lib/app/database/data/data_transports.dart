@@ -1,5 +1,6 @@
-import 'package:life_simulator/app/personality/models/transport/transport_model.dart';
 import 'package:uuid/uuid.dart';
+
+import '../../personality/models/transport/transport_model.dart';
 
 class DataTransports {
   static List<Transport> db() {

@@ -1,5 +1,4 @@
-import 'package:life_simulator/app/learning/models/learning_model.dart';
-
+import '../../learning/models/learning_model.dart';
 import '../../skills/models/skill_model.dart';
 
 class DataLearnings {

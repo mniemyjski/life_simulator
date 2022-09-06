@@ -3,11 +3,11 @@ import 'dart:async';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:life_simulator/app/event/models/game_event/game_event_model.dart';
-import 'package:life_simulator/app/medicines/cubit/medicines_cubit.dart';
 
 import '../../date/cubit/date_cubit.dart';
 import '../../event/cubit/event_cubit.dart';
+import '../../event/models/game_event/game_event_model.dart';
+import '../../medicines/cubit/medicines_cubit.dart';
 import '../../new_game/new_game_cubit.dart';
 import '../../time_spend/cubit/time_spend_cubit.dart';
 import '../../time_spend/models/time_bonus/time_bonus_model.dart';

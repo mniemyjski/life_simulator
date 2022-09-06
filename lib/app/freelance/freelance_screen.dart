@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:life_simulator/app/date/widgets/next_day.dart';
-import 'package:life_simulator/app/freelance/cubit/done/freelance_done_cubit.dart';
-import 'package:life_simulator/app/freelance/cubit/fame/fame_cubit.dart';
-import 'package:life_simulator/app/freelance/models/freelance_done/freelance_done_model.dart';
-import 'package:life_simulator/app/game/widget/app_bar_stats.dart';
-import 'package:life_simulator/config/routes/routes.gr.dart';
-import 'package:life_simulator/utilities/utilities.dart';
+import 'package:richeable/utilities/utilities.dart';
 
+import '../../config/routes/routes.gr.dart';
 import '../../constants/constants.dart';
+import '../date/widgets/next_day.dart';
+import '../game/widget/app_bar_stats.dart';
+import 'cubit/done/freelance_done_cubit.dart';
+import 'cubit/fame/fame_cubit.dart';
+import 'models/freelance_done/freelance_done_model.dart';
 
 class FreelanceScreen extends StatelessWidget {
   const FreelanceScreen({Key? key}) : super(key: key);

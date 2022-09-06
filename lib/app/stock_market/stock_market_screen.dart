@@ -2,14 +2,14 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:life_simulator/app/game/widget/app_bar_stats.dart';
-import 'package:life_simulator/app/stock_market/cubit/stock_market/stock_market_cubit.dart';
-import 'package:life_simulator/config/routes/routes.gr.dart';
-import 'package:life_simulator/constants/constants.dart';
-import 'package:life_simulator/utilities/utilities.dart';
-import 'package:life_simulator/widgets/widgets.dart';
 
+import '../../config/routes/routes.gr.dart';
+import '../../constants/constants.dart';
+import '../../utilities/utilities.dart';
+import '../../widgets/widgets.dart';
 import '../date/widgets/next_day.dart';
+import '../game/widget/app_bar_stats.dart';
+import 'cubit/stock_market/stock_market_cubit.dart';
 import 'models/instrument/instrument.dart';
 
 class StockMarketScreen extends StatefulWidget {

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:life_simulator/app/assets/cubit/build/build_asset_cubit.dart';
-import 'package:life_simulator/app/assets/models/build/build_asset_model.dart';
-import 'package:life_simulator/app/assets/widgets/asset_builder.dart';
 
 import '../../constants/locale_keys.g.dart';
 import '../../utilities/utilities.dart';
+import 'cubit/build/build_asset_cubit.dart';
+import 'models/build/build_asset_model.dart';
 import 'widgets/asset_build_element.dart';
+import 'widgets/asset_builder.dart';
 
 class BuildAssetsScreen extends StatefulWidget {
   const BuildAssetsScreen({Key? key}) : super(key: key);

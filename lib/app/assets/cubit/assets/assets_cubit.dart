@@ -4,17 +4,17 @@ import 'dart:math';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:life_simulator/app/assets/cubit/buy/buy_asset_cubit.dart';
-import 'package:life_simulator/app/assets/cubit/tenant/tenants_cubit.dart';
-import 'package:life_simulator/app/database/cubit/database_cubit.dart';
-import 'package:life_simulator/app/money/models/transaction/transaction_model.dart';
 
 import '../../../../utilities/utilities.dart';
+import '../../../database/cubit/database_cubit.dart';
 import '../../../date/cubit/date_cubit.dart';
 import '../../../money/cubit/money_cubit.dart';
+import '../../../money/models/transaction/transaction_model.dart';
 import '../../../new_game/new_game_cubit.dart';
 import '../../models/asset/asset_model.dart';
 import '../../models/tenant/tenant_model.dart';
+import '../buy/buy_asset_cubit.dart';
+import '../tenant/tenants_cubit.dart';
 
 part 'assets_cubit.freezed.dart';
 part 'assets_cubit.g.dart';

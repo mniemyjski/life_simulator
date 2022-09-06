@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:life_simulator/app/game/widget/app_bar_stats.dart';
-import 'package:life_simulator/constants/constants.dart';
-import 'package:life_simulator/utilities/utilities.dart';
+import 'package:richeable/utilities/utilities.dart';
 
+import '../../constants/constants.dart';
+import '../game/widget/app_bar_stats.dart';
 import '../skills/cubit/skills_cubit.dart';
 import 'widgets/personality/personality_menu.dart';
 import 'widgets/personality/personality_skill_element.dart';

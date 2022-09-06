@@ -2,10 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:life_simulator/app/game/widget/app_bar_stats.dart';
-import 'package:life_simulator/app/medicines/cubit/medicines_cubit.dart';
 
 import '../date/widgets/next_day.dart';
+import '../game/widget/app_bar_stats.dart';
+import 'cubit/medicines_cubit.dart';
 import 'models/medicine_model.dart';
 
 class MedicinesScreen extends StatelessWidget {

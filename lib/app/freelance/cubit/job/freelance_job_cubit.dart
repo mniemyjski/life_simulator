@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:life_simulator/utilities/utilities.dart';
 
 import '../../../date/cubit/date_cubit.dart';
 import '../../../new_game/new_game_cubit.dart';
@@ -135,9 +134,6 @@ class FreelanceJobCubit extends HydratedCubit<FreelanceWorkState> {
       }
     }
 
-    Logger().wtf(reqSkill);
-    Logger().wtf(userSkills);
-    Logger().i(test);
     return test.length == reqSkill.length ? true : false;
   }
 

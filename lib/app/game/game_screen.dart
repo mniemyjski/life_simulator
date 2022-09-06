@@ -3,12 +3,12 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:life_simulator/app/date/widgets/next_day.dart';
-import 'package:life_simulator/app/game/widget/app_bar_stats.dart';
-import 'package:life_simulator/app/rules/cubit/rules_cubit.dart';
-import 'package:life_simulator/config/routes/routes.gr.dart';
 
+import '../../config/routes/routes.gr.dart';
+import '../date/widgets/next_day.dart';
 import '../event/widgets/events_list.dart';
+import '../rules/cubit/rules_cubit.dart';
+import 'widget/app_bar_stats.dart';
 
 class GameScreen extends StatelessWidget {
   const GameScreen({Key? key}) : super(key: key);

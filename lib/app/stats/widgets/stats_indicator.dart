@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:life_simulator/app/stats/cubit/stats_cubit.dart';
-import 'package:life_simulator/app/stats/widgets/stats_element.dart';
-import 'package:life_simulator/utilities/utilities.dart';
+import 'package:richeable/utilities/utilities.dart';
 
 import '../../../constants/constants.dart';
+import '../cubit/stats_cubit.dart';
+import 'stats_element.dart';
 
 class StatsIndicator extends StatelessWidget {
   const StatsIndicator({Key? key}) : super(key: key);

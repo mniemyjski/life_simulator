@@ -2,21 +2,21 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:life_simulator/app/assets/cubit/assets/assets_cubit.dart';
-import 'package:life_simulator/app/assets/cubit/tenant/tenants_cubit.dart';
-import 'package:life_simulator/app/assets/widgets/asset_element.dart';
-import 'package:life_simulator/app/assets/widgets/min_rating_button.dart';
-import 'package:life_simulator/app/assets/widgets/renovation_button.dart';
-import 'package:life_simulator/app/assets/widgets/rent_button.dart';
-import 'package:life_simulator/app/assets/widgets/upgrade_button.dart';
-import 'package:life_simulator/app/date/widgets/next_day.dart';
-import 'package:life_simulator/utilities/utilities.dart';
-import 'package:life_simulator/widgets/widgets.dart';
+import 'package:richeable/utilities/utilities.dart';
 
 import '../../constants/locale_keys.g.dart';
+import '../../widgets/widgets.dart';
+import '../date/widgets/next_day.dart';
 import '../game/widget/app_bar_stats.dart';
+import 'cubit/assets/assets_cubit.dart';
+import 'cubit/tenant/tenants_cubit.dart';
 import 'models/asset/asset_model.dart';
 import 'models/tenant/tenant_model.dart';
+import 'widgets/asset_element.dart';
+import 'widgets/min_rating_button.dart';
+import 'widgets/renovation_button.dart';
+import 'widgets/rent_button.dart';
+import 'widgets/upgrade_button.dart';
 
 class AssetScreen extends StatelessWidget {
   final String id;

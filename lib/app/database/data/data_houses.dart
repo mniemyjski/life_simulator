@@ -1,5 +1,6 @@
-import 'package:life_simulator/app/personality/models/house/house_model.dart';
 import 'package:uuid/uuid.dart';
+
+import '../../personality/models/house/house_model.dart';
 
 class DataHouses {
   static List<House> db() {

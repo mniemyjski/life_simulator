@@ -1,9 +1,10 @@
-import 'package:life_simulator/app/event/models/game_event/game_event_model.dart';
 import 'package:uuid/uuid.dart';
+
+import '../../event/models/game_event/game_event_model.dart';
 
 class DataEvents {
   static List<GameEvent> db() {
-    var uuid = Uuid();
+    var uuid = const Uuid();
     return [
       GameEvent(
         id: uuid.v1(),

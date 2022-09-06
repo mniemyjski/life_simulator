@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:life_simulator/app/freelance/models/freelance_base/freelance_base.dart';
+
+import '../freelance_base/freelance_base.dart';
 
 part 'freelance_done_model.freezed.dart';
 part 'freelance_done_model.g.dart';

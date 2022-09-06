@@ -1,6 +1,6 @@
-import 'package:life_simulator/app/stock_market/models/candle/candle.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../stock_market/models/candle/candle.dart';
 import '../../stock_market/models/instrument/instrument.dart';
 
 class DataInstruments {

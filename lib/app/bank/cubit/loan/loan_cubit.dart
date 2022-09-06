@@ -4,12 +4,12 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:jiffy/jiffy.dart';
-import 'package:life_simulator/app/date/cubit/date_cubit.dart';
-import 'package:life_simulator/app/money/cubit/money_cubit.dart';
-import 'package:life_simulator/app/money/models/transaction/transaction_model.dart';
-import 'package:life_simulator/app/new_game/new_game_cubit.dart';
 
 import '../../../../utilities/utilities.dart';
+import '../../../date/cubit/date_cubit.dart';
+import '../../../money/cubit/money_cubit.dart';
+import '../../../money/models/transaction/transaction_model.dart';
+import '../../../new_game/new_game_cubit.dart';
 import '../../models/loan/loan_model.dart';
 
 part 'loan_cubit.freezed.dart';
@@ -49,7 +49,7 @@ class LoanCubit extends HydratedCubit<LoanState> {
   }
 
   bool _creditworthiness(double borrow) {
-    if (loan() + borrow > 50000) return true;
+    if (loan() + borrow > 50000 + _moneyCubit.getYearlyNet()) return true;
 
     return false;
   }
@@ -91,10 +91,9 @@ class LoanCubit extends HydratedCubit<LoanState> {
   double loan() {
     double value = 0;
     state.whenOrNull(loaded: (loans) {
-      loans
-        ..forEach((element) {
-          value += element.leftLoan;
-        });
+      for (var element in loans) {
+        value += element.leftLoan;
+      }
     });
 
     return value;

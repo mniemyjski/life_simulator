@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:jiffy/jiffy.dart';
+import 'package:richeable/utilities/utilities.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../date/cubit/date_cubit.dart';
@@ -56,6 +58,27 @@ class MoneyCubit extends HydratedCubit<double> {
         throw 'Error when add transaction';
       }
     });
+  }
+
+  double getYearlyNet() {
+    return _transactionCubit.state.maybeWhen(
+        orElse: () => 0,
+        loaded: (transactions) {
+          return _dateCubit.state.maybeWhen(
+              orElse: () => 0,
+              loaded: (date) {
+                double value = 0;
+                DateTime startDate = Jiffy(date).add(years: -1).dateTime.onlyDate();
+
+                for (var element in transactions) {
+                  if (element.dateCre.millisecondsSinceEpoch > startDate.millisecondsSinceEpoch) {
+                    value += element.value;
+                  }
+                }
+
+                return value > 0 ? value : 0;
+              });
+        });
   }
 
   _change(double money) {

@@ -3,15 +3,15 @@ import 'dart:async';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:life_simulator/app/date/cubit/date_cubit.dart';
-import 'package:life_simulator/app/money/models/transaction/transaction_model.dart';
-import 'package:life_simulator/app/time_spend/cubit/time_spend_cubit.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../utilities/utilities.dart';
+import '../../date/cubit/date_cubit.dart';
 import '../../money/cubit/money_cubit.dart';
+import '../../money/models/transaction/transaction_model.dart';
 import '../../new_game/new_game_cubit.dart';
 import '../../skills/cubit/skills_cubit.dart';
+import '../../time_spend/cubit/time_spend_cubit.dart';
 import '../models/learning_model.dart';
 
 part 'learning_cubit.freezed.dart';

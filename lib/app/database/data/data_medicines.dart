@@ -1,5 +1,6 @@
-import 'package:life_simulator/app/medicines/models/medicine_model.dart';
 import 'package:uuid/uuid.dart';
+
+import '../../medicines/models/medicine_model.dart';
 
 class DataMedicines {
   static List<Medicine> db() {

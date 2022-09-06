@@ -4,10 +4,10 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:jiffy/jiffy.dart';
-import 'package:life_simulator/app/money/models/sum_transactions/sum_transactions_model.dart';
-import 'package:life_simulator/utilities/utilities.dart';
+import 'package:richeable/utilities/utilities.dart';
 
 import '../../../date/cubit/date_cubit.dart';
+import '../../models/sum_transactions/sum_transactions_model.dart';
 import '../../models/transaction/transaction_model.dart';
 import '../transactions/transactions_cubit.dart';
 

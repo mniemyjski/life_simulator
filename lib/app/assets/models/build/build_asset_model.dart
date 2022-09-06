@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:life_simulator/app/assets/models/asset/asset_model.dart';
+
+import '../asset/asset_model.dart';
 
 part 'build_asset_model.freezed.dart';
 part 'build_asset_model.g.dart';

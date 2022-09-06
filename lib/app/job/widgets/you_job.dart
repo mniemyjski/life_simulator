@@ -1,10 +1,10 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:life_simulator/app/job/cubit/job_cubit.dart';
 
 import '../../../utilities/utilities.dart';
 import '../../../widgets/widgets.dart';
+import '../cubit/job_cubit.dart';
 import '../models/experience/experience_model.dart';
 import '../models/job/job_model.dart';
 

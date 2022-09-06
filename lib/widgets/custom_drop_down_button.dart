@@ -1,6 +1,6 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:life_simulator/utilities/utilities.dart';
 
 class CustomDropDownButton extends StatefulWidget {
   final List<String> items;

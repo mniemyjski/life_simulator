@@ -3,15 +3,15 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:life_simulator/app/freelance/widgets/freelance_job_creator.dart';
-import 'package:life_simulator/app/freelance/widgets/freelance_job_element.dart';
-import 'package:life_simulator/app/time_spend/cubit/time_spend_cubit.dart';
-import 'package:life_simulator/utilities/utilities.dart';
+import 'package:richeable/utilities/utilities.dart';
 
 import '../../constants/constants.dart';
 import '../date/widgets/next_day.dart';
 import '../game/widget/app_bar_stats.dart';
+import '../time_spend/cubit/time_spend_cubit.dart';
 import 'cubit/job/freelance_job_cubit.dart';
+import 'widgets/freelance_job_creator.dart';
+import 'widgets/freelance_job_element.dart';
 
 class FreelanceJobsScreen extends StatelessWidget {
   const FreelanceJobsScreen({Key? key}) : super(key: key);

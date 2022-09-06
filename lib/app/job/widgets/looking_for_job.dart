@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:life_simulator/app/database/cubit/database_cubit.dart';
-import 'package:life_simulator/app/database/models/database.dart';
-import 'package:life_simulator/app/job/widgets/job_element.dart';
-import 'package:life_simulator/widgets/custom_drop_down_button.dart';
 
 import '../../../utilities/utilities.dart';
+import '../../../widgets/custom_drop_down_button.dart';
+import '../../database/cubit/database_cubit.dart';
+import '../../database/models/database.dart';
 import '../models/job/job_model.dart';
+import 'job_element.dart';
 
 class LookingForJob extends StatefulWidget {
   const LookingForJob({Key? key}) : super(key: key);

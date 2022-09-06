@@ -4,14 +4,13 @@ import 'dart:math';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:life_simulator/app/assets/models/asset/asset_model.dart';
-import 'package:life_simulator/app/money/models/income/income_model.dart';
-import 'package:life_simulator/utilities/utilities.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../database/cubit/database_cubit.dart';
 import '../../../money/cubit/income/income_cubit.dart';
+import '../../../money/models/income/income_model.dart';
 import '../../../new_game/new_game_cubit.dart';
+import '../../models/asset/asset_model.dart';
 import '../../models/tenant/tenant_model.dart';
 
 part 'tenants_cubit.freezed.dart';

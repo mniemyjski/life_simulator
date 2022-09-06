@@ -3,13 +3,13 @@ import 'dart:async';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:life_simulator/app/database/cubit/database_cubit.dart';
-import 'package:life_simulator/app/money/models/transaction/transaction_model.dart';
 
 import '../../../../utilities/utilities.dart';
+import '../../../database/cubit/database_cubit.dart';
 import '../../../money/cubit/income/income_cubit.dart';
 import '../../../money/cubit/money_cubit.dart';
 import '../../../money/models/income/income_model.dart';
+import '../../../money/models/transaction/transaction_model.dart';
 import '../../../new_game/new_game_cubit.dart';
 import '../../../time_spend/cubit/time_spend_cubit.dart';
 import '../../../time_spend/models/time_bonus/time_bonus_model.dart';
@@ -157,12 +157,12 @@ class HouseCubit extends HydratedCubit<HouseState> {
   }
 
   sell() {
-    state.whenOrNull(loaded: (_house) {
-      if (_house != null) {
+    state.whenOrNull(loaded: (house) {
+      if (house != null) {
         _timeSpendCubit.removeBonus(ETypeBonusSource.house);
-        _incomeCubit.remove(_house.id);
+        _incomeCubit.remove(house.id);
         _moneyCubit.addTransaction(
-            value: _house.cost * 0.8, eTypeTransactionSource: ETypeTransactionSource.house);
+            value: house.cost * 0.8, eTypeTransactionSource: ETypeTransactionSource.house);
         emit(const HouseState.loaded(house: null));
       }
     });

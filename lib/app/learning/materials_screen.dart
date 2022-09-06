@@ -2,16 +2,16 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:life_simulator/app/database/cubit/database_cubit.dart';
-import 'package:life_simulator/app/learning/cubit/learning_cubit.dart';
-import 'package:life_simulator/app/learning/models/learning_model.dart';
-import 'package:life_simulator/utilities/utilities.dart';
-import 'package:life_simulator/widgets/custom_drop_down_button.dart';
 
 import '../../constants/constants.dart';
+import '../../utilities/utilities.dart';
+import '../../widgets/custom_drop_down_button.dart';
+import '../database/cubit/database_cubit.dart';
 import '../database/models/database.dart';
 import '../game/widget/app_bar_stats.dart';
 import '../skills/models/skill_model.dart';
+import 'cubit/learning_cubit.dart';
+import 'models/learning_model.dart';
 import 'widgets/learning_element.dart';
 
 class MaterialsScreen extends StatefulWidget {

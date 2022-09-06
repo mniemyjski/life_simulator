@@ -2,12 +2,13 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:life_simulator/app/database/cubit/database_cubit.dart';
-import 'package:life_simulator/app/personality/cubit/house/house_cubit.dart';
-import 'package:life_simulator/app/personality/models/house/house_model.dart';
-import 'package:life_simulator/app/settings/cubit/dark_mode_cubit.dart';
-import 'package:life_simulator/constants/constants.dart';
-import 'package:life_simulator/utilities/utilities.dart';
+import 'package:richeable/utilities/utilities.dart';
+
+import '../../constants/constants.dart';
+import '../database/cubit/database_cubit.dart';
+import '../settings/cubit/dark_mode_cubit.dart';
+import 'cubit/house/house_cubit.dart';
+import 'models/house/house_model.dart';
 
 class HouseScreen extends StatelessWidget {
   final ETypeHouse eTypeHouse;

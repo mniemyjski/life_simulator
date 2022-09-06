@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:life_simulator/app/money/models/transaction/transaction_model.dart';
+
+import '../transaction/transaction_model.dart';
 
 part 'sum_transactions_model.freezed.dart';
 part 'sum_transactions_model.g.dart';

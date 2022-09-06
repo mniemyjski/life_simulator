@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:life_simulator/app/database/cubit/database_cubit.dart';
-import 'package:life_simulator/app/personality/cubit/food/food_cubit.dart';
-import 'package:life_simulator/app/personality/widgets/food/food_element.dart';
-import 'package:life_simulator/utilities/utilities.dart';
+import 'package:richeable/utilities/utilities.dart';
 
 import '../../constants/constants.dart';
+import '../database/cubit/database_cubit.dart';
+import 'cubit/food/food_cubit.dart';
+import 'widgets/food/food_element.dart';
 
 class FoodScreen extends StatelessWidget {
   const FoodScreen({Key? key}) : super(key: key);

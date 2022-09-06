@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:life_simulator/app/bank/cubit/deposit/deposit_cubit.dart';
-import 'package:life_simulator/app/bank/cubit/loan/loan_cubit.dart';
-import 'package:life_simulator/constants/constants.dart';
-import 'package:life_simulator/utilities/utilities.dart';
+import 'package:richeable/utilities/utilities.dart';
 
+import '../../constants/constants.dart';
 import '../../widgets/widgets.dart';
 import '../date/widgets/next_day.dart';
 import '../game/widget/app_bar_stats.dart';
 import '../money/cubit/money_cubit.dart';
 import '../money/models/transaction/transaction_model.dart';
+import 'cubit/deposit/deposit_cubit.dart';
+import 'cubit/loan/loan_cubit.dart';
 import 'models/loan/loan_model.dart';
 
 class BankScreen extends StatelessWidget {
@@ -93,7 +93,7 @@ class BankScreen extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         double interest = 0.04;
-        double maxBorrow = 50000;
+        double maxBorrow = 50000 + context.read<MoneyCubit>().getYearlyNet();
         double maxTurns = 60;
         double turns = 3;
         double borrow = 1000;

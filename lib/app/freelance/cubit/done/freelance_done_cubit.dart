@@ -3,11 +3,11 @@ import 'dart:async';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:life_simulator/app/money/models/transaction/transaction_model.dart';
-import 'package:life_simulator/utilities/utilities.dart';
+import 'package:richeable/utilities/utilities.dart';
 
 import '../../../date/cubit/date_cubit.dart';
 import '../../../money/cubit/money_cubit.dart';
+import '../../../money/models/transaction/transaction_model.dart';
 import '../../../new_game/new_game_cubit.dart';
 import '../../models/freelance_done/freelance_done_model.dart';
 import '../fame/fame_cubit.dart';
