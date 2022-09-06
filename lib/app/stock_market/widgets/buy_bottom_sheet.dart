@@ -56,7 +56,7 @@ class _BuyBottomSheetState extends State<BuyBottomSheet> {
                   ),
                   Column(
                     children: [
-                      Text('${(value * 0.995).toStringAsFixed(4)} ${widget.instrument.name}'),
+                      Text('${(value * 0.99).toStringAsFixed(4)} ${widget.instrument.name}'),
                       Text('${(value * widget.instrument.candles.last.close).toMoney()}'),
                     ],
                   )
@@ -66,7 +66,7 @@ class _BuyBottomSheetState extends State<BuyBottomSheet> {
                   onPressed: () {
                     context
                         .read<ExchangesCubit>()
-                        .buy(idInstrument: widget.instrument.id, count: value * 0.995);
+                        .buy(idInstrument: widget.instrument.id, count: value * 0.99);
                     context.router.pop();
                   },
                   child: Text(
