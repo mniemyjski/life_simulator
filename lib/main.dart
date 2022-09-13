@@ -43,7 +43,16 @@ import 'config/themes/custom_theme.dart';
 import 'constants/constants.dart';
 import 'utilities/utilities.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
+  configureDependencies(Env.dev);
+  setPathUrlStrategy();
+
+  final storage = await HydratedStorage.build(
+    storageDirectory: kIsWeb ? HydratedStorage.webStorageDirectory : await getTemporaryDirectory(),
+  );
+
   HydratedBlocOverrides.runZoned(
     () => runApp(
       EasyLocalization(
@@ -58,16 +67,7 @@ void main() {
       ),
     ),
     blocObserver: SimpleBlocObserver(),
-    createStorage: () async {
-      WidgetsFlutterBinding.ensureInitialized();
-      EasyLocalization.ensureInitialized();
-      configureDependencies(Env.dev);
-      setPathUrlStrategy();
-      return HydratedStorage.build(
-        storageDirectory:
-            kIsWeb ? HydratedStorage.webStorageDirectory : await getTemporaryDirectory(),
-      );
-    },
+    storage: storage,
   );
 }
 

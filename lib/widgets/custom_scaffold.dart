@@ -47,11 +47,16 @@ class _CustomScaffoldState extends State<CustomScaffold> {
   @override
   Widget build(BuildContext context) {
     if (test) {
-      return const Center(
-          child: SpinKitFadingCircle(
-        color: Colors.white,
-        size: 80.0,
-      ));
+      return Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        color: Theme.of(context).scaffoldBackgroundColor,
+        child: const Center(
+            child: SpinKitFadingCircle(
+          color: Colors.white,
+          size: 80.0,
+        )),
+      );
     }
 
     return SafeArea(
