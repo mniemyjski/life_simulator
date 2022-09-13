@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:richeable/utilities/utilities.dart';
+import 'package:richeable/widgets/widgets.dart';
 
 import '../../constants/constants.dart';
 import '../date/widgets/next_day.dart';
@@ -16,8 +17,7 @@ class TimeSpendScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
+    return CustomScaffold(
       body: Column(
         children: [
           const AppBarStats(),
@@ -193,7 +193,7 @@ class TimeSpendScreen extends StatelessWidget {
           ],
         ),
       ),
-    ));
+    );
   }
 
   Builder buildNonChangedElement({required String name, required int value}) {

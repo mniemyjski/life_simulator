@@ -1,3 +1,4 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:richeable/utilities/utilities.dart';
@@ -11,9 +12,9 @@ class EventsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(4.0),
-      child: Container(
-        height: 400,
-        decoration: BoxDecoration(border: Border.all(color: Theme.of(context).primaryColor)),
+      child: DottedBorder(
+        color: Theme.of(context).primaryColor.withOpacity(0.4),
+        strokeWidth: 1,
         child: BlocBuilder<EventCubit, EventState>(
           builder: (context, state) {
             return state.maybeWhen(

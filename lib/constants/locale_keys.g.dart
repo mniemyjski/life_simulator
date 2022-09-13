@@ -96,5 +96,8 @@ abstract class  LocaleKeys {
   static const close = 'close';
   static const high = 'high';
   static const low = 'low';
+  static const job = 'job';
+  static const home = 'home';
+  static const dayOnTurn = 'dayOnTurn';
 
 }

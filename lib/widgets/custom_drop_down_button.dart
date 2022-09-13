@@ -79,7 +79,7 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
           border: Border.all(
             color: Colors.black26,
           ),
-          color: Colors.white,
+          color: Theme.of(context).cardColor,
         ),
         buttonHeight: 40,
         buttonWidth: 180,

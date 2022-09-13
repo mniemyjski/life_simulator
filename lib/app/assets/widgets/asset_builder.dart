@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bot_toast/bot_toast.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,6 +8,7 @@ import 'package:uuid/uuid.dart';
 
 import '../../../constants/constants.dart';
 import '../../../utilities/utilities.dart';
+import '../../../widgets/custom_drop_down_button.dart';
 import '../../../widgets/widgets.dart';
 import '../cubit/build/build_asset_cubit.dart';
 import '../models/asset/asset_model.dart';
@@ -28,44 +28,6 @@ class _AssetBuilderState extends State<AssetBuilder> {
   ETypeAsset selectedAssetType = ETypeAsset.apartment;
   int selectedTenant = 1;
   int selectedDuration = 60;
-
-  List<int> _getDividersIndexes() {
-    List<int> dividersIndexes = [];
-    for (var i = 0; i < (items.length * 2) - 1; i++) {
-      if (i.isOdd) {
-        dividersIndexes.add(i);
-      }
-    }
-    return dividersIndexes;
-  }
-
-  List<DropdownMenuItem<String>> _addDividersAfterItems(List<String> items) {
-    List<DropdownMenuItem<String>> menuItems = [];
-    for (var item in items) {
-      menuItems.addAll(
-        [
-          DropdownMenuItem<String>(
-            value: item,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Text(
-                item,
-                style: const TextStyle(
-                  fontSize: 14,
-                ),
-              ),
-            ),
-          ),
-          if (item != items.last)
-            const DropdownMenuItem<String>(
-              enabled: false,
-              child: Divider(),
-            ),
-        ],
-      );
-    }
-    return menuItems;
-  }
 
   resetSliders() {
     switch (selectedAssetType) {
@@ -197,31 +159,14 @@ class _AssetBuilderState extends State<AssetBuilder> {
               padding: const EdgeInsets.only(left: 4),
               child: Row(
                 children: [
-                  DropdownButtonHideUnderline(
-                    child: DropdownButton2(
-                      isExpanded: true,
-                      items: _addDividersAfterItems(items),
-                      customItemsIndexes: _getDividersIndexes(),
-                      customItemsHeight: 4,
-                      value: Enums.toText(selectedAssetType),
-                      onChanged: (value) {
-                        setState(() {
-                          selectedAssetType = Enums.toEnum(value as String, ETypeAsset.values);
-                          resetSliders();
-                        });
-                      },
-                      buttonDecoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.black26,
-                        ),
-                        color: Colors.white,
-                      ),
-                      buttonHeight: 40,
-                      buttonWidth: 180,
-                      itemHeight: 40,
-                      itemPadding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      buttonElevation: 2,
-                    ),
+                  CustomDropDownButton(
+                    items: items,
+                    onChanged: (value) {
+                      setState(() {
+                        selectedAssetType = Enums.toEnum(value, ETypeAsset.values);
+                        resetSliders();
+                      });
+                    },
                   ),
                   Expanded(
                     child: Card(

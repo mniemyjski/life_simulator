@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:richeable/utilities/utilities.dart';
+import 'package:richeable/widgets/widgets.dart';
 
 import '../../config/routes/routes.gr.dart';
 import '../../constants/constants.dart';
@@ -25,8 +26,7 @@ class LearningScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
+    return CustomScaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -149,6 +149,6 @@ class LearningScreen extends StatelessWidget {
           ],
         ),
       ),
-    ));
+    );
   }
 }

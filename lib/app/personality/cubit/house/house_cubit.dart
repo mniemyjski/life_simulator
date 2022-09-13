@@ -143,7 +143,7 @@ class HouseCubit extends HydratedCubit<HouseState> {
       );
 
       _moneyCubit.addTransaction(
-          value: newHouse.cost, eTypeTransactionSource: ETypeTransactionSource.house);
+          value: newHouse.cost, eTypeTransactionSource: ETypeTransactionSource.home);
 
       _incomeCubit.add(income);
       if (oldHouse != null && oldHouse.eTypeHouse == ETypeHouse.rent) {
@@ -162,7 +162,7 @@ class HouseCubit extends HydratedCubit<HouseState> {
         _timeSpendCubit.removeBonus(ETypeBonusSource.house);
         _incomeCubit.remove(house.id);
         _moneyCubit.addTransaction(
-            value: house.cost * 0.8, eTypeTransactionSource: ETypeTransactionSource.house);
+            value: house.cost * 0.8, eTypeTransactionSource: ETypeTransactionSource.home);
         emit(const HouseState.loaded(house: null));
       }
     });

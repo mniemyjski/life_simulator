@@ -20,10 +20,13 @@ class StatsElement extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(2.0),
                 width: 50,
-                child: LinearProgressIndicator(
-                  value: value,
-                  minHeight: 8,
-                  color: color,
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                  child: LinearProgressIndicator(
+                    value: value,
+                    minHeight: 8,
+                    color: color,
+                  ),
                 ),
               ),
               Positioned.fill(

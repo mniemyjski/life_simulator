@@ -202,8 +202,7 @@ class BankScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
+    return CustomScaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -424,6 +423,6 @@ class BankScreen extends StatelessWidget {
           ],
         ),
       ),
-    ));
+    );
   }
 }

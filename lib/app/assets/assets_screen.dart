@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:richeable/utilities/utilities.dart';
+import 'package:richeable/widgets/widgets.dart';
 
 import '../../config/routes/routes.gr.dart';
 import '../../constants/constants.dart';
@@ -16,46 +17,44 @@ class AssetsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Column(
-          children: [
-            const AppBarStats(),
-            Expanded(
-              child: BlocBuilder<AssetsCubit, AssetsState>(
-                builder: (context, state) {
-                  return state.maybeWhen(
-                      orElse: () => Container(),
-                      loaded: (assets) {
-                        if (assets.isEmpty) {
-                          return Center(
-                            child: Text(LocaleKeys.youDontHaveAnyAssets.tr(),
-                                style: Theme.of(context).textTheme.bodyText2),
-                          );
-                        }
+    return CustomScaffold(
+      body: Column(
+        children: [
+          const AppBarStats(),
+          Expanded(
+            child: BlocBuilder<AssetsCubit, AssetsState>(
+              builder: (context, state) {
+                return state.maybeWhen(
+                    orElse: () => Container(),
+                    loaded: (assets) {
+                      if (assets.isEmpty) {
+                        return Center(
+                          child: Text(LocaleKeys.youDontHaveAnyAssets.tr(),
+                              style: Theme.of(context).textTheme.bodyText2),
+                        );
+                      }
 
-                        return ListView.builder(
-                            itemCount: assets.length,
-                            itemBuilder: (context, index) {
-                              return AssetElement(
-                                iconButton: IconButton(
-                                  onPressed: () =>
-                                      context.router.push(AssetRoute(id: assets[index].id)),
-                                  icon: const FaIcon(FontAwesomeIcons.pencil),
-                                ),
-                                asset: assets[index],
-                              );
-                            });
-                      });
-                },
-              ),
+                      return ListView.builder(
+                          itemCount: assets.length,
+                          itemBuilder: (context, index) {
+                            return AssetElement(
+                              iconButton: IconButton(
+                                onPressed: () =>
+                                    context.router.push(AssetRoute(id: assets[index].id)),
+                                icon: const FaIcon(FontAwesomeIcons.pencil),
+                              ),
+                              asset: assets[index],
+                            );
+                          });
+                    });
+              },
             ),
-            const SizedBox(height: 80),
-          ],
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: const AssetsMenu(),
+          ),
+          const SizedBox(height: 80),
+        ],
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: const AssetsMenu(),
     );
   }
 }

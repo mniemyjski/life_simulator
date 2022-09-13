@@ -129,7 +129,7 @@ class IncomeCubit extends HydratedCubit<IncomeState> {
                   break;
                 case ETypeSource.house:
                   _moneyCubit.addTransaction(
-                      value: element.value, eTypeTransactionSource: ETypeTransactionSource.house);
+                      value: element.value, eTypeTransactionSource: ETypeTransactionSource.home);
                   break;
                 case ETypeSource.transport:
                   _moneyCubit.addTransaction(

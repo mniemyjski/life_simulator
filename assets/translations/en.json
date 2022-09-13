@@ -94,7 +94,10 @@
   "open": "Open",
   "close": "Close",
   "high": "High",
-  "low": "Low"
+  "low": "Low",
+  "job": "Job",
+  "home": "Home",
+  "dayOnTurn": "Day on turn"
 
 
 }

@@ -247,35 +247,33 @@ class AssetScreen extends StatelessWidget {
       );
     }
 
-    return SafeArea(
-      child: Scaffold(
-        body: BlocBuilder<AssetsCubit, AssetsState>(
-          builder: (context, state) {
-            return state.maybeWhen(
-                orElse: () => Container(),
-                loaded: (assets) {
-                  Asset? asset = assets.firstWhereOrNull((element) => element.id == id);
+    return CustomScaffold(
+      body: BlocBuilder<AssetsCubit, AssetsState>(
+        builder: (context, state) {
+          return state.maybeWhen(
+              orElse: () => Container(),
+              loaded: (assets) {
+                Asset? asset = assets.firstWhereOrNull((element) => element.id == id);
 
-                  if (asset != null) return buildBody(asset);
+                if (asset != null) return buildBody(asset);
 
-                  return Container();
-                });
-          },
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: Padding(
-          padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              FloatingActionButton(
-                heroTag: null,
-                onPressed: () => context.router.pop(),
-                child: const FaIcon(FontAwesomeIcons.arrowRotateLeft),
-              ),
-              const NextDayButton(),
-            ],
-          ),
+                return Container();
+              });
+        },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            FloatingActionButton(
+              heroTag: null,
+              onPressed: () => context.router.pop(),
+              child: const FaIcon(FontAwesomeIcons.arrowRotateLeft),
+            ),
+            const NextDayButton(),
+          ],
         ),
       ),
     );

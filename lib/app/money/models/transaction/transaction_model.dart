@@ -13,7 +13,7 @@ enum ETypeTransactionSource {
   freelance,
   asset,
   market,
-  house,
+  home,
   food,
   transport,
   learning,

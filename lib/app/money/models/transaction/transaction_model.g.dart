@@ -37,7 +37,7 @@ const _$ETypeTransactionSourceEnumMap = {
   ETypeTransactionSource.freelance: 'freelance',
   ETypeTransactionSource.asset: 'asset',
   ETypeTransactionSource.market: 'market',
-  ETypeTransactionSource.house: 'house',
+  ETypeTransactionSource.home: 'home',
   ETypeTransactionSource.food: 'food',
   ETypeTransactionSource.transport: 'transport',
   ETypeTransactionSource.learning: 'learning',

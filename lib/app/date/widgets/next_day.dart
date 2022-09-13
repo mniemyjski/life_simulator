@@ -16,6 +16,7 @@ class NextDayButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
+      // backgroundColor: Theme.of(context).primaryColor.withOpacity(0.5),
       heroTag: null,
       onPressed: () async {
         if (!context.read<TimeSpendCubit>().checkBonusSource(ETypeBonusSource.house)) {

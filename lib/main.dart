@@ -71,7 +71,14 @@ void main() {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   final _appRouter = AppRouter();
 
   @override
@@ -216,8 +223,7 @@ class MyApp extends StatelessWidget {
             localizationsDelegates: context.localizationDelegates,
             supportedLocales: context.supportedLocales,
             theme: CustomTheme.lightTheme,
-            darkTheme: CustomTheme.darkTheme,
-            themeMode: context.watch<DarkModeCubit>().state ? ThemeMode.dark : ThemeMode.light,
+            themeMode: ThemeMode.light,
             routerDelegate: _appRouter.delegate(
               navigatorObservers: () => [
                 BotToastNavigatorObserver(),

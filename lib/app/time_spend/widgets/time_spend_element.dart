@@ -35,10 +35,13 @@ class TimeSpendElement extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(4.0),
                 width: 50,
-                child: LinearProgressIndicator(
-                  value: value / 24,
-                  minHeight: 12,
-                  color: color,
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                  child: LinearProgressIndicator(
+                    value: value / 24,
+                    minHeight: 12,
+                    color: color,
+                  ),
                 ),
               ),
               Positioned.fill(

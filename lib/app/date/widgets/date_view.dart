@@ -16,29 +16,32 @@ class DateChange extends StatelessWidget {
                 Row(
                   children: [
                     Card(
+                        color: Colors.grey.withOpacity(0.2),
                         child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'Y:${dateGame.year}',
-                        style: TextStyle(color: Theme.of(context).textTheme.bodyText1!.color),
-                      ),
-                    )),
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            'Y:${dateGame.year}',
+                            style: TextStyle(color: Theme.of(context).textTheme.bodyText2!.color),
+                          ),
+                        )),
                     Card(
+                        color: Colors.grey.withOpacity(0.2),
                         child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'M:${dateGame.month}',
-                        style: TextStyle(color: Theme.of(context).textTheme.bodyText1!.color),
-                      ),
-                    )),
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            'M:${dateGame.month}',
+                            style: TextStyle(color: Theme.of(context).textTheme.bodyText2!.color),
+                          ),
+                        )),
                     Card(
+                        color: Colors.grey.withOpacity(0.2),
                         child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'D:${dateGame.day}',
-                        style: TextStyle(color: Theme.of(context).textTheme.bodyText1!.color),
-                      ),
-                    )),
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            'D:${dateGame.day}',
+                            style: TextStyle(color: Theme.of(context).textTheme.bodyText2!.color),
+                          ),
+                        )),
                   ],
                 ),
               ],
