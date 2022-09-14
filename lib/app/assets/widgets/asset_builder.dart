@@ -94,7 +94,8 @@ class _AssetBuilderState extends State<AssetBuilder> {
     double cost = (baseCost() * selectedTenant / (selectedDuration / 8)).toDouble();
     double value = (baseCost() * selectedTenant / 5) * 1.3;
 
-    return Padding(
+    return Container(
+      color: Colors.black.withOpacity(0.5),
       padding: MediaQuery.of(context).viewInsets,
       child: Padding(
         padding: const EdgeInsets.all(8.0),

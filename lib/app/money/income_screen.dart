@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:richeable/widgets/widgets.dart';
 
 import '../../constants/constants.dart';
 import '../../utilities/utilities.dart';
@@ -14,8 +15,7 @@ class IncomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
+    return CustomScaffold(
       body: Column(
         children: [
           const AppBarStats(),
@@ -137,7 +137,7 @@ class IncomeScreen extends StatelessWidget {
           ],
         ),
       ),
-    ));
+    );
   }
 
   Builder _elementList(Income element) {

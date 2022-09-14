@@ -45,7 +45,8 @@ class _FreelanceJobCreatorState extends State<FreelanceJobCreator> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
+      color: Colors.black.withOpacity(0.5),
       padding: MediaQuery.of(context).viewInsets,
       child: Padding(
         padding: const EdgeInsets.all(8.0),

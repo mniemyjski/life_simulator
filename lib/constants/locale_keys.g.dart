@@ -99,5 +99,7 @@ abstract class  LocaleKeys {
   static const job = 'job';
   static const home = 'home';
   static const dayOnTurn = 'dayOnTurn';
+  static const locale_app = 'locale_app';
+  static const youDontHaveAnyProduct = 'youDontHaveAnyProduct';
 
 }

@@ -97,7 +97,8 @@
   "low": "Low",
   "job": "Job",
   "home": "Home",
-  "dayOnTurn": "Day on turn"
-
+  "dayOnTurn": "Day on turn",
+  "locale_app": "Language",
+  "youDontHaveAnyProduct": "youDontHaveAnyProduct"
 
 }
