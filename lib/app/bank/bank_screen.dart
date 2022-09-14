@@ -32,7 +32,8 @@ class BankScreen extends StatelessWidget {
         final double max = context.read<DepositCubit>().state + (money > 0 ? money : 0);
 
         return StatefulBuilder(builder: (context, setState) {
-          return Padding(
+          return Container(
+            color: Colors.black.withOpacity(0.5),
             padding: const EdgeInsets.all(8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -99,7 +100,8 @@ class BankScreen extends StatelessWidget {
         double borrow = 1000;
 
         return StatefulBuilder(builder: (context, setState) {
-          return Padding(
+          return Container(
+            color: Colors.black.withOpacity(0.5),
             padding: const EdgeInsets.all(8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
