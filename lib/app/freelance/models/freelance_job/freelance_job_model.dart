@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:richeable/utilities/utilities.dart';
 
 import '../../../skills/models/skill_model.dart';
 import '../freelance_base/freelance_base.dart';
@@ -19,10 +20,8 @@ class FreelanceJob with _$FreelanceJob {
     required String id,
     required String name,
     required ETypeFreelance eTypeFreelance,
-    @Default(0) double fame,
-    @Default(0) double price,
-    required int level,
     //EndBase
+    required int level,
     required int workTime,
     required int leftWorkTime,
     required List<Skill> reqSkills,
@@ -40,35 +39,35 @@ class FreelanceJob with _$FreelanceJob {
     }
 
     var rng = Random();
-    if (skills <= (2 / reqSkills.length)) {
-      if (rng.nextInt(100) >= 90) {
+    if (skills <= (2 * reqSkills.length)) {
+      if (rng.nextInt(100) >= 25) {
         rating = 1;
       } else {
         rating = 2;
       }
     }
-    if (skills >= (3 / reqSkills.length) && skills <= (4 / reqSkills.length)) {
+    if (skills >= (3 * reqSkills.length) && skills <= (4 * reqSkills.length)) {
       if (rng.nextInt(100) >= 50) {
         rating = 1;
       } else {
         rating = 2;
       }
     }
-    if (skills >= (5 / reqSkills.length) && skills <= (6 / reqSkills.length)) {
+    if (skills >= (5 * reqSkills.length) && skills <= (6 * reqSkills.length)) {
       if (rng.nextInt(100) >= 50) {
         rating = 2;
       } else {
         rating = 3;
       }
     }
-    if (skills >= (7 / reqSkills.length) && skills <= (8 / reqSkills.length)) {
+    if (skills >= (7 * reqSkills.length) && skills <= (8 * reqSkills.length)) {
       if (rng.nextInt(100) >= 50) {
         rating = 3;
       } else {
         rating = 4;
       }
     }
-    if (skills >= (9 / reqSkills.length)) {
+    if (skills >= (9 * reqSkills.length)) {
       if (rng.nextInt(100) >= 50) {
         rating = 4;
       } else {
@@ -79,34 +78,38 @@ class FreelanceJob with _$FreelanceJob {
     return rating;
   }
 
-  double getFameMultiplier() {
-    double v = fame == 0 ? 10 : fame;
-
-    for (var r in reqSkills) {
-      for (var u in userSkills) {
-        if (r.name == u.name) v *= u.lvl;
-      }
-    }
-    return v;
-  }
-
   FreelanceDone toDone(DateTime d) {
     double price;
     int rating = _generateRating();
-    double fame = 10;
+    double fame;
 
     switch (eTypeFreelance) {
       case ETypeFreelance.book:
-        price = 5;
+        price = 2;
         break;
       case ETypeFreelance.course:
-        price = 10;
+        price = 2;
         break;
       case ETypeFreelance.youtube:
-        price = 0.5;
+        price = 0.05;
         break;
       case ETypeFreelance.application:
-        price = 10;
+        price = 2;
+        break;
+    }
+
+    switch (eTypeFreelance) {
+      case ETypeFreelance.book:
+        fame = 5;
+        break;
+      case ETypeFreelance.course:
+        fame = 5;
+        break;
+      case ETypeFreelance.youtube:
+        fame = 50;
+        break;
+      case ETypeFreelance.application:
+        fame = 5;
         break;
     }
 
@@ -115,10 +118,9 @@ class FreelanceJob with _$FreelanceJob {
       name: name,
       eTypeFreelance: eTypeFreelance,
       fame: fame * rating * level,
-      price: price * rating,
+      price: price * rating * level,
       dateCre: d,
       rating: _generateRating(),
-      level: level,
     );
   }
 }

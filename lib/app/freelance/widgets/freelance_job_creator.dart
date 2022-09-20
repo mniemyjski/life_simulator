@@ -87,10 +87,10 @@ class _FreelanceJobCreatorState extends State<FreelanceJobCreator> {
                                   controller: controller,
                                   validator: (v) {
                                     if (v == null || v.isEmpty) {
-                                      return 'Can\'t be empty';
+                                      return LocaleKeys.cantBeEmpty.tr();
                                     }
                                     if (v.length < 4) {
-                                      return 'Too short';
+                                      return LocaleKeys.tooShort.tr();
                                     }
                                     return null;
                                   },
@@ -101,7 +101,8 @@ class _FreelanceJobCreatorState extends State<FreelanceJobCreator> {
                                 child: IconButton(
                                     onPressed: () {
                                       setState(() {
-                                        controller.text = faker.lorem.word();
+                                        controller.text =
+                                            "${faker.lorem.word().capitalize()} ${faker.lorem.word().capitalize()}";
                                       });
                                     },
                                     icon: const Icon(FontAwesomeIcons.shuffle)))
@@ -263,16 +264,16 @@ class _FreelanceJobCreatorState extends State<FreelanceJobCreator> {
   calcDuration() {
     switch (typeJob) {
       case ETypeFreelance.book:
-        duration = (40 * lvl).toInt();
+        duration = (100 * lvl).toInt();
         break;
       case ETypeFreelance.course:
-        duration = (40 * lvl).toInt();
+        duration = (80 * lvl).toInt();
         break;
       case ETypeFreelance.youtube:
         duration = (4 * lvl).toInt();
         break;
       case ETypeFreelance.application:
-        duration = (40 * lvl).toInt();
+        duration = (120 * lvl).toInt();
         break;
     }
   }

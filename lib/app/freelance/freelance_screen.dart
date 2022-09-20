@@ -2,7 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:richeable/app/freelance/widgets/advertisement_chooser.dart';
 import 'package:richeable/utilities/utilities.dart';
 import 'package:richeable/widgets/widgets.dart';
 
@@ -124,7 +126,7 @@ class FreelanceScreen extends StatelessWidget {
                                           ],
                                         ),
                                         RatingBarIndicator(
-                                          rating: element.level.toDouble(),
+                                          rating: element.rating.toDouble(),
                                           itemBuilder: (context, index) => const Icon(
                                             Icons.star,
                                             color: Colors.amber,
@@ -185,10 +187,68 @@ class FreelanceScreen extends StatelessWidget {
               child: const FaIcon(FontAwesomeIcons.arrowRotateLeft),
             ),
             const NextDayButton(),
-            FloatingActionButton(
-              heroTag: null,
-              onPressed: () => context.router.push(const FreelanceJobsRoute()),
-              child: const FaIcon(FontAwesomeIcons.plus),
+            // FloatingActionButton(
+            //   heroTag: null,
+            //   onPressed: () => context.router.push(const FreelanceJobsRoute()),
+            //   child: const FaIcon(FontAwesomeIcons.plus),
+            // ),
+            SpeedDial(
+              animatedIcon: AnimatedIcons.menu_close,
+              spaceBetweenChildren: 4,
+              spacing: 15,
+              overlayColor: Colors.black,
+              overlayOpacity: 0.5,
+              children: [
+                SpeedDialChild(
+                  labelWidget: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Card(
+                      child: Container(
+                        width: 100,
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(
+                          child: Text(
+                            LocaleKeys.create.tr(),
+                            style: Theme.of(context).textTheme.bodyText1,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  child: const FaIcon(FontAwesomeIcons.plus),
+                  onTap: () => context.router.push(const FreelanceJobsRoute()),
+                ),
+                SpeedDialChild(
+                  labelWidget: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Card(
+                      child: Container(
+                        width: 100,
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(
+                          child: Text(
+                            LocaleKeys.advertisement.tr(),
+                            style: Theme.of(context).textTheme.bodyText1,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  child: const FaIcon(FontAwesomeIcons.rectangleAd),
+                  onTap: () {
+                    showModalBottomSheet<String>(
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(top: Radius.circular(8.0))),
+                      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                      context: context,
+                      isScrollControlled: true,
+                      builder: (BuildContext context) {
+                        return const AdvertisementChooser();
+                      },
+                    );
+                  },
+                ),
+              ],
             ),
           ],
         ),

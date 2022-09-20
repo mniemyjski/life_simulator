@@ -6,11 +6,7 @@ class SimpleBlocObserver extends BlocObserver {
   void onChange(BlocBase bloc, Change change) {
     super.onChange(bloc, change);
 
-    if (bloc.runtimeType.toString() == 'IncomeCubit') {
-      Logger().i(
-          '${bloc.runtimeType}\nCurrentState:${change.currentState}\nNextState:${change.nextState}');
-    }
-    if (bloc.runtimeType.toString() == 'DateCubit') {
+    if (bloc.runtimeType.toString() == 'FreelanceDoneCubit') {
       Logger().e(
           '${bloc.runtimeType}\nCurrentState:${change.currentState}\nNextState:${change.nextState}');
     }

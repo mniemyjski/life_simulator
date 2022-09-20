@@ -23,10 +23,10 @@ mixin _$FreelanceDone {
 //Base
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  ETypeFreelance get eTypeFreelance => throw _privateConstructorUsedError;
+  ETypeFreelance get eTypeFreelance =>
+      throw _privateConstructorUsedError; //EndBase
   double get fame => throw _privateConstructorUsedError;
   double get price => throw _privateConstructorUsedError;
-  int get level => throw _privateConstructorUsedError; //EndBase
   DateTime get dateCre => throw _privateConstructorUsedError;
   int get rating => throw _privateConstructorUsedError;
 
@@ -47,7 +47,6 @@ abstract class $FreelanceDoneCopyWith<$Res> {
       ETypeFreelance eTypeFreelance,
       double fame,
       double price,
-      int level,
       DateTime dateCre,
       int rating});
 }
@@ -68,7 +67,6 @@ class _$FreelanceDoneCopyWithImpl<$Res>
     Object? eTypeFreelance = freezed,
     Object? fame = freezed,
     Object? price = freezed,
-    Object? level = freezed,
     Object? dateCre = freezed,
     Object? rating = freezed,
   }) {
@@ -93,10 +91,6 @@ class _$FreelanceDoneCopyWithImpl<$Res>
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as double,
-      level: level == freezed
-          ? _value.level
-          : level // ignore: cast_nullable_to_non_nullable
-              as int,
       dateCre: dateCre == freezed
           ? _value.dateCre
           : dateCre // ignore: cast_nullable_to_non_nullable
@@ -122,7 +116,6 @@ abstract class _$$_FreelanceDoneCopyWith<$Res>
       ETypeFreelance eTypeFreelance,
       double fame,
       double price,
-      int level,
       DateTime dateCre,
       int rating});
 }
@@ -145,7 +138,6 @@ class __$$_FreelanceDoneCopyWithImpl<$Res>
     Object? eTypeFreelance = freezed,
     Object? fame = freezed,
     Object? price = freezed,
-    Object? level = freezed,
     Object? dateCre = freezed,
     Object? rating = freezed,
   }) {
@@ -170,10 +162,6 @@ class __$$_FreelanceDoneCopyWithImpl<$Res>
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as double,
-      level: level == freezed
-          ? _value.level
-          : level // ignore: cast_nullable_to_non_nullable
-              as int,
       dateCre: dateCre == freezed
           ? _value.dateCre
           : dateCre // ignore: cast_nullable_to_non_nullable
@@ -195,7 +183,6 @@ class _$_FreelanceDone extends _FreelanceDone {
       required this.eTypeFreelance,
       required this.fame,
       required this.price,
-      required this.level,
       required this.dateCre,
       required this.rating})
       : assert(rating > 0, 'rating < 6'),
@@ -211,13 +198,11 @@ class _$_FreelanceDone extends _FreelanceDone {
   final String name;
   @override
   final ETypeFreelance eTypeFreelance;
+//EndBase
   @override
   final double fame;
   @override
   final double price;
-  @override
-  final int level;
-//EndBase
   @override
   final DateTime dateCre;
   @override
@@ -225,7 +210,7 @@ class _$_FreelanceDone extends _FreelanceDone {
 
   @override
   String toString() {
-    return 'FreelanceDone(id: $id, name: $name, eTypeFreelance: $eTypeFreelance, fame: $fame, price: $price, level: $level, dateCre: $dateCre, rating: $rating)';
+    return 'FreelanceDone(id: $id, name: $name, eTypeFreelance: $eTypeFreelance, fame: $fame, price: $price, dateCre: $dateCre, rating: $rating)';
   }
 
   @override
@@ -239,7 +224,6 @@ class _$_FreelanceDone extends _FreelanceDone {
                 .equals(other.eTypeFreelance, eTypeFreelance) &&
             const DeepCollectionEquality().equals(other.fame, fame) &&
             const DeepCollectionEquality().equals(other.price, price) &&
-            const DeepCollectionEquality().equals(other.level, level) &&
             const DeepCollectionEquality().equals(other.dateCre, dateCre) &&
             const DeepCollectionEquality().equals(other.rating, rating));
   }
@@ -253,7 +237,6 @@ class _$_FreelanceDone extends _FreelanceDone {
       const DeepCollectionEquality().hash(eTypeFreelance),
       const DeepCollectionEquality().hash(fame),
       const DeepCollectionEquality().hash(price),
-      const DeepCollectionEquality().hash(level),
       const DeepCollectionEquality().hash(dateCre),
       const DeepCollectionEquality().hash(rating));
 
@@ -275,7 +258,6 @@ abstract class _FreelanceDone extends FreelanceDone implements FreelanceBase {
       required final ETypeFreelance eTypeFreelance,
       required final double fame,
       required final double price,
-      required final int level,
       required final DateTime dateCre,
       required final int rating}) = _$_FreelanceDone;
   const _FreelanceDone._() : super._();
@@ -289,13 +271,11 @@ abstract class _FreelanceDone extends FreelanceDone implements FreelanceBase {
   String get name => throw _privateConstructorUsedError;
   @override
   ETypeFreelance get eTypeFreelance => throw _privateConstructorUsedError;
-  @override
+  @override //EndBase
   double get fame => throw _privateConstructorUsedError;
   @override
   double get price => throw _privateConstructorUsedError;
   @override
-  int get level => throw _privateConstructorUsedError;
-  @override //EndBase
   DateTime get dateCre => throw _privateConstructorUsedError;
   @override
   int get rating => throw _privateConstructorUsedError;

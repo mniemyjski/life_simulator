@@ -118,5 +118,9 @@ abstract class  LocaleKeys {
   static const jobs = 'jobs';
   static const notEnoughMoney = 'notEnoughMoney';
   static const endGame = 'endGame';
+  static const cantBeEmpty = 'cantBeEmpty';
+  static const tooShort = 'tooShort';
+  static const advertisement = 'advertisement';
+  static const fame = 'fame';
 
 }

@@ -5,6 +5,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../date/cubit/date_cubit.dart';
+import '../../../money/cubit/money_cubit.dart';
 import '../../../new_game/new_game_cubit.dart';
 
 part 'fame_cubit.freezed.dart';
@@ -19,9 +20,12 @@ class FameCubit extends HydratedCubit<FameState> {
   final DateCubit _dateCubit;
   late StreamSubscription _dateSub;
 
+  final MoneyCubit _moneyCubit;
+
   FameCubit(
     this._newGameCubit,
     this._dateCubit,
+    this._moneyCubit,
   ) : super(const FameState.initial()) {
     _newGame();
     _counting();
@@ -55,6 +59,13 @@ class FameCubit extends HydratedCubit<FameState> {
   add(double add) {
     state.whenOrNull(loaded: (value) {
       emit(FameState.loaded(value += add));
+    });
+  }
+
+  buyAdv({required double money, required int fame}) {
+    if (_moneyCubit.state < money) return 'notEnoughMoney';
+    state.whenOrNull(loaded: (value) {
+      emit(FameState.loaded(value += fame));
     });
   }
 

@@ -23,10 +23,9 @@ mixin _$FreelanceJob {
 //Base
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  ETypeFreelance get eTypeFreelance => throw _privateConstructorUsedError;
-  double get fame => throw _privateConstructorUsedError;
-  double get price => throw _privateConstructorUsedError;
-  int get level => throw _privateConstructorUsedError; //EndBase
+  ETypeFreelance get eTypeFreelance =>
+      throw _privateConstructorUsedError; //EndBase
+  int get level => throw _privateConstructorUsedError;
   int get workTime => throw _privateConstructorUsedError;
   int get leftWorkTime => throw _privateConstructorUsedError;
   List<Skill> get reqSkills => throw _privateConstructorUsedError;
@@ -47,8 +46,6 @@ abstract class $FreelanceJobCopyWith<$Res> {
       {String id,
       String name,
       ETypeFreelance eTypeFreelance,
-      double fame,
-      double price,
       int level,
       int workTime,
       int leftWorkTime,
@@ -69,8 +66,6 @@ class _$FreelanceJobCopyWithImpl<$Res> implements $FreelanceJobCopyWith<$Res> {
     Object? id = freezed,
     Object? name = freezed,
     Object? eTypeFreelance = freezed,
-    Object? fame = freezed,
-    Object? price = freezed,
     Object? level = freezed,
     Object? workTime = freezed,
     Object? leftWorkTime = freezed,
@@ -90,14 +85,6 @@ class _$FreelanceJobCopyWithImpl<$Res> implements $FreelanceJobCopyWith<$Res> {
           ? _value.eTypeFreelance
           : eTypeFreelance // ignore: cast_nullable_to_non_nullable
               as ETypeFreelance,
-      fame: fame == freezed
-          ? _value.fame
-          : fame // ignore: cast_nullable_to_non_nullable
-              as double,
-      price: price == freezed
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as double,
       level: level == freezed
           ? _value.level
           : level // ignore: cast_nullable_to_non_nullable
@@ -133,8 +120,6 @@ abstract class _$$_FreelanceJobCopyWith<$Res>
       {String id,
       String name,
       ETypeFreelance eTypeFreelance,
-      double fame,
-      double price,
       int level,
       int workTime,
       int leftWorkTime,
@@ -158,8 +143,6 @@ class __$$_FreelanceJobCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = freezed,
     Object? eTypeFreelance = freezed,
-    Object? fame = freezed,
-    Object? price = freezed,
     Object? level = freezed,
     Object? workTime = freezed,
     Object? leftWorkTime = freezed,
@@ -179,14 +162,6 @@ class __$$_FreelanceJobCopyWithImpl<$Res>
           ? _value.eTypeFreelance
           : eTypeFreelance // ignore: cast_nullable_to_non_nullable
               as ETypeFreelance,
-      fame: fame == freezed
-          ? _value.fame
-          : fame // ignore: cast_nullable_to_non_nullable
-              as double,
-      price: price == freezed
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as double,
       level: level == freezed
           ? _value.level
           : level // ignore: cast_nullable_to_non_nullable
@@ -218,8 +193,6 @@ class _$_FreelanceJob extends _FreelanceJob {
       {required this.id,
       required this.name,
       required this.eTypeFreelance,
-      this.fame = 0,
-      this.price = 0,
       required this.level,
       required this.workTime,
       required this.leftWorkTime,
@@ -239,15 +212,9 @@ class _$_FreelanceJob extends _FreelanceJob {
   final String name;
   @override
   final ETypeFreelance eTypeFreelance;
-  @override
-  @JsonKey()
-  final double fame;
-  @override
-  @JsonKey()
-  final double price;
+//EndBase
   @override
   final int level;
-//EndBase
   @override
   final int workTime;
   @override
@@ -268,7 +235,7 @@ class _$_FreelanceJob extends _FreelanceJob {
 
   @override
   String toString() {
-    return 'FreelanceJob(id: $id, name: $name, eTypeFreelance: $eTypeFreelance, fame: $fame, price: $price, level: $level, workTime: $workTime, leftWorkTime: $leftWorkTime, reqSkills: $reqSkills, userSkills: $userSkills)';
+    return 'FreelanceJob(id: $id, name: $name, eTypeFreelance: $eTypeFreelance, level: $level, workTime: $workTime, leftWorkTime: $leftWorkTime, reqSkills: $reqSkills, userSkills: $userSkills)';
   }
 
   @override
@@ -280,8 +247,6 @@ class _$_FreelanceJob extends _FreelanceJob {
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality()
                 .equals(other.eTypeFreelance, eTypeFreelance) &&
-            const DeepCollectionEquality().equals(other.fame, fame) &&
-            const DeepCollectionEquality().equals(other.price, price) &&
             const DeepCollectionEquality().equals(other.level, level) &&
             const DeepCollectionEquality().equals(other.workTime, workTime) &&
             const DeepCollectionEquality()
@@ -299,8 +264,6 @@ class _$_FreelanceJob extends _FreelanceJob {
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(eTypeFreelance),
-      const DeepCollectionEquality().hash(fame),
-      const DeepCollectionEquality().hash(price),
       const DeepCollectionEquality().hash(level),
       const DeepCollectionEquality().hash(workTime),
       const DeepCollectionEquality().hash(leftWorkTime),
@@ -323,8 +286,6 @@ abstract class _FreelanceJob extends FreelanceJob implements FreelanceBase {
       {required final String id,
       required final String name,
       required final ETypeFreelance eTypeFreelance,
-      final double fame,
-      final double price,
       required final int level,
       required final int workTime,
       required final int leftWorkTime,
@@ -341,13 +302,9 @@ abstract class _FreelanceJob extends FreelanceJob implements FreelanceBase {
   String get name => throw _privateConstructorUsedError;
   @override
   ETypeFreelance get eTypeFreelance => throw _privateConstructorUsedError;
-  @override
-  double get fame => throw _privateConstructorUsedError;
-  @override
-  double get price => throw _privateConstructorUsedError;
-  @override
-  int get level => throw _privateConstructorUsedError;
   @override //EndBase
+  int get level => throw _privateConstructorUsedError;
+  @override
   int get workTime => throw _privateConstructorUsedError;
   @override
   int get leftWorkTime => throw _privateConstructorUsedError;

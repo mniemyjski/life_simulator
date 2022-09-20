@@ -32,7 +32,7 @@ class SkillsCubit extends HydratedCubit<SkillsState> {
   _newGame() {
     List<Skill> skills = [];
     for (var element in ETypeSkills.values) {
-      skills.add(Skill(name: element));
+      skills.add(Skill(name: element, exp: 2000, lvl: 1));
     }
 
     if (_newGameCubit.state) emit(SkillsState.loaded(skills));

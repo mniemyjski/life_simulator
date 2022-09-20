@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -104,8 +105,13 @@ class MedicinesScreen extends StatelessWidget {
                                   ),
                                   if (!medicine.active)
                                     IconButton(
-                                      onPressed: () =>
-                                          context.read<MedicinesCubit>().buy(medicine.id),
+                                      onPressed: () {
+                                        var toast = context.read<MedicinesCubit>().buy(medicine);
+                                        if (toast != null) {
+                                          BotToast.showText(
+                                              text: toast, align: const Alignment(0.1, 0.05));
+                                        }
+                                      },
                                       icon: const FaIcon(FontAwesomeIcons.plus),
                                     ),
                                 ],

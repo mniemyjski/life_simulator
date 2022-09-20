@@ -16,10 +16,9 @@ class FreelanceDone with _$FreelanceDone {
     required String id,
     required String name,
     required ETypeFreelance eTypeFreelance,
+    //EndBase
     required double fame,
     required double price,
-    required int level,
-    //EndBase
     required DateTime dateCre,
     required int rating,
   }) = _FreelanceDone;

@@ -4,6 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../../utilities/utilities.dart';
 import '../../../date/cubit/date_cubit.dart';
 import '../../../new_game/new_game_cubit.dart';
 import '../../../skills/cubit/skills_cubit.dart';
@@ -70,9 +71,7 @@ class FreelanceJobCubit extends HydratedCubit<FreelanceWorkState> {
                         for (var e in freelanceJobs) {
                           if (e.leftWorkTime > time) {
                             result.add(
-                              e.copyWith(
-                                  leftWorkTime: e.leftWorkTime - time,
-                                  fame: e.getFameMultiplier() * (time - e.leftWorkTime)),
+                              e.copyWith(leftWorkTime: e.leftWorkTime - time),
                             );
                             _countingExp(
                               reqSkills: e.reqSkills,
@@ -82,9 +81,7 @@ class FreelanceJobCubit extends HydratedCubit<FreelanceWorkState> {
                             time = 0;
                           }
                           if (e.leftWorkTime <= time) {
-                            _freelanceDoneCubit.add(e
-                                .copyWith(fame: e.getFameMultiplier() * e.leftWorkTime)
-                                .toDone(date));
+                            _freelanceDoneCubit.add(e.toDone(date));
                             _countingExp(
                               reqSkills: e.reqSkills,
                               userSkills: e.userSkills,
@@ -127,8 +124,7 @@ class FreelanceJobCubit extends HydratedCubit<FreelanceWorkState> {
     return state.maybeWhen(
         orElse: () => 'error',
         loaded: (list) {
-          emit(FreelanceWorkState.loaded(List.from(list)
-            ..add(freelanceWork.copyWith(fame: freelanceWork.getFameMultiplier()))));
+          emit(FreelanceWorkState.loaded(List.from(list)..add(freelanceWork)));
           return null;
         });
   }

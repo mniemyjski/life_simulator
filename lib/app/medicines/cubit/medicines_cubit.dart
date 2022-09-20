@@ -72,11 +72,14 @@ class MedicinesCubit extends HydratedCubit<MedicinesState> {
     });
   }
 
-  buy(String id) {
+  String? buy(Medicine medicine) {
     state.whenOrNull(loaded: (medicines) {
-      List<Medicine> result = List.from(medicines)..removeWhere((element) => element.id == id);
+      if (_moneyCubit.state < medicine.cost) return "youDontHaveEnoughMoney";
+
+      List<Medicine> result = List.from(medicines)
+        ..removeWhere((element) => element.id == medicine.id);
       for (var element in medicines) {
-        if (element.id == id) {
+        if (element.id == medicine.id) {
           result.add(element.copyWith(active: true));
           _moneyCubit.addTransaction(
               value: element.cost, eTypeTransactionSource: ETypeTransactionSource.medicine);
@@ -86,6 +89,7 @@ class MedicinesCubit extends HydratedCubit<MedicinesState> {
       result = result..sort(((a, b) => a.id.compareTo(b.id)));
       emit(MedicinesState.loaded(result));
     });
+    return null;
   }
 
   @override

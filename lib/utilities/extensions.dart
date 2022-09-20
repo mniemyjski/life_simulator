@@ -14,18 +14,24 @@ extension DateT on DateTime {
   }
 
   DateTime addDate({int days = 0, int weeks = 0, int months = 0, int years = 0}) {
-    DateTime date = Jiffy(onlyDate())
+    DateTime newDate = Jiffy(onlyDate())
         .add(days: days, weeks: weeks, months: months, years: years)
         .dateTime
         .onlyDate();
-    if (date == this) {
-      Jiffy(onlyDate())
+    if (newDate == onlyDate()) {
+      newDate = Jiffy(onlyDate())
           .add(days: days + 1, weeks: weeks, months: months, years: years)
           .dateTime
           .onlyDate();
     }
 
-    return date;
+    return newDate;
+  }
+}
+
+extension StringExtension on String {
+  String capitalize() {
+    return "${this[0].toUpperCase()}${substring(1).toLowerCase()}";
   }
 }
 

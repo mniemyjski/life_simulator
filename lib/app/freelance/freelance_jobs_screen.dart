@@ -53,6 +53,7 @@ class FreelanceJobsScreen extends StatelessWidget {
               },
             ),
           ),
+          const SizedBox(height: 80),
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
