@@ -48,9 +48,22 @@ extension DoubleT on double {
     if (test == 0) return '$minus\$${test.toStringAsFixed(0)}';
     if (test < 1) return '$minus\$${test.toStringAsFixed(6)}';
     if (test < 999) return '$minus\$${test.toStringAsFixed(2)}';
-    if (test < 1000000) return '$minus\$${test.toStringAsFixed(1)}';
+    if (test < 1000000) return '$minus\$${(test / 1000).toStringAsFixed(1)} t';
     if (test <= 1000000000) return '$minus\$${(test / 1000000).toStringAsFixed(2)} mln';
     if (test <= 1000000000000) return '$minus\$${(test / 1000000000).toStringAsFixed(2)} mld';
+    return '$minus\$${(test / 1000000000000).toStringAsFixed(2)} bln';
+  }
+
+  toExp() {
+    double test = this < 0 ? this * -1 : this;
+    String minus = this < 0 ? '-' : '';
+
+    if (test == 0) return '$minus${test.toStringAsFixed(0)}';
+    if (test < 1) return '$minus${test.toStringAsFixed(6)}';
+    if (test < 999) return '$minus${test.toStringAsFixed(2)}';
+    if (test < 1000000) return '$minus${(test / 1000).toStringAsFixed(1)} t';
+    if (test <= 1000000000) return '$minus${(test / 1000000).toStringAsFixed(2)} mln';
+    if (test <= 1000000000000) return '$minus${(test / 1000000000).toStringAsFixed(2)} mld';
     return '$minus\$${(test / 1000000000000).toStringAsFixed(2)} bln';
   }
 }

@@ -33,7 +33,7 @@ class FreelanceScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      'Fame',
+                      LocaleKeys.fame.tr(),
                       style: Theme.of(context)
                           .textTheme
                           .bodyText1!
@@ -43,7 +43,7 @@ class FreelanceScreen extends StatelessWidget {
                       context
                           .watch<FameCubit>()
                           .state
-                          .maybeWhen(orElse: () => '0', loaded: (v) => v.toInt().toString()),
+                          .maybeWhen(orElse: () => '0', loaded: (v) => v.roundToDouble().toExp()),
                       style: Theme.of(context).textTheme.bodyText1,
                     ),
                   ],
@@ -187,11 +187,6 @@ class FreelanceScreen extends StatelessWidget {
               child: const FaIcon(FontAwesomeIcons.arrowRotateLeft),
             ),
             const NextDayButton(),
-            // FloatingActionButton(
-            //   heroTag: null,
-            //   onPressed: () => context.router.push(const FreelanceJobsRoute()),
-            //   child: const FaIcon(FontAwesomeIcons.plus),
-            // ),
             SpeedDial(
               animatedIcon: AnimatedIcons.menu_close,
               spaceBetweenChildren: 4,
