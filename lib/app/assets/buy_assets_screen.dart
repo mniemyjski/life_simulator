@@ -2,6 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:richeable/constants/constants.dart';
+import 'package:richeable/utilities/utilities.dart';
 import 'package:richeable/widgets/widgets.dart';
 
 import 'cubit/assets/assets_cubit.dart';
@@ -15,7 +17,9 @@ class BuyAssetsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text(LocaleKeys.buyAssets.tr()),
+      ),
       body: Column(
         children: [
           const SizedBox(height: 8),

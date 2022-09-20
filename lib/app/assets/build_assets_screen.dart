@@ -21,7 +21,9 @@ class _BuildAssetsScreenState extends State<BuildAssetsScreen> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text(LocaleKeys.buildAssets.tr()),
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

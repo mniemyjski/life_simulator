@@ -23,7 +23,8 @@ enum ETypeTransactionSource {
   medicine,
   unpaidTaxes,
   addMoney,
-  lostMoney
+  lostMoney,
+  advertisement,
 }
 
 @freezed

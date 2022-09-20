@@ -122,5 +122,8 @@ abstract class  LocaleKeys {
   static const tooShort = 'tooShort';
   static const advertisement = 'advertisement';
   static const fame = 'fame';
+  static const chooseFood = 'chooseFood';
+  static const buyAssets = 'buyAssets';
+  static const buildAssets = 'buildAssets';
 
 }

@@ -14,7 +14,7 @@ class FoodScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      appBar: AppBar(title: Text(LocaleKeys.buyTransport.tr())),
+      appBar: AppBar(title: Text(LocaleKeys.chooseFood.tr())),
       body: Padding(
         padding: const EdgeInsets.only(top: 8.0),
         child: Column(

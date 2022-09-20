@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:richeable/app/money/models/transaction/transaction_model.dart';
 
 import '../../../date/cubit/date_cubit.dart';
 import '../../../money/cubit/money_cubit.dart';
@@ -65,6 +66,8 @@ class FameCubit extends HydratedCubit<FameState> {
   buyAdv({required double money, required int fame}) {
     if (_moneyCubit.state < money) return 'notEnoughMoney';
     state.whenOrNull(loaded: (value) {
+      _moneyCubit.addTransaction(
+          value: -money, eTypeTransactionSource: ETypeTransactionSource.advertisement);
       emit(FameState.loaded(value += fame));
     });
   }

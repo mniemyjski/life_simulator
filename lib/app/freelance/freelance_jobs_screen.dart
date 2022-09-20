@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -6,8 +5,6 @@ import 'package:richeable/utilities/utilities.dart';
 import 'package:richeable/widgets/widgets.dart';
 
 import '../../constants/constants.dart';
-import '../date/widgets/next_day.dart';
-import '../game/widget/app_bar_stats.dart';
 import 'cubit/job/freelance_job_cubit.dart';
 import 'widgets/freelance_job_creator.dart';
 import 'widgets/freelance_job_element.dart';
@@ -18,17 +15,10 @@ class FreelanceJobsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
+      appBar: AppBar(title: Text(LocaleKeys.jobs.tr())),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const AppBarStats(),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              '${LocaleKeys.jobs.tr()}:',
-              style: Theme.of(context).textTheme.headline6!.copyWith(color: Colors.white),
-            ),
-          ),
           Expanded(
             child: BlocBuilder<FreelanceJobCubit, FreelanceWorkState>(
               builder: (context, state) {
@@ -62,12 +52,14 @@ class FreelanceJobsScreen extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            FloatingActionButton(
-              heroTag: null,
-              onPressed: () => context.router.pop(),
-              child: const FaIcon(FontAwesomeIcons.arrowRotateLeft),
-            ),
-            const NextDayButton(),
+            // FloatingActionButton(
+            //   heroTag: null,
+            //   onPressed: () => context.router.pop(),
+            //   child: const FaIcon(FontAwesomeIcons.arrowRotateLeft),
+            // ),
+            // const NextDayButton(),
+            const SizedBox(height: 56),
+            const SizedBox(height: 56),
             FloatingActionButton(
               heroTag: null,
               onPressed: () => showModalBottomSheet<void>(
