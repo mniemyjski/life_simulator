@@ -82,7 +82,7 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
           color: Theme.of(context).cardColor,
         ),
         buttonHeight: 40,
-        buttonWidth: 180,
+        buttonWidth: 160,
         itemHeight: 40,
         itemPadding: const EdgeInsets.symmetric(horizontal: 8.0),
         buttonElevation: 2,

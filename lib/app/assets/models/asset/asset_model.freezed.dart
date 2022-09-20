@@ -28,6 +28,7 @@ mixin _$Asset {
   double get value => throw _privateConstructorUsedError;
   int get level => throw _privateConstructorUsedError;
   double get renovation => throw _privateConstructorUsedError;
+  double get monthlyCost => throw _privateConstructorUsedError;
   double get minRent => throw _privateConstructorUsedError;
   bool get friendlyAnimal => throw _privateConstructorUsedError;
   int get minRating => throw _privateConstructorUsedError;
@@ -50,6 +51,7 @@ abstract class $AssetCopyWith<$Res> {
       double value,
       int level,
       double renovation,
+      double monthlyCost,
       double minRent,
       bool friendlyAnimal,
       int minRating});
@@ -73,6 +75,7 @@ class _$AssetCopyWithImpl<$Res> implements $AssetCopyWith<$Res> {
     Object? value = freezed,
     Object? level = freezed,
     Object? renovation = freezed,
+    Object? monthlyCost = freezed,
     Object? minRent = freezed,
     Object? friendlyAnimal = freezed,
     Object? minRating = freezed,
@@ -110,6 +113,10 @@ class _$AssetCopyWithImpl<$Res> implements $AssetCopyWith<$Res> {
           ? _value.renovation
           : renovation // ignore: cast_nullable_to_non_nullable
               as double,
+      monthlyCost: monthlyCost == freezed
+          ? _value.monthlyCost
+          : monthlyCost // ignore: cast_nullable_to_non_nullable
+              as double,
       minRent: minRent == freezed
           ? _value.minRent
           : minRent // ignore: cast_nullable_to_non_nullable
@@ -140,6 +147,7 @@ abstract class _$$_AssetCopyWith<$Res> implements $AssetCopyWith<$Res> {
       double value,
       int level,
       double renovation,
+      double monthlyCost,
       double minRent,
       bool friendlyAnimal,
       int minRating});
@@ -164,6 +172,7 @@ class __$$_AssetCopyWithImpl<$Res> extends _$AssetCopyWithImpl<$Res>
     Object? value = freezed,
     Object? level = freezed,
     Object? renovation = freezed,
+    Object? monthlyCost = freezed,
     Object? minRent = freezed,
     Object? friendlyAnimal = freezed,
     Object? minRating = freezed,
@@ -201,6 +210,10 @@ class __$$_AssetCopyWithImpl<$Res> extends _$AssetCopyWithImpl<$Res>
           ? _value.renovation
           : renovation // ignore: cast_nullable_to_non_nullable
               as double,
+      monthlyCost: monthlyCost == freezed
+          ? _value.monthlyCost
+          : monthlyCost // ignore: cast_nullable_to_non_nullable
+              as double,
       minRent: minRent == freezed
           ? _value.minRent
           : minRent // ignore: cast_nullable_to_non_nullable
@@ -229,11 +242,13 @@ class _$_Asset extends _Asset {
       required this.value,
       required this.level,
       required this.renovation,
+      required this.monthlyCost,
       this.minRent = 800,
       this.friendlyAnimal = true,
       this.minRating = 1})
       : assert(minRating > 0, 'minRating <= 5'),
         assert(baseValue > 0),
+        assert(monthlyCost < 0),
         super._();
 
   factory _$_Asset.fromJson(Map<String, dynamic> json) =>
@@ -256,6 +271,8 @@ class _$_Asset extends _Asset {
   @override
   final double renovation;
   @override
+  final double monthlyCost;
+  @override
   @JsonKey()
   final double minRent;
   @override
@@ -267,7 +284,7 @@ class _$_Asset extends _Asset {
 
   @override
   String toString() {
-    return 'Asset(id: $id, address: $address, eTypeAsset: $eTypeAsset, tenantsMax: $tenantsMax, baseValue: $baseValue, value: $value, level: $level, renovation: $renovation, minRent: $minRent, friendlyAnimal: $friendlyAnimal, minRating: $minRating)';
+    return 'Asset(id: $id, address: $address, eTypeAsset: $eTypeAsset, tenantsMax: $tenantsMax, baseValue: $baseValue, value: $value, level: $level, renovation: $renovation, monthlyCost: $monthlyCost, minRent: $minRent, friendlyAnimal: $friendlyAnimal, minRating: $minRating)';
   }
 
   @override
@@ -286,6 +303,8 @@ class _$_Asset extends _Asset {
             const DeepCollectionEquality().equals(other.level, level) &&
             const DeepCollectionEquality()
                 .equals(other.renovation, renovation) &&
+            const DeepCollectionEquality()
+                .equals(other.monthlyCost, monthlyCost) &&
             const DeepCollectionEquality().equals(other.minRent, minRent) &&
             const DeepCollectionEquality()
                 .equals(other.friendlyAnimal, friendlyAnimal) &&
@@ -304,6 +323,7 @@ class _$_Asset extends _Asset {
       const DeepCollectionEquality().hash(value),
       const DeepCollectionEquality().hash(level),
       const DeepCollectionEquality().hash(renovation),
+      const DeepCollectionEquality().hash(monthlyCost),
       const DeepCollectionEquality().hash(minRent),
       const DeepCollectionEquality().hash(friendlyAnimal),
       const DeepCollectionEquality().hash(minRating));
@@ -329,6 +349,7 @@ abstract class _Asset extends Asset {
       required final double value,
       required final int level,
       required final double renovation,
+      required final double monthlyCost,
       final double minRent,
       final bool friendlyAnimal,
       final int minRating}) = _$_Asset;
@@ -352,6 +373,8 @@ abstract class _Asset extends Asset {
   int get level => throw _privateConstructorUsedError;
   @override
   double get renovation => throw _privateConstructorUsedError;
+  @override
+  double get monthlyCost => throw _privateConstructorUsedError;
   @override
   double get minRent => throw _privateConstructorUsedError;
   @override

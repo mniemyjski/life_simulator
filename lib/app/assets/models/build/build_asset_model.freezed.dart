@@ -20,7 +20,6 @@ BuildAsset _$BuildAssetFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$BuildAsset {
-  String get id => throw _privateConstructorUsedError;
   String get address => throw _privateConstructorUsedError;
   ETypeAsset get eTypeAsset => throw _privateConstructorUsedError;
   DateTime? get datCre => throw _privateConstructorUsedError;
@@ -41,8 +40,7 @@ abstract class $BuildAssetCopyWith<$Res> {
           BuildAsset value, $Res Function(BuildAsset) then) =
       _$BuildAssetCopyWithImpl<$Res>;
   $Res call(
-      {String id,
-      String address,
+      {String address,
       ETypeAsset eTypeAsset,
       DateTime? datCre,
       DateTime? datEnd,
@@ -61,7 +59,6 @@ class _$BuildAssetCopyWithImpl<$Res> implements $BuildAssetCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? id = freezed,
     Object? address = freezed,
     Object? eTypeAsset = freezed,
     Object? datCre = freezed,
@@ -71,10 +68,6 @@ class _$BuildAssetCopyWithImpl<$Res> implements $BuildAssetCopyWith<$Res> {
     Object? value = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
       address: address == freezed
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
@@ -115,8 +108,7 @@ abstract class _$$_BuildAssetCopyWith<$Res>
       __$$_BuildAssetCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String id,
-      String address,
+      {String address,
       ETypeAsset eTypeAsset,
       DateTime? datCre,
       DateTime? datEnd,
@@ -137,7 +129,6 @@ class __$$_BuildAssetCopyWithImpl<$Res> extends _$BuildAssetCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? id = freezed,
     Object? address = freezed,
     Object? eTypeAsset = freezed,
     Object? datCre = freezed,
@@ -147,10 +138,6 @@ class __$$_BuildAssetCopyWithImpl<$Res> extends _$BuildAssetCopyWithImpl<$Res>
     Object? value = freezed,
   }) {
     return _then(_$_BuildAsset(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
       address: address == freezed
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
@@ -187,8 +174,7 @@ class __$$_BuildAssetCopyWithImpl<$Res> extends _$BuildAssetCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_BuildAsset implements _BuildAsset {
   const _$_BuildAsset(
-      {required this.id,
-      required this.address,
+      {required this.address,
       required this.eTypeAsset,
       this.datCre,
       this.datEnd,
@@ -199,8 +185,6 @@ class _$_BuildAsset implements _BuildAsset {
   factory _$_BuildAsset.fromJson(Map<String, dynamic> json) =>
       _$$_BuildAssetFromJson(json);
 
-  @override
-  final String id;
   @override
   final String address;
   @override
@@ -218,7 +202,7 @@ class _$_BuildAsset implements _BuildAsset {
 
   @override
   String toString() {
-    return 'BuildAsset(id: $id, address: $address, eTypeAsset: $eTypeAsset, datCre: $datCre, datEnd: $datEnd, tenantsMax: $tenantsMax, cost: $cost, value: $value)';
+    return 'BuildAsset(address: $address, eTypeAsset: $eTypeAsset, datCre: $datCre, datEnd: $datEnd, tenantsMax: $tenantsMax, cost: $cost, value: $value)';
   }
 
   @override
@@ -226,7 +210,6 @@ class _$_BuildAsset implements _BuildAsset {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_BuildAsset &&
-            const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.address, address) &&
             const DeepCollectionEquality()
                 .equals(other.eTypeAsset, eTypeAsset) &&
@@ -242,7 +225,6 @@ class _$_BuildAsset implements _BuildAsset {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(address),
       const DeepCollectionEquality().hash(eTypeAsset),
       const DeepCollectionEquality().hash(datCre),
@@ -264,8 +246,7 @@ class _$_BuildAsset implements _BuildAsset {
 
 abstract class _BuildAsset implements BuildAsset {
   const factory _BuildAsset(
-      {required final String id,
-      required final String address,
+      {required final String address,
       required final ETypeAsset eTypeAsset,
       final DateTime? datCre,
       final DateTime? datEnd,
@@ -276,8 +257,6 @@ abstract class _BuildAsset implements BuildAsset {
   factory _BuildAsset.fromJson(Map<String, dynamic> json) =
       _$_BuildAsset.fromJson;
 
-  @override
-  String get id => throw _privateConstructorUsedError;
   @override
   String get address => throw _privateConstructorUsedError;
   @override

@@ -20,6 +20,7 @@ class Asset with _$Asset {
 
   @Assert('minRating > 0', 'minRating <= 5')
   @Assert('baseValue > 0')
+  @Assert('monthlyCost < 0')
   const factory Asset({
     required String id,
     required String address,
@@ -29,6 +30,7 @@ class Asset with _$Asset {
     required double value,
     required int level,
     required double renovation,
+    required double monthlyCost,
     @Default(800) double minRent,
     @Default(true) bool friendlyAnimal,
     @Default(1) int minRating,
@@ -41,27 +43,27 @@ class Asset with _$Asset {
     required ETypeAsset eTypeAsset,
     required int tenantsMax,
     required double baseValue,
-    required int level,
+    int level = 0,
     double? renovation,
-    double? minRent,
-    bool? friendlyAnimal,
-    int? minRating,
+    double minRent = 800,
+    bool friendlyAnimal = true,
+    int minRating = 1,
   }) {
     var uuid = const Uuid();
     var rng = Random();
 
     return Asset(
-      id: uuid.v1(),
-      address: address,
-      eTypeAsset: eTypeAsset,
-      tenantsMax: tenantsMax,
-      baseValue: baseValue,
-      value: baseValue,
-      level: level,
-      renovation: renovation ?? rng.nextIntInRange(60, 100).toDouble(),
-      minRent: minRent ?? 800,
-      friendlyAnimal: friendlyAnimal ?? true,
-      minRating: minRating ?? 1,
-    );
+        id: uuid.v1(),
+        address: address,
+        eTypeAsset: eTypeAsset,
+        tenantsMax: tenantsMax,
+        baseValue: baseValue,
+        value: baseValue,
+        level: level,
+        renovation: renovation ?? rng.nextIntInRange(60, 100).toDouble(),
+        minRent: minRent,
+        friendlyAnimal: friendlyAnimal,
+        minRating: minRating,
+        monthlyCost: (-100 * tenantsMax).toDouble());
   }
 }

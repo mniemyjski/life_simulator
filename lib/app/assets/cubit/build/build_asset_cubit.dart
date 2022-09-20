@@ -83,14 +83,11 @@ class BuildAssetCubit extends HydratedCubit<BuildAssetState> {
               result.add(element);
             } else {
               _assetsCubit.add(
-                Asset(
-                  id: element.id,
+                Asset.builder(
                   address: element.address,
                   eTypeAsset: element.eTypeAsset,
                   tenantsMax: element.tenantsMax,
                   baseValue: element.value,
-                  value: element.value,
-                  level: 0,
                   renovation: 100,
                 ),
               );

@@ -6,6 +6,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../../utilities/utilities.dart';
 import '../../../database/cubit/database_cubit.dart';
 import '../../../money/cubit/income/income_cubit.dart';
 import '../../../money/models/income/income_model.dart';
@@ -88,7 +89,9 @@ class TenantsCubit extends HydratedCubit<TenantsState> {
       List<Tenant> tenantsAllInAssets =
           List.of(tenants.where((element) => element.idAsset != asset.id));
 
-      if (tenantsInAsset.length < asset.tenantsMax && asset.renovation > 70) {
+      if (tenantsInAsset.length < asset.tenantsMax &&
+          asset.renovation > 70 &&
+          tenantsDB.isNotEmpty) {
         final int random = Random().nextInt(tenantsDB.length);
         Tenant newTenant = tenantsDB[random].copyWith(id: uuid.v1(), idAsset: asset.id);
 
@@ -116,16 +119,18 @@ class TenantsCubit extends HydratedCubit<TenantsState> {
     List<Tenant> tenants = List.from(_databaseCubit.state.tenantsDB
         .where(
           (e) =>
-              asset.minRating <= e.rating &&
               asset.level >= e.minLevel &&
+              asset.minRating <= e.rating &&
               e.rent >= asset.minRent &&
               (asset.friendlyAnimal == e.hasAnimal || e.hasAnimal == false),
         )
         .toList());
 
     List<Tenant> result = [];
+
     for (var element in tenants) {
-      int random = Random().nextInt(element.chance);
+      int random = Random().nextInt(element.chance + 1);
+
       if (random == element.chance) result.add(element);
     }
 

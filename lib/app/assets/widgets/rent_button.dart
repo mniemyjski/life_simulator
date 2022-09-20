@@ -39,7 +39,7 @@ class RentButton extends StatelessWidget {
                         Slider(
                           value: newRent,
                           min: 0,
-                          max: 15000,
+                          max: 2000,
                           divisions: 100,
                           label: '${(newRent).toInt().toString()}\$',
                           onChanged: (double value) => setState(() => newRent = value),

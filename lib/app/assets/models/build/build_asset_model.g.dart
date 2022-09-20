@@ -8,7 +8,6 @@ part of 'build_asset_model.dart';
 
 _$_BuildAsset _$$_BuildAssetFromJson(Map<String, dynamic> json) =>
     _$_BuildAsset(
-      id: json['id'] as String,
       address: json['address'] as String,
       eTypeAsset: $enumDecode(_$ETypeAssetEnumMap, json['eTypeAsset']),
       datCre: json['datCre'] == null
@@ -24,7 +23,6 @@ _$_BuildAsset _$$_BuildAssetFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$_BuildAssetToJson(_$_BuildAsset instance) =>
     <String, dynamic>{
-      'id': instance.id,
       'address': instance.address,
       'eTypeAsset': _$ETypeAssetEnumMap[instance.eTypeAsset],
       'datCre': instance.datCre?.toIso8601String(),

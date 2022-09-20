@@ -4,7 +4,6 @@ import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:uuid/uuid.dart';
 
 import '../../../constants/constants.dart';
 import '../../../utilities/utilities.dart';
@@ -25,74 +24,59 @@ class _AssetBuilderState extends State<AssetBuilder> {
   final List<String> items = Enums.toList(ETypeAsset.values);
   final TextEditingController controller = TextEditingController(text: '');
   final GlobalKey<FormState> formKey = GlobalKey();
-  ETypeAsset selectedAssetType = ETypeAsset.apartment;
-  int selectedTenant = 1;
-  int selectedDuration = 60;
+  late ETypeAsset selectedAssetType;
+  late int selectedMultipleValue;
+  late int selectedTenant;
+  late int minTenant;
+  late int maxTenant;
+  late int baseCost;
+  late int duration;
 
   resetSliders() {
     switch (selectedAssetType) {
       case ETypeAsset.apartment:
         selectedTenant = 1;
-        selectedDuration = 60;
+        minTenant = 1;
+        maxTenant = 1;
+        baseCost = 50000;
+        duration = 12;
         break;
       case ETypeAsset.house:
         selectedTenant = 1;
-        selectedDuration = 60;
+        minTenant = 1;
+        maxTenant = 2;
+        baseCost = 80000;
+        duration = 24;
         break;
       case ETypeAsset.tenement:
         selectedTenant = 10;
-        selectedDuration = 60;
+        minTenant = 10;
+        maxTenant = 30;
+        baseCost = 50000;
+        duration = 24;
         break;
       case ETypeAsset.estate:
         selectedTenant = 30;
-        selectedDuration = 60;
+        minTenant = 30;
+        maxTenant = 80;
+        baseCost = 80000;
+        duration = 24;
         break;
-    }
-  }
-
-  int minTenant() {
-    switch (selectedAssetType) {
-      case ETypeAsset.apartment:
-        return 1;
-      case ETypeAsset.house:
-        return 1;
-      case ETypeAsset.tenement:
-        return 10;
-      case ETypeAsset.estate:
-        return 30;
-    }
-  }
-
-  int maxTenant() {
-    switch (selectedAssetType) {
-      case ETypeAsset.apartment:
-        return 1;
-      case ETypeAsset.house:
-        return 2;
-      case ETypeAsset.tenement:
-        return 20;
-      case ETypeAsset.estate:
-        return 80;
-    }
-  }
-
-  double baseCost() {
-    switch (selectedAssetType) {
-      case ETypeAsset.apartment:
-        return 500000;
-      case ETypeAsset.house:
-        return 600000;
-      case ETypeAsset.tenement:
-        return 500000;
-      case ETypeAsset.estate:
-        return 600000;
     }
   }
 
   @override
+  void initState() {
+    selectedAssetType = ETypeAsset.apartment;
+    selectedMultipleValue = 1;
+    resetSliders();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    double cost = (baseCost() * selectedTenant / (selectedDuration / 8)).toDouble();
-    double value = (baseCost() * selectedTenant / 5) * 1.3;
+    double cost = (baseCost * selectedTenant * selectedMultipleValue).toDouble();
+    double value = cost * 1.3;
 
     return Container(
       color: Colors.black.withOpacity(0.5),
@@ -180,6 +164,33 @@ class _AssetBuilderState extends State<AssetBuilder> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
+                              '${LocaleKeys.duration.tr()}:',
+                              style: TextStyle(
+                                  color: Theme.of(context).textTheme.bodyText1!.color,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              '$duration months',
+                              style: TextStyle(
+                                  color: Theme.of(context).textTheme.bodyText1!.color,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Card(
+                      shape: BeveledRectangleBorder(
+                        borderRadius: BorderRadius.circular(0),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
                               '${LocaleKeys.cost.tr()}:',
                               style: TextStyle(
                                   color: Theme.of(context).textTheme.bodyText1!.color,
@@ -243,9 +254,9 @@ class _AssetBuilderState extends State<AssetBuilder> {
                     Expanded(
                       child: Slider(
                         value: selectedTenant.toDouble(),
-                        min: minTenant().toDouble(),
-                        max: maxTenant().toDouble(),
-                        divisions: maxTenant(),
+                        min: minTenant.toDouble(),
+                        max: maxTenant.toDouble(),
+                        divisions: maxTenant,
                         onChanged: (double value) => setState(() => selectedTenant = value.toInt()),
                       ),
                     ),
@@ -268,23 +279,23 @@ class _AssetBuilderState extends State<AssetBuilder> {
                 child: Row(
                   children: [
                     Text(
-                      '${LocaleKeys.duration.tr()}:',
+                      '${LocaleKeys.valueMultiplier.tr()}:',
                       style: TextStyle(
                           color: Theme.of(context).textTheme.bodyText1!.color,
                           fontWeight: FontWeight.bold),
                     ),
                     Expanded(
                       child: Slider(
-                        value: selectedDuration.toDouble(),
-                        min: 12,
-                        max: 60,
-                        divisions: 60,
+                        value: selectedMultipleValue.toDouble(),
+                        min: 1,
+                        max: 10,
+                        divisions: 10,
                         onChanged: (double value) =>
-                            setState(() => selectedDuration = value.toInt()),
+                            setState(() => selectedMultipleValue = value.toInt()),
                       ),
                     ),
                     Text(
-                      '$selectedDuration months',
+                      '$selectedMultipleValue',
                       style: TextStyle(
                           color: Theme.of(context).textTheme.bodyText1!.color,
                           fontWeight: FontWeight.bold),
@@ -298,18 +309,15 @@ class _AssetBuilderState extends State<AssetBuilder> {
               child: CustomButton(
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
-                      var uuid = const Uuid();
-
                       String? test = context.read<BuildAssetCubit>().build(
                             BuildAsset(
-                              id: uuid.v1(),
                               address: controller.text,
                               eTypeAsset: selectedAssetType,
                               tenantsMax: selectedTenant,
                               cost: cost,
                               value: value,
                             ),
-                            selectedDuration,
+                            duration,
                           );
                       if (test != null) {
                         BotToast.showText(text: test, align: const Alignment(0.1, 0.05));

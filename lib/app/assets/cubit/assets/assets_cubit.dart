@@ -8,7 +8,9 @@ import 'package:injectable/injectable.dart';
 import '../../../../utilities/utilities.dart';
 import '../../../database/cubit/database_cubit.dart';
 import '../../../date/cubit/date_cubit.dart';
+import '../../../money/cubit/income/income_cubit.dart';
 import '../../../money/cubit/money_cubit.dart';
+import '../../../money/models/income/income_model.dart';
 import '../../../money/models/transaction/transaction_model.dart';
 import '../../../new_game/new_game_cubit.dart';
 import '../../models/asset/asset_model.dart';
@@ -34,6 +36,8 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
   final DatabaseCubit _databaseCubit;
   final TenantsCubit _tenantsCubit;
 
+  final IncomeCubit _incomeCubit;
+
   AssetsCubit(
     this._newGameCubit,
     this._moneyCubit,
@@ -41,6 +45,7 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
     this._dateCubit,
     this._databaseCubit,
     this._tenantsCubit,
+    this._incomeCubit,
   ) : super(const AssetsState.initial()) {
     _newGame();
     _counting();
@@ -72,6 +77,7 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
           _moneyCubit.addTransaction(
               value: -asset.value, eTypeTransactionSource: ETypeTransactionSource.asset);
           _buyAssetCubit.remove(asset);
+          _addIncome(asset);
           emit(AssetsState.loaded(result));
           return 'succeed';
         });
@@ -83,6 +89,7 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
         orElse: () => throw 'error',
         loaded: (assets) {
           List<Asset> result = List.from(assets)..add(asset);
+          _addIncome(asset);
           emit(AssetsState.loaded(result));
           return 'succeed';
         });
@@ -98,9 +105,26 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
               value: asset.value, eTypeTransactionSource: ETypeTransactionSource.asset);
           _buyAssetCubit.add(asset.copyWith(friendlyAnimal: true, minRent: 800));
           _tenantsCubit.removeTenantInAsset(asset);
+          _removeIncome(asset);
           emit(AssetsState.loaded(result));
           return 'succeed';
         });
+  }
+
+  _addIncome(Asset asset) {
+    Income income = Income(
+      id: asset.id,
+      source: ETypeSource.asset,
+      typeIncome: ETypeIncome.expense,
+      eTypeFrequency: ETypeFrequency.monthly,
+      value: asset.monthlyCost,
+    );
+
+    _incomeCubit.add(income);
+  }
+
+  _removeIncome(Asset asset) {
+    _incomeCubit.remove(asset.id);
   }
 
   //function to change renovation for asset

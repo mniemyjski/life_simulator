@@ -8,7 +8,6 @@ part 'build_asset_model.g.dart';
 @freezed
 class BuildAsset with _$BuildAsset {
   const factory BuildAsset({
-    required String id,
     required String address,
     required ETypeAsset eTypeAsset,
     DateTime? datCre,
