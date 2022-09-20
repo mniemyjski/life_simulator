@@ -126,5 +126,6 @@ abstract class  LocaleKeys {
   static const buyAssets = 'buyAssets';
   static const buildAssets = 'buildAssets';
   static const valueMultiplier = 'valueMultiplier';
+  static const income = 'income';
 
 }
