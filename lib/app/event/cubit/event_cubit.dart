@@ -85,12 +85,12 @@ class EventCubit extends HydratedCubit<EventState> {
         state.whenOrNull(loaded: (events) {
           List<GameEvent> result = [];
 
-          events.forEach((element) {
+          for (var element in events) {
             GameEvent gameEvent = element.copyWith(
                 leftDuration: element.leftDuration > 0 ? element.leftDuration - 1 : 0);
             if (gameEvent.leftDuration == 0) gameEvent = gameEvent.copyWith(active: false);
             result.add(gameEvent);
-          });
+          }
 
           emit(EventState.loaded(events: result));
         });

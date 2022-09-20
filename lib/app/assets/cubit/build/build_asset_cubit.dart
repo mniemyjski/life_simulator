@@ -82,7 +82,7 @@ class BuildAssetCubit extends HydratedCubit<BuildAssetState> {
             if (element.datEnd != date) {
               result.add(element);
             } else {
-              _assetsCubit.buy(
+              _assetsCubit.add(
                 Asset(
                   id: element.id,
                   address: element.address,

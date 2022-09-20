@@ -41,7 +41,7 @@ class Skill with _$Skill {
   }
 
   static List<double> getProgress() {
-    return [0, 1000, 3000, 6000, 12000, 24000, 58000, 116000, 232000, 350000, 700000];
+    return [0, 2000, 5000, 8000, 12000, 24000, 58000, 116000, 232000, 350000, 700000];
   }
 
   factory Skill.fromJson(Map<String, dynamic> json) => _$SkillFromJson(json);

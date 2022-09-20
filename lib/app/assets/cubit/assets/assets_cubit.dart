@@ -65,7 +65,7 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
     if (_moneyCubit.state < asset.value) return 'not_enought_money';
 
     return state.maybeWhen(
-        orElse: () => 'error',
+        orElse: () => throw 'error',
         loaded: (assets) {
           List<Asset> result = List.from(assets)..add(asset);
 
@@ -77,10 +77,21 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
         });
   }
 
+  //function to buy asset
+  String add(Asset asset) {
+    return state.maybeWhen(
+        orElse: () => throw 'error',
+        loaded: (assets) {
+          List<Asset> result = List.from(assets)..add(asset);
+          emit(AssetsState.loaded(result));
+          return 'succeed';
+        });
+  }
+
   //function to sell asset
   String sell(Asset asset) {
     return state.maybeWhen(
-        orElse: () => 'error',
+        orElse: () => throw 'error',
         loaded: (assets) {
           List<Asset> result = List.from(assets)..remove(asset);
           _moneyCubit.addTransaction(
@@ -101,7 +112,7 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
     if (_moneyCubit.state < cost) return 'not_enought_money';
 
     return state.maybeWhen(
-        orElse: () => 'error',
+        orElse: () => throw 'error',
         loaded: (assets) {
           List<Asset> result = List.from(assets)..remove(asset);
           _moneyCubit.addTransaction(
@@ -123,7 +134,7 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
     if (_moneyCubit.state < cost) return 'not_enought_money';
 
     return state.maybeWhen(
-        orElse: () => 'error',
+        orElse: () => throw 'error',
         loaded: (assets) {
           List<Asset> result = List.from(assets)..remove(asset);
           _moneyCubit.addTransaction(
@@ -142,7 +153,7 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
     required bool friendlyAnimal,
   }) {
     state.maybeWhen(
-        orElse: () => 'error',
+        orElse: () => throw 'error',
         loaded: (assets) {
           List<Asset> result = List.from(assets)..remove(asset);
           Asset newAsset = asset.copyWith(friendlyAnimal: friendlyAnimal);
@@ -157,7 +168,7 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
     required int minRating,
   }) {
     state.maybeWhen(
-        orElse: () => 'error',
+        orElse: () => throw 'error',
         loaded: (assets) {
           List<Asset> result = List.from(assets)..remove(asset);
           Asset newAsset = asset.copyWith(minRating: minRating);
@@ -172,7 +183,7 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
     required double rent,
   }) {
     state.maybeWhen(
-        orElse: () => 'error',
+        orElse: () => throw 'error',
         loaded: (assets) {
           List<Asset> result = List.from(assets)..remove(asset);
           Asset newAsset = asset.copyWith(minRent: rent);
@@ -184,17 +195,19 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
   //counting asset
   _counting() {
     _dateSub = _dateCubit.stream.listen((event) {
-      state.whenOrNull(loaded: (assets) {
-        final List<Asset> result = [];
-        for (var element in assets) {
-          Asset newAsset = _decreaseRenovation(element);
-          _tenantsCubit.changeSatisfaction(newAsset);
-          _tenantsCubit.removeTenantBelowSatisfaction(newAsset);
-          _tenantsCubit.addTenant(newAsset);
-          result.add(newAsset);
-          emit(AssetsState.loaded(result));
-        }
-      });
+      state.maybeWhen(
+          orElse: () => throw 'error',
+          loaded: (assets) {
+            final List<Asset> result = [];
+            for (var element in assets) {
+              Asset newAsset = _decreaseRenovation(element);
+              _tenantsCubit.changeSatisfaction(newAsset);
+              _tenantsCubit.removeTenantBelowSatisfaction(newAsset);
+              _tenantsCubit.addTenant(newAsset);
+              result.add(newAsset);
+              emit(AssetsState.loaded(result));
+            }
+          });
     });
   }
 

@@ -13,7 +13,7 @@ class AppBarStats extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Theme.of(context).primaryColor.withOpacity(0.5),
+      color: Theme.of(context).primaryColor.withOpacity(0.4),
       child: Padding(
         padding: const EdgeInsets.all(4.0),
         child: Column(

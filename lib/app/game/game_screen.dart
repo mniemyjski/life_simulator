@@ -3,6 +3,9 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:richeable/app/event/cubit/event_cubit.dart';
+import 'package:richeable/constants/constants.dart';
+import 'package:richeable/utilities/utilities.dart';
 import 'package:richeable/widgets/widgets.dart';
 
 import '../../config/routes/routes.gr.dart';
@@ -17,14 +20,33 @@ class GameScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DateTime? last;
+
     return MultiBlocListener(
       listeners: [
         BlocListener<RulesCubit, RulesState>(
           listener: (context, state) {
             state.whenOrNull(loaded: (rules) {
               if (rules) {
-                BotToast.showText(text: 'End Game', align: const Alignment(0.1, 0.05));
+                BotToast.showText(
+                    text: LocaleKeys.endGame.tr(),
+                    contentPadding: const EdgeInsets.all(18),
+                    align: const Alignment(0.1, 0.05));
                 context.router.push(const HomeRoute());
+              }
+            });
+          },
+        ),
+        BlocListener<EventCubit, EventState>(
+          listener: (context, state) {
+            state.whenOrNull(loaded: (event) {
+              if ((last ?? '') != event.first.datCre) {
+                BotToast.showText(
+                    text: event.first.name,
+                    contentPadding: const EdgeInsets.all(18),
+                    align: const Alignment(0.1, 0.05));
+
+                last = event.first.datCre;
               }
             });
           },

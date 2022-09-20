@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bot_toast/bot_toast.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -138,46 +137,24 @@ class _FreelanceJobCreatorState extends State<FreelanceJobCreator> {
                           Text('${lvl.toInt()}'),
                         ],
                       ),
-                      const Padding(
-                        padding: EdgeInsets.only(bottom: 4),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 4),
                         child: Text(
-                          'Type:',
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          '${LocaleKeys.type.tr()}:',
+                          style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(4),
                         child: Row(
                           children: [
-                            //TODO change DropdownButtonHideUnderline to CustomDropButton
-                            DropdownButtonHideUnderline(
-                              child: DropdownButton2(
-                                items: (Enums.toList(ETypeFreelance.values) as List<String>)
-                                    .map((item) => DropdownMenuItem<String>(
-                                          value: item,
-                                          child: Text(
-                                            item,
-                                            style: const TextStyle(
-                                              fontSize: 14,
-                                            ),
-                                          ),
-                                        ))
-                                    .toList(),
-                                value: Enums.toText(typeJob),
+                            CustomDropDownButton(
+                                items: Enums.toList(ETypeFreelance.values),
                                 onChanged: (v) => setState(() {
-                                  typeJob = Enums.toEnum(v as String, ETypeFreelance.values);
-                                  req = _getList(typeJob, lvl);
-                                  calcDuration();
-                                }),
-                                buttonHeight: 40,
-                                buttonWidth: 140,
-                                itemHeight: 40,
-                                buttonPadding: const EdgeInsets.only(left: 14, right: 14),
-                                buttonDecoration: BoxDecoration(
-                                  color: Theme.of(context).cardColor,
-                                ),
-                              ),
-                            ),
+                                      typeJob = Enums.toEnum(v, ETypeFreelance.values);
+                                      req = _getList(typeJob, lvl);
+                                      calcDuration();
+                                    })),
                             Card(
                               shape: const RoundedRectangleBorder(
                                 borderRadius: BorderRadius.zero,
@@ -206,11 +183,11 @@ class _FreelanceJobCreatorState extends State<FreelanceJobCreator> {
                           ],
                         ),
                       ),
-                      const Padding(
-                        padding: EdgeInsets.only(bottom: 4),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 4),
                         child: Text(
-                          'Req:',
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          '${LocaleKeys.requirements.tr()}:',
+                          style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ),
                       Padding(
@@ -316,7 +293,7 @@ class _FreelanceJobCreatorState extends State<FreelanceJobCreator> {
                     .copyWith(color: test.lvl >= element.lvl ? Colors.green[600] : Colors.red),
                 children: <TextSpan>[
                   TextSpan(
-                      text: '${Enums.toText(element.name)}: ',
+                      text: '${Enums.toText(element.name).tr()}: ',
                       style: const TextStyle(fontWeight: FontWeight.bold)),
                   TextSpan(text: element.lvl.toString()),
                 ],

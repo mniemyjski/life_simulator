@@ -41,8 +41,7 @@ class DateCubit extends HydratedCubit<DateState> {
   nextDay() {
     for (var i = 0; i < _daySettingCubit.state; i++) {
       state.whenOrNull(loaded: (date) {
-        DateTime dateTime = date.onlyDate().add(const Duration(days: 1)).onlyDate();
-        if (date == dateTime) dateTime = date.onlyDate().add(const Duration(days: 2)).onlyDate();
+        DateTime dateTime = date.addDate(days: 1);
 
         emit(DateState.loaded(dateTime));
       });

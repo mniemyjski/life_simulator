@@ -53,7 +53,7 @@ class TimeSpend extends StatelessWidget {
                         TimeSpendElement(
                           value: timeSpend.getTotalLearnTime(),
                           valueName: '${timeSpend.getTotalLearnTime()} ($bonusLearn)',
-                          name: LocaleKeys.learn,
+                          name: LocaleKeys.learn.tr(),
                           color: Colors.purple[800]!.withOpacity(0.7),
                         ),
                         TimeSpendElement(

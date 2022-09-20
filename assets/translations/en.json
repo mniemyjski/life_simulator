@@ -99,6 +99,24 @@
   "home": "Home",
   "dayOnTurn": "Day on turn",
   "locale_app": "Language",
-  "youDontHaveAnyProduct": "youDontHaveAnyProduct"
+  "youDontHaveAnyProduct": "You don't have any product",
+  "programming": "Programming",
+  "analytics": "Analytics",
+  "bookkeeping": "Bookkeeping",
+  "business": "Business",
+  "management": "Management",
+  "confidence": "Confidence",
+  "communicativeness": "Communicativeness",
+  "book": "Book",
+  "course": "Course",
+  "youtube": "Youtube",
+  "application": "Application",
+  "onlineCourse": "Online Course",
+  "fullTimeCourse": "Full time Course",
+  "requirements": "Requirements",
+  "jobs": "Jobs",
+  "notEnoughMoney": "Not enough money",
+  "endGame": "End Game"
+
 
 }

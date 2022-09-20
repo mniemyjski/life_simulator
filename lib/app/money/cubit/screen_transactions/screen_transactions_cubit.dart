@@ -81,13 +81,24 @@ class ScreenTransactionsCubit extends Cubit<ScreenTransactionsState> {
 
   backMonth() {
     state.whenOrNull(loaded: (date, oldTransactions) {
-      _counter(Jiffy(date).add(months: -1).dateTime.onlyDate());
+      DateTime newMonth = Jiffy(date).add(months: -1).dateTime.onlyDate();
+
+      if (newMonth.millisecondsSinceEpoch >= DateTime(18, 1, 1).millisecondsSinceEpoch) {
+        _counter(newMonth);
+      }
     });
   }
 
   nextMonth() {
     state.whenOrNull(loaded: (date, oldTransactions) {
-      _counter(Jiffy(date).add(months: 1).dateTime.onlyDate());
+      DateTime newMonth = Jiffy(date).add(months: 1).dateTime.onlyDate();
+
+      _dateCubit.state.whenOrNull(loaded: (d) {
+        if (newMonth.millisecondsSinceEpoch <=
+            DateTime(d.year, d.month, 1).millisecondsSinceEpoch) {
+          _counter(newMonth);
+        }
+      });
     });
   }
 

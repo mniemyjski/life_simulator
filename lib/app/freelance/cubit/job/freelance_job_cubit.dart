@@ -55,44 +55,51 @@ class FreelanceJobCubit extends HydratedCubit<FreelanceWorkState> {
 
   _counting() {
     _dateSub = _dateCubit.stream.listen((event) {
-      event.whenOrNull(loaded: (date) {
-        _timeSpendCubit.state.whenOrNull(loaded: (timeSpend) {
-          state.whenOrNull(loaded: (freelanceJobs) {
-            int time = timeSpend.freelance;
-            List<FreelanceJob> result = [];
+      event.maybeWhen(
+          orElse: () => throw 'error',
+          loaded: (date) {
+            _timeSpendCubit.state.maybeWhen(
+                orElse: () => throw 'error',
+                loaded: (timeSpend) {
+                  state.maybeWhen(
+                      orElse: () => throw 'error',
+                      loaded: (freelanceJobs) {
+                        int time = timeSpend.freelance;
+                        List<FreelanceJob> result = [];
 
-            for (var e in freelanceJobs) {
-              if (e.leftWorkTime > time) {
-                result.add(
-                  e.copyWith(
-                      leftWorkTime: e.leftWorkTime - time,
-                      fame: e.getFameMultiplier() * (time - e.leftWorkTime)),
-                );
-                _countingExp(
-                  reqSkills: e.reqSkills,
-                  userSkills: e.userSkills,
-                  hours: time,
-                );
-                time = 0;
-              }
-              if (e.leftWorkTime <= time) {
-                _freelanceDoneCubit
-                    .add(e.copyWith(fame: e.getFameMultiplier() * e.leftWorkTime).toDone(date));
-                _countingExp(
-                  reqSkills: e.reqSkills,
-                  userSkills: e.userSkills,
-                  hours: e.leftWorkTime,
-                );
-                time = time - e.leftWorkTime;
-              }
-            }
-            if (result.isEmpty) {
-              _timeSpendCubit.changeFreelance(-timeSpend.freelance);
-            }
-            emit(FreelanceWorkState.loaded(result));
+                        for (var e in freelanceJobs) {
+                          if (e.leftWorkTime > time) {
+                            result.add(
+                              e.copyWith(
+                                  leftWorkTime: e.leftWorkTime - time,
+                                  fame: e.getFameMultiplier() * (time - e.leftWorkTime)),
+                            );
+                            _countingExp(
+                              reqSkills: e.reqSkills,
+                              userSkills: e.userSkills,
+                              hours: time,
+                            );
+                            time = 0;
+                          }
+                          if (e.leftWorkTime <= time) {
+                            _freelanceDoneCubit.add(e
+                                .copyWith(fame: e.getFameMultiplier() * e.leftWorkTime)
+                                .toDone(date));
+                            _countingExp(
+                              reqSkills: e.reqSkills,
+                              userSkills: e.userSkills,
+                              hours: e.leftWorkTime,
+                            );
+                            time = time - e.leftWorkTime;
+                          }
+                        }
+                        if (result.isEmpty) {
+                          _timeSpendCubit.changeFreelance(-timeSpend.freelance);
+                        }
+                        emit(FreelanceWorkState.loaded(result));
+                      });
+                });
           });
-        });
-      });
     });
   }
 
@@ -114,7 +121,7 @@ class FreelanceJobCubit extends HydratedCubit<FreelanceWorkState> {
     bool test =
         _testReqSkill(reqSkill: freelanceWork.reqSkills, userSkills: freelanceWork.userSkills);
     if (!test) {
-      return "YouCannotDoThis";
+      return "youCannotDoThis";
     }
 
     return state.maybeWhen(

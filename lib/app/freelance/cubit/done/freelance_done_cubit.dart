@@ -87,7 +87,7 @@ class FreelanceDoneCubit extends HydratedCubit<FreelanceDoneState> {
           if (addFame > 0) _fameCubit.add(addFame);
 
           _fameCubit.state.whenOrNull(loaded: (fame) {
-            double fame10 = fame / 30000;
+            double fame10 = fame / 60000;
             double addMoney = 0;
             for (var e in result) {
               addMoney = e.price * fame10;

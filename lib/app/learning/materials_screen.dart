@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -71,9 +72,14 @@ class _MaterialsScreenState extends State<MaterialsScreen> {
                     itemBuilder: (context, index) {
                       return LearningElement(
                         element: list[index],
-                        onPressed: () {
-                          context.read<LearningCubit>().add(list[index]);
-                          context.router.pop();
+                        onPressed: () async {
+                          var toast = context.read<LearningCubit>().add(list[index]);
+                          if (toast != null) {
+                            BotToast.showText(
+                                text: toast.toString().tr(), align: const Alignment(0.1, 0.05));
+                          } else {
+                            context.router.pop();
+                          }
                         },
                       );
                     },

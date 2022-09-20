@@ -78,22 +78,24 @@ class TenantsCubit extends HydratedCubit<TenantsState> {
   }
 
   addTenant(Asset asset) {
-    if (Random().nextInt(100) < 50) return asset;
+    if (Random().nextInt(100) < 50) return;
 
     state.whenOrNull(loaded: (tenants) {
       var uuid = const Uuid();
       List<Tenant> tenantsDB = _getTenantsDB(asset);
       List<Tenant> tenantsInAsset =
           List.of(tenants.where((element) => element.idAsset == asset.id));
-      List<Tenant> tenantsTotal = List.of(tenants.where((element) => element.idAsset != asset.id));
+      List<Tenant> tenantsAllInAssets =
+          List.of(tenants.where((element) => element.idAsset != asset.id));
 
       if (tenantsInAsset.length < asset.tenantsMax && asset.renovation > 70) {
         final int random = Random().nextInt(tenantsDB.length);
         Tenant newTenant = tenantsDB[random].copyWith(id: uuid.v1(), idAsset: asset.id);
+
         _addIncome(newTenant);
         tenantsInAsset.add(newTenant);
 
-        emit(TenantsState.loaded(tenantsInAsset..addAll(tenantsTotal)));
+        emit(TenantsState.loaded(tenantsInAsset..addAll(tenantsAllInAssets)));
       }
     });
   }
@@ -111,7 +113,7 @@ class TenantsCubit extends HydratedCubit<TenantsState> {
   }
 
   List<Tenant> _getTenantsDB(Asset asset) {
-    return List.from(_databaseCubit.state.tenantsDB
+    List<Tenant> tenants = List.from(_databaseCubit.state.tenantsDB
         .where(
           (e) =>
               asset.minRating <= e.rating &&
@@ -120,6 +122,14 @@ class TenantsCubit extends HydratedCubit<TenantsState> {
               (asset.friendlyAnimal == e.hasAnimal || e.hasAnimal == false),
         )
         .toList());
+
+    List<Tenant> result = [];
+    for (var element in tenants) {
+      int random = Random().nextInt(element.chance);
+      if (random == element.chance) result.add(element);
+    }
+
+    return result;
   }
 
   removeTenant({required Asset asset, required Tenant tenant}) {

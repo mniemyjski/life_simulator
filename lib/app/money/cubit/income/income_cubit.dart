@@ -92,63 +92,71 @@ class IncomeCubit extends HydratedCubit<IncomeState> {
 
   _counting() {
     _dateSub = _dateCubit.stream.listen((dateState) {
-      dateState.whenOrNull(loaded: (date) {
-        state.whenOrNull(loaded: (incomes) {
-          List<Income> result = [];
+      dateState.maybeWhen(
+          orElse: () => throw "Date doesn't loaded!!!",
+          loaded: (date) {
+            state.maybeWhen(
+                orElse: () => throw "Incomes doesn't loaded!!!",
+                loaded: (incomes) {
+                  List<Income> result = [];
 
-          for (var element in incomes) {
-            if (element.next == date) {
-              DateTime nextDate;
+                  for (var element in incomes) {
+                    if (element.next == date) {
+                      DateTime nextDate;
 
-              switch (element.eTypeFrequency) {
-                case ETypeFrequency.annually:
-                  nextDate = Jiffy(date).add(years: 1).dateTime.onlyDate();
-                  break;
-                case ETypeFrequency.monthly:
-                  nextDate = Jiffy(date).add(months: 1).dateTime.onlyDate();
-                  break;
-                case ETypeFrequency.weekly:
-                  nextDate = Jiffy(date).add(weeks: 1).dateTime.onlyDate();
-                  break;
-                case ETypeFrequency.daily:
-                  nextDate = Jiffy(date).add(days: 1).dateTime.onlyDate();
-                  break;
-              }
+                      switch (element.eTypeFrequency) {
+                        case ETypeFrequency.annually:
+                          nextDate = date.addDate(years: 1);
+                          break;
+                        case ETypeFrequency.monthly:
+                          nextDate = date.addDate(months: 1);
+                          break;
+                        case ETypeFrequency.weekly:
+                          nextDate = date.addDate(weeks: 1);
+                          break;
+                        case ETypeFrequency.daily:
+                          nextDate = date.addDate(days: 1);
+                          break;
+                      }
 
-              result.add(element.copyWith(next: nextDate));
+                      result.add(element.copyWith(next: nextDate));
 
-              //Todo change income source to transaction source
-              switch (element.source) {
-                case ETypeSource.job:
-                  _moneyCubit.addTransaction(
-                      value: element.value, eTypeTransactionSource: ETypeTransactionSource.job);
-                  break;
-                case ETypeSource.meal:
-                  _moneyCubit.addTransaction(
-                      value: element.value, eTypeTransactionSource: ETypeTransactionSource.food);
-                  break;
-                case ETypeSource.house:
-                  _moneyCubit.addTransaction(
-                      value: element.value, eTypeTransactionSource: ETypeTransactionSource.home);
-                  break;
-                case ETypeSource.transport:
-                  _moneyCubit.addTransaction(
-                      value: element.value,
-                      eTypeTransactionSource: ETypeTransactionSource.transport);
-                  break;
-                case ETypeSource.asset:
-                  _moneyCubit.addTransaction(
-                      value: element.value, eTypeTransactionSource: ETypeTransactionSource.asset);
-                  break;
-              }
-            } else {
-              result.add(element);
-            }
-          }
+                      //Todo change income source to transaction source
+                      switch (element.source) {
+                        case ETypeSource.job:
+                          _moneyCubit.addTransaction(
+                              value: element.value,
+                              eTypeTransactionSource: ETypeTransactionSource.job);
+                          break;
+                        case ETypeSource.meal:
+                          _moneyCubit.addTransaction(
+                              value: element.value,
+                              eTypeTransactionSource: ETypeTransactionSource.food);
+                          break;
+                        case ETypeSource.house:
+                          _moneyCubit.addTransaction(
+                              value: element.value,
+                              eTypeTransactionSource: ETypeTransactionSource.home);
+                          break;
+                        case ETypeSource.transport:
+                          _moneyCubit.addTransaction(
+                              value: element.value,
+                              eTypeTransactionSource: ETypeTransactionSource.transport);
+                          break;
+                        case ETypeSource.asset:
+                          _moneyCubit.addTransaction(
+                              value: element.value,
+                              eTypeTransactionSource: ETypeTransactionSource.asset);
+                          break;
+                      }
+                    } else {
+                      result.add(element);
+                    }
+                  }
 
-          emit(IncomeState.loaded(result));
-        });
-      });
+                  emit(IncomeState.loaded(result));
+                });
+          });
     });
   }
 

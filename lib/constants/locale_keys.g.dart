@@ -101,5 +101,22 @@ abstract class  LocaleKeys {
   static const dayOnTurn = 'dayOnTurn';
   static const locale_app = 'locale_app';
   static const youDontHaveAnyProduct = 'youDontHaveAnyProduct';
+  static const programming = 'programming';
+  static const analytics = 'analytics';
+  static const bookkeeping = 'bookkeeping';
+  static const business = 'business';
+  static const management = 'management';
+  static const confidence = 'confidence';
+  static const communicativeness = 'communicativeness';
+  static const book = 'book';
+  static const course = 'course';
+  static const youtube = 'youtube';
+  static const application = 'application';
+  static const onlineCourse = 'onlineCourse';
+  static const fullTimeCourse = 'fullTimeCourse';
+  static const requirements = 'requirements';
+  static const jobs = 'jobs';
+  static const notEnoughMoney = 'notEnoughMoney';
+  static const endGame = 'endGame';
 
 }

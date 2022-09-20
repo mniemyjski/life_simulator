@@ -91,6 +91,7 @@ class LearningCubit extends HydratedCubit<LearningState> {
   }
 
   add(Learning learning) {
+    if (_moneyCubit.state < -learning.cost) return 'notEnoughMoney';
     state.whenOrNull(loaded: (learnings) {
       List<Learning> result = List.from(learnings)..add(learning.copyWith(id: Uuid().v1()));
 

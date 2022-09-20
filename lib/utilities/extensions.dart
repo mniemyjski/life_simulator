@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:jiffy/jiffy.dart';
+
 import 'utilities.dart';
 
 extension DateT on DateTime {
@@ -9,6 +11,21 @@ extension DateT on DateTime {
     if (year < 999) return DateFormat('yyy/MM/dd').format(DateTime(year, month, day));
     if (year < 9999) return DateFormat('yyyy/MM/dd').format(DateTime(year, month, day));
     throw 'error';
+  }
+
+  DateTime addDate({int days = 0, int weeks = 0, int months = 0, int years = 0}) {
+    DateTime date = Jiffy(onlyDate())
+        .add(days: days, weeks: weeks, months: months, years: years)
+        .dateTime
+        .onlyDate();
+    if (date == this) {
+      Jiffy(onlyDate())
+          .add(days: days + 1, weeks: weeks, months: months, years: years)
+          .dateTime
+          .onlyDate();
+    }
+
+    return date;
   }
 }
 

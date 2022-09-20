@@ -55,10 +55,11 @@ class FreelanceScreen extends StatelessWidget {
                 return state.maybeWhen(
                     orElse: () => Container(),
                     loaded: (freelances) {
-                      if (freelances.isEmpty)
+                      if (freelances.isEmpty) {
                         return Center(
                           child: Text(LocaleKeys.youDontHaveAnyProduct.tr()),
                         );
+                      }
 
                       return ListView.builder(
                           itemCount: freelances.length,
