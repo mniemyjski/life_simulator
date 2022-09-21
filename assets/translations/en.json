@@ -125,7 +125,54 @@
   "buyAssets": "Buy assets",
   "buildAssets": "Build assets",
   "valueMultiplier": "Value multiplier",
-  "income": "Income"
+  "income": "Income",
+  "resetTutorial": "Reset tutorial",
 
+  "personalScreen": "Personal Screen",
+  "personalScreenDesc": "On this screen you can preview your skills, you can also rent or buy a flat, buy a car that will shorten your commuting period and choose better food that adds various bonuses but is proportionally more expensive.",
 
+  "transactionsScreen": "Transactions Screen",
+  "transactionsScreenDesc": "On this screen you can see your monthly income and expenses",
+
+  "jobScreen": "Job Screen",
+  "jobScreenDesc": "On this screen you can find your dream job and apply for a promotion",
+
+  "freelanceScreen": "Freelance Screen",
+  "freelanceScreenDesc": "On this screen you can see the amount of your fame, write books and applications, record videos on youtube, or create courses on which you will earn depending on the amount of fame.\nYou generate Fame from the goods you produce, but you can also get it by buying advertising.",
+
+  "assetsScreen": "Assets Screen",
+  "assetsScreenDesc": "On this screen you will build real estate, but also buy and sell them. Real estate generates costs, but if you find tenants, they will bring you income. Remember that tenants have their rating and the better you score, the less damage they will generate.",
+
+  "businessScreen": "Business Screen",
+  "businessScreenDesc": "On this screen you can open your own company, start it, hire and fire employees.",
+
+  "stockMarketScreen": "Stock Market Screen",
+  "stockMarketScreenDesc": "On this screen you can trade cryptocurrencies, raw materials and company stocks",
+
+  "learningScreen": "Learning Screen",
+  "learningScreenDesc": "You can buy study materials on this screen",
+
+  "bankScreen": "Bank Screen",
+  "bankScreenDesc": "On this screen you can deposit cash and thus earn interest every day or take a loan that you will pay back in installments",
+
+  "medicineScreen": "Medicine Screen",
+  "medicineScreenDesc": "On this screen you can buy medicines if your health drops, you will also find other supplements there :)",
+
+  "nextTurn": "Next Turn",
+  "nextTurnDesc": "This button is used to go to the next day. In the settings screen, you can change how many days will pass after pressing this button",
+
+  "currentDate": "Current Date",
+  "currentDateDesc": "Here you can see the current date",
+
+  "yourMoney": "Your Money",
+  "yourMoneyDesc": "You can see your account status here",
+
+  "yourStats": "Your Stats",
+  "yourStatsDesc": "Here you can see your stats. If you spend too little time to relax, your satisfaction will drop, the same goes for sleep, if you overdo it and stay awake, it will affect your health.",
+
+  "timeSpendPanel": "Time spent in daily",
+  "timeSpendPanelDesc": "Here you can see how much time you spends on certain activities, click this panel to be able to manage this time and see details",
+
+  "eventScreen": "Event Screen",
+  "eventScreenDesc": "Various events that will have an impact on your gameplay will be displayed here"
 }

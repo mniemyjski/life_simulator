@@ -8,7 +8,18 @@ import '../../stats/widgets/stats_indicator.dart';
 import '../../time_spend/widgets/time_spend_indicator.dart';
 
 class AppBarStats extends StatelessWidget {
-  const AppBarStats({Key? key}) : super(key: key);
+  final Key? keyTimeSpend;
+  final Key? keyStats;
+  final Key? keyDate;
+  final Key? keyMoney;
+
+  const AppBarStats({
+    Key? key,
+    this.keyTimeSpend,
+    this.keyStats,
+    this.keyDate,
+    this.keyMoney,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +36,11 @@ class AppBarStats extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const DateChange(),
+                DateChange(
+                  key: keyDate,
+                ),
                 Card(
+                  key: keyMoney,
                   color: Colors.grey.withOpacity(0.2),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -36,10 +50,12 @@ class AppBarStats extends StatelessWidget {
                     ),
                   ),
                 ),
-                const StatsIndicator(),
+                StatsIndicator(
+                  key: keyStats,
+                ),
               ],
             ),
-            const TimeSpend(),
+            TimeSpend(key: keyTimeSpend),
           ],
         ),
       ),

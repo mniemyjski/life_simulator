@@ -1,10 +1,10 @@
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../constants/constants.dart';
 import '../../../utilities/utilities.dart';
 import '../../../widgets/widgets.dart';
+import '../../tutorial/cubit/tutorial_cubit.dart';
 import '../cubit/day_setting_cubit.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -43,40 +43,17 @@ class SettingsScreen extends StatelessWidget {
                 style: const TextStyle(color: Colors.white),
               ),
             ),
-            DropdownButtonHideUnderline(
-              child: DropdownButton2(
-                hint: Text(
-                  'Select Item',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Theme.of(context).hintColor,
-                  ),
-                ),
-                items: context
-                    .watch<DaySettingCubit>()
-                    .dayList()
-                    .map((item) => DropdownMenuItem<String>(
-                          value: item,
-                          child: Text(
-                            item,
-                            style: const TextStyle(
-                              fontSize: 14,
-                            ),
-                          ),
-                        ))
-                    .toList(),
-                value: context.watch<DaySettingCubit>().state.toString(),
-                onChanged: (value) {
-                  context.read<DaySettingCubit>().change(int.parse(value as String));
-                },
-                buttonHeight: 40,
-                buttonWidth: 140,
-                itemHeight: 40,
-                buttonPadding: const EdgeInsets.only(left: 14, right: 14),
-                buttonDecoration: BoxDecoration(
-                  color: Theme.of(context).cardColor,
-                ),
-              ),
+            CustomDropDownButton(
+              initialValue: context.watch<DaySettingCubit>().state.toString(),
+              items: context.watch<DaySettingCubit>().dayList(),
+              onChanged: (String? value) =>
+                  context.read<DaySettingCubit>().change(int.parse(value as String)),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 16.0, bottom: 8.0),
+              child: CustomButton(
+                  onPressed: () => context.read<TutorialCubit>().reset(),
+                  child: Text(LocaleKeys.resetTutorial.tr())),
             ),
           ],
         ),

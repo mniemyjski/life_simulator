@@ -30,13 +30,13 @@ import 'app/personality/cubit/food/food_cubit.dart';
 import 'app/personality/cubit/house/house_cubit.dart';
 import 'app/personality/cubit/transport/transport_cubit.dart';
 import 'app/rules/cubit/rules_cubit.dart';
-import 'app/settings/cubit/dark_mode_cubit.dart';
 import 'app/settings/cubit/day_setting_cubit.dart';
 import 'app/skills/cubit/skills_cubit.dart';
 import 'app/stats/cubit/stats_cubit.dart';
 import 'app/stock_market/cubit/exchanges/exchanges_cubit.dart';
 import 'app/stock_market/cubit/stock_market/stock_market_cubit.dart';
 import 'app/time_spend/cubit/time_spend_cubit.dart';
+import 'app/tutorial/cubit/tutorial_cubit.dart';
 import 'config/injectable/injection.dart';
 import 'config/routes/routes.gr.dart';
 import 'config/themes/custom_theme.dart';
@@ -90,13 +90,13 @@ class _MyAppState extends State<MyApp> {
 
     return MultiBlocProvider(
       providers: [
-        BlocProvider<DarkModeCubit>(
-          // lazy: false,
-          create: (_) => getIt<DarkModeCubit>(),
-        ),
         BlocProvider<DaySettingCubit>(
-          // lazy: false,
+          lazy: false,
           create: (_) => getIt<DaySettingCubit>(),
+        ),
+        BlocProvider(
+          lazy: false,
+          create: (_) => getIt<TutorialCubit>(),
         ),
         BlocProvider<NewGameCubit>(
           // lazy: false,
