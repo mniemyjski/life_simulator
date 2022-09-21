@@ -2,6 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:richeable/config/injectable/injection.dart';
+import 'package:richeable/constants/sounds.dart';
 import 'package:richeable/utilities/utilities.dart';
 
 import '../../../config/routes/routes.gr.dart';
@@ -15,10 +17,14 @@ class NextDayButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final player = getIt<Injection>().player;
+
     return FloatingActionButton(
-      // backgroundColor: Theme.of(context).primaryColor.withOpacity(0.5),
       heroTag: null,
       onPressed: () async {
+        player.setAsset(Sounds.click());
+        player.play();
+
         if (!context.read<TimeSpendCubit>().checkBonusSource(ETypeBonusSource.house)) {
           bool? areYouSure = await showDialog<bool>(
             context: context,

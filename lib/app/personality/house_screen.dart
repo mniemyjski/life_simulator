@@ -7,7 +7,6 @@ import 'package:richeable/widgets/widgets.dart';
 
 import '../../constants/constants.dart';
 import '../database/cubit/database_cubit.dart';
-import '../settings/cubit/dark_mode_cubit.dart';
 import 'cubit/house/house_cubit.dart';
 import 'models/house/house_model.dart';
 
@@ -180,9 +179,7 @@ class HouseScreen extends StatelessWidget {
                     onPressed: onPressed,
                     icon: FaIcon(
                       owned ? FontAwesomeIcons.minus : FontAwesomeIcons.plus,
-                      color: owned || context.read<DarkModeCubit>().state
-                          ? Colors.white
-                          : Colors.black,
+                      color: owned ? Colors.white : Colors.black,
                     ))
               ],
             ),

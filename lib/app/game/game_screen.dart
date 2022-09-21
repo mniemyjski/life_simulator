@@ -11,7 +11,9 @@ import 'package:richeable/utilities/utilities.dart';
 import 'package:richeable/widgets/widgets.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
+import '../../config/injectable/injection.dart';
 import '../../config/routes/routes.gr.dart';
+import '../../constants/sounds.dart';
 import '../date/widgets/next_day.dart';
 import '../event/widgets/events_list.dart';
 import '../rules/cubit/rules_cubit.dart';
@@ -160,6 +162,8 @@ class _GameScreenState extends State<GameScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final player = getIt<Injection>().player;
+
     return MultiBlocListener(
       listeners: [
         BlocListener<RulesCubit, RulesState>(
@@ -213,6 +217,8 @@ class _GameScreenState extends State<GameScreen> {
                   ButtonElement(
                     key: keyButton,
                     onPressed: () {
+                      player.setAsset(Sounds.click());
+                      player.play();
                       context.router.push(const PersonalityRoute());
                     },
                     icon: const FaIcon(FontAwesomeIcons.userLarge),
@@ -220,6 +226,8 @@ class _GameScreenState extends State<GameScreen> {
                   ButtonElement(
                     key: keyButton1,
                     onPressed: () {
+                      player.setAsset(Sounds.click());
+                      player.play();
                       context.router.push(const TransactionsRoute());
                     },
                     icon: const FaIcon(FontAwesomeIcons.scaleBalanced),
@@ -227,6 +235,8 @@ class _GameScreenState extends State<GameScreen> {
                   ButtonElement(
                     key: keyButton2,
                     onPressed: () {
+                      player.setAsset(Sounds.click());
+                      player.play();
                       context.router.push(const JobRoute());
                     },
                     icon: const FaIcon(FontAwesomeIcons.briefcase),
@@ -234,6 +244,8 @@ class _GameScreenState extends State<GameScreen> {
                   ButtonElement(
                     key: keyButton3,
                     onPressed: () {
+                      player.setAsset(Sounds.click());
+                      player.play();
                       context.router.push(const FreelanceRoute());
                     },
                     icon: const FaIcon(FontAwesomeIcons.computer),
@@ -241,6 +253,8 @@ class _GameScreenState extends State<GameScreen> {
                   ButtonElement(
                     key: keyButton4,
                     onPressed: () {
+                      player.setAsset(Sounds.click());
+                      player.play();
                       context.router.push(const AssetsRoute());
                     },
                     icon: const FaIcon(FontAwesomeIcons.city),
@@ -253,6 +267,8 @@ class _GameScreenState extends State<GameScreen> {
                   ButtonElement(
                     key: keyButton6,
                     onPressed: () {
+                      player.setAsset(Sounds.click());
+                      player.play();
                       context.router.push(const StockMarketRoute());
                     },
                     icon: const FaIcon(FontAwesomeIcons.chartLine),
@@ -260,6 +276,8 @@ class _GameScreenState extends State<GameScreen> {
                   ButtonElement(
                     key: keyButton7,
                     onPressed: () {
+                      player.setAsset(Sounds.click());
+                      player.play();
                       context.router.push(const LearningRoute());
                     },
                     icon: const FaIcon(FontAwesomeIcons.graduationCap),
@@ -267,6 +285,8 @@ class _GameScreenState extends State<GameScreen> {
                   ButtonElement(
                     key: keyButton8,
                     onPressed: () {
+                      player.setAsset(Sounds.click());
+                      player.play();
                       context.router.push(const BankRoute());
                     },
                     icon: const FaIcon(FontAwesomeIcons.piggyBank),
@@ -274,12 +294,16 @@ class _GameScreenState extends State<GameScreen> {
                   ButtonElement(
                     key: keyButton9,
                     onPressed: () {
+                      player.setAsset(Sounds.click());
+                      player.play();
                       context.router.push(const MedicinesRoute());
                     },
                     icon: const FaIcon(FontAwesomeIcons.capsules),
                   ),
                   ButtonElement(
                     onPressed: () {
+                      player.setAsset(Sounds.click());
+                      player.play();
                       context.router.pop();
                     },
                     icon: const FaIcon(FontAwesomeIcons.xmark),

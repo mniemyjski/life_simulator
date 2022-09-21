@@ -128,6 +128,7 @@ abstract class  LocaleKeys {
   static const valueMultiplier = 'valueMultiplier';
   static const income = 'income';
   static const resetTutorial = 'resetTutorial';
+  static const requirementsToPromote = 'requirementsToPromote';
   static const personalScreen = 'personalScreen';
   static const personalScreenDesc = 'personalScreenDesc';
   static const transactionsScreen = 'transactionsScreen';

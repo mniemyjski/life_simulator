@@ -7,7 +7,6 @@ import 'package:richeable/widgets/widgets.dart';
 
 import '../../constants/constants.dart';
 import '../database/cubit/database_cubit.dart';
-import '../settings/cubit/dark_mode_cubit.dart';
 import 'cubit/transport/transport_cubit.dart';
 import 'models/transport/transport_model.dart';
 
@@ -161,9 +160,7 @@ class TransportScreen extends StatelessWidget {
                     onPressed: onPressed,
                     icon: FaIcon(
                       owned ? FontAwesomeIcons.minus : FontAwesomeIcons.plus,
-                      color: owned || context.read<DarkModeCubit>().state
-                          ? Colors.white
-                          : Colors.black,
+                      color: owned ? Colors.white : Colors.black,
                     ))
               ],
             ),

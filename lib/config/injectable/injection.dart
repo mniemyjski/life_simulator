@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
+import 'package:just_audio/just_audio.dart';
 
 import 'injection.config.dart';
 
@@ -17,3 +18,8 @@ final getIt = GetIt.instance;
 )
 @injectableInit
 void configureDependencies(String environment) => $initGetIt(getIt, environment: environment);
+
+@lazySingleton
+class Injection {
+  final player = AudioPlayer()..setVolume(1);
+}
