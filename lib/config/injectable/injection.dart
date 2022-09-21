@@ -21,5 +21,5 @@ void configureDependencies(String environment) => $initGetIt(getIt, environment:
 
 @lazySingleton
 class Injection {
-  final player = AudioPlayer()..setVolume(1);
+  final player = AudioPlayer();
 }

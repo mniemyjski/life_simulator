@@ -27,10 +27,26 @@ class YourJob extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    buildText(name: 'Company', value: job.company),
-                    buildText(name: 'Industry', value: Enums.toText(job.industry)),
-                    buildText(name: 'Experience', value: experience.exp.toString()),
-                    buildText(name: 'Salary', value: '${experience.salary.toString()}\$'),
+                    buildText(
+                      name: LocaleKeys.name.tr(),
+                      value: experience.name,
+                    ),
+                    buildText(
+                      name: LocaleKeys.company.tr(),
+                      value: job.company,
+                    ),
+                    buildText(
+                      name: LocaleKeys.industry.tr(),
+                      value: Enums.toText(job.industry),
+                    ),
+                    buildText(
+                      name: LocaleKeys.experience.tr(),
+                      value: experience.exp.toString(),
+                    ),
+                    buildText(
+                      name: LocaleKeys.salary.tr(),
+                      value: '${experience.salary.toString()}\$',
+                    ),
                   ],
                 ),
               ),

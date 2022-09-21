@@ -13,7 +13,6 @@ import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
 import '../../config/injectable/injection.dart';
 import '../../config/routes/routes.gr.dart';
-import '../../constants/sounds.dart';
 import '../date/widgets/next_day.dart';
 import '../event/widgets/events_list.dart';
 import '../rules/cubit/rules_cubit.dart';
@@ -303,7 +302,6 @@ class _GameScreenState extends State<GameScreen> {
                   ButtonElement(
                     onPressed: () {
                       player.setAsset(Sounds.click());
-                      player.play();
                       context.router.pop();
                     },
                     icon: const FaIcon(FontAwesomeIcons.xmark),
