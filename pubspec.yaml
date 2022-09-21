@@ -61,7 +61,6 @@ dependencies:
   flutter_speed_dial: ^6.0.0
   faker: ^2.0.0
 
-  flutter_beep: ^1.0.0
   just_audio: ^0.9.29
 
 dev_dependencies:
