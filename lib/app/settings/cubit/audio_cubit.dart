@@ -7,13 +7,16 @@ import 'package:richeable/app/settings/models/audio_model.dart';
 class AudioCubit extends HydratedCubit<Audio> {
   final AudioPlayer _soundPlayer = AudioPlayer();
   final AudioPlayer _musicPlayer = AudioPlayer();
+  final double _decreaseVolume = 0.1;
   AudioCubit() : super(const Audio());
 
   changeSoundsVolume(double value) {
+    _soundPlayer.setVolume(value);
     emit(state.copyWith(sounds: value));
   }
 
   changeMusicVolume(double value) {
+    _musicPlayer.setVolume(value * _decreaseVolume);
     emit(state.copyWith(music: value));
   }
 
@@ -26,7 +29,12 @@ class AudioCubit extends HydratedCubit<Audio> {
   AudioPlayer getMusic(String music) {
     return _musicPlayer
       ..setAsset(music)
-      ..setVolume(state.music);
+      ..setLoopMode(LoopMode.one)
+      ..setVolume(state.music * _decreaseVolume);
+  }
+
+  stopMusic() {
+    _musicPlayer.stop();
   }
 
   @override

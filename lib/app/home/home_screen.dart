@@ -12,8 +12,19 @@ import '../../widgets/widgets.dart';
 import '../new_game/new_game_cubit.dart';
 import '../settings/cubit/audio_cubit.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    context.read<AudioCubit>().getMusic(AudioCollection.music()).play();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

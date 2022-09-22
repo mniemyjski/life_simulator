@@ -147,6 +147,7 @@ class _GameScreenState extends State<GameScreen> {
         ),
       ],
     );
+
     super.initState();
   }
 
