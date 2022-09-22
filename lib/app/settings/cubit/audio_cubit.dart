@@ -33,8 +33,12 @@ class AudioCubit extends HydratedCubit<Audio> {
       ..setVolume(state.music * _decreaseVolume);
   }
 
-  stopMusic() {
-    _musicPlayer.stop();
+  pauseMusic() {
+    _musicPlayer.pause();
+  }
+
+  resumeMusic() {
+    _musicPlayer.play();
   }
 
   @override

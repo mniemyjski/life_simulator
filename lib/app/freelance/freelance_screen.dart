@@ -142,7 +142,7 @@ class FreelanceScreen extends StatelessWidget {
                                 Card(
                                   child: Container(
                                     height: 60,
-                                    width: 60,
+                                    width: 50,
                                     padding: const EdgeInsets.all(8.0),
                                     child: Center(
                                       child: Text(
@@ -155,7 +155,7 @@ class FreelanceScreen extends StatelessWidget {
                                 Card(
                                   child: Container(
                                     height: 60,
-                                    width: 60,
+                                    width: 80,
                                     padding: const EdgeInsets.all(8.0),
                                     child: Center(
                                       child: Text(
@@ -180,6 +180,7 @@ class FreelanceScreen extends StatelessWidget {
         padding: const EdgeInsets.only(left: 8.0, right: 8.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             FloatingActionButton(
               heroTag: null,

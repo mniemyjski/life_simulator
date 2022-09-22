@@ -26,7 +26,6 @@ class PersonalityMenu extends StatelessWidget {
             child: const FaIcon(FontAwesomeIcons.arrowRotateLeft),
           ),
           const NextDayButton(),
-
           SpeedDial(
             animatedIcon: AnimatedIcons.menu_close,
             spaceBetweenChildren: 4,
@@ -112,55 +111,6 @@ class PersonalityMenu extends StatelessWidget {
               ),
             ],
           ),
-
-          // Column(
-          //   mainAxisSize: MainAxisSize.min,
-          //   mainAxisAlignment: MainAxisAlignment.start,
-          //   crossAxisAlignment: CrossAxisAlignment.end,
-          //   children: [
-          //     MenuAnimateElement(
-          //       open: open,
-          //       txt: LocaleKeys.rentHouse.tr(),
-          //       onPressed: () {
-          //         context.router.push(HouseRoute(eTypeHouse: ETypeHouse.rent));
-          //         _nextScreen();
-          //       },
-          //     ),
-          //     MenuAnimateElement(
-          //       open: open,
-          //       txt: LocaleKeys.buyHouse.tr(),
-          //       onPressed: () {
-          //         context.router.push(HouseRoute(eTypeHouse: ETypeHouse.buy));
-          //         _nextScreen();
-          //       },
-          //     ),
-          //     MenuAnimateElement(
-          //       open: open,
-          //       txt: LocaleKeys.buyTransport.tr(),
-          //       onPressed: () {
-          //         context.router.push(const TransportRoute());
-          //         _nextScreen();
-          //       },
-          //     ),
-          //     MenuAnimateElement(
-          //       open: open,
-          //       txt: LocaleKeys.food.tr(),
-          //       onPressed: () {
-          //         context.router.push(const FoodRoute());
-          //         _nextScreen();
-          //       },
-          //     ),
-          //     Padding(
-          //       padding: const EdgeInsets.only(bottom: 4.0),
-          //       child: FloatingActionButton(
-          //         onPressed: () => setState(() {
-          //           open = !open;
-          //         }),
-          //         child: Icon(!open ? Icons.menu : Icons.close),
-          //       ),
-          //     ),
-          //   ],
-          // ),
         ],
       ),
     );

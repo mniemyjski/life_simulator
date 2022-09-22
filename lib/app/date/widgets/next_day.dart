@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:badges/badges.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,100 +22,23 @@ class NextDayButton extends StatefulWidget {
 }
 
 class _NextDayButtonState extends State<NextDayButton> {
-  bool show = false;
+  late OverlayEntry entry;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        if (show)
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(28)),
-                    color: Theme.of(context).primaryColor.withOpacity(1),
-                  ),
-                  child: FloatingActionButton(
-                      backgroundColor: Colors.white70,
-                      onPressed: () {
-                        context.read<DaySettingCubit>().change(1);
-                        setState(() => show = !show);
-                      },
-                      child: Text(
-                        '1',
-                        style:
-                            Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black87),
-                      )),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(28)),
-                    color: Theme.of(context).primaryColor.withOpacity(1),
-                  ),
-                  child: FloatingActionButton(
-                      backgroundColor: Colors.white70,
-                      onPressed: () {
-                        context.read<DaySettingCubit>().change(5);
-                        setState(() => show = !show);
-                      },
-                      child: Text(
-                        '5',
-                        style:
-                            Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black87),
-                      )),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(28)),
-                    color: Theme.of(context).primaryColor.withOpacity(1),
-                  ),
-                  child: FloatingActionButton(
-                      backgroundColor: Colors.white70,
-                      onPressed: () {
-                        context.read<DaySettingCubit>().change(10);
-                        setState(() => show = !show);
-                      },
-                      child: Text(
-                        '10',
-                        style:
-                            Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black87),
-                      )),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(28)),
-                    color: Theme.of(context).primaryColor.withOpacity(1),
-                  ),
-                  child: FloatingActionButton(
-                      backgroundColor: Colors.white70,
-                      onPressed: () {
-                        context.read<DaySettingCubit>().change(30);
-                        setState(() => show = !show);
-                      },
-                      child: Text(
-                        '30',
-                        style:
-                            Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black87),
-                      )),
-                ),
-              ),
-            ],
-          ),
         InkWell(
-          onLongPress: () => setState(() => show = !show),
+          onLongPress: () {
+            final overlay = Overlay.of(context);
+
+            entry = OverlayEntry(builder: (context) {
+              return _buildBody(context);
+            });
+
+            overlay!.insert(entry);
+          },
           child: FloatingActionButton(
             heroTag: null,
             onPressed: () async {
@@ -129,14 +53,135 @@ class _NextDayButtonState extends State<NextDayButton> {
               }
 
               var cancel = BotToast.showLoading();
-              context.read<DateCubit>().nextDay();
+              if (mounted) context.read<DateCubit>().nextDay();
               await Future.delayed(const Duration(milliseconds: 200));
               cancel();
             },
-            child: const FaIcon(FontAwesomeIcons.hourglass),
+            child: Badge(
+              badgeColor: Theme.of(context).primaryColor.withOpacity(1),
+              padding: const EdgeInsets.all(4),
+              badgeContent: Text(
+                context.watch<DaySettingCubit>().state.toString(),
+                style: const TextStyle(fontSize: 8),
+              ),
+              toAnimate: false,
+              child: const FaIcon(FontAwesomeIcons.hourglass),
+            ),
           ),
         ),
       ],
+    );
+  }
+
+  GestureDetector _buildBody(BuildContext context) {
+    return GestureDetector(
+      onTap: () => entry.remove(),
+      child: Container(
+        color: Colors.black.withOpacity(0.5),
+        padding: const EdgeInsets.only(bottom: 70),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(Radius.circular(28)),
+                      color: Theme.of(context).primaryColor.withOpacity(1),
+                    ),
+                    child: FloatingActionButton(
+                        heroTag: null,
+                        backgroundColor: Colors.white70,
+                        onPressed: () {
+                          context.read<DaySettingCubit>().change(1);
+                          entry.remove();
+                        },
+                        child: Text(
+                          '1',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline1!
+                              .copyWith(color: Colors.black87),
+                        )),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(Radius.circular(28)),
+                      color: Theme.of(context).primaryColor.withOpacity(1),
+                    ),
+                    child: FloatingActionButton(
+                        heroTag: null,
+                        backgroundColor: Colors.white70,
+                        onPressed: () {
+                          context.read<DaySettingCubit>().change(5);
+                          entry.remove();
+                        },
+                        child: Text(
+                          '5',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline1!
+                              .copyWith(color: Colors.black87),
+                        )),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(Radius.circular(28)),
+                      color: Theme.of(context).primaryColor.withOpacity(1),
+                    ),
+                    child: FloatingActionButton(
+                        heroTag: null,
+                        backgroundColor: Colors.white70,
+                        onPressed: () {
+                          context.read<DaySettingCubit>().change(10);
+                          entry.remove();
+                        },
+                        child: Text(
+                          '10',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline1!
+                              .copyWith(color: Colors.black87),
+                        )),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(Radius.circular(28)),
+                      color: Theme.of(context).primaryColor.withOpacity(1),
+                    ),
+                    child: FloatingActionButton(
+                        heroTag: null,
+                        backgroundColor: Colors.white70,
+                        onPressed: () {
+                          context.read<DaySettingCubit>().change(30);
+                          entry.remove();
+                        },
+                        child: Text(
+                          '30',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline1!
+                              .copyWith(color: Colors.black87),
+                        )),
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
     );
   }
 

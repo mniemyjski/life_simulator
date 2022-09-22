@@ -106,7 +106,7 @@ class FreelanceJob with _$FreelanceJob {
         fame = 5;
         break;
       case ETypeFreelance.youtube:
-        fame = 50;
+        fame = 20;
         break;
       case ETypeFreelance.application:
         fame = 5;

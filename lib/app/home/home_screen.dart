@@ -19,11 +19,29 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   @override
   void initState() {
     context.read<AudioCubit>().getMusic(AudioCollection.music()).play();
+    WidgetsBinding.instance.addObserver(this);
     super.initState();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    switch (state) {
+      case AppLifecycleState.resumed:
+        context.read<AudioCubit>().resumeMusic();
+        break;
+      case AppLifecycleState.inactive:
+        context.read<AudioCubit>().pauseMusic();
+        break;
+      case AppLifecycleState.paused:
+        context.read<AudioCubit>().pauseMusic();
+        break;
+      case AppLifecycleState.detached:
+        break;
+    }
   }
 
   @override

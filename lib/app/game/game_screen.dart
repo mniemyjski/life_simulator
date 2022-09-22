@@ -1,9 +1,12 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:badges/badges.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:richeable/app/event/cubit/event_cubit.dart';
+import 'package:richeable/app/freelance/cubit/job/freelance_job_cubit.dart';
+import 'package:richeable/app/learning/cubit/learning_cubit.dart';
 import 'package:richeable/app/tutorial/cubit/tutorial_cubit.dart';
 import 'package:richeable/app/tutorial/widgets/tutorial_widget.dart';
 import 'package:richeable/constants/constants.dart';
@@ -242,7 +245,24 @@ class _GameScreenState extends State<GameScreen> {
                       context.read<AudioCubit>().getSounds(AudioCollection.click()).play();
                       context.router.push(const FreelanceRoute());
                     },
-                    icon: const FaIcon(FontAwesomeIcons.computer),
+                    icon: BlocBuilder<FreelanceJobCubit, FreelanceWorkState>(
+                      builder: (context, state) {
+                        return state.maybeWhen(
+                            orElse: () => Container(),
+                            loaded: (freelance) {
+                              if (freelance.isEmpty) return const FaIcon(FontAwesomeIcons.computer);
+
+                              return Badge(
+                                padding: const EdgeInsets.all(4),
+                                badgeContent: Text(
+                                  freelance.length.toString(),
+                                  style: const TextStyle(fontSize: 8),
+                                ),
+                                child: const FaIcon(FontAwesomeIcons.computer),
+                              );
+                            });
+                      },
+                    ),
                   ),
                   ButtonElement(
                     key: keyButton4,
@@ -271,7 +291,26 @@ class _GameScreenState extends State<GameScreen> {
                       context.read<AudioCubit>().getSounds(AudioCollection.click()).play();
                       context.router.push(const LearningRoute());
                     },
-                    icon: const FaIcon(FontAwesomeIcons.graduationCap),
+                    icon: BlocBuilder<LearningCubit, LearningState>(
+                      builder: (context, state) {
+                        return state.maybeWhen(
+                            orElse: () => const FaIcon(FontAwesomeIcons.graduationCap),
+                            loaded: (learnings) {
+                              if (learnings.isEmpty) {
+                                return const FaIcon(FontAwesomeIcons.graduationCap);
+                              }
+
+                              return Badge(
+                                padding: const EdgeInsets.all(4),
+                                badgeContent: Text(
+                                  learnings.length.toString(),
+                                  style: const TextStyle(fontSize: 8),
+                                ),
+                                child: const FaIcon(FontAwesomeIcons.graduationCap),
+                              );
+                            });
+                      },
+                    ),
                   ),
                   ButtonElement(
                     key: keyButton8,

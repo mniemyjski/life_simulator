@@ -84,6 +84,7 @@ class LearningScreen extends StatelessWidget {
         padding: const EdgeInsets.only(left: 8.0, right: 8.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             FloatingActionButton(
               heroTag: null,
