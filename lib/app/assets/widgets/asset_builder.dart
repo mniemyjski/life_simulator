@@ -257,7 +257,9 @@ class _AssetBuilderState extends State<AssetBuilder> {
                         min: minTenant.toDouble(),
                         max: maxTenant.toDouble(),
                         divisions: maxTenant,
-                        onChanged: (double value) => setState(() => selectedTenant = value.toInt()),
+                        onChanged: maxTenant == 1
+                            ? null
+                            : (double value) => setState(() => selectedTenant = value.toInt()),
                       ),
                     ),
                     Text(

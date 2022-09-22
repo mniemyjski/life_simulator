@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:richeable/app/settings/cubit/audio_cubit.dart';
 import 'package:url_strategy/url_strategy.dart';
 
 import 'app/assets/cubit/assets/assets_cubit.dart';
@@ -90,6 +91,10 @@ class _MyAppState extends State<MyApp> {
 
     return MultiBlocProvider(
       providers: [
+        BlocProvider<AudioCubit>(
+          lazy: false,
+          create: (_) => getIt<AudioCubit>(),
+        ),
         BlocProvider<DaySettingCubit>(
           lazy: false,
           create: (_) => getIt<DaySettingCubit>(),

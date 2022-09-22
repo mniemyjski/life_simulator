@@ -129,6 +129,8 @@ abstract class  LocaleKeys {
   static const income = 'income';
   static const resetTutorial = 'resetTutorial';
   static const requirementsToPromote = 'requirementsToPromote';
+  static const sounds = 'sounds';
+  static const music = 'music';
   static const personalScreen = 'personalScreen';
   static const personalScreenDesc = 'personalScreenDesc';
   static const transactionsScreen = 'transactionsScreen';

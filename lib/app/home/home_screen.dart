@@ -10,6 +10,7 @@ import '../../config/routes/routes.gr.dart';
 import '../../constants/constants.dart';
 import '../../widgets/widgets.dart';
 import '../new_game/new_game_cubit.dart';
+import '../settings/cubit/audio_cubit.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -49,6 +50,7 @@ class HomeScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: CustomButton(
                       onPressed: () {
+                        context.read<AudioCubit>().getSounds(AudioCollection.click()).play();
                         context.router.push(const GameRoute());
                       },
                       child: Text(LocaleKeys.continueGame.tr()),
@@ -63,6 +65,7 @@ class HomeScreen extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: CustomButton(
                 onPressed: () {
+                  context.read<AudioCubit>().getSounds(AudioCollection.click()).play();
                   context.read<NewGameCubit>().change(true);
                   context.router.push(const GameRoute());
                   context.read<NewGameCubit>().change(false);
@@ -73,7 +76,10 @@ class HomeScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: CustomButton(
-                onPressed: () => context.router.push(const SettingsRoute()),
+                onPressed: () {
+                  context.read<AudioCubit>().getSounds(AudioCollection.click()).play();
+                  context.router.push(const SettingsRoute());
+                },
                 child: Text(LocaleKeys.settings.tr()),
               ),
             ),
@@ -81,6 +87,7 @@ class HomeScreen extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: CustomButton(
                 onPressed: () {
+                  context.read<AudioCubit>().getSounds(AudioCollection.click()).play();
                   if (Platform.isAndroid) {
                     SystemNavigator.pop();
                   } else if (Platform.isIOS) {
