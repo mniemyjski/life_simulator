@@ -5,6 +5,8 @@ import 'package:richeable/app/settings/models/audio_model.dart';
 
 @lazySingleton
 class AudioCubit extends HydratedCubit<Audio> {
+  final AudioPlayer _soundPlayer = AudioPlayer();
+  final AudioPlayer _musicPlayer = AudioPlayer();
   AudioCubit() : super(const Audio());
 
   changeSoundsVolume(double value) {
@@ -16,17 +18,13 @@ class AudioCubit extends HydratedCubit<Audio> {
   }
 
   AudioPlayer getSounds(String sound) {
-    final player = AudioPlayer();
-
-    return player
+    return _soundPlayer
       ..setAsset(sound)
       ..setVolume(state.sounds);
   }
 
   AudioPlayer getMusic(String music) {
-    final player = AudioPlayer();
-
-    return player
+    return _musicPlayer
       ..setAsset(music)
       ..setVolume(state.music);
   }

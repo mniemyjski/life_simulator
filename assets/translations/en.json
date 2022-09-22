@@ -162,7 +162,7 @@
   "medicineScreenDesc": "On this screen you can buy medicines if your health drops, you will also find other supplements there :)",
 
   "nextTurn": "Next Turn",
-  "nextTurnDesc": "This button is used to go to the next day. In the settings screen, you can change how many days will pass after pressing this button",
+  "nextTurnDesc": "This button is used to go to the next day. In the settings screen, you can change how many days will pass after pressing this button. You can also do this by holding down the next turn button for a longer time.",
 
   "currentDate": "Current Date",
   "currentDateDesc": "Here you can see the current date",
