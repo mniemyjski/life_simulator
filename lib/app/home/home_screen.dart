@@ -30,7 +30,7 @@ class HomeScreen extends StatelessWidget {
                   style: Theme.of(context).textTheme.headline2!.copyWith(color: Colors.white),
                   children: <TextSpan>[
                     const TextSpan(
-                      text: 'Riche',
+                      text: 'Rich',
                     ),
                     TextSpan(
                       text: 'Able',
