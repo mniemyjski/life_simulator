@@ -29,9 +29,9 @@ class TransactionsCubit extends HydratedCubit<TransactionsState> {
   }
 
   _newGame() {
-    if (_newGameCubit.state) emit(const TransactionsState.loaded([]));
+    if (_newGameCubit.state) emit(TransactionsState.loaded([]));
     _newGameSub = _newGameCubit.stream.listen((newGame) {
-      if (newGame) emit(const TransactionsState.loaded([]));
+      if (newGame) emit(TransactionsState.loaded([]));
     });
   }
 
@@ -39,8 +39,7 @@ class TransactionsCubit extends HydratedCubit<TransactionsState> {
     return state.maybeWhen(
         orElse: () => false,
         loaded: (transactions) {
-          List<Transaction> result = List.of(transactions)..add(transaction);
-          emit(TransactionsState.loaded(result));
+          emit(TransactionsState.loaded(transactions..add(transaction)));
           return true;
         });
   }

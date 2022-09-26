@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:richeable/utilities/utilities.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../skills/models/skill_model.dart';
 import '../freelance_base/freelance_base.dart';
@@ -26,9 +27,44 @@ class FreelanceJob with _$FreelanceJob {
     required int leftWorkTime,
     required List<Skill> reqSkills,
     required List<Skill> userSkills,
+    @Default(false) bool repeat,
+    @Default(0) int lastVersion,
   }) = _FreelanceJob;
 
   factory FreelanceJob.fromJson(Map<String, dynamic> json) => _$FreelanceJobFromJson(json);
+
+  static FreelanceJob builder({
+    required String name,
+    required ETypeFreelance eTypeFreelance,
+    required int level,
+    required int workTime,
+    required List<Skill> reqSkills,
+    required List<Skill> userSkills,
+  }) {
+    return FreelanceJob(
+      id: const Uuid().v1(),
+      name: name,
+      eTypeFreelance: eTypeFreelance,
+      level: level,
+      workTime: workTime,
+      leftWorkTime: workTime,
+      reqSkills: reqSkills,
+      userSkills: userSkills,
+    );
+  }
+
+  FreelanceJob repeater() {
+    String newName = lastVersion > 0
+        ? '${name.substring(0, name.length - lastVersion.toString().length)}${lastVersion + 1}'
+        : '$name 1';
+
+    return copyWith(
+        id: const Uuid().v1(),
+        name: newName,
+        workTime: workTime,
+        leftWorkTime: workTime,
+        lastVersion: lastVersion + 1);
+  }
 
   int _generateRating() {
     int skills = 0;
@@ -100,16 +136,16 @@ class FreelanceJob with _$FreelanceJob {
 
     switch (eTypeFreelance) {
       case ETypeFreelance.book:
-        fame = 5;
+        fame = 4;
         break;
       case ETypeFreelance.course:
-        fame = 5;
+        fame = 4;
         break;
       case ETypeFreelance.youtube:
-        fame = 20;
+        fame = 6;
         break;
       case ETypeFreelance.application:
-        fame = 5;
+        fame = 4;
         break;
     }
 
@@ -120,7 +156,7 @@ class FreelanceJob with _$FreelanceJob {
       fame: fame * rating * level,
       price: price * rating * level,
       dateCre: d,
-      rating: _generateRating(),
+      rating: rating,
     );
   }
 }

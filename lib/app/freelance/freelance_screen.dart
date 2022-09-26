@@ -25,30 +25,78 @@ class FreelanceScreen extends StatelessWidget {
       body: Column(
         children: [
           const AppBarStats(),
-          Card(
-            child: SizedBox(
-              width: double.infinity,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    Text(
-                      LocaleKeys.fame.tr(),
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText1!
-                          .copyWith(fontWeight: FontWeight.bold),
+          Row(
+            children: [
+              Expanded(
+                child: Card(
+                  child: Container(
+                    height: 50,
+                    padding: const EdgeInsets.all(4.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          '${LocaleKeys.fame.tr()}:',
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText1!
+                              .copyWith(fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          context.watch<FameCubit>().state.maybeWhen(
+                              orElse: () => '0', loaded: (v) => v.roundToDouble().toExp()),
+                          style: Theme.of(context).textTheme.bodyText1,
+                        ),
+                      ],
                     ),
-                    Text(
-                      context
-                          .watch<FameCubit>()
-                          .state
-                          .maybeWhen(orElse: () => '0', loaded: (v) => v.roundToDouble().toExp()),
-                      style: Theme.of(context).textTheme.bodyText1,
-                    ),
-                  ],
+                  ),
                 ),
               ),
+              Card(
+                  child: Container(
+                height: 50,
+                width: 75,
+                padding: const EdgeInsets.all(4.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text('${LocaleKeys.dailyFame.tr()}:',
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText1!
+                            .copyWith(fontWeight: FontWeight.bold)),
+                    Text(context.watch<FreelanceDoneCubit>().getDailyFame().toExp(),
+                        style: Theme.of(context).textTheme.bodyText1),
+                  ],
+                ),
+              )),
+              Card(
+                  child: Container(
+                height: 50,
+                width: 75,
+                padding: const EdgeInsets.all(4.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text('${LocaleKeys.value.tr()}:',
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText1!
+                            .copyWith(fontWeight: FontWeight.bold)),
+                    Text(context.watch<FreelanceDoneCubit>().getValue().toMoney(),
+                        style: Theme.of(context).textTheme.bodyText1),
+                  ],
+                ),
+              )),
+            ],
+          ),
+          const Padding(
+            padding: EdgeInsets.only(left: 8.0, right: 8.0),
+            child: Divider(
+              color: Colors.white70,
             ),
           ),
           Expanded(
@@ -142,7 +190,7 @@ class FreelanceScreen extends StatelessWidget {
                                 Card(
                                   child: Container(
                                     height: 60,
-                                    width: 50,
+                                    width: 75,
                                     padding: const EdgeInsets.all(8.0),
                                     child: Center(
                                       child: Text(
@@ -155,7 +203,7 @@ class FreelanceScreen extends StatelessWidget {
                                 Card(
                                   child: Container(
                                     height: 60,
-                                    width: 80,
+                                    width: 75,
                                     padding: const EdgeInsets.all(8.0),
                                     child: Center(
                                       child: Text(

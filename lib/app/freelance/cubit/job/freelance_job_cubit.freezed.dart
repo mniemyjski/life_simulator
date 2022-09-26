@@ -364,7 +364,7 @@ class __$$LoadedCopyWithImpl<$Res>
   }) {
     return _then(_$Loaded(
       list == freezed
-          ? _value._list
+          ? _value.list
           : list // ignore: cast_nullable_to_non_nullable
               as List<FreelanceJob>,
     ));
@@ -374,19 +374,13 @@ class __$$LoadedCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$Loaded implements Loaded {
-  const _$Loaded(final List<FreelanceJob> list, {final String? $type})
-      : _list = list,
-        $type = $type ?? 'loaded';
+  const _$Loaded(this.list, {final String? $type}) : $type = $type ?? 'loaded';
 
   factory _$Loaded.fromJson(Map<String, dynamic> json) =>
       _$$LoadedFromJson(json);
 
-  final List<FreelanceJob> _list;
   @override
-  List<FreelanceJob> get list {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_list);
-  }
+  final List<FreelanceJob> list;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
@@ -401,13 +395,13 @@ class _$Loaded implements Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$Loaded &&
-            const DeepCollectionEquality().equals(other._list, _list));
+            const DeepCollectionEquality().equals(other.list, list));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_list));
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(list));
 
   @JsonKey(ignore: true)
   @override

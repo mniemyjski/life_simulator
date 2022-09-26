@@ -41,9 +41,9 @@ class TenantsCubit extends HydratedCubit<TenantsState> {
   }
 
   _newGame() {
-    if (_newGameCubit.state) emit(const TenantsState.loaded([]));
+    if (_newGameCubit.state) emit(TenantsState.loaded([]));
     _newGameSub = _newGameCubit.stream.listen((newGame) {
-      if (newGame) emit(const TenantsState.loaded([]));
+      if (newGame) emit(TenantsState.loaded([]));
     });
   }
 

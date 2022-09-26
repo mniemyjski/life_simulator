@@ -1,6 +1,6 @@
 part of 'freelance_job_cubit.dart';
 
-@freezed
+@Freezed(makeCollectionsUnmodifiable: false)
 class FreelanceWorkState with _$FreelanceWorkState {
   const factory FreelanceWorkState.initial() = Initial;
   const factory FreelanceWorkState.loading() = Loading;

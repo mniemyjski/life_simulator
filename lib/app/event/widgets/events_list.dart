@@ -45,7 +45,7 @@ class EventsList extends StatelessWidget {
                                           element.datCre!.onlyDateToString(),
                                           style: Theme.of(context).textTheme.bodyText1!.copyWith(
                                                 fontStyle: FontStyle.italic,
-                                                color: element.active ? null : Colors.grey,
+                                                color: element.active ? null : Colors.grey[700],
                                               ),
                                         ),
                                         Row(
@@ -56,7 +56,8 @@ class EventsList extends StatelessWidget {
                                                     .textTheme
                                                     .bodyText1!
                                                     .copyWith(
-                                                      color: element.active ? null : Colors.grey,
+                                                      color:
+                                                          element.active ? null : Colors.grey[700],
                                                     ),
                                                 children: <TextSpan>[
                                                   const TextSpan(
@@ -76,7 +77,7 @@ class EventsList extends StatelessWidget {
                                         RichText(
                                           text: TextSpan(
                                             style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                  color: element.active ? null : Colors.grey,
+                                                  color: element.active ? null : Colors.grey[700],
                                                 ),
                                             children: <TextSpan>[
                                               const TextSpan(
@@ -94,7 +95,26 @@ class EventsList extends StatelessWidget {
                                         RichText(
                                           text: TextSpan(
                                             style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                  color: element.active ? null : Colors.grey,
+                                                  color: element.active ? null : Colors.grey[700],
+                                                ),
+                                            children: <TextSpan>[
+                                              const TextSpan(
+                                                text: 'Value: ',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              TextSpan(
+                                                  text: element.value is int
+                                                      ? '${element.value * 100}%'
+                                                      : element.value.toString()),
+                                            ],
+                                          ),
+                                        ),
+                                        RichText(
+                                          text: TextSpan(
+                                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                                  color: element.active ? null : Colors.grey[700],
                                                 ),
                                             children: <TextSpan>[
                                               const TextSpan(
@@ -122,18 +142,12 @@ class EventsList extends StatelessWidget {
                               child: RichText(
                                 text: TextSpan(
                                   style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                        color: element.active ? null : Colors.grey,
+                                        color: element.active ? null : Colors.grey[700],
                                       ),
                                   children: <TextSpan>[
                                     TextSpan(
                                       text: '${element.datCre!.onlyDateToString()} | ',
                                       style: const TextStyle(fontStyle: FontStyle.italic),
-                                    ),
-                                    const TextSpan(
-                                      text: 'Event: ',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                      ),
                                     ),
                                     TextSpan(
                                       text: element.name,

@@ -41,7 +41,7 @@ class RentButton extends StatelessWidget {
                           min: 0,
                           max: 2000,
                           divisions: 100,
-                          label: '${(newRent).toInt().toString()}\$',
+                          label: '${(newRent).toMoney()}',
                           onChanged: (double value) => setState(() => newRent = value),
                         ),
                         CustomButton(

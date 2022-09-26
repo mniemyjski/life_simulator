@@ -196,7 +196,7 @@ class __$$_InstrumentCopyWithImpl<$Res> extends _$InstrumentCopyWithImpl<$Res>
           : eTypeInstrument // ignore: cast_nullable_to_non_nullable
               as ETypeInstrument,
       candles: candles == freezed
-          ? _value._candles
+          ? _value.candles
           : candles // ignore: cast_nullable_to_non_nullable
               as List<Candle>,
       eTypeTrend: eTypeTrend == freezed
@@ -238,11 +238,11 @@ class __$$_InstrumentCopyWithImpl<$Res> extends _$InstrumentCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Instrument implements _Instrument {
-  const _$_Instrument(
+  _$_Instrument(
       {required this.id,
       required this.name,
       required this.eTypeInstrument,
-      required final List<Candle> candles,
+      required this.candles,
       required this.eTypeTrend,
       required this.datTrendEnd,
       required this.potentialIncrease,
@@ -250,8 +250,7 @@ class _$_Instrument implements _Instrument {
       required this.potentialStable,
       required this.min,
       required this.max,
-      required this.valorization})
-      : _candles = candles;
+      required this.valorization});
 
   factory _$_Instrument.fromJson(Map<String, dynamic> json) =>
       _$$_InstrumentFromJson(json);
@@ -262,13 +261,8 @@ class _$_Instrument implements _Instrument {
   final String name;
   @override
   final ETypeInstrument eTypeInstrument;
-  final List<Candle> _candles;
   @override
-  List<Candle> get candles {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_candles);
-  }
-
+  final List<Candle> candles;
   @override
   final ETypeTrend eTypeTrend;
   @override
@@ -300,7 +294,7 @@ class _$_Instrument implements _Instrument {
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality()
                 .equals(other.eTypeInstrument, eTypeInstrument) &&
-            const DeepCollectionEquality().equals(other._candles, _candles) &&
+            const DeepCollectionEquality().equals(other.candles, candles) &&
             const DeepCollectionEquality()
                 .equals(other.eTypeTrend, eTypeTrend) &&
             const DeepCollectionEquality()
@@ -324,7 +318,7 @@ class _$_Instrument implements _Instrument {
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(eTypeInstrument),
-      const DeepCollectionEquality().hash(_candles),
+      const DeepCollectionEquality().hash(candles),
       const DeepCollectionEquality().hash(eTypeTrend),
       const DeepCollectionEquality().hash(datTrendEnd),
       const DeepCollectionEquality().hash(potentialIncrease),
@@ -346,7 +340,7 @@ class _$_Instrument implements _Instrument {
 }
 
 abstract class _Instrument implements Instrument {
-  const factory _Instrument(
+  factory _Instrument(
       {required final String id,
       required final String name,
       required final ETypeInstrument eTypeInstrument,

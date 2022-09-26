@@ -363,7 +363,7 @@ class __$$LoadedCopyWithImpl<$Res> extends _$TransactionsStateCopyWithImpl<$Res>
   }) {
     return _then(_$Loaded(
       transactions == freezed
-          ? _value._transactions
+          ? _value.transactions
           : transactions // ignore: cast_nullable_to_non_nullable
               as List<Transaction>,
     ));
@@ -373,19 +373,14 @@ class __$$LoadedCopyWithImpl<$Res> extends _$TransactionsStateCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$Loaded implements Loaded {
-  const _$Loaded(final List<Transaction> transactions, {final String? $type})
-      : _transactions = transactions,
-        $type = $type ?? 'loaded';
+  _$Loaded(this.transactions, {final String? $type})
+      : $type = $type ?? 'loaded';
 
   factory _$Loaded.fromJson(Map<String, dynamic> json) =>
       _$$LoadedFromJson(json);
 
-  final List<Transaction> _transactions;
   @override
-  List<Transaction> get transactions {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_transactions);
-  }
+  final List<Transaction> transactions;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
@@ -401,13 +396,13 @@ class _$Loaded implements Loaded {
         (other.runtimeType == runtimeType &&
             other is _$Loaded &&
             const DeepCollectionEquality()
-                .equals(other._transactions, _transactions));
+                .equals(other.transactions, transactions));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_transactions));
+      runtimeType, const DeepCollectionEquality().hash(transactions));
 
   @JsonKey(ignore: true)
   @override
@@ -489,7 +484,7 @@ class _$Loaded implements Loaded {
 }
 
 abstract class Loaded implements TransactionsState {
-  const factory Loaded(final List<Transaction> transactions) = _$Loaded;
+  factory Loaded(final List<Transaction> transactions) = _$Loaded;
 
   factory Loaded.fromJson(Map<String, dynamic> json) = _$Loaded.fromJson;
 

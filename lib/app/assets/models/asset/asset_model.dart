@@ -64,6 +64,6 @@ class Asset with _$Asset {
         minRent: minRent,
         friendlyAnimal: friendlyAnimal,
         minRating: minRating,
-        monthlyCost: (-100 * tenantsMax).toDouble());
+        monthlyCost: (-200 * tenantsMax).toDouble());
   }
 }

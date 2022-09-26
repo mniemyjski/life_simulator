@@ -2,7 +2,7 @@ name: richeable
 description: A new Flutter project.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.4+1
+version: 1.0.5+1
 
 environment:
   sdk: ">=2.16.2 <3.0.0"
@@ -62,6 +62,7 @@ dependencies:
   faker: ^2.0.0
 
   just_audio: ^0.9.29
+  currency_formatter: ^2.0.0
 
 dev_dependencies:
   flutter_test:

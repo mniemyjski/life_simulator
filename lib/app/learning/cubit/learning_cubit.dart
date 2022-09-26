@@ -48,9 +48,9 @@ class LearningCubit extends HydratedCubit<LearningState> {
   }
 
   _newGame() {
-    if (_newGameCubit.state) emit(const LearningState.loaded([]));
+    if (_newGameCubit.state) emit(LearningState.loaded([]));
     _newGameSub = _newGameCubit.stream.listen((newGame) {
-      if (newGame) emit(const LearningState.loaded([]));
+      if (newGame) emit(LearningState.loaded([]));
     });
   }
 

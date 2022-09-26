@@ -42,9 +42,9 @@ class LoanCubit extends HydratedCubit<LoanState> {
   }
 
   _newGame() {
-    if (_newGameCubit.state) emit(const LoanState.loaded([]));
+    if (_newGameCubit.state) emit(LoanState.loaded([]));
     _newGameSub = _newGameCubit.stream.listen((newGame) {
-      if (newGame) emit(const LoanState.loaded([]));
+      if (newGame) emit(LoanState.loaded([]));
     });
   }
 

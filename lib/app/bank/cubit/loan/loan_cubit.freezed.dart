@@ -35,21 +35,21 @@ mixin _$LoanState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Loan> Loans) loaded,
+    required TResult Function(List<Loan> loans) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Loan> Loans)? loaded,
+    TResult Function(List<Loan> loans)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Loan> Loans)? loaded,
+    TResult Function(List<Loan> loans)? loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -140,7 +140,7 @@ class _$Initial implements Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Loan> Loans) loaded,
+    required TResult Function(List<Loan> loans) loaded,
   }) {
     return initial();
   }
@@ -150,7 +150,7 @@ class _$Initial implements Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Loan> Loans)? loaded,
+    TResult Function(List<Loan> loans)? loaded,
   }) {
     return initial?.call();
   }
@@ -160,7 +160,7 @@ class _$Initial implements Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Loan> Loans)? loaded,
+    TResult Function(List<Loan> loans)? loaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -262,7 +262,7 @@ class _$Loading implements Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Loan> Loans) loaded,
+    required TResult Function(List<Loan> loans) loaded,
   }) {
     return loading();
   }
@@ -272,7 +272,7 @@ class _$Loading implements Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Loan> Loans)? loaded,
+    TResult Function(List<Loan> loans)? loaded,
   }) {
     return loading?.call();
   }
@@ -282,7 +282,7 @@ class _$Loading implements Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Loan> Loans)? loaded,
+    TResult Function(List<Loan> loans)? loaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -341,7 +341,7 @@ abstract class Loading implements LoanState {
 abstract class _$$LoadedCopyWith<$Res> {
   factory _$$LoadedCopyWith(_$Loaded value, $Res Function(_$Loaded) then) =
       __$$LoadedCopyWithImpl<$Res>;
-  $Res call({List<Loan> Loans});
+  $Res call({List<Loan> loans});
 }
 
 /// @nodoc
@@ -355,12 +355,12 @@ class __$$LoadedCopyWithImpl<$Res> extends _$LoanStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? Loans = freezed,
+    Object? loans = freezed,
   }) {
     return _then(_$Loaded(
-      Loans == freezed
-          ? _value._Loans
-          : Loans // ignore: cast_nullable_to_non_nullable
+      loans == freezed
+          ? _value.loans
+          : loans // ignore: cast_nullable_to_non_nullable
               as List<Loan>,
     ));
   }
@@ -369,26 +369,20 @@ class __$$LoadedCopyWithImpl<$Res> extends _$LoanStateCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$Loaded implements Loaded {
-  const _$Loaded(final List<Loan> Loans, {final String? $type})
-      : _Loans = Loans,
-        $type = $type ?? 'loaded';
+  _$Loaded(this.loans, {final String? $type}) : $type = $type ?? 'loaded';
 
   factory _$Loaded.fromJson(Map<String, dynamic> json) =>
       _$$LoadedFromJson(json);
 
-  final List<Loan> _Loans;
   @override
-  List<Loan> get Loans {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_Loans);
-  }
+  final List<Loan> loans;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'LoanState.loaded(Loans: $Loans)';
+    return 'LoanState.loaded(loans: $loans)';
   }
 
   @override
@@ -396,13 +390,13 @@ class _$Loaded implements Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$Loaded &&
-            const DeepCollectionEquality().equals(other._Loans, _Loans));
+            const DeepCollectionEquality().equals(other.loans, loans));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_Loans));
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(loans));
 
   @JsonKey(ignore: true)
   @override
@@ -414,9 +408,9 @@ class _$Loaded implements Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Loan> Loans) loaded,
+    required TResult Function(List<Loan> loans) loaded,
   }) {
-    return loaded(Loans);
+    return loaded(loans);
   }
 
   @override
@@ -424,9 +418,9 @@ class _$Loaded implements Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Loan> Loans)? loaded,
+    TResult Function(List<Loan> loans)? loaded,
   }) {
-    return loaded?.call(Loans);
+    return loaded?.call(loans);
   }
 
   @override
@@ -434,11 +428,11 @@ class _$Loaded implements Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Loan> Loans)? loaded,
+    TResult Function(List<Loan> loans)? loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(Loans);
+      return loaded(loans);
     }
     return orElse();
   }
@@ -484,11 +478,11 @@ class _$Loaded implements Loaded {
 }
 
 abstract class Loaded implements LoanState {
-  const factory Loaded(final List<Loan> Loans) = _$Loaded;
+  factory Loaded(final List<Loan> loans) = _$Loaded;
 
   factory Loaded.fromJson(Map<String, dynamic> json) = _$Loaded.fromJson;
 
-  List<Loan> get Loans => throw _privateConstructorUsedError;
+  List<Loan> get loans => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$LoadedCopyWith<_$Loaded> get copyWith =>
       throw _privateConstructorUsedError;

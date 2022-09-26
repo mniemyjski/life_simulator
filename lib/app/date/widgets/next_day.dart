@@ -42,19 +42,30 @@ class _NextDayButtonState extends State<NextDayButton> {
           child: FloatingActionButton(
             heroTag: null,
             onPressed: () async {
-              context.read<AudioCubit>().getSounds(AudioCollection.click()).play();
+              var cancel = BotToast.showLoading();
+              context.read<AudioCubit>().getSounds(AudioCollection.nextTurn()).play();
 
               if (!context.read<TimeSpendCubit>().checkBonusSource(ETypeBonusSource.house)) {
+                cancel();
                 bool? areYouSure = await showDialog<bool>(
                   context: context,
                   builder: (BuildContext context) => _buildAlertDialog(context),
                 );
                 if (!(areYouSure ?? false)) return;
               }
+              cancel();
+              cancel = BotToast.showLoading();
 
-              var cancel = BotToast.showLoading();
-              if (mounted) context.read<DateCubit>().nextDay();
-              await Future.delayed(const Duration(milliseconds: 200));
+              int time = 0;
+
+              if (mounted) {
+                context.read<DateCubit>().nextDay();
+                if (context.read<DaySettingCubit>().state == 5) time = 300;
+                if (context.read<DaySettingCubit>().state == 10) time = 400;
+                if (context.read<DaySettingCubit>().state == 30) time = 800;
+              }
+
+              await Future.delayed(Duration(milliseconds: time));
               cancel();
             },
             child: Badge(

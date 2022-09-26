@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -38,8 +39,13 @@ class BuyAssetsScreen extends StatelessWidget {
                               asset: element,
                               iconButton: IconButton(
                                 onPressed: () {
-                                  context.read<AssetsCubit>().buy(element);
-                                  context.router.pop();
+                                  String? toast = context.read<AssetsCubit>().buy(element);
+                                  if (toast != null) {
+                                    BotToast.showText(
+                                        text: toast, align: const Alignment(0.1, 0.05));
+                                  } else {
+                                    context.router.pop();
+                                  }
                                 },
                                 icon: const FaIcon(FontAwesomeIcons.basketShopping),
                               ),

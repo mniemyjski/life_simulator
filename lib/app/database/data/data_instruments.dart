@@ -12,10 +12,10 @@ class DataInstruments {
         name: 'BTC',
         eTypeInstrument: ETypeInstrument.crypto,
         eTypeTrend: ETypeTrend.stable,
-        datTrendEnd: DateTime(17, 11, 1),
+        datTrendEnd: DateTime(17, 1, 1),
         candles: [
           Candle(
-            dateTime: DateTime(17, 11, 1),
+            dateTime: DateTime(17, 1, 1),
             open: 3543,
             high: 3543,
             low: 3543,
@@ -34,10 +34,10 @@ class DataInstruments {
         name: 'ETH',
         eTypeInstrument: ETypeInstrument.crypto,
         eTypeTrend: ETypeTrend.stable,
-        datTrendEnd: DateTime(17, 11, 1),
+        datTrendEnd: DateTime(17, 1, 1),
         candles: [
           Candle(
-            dateTime: DateTime(17, 11, 1),
+            dateTime: DateTime(17, 1, 1),
             open: 500,
             high: 500,
             low: 500,
@@ -56,10 +56,10 @@ class DataInstruments {
         name: 'BNB',
         eTypeInstrument: ETypeInstrument.crypto,
         eTypeTrend: ETypeTrend.stable,
-        datTrendEnd: DateTime(17, 11, 1),
+        datTrendEnd: DateTime(17, 1, 1),
         candles: [
           Candle(
-            dateTime: DateTime(17, 11, 1),
+            dateTime: DateTime(17, 1, 1),
             open: 150,
             high: 150,
             low: 150,
@@ -78,10 +78,10 @@ class DataInstruments {
         name: 'HERO',
         eTypeInstrument: ETypeInstrument.crypto,
         eTypeTrend: ETypeTrend.stable,
-        datTrendEnd: DateTime(17, 11, 1),
+        datTrendEnd: DateTime(17, 1, 1),
         candles: [
           Candle(
-            dateTime: DateTime(17, 11, 1),
+            dateTime: DateTime(17, 1, 1),
             open: 0.01,
             high: 0.01,
             low: 0.01,
@@ -100,10 +100,10 @@ class DataInstruments {
         name: 'DOME',
         eTypeInstrument: ETypeInstrument.crypto,
         eTypeTrend: ETypeTrend.stable,
-        datTrendEnd: DateTime(17, 11, 1),
+        datTrendEnd: DateTime(17, 1, 1),
         candles: [
           Candle(
-            dateTime: DateTime(17, 11, 1),
+            dateTime: DateTime(17, 1, 1),
             open: 0.01,
             high: 0.01,
             low: 0.01,
@@ -122,10 +122,10 @@ class DataInstruments {
         name: 'OIL',
         eTypeInstrument: ETypeInstrument.resource,
         eTypeTrend: ETypeTrend.stable,
-        datTrendEnd: DateTime(17, 11, 1),
+        datTrendEnd: DateTime(17, 1, 1),
         candles: [
           Candle(
-            dateTime: DateTime(17, 11, 1),
+            dateTime: DateTime(17, 1, 1),
             open: 100,
             high: 100,
             low: 100,
@@ -144,10 +144,10 @@ class DataInstruments {
         name: 'GOLD',
         eTypeInstrument: ETypeInstrument.resource,
         eTypeTrend: ETypeTrend.stable,
-        datTrendEnd: DateTime(17, 11, 1),
+        datTrendEnd: DateTime(17, 1, 1),
         candles: [
           Candle(
-            dateTime: DateTime(17, 11, 1),
+            dateTime: DateTime(17, 1, 1),
             open: 1500,
             high: 1500,
             low: 1500,
@@ -166,10 +166,10 @@ class DataInstruments {
         name: 'SILVER',
         eTypeInstrument: ETypeInstrument.resource,
         eTypeTrend: ETypeTrend.stable,
-        datTrendEnd: DateTime(17, 11, 1),
+        datTrendEnd: DateTime(17, 1, 1),
         candles: [
           Candle(
-            dateTime: DateTime(17, 11, 1),
+            dateTime: DateTime(17, 1, 1),
             open: 500,
             high: 500,
             low: 500,
@@ -188,10 +188,10 @@ class DataInstruments {
         name: 'TESLA',
         eTypeInstrument: ETypeInstrument.company,
         eTypeTrend: ETypeTrend.stable,
-        datTrendEnd: DateTime(17, 11, 1),
+        datTrendEnd: DateTime(17, 1, 1),
         candles: [
           Candle(
-            dateTime: DateTime(17, 11, 1),
+            dateTime: DateTime(17, 1, 1),
             open: 400,
             high: 400,
             low: 400,
@@ -210,10 +210,10 @@ class DataInstruments {
         name: 'APPLE',
         eTypeInstrument: ETypeInstrument.company,
         eTypeTrend: ETypeTrend.stable,
-        datTrendEnd: DateTime(17, 11, 1),
+        datTrendEnd: DateTime(17, 1, 1),
         candles: [
           Candle(
-            dateTime: DateTime(17, 11, 1),
+            dateTime: DateTime(17, 1, 1),
             open: 400,
             high: 400,
             low: 400,

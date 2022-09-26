@@ -21,6 +21,8 @@ _$_FreelanceJob _$$_FreelanceJobFromJson(Map<String, dynamic> json) =>
       userSkills: (json['userSkills'] as List<dynamic>)
           .map((e) => Skill.fromJson(e as Map<String, dynamic>))
           .toList(),
+      repeat: json['repeat'] as bool? ?? false,
+      lastVersion: json['lastVersion'] as int? ?? 0,
     );
 
 Map<String, dynamic> _$$_FreelanceJobToJson(_$_FreelanceJob instance) =>
@@ -33,6 +35,8 @@ Map<String, dynamic> _$$_FreelanceJobToJson(_$_FreelanceJob instance) =>
       'leftWorkTime': instance.leftWorkTime,
       'reqSkills': instance.reqSkills.map((e) => e.toJson()).toList(),
       'userSkills': instance.userSkills.map((e) => e.toJson()).toList(),
+      'repeat': instance.repeat,
+      'lastVersion': instance.lastVersion,
     };
 
 const _$ETypeFreelanceEnumMap = {

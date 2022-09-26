@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:richeable/utilities/utilities.dart';
-import 'package:uuid/uuid.dart';
 
 import '../../../constants/constants.dart';
 import '../../../widgets/widgets.dart';
@@ -208,12 +207,10 @@ class _FreelanceJobCreatorState extends State<FreelanceJobCreator> {
                       CustomButton(
                           onPressed: () {
                             if (formKey.currentState!.validate()) {
-                              FreelanceJob freelanceWork = FreelanceJob(
-                                id: const Uuid().v1(),
+                              FreelanceJob freelanceWork = FreelanceJob.builder(
                                 name: controller.text,
                                 eTypeFreelance: typeJob,
                                 workTime: duration,
-                                leftWorkTime: duration,
                                 reqSkills: req,
                                 userSkills: skills,
                                 level: lvl,
@@ -270,7 +267,7 @@ class _FreelanceJobCreatorState extends State<FreelanceJobCreator> {
         duration = (80 * lvl).toInt();
         break;
       case ETypeFreelance.youtube:
-        duration = (4 * lvl).toInt();
+        duration = (8 * lvl).toInt();
         break;
       case ETypeFreelance.application:
         duration = (120 * lvl).toInt();

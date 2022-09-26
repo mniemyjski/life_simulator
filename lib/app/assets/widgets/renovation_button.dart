@@ -52,7 +52,7 @@ class RenovationButton extends StatelessWidget {
                           min: 0,
                           max: 100,
                           divisions: 100,
-                          label: '${(newRenovation).toInt().toString()}%',
+                          label: '${(newRenovation).toMoney()}%',
                           onChanged: (double value) => _setState(value),
                         ),
                         CustomButton(

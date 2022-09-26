@@ -74,7 +74,7 @@ class _AdvertisementChooserState extends State<AdvertisementChooser> {
                                       fontWeight: FontWeight.bold),
                                 ),
                                 Text(
-                                  '${LocaleKeys.fame.tr()}: ${value * 50}',
+                                  '${LocaleKeys.fame.tr()}: ${value * 10}',
                                   style: TextStyle(
                                       color: Theme.of(context).textTheme.bodyText1!.color,
                                       fontWeight: FontWeight.bold),
@@ -93,7 +93,7 @@ class _AdvertisementChooserState extends State<AdvertisementChooser> {
               padding: const EdgeInsets.all(4.0),
               child: CustomButton(
                   onPressed: () {
-                    context.read<FameCubit>().buyAdv(money: value.toDouble(), fame: value * 1000);
+                    context.read<FameCubit>().buyAdv(money: value.toDouble(), fame: value * 10);
                     context.router.pop();
                   },
                   child: Text(

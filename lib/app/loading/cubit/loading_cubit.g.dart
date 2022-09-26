@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'loan_cubit.dart';
+part of 'loading_cubit.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -23,13 +23,9 @@ Map<String, dynamic> _$$LoadingToJson(_$Loading instance) => <String, dynamic>{
     };
 
 _$Loaded _$$LoadedFromJson(Map<String, dynamic> json) => _$Loaded(
-      (json['loans'] as List<dynamic>)
-          .map((e) => Loan.fromJson(e as Map<String, dynamic>))
-          .toList(),
       $type: json['runtimeType'] as String?,
     );
 
 Map<String, dynamic> _$$LoadedToJson(_$Loaded instance) => <String, dynamic>{
-      'loans': instance.loans.map((e) => e.toJson()).toList(),
       'runtimeType': instance.$type,
     };

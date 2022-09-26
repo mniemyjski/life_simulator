@@ -30,6 +30,8 @@ mixin _$FreelanceJob {
   int get leftWorkTime => throw _privateConstructorUsedError;
   List<Skill> get reqSkills => throw _privateConstructorUsedError;
   List<Skill> get userSkills => throw _privateConstructorUsedError;
+  bool get repeat => throw _privateConstructorUsedError;
+  int get lastVersion => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -50,7 +52,9 @@ abstract class $FreelanceJobCopyWith<$Res> {
       int workTime,
       int leftWorkTime,
       List<Skill> reqSkills,
-      List<Skill> userSkills});
+      List<Skill> userSkills,
+      bool repeat,
+      int lastVersion});
 }
 
 /// @nodoc
@@ -71,6 +75,8 @@ class _$FreelanceJobCopyWithImpl<$Res> implements $FreelanceJobCopyWith<$Res> {
     Object? leftWorkTime = freezed,
     Object? reqSkills = freezed,
     Object? userSkills = freezed,
+    Object? repeat = freezed,
+    Object? lastVersion = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -105,6 +111,14 @@ class _$FreelanceJobCopyWithImpl<$Res> implements $FreelanceJobCopyWith<$Res> {
           ? _value.userSkills
           : userSkills // ignore: cast_nullable_to_non_nullable
               as List<Skill>,
+      repeat: repeat == freezed
+          ? _value.repeat
+          : repeat // ignore: cast_nullable_to_non_nullable
+              as bool,
+      lastVersion: lastVersion == freezed
+          ? _value.lastVersion
+          : lastVersion // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -124,7 +138,9 @@ abstract class _$$_FreelanceJobCopyWith<$Res>
       int workTime,
       int leftWorkTime,
       List<Skill> reqSkills,
-      List<Skill> userSkills});
+      List<Skill> userSkills,
+      bool repeat,
+      int lastVersion});
 }
 
 /// @nodoc
@@ -148,6 +164,8 @@ class __$$_FreelanceJobCopyWithImpl<$Res>
     Object? leftWorkTime = freezed,
     Object? reqSkills = freezed,
     Object? userSkills = freezed,
+    Object? repeat = freezed,
+    Object? lastVersion = freezed,
   }) {
     return _then(_$_FreelanceJob(
       id: id == freezed
@@ -182,6 +200,14 @@ class __$$_FreelanceJobCopyWithImpl<$Res>
           ? _value._userSkills
           : userSkills // ignore: cast_nullable_to_non_nullable
               as List<Skill>,
+      repeat: repeat == freezed
+          ? _value.repeat
+          : repeat // ignore: cast_nullable_to_non_nullable
+              as bool,
+      lastVersion: lastVersion == freezed
+          ? _value.lastVersion
+          : lastVersion // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -197,7 +223,9 @@ class _$_FreelanceJob extends _FreelanceJob {
       required this.workTime,
       required this.leftWorkTime,
       required final List<Skill> reqSkills,
-      required final List<Skill> userSkills})
+      required final List<Skill> userSkills,
+      this.repeat = false,
+      this.lastVersion = 0})
       : _reqSkills = reqSkills,
         _userSkills = userSkills,
         super._();
@@ -234,8 +262,15 @@ class _$_FreelanceJob extends _FreelanceJob {
   }
 
   @override
+  @JsonKey()
+  final bool repeat;
+  @override
+  @JsonKey()
+  final int lastVersion;
+
+  @override
   String toString() {
-    return 'FreelanceJob(id: $id, name: $name, eTypeFreelance: $eTypeFreelance, level: $level, workTime: $workTime, leftWorkTime: $leftWorkTime, reqSkills: $reqSkills, userSkills: $userSkills)';
+    return 'FreelanceJob(id: $id, name: $name, eTypeFreelance: $eTypeFreelance, level: $level, workTime: $workTime, leftWorkTime: $leftWorkTime, reqSkills: $reqSkills, userSkills: $userSkills, repeat: $repeat, lastVersion: $lastVersion)';
   }
 
   @override
@@ -254,7 +289,10 @@ class _$_FreelanceJob extends _FreelanceJob {
             const DeepCollectionEquality()
                 .equals(other._reqSkills, _reqSkills) &&
             const DeepCollectionEquality()
-                .equals(other._userSkills, _userSkills));
+                .equals(other._userSkills, _userSkills) &&
+            const DeepCollectionEquality().equals(other.repeat, repeat) &&
+            const DeepCollectionEquality()
+                .equals(other.lastVersion, lastVersion));
   }
 
   @JsonKey(ignore: true)
@@ -268,7 +306,9 @@ class _$_FreelanceJob extends _FreelanceJob {
       const DeepCollectionEquality().hash(workTime),
       const DeepCollectionEquality().hash(leftWorkTime),
       const DeepCollectionEquality().hash(_reqSkills),
-      const DeepCollectionEquality().hash(_userSkills));
+      const DeepCollectionEquality().hash(_userSkills),
+      const DeepCollectionEquality().hash(repeat),
+      const DeepCollectionEquality().hash(lastVersion));
 
   @JsonKey(ignore: true)
   @override
@@ -290,7 +330,9 @@ abstract class _FreelanceJob extends FreelanceJob implements FreelanceBase {
       required final int workTime,
       required final int leftWorkTime,
       required final List<Skill> reqSkills,
-      required final List<Skill> userSkills}) = _$_FreelanceJob;
+      required final List<Skill> userSkills,
+      final bool repeat,
+      final int lastVersion}) = _$_FreelanceJob;
   const _FreelanceJob._() : super._();
 
   factory _FreelanceJob.fromJson(Map<String, dynamic> json) =
@@ -312,6 +354,10 @@ abstract class _FreelanceJob extends FreelanceJob implements FreelanceBase {
   List<Skill> get reqSkills => throw _privateConstructorUsedError;
   @override
   List<Skill> get userSkills => throw _privateConstructorUsedError;
+  @override
+  bool get repeat => throw _privateConstructorUsedError;
+  @override
+  int get lastVersion => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_FreelanceJobCopyWith<_$_FreelanceJob> get copyWith =>

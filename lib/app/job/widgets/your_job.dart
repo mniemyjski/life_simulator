@@ -58,54 +58,61 @@ class YourJob extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CustomButton(
-                      onPressed: () {
-                        var toast = context.read<JobCubit>().applyForPromotion();
-                        if (toast != null)
-                          BotToast.showText(text: toast, align: Alignment(0.1, 0.05));
-                      },
-                      child: Text('Apply for a promotion'),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 4.0, top: 10.0),
-                      child: Text('${LocaleKeys.requirementsToPromote.tr()}:'),
-                    ),
                     BlocBuilder<JobCubit, JobState>(
                       builder: (context, state) {
                         return state.maybeWhen(
                             orElse: () => Container(),
                             loaded: (job, exp) {
-                              if (job!.experiences.length < exp!.exp + 1) return Container();
+                              if (job!.experiences.length < (exp!.exp + 2)) return Container();
 
-                              return ListView.builder(
-                                  shrinkWrap: true,
-                                  itemCount: job.experiences[exp.exp + 1].requirements.length,
-                                  itemBuilder: (context, index) {
-                                    final element =
-                                        job.experiences[exp.exp + 1].requirements[index];
+                              return Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  CustomButton(
+                                    onPressed: () {
+                                      var toast = context.read<JobCubit>().applyForPromotion();
+                                      if (toast != null) {
+                                        BotToast.showText(text: toast, align: Alignment(0.1, 0.05));
+                                      }
+                                    },
+                                    child: Text('Apply for a promotion'),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 4.0, top: 10.0),
+                                    child: Text('${LocaleKeys.requirementsToPromote.tr()}:'),
+                                  ),
+                                  ListView.builder(
+                                      shrinkWrap: true,
+                                      itemCount: job.experiences[exp.exp + 1].requirements.length,
+                                      itemBuilder: (context, index) {
+                                        final element =
+                                            job.experiences[exp.exp + 1].requirements[index];
 
-                                    return Card(
-                                        child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: RichText(
-                                        text: TextSpan(
-                                          style: Theme.of(context).textTheme.bodyText1,
-                                          children: <TextSpan>[
-                                            TextSpan(
-                                              text: '${Enums.toText(element.name).tr()}: ',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyText1!
-                                                  .copyWith(fontWeight: FontWeight.bold),
+                                        return Card(
+                                            child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: RichText(
+                                            text: TextSpan(
+                                              style: Theme.of(context).textTheme.bodyText1,
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                  text: '${Enums.toText(element.name).tr()}: ',
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyText1!
+                                                      .copyWith(fontWeight: FontWeight.bold),
+                                                ),
+                                                TextSpan(
+                                                  text: element.lvl.toString(),
+                                                ),
+                                              ],
                                             ),
-                                            TextSpan(
-                                              text: element.lvl.toString(),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ));
-                                  });
+                                          ),
+                                        ));
+                                      }),
+                                ],
+                              );
                             });
                       },
                     ),

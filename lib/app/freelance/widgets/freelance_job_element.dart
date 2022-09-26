@@ -16,18 +16,6 @@ class FreelanceJobElement extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Card(
-            child: Container(
-          width: 50,
-          height: 50,
-          padding: const EdgeInsets.all(4.0),
-          child: Center(
-            child: Text(
-              index.toString(),
-              style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black),
-            ),
-          ),
-        )),
         Expanded(
           child: Card(
             child: Container(
@@ -77,6 +65,17 @@ class FreelanceJobElement extends StatelessWidget {
             ),
           ),
         ),
+        Card(
+            child: Container(
+          height: 50,
+          width: 50,
+          padding: const EdgeInsets.all(4.0),
+          child: IconButton(
+              onPressed: () => context.read<FreelanceJobCubit>().repeat(element),
+              icon: FaIcon(
+                element.repeat ? FontAwesomeIcons.repeat : FontAwesomeIcons.one,
+              )),
+        )),
         Card(
             child: Container(
           height: 50,

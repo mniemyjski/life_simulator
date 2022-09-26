@@ -52,12 +52,6 @@ class FreelanceJobsScreen extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            // FloatingActionButton(
-            //   heroTag: null,
-            //   onPressed: () => context.router.pop(),
-            //   child: const FaIcon(FontAwesomeIcons.arrowRotateLeft),
-            // ),
-            // const NextDayButton(),
             const SizedBox(height: 56),
             const SizedBox(height: 56),
             FloatingActionButton(

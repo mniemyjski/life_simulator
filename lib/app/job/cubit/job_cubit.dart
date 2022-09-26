@@ -69,7 +69,7 @@ class JobCubit extends HydratedCubit<JobState> {
                 for (var u in userSkills) {
                   if (r.name == u.name) {
                     _skillsCubit.update(
-                        skill: u.name, exp: ((u.lvl + 1) * (timeSpend.work / 2)).toDouble());
+                        skill: u.name, exp: ((u.lvl + 1) * (timeSpend.work / 3)).toDouble());
                   }
                 }
               }
@@ -169,7 +169,7 @@ class JobCubit extends HydratedCubit<JobState> {
     });
   }
 
-  String applyForPromotion() {
+  String? applyForPromotion() {
     return state.maybeWhen(
         loaded: (job, experience) {
           int exp = experience!.exp + 1;
@@ -208,7 +208,6 @@ class JobCubit extends HydratedCubit<JobState> {
 
           _incomeCubit.update(id: job.id, value: newExperience.salary);
           emit(JobState.loaded(job: job, experience: newExperience));
-          return 'succeed';
         },
         orElse: () => 'error');
   }

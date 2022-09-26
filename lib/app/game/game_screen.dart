@@ -4,6 +4,7 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:richeable/app/assets/cubit/build/build_asset_cubit.dart';
 import 'package:richeable/app/event/cubit/event_cubit.dart';
 import 'package:richeable/app/freelance/cubit/job/freelance_job_cubit.dart';
 import 'package:richeable/app/learning/cubit/learning_cubit.dart';
@@ -183,14 +184,18 @@ class _GameScreenState extends State<GameScreen> {
         BlocListener<EventCubit, EventState>(
           listener: (context, state) {
             state.whenOrNull(loaded: (event) {
-              if ((last ?? '') != event.first.datCre) {
-                BotToast.showText(
-                    text: event.first.name,
-                    contentPadding: const EdgeInsets.all(18),
-                    align: const Alignment(0.1, 0.05));
-
-                last = event.first.datCre;
-              }
+              // if ((last ?? '') != event.first.datCre && context.router.current is GameScreen) {
+              //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              //     behavior: SnackBarBehavior.floating,
+              //     content: Text(event.first.name),
+              //     action: SnackBarAction(
+              //       label: 'Undo',
+              //       onPressed: () {},
+              //     ),
+              //   ));
+              //
+              //   last = event.first.datCre;
+              // }
             });
           },
         ),
@@ -270,7 +275,24 @@ class _GameScreenState extends State<GameScreen> {
                       context.read<AudioCubit>().getSounds(AudioCollection.click()).play();
                       context.router.push(const AssetsRoute());
                     },
-                    icon: const FaIcon(FontAwesomeIcons.city),
+                    icon: BlocBuilder<BuildAssetCubit, BuildAssetState>(
+                      builder: (context, state) {
+                        return state.maybeWhen(
+                            orElse: () => Container(),
+                            loaded: (building) {
+                              if (building.isEmpty) return const FaIcon(FontAwesomeIcons.city);
+
+                              return Badge(
+                                padding: const EdgeInsets.all(4),
+                                badgeContent: Text(
+                                  building.length.toString(),
+                                  style: const TextStyle(fontSize: 8),
+                                ),
+                                child: const FaIcon(FontAwesomeIcons.city),
+                              );
+                            });
+                      },
+                    ),
                   ),
                   ButtonElement(
                     key: keyButton5,

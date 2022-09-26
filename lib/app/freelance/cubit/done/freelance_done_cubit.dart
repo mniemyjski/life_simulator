@@ -46,9 +46,9 @@ class FreelanceDoneCubit extends HydratedCubit<FreelanceDoneState> {
   }
 
   _newGame() {
-    if (_newGameCubit.state) emit(const FreelanceDoneState.loaded([]));
+    if (_newGameCubit.state) emit(FreelanceDoneState.loaded([]));
     _newGameSub = _newGameCubit.stream.listen((newGame) {
-      if (newGame) emit(const FreelanceDoneState.loaded([]));
+      if (newGame) emit(FreelanceDoneState.loaded([]));
     });
   }
 
@@ -56,53 +56,86 @@ class FreelanceDoneCubit extends HydratedCubit<FreelanceDoneState> {
     _dateSub = _dateCubit.stream.listen((event) {
       event.whenOrNull(loaded: (date) {
         state.whenOrNull(loaded: (freelances) {
-          List<FreelanceDone> result = [];
-
-          //Interval reduce fame in jobs
-          for (var e in freelances) {
-            DateTime next1 = e.dateCre.onlyDate().add(const Duration(days: 180));
-            DateTime next2 = e.dateCre.onlyDate().add(const Duration(days: 360));
-            DateTime next3 = e.dateCre.onlyDate().add(const Duration(days: 720));
-
-            if (next1 == date.onlyDate()) {
-              result.add(e.copyWith(fame: e.fame / 2));
-              continue;
-            }
-            if (next2 == date.onlyDate()) {
-              result.add(e.copyWith(fame: e.fame / 2));
-              continue;
-            }
-            if (next3 == date.onlyDate()) {
-              continue;
-            }
-            result.add(e);
-          }
-
-          double addFame = 0;
-
-          //Daily cumulate fame
-          for (var e in result) {
-            addFame += e.fame;
-          }
-          if (addFame > 0) _fameCubit.add(addFame);
-
-          _fameCubit.state.whenOrNull(loaded: (fame) {
-            double fame10 = fame / 30000;
-            double addMoney = 0;
-            for (var e in result) {
-              addMoney = e.price * fame10;
-            }
-
-            if (addMoney > 0) {
-              _moneyCubit.addTransaction(
-                  value: addMoney, eTypeTransactionSource: ETypeTransactionSource.freelance);
-            }
-          });
+          List<FreelanceDone> result = _reduceFameInTime(freelances, date);
+          _addMoneyAndFameForFreelance(result);
 
           emit(FreelanceDoneState.loaded(result));
         });
       });
     });
+  }
+
+  List<FreelanceDone> _reduceFameInTime(List<FreelanceDone> freelances, DateTime date) {
+    List<FreelanceDone> result = [];
+
+    for (var e in freelances) {
+      DateTime next1 = e.dateCre.addDate(months: 6 * e.rating);
+      DateTime next2 = e.dateCre.addDate(years: 1 * e.rating);
+      DateTime next3 = e.dateCre.addDate(years: 2 * e.rating);
+
+      if (next1 == date.onlyDate()) {
+        result.add(e.copyWith(fame: e.fame / 2, price: e.price / 2));
+        continue;
+      }
+      if (next2 == date.onlyDate()) {
+        result.add(e.copyWith(fame: e.fame / 2, price: e.price / 2));
+        continue;
+      }
+      if (next3.millisecondsSinceEpoch > date.onlyDate().millisecondsSinceEpoch) {
+        result.add(e);
+        continue;
+      }
+    }
+
+    return result;
+  }
+
+  _addMoneyAndFameForFreelance(List<FreelanceDone> freelances) {
+    _fameCubit.state.whenOrNull(loaded: (fame) {
+      double fame10 = fame / 500000;
+      double addMoney = 0;
+      double addFame = 0;
+
+      for (var e in freelances) {
+        addMoney += e.price * fame10;
+        addFame += e.fame;
+      }
+
+      if (addFame > 0) _fameCubit.add(addFame);
+
+      if (addMoney > 0) {
+        _moneyCubit.addTransaction(
+          value: addMoney,
+          eTypeTransactionSource: ETypeTransactionSource.freelance,
+        );
+      }
+    });
+  }
+
+  double getDailyFame() {
+    double fame = 0;
+    state.maybeWhen(
+        orElse: () => 0.0,
+        loaded: (done) {
+          for (var element in done) {
+            fame += element.fame;
+          }
+        });
+
+    return fame;
+  }
+
+  double getValue() {
+    double price = 0;
+    state.maybeWhen(
+        orElse: () => 0.0,
+        loaded: (done) {
+          for (var element in done) {
+            price += element.price;
+          }
+        });
+
+    return price;
   }
 
   add(FreelanceDone freelanceDone) {

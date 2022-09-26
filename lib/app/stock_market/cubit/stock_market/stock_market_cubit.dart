@@ -135,10 +135,10 @@ class StockMarketCubit extends HydratedCubit<StockMarketState> {
                 break;
             }
 
-            List<Candle> newCandles = List.of(newInstrument.candles)
+            newInstrument.candles
               ..removeAt(0)
               ..add(newCandle);
-            newInstruments.add(newInstrument.copyWith(candles: newCandles));
+            newInstruments.add(newInstrument);
           }
 
           emit(StockMarketState.loaded(newInstruments));

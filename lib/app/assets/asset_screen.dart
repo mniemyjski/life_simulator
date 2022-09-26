@@ -273,6 +273,9 @@ class AssetScreen extends StatelessWidget {
               child: const FaIcon(FontAwesomeIcons.arrowRotateLeft),
             ),
             const NextDayButton(),
+            const SizedBox(
+              width: 56,
+            ),
           ],
         ),
       ),

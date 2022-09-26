@@ -88,6 +88,10 @@ class FreelanceJobCubit extends HydratedCubit<FreelanceWorkState> {
                               hours: e.leftWorkTime,
                             );
                             time = time - e.leftWorkTime;
+
+                            if (e.repeat) {
+                              result = [e.repeater(), ...result];
+                            }
                           }
                         }
                         if (result.isEmpty) {
@@ -108,7 +112,7 @@ class FreelanceJobCubit extends HydratedCubit<FreelanceWorkState> {
     for (var r in reqSkills) {
       for (var u in userSkills) {
         if (u.name == r.name) {
-          _skillsCubit.update(skill: u.name, exp: ((u.lvl + 1) * hours).toDouble());
+          _skillsCubit.update(skill: u.name, exp: ((u.lvl + 1) * hours / 3).toDouble());
         }
       }
     }
@@ -145,6 +149,18 @@ class FreelanceJobCubit extends HydratedCubit<FreelanceWorkState> {
         orElse: () => 'error',
         loaded: (list) {
           emit(FreelanceWorkState.loaded(List.from(list)..removeWhere((e) => e.id == id)));
+        });
+  }
+
+  repeat(FreelanceJob element) {
+    state.maybeWhen(
+        orElse: () => 'error',
+        loaded: (list) {
+          List<FreelanceJob> result = List.of(list);
+          int index = result.indexWhere((e) => e.id == element.id);
+          result[index] = element.copyWith(repeat: !element.repeat);
+
+          emit(FreelanceWorkState.loaded(result));
         });
   }
 

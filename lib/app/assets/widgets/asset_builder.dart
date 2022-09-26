@@ -38,28 +38,28 @@ class _AssetBuilderState extends State<AssetBuilder> {
         selectedTenant = 1;
         minTenant = 1;
         maxTenant = 1;
-        baseCost = 50000;
+        baseCost = 80000;
         duration = 12;
         break;
       case ETypeAsset.house:
         selectedTenant = 1;
         minTenant = 1;
         maxTenant = 2;
-        baseCost = 80000;
+        baseCost = 100000;
         duration = 24;
         break;
       case ETypeAsset.tenement:
         selectedTenant = 10;
         minTenant = 10;
         maxTenant = 30;
-        baseCost = 50000;
+        baseCost = 80000;
         duration = 24;
         break;
       case ETypeAsset.estate:
         selectedTenant = 30;
         minTenant = 30;
         maxTenant = 80;
-        baseCost = 80000;
+        baseCost = 100000;
         duration = 24;
         break;
     }
@@ -311,7 +311,7 @@ class _AssetBuilderState extends State<AssetBuilder> {
               child: CustomButton(
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
-                      String? test = context.read<BuildAssetCubit>().build(
+                      String? toast = context.read<BuildAssetCubit>().build(
                             BuildAsset(
                               address: controller.text,
                               eTypeAsset: selectedAssetType,
@@ -321,8 +321,8 @@ class _AssetBuilderState extends State<AssetBuilder> {
                             ),
                             duration,
                           );
-                      if (test != null) {
-                        BotToast.showText(text: test, align: const Alignment(0.1, 0.05));
+                      if (toast != null) {
+                        BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
                       } else {
                         context.router.pop();
                       }

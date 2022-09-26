@@ -9,9 +9,9 @@ enum ETypeInstrument { crypto, resource, company }
 
 enum ETypeTrend { stable, decrease, increase }
 
-@freezed
+@Freezed(makeCollectionsUnmodifiable: false)
 class Instrument with _$Instrument {
-  const factory Instrument({
+  factory Instrument({
     required String id,
     required String name,
     required ETypeInstrument eTypeInstrument,

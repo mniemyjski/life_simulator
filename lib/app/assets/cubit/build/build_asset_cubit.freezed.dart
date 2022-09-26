@@ -361,7 +361,7 @@ class __$$LoadedCopyWithImpl<$Res> extends _$BuildAssetStateCopyWithImpl<$Res>
   }) {
     return _then(_$Loaded(
       buildAssets == freezed
-          ? _value._buildAssets
+          ? _value.buildAssets
           : buildAssets // ignore: cast_nullable_to_non_nullable
               as List<BuildAsset>,
     ));
@@ -371,19 +371,13 @@ class __$$LoadedCopyWithImpl<$Res> extends _$BuildAssetStateCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$Loaded implements Loaded {
-  const _$Loaded(final List<BuildAsset> buildAssets, {final String? $type})
-      : _buildAssets = buildAssets,
-        $type = $type ?? 'loaded';
+  _$Loaded(this.buildAssets, {final String? $type}) : $type = $type ?? 'loaded';
 
   factory _$Loaded.fromJson(Map<String, dynamic> json) =>
       _$$LoadedFromJson(json);
 
-  final List<BuildAsset> _buildAssets;
   @override
-  List<BuildAsset> get buildAssets {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_buildAssets);
-  }
+  final List<BuildAsset> buildAssets;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
@@ -399,13 +393,13 @@ class _$Loaded implements Loaded {
         (other.runtimeType == runtimeType &&
             other is _$Loaded &&
             const DeepCollectionEquality()
-                .equals(other._buildAssets, _buildAssets));
+                .equals(other.buildAssets, buildAssets));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_buildAssets));
+      runtimeType, const DeepCollectionEquality().hash(buildAssets));
 
   @JsonKey(ignore: true)
   @override
@@ -487,7 +481,7 @@ class _$Loaded implements Loaded {
 }
 
 abstract class Loaded implements BuildAssetState {
-  const factory Loaded(final List<BuildAsset> buildAssets) = _$Loaded;
+  factory Loaded(final List<BuildAsset> buildAssets) = _$Loaded;
 
   factory Loaded.fromJson(Map<String, dynamic> json) = _$Loaded.fromJson;
 

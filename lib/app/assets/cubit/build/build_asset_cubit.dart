@@ -47,27 +47,26 @@ class BuildAssetCubit extends HydratedCubit<BuildAssetState> {
   }
 
   _newGame() {
-    if (_newGameCubit.state) emit(const BuildAssetState.loaded([]));
+    if (_newGameCubit.state) emit(BuildAssetState.loaded([]));
     _newGameSub = _newGameCubit.stream.listen((newGame) {
-      if (newGame) emit(const BuildAssetState.loaded([]));
+      if (newGame) emit(BuildAssetState.loaded([]));
     });
   }
 
   String? build(BuildAsset buildAsset, months) {
     if (_moneyCubit.state < buildAsset.cost) return 'not_enought_money';
 
-    state.whenOrNull(loaded: (buildAssets) {
-      _dateCubit.state.whenOrNull(loaded: (date) {
-        List<BuildAsset> result = List.from(buildAssets)
-          ..add(
-            buildAsset.copyWith(
-              datCre: date,
-              datEnd: Jiffy(date).add(months: 12).dateTime.onlyDate(),
-            ),
-          );
+    _dateCubit.state.whenOrNull(loaded: (date) {
+      state.whenOrNull(loaded: (buildAssets) {
+        BuildAsset newBuildAssets = buildAsset.copyWith(
+          datCre: date,
+          datEnd: Jiffy(date).add(months: 12).dateTime.onlyDate(),
+        );
+
         _moneyCubit.addTransaction(
             value: -buildAsset.cost, eTypeTransactionSource: ETypeTransactionSource.asset);
-        emit(BuildAssetState.loaded(result));
+
+        emit(BuildAssetState.loaded(List.of(buildAssets)..add(newBuildAssets)));
       });
     });
     return null;

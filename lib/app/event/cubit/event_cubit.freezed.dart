@@ -360,7 +360,7 @@ class __$$LoadedCopyWithImpl<$Res> extends _$EventStateCopyWithImpl<$Res>
   }) {
     return _then(_$Loaded(
       events: events == freezed
-          ? _value._events
+          ? _value.events
           : events // ignore: cast_nullable_to_non_nullable
               as List<GameEvent>,
     ));
@@ -370,19 +370,14 @@ class __$$LoadedCopyWithImpl<$Res> extends _$EventStateCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$Loaded implements Loaded {
-  const _$Loaded({required final List<GameEvent> events, final String? $type})
-      : _events = events,
-        $type = $type ?? 'loaded';
+  _$Loaded({required this.events, final String? $type})
+      : $type = $type ?? 'loaded';
 
   factory _$Loaded.fromJson(Map<String, dynamic> json) =>
       _$$LoadedFromJson(json);
 
-  final List<GameEvent> _events;
   @override
-  List<GameEvent> get events {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_events);
-  }
+  final List<GameEvent> events;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
@@ -397,13 +392,13 @@ class _$Loaded implements Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$Loaded &&
-            const DeepCollectionEquality().equals(other._events, _events));
+            const DeepCollectionEquality().equals(other.events, events));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_events));
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(events));
 
   @JsonKey(ignore: true)
   @override
@@ -485,7 +480,7 @@ class _$Loaded implements Loaded {
 }
 
 abstract class Loaded implements EventState {
-  const factory Loaded({required final List<GameEvent> events}) = _$Loaded;
+  factory Loaded({required final List<GameEvent> events}) = _$Loaded;
 
   factory Loaded.fromJson(Map<String, dynamic> json) = _$Loaded.fromJson;
 

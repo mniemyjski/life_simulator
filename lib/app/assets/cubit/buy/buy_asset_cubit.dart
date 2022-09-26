@@ -40,8 +40,8 @@ class BuyAssetCubit extends Cubit<BuyAssetState> {
 
   add(Asset asset) {
     state.whenOrNull(loaded: (assets) {
-      List<Asset> result = List.from(assets)..add(asset);
-      emit(BuyAssetState.loaded(result));
+      assets.add(asset);
+      emit(BuyAssetState.loaded(assets));
     });
   }
 

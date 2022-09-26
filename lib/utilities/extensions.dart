@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:currency_formatter/currency_formatter.dart';
 import 'package:jiffy/jiffy.dart';
 
 import 'utilities.dart';
@@ -42,28 +43,37 @@ extension RandomT on Random {
 
 extension DoubleT on double {
   toMoney() {
-    double test = this < 0 ? this * -1 : this;
+    double value = this < 0 ? this * -1 : this;
     String minus = this < 0 ? '-' : '';
 
-    if (test == 0) return '$minus\$${test.toStringAsFixed(0)}';
-    if (test < 1) return '$minus\$${test.toStringAsFixed(6)}';
-    if (test < 999) return '$minus\$${test.toStringAsFixed(2)}';
-    if (test < 1000000) return '$minus\$${(test / 1000).toStringAsFixed(2)} t';
-    if (test <= 1000000000) return '$minus\$${(test / 1000000).toStringAsFixed(2)} mln';
-    if (test <= 1000000000000) return '$minus\$${(test / 1000000000).toStringAsFixed(2)} mld';
-    return '$minus\$${(test / 1000000000000).toStringAsFixed(2)} bln';
+    return minus +
+        CurrencyFormatter.format(
+          value,
+          CurrencyFormatterSettings(
+            symbol: '\$',
+            symbolSide: SymbolSide.left,
+            thousandSeparator: ' ',
+            decimalSeparator: ',',
+            symbolSeparator: '',
+          ),
+          compact: true,
+        );
   }
 
   toExp() {
-    double test = this < 0 ? this * -1 : this;
+    double value = this < 0 ? this * -1 : this;
     String minus = this < 0 ? '-' : '';
 
-    if (test == 0) return '$minus${test.toStringAsFixed(0)}';
-    if (test < 1) return '$minus${test.toStringAsFixed(6)}';
-    if (test < 999) return '$minus${test.toStringAsFixed(2)}';
-    if (test < 1000000) return '$minus${(test / 1000).toStringAsFixed(2)} t';
-    if (test <= 1000000000) return '$minus${(test / 1000000).toStringAsFixed(2)} mln';
-    if (test <= 1000000000000) return '$minus${(test / 1000000000).toStringAsFixed(2)} mld';
-    return '$minus\$${(test / 1000000000000).toStringAsFixed(2)} bln';
+    return minus +
+        CurrencyFormatter.format(
+          value,
+          CurrencyFormatterSettings(
+            symbol: '',
+            symbolSide: SymbolSide.left,
+            thousandSeparator: ' ',
+            decimalSeparator: ',',
+            symbolSeparator: '',
+          ),
+        );
   }
 }

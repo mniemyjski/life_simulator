@@ -66,20 +66,18 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
   }
 
   //function to buy asset
-  String buy(Asset asset) {
+  String? buy(Asset asset) {
     if (_moneyCubit.state < asset.value) return 'not_enought_money';
 
     return state.maybeWhen(
         orElse: () => throw 'error',
         loaded: (assets) {
-          List<Asset> result = List.from(assets)..add(asset);
-
           _moneyCubit.addTransaction(
               value: -asset.value, eTypeTransactionSource: ETypeTransactionSource.asset);
           _buyAssetCubit.remove(asset);
           _addIncome(asset);
-          emit(AssetsState.loaded(result));
-          return 'succeed';
+
+          emit(AssetsState.loaded(List.of(assets)..add(asset)));
         });
   }
 
@@ -100,7 +98,7 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
     return state.maybeWhen(
         orElse: () => throw 'error',
         loaded: (assets) {
-          List<Asset> result = List.from(assets)..remove(asset);
+          List<Asset> result = List.of(assets)..removeWhere((element) => element.id == asset.id);
           _moneyCubit.addTransaction(
               value: asset.value, eTypeTransactionSource: ETypeTransactionSource.asset);
           _buyAssetCubit.add(asset.copyWith(friendlyAnimal: true, minRent: 800));
@@ -133,7 +131,7 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
     required double renovation,
     required double cost,
   }) {
-    if (_moneyCubit.state < cost) return 'not_enought_money';
+    if (_moneyCubit.state < -cost) return 'not_enought_money';
 
     return state.maybeWhen(
         orElse: () => throw 'error',
@@ -150,12 +148,12 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
   }
 
   //function to change level for asset
-  String changeLevel({
+  String? changeLevel({
     required Asset asset,
     required int level,
     required double cost,
   }) {
-    if (_moneyCubit.state < cost) return 'not_enought_money';
+    if (_moneyCubit.state < -cost) return 'not_enought_money';
 
     return state.maybeWhen(
         orElse: () => throw 'error',
@@ -167,7 +165,6 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
               asset.copyWith(level: asset.level + level, value: asset.value + (-cost * 1.5));
           result.add(newAsset);
           emit(AssetsState.loaded(result));
-          return 'succeed';
         });
   }
 
