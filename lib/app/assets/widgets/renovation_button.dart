@@ -29,7 +29,7 @@ class RenovationButton extends StatelessWidget {
                     if (value >= (asset.renovation)) {
                       setState(() {
                         newRenovation = value;
-                        cost = ((newRenovation - asset.renovation) * (asset.baseValue * 0.002))
+                        cost = ((newRenovation - asset.renovation) * (asset.value * 0.002))
                             .roundToDouble();
                       });
                     }

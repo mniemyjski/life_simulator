@@ -9,6 +9,7 @@ import '../../date/cubit/date_cubit.dart';
 import '../../money/cubit/income/income_cubit.dart';
 import '../../money/cubit/money_cubit.dart';
 import '../../money/models/income/income_model.dart';
+import '../../money/models/transaction/transaction_model.dart';
 import '../../new_game/new_game_cubit.dart';
 import '../../skills/cubit/skills_cubit.dart';
 import '../../time_spend/cubit/time_spend_cubit.dart';
@@ -95,7 +96,7 @@ class JobCubit extends HydratedCubit<JobState> {
 
           Income income = Income(
             id: job.id,
-            source: ETypeSource.job,
+            source: ETypeTransactionSource.job,
             typeIncome: ETypeIncome.revenue,
             value: experience.salary,
             eTypeFrequency: experience.eTypeFrequency,

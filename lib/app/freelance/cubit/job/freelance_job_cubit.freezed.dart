@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-FreelanceWorkState _$FreelanceWorkStateFromJson(Map<String, dynamic> json) {
+FreelanceJobState _$FreelanceJobStateFromJson(Map<String, dynamic> json) {
   switch (json['runtimeType']) {
     case 'initial':
       return Initial.fromJson(json);
@@ -24,13 +24,13 @@ FreelanceWorkState _$FreelanceWorkStateFromJson(Map<String, dynamic> json) {
       return Loaded.fromJson(json);
 
     default:
-      throw CheckedFromJsonException(json, 'runtimeType', 'FreelanceWorkState',
+      throw CheckedFromJsonException(json, 'runtimeType', 'FreelanceJobState',
           'Invalid union type "${json['runtimeType']}"!');
   }
 }
 
 /// @nodoc
-mixin _$FreelanceWorkState {
+mixin _$FreelanceJobState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
@@ -79,20 +79,20 @@ mixin _$FreelanceWorkState {
 }
 
 /// @nodoc
-abstract class $FreelanceWorkStateCopyWith<$Res> {
-  factory $FreelanceWorkStateCopyWith(
-          FreelanceWorkState value, $Res Function(FreelanceWorkState) then) =
-      _$FreelanceWorkStateCopyWithImpl<$Res>;
+abstract class $FreelanceJobStateCopyWith<$Res> {
+  factory $FreelanceJobStateCopyWith(
+          FreelanceJobState value, $Res Function(FreelanceJobState) then) =
+      _$FreelanceJobStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$FreelanceWorkStateCopyWithImpl<$Res>
-    implements $FreelanceWorkStateCopyWith<$Res> {
-  _$FreelanceWorkStateCopyWithImpl(this._value, this._then);
+class _$FreelanceJobStateCopyWithImpl<$Res>
+    implements $FreelanceJobStateCopyWith<$Res> {
+  _$FreelanceJobStateCopyWithImpl(this._value, this._then);
 
-  final FreelanceWorkState _value;
+  final FreelanceJobState _value;
   // ignore: unused_field
-  final $Res Function(FreelanceWorkState) _then;
+  final $Res Function(FreelanceJobState) _then;
 }
 
 /// @nodoc
@@ -103,7 +103,7 @@ abstract class _$$InitialCopyWith<$Res> {
 
 /// @nodoc
 class __$$InitialCopyWithImpl<$Res>
-    extends _$FreelanceWorkStateCopyWithImpl<$Res>
+    extends _$FreelanceJobStateCopyWithImpl<$Res>
     implements _$$InitialCopyWith<$Res> {
   __$$InitialCopyWithImpl(_$Initial _value, $Res Function(_$Initial) _then)
       : super(_value, (v) => _then(v as _$Initial));
@@ -125,7 +125,7 @@ class _$Initial implements Initial {
 
   @override
   String toString() {
-    return 'FreelanceWorkState.initial()';
+    return 'FreelanceJobState.initial()';
   }
 
   @override
@@ -212,7 +212,7 @@ class _$Initial implements Initial {
   }
 }
 
-abstract class Initial implements FreelanceWorkState {
+abstract class Initial implements FreelanceJobState {
   const factory Initial() = _$Initial;
 
   factory Initial.fromJson(Map<String, dynamic> json) = _$Initial.fromJson;
@@ -226,7 +226,7 @@ abstract class _$$LoadingCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadingCopyWithImpl<$Res>
-    extends _$FreelanceWorkStateCopyWithImpl<$Res>
+    extends _$FreelanceJobStateCopyWithImpl<$Res>
     implements _$$LoadingCopyWith<$Res> {
   __$$LoadingCopyWithImpl(_$Loading _value, $Res Function(_$Loading) _then)
       : super(_value, (v) => _then(v as _$Loading));
@@ -248,7 +248,7 @@ class _$Loading implements Loading {
 
   @override
   String toString() {
-    return 'FreelanceWorkState.loading()';
+    return 'FreelanceJobState.loading()';
   }
 
   @override
@@ -335,7 +335,7 @@ class _$Loading implements Loading {
   }
 }
 
-abstract class Loading implements FreelanceWorkState {
+abstract class Loading implements FreelanceJobState {
   const factory Loading() = _$Loading;
 
   factory Loading.fromJson(Map<String, dynamic> json) = _$Loading.fromJson;
@@ -349,8 +349,7 @@ abstract class _$$LoadedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$LoadedCopyWithImpl<$Res>
-    extends _$FreelanceWorkStateCopyWithImpl<$Res>
+class __$$LoadedCopyWithImpl<$Res> extends _$FreelanceJobStateCopyWithImpl<$Res>
     implements _$$LoadedCopyWith<$Res> {
   __$$LoadedCopyWithImpl(_$Loaded _value, $Res Function(_$Loaded) _then)
       : super(_value, (v) => _then(v as _$Loaded));
@@ -387,7 +386,7 @@ class _$Loaded implements Loaded {
 
   @override
   String toString() {
-    return 'FreelanceWorkState.loaded(list: $list)';
+    return 'FreelanceJobState.loaded(list: $list)';
   }
 
   @override
@@ -482,7 +481,7 @@ class _$Loaded implements Loaded {
   }
 }
 
-abstract class Loaded implements FreelanceWorkState {
+abstract class Loaded implements FreelanceJobState {
   const factory Loaded(final List<FreelanceJob> list) = _$Loaded;
 
   factory Loaded.fromJson(Map<String, dynamic> json) = _$Loaded.fromJson;

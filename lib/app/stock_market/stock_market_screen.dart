@@ -21,44 +21,39 @@ class StockMarketScreen extends StatefulWidget {
 
 class _StockMarketScreenState extends State<StockMarketScreen> {
   ETypeInstrument eTypeInstrument = ETypeInstrument.crypto;
+  final List<bool> _selectedFruits = <bool>[true, false, false];
 
-  _changeMarket(ETypeInstrument e) => setState(() => eTypeInstrument = e);
+  _changeMarket(int index) {
+    setState(() {
+      for (int i = 0; i < _selectedFruits.length; i++) {
+        _selectedFruits[i] = i == index;
+        eTypeInstrument = ETypeInstrument.values[index];
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
       body: Column(children: [
         const AppBarStats(),
-        Row(
-          children: [
-            Expanded(
-              child: CustomButton(
-                padding: const EdgeInsets.only(left: 4, bottom: 4),
-                onPressed: () => _changeMarket(ETypeInstrument.crypto),
-                child: Text(Enums.toText(ETypeInstrument.crypto)),
-              ),
-            ),
-            Expanded(
-              child: CustomButton(
-                padding: const EdgeInsets.only(left: 4, bottom: 4),
-                onPressed: () => _changeMarket(ETypeInstrument.resource),
-                child: Text(Enums.toText(ETypeInstrument.resource)),
-              ),
-            ),
-            Expanded(
-              child: CustomButton(
-                padding: const EdgeInsets.only(left: 4, right: 4, bottom: 4),
-                onPressed: () => _changeMarket(ETypeInstrument.company),
-                child: Text(Enums.toText(ETypeInstrument.company)),
-              ),
-            ),
-          ],
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 4, right: 4),
-          child: Divider(
-            color: Theme.of(context).primaryColor,
+        ToggleButtons(
+          onPressed: (int index) => _changeMarket(index),
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
+          selectedBorderColor: Colors.white70,
+          selectedColor: Colors.white,
+          fillColor: Theme.of(context).scaffoldBackgroundColor,
+          color: Colors.white70,
+          constraints: const BoxConstraints(
+            minHeight: 40.0,
+            minWidth: 80.0,
           ),
+          isSelected: _selectedFruits,
+          children: [
+            Text(Enums.toText(ETypeInstrument.crypto).tr()),
+            Text(Enums.toText(ETypeInstrument.resources).tr()),
+            Text(Enums.toText(ETypeInstrument.company).tr()),
+          ],
         ),
         BlocBuilder<StockMarketCubit, StockMarketState>(
           builder: (context, state) {

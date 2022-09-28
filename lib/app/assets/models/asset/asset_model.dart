@@ -52,15 +52,17 @@ class Asset with _$Asset {
     var uuid = const Uuid();
     var rng = Random();
 
+    double r = renovation ?? rng.nextIntInRange(60, 100).toDouble();
+
     return Asset(
         id: uuid.v1(),
         address: address,
         eTypeAsset: eTypeAsset,
         tenantsMax: tenantsMax,
         baseValue: baseValue,
-        value: baseValue,
+        value: baseValue * (r / 100),
         level: level,
-        renovation: renovation ?? rng.nextIntInRange(60, 100).toDouble(),
+        renovation: r,
         minRent: minRent,
         friendlyAnimal: friendlyAnimal,
         minRating: minRating,

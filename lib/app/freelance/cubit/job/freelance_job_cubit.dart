@@ -18,7 +18,7 @@ part 'freelance_job_cubit.g.dart';
 part 'freelance_job_state.dart';
 
 @lazySingleton
-class FreelanceJobCubit extends HydratedCubit<FreelanceWorkState> {
+class FreelanceJobCubit extends HydratedCubit<FreelanceJobState> {
   final NewGameCubit _newGameCubit;
   late StreamSubscription _newGameSub;
 
@@ -35,7 +35,7 @@ class FreelanceJobCubit extends HydratedCubit<FreelanceWorkState> {
     this._timeSpendCubit,
     this._freelanceDoneCubit,
     this._skillsCubit,
-  ) : super(const FreelanceWorkState.initial()) {
+  ) : super(const FreelanceJobState.initial()) {
     _newGame();
     _counting();
   }
@@ -48,9 +48,9 @@ class FreelanceJobCubit extends HydratedCubit<FreelanceWorkState> {
   }
 
   _newGame() {
-    if (_newGameCubit.state) emit(const FreelanceWorkState.loaded([]));
+    if (_newGameCubit.state) emit(const FreelanceJobState.loaded([]));
     _newGameSub = _newGameCubit.stream.listen((newGame) {
-      if (newGame) emit(const FreelanceWorkState.loaded([]));
+      if (newGame) emit(const FreelanceJobState.loaded([]));
     });
   }
 
@@ -97,7 +97,7 @@ class FreelanceJobCubit extends HydratedCubit<FreelanceWorkState> {
                         if (result.isEmpty) {
                           _timeSpendCubit.changeFreelance(-timeSpend.freelance);
                         }
-                        emit(FreelanceWorkState.loaded(result));
+                        emit(FreelanceJobState.loaded(result));
                       });
                 });
           });
@@ -128,9 +128,23 @@ class FreelanceJobCubit extends HydratedCubit<FreelanceWorkState> {
     return state.maybeWhen(
         orElse: () => 'error',
         loaded: (list) {
-          emit(FreelanceWorkState.loaded(List.from(list)..add(freelanceWork)));
+          emit(FreelanceJobState.loaded(List.from(list)..add(freelanceWork)));
           return null;
         });
+  }
+
+  reorderAble({required int oldIndex, required int newIndex}) {
+    state.whenOrNull(loaded: (list) {
+      List<FreelanceJob> result = List.from(list);
+
+      if (oldIndex < newIndex) {
+        newIndex -= 1;
+      }
+      final FreelanceJob item = result.removeAt(oldIndex);
+      result.insert(newIndex, item);
+
+      emit(FreelanceJobState.loaded(result));
+    });
   }
 
   _testReqSkill({required List<Skill> reqSkill, required List<Skill> userSkills}) {
@@ -148,7 +162,7 @@ class FreelanceJobCubit extends HydratedCubit<FreelanceWorkState> {
     state.maybeWhen(
         orElse: () => 'error',
         loaded: (list) {
-          emit(FreelanceWorkState.loaded(List.from(list)..removeWhere((e) => e.id == id)));
+          emit(FreelanceJobState.loaded(List.from(list)..removeWhere((e) => e.id == id)));
         });
   }
 
@@ -160,17 +174,17 @@ class FreelanceJobCubit extends HydratedCubit<FreelanceWorkState> {
           int index = result.indexWhere((e) => e.id == element.id);
           result[index] = element.copyWith(repeat: !element.repeat);
 
-          emit(FreelanceWorkState.loaded(result));
+          emit(FreelanceJobState.loaded(result));
         });
   }
 
   @override
-  FreelanceWorkState? fromJson(Map<String, dynamic> json) {
-    return FreelanceWorkState.fromJson(json);
+  FreelanceJobState? fromJson(Map<String, dynamic> json) {
+    return FreelanceJobState.fromJson(json);
   }
 
   @override
-  Map<String, dynamic>? toJson(FreelanceWorkState state) {
+  Map<String, dynamic>? toJson(FreelanceJobState state) {
     return state.toJson();
   }
 }

@@ -3,6 +3,7 @@ enum ETypeFreelance {
   course,
   youtube,
   application,
+  handicrafts,
 }
 
 abstract class FreelanceBase {

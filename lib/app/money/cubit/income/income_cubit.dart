@@ -7,9 +7,9 @@ import 'package:jiffy/jiffy.dart';
 import 'package:richeable/utilities/utilities.dart';
 
 import '../../../date/cubit/date_cubit.dart';
+import '../../../loading/cubit/loading_cubit.dart';
 import '../../../new_game/new_game_cubit.dart';
 import '../../models/income/income_model.dart';
-import '../../models/transaction/transaction_model.dart';
 import '../money_cubit.dart';
 
 part 'income_cubit.freezed.dart';
@@ -26,10 +26,13 @@ class IncomeCubit extends HydratedCubit<IncomeState> {
   final DateCubit _dateCubit;
   late StreamSubscription _dateSub;
 
+  final LoadingCubit _loadingCubit;
+
   IncomeCubit(
     this._moneyCubit,
     this._newGameCubit,
     this._dateCubit,
+    this._loadingCubit,
   ) : super(const IncomeState.initial()) {
     _newGame();
     _counting();
@@ -120,35 +123,10 @@ class IncomeCubit extends HydratedCubit<IncomeState> {
                       }
 
                       result.add(element.copyWith(next: nextDate));
-
-                      //Todo change income source to transaction source
-                      switch (element.source) {
-                        case ETypeSource.job:
-                          _moneyCubit.addTransaction(
-                              value: element.value,
-                              eTypeTransactionSource: ETypeTransactionSource.job);
-                          break;
-                        case ETypeSource.meal:
-                          _moneyCubit.addTransaction(
-                              value: element.value,
-                              eTypeTransactionSource: ETypeTransactionSource.food);
-                          break;
-                        case ETypeSource.house:
-                          _moneyCubit.addTransaction(
-                              value: element.value,
-                              eTypeTransactionSource: ETypeTransactionSource.home);
-                          break;
-                        case ETypeSource.transport:
-                          _moneyCubit.addTransaction(
-                              value: element.value,
-                              eTypeTransactionSource: ETypeTransactionSource.transport);
-                          break;
-                        case ETypeSource.asset:
-                          _moneyCubit.addTransaction(
-                              value: element.value,
-                              eTypeTransactionSource: ETypeTransactionSource.asset);
-                          break;
-                      }
+                      _moneyCubit.addTransaction(
+                        value: element.value,
+                        eTypeTransactionSource: element.source,
+                      );
                     } else {
                       result.add(element);
                     }

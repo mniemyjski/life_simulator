@@ -5,6 +5,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:richeable/utilities/utilities.dart';
 
+import '../../loading/cubit/loading_cubit.dart';
 import '../../new_game/new_game_cubit.dart';
 import '../../settings/cubit/day_setting_cubit.dart';
 
@@ -18,9 +19,12 @@ class DateCubit extends HydratedCubit<DateState> {
   final DaySettingCubit _daySettingCubit;
   late StreamSubscription _newGameSub;
 
+  final LoadingCubit _loadingCubit;
+
   DateCubit(
     this._newGameCubit,
     this._daySettingCubit,
+    this._loadingCubit,
   ) : super(const DateState.initial()) {
     _newGame();
   }
@@ -38,7 +42,9 @@ class DateCubit extends HydratedCubit<DateState> {
     });
   }
 
-  nextDay() {
+  nextDay() async {
+    String uid = _loadingCubit.add();
+    await Future.delayed(const Duration(milliseconds: 100));
     for (var i = 0; i < _daySettingCubit.state; i++) {
       state.whenOrNull(loaded: (date) {
         DateTime dateTime = date.addDate(days: 1);
@@ -46,6 +52,7 @@ class DateCubit extends HydratedCubit<DateState> {
         emit(DateState.loaded(dateTime));
       });
     }
+    _loadingCubit.remove(uid);
   }
 
   @override

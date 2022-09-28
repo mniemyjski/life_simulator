@@ -10,6 +10,7 @@ import '../../../../utilities/utilities.dart';
 import '../../../database/cubit/database_cubit.dart';
 import '../../../money/cubit/income/income_cubit.dart';
 import '../../../money/models/income/income_model.dart';
+import '../../../money/models/transaction/transaction_model.dart';
 import '../../../new_game/new_game_cubit.dart';
 import '../../models/asset/asset_model.dart';
 import '../../models/tenant/tenant_model.dart';
@@ -106,7 +107,7 @@ class TenantsCubit extends HydratedCubit<TenantsState> {
   _addIncome(Tenant tenant) {
     Income income = Income(
       id: tenant.id!,
-      source: ETypeSource.asset,
+      source: ETypeTransactionSource.asset,
       typeIncome: ETypeIncome.revenue,
       eTypeFrequency: ETypeFrequency.monthly,
       value: tenant.rent,

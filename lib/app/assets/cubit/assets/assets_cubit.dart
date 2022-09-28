@@ -112,7 +112,7 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
   _addIncome(Asset asset) {
     Income income = Income(
       id: asset.id,
-      source: ETypeSource.asset,
+      source: ETypeTransactionSource.asset,
       typeIncome: ETypeIncome.expense,
       eTypeFrequency: ETypeFrequency.monthly,
       value: asset.monthlyCost,
@@ -137,10 +137,12 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
         orElse: () => throw 'error',
         loaded: (assets) {
           List<Asset> result = List.from(assets)..remove(asset);
+
           _moneyCubit.addTransaction(
               value: cost, eTypeTransactionSource: ETypeTransactionSource.asset);
           Asset newAsset = asset.copyWith(
-              renovation: asset.renovation + renovation, value: asset.value + (-cost * 1.5));
+              renovation: asset.renovation + renovation,
+              value: asset.value + (asset.baseValue * (renovation / 100)));
           result.add(newAsset);
           emit(AssetsState.loaded(result));
           return 'succeed';
@@ -244,44 +246,59 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
       for (var t in tenants) {
         int hasAnimal = t.hasAnimal ? 1 : 0;
 
+        double increaseR = 1 - hasAnimal / result.tenantsMax;
+        double decreaseR = -1 - hasAnimal / result.tenantsMax;
+
+        double increaseV = result.baseValue * (increaseR / 100);
+        double decreaseV = result.baseValue * (decreaseR / 100);
+
         if (t.rating == 1) {
           int r = rng.nextInt(100);
 
           if (r < 90 && result.renovation > 0) {
-            result = result.copyWith(renovation: result.renovation - 1 - hasAnimal);
+            result = result.copyWith(
+                renovation: result.renovation + decreaseR, value: result.value + decreaseV);
           }
         }
+
         if (t.rating == 2) {
           int r = rng.nextInt(100);
           if (r < 80 && result.renovation > 0) {
-            result = result.copyWith(renovation: result.renovation - 1 - hasAnimal);
+            result = result.copyWith(
+                renovation: result.renovation + decreaseR, value: result.value + decreaseV);
           }
         }
         if (t.rating == 3) {
           int r = rng.nextInt(100);
           if (r >= 70 && result.renovation < 100) {
-            result = result.copyWith(renovation: result.renovation + 1 - hasAnimal);
+            result = result.copyWith(
+                renovation: result.renovation + increaseR, value: result.value + increaseV);
           }
           if (r < 70 && result.renovation > 0) {
-            result = result.copyWith(renovation: result.renovation - 1 - hasAnimal);
+            result = result.copyWith(
+                renovation: result.renovation + decreaseR, value: result.value + decreaseV);
           }
         }
         if (t.rating == 4) {
           int r = rng.nextInt(100);
           if (r >= 20 && result.renovation < 100) {
-            result = result.copyWith(renovation: result.renovation + 1 - hasAnimal);
+            result = result.copyWith(
+                renovation: result.renovation + increaseR, value: result.value + increaseV);
           }
           if (r < 20 && result.renovation > 0) {
-            result = result.copyWith(renovation: result.renovation - 1 - hasAnimal);
+            result = result.copyWith(
+                renovation: result.renovation + decreaseR, value: result.value + decreaseV);
           }
         }
         if (t.rating == 5) {
           int r = rng.nextInt(100);
           if (r >= 5 && result.renovation < 100) {
-            result = result.copyWith(renovation: result.renovation + 1 - hasAnimal);
+            result = result.copyWith(
+                renovation: result.renovation + increaseR, value: result.value + increaseV);
           }
           if (r < 5 && result.renovation > 0) {
-            result = result.copyWith(renovation: result.renovation - 1 - hasAnimal);
+            result = result.copyWith(
+                renovation: result.renovation + decreaseR, value: result.value + decreaseV);
           }
         }
       }

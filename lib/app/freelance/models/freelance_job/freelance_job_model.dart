@@ -121,31 +121,24 @@ class FreelanceJob with _$FreelanceJob {
 
     switch (eTypeFreelance) {
       case ETypeFreelance.book:
-        price = 2;
+        price = 5;
+        fame = 2;
         break;
       case ETypeFreelance.course:
-        price = 2;
+        price = 5;
+        fame = 2;
         break;
       case ETypeFreelance.youtube:
         price = 0.05;
-        break;
-      case ETypeFreelance.application:
-        price = 2;
-        break;
-    }
-
-    switch (eTypeFreelance) {
-      case ETypeFreelance.book:
-        fame = 4;
-        break;
-      case ETypeFreelance.course:
-        fame = 4;
-        break;
-      case ETypeFreelance.youtube:
         fame = 6;
         break;
       case ETypeFreelance.application:
-        fame = 4;
+        price = 5;
+        fame = 2;
+        break;
+      case ETypeFreelance.handicrafts:
+        price = 5;
+        fame = 0.5;
         break;
     }
 
@@ -154,7 +147,7 @@ class FreelanceJob with _$FreelanceJob {
       name: name,
       eTypeFreelance: eTypeFreelance,
       fame: fame * rating * level,
-      price: price * rating * level,
+      price: price * rating,
       dateCre: d,
       rating: rating,
     );

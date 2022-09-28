@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:richeable/app/loading/cubit/loading_cubit.dart';
 import 'package:richeable/app/settings/cubit/audio_cubit.dart';
 import 'package:url_strategy/url_strategy.dart';
 
@@ -104,12 +105,16 @@ class _MyAppState extends State<MyApp> {
           create: (_) => getIt<TutorialCubit>(),
         ),
         BlocProvider<NewGameCubit>(
-          // lazy: false,
+          lazy: false,
           create: (_) => getIt<NewGameCubit>(),
         ),
         BlocProvider(
-          // lazy: false,
+          lazy: false,
           create: (_) => getIt<DatabaseCubit>(),
+        ),
+        BlocProvider(
+          lazy: false,
+          create: (_) => getIt<LoadingCubit>(),
         ),
       ],
       child: Builder(builder: (context) {

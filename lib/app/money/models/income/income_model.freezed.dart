@@ -21,7 +21,7 @@ Income _$IncomeFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Income {
   String get id => throw _privateConstructorUsedError;
-  ETypeSource get source => throw _privateConstructorUsedError;
+  ETypeTransactionSource get source => throw _privateConstructorUsedError;
   ETypeIncome get typeIncome => throw _privateConstructorUsedError;
   ETypeFrequency get eTypeFrequency => throw _privateConstructorUsedError;
   double get value => throw _privateConstructorUsedError;
@@ -38,7 +38,7 @@ abstract class $IncomeCopyWith<$Res> {
       _$IncomeCopyWithImpl<$Res>;
   $Res call(
       {String id,
-      ETypeSource source,
+      ETypeTransactionSource source,
       ETypeIncome typeIncome,
       ETypeFrequency eTypeFrequency,
       double value,
@@ -70,7 +70,7 @@ class _$IncomeCopyWithImpl<$Res> implements $IncomeCopyWith<$Res> {
       source: source == freezed
           ? _value.source
           : source // ignore: cast_nullable_to_non_nullable
-              as ETypeSource,
+              as ETypeTransactionSource,
       typeIncome: typeIncome == freezed
           ? _value.typeIncome
           : typeIncome // ignore: cast_nullable_to_non_nullable
@@ -98,7 +98,7 @@ abstract class _$$_IncomeCopyWith<$Res> implements $IncomeCopyWith<$Res> {
   @override
   $Res call(
       {String id,
-      ETypeSource source,
+      ETypeTransactionSource source,
       ETypeIncome typeIncome,
       ETypeFrequency eTypeFrequency,
       double value,
@@ -131,7 +131,7 @@ class __$$_IncomeCopyWithImpl<$Res> extends _$IncomeCopyWithImpl<$Res>
       source: source == freezed
           ? _value.source
           : source // ignore: cast_nullable_to_non_nullable
-              as ETypeSource,
+              as ETypeTransactionSource,
       typeIncome: typeIncome == freezed
           ? _value.typeIncome
           : typeIncome // ignore: cast_nullable_to_non_nullable
@@ -170,7 +170,7 @@ class _$_Income extends _Income {
   @override
   final String id;
   @override
-  final ETypeSource source;
+  final ETypeTransactionSource source;
   @override
   final ETypeIncome typeIncome;
   @override
@@ -225,7 +225,7 @@ class _$_Income extends _Income {
 abstract class _Income extends Income {
   const factory _Income(
       {required final String id,
-      required final ETypeSource source,
+      required final ETypeTransactionSource source,
       required final ETypeIncome typeIncome,
       required final ETypeFrequency eTypeFrequency,
       required final double value,
@@ -237,7 +237,7 @@ abstract class _Income extends Income {
   @override
   String get id => throw _privateConstructorUsedError;
   @override
-  ETypeSource get source => throw _privateConstructorUsedError;
+  ETypeTransactionSource get source => throw _privateConstructorUsedError;
   @override
   ETypeIncome get typeIncome => throw _privateConstructorUsedError;
   @override

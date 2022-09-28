@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:badges/badges.dart';
-import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -42,31 +41,19 @@ class _NextDayButtonState extends State<NextDayButton> {
           child: FloatingActionButton(
             heroTag: null,
             onPressed: () async {
-              var cancel = BotToast.showLoading();
               context.read<AudioCubit>().getSounds(AudioCollection.nextTurn()).play();
 
               if (!context.read<TimeSpendCubit>().checkBonusSource(ETypeBonusSource.house)) {
-                cancel();
                 bool? areYouSure = await showDialog<bool>(
                   context: context,
                   builder: (BuildContext context) => _buildAlertDialog(context),
                 );
                 if (!(areYouSure ?? false)) return;
               }
-              cancel();
-              cancel = BotToast.showLoading();
-
-              int time = 0;
 
               if (mounted) {
                 context.read<DateCubit>().nextDay();
-                if (context.read<DaySettingCubit>().state == 5) time = 300;
-                if (context.read<DaySettingCubit>().state == 10) time = 400;
-                if (context.read<DaySettingCubit>().state == 30) time = 800;
               }
-
-              await Future.delayed(Duration(milliseconds: time));
-              cancel();
             },
             child: Badge(
               badgeColor: Theme.of(context).primaryColor.withOpacity(1),

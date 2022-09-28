@@ -43,7 +43,7 @@ Map<String, dynamic> _$$_InstrumentToJson(_$_Instrument instance) =>
 
 const _$ETypeInstrumentEnumMap = {
   ETypeInstrument.crypto: 'crypto',
-  ETypeInstrument.resource: 'resource',
+  ETypeInstrument.resources: 'resources',
   ETypeInstrument.company: 'company',
 };
 

@@ -27,7 +27,7 @@ class DataInstruments {
         potentialStable: 20,
         min: 3543,
         max: 30000,
-        valorization: 1.4,
+        valorization: 1.2,
       ),
       Instrument(
         id: uuid.v1(),
@@ -49,7 +49,7 @@ class DataInstruments {
         potentialStable: 20,
         min: 500,
         max: 2000,
-        valorization: 1.4,
+        valorization: 1.2,
       ),
       Instrument(
         id: uuid.v1(),
@@ -71,7 +71,7 @@ class DataInstruments {
         potentialStable: 20,
         min: 150,
         max: 600,
-        valorization: 1.4,
+        valorization: 1.2,
       ),
       Instrument(
         id: uuid.v1(),
@@ -93,7 +93,7 @@ class DataInstruments {
         potentialStable: 20,
         min: 0.01,
         max: 0.26,
-        valorization: 1.4,
+        valorization: 1.2,
       ),
       Instrument(
         id: uuid.v1(),
@@ -115,12 +115,12 @@ class DataInstruments {
         potentialStable: 20,
         min: 0.01,
         max: 0.26,
-        valorization: 1.4,
+        valorization: 1.2,
       ),
       Instrument(
         id: uuid.v1(),
         name: 'OIL',
-        eTypeInstrument: ETypeInstrument.resource,
+        eTypeInstrument: ETypeInstrument.resources,
         eTypeTrend: ETypeTrend.stable,
         datTrendEnd: DateTime(17, 1, 1),
         candles: [
@@ -142,7 +142,7 @@ class DataInstruments {
       Instrument(
         id: uuid.v1(),
         name: 'GOLD',
-        eTypeInstrument: ETypeInstrument.resource,
+        eTypeInstrument: ETypeInstrument.resources,
         eTypeTrend: ETypeTrend.stable,
         datTrendEnd: DateTime(17, 1, 1),
         candles: [
@@ -164,7 +164,7 @@ class DataInstruments {
       Instrument(
         id: uuid.v1(),
         name: 'SILVER',
-        eTypeInstrument: ETypeInstrument.resource,
+        eTypeInstrument: ETypeInstrument.resources,
         eTypeTrend: ETypeTrend.stable,
         datTrendEnd: DateTime(17, 1, 1),
         candles: [

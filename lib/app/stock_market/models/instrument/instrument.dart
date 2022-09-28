@@ -5,7 +5,7 @@ import '../candle/candle.dart';
 part 'instrument.freezed.dart';
 part 'instrument.g.dart';
 
-enum ETypeInstrument { crypto, resource, company }
+enum ETypeInstrument { crypto, resources, company }
 
 enum ETypeTrend { stable, decrease, increase }
 

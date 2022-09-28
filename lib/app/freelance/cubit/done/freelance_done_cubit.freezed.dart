@@ -114,7 +114,7 @@ class __$$InitialCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$Initial implements Initial {
+class _$Initial with DiagnosticableTreeMixin implements Initial {
   const _$Initial({final String? $type}) : $type = $type ?? 'initial';
 
   factory _$Initial.fromJson(Map<String, dynamic> json) =>
@@ -124,8 +124,14 @@ class _$Initial implements Initial {
   final String $type;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'FreelanceDoneState.initial()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'FreelanceDoneState.initial'));
   }
 
   @override
@@ -237,7 +243,7 @@ class __$$LoadingCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$Loading implements Loading {
+class _$Loading with DiagnosticableTreeMixin implements Loading {
   const _$Loading({final String? $type}) : $type = $type ?? 'loading';
 
   factory _$Loading.fromJson(Map<String, dynamic> json) =>
@@ -247,8 +253,14 @@ class _$Loading implements Loading {
   final String $type;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'FreelanceDoneState.loading()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'FreelanceDoneState.loading'));
   }
 
   @override
@@ -373,7 +385,7 @@ class __$$LoadedCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$Loaded implements Loaded {
+class _$Loaded with DiagnosticableTreeMixin implements Loaded {
   _$Loaded(this.freelances, {final String? $type}) : $type = $type ?? 'loaded';
 
   factory _$Loaded.fromJson(Map<String, dynamic> json) =>
@@ -386,8 +398,16 @@ class _$Loaded implements Loaded {
   final String $type;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'FreelanceDoneState.loaded(freelances: $freelances)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'FreelanceDoneState.loaded'))
+      ..add(DiagnosticsProperty('freelances', freelances));
   }
 
   @override

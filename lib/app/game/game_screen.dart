@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:badges/badges.dart';
 import 'package:bot_toast/bot_toast.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -8,6 +9,7 @@ import 'package:richeable/app/assets/cubit/build/build_asset_cubit.dart';
 import 'package:richeable/app/event/cubit/event_cubit.dart';
 import 'package:richeable/app/freelance/cubit/job/freelance_job_cubit.dart';
 import 'package:richeable/app/learning/cubit/learning_cubit.dart';
+import 'package:richeable/app/loading/cubit/loading_cubit.dart';
 import 'package:richeable/app/tutorial/cubit/tutorial_cubit.dart';
 import 'package:richeable/app/tutorial/widgets/tutorial_widget.dart';
 import 'package:richeable/constants/constants.dart';
@@ -50,6 +52,8 @@ class _GameScreenState extends State<GameScreen> {
   GlobalKey keyButton15 = GlobalKey();
   List<TargetFocus> targets = [];
   DateTime? last;
+  late OverlayEntry? entry;
+  late OverlayState? overlay;
 
   showTutorial() {
     TutorialCoachMark(
@@ -152,6 +156,15 @@ class _GameScreenState extends State<GameScreen> {
       ],
     );
 
+    overlay = Overlay.of(context);
+
+    entry = OverlayEntry(builder: (context) {
+      return Container(
+        color: Colors.black.withOpacity(0.5),
+        child: const CustomLoadingWidget(),
+      );
+    });
+
     super.initState();
   }
 
@@ -168,6 +181,19 @@ class _GameScreenState extends State<GameScreen> {
   Widget build(BuildContext context) {
     return MultiBlocListener(
       listeners: [
+        BlocListener<LoadingCubit, LoadingState>(
+          listenWhen: (oldState, newState) => oldState.runtimeType != newState.runtimeType,
+          listener: (context, state) {
+            state.when(
+              loading: (names) {
+                if (!entry!.mounted) overlay!.insert(entry!);
+              },
+              loaded: () {
+                if (entry != null) entry!.remove();
+              },
+            );
+          },
+        ),
         BlocListener<RulesCubit, RulesState>(
           listener: (context, state) {
             state.whenOrNull(loaded: (rules) {
@@ -250,7 +276,7 @@ class _GameScreenState extends State<GameScreen> {
                       context.read<AudioCubit>().getSounds(AudioCollection.click()).play();
                       context.router.push(const FreelanceRoute());
                     },
-                    icon: BlocBuilder<FreelanceJobCubit, FreelanceWorkState>(
+                    icon: BlocBuilder<FreelanceJobCubit, FreelanceJobState>(
                       builder: (context, state) {
                         return state.maybeWhen(
                             orElse: () => Container(),

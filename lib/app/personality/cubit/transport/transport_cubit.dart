@@ -62,7 +62,7 @@ class TransportCubit extends HydratedCubit<TransportState> {
 
       Income income = Income(
         id: transport.id,
-        source: ETypeSource.transport,
+        source: ETypeTransactionSource.transport,
         typeIncome: ETypeIncome.expense,
         value: transport.monthlyCost,
         eTypeFrequency: ETypeFrequency.monthly,

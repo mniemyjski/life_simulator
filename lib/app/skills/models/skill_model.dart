@@ -11,6 +11,9 @@ enum ETypeSkills {
   management,
   confidence,
   communicativeness,
+  writing,
+  creativity,
+  handyman,
 }
 
 @freezed

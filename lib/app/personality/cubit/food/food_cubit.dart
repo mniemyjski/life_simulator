@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:richeable/app/money/models/transaction/transaction_model.dart';
 
 import '../../../database/cubit/database_cubit.dart';
 import '../../../money/cubit/income/income_cubit.dart';
@@ -44,7 +45,7 @@ class FoodCubit extends HydratedCubit<FoodState> {
       List<Food> list = _databaseCubit.state.foodsDB;
       Income income = Income(
         id: list.first.id,
-        source: ETypeSource.meal,
+        source: ETypeTransactionSource.food,
         typeIncome: ETypeIncome.expense,
         value: list.first.cost,
         eTypeFrequency: ETypeFrequency.daily,
@@ -76,7 +77,7 @@ class FoodCubit extends HydratedCubit<FoodState> {
         List<Food> list = _databaseCubit.state.foodsDB;
         Income income = Income(
           id: list.first.id,
-          source: ETypeSource.meal,
+          source: ETypeTransactionSource.food,
           typeIncome: ETypeIncome.expense,
           value: list.first.cost,
           eTypeFrequency: ETypeFrequency.daily,
@@ -110,7 +111,7 @@ class FoodCubit extends HydratedCubit<FoodState> {
     state.whenOrNull(loaded: (oldFood) {
       Income income = Income(
         id: food.id,
-        source: ETypeSource.meal,
+        source: ETypeTransactionSource.food,
         typeIncome: ETypeIncome.expense,
         value: food.cost,
         eTypeFrequency: ETypeFrequency.daily,

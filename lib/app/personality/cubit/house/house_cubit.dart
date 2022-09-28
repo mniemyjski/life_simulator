@@ -49,7 +49,7 @@ class HouseCubit extends HydratedCubit<HouseState> {
       House house = _databaseCubit.state.housesDB.first;
       Income income = Income(
         id: house.id,
-        source: ETypeSource.house,
+        source: ETypeTransactionSource.home,
         typeIncome: ETypeIncome.expense,
         value: house.monthlyCost,
         eTypeFrequency: ETypeFrequency.monthly,
@@ -80,7 +80,7 @@ class HouseCubit extends HydratedCubit<HouseState> {
         House house = _databaseCubit.state.housesDB.first;
         Income income = Income(
           id: house.id,
-          source: ETypeSource.house,
+          source: ETypeTransactionSource.home,
           typeIncome: ETypeIncome.expense,
           value: house.monthlyCost,
           eTypeFrequency: ETypeFrequency.monthly,
@@ -120,7 +120,7 @@ class HouseCubit extends HydratedCubit<HouseState> {
 
       Income income = Income(
           id: newHouse.id,
-          source: ETypeSource.house,
+          source: ETypeTransactionSource.home,
           typeIncome: ETypeIncome.expense,
           value: newHouse.monthlyCost,
           eTypeFrequency: ETypeFrequency.monthly);

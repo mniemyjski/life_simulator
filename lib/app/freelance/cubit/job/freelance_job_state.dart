@@ -1,11 +1,11 @@
 part of 'freelance_job_cubit.dart';
 
 @Freezed(makeCollectionsUnmodifiable: false)
-class FreelanceWorkState with _$FreelanceWorkState {
-  const factory FreelanceWorkState.initial() = Initial;
-  const factory FreelanceWorkState.loading() = Loading;
-  const factory FreelanceWorkState.loaded(List<FreelanceJob> list) = Loaded;
+class FreelanceJobState with _$FreelanceJobState {
+  const factory FreelanceJobState.initial() = Initial;
+  const factory FreelanceJobState.loading() = Loading;
+  const factory FreelanceJobState.loaded(List<FreelanceJob> list) = Loaded;
 
-  factory FreelanceWorkState.fromJson(Map<String, dynamic> json) =>
-      _$FreelanceWorkStateFromJson(json);
+  factory FreelanceJobState.fromJson(Map<String, dynamic> json) =>
+      _$FreelanceJobStateFromJson(json);
 }

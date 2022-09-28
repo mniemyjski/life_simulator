@@ -16,8 +16,6 @@ final _privateConstructorUsedError = UnsupportedError(
 
 LoadingState _$LoadingStateFromJson(Map<String, dynamic> json) {
   switch (json['runtimeType']) {
-    case 'initial':
-      return Initial.fromJson(json);
     case 'loading':
       return Loading.fromJson(json);
     case 'loaded':
@@ -33,43 +31,37 @@ LoadingState _$LoadingStateFromJson(Map<String, dynamic> json) {
 mixin _$LoadingState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
+    required TResult Function(List<String> names) loading,
     required TResult Function() loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
+    TResult Function(List<String> names)? loading,
     TResult Function()? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
+    TResult Function(List<String> names)? loading,
     TResult Function()? loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
     required TResult Function(Loading value) loading,
     required TResult Function(Loaded value) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
     TResult Function(Loading value)? loading,
     TResult Function(Loaded value)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
     TResult Function(Loading value)? loading,
     TResult Function(Loaded value)? loaded,
     required TResult orElse(),
@@ -95,131 +87,10 @@ class _$LoadingStateCopyWithImpl<$Res> implements $LoadingStateCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$$InitialCopyWith<$Res> {
-  factory _$$InitialCopyWith(_$Initial value, $Res Function(_$Initial) then) =
-      __$$InitialCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$InitialCopyWithImpl<$Res> extends _$LoadingStateCopyWithImpl<$Res>
-    implements _$$InitialCopyWith<$Res> {
-  __$$InitialCopyWithImpl(_$Initial _value, $Res Function(_$Initial) _then)
-      : super(_value, (v) => _then(v as _$Initial));
-
-  @override
-  _$Initial get _value => super._value as _$Initial;
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$Initial implements Initial {
-  const _$Initial({final String? $type}) : $type = $type ?? 'initial';
-
-  factory _$Initial.fromJson(Map<String, dynamic> json) =>
-      _$$InitialFromJson(json);
-
-  @JsonKey(name: 'runtimeType')
-  final String $type;
-
-  @override
-  String toString() {
-    return 'LoadingState.initial()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Initial);
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function() loaded,
-  }) {
-    return initial();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function()? loaded,
-  }) {
-    return initial?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function()? loaded,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(Loading value) loading,
-    required TResult Function(Loaded value) loaded,
-  }) {
-    return initial(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Loading value)? loading,
-    TResult Function(Loaded value)? loaded,
-  }) {
-    return initial?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Loading value)? loading,
-    TResult Function(Loaded value)? loaded,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial(this);
-    }
-    return orElse();
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$InitialToJson(this);
-  }
-}
-
-abstract class Initial implements LoadingState {
-  const factory Initial() = _$Initial;
-
-  factory Initial.fromJson(Map<String, dynamic> json) = _$Initial.fromJson;
-}
-
-/// @nodoc
 abstract class _$$LoadingCopyWith<$Res> {
   factory _$$LoadingCopyWith(_$Loading value, $Res Function(_$Loading) then) =
       __$$LoadingCopyWithImpl<$Res>;
+  $Res call({List<String> names});
 }
 
 /// @nodoc
@@ -230,64 +101,90 @@ class __$$LoadingCopyWithImpl<$Res> extends _$LoadingStateCopyWithImpl<$Res>
 
   @override
   _$Loading get _value => super._value as _$Loading;
+
+  @override
+  $Res call({
+    Object? names = freezed,
+  }) {
+    return _then(_$Loading(
+      names == freezed
+          ? _value._names
+          : names // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$Loading implements Loading {
-  const _$Loading({final String? $type}) : $type = $type ?? 'loading';
+  const _$Loading(final List<String> names, {final String? $type})
+      : _names = names,
+        $type = $type ?? 'loading';
 
   factory _$Loading.fromJson(Map<String, dynamic> json) =>
       _$$LoadingFromJson(json);
+
+  final List<String> _names;
+  @override
+  List<String> get names {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_names);
+  }
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'LoadingState.loading()';
+    return 'LoadingState.loading(names: $names)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Loading);
+        (other.runtimeType == runtimeType &&
+            other is _$Loading &&
+            const DeepCollectionEquality().equals(other._names, _names));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_names));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$LoadingCopyWith<_$Loading> get copyWith =>
+      __$$LoadingCopyWithImpl<_$Loading>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
+    required TResult Function(List<String> names) loading,
     required TResult Function() loaded,
   }) {
-    return loading();
+    return loading(names);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
+    TResult Function(List<String> names)? loading,
     TResult Function()? loaded,
   }) {
-    return loading?.call();
+    return loading?.call(names);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
+    TResult Function(List<String> names)? loading,
     TResult Function()? loaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading();
+      return loading(names);
     }
     return orElse();
   }
@@ -295,7 +192,6 @@ class _$Loading implements Loading {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
     required TResult Function(Loading value) loading,
     required TResult Function(Loaded value) loaded,
   }) {
@@ -305,7 +201,6 @@ class _$Loading implements Loading {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
     TResult Function(Loading value)? loading,
     TResult Function(Loaded value)? loaded,
   }) {
@@ -315,7 +210,6 @@ class _$Loading implements Loading {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
     TResult Function(Loading value)? loading,
     TResult Function(Loaded value)? loaded,
     required TResult orElse(),
@@ -333,9 +227,14 @@ class _$Loading implements Loading {
 }
 
 abstract class Loading implements LoadingState {
-  const factory Loading() = _$Loading;
+  const factory Loading(final List<String> names) = _$Loading;
 
   factory Loading.fromJson(Map<String, dynamic> json) = _$Loading.fromJson;
+
+  List<String> get names => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$$LoadingCopyWith<_$Loading> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -383,8 +282,7 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
+    required TResult Function(List<String> names) loading,
     required TResult Function() loaded,
   }) {
     return loaded();
@@ -393,8 +291,7 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
+    TResult Function(List<String> names)? loading,
     TResult Function()? loaded,
   }) {
     return loaded?.call();
@@ -403,8 +300,7 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
+    TResult Function(List<String> names)? loading,
     TResult Function()? loaded,
     required TResult orElse(),
   }) {
@@ -417,7 +313,6 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
     required TResult Function(Loading value) loading,
     required TResult Function(Loaded value) loaded,
   }) {
@@ -427,7 +322,6 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
     TResult Function(Loading value)? loading,
     TResult Function(Loaded value)? loaded,
   }) {
@@ -437,7 +331,6 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
     TResult Function(Loading value)? loading,
     TResult Function(Loaded value)? loaded,
     required TResult orElse(),

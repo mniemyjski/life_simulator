@@ -4,6 +4,7 @@ import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:richeable/app/freelance/services/freelance_services.dart';
 import 'package:richeable/utilities/utilities.dart';
 
 import '../../../constants/constants.dart';
@@ -22,10 +23,12 @@ class FreelanceJobCreator extends StatefulWidget {
 }
 
 class _FreelanceJobCreatorState extends State<FreelanceJobCreator> {
-  late int duration = 40;
   late int lvl = 1;
   late ETypeFreelance typeJob = ETypeFreelance.book;
-  late List<Skill> req = _getList(typeJob, lvl);
+
+  late int duration = FreelanceServices.calcDuration(typeJob: typeJob, lvl: lvl);
+  late List<Skill> req = FreelanceServices.getList(selected: typeJob, lvl: lvl);
+
   late TextEditingController controller;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -128,8 +131,9 @@ class _FreelanceJobCreatorState extends State<FreelanceJobCreator> {
                               onChanged: (double v) {
                                 setState(() {
                                   lvl = v.toInt();
-                                  req = _getList(typeJob, lvl);
-                                  calcDuration();
+                                  req = FreelanceServices.getList(selected: typeJob, lvl: lvl);
+                                  duration =
+                                      FreelanceServices.calcDuration(typeJob: typeJob, lvl: lvl);
                                 });
                               },
                             ),
@@ -152,8 +156,9 @@ class _FreelanceJobCreatorState extends State<FreelanceJobCreator> {
                                 items: Enums.toList(ETypeFreelance.values),
                                 onChanged: (v) => setState(() {
                                       typeJob = Enums.toEnum(v, ETypeFreelance.values);
-                                      req = _getList(typeJob, lvl);
-                                      calcDuration();
+                                      req = FreelanceServices.getList(selected: typeJob, lvl: lvl);
+                                      duration = FreelanceServices.calcDuration(
+                                          typeJob: typeJob, lvl: lvl);
                                     })),
                             Card(
                               shape: const RoundedRectangleBorder(
@@ -234,45 +239,6 @@ class _FreelanceJobCreatorState extends State<FreelanceJobCreator> {
         ),
       ),
     );
-  }
-
-  List<Skill> _getList(ETypeFreelance selected, int lvl) {
-    switch (selected) {
-      case ETypeFreelance.book:
-        return [
-          Skill(name: ETypeSkills.communicativeness, lvl: lvl),
-        ];
-      case ETypeFreelance.course:
-        return [
-          Skill(name: ETypeSkills.confidence, lvl: lvl),
-        ];
-      case ETypeFreelance.youtube:
-        return [
-          Skill(name: ETypeSkills.communicativeness, lvl: lvl),
-          Skill(name: ETypeSkills.confidence, lvl: lvl),
-        ];
-      case ETypeFreelance.application:
-        return [
-          Skill(name: ETypeSkills.programming, lvl: lvl),
-        ];
-    }
-  }
-
-  calcDuration() {
-    switch (typeJob) {
-      case ETypeFreelance.book:
-        duration = (100 * lvl).toInt();
-        break;
-      case ETypeFreelance.course:
-        duration = (80 * lvl).toInt();
-        break;
-      case ETypeFreelance.youtube:
-        duration = (8 * lvl).toInt();
-        break;
-      case ETypeFreelance.application:
-        duration = (120 * lvl).toInt();
-        break;
-    }
   }
 
   List<Widget> _buildWidgetReq({required List<Skill> reqSkills, required List<Skill> userSkill}) {

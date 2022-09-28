@@ -1,34 +1,73 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
+import 'package:uuid/uuid.dart';
 
-import '../../freelance/cubit/done/freelance_done_cubit.dart';
-import '../../money/cubit/money_cubit.dart';
-import '../../stock_market/cubit/stock_market/stock_market_cubit.dart';
+import '../../../utilities/utilities.dart';
 
 part 'loading_cubit.freezed.dart';
 part 'loading_cubit.g.dart';
 part 'loading_state.dart';
 
+@lazySingleton
 class LoadingCubit extends Cubit<LoadingState> {
-  final MoneyCubit _moneyCubit;
-  final StockMarketCubit _stockMarketCubit;
-  final FreelanceDoneCubit _freelanceDoneCubit;
+  LoadingCubit() : super(const LoadingState.loaded());
 
-  LoadingCubit(
-    this._moneyCubit,
-    this._stockMarketCubit,
-    this._freelanceDoneCubit,
-  ) : super(const LoadingState.initial());
+  String add() {
+    String uid = const Uuid().v1();
+    return state.when(loading: (names) {
+      List<String> result = List.of(names)..add(uid);
+      emit(LoadingState.loading(result));
+      return uid;
+    }, loaded: () {
+      emit(LoadingState.loading([uid]));
 
-  loading() {
-    emit(const LoadingState.loading());
-
-    emit(const LoadingState.loaded());
+      return uid;
+    });
   }
 
-  newGame() {
-    emit(const LoadingState.loading());
-
-    emit(const LoadingState.loaded());
+  Future delayed() async {
+    return Future.delayed(const Duration(milliseconds: 100));
   }
+
+  remove(String uid) {
+    state.whenOrNull(loading: (names) {
+      if (!names.contains(uid)) return;
+      List<String> result = List.of(names)..removeWhere((element) => element == uid);
+      if (result.isEmpty) {
+        emit(const LoadingState.loaded());
+      } else {
+        emit(LoadingState.loading(result));
+      }
+    });
+  }
+
+  //
+  // loading() {
+  //   emit(const LoadingState.loading());
+  // }
+
+  // loaded() {
+  //   emit(const LoadingState.loaded());
+  // }
+
+  // _loading() {
+  //   _stockMarketCubit.stream.listen((event) {
+  //     event.maybeWhen(
+  //       orElse: () {
+  //         if (state is! Loading) emit(const LoadingState.loading());
+  //       },
+  //       loaded: (v) => emit(const LoadingState.loaded()),
+  //     );
+  //   });
+  //   _freelanceDoneCubit.stream.listen((event) {
+  //     event.maybeWhen(
+  //       orElse: () {
+  //         if (state is! Loading) emit(const LoadingState.loading());
+  //         emit(const LoadingState.loading());
+  //       },
+  //       loaded: (v) => emit(const LoadingState.loaded()),
+  //     );
+  //   });
+  // }
 }

@@ -113,7 +113,7 @@ class __$$InitialCopyWithImpl<$Res> extends _$StockMarketStateCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$Initial implements Initial {
+class _$Initial with DiagnosticableTreeMixin implements Initial {
   const _$Initial({final String? $type}) : $type = $type ?? 'initial';
 
   factory _$Initial.fromJson(Map<String, dynamic> json) =>
@@ -123,8 +123,14 @@ class _$Initial implements Initial {
   final String $type;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'StockMarketState.initial()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'StockMarketState.initial'));
   }
 
   @override
@@ -235,7 +241,7 @@ class __$$LoadingCopyWithImpl<$Res> extends _$StockMarketStateCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$Loading implements Loading {
+class _$Loading with DiagnosticableTreeMixin implements Loading {
   const _$Loading({final String? $type}) : $type = $type ?? 'loading';
 
   factory _$Loading.fromJson(Map<String, dynamic> json) =>
@@ -245,8 +251,14 @@ class _$Loading implements Loading {
   final String $type;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'StockMarketState.loading()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'StockMarketState.loading'));
   }
 
   @override
@@ -370,7 +382,7 @@ class __$$LoadedCopyWithImpl<$Res> extends _$StockMarketStateCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$Loaded implements Loaded {
+class _$Loaded with DiagnosticableTreeMixin implements Loaded {
   _$Loaded(this.instruments, {final String? $type}) : $type = $type ?? 'loaded';
 
   factory _$Loaded.fromJson(Map<String, dynamic> json) =>
@@ -383,8 +395,16 @@ class _$Loaded implements Loaded {
   final String $type;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'StockMarketState.loaded(instruments: $instruments)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'StockMarketState.loaded'))
+      ..add(DiagnosticsProperty('instruments', instruments));
   }
 
   @override

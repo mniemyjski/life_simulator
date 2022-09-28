@@ -1,11 +1,15 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:richeable/app/freelance/models/freelance_counting_model.dart';
+import 'package:richeable/app/freelance/services/freelance_services.dart';
 import 'package:richeable/utilities/utilities.dart';
 
 import '../../../date/cubit/date_cubit.dart';
+import '../../../loading/cubit/loading_cubit.dart';
 import '../../../money/cubit/money_cubit.dart';
 import '../../../money/models/transaction/transaction_model.dart';
 import '../../../new_game/new_game_cubit.dart';
@@ -28,11 +32,14 @@ class FreelanceDoneCubit extends HydratedCubit<FreelanceDoneState> {
 
   final MoneyCubit _moneyCubit;
 
+  final LoadingCubit _loadingCubit;
+
   FreelanceDoneCubit(
     this._newGameCubit,
     this._dateCubit,
     this._fameCubit,
     this._moneyCubit,
+    this._loadingCubit,
   ) : super(const FreelanceDoneState.initial()) {
     _newGame();
     _counting();
@@ -55,60 +62,40 @@ class FreelanceDoneCubit extends HydratedCubit<FreelanceDoneState> {
   _counting() {
     _dateSub = _dateCubit.stream.listen((event) {
       event.whenOrNull(loaded: (date) {
-        state.whenOrNull(loaded: (freelances) {
-          List<FreelanceDone> result = _reduceFameInTime(freelances, date);
-          _addMoneyAndFameForFreelance(result);
+        state.whenOrNull(
+          loaded: (freelances) {
+            _fameCubit.state.whenOrNull(
+              loaded: (fame) {
+                final FreelanceCounting result =
+                    FreelanceServices.reduceFameAndCountingFameAndMoney(
+                  date: date,
+                  fame: fame,
+                  freelances: freelances,
+                );
 
-          emit(FreelanceDoneState.loaded(result));
-        });
+                if (result.addFame > 0) _fameCubit.add(result.addFame);
+
+                if (result.addMoney > 0) {
+                  _moneyCubit.addTransaction(
+                    value: result.addMoney,
+                    eTypeTransactionSource: ETypeTransactionSource.freelance,
+                  );
+                }
+
+                emit(FreelanceDoneState.loaded(result.freelances));
+              },
+            );
+          },
+        );
       });
     });
   }
 
-  List<FreelanceDone> _reduceFameInTime(List<FreelanceDone> freelances, DateTime date) {
-    List<FreelanceDone> result = [];
+  add(FreelanceDone freelanceDone) {
+    state.whenOrNull(loaded: (freelances) {
+      List<FreelanceDone> result = [freelanceDone, ...freelances];
 
-    for (var e in freelances) {
-      DateTime next1 = e.dateCre.addDate(months: 6 * e.rating);
-      DateTime next2 = e.dateCre.addDate(years: 1 * e.rating);
-      DateTime next3 = e.dateCre.addDate(years: 2 * e.rating);
-
-      if (next1 == date.onlyDate()) {
-        result.add(e.copyWith(fame: e.fame / 2, price: e.price / 2));
-        continue;
-      }
-      if (next2 == date.onlyDate()) {
-        result.add(e.copyWith(fame: e.fame / 2, price: e.price / 2));
-        continue;
-      }
-      if (next3.millisecondsSinceEpoch > date.onlyDate().millisecondsSinceEpoch) {
-        result.add(e);
-        continue;
-      }
-    }
-
-    return result;
-  }
-
-  _addMoneyAndFameForFreelance(List<FreelanceDone> freelances) {
-    _fameCubit.state.whenOrNull(loaded: (fame) {
-      double fame10 = fame / 500000;
-      double addMoney = 0;
-      double addFame = 0;
-
-      for (var e in freelances) {
-        addMoney += e.price * fame10;
-        addFame += e.fame;
-      }
-
-      if (addFame > 0) _fameCubit.add(addFame);
-
-      if (addMoney > 0) {
-        _moneyCubit.addTransaction(
-          value: addMoney,
-          eTypeTransactionSource: ETypeTransactionSource.freelance,
-        );
-      }
+      emit(FreelanceDoneState.loaded(result));
     });
   }
 
@@ -136,22 +123,6 @@ class FreelanceDoneCubit extends HydratedCubit<FreelanceDoneState> {
         });
 
     return price;
-  }
-
-  add(FreelanceDone freelanceDone) {
-    state.whenOrNull(loaded: (freelances) {
-      List<FreelanceDone> result = List.of(freelances)..add(freelanceDone);
-      result.sort((a, b) => b.dateCre.compareTo(a.dateCre));
-      emit(FreelanceDoneState.loaded(result));
-    });
-  }
-
-  remove(String id) {
-    state.maybeWhen(
-        orElse: () => 'error',
-        loaded: (freelances) {
-          emit(FreelanceDoneState.loaded(List.from(freelances)..removeWhere((e) => e.id == id)));
-        });
   }
 
   @override

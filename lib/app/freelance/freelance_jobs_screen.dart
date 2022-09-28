@@ -19,8 +19,9 @@ class FreelanceJobsScreen extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          const SizedBox(height: 8),
           Expanded(
-            child: BlocBuilder<FreelanceJobCubit, FreelanceWorkState>(
+            child: BlocBuilder<FreelanceJobCubit, FreelanceJobState>(
               builder: (context, state) {
                 return state.maybeWhen(
                     orElse: () => Container(),
@@ -34,10 +35,19 @@ class FreelanceJobsScreen extends StatelessWidget {
                         );
                       }
 
-                      return ListView.builder(
+                      return ReorderableListView.builder(
                           itemCount: listJobs.length,
+                          onReorder: (oldIndex, newIndex) => context
+                              .read<FreelanceJobCubit>()
+                              .reorderAble(oldIndex: oldIndex, newIndex: newIndex),
                           itemBuilder: (context, index) {
-                            return FreelanceJobElement(listJobs[index], index + 1);
+                            return FreelanceJobElement(
+                              listJobs[index],
+                              index + 1,
+                              key: ValueKey(
+                                listJobs[index].id,
+                              ),
+                            );
                           });
                     });
               },

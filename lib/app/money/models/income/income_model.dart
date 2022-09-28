@@ -1,17 +1,18 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:richeable/app/money/models/transaction/transaction_model.dart';
 
 import '../../../../utilities/utilities.dart';
 
 part 'income_model.freezed.dart';
 part 'income_model.g.dart';
 
-enum ETypeSource {
-  job,
-  meal,
-  house,
-  transport,
-  asset,
-}
+// enum ETypeSource {
+//   job,
+//   meal,
+//   house,
+//   transport,
+//   asset,
+// }
 
 enum ETypeIncome {
   revenue,
@@ -31,7 +32,7 @@ class Income with _$Income {
 
   const factory Income({
     required String id,
-    required ETypeSource source,
+    required ETypeTransactionSource source,
     required ETypeIncome typeIncome,
     required ETypeFrequency eTypeFrequency,
     required double value,
