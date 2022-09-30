@@ -6,7 +6,7 @@ import 'package:injectable/injectable.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../date/cubit/date_cubit.dart';
-import '../../../money/cubit/money_cubit.dart';
+import '../../../money/cubit/money/money_cubit.dart';
 import '../../../money/models/transaction/transaction_model.dart';
 import '../../../new_game/new_game_cubit.dart';
 import '../../models/exchange/exchange.dart';
@@ -57,7 +57,7 @@ class ExchangesCubit extends HydratedCubit<ExchangesState> {
         loaded: (market) {
           Instrument instrument = market.where((e) => e.id == idInstrument).first;
 
-          if (_moneyCubit.state < (count * instrument.candles.last.close)) {
+          if (_moneyCubit.getBalance() < (count * instrument.candles.last.close)) {
             return "You don't have enough money";
           }
 

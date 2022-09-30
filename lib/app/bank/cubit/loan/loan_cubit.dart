@@ -7,7 +7,7 @@ import 'package:jiffy/jiffy.dart';
 
 import '../../../../utilities/utilities.dart';
 import '../../../date/cubit/date_cubit.dart';
-import '../../../money/cubit/money_cubit.dart';
+import '../../../money/cubit/money/money_cubit.dart';
 import '../../../money/models/transaction/transaction_model.dart';
 import '../../../new_game/new_game_cubit.dart';
 import '../../models/loan/loan_model.dart';
@@ -48,14 +48,14 @@ class LoanCubit extends HydratedCubit<LoanState> {
     });
   }
 
-  bool _creditworthiness(double borrow) {
-    if (loan() + borrow > 50000 + _moneyCubit.getYearlyNet()) return true;
+  Future<bool> _creditworthiness(double borrow) async {
+    if (loan() + borrow > 50000 + await _moneyCubit.lastYearIncome()) return true;
 
     return false;
   }
 
-  String add(Loan loan) {
-    if (_creditworthiness(loan.borrowed)) return "You don't have creditworthiness";
+  Future<String> add(Loan loan) async {
+    if (await _creditworthiness(loan.borrowed)) return "You don't have creditworthiness";
 
     return _dateCubit.state.maybeWhen(
         loaded: (date) {

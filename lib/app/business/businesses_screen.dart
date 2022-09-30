@@ -1,0 +1,71 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:richeable/app/business/cubit/businesses/businesses_cubit.dart';
+import 'package:richeable/app/business/models/business/business_model.dart';
+import 'package:richeable/app/business/widgets/business_creator.dart';
+import 'package:richeable/widgets/custom_scaffold.dart';
+
+import '../date/widgets/next_day.dart';
+import '../game/widget/app_bar_stats.dart';
+import 'widgets/business_element.dart';
+
+class BusinessesScreen extends StatelessWidget {
+  const BusinessesScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomScaffold(
+      body: Column(
+        children: [
+          const AppBarStats(),
+          Expanded(
+            child: BlocBuilder<BusinessesCubit, BusinessesState>(
+              builder: (context, state) {
+                return state.maybeWhen(
+                    orElse: () => Container(),
+                    loaded: (businesses) {
+                      return ListView.builder(
+                          itemCount: businesses.length,
+                          itemBuilder: (context, index) {
+                            final Business element = businesses[index];
+
+                            return BusinessElement(element: element);
+                          });
+                    });
+              },
+            ),
+          ),
+          const SizedBox(height: 80),
+        ],
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            FloatingActionButton(
+              heroTag: null,
+              onPressed: () => context.router.pop(),
+              child: const FaIcon(FontAwesomeIcons.arrowRotateLeft),
+            ),
+            const NextDayButton(),
+            FloatingActionButton(
+              heroTag: null,
+              onPressed: () => showModalBottomSheet<void>(
+                  isScrollControlled: true,
+                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                  context: context,
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(top: Radius.circular(8.0))),
+                  builder: (BuildContext context) => const BusinessCreator()),
+              child: const FaIcon(FontAwesomeIcons.plus),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

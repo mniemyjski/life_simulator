@@ -225,7 +225,9 @@ class TransactionsScreen extends StatelessWidget {
               const NextDayButton(),
               FloatingActionButton(
                 heroTag: null,
-                onPressed: () => context.router.push(const IncomeRoute()),
+                onPressed: () {
+                  context.router.push(const IncomeRoute());
+                },
                 child: const FaIcon(FontAwesomeIcons.solidNoteSticky),
               ),
             ],

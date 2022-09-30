@@ -20,7 +20,7 @@ Map<String, dynamic> _$$_LearningToJson(_$_Learning instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'skillType': _$ETypeSkillsEnumMap[instance.skillType],
+      'skillType': _$ETypeSkillsEnumMap[instance.skillType]!,
       'baseTime': instance.baseTime,
       'exp': instance.exp,
       'time': instance.time,
@@ -35,4 +35,7 @@ const _$ETypeSkillsEnumMap = {
   ETypeSkills.management: 'management',
   ETypeSkills.confidence: 'confidence',
   ETypeSkills.communicativeness: 'communicativeness',
+  ETypeSkills.writing: 'writing',
+  ETypeSkills.creativity: 'creativity',
+  ETypeSkills.handyman: 'handyman',
 };

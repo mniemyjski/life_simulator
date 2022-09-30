@@ -220,7 +220,9 @@ class _$_Food implements _Food {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_FoodToJson(this);
+    return _$$_FoodToJson(
+      this,
+    );
   }
 }
 
@@ -236,17 +238,17 @@ abstract class _Food implements Food {
   factory _Food.fromJson(Map<String, dynamic> json) = _$_Food.fromJson;
 
   @override
-  String get id => throw _privateConstructorUsedError;
+  String get id;
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  double get cost => throw _privateConstructorUsedError;
+  double get cost;
   @override
-  int get bonusToRelax => throw _privateConstructorUsedError;
+  int get bonusToRelax;
   @override
-  int get bonusToSleep => throw _privateConstructorUsedError;
+  int get bonusToSleep;
   @override
-  int get bonusToLearn => throw _privateConstructorUsedError;
+  int get bonusToLearn;
   @override
   @JsonKey(ignore: true)
   _$$_FoodCopyWith<_$_Food> get copyWith => throw _privateConstructorUsedError;

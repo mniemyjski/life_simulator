@@ -324,7 +324,9 @@ class _$_Experience implements _Experience {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ExperienceToJson(this);
+    return _$$_ExperienceToJson(
+      this,
+    );
   }
 }
 
@@ -346,27 +348,27 @@ abstract class _Experience implements Experience {
       _$_Experience.fromJson;
 
   @override
-  String get id => throw _privateConstructorUsedError;
+  String get id;
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  int get exp => throw _privateConstructorUsedError;
+  int get exp;
   @override
-  List<Skill> get requirements => throw _privateConstructorUsedError;
+  List<Skill> get requirements;
   @override
-  double get salary => throw _privateConstructorUsedError;
+  double get salary;
   @override
-  ETypeFrequency get eTypeFrequency => throw _privateConstructorUsedError;
+  ETypeFrequency get eTypeFrequency;
   @override
-  int get work => throw _privateConstructorUsedError;
+  int get work;
   @override
-  int get commuting => throw _privateConstructorUsedError;
+  int get commuting;
   @override
-  int get bonusToRelax => throw _privateConstructorUsedError;
+  int get bonusToRelax;
   @override
-  int get bonusToSleep => throw _privateConstructorUsedError;
+  int get bonusToSleep;
   @override
-  int get bonusToLearn => throw _privateConstructorUsedError;
+  int get bonusToLearn;
   @override
   @JsonKey(ignore: true)
   _$$_ExperienceCopyWith<_$_Experience> get copyWith =>

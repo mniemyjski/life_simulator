@@ -154,7 +154,9 @@ class _$_Skill extends _Skill {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SkillToJson(this);
+    return _$$_SkillToJson(
+      this,
+    );
   }
 }
 
@@ -168,11 +170,11 @@ abstract class _Skill extends Skill {
   factory _Skill.fromJson(Map<String, dynamic> json) = _$_Skill.fromJson;
 
   @override
-  ETypeSkills get name => throw _privateConstructorUsedError;
+  ETypeSkills get name;
   @override
-  int get lvl => throw _privateConstructorUsedError;
+  int get lvl;
   @override
-  double get exp => throw _privateConstructorUsedError;
+  double get exp;
   @override
   @JsonKey(ignore: true)
   _$$_SkillCopyWith<_$_Skill> get copyWith =>

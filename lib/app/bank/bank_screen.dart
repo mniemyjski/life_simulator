@@ -10,7 +10,7 @@ import '../../constants/constants.dart';
 import '../../widgets/widgets.dart';
 import '../date/widgets/next_day.dart';
 import '../game/widget/app_bar_stats.dart';
-import '../money/cubit/money_cubit.dart';
+import '../money/cubit/money/money_cubit.dart';
 import '../money/models/transaction/transaction_model.dart';
 import 'cubit/deposit/deposit_cubit.dart';
 import 'cubit/loan/loan_cubit.dart';
@@ -28,7 +28,7 @@ class BankScreen extends StatelessWidget {
       builder: (BuildContext context) {
         double newDeposit = context.read<DepositCubit>().state;
         final double oldDeposit = context.read<DepositCubit>().state;
-        final double money = context.watch<MoneyCubit>().state;
+        final double money = context.watch<MoneyCubit>().getBalance();
         final double max = context.read<DepositCubit>().state + (money > 0 ? money : 0);
 
         return StatefulBuilder(builder: (context, setState) {
@@ -94,7 +94,9 @@ class BankScreen extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         double interest = 0.04;
-        double maxBorrow = 50000 + context.read<MoneyCubit>().getYearlyNet();
+
+        //toDo add last year income
+        double maxBorrow = 50000;
         double maxTurns = 60;
         double turns = 3;
         double borrow = 1000;
@@ -178,7 +180,7 @@ class BankScreen extends StatelessWidget {
                   ),
                 ),
                 CustomButton(
-                    onPressed: () {
+                    onPressed: () async {
                       Loan loan = Loan(
                         borrowed: borrow.toInt().toDouble(),
                         leftLoan: (borrow + (borrow * turns * interest)).toInt().toDouble(),
@@ -187,7 +189,7 @@ class BankScreen extends StatelessWidget {
                         months: turns.toInt(),
                         leftMonths: turns.toInt(),
                       );
-                      String? toast = context.read<LoanCubit>().add(loan);
+                      String? toast = await context.read<LoanCubit>().add(loan);
                       BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
                       context.router.pop();
                     },

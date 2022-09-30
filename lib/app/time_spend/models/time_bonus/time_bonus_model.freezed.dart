@@ -162,7 +162,9 @@ class _$_TimeBonus implements _TimeBonus {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TimeBonusToJson(this);
+    return _$$_TimeBonusToJson(
+      this,
+    );
   }
 }
 
@@ -176,11 +178,11 @@ abstract class _TimeBonus implements TimeBonus {
       _$_TimeBonus.fromJson;
 
   @override
-  ETypeBonus get eTypeBonus => throw _privateConstructorUsedError;
+  ETypeBonus get eTypeBonus;
   @override
-  ETypeBonusSource get eTypeBonusSource => throw _privateConstructorUsedError;
+  ETypeBonusSource get eTypeBonusSource;
   @override
-  int get value => throw _privateConstructorUsedError;
+  int get value;
   @override
   @JsonKey(ignore: true)
   _$$_TimeBonusCopyWith<_$_TimeBonus> get copyWith =>

@@ -7,7 +7,7 @@ import 'package:injectable/injectable.dart';
 import '../../../../utilities/utilities.dart';
 import '../../../database/cubit/database_cubit.dart';
 import '../../../money/cubit/income/income_cubit.dart';
-import '../../../money/cubit/money_cubit.dart';
+import '../../../money/cubit/money/money_cubit.dart';
 import '../../../money/models/income/income_model.dart';
 import '../../../money/models/transaction/transaction_model.dart';
 import '../../../new_game/new_game_cubit.dart';
@@ -109,7 +109,7 @@ class HouseCubit extends HydratedCubit<HouseState> {
   }
 
   Future<String?> getHouse(House newHouse) async {
-    if (_moneyCubit.state < -newHouse.cost) {
+    if (_moneyCubit.getBalance() < -newHouse.cost) {
       return "You don't have enough money.";
     }
 

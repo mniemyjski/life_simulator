@@ -26,7 +26,7 @@ Map<String, dynamic> _$$_EventToJson(_$_Event instance) => <String, dynamic>{
       'name': instance.name,
       'description': instance.description,
       'datCre': instance.datCre?.toIso8601String(),
-      'eTypeEffect': _$ETypeEffectEnumMap[instance.eTypeEffect],
+      'eTypeEffect': _$ETypeEffectEnumMap[instance.eTypeEffect]!,
       'value': instance.value,
       'duration': instance.duration,
       'leftDuration': instance.leftDuration,

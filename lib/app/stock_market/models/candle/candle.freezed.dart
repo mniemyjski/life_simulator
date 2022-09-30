@@ -189,7 +189,9 @@ class _$_Candle implements _Candle {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CandleToJson(this);
+    return _$$_CandleToJson(
+      this,
+    );
   }
 }
 
@@ -204,15 +206,15 @@ abstract class _Candle implements Candle {
   factory _Candle.fromJson(Map<String, dynamic> json) = _$_Candle.fromJson;
 
   @override
-  DateTime get dateTime => throw _privateConstructorUsedError;
+  DateTime get dateTime;
   @override
-  double get open => throw _privateConstructorUsedError;
+  double get open;
   @override
-  double get high => throw _privateConstructorUsedError;
+  double get high;
   @override
-  double get low => throw _privateConstructorUsedError;
+  double get low;
   @override
-  double get close => throw _privateConstructorUsedError;
+  double get close;
   @override
   @JsonKey(ignore: true)
   _$$_CandleCopyWith<_$_Candle> get copyWith =>

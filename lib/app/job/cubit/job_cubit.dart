@@ -7,7 +7,7 @@ import 'package:injectable/injectable.dart';
 
 import '../../date/cubit/date_cubit.dart';
 import '../../money/cubit/income/income_cubit.dart';
-import '../../money/cubit/money_cubit.dart';
+import '../../money/cubit/money/money_cubit.dart';
 import '../../money/models/income/income_model.dart';
 import '../../money/models/transaction/transaction_model.dart';
 import '../../new_game/new_game_cubit.dart';

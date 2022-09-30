@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'transactions_cubit.dart';
+part of 'money_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-TransactionsState _$TransactionsStateFromJson(Map<String, dynamic> json) {
+MoneyState _$MoneyStateFromJson(Map<String, dynamic> json) {
   switch (json['runtimeType']) {
     case 'initial':
       return Initial.fromJson(json);
@@ -24,32 +24,32 @@ TransactionsState _$TransactionsStateFromJson(Map<String, dynamic> json) {
       return Loaded.fromJson(json);
 
     default:
-      throw CheckedFromJsonException(json, 'runtimeType', 'TransactionsState',
+      throw CheckedFromJsonException(json, 'runtimeType', 'MoneyState',
           'Invalid union type "${json['runtimeType']}"!');
   }
 }
 
 /// @nodoc
-mixin _$TransactionsState {
+mixin _$MoneyState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Transaction> transactions) loaded,
+    required TResult Function(double value) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Transaction> transactions)? loaded,
+    TResult Function(double value)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Transaction> transactions)? loaded,
+    TResult Function(double value)? loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -79,20 +79,19 @@ mixin _$TransactionsState {
 }
 
 /// @nodoc
-abstract class $TransactionsStateCopyWith<$Res> {
-  factory $TransactionsStateCopyWith(
-          TransactionsState value, $Res Function(TransactionsState) then) =
-      _$TransactionsStateCopyWithImpl<$Res>;
+abstract class $MoneyStateCopyWith<$Res> {
+  factory $MoneyStateCopyWith(
+          MoneyState value, $Res Function(MoneyState) then) =
+      _$MoneyStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$TransactionsStateCopyWithImpl<$Res>
-    implements $TransactionsStateCopyWith<$Res> {
-  _$TransactionsStateCopyWithImpl(this._value, this._then);
+class _$MoneyStateCopyWithImpl<$Res> implements $MoneyStateCopyWith<$Res> {
+  _$MoneyStateCopyWithImpl(this._value, this._then);
 
-  final TransactionsState _value;
+  final MoneyState _value;
   // ignore: unused_field
-  final $Res Function(TransactionsState) _then;
+  final $Res Function(MoneyState) _then;
 }
 
 /// @nodoc
@@ -102,8 +101,7 @@ abstract class _$$InitialCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$InitialCopyWithImpl<$Res>
-    extends _$TransactionsStateCopyWithImpl<$Res>
+class __$$InitialCopyWithImpl<$Res> extends _$MoneyStateCopyWithImpl<$Res>
     implements _$$InitialCopyWith<$Res> {
   __$$InitialCopyWithImpl(_$Initial _value, $Res Function(_$Initial) _then)
       : super(_value, (v) => _then(v as _$Initial));
@@ -125,7 +123,7 @@ class _$Initial implements Initial {
 
   @override
   String toString() {
-    return 'TransactionsState.initial()';
+    return 'MoneyState.initial()';
   }
 
   @override
@@ -143,7 +141,7 @@ class _$Initial implements Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Transaction> transactions) loaded,
+    required TResult Function(double value) loaded,
   }) {
     return initial();
   }
@@ -153,7 +151,7 @@ class _$Initial implements Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Transaction> transactions)? loaded,
+    TResult Function(double value)? loaded,
   }) {
     return initial?.call();
   }
@@ -163,7 +161,7 @@ class _$Initial implements Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Transaction> transactions)? loaded,
+    TResult Function(double value)? loaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -208,11 +206,13 @@ class _$Initial implements Initial {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$InitialToJson(this);
+    return _$$InitialToJson(
+      this,
+    );
   }
 }
 
-abstract class Initial implements TransactionsState {
+abstract class Initial implements MoneyState {
   const factory Initial() = _$Initial;
 
   factory Initial.fromJson(Map<String, dynamic> json) = _$Initial.fromJson;
@@ -225,8 +225,7 @@ abstract class _$$LoadingCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$LoadingCopyWithImpl<$Res>
-    extends _$TransactionsStateCopyWithImpl<$Res>
+class __$$LoadingCopyWithImpl<$Res> extends _$MoneyStateCopyWithImpl<$Res>
     implements _$$LoadingCopyWith<$Res> {
   __$$LoadingCopyWithImpl(_$Loading _value, $Res Function(_$Loading) _then)
       : super(_value, (v) => _then(v as _$Loading));
@@ -248,7 +247,7 @@ class _$Loading implements Loading {
 
   @override
   String toString() {
-    return 'TransactionsState.loading()';
+    return 'MoneyState.loading()';
   }
 
   @override
@@ -266,7 +265,7 @@ class _$Loading implements Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Transaction> transactions) loaded,
+    required TResult Function(double value) loaded,
   }) {
     return loading();
   }
@@ -276,7 +275,7 @@ class _$Loading implements Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Transaction> transactions)? loaded,
+    TResult Function(double value)? loaded,
   }) {
     return loading?.call();
   }
@@ -286,7 +285,7 @@ class _$Loading implements Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Transaction> transactions)? loaded,
+    TResult Function(double value)? loaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -331,11 +330,13 @@ class _$Loading implements Loading {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LoadingToJson(this);
+    return _$$LoadingToJson(
+      this,
+    );
   }
 }
 
-abstract class Loading implements TransactionsState {
+abstract class Loading implements MoneyState {
   const factory Loading() = _$Loading;
 
   factory Loading.fromJson(Map<String, dynamic> json) = _$Loading.fromJson;
@@ -345,11 +346,11 @@ abstract class Loading implements TransactionsState {
 abstract class _$$LoadedCopyWith<$Res> {
   factory _$$LoadedCopyWith(_$Loaded value, $Res Function(_$Loaded) then) =
       __$$LoadedCopyWithImpl<$Res>;
-  $Res call({List<Transaction> transactions});
+  $Res call({double value});
 }
 
 /// @nodoc
-class __$$LoadedCopyWithImpl<$Res> extends _$TransactionsStateCopyWithImpl<$Res>
+class __$$LoadedCopyWithImpl<$Res> extends _$MoneyStateCopyWithImpl<$Res>
     implements _$$LoadedCopyWith<$Res> {
   __$$LoadedCopyWithImpl(_$Loaded _value, $Res Function(_$Loaded) _then)
       : super(_value, (v) => _then(v as _$Loaded));
@@ -359,13 +360,13 @@ class __$$LoadedCopyWithImpl<$Res> extends _$TransactionsStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? transactions = freezed,
+    Object? value = freezed,
   }) {
     return _then(_$Loaded(
-      transactions == freezed
-          ? _value.transactions
-          : transactions // ignore: cast_nullable_to_non_nullable
-              as List<Transaction>,
+      value == freezed
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -373,21 +374,20 @@ class __$$LoadedCopyWithImpl<$Res> extends _$TransactionsStateCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$Loaded implements Loaded {
-  _$Loaded(this.transactions, {final String? $type})
-      : $type = $type ?? 'loaded';
+  const _$Loaded(this.value, {final String? $type}) : $type = $type ?? 'loaded';
 
   factory _$Loaded.fromJson(Map<String, dynamic> json) =>
       _$$LoadedFromJson(json);
 
   @override
-  final List<Transaction> transactions;
+  final double value;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'TransactionsState.loaded(transactions: $transactions)';
+    return 'MoneyState.loaded(value: $value)';
   }
 
   @override
@@ -395,14 +395,13 @@ class _$Loaded implements Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$Loaded &&
-            const DeepCollectionEquality()
-                .equals(other.transactions, transactions));
+            const DeepCollectionEquality().equals(other.value, value));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(transactions));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(value));
 
   @JsonKey(ignore: true)
   @override
@@ -414,9 +413,9 @@ class _$Loaded implements Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Transaction> transactions) loaded,
+    required TResult Function(double value) loaded,
   }) {
-    return loaded(transactions);
+    return loaded(value);
   }
 
   @override
@@ -424,9 +423,9 @@ class _$Loaded implements Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Transaction> transactions)? loaded,
+    TResult Function(double value)? loaded,
   }) {
-    return loaded?.call(transactions);
+    return loaded?.call(value);
   }
 
   @override
@@ -434,11 +433,11 @@ class _$Loaded implements Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Transaction> transactions)? loaded,
+    TResult Function(double value)? loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(transactions);
+      return loaded(value);
     }
     return orElse();
   }
@@ -479,16 +478,18 @@ class _$Loaded implements Loaded {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LoadedToJson(this);
+    return _$$LoadedToJson(
+      this,
+    );
   }
 }
 
-abstract class Loaded implements TransactionsState {
-  factory Loaded(final List<Transaction> transactions) = _$Loaded;
+abstract class Loaded implements MoneyState {
+  const factory Loaded(final double value) = _$Loaded;
 
   factory Loaded.fromJson(Map<String, dynamic> json) = _$Loaded.fromJson;
 
-  List<Transaction> get transactions => throw _privateConstructorUsedError;
+  double get value;
   @JsonKey(ignore: true)
   _$$LoadedCopyWith<_$Loaded> get copyWith =>
       throw _privateConstructorUsedError;

@@ -125,7 +125,9 @@ class _$_Tutorial implements _Tutorial {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TutorialToJson(this);
+    return _$$_TutorialToJson(
+      this,
+    );
   }
 }
 
@@ -135,7 +137,7 @@ abstract class _Tutorial implements Tutorial {
   factory _Tutorial.fromJson(Map<String, dynamic> json) = _$_Tutorial.fromJson;
 
   @override
-  bool get main => throw _privateConstructorUsedError;
+  bool get main;
   @override
   @JsonKey(ignore: true)
   _$$_TutorialCopyWith<_$_Tutorial> get copyWith =>

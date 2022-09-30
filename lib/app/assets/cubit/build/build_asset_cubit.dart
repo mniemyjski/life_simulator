@@ -7,7 +7,7 @@ import 'package:jiffy/jiffy.dart';
 import 'package:richeable/utilities/utilities.dart';
 
 import '../../../date/cubit/date_cubit.dart';
-import '../../../money/cubit/money_cubit.dart';
+import '../../../money/cubit/money/money_cubit.dart';
 import '../../../money/models/transaction/transaction_model.dart';
 import '../../../new_game/new_game_cubit.dart';
 import '../../models/asset/asset_model.dart';
@@ -54,7 +54,7 @@ class BuildAssetCubit extends HydratedCubit<BuildAssetState> {
   }
 
   String? build(BuildAsset buildAsset, months) {
-    if (_moneyCubit.state < buildAsset.cost) return 'not_enought_money';
+    if (_moneyCubit.getBalance() < buildAsset.cost) return 'not_enought_money';
 
     _dateCubit.state.whenOrNull(loaded: (date) {
       state.whenOrNull(loaded: (buildAssets) {

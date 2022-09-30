@@ -9,7 +9,7 @@ import '../../../../utilities/utilities.dart';
 import '../../../database/cubit/database_cubit.dart';
 import '../../../date/cubit/date_cubit.dart';
 import '../../../money/cubit/income/income_cubit.dart';
-import '../../../money/cubit/money_cubit.dart';
+import '../../../money/cubit/money/money_cubit.dart';
 import '../../../money/models/income/income_model.dart';
 import '../../../money/models/transaction/transaction_model.dart';
 import '../../../new_game/new_game_cubit.dart';
@@ -67,7 +67,7 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
 
   //function to buy asset
   String? buy(Asset asset) {
-    if (_moneyCubit.state < asset.value) return 'not_enought_money';
+    if (_moneyCubit.getBalance() < asset.value) return 'not_enought_money';
 
     return state.maybeWhen(
         orElse: () => throw 'error',
@@ -131,7 +131,7 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
     required double renovation,
     required double cost,
   }) {
-    if (_moneyCubit.state < -cost) return 'not_enought_money';
+    if (_moneyCubit.getBalance() < -cost) return 'not_enought_money';
 
     return state.maybeWhen(
         orElse: () => throw 'error',
@@ -155,7 +155,7 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
     required int level,
     required double cost,
   }) {
-    if (_moneyCubit.state < -cost) return 'not_enought_money';
+    if (_moneyCubit.getBalance() < -cost) return 'not_enought_money';
 
     return state.maybeWhen(
         orElse: () => throw 'error',

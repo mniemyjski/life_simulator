@@ -147,7 +147,9 @@ class _$_SumTransactions implements _SumTransactions {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SumTransactionsToJson(this);
+    return _$$_SumTransactionsToJson(
+      this,
+    );
   }
 }
 
@@ -160,10 +162,9 @@ abstract class _SumTransactions implements SumTransactions {
       _$_SumTransactions.fromJson;
 
   @override
-  ETypeTransactionSource get eTypeTransactionSource =>
-      throw _privateConstructorUsedError;
+  ETypeTransactionSource get eTypeTransactionSource;
   @override
-  double get value => throw _privateConstructorUsedError;
+  double get value;
   @override
   @JsonKey(ignore: true)
   _$$_SumTransactionsCopyWith<_$_SumTransactions> get copyWith =>

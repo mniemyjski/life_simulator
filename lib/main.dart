@@ -5,8 +5,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:richeable/app/business/cubit/businesses/businesses_cubit.dart';
 import 'package:richeable/app/loading/cubit/loading_cubit.dart';
 import 'package:richeable/app/settings/cubit/audio_cubit.dart';
+import 'package:richeable/repositories/isar_repository.dart';
 import 'package:url_strategy/url_strategy.dart';
 
 import 'app/assets/cubit/assets/assets_cubit.dart';
@@ -25,8 +27,7 @@ import 'app/job/cubit/job_cubit.dart';
 import 'app/learning/cubit/learning_cubit.dart';
 import 'app/medicines/cubit/medicines_cubit.dart';
 import 'app/money/cubit/income/income_cubit.dart';
-import 'app/money/cubit/money_cubit.dart';
-import 'app/money/cubit/transactions/transactions_cubit.dart';
+import 'app/money/cubit/money/money_cubit.dart';
 import 'app/new_game/new_game_cubit.dart';
 import 'app/personality/cubit/food/food_cubit.dart';
 import 'app/personality/cubit/house/house_cubit.dart';
@@ -50,6 +51,7 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   configureDependencies(Env.dev);
   setPathUrlStrategy();
+  await getIt<IsarRepository>().init();
 
   final storage = await HydratedStorage.build(
     storageDirectory: kIsWeb ? HydratedStorage.webStorageDirectory : await getTemporaryDirectory(),
@@ -65,7 +67,7 @@ void main() async {
         ],
         path: 'assets/translations',
         fallbackLocale: const Locale('en'),
-        child: MyApp(),
+        child: const MyApp(),
       ),
     ),
     blocObserver: SimpleBlocObserver(),
@@ -74,7 +76,7 @@ void main() async {
 }
 
 class MyApp extends StatefulWidget {
-  MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -131,10 +133,6 @@ class _MyAppState extends State<MyApp> {
             BlocProvider(
               lazy: false,
               create: (_) => getIt<SkillsCubit>(),
-            ),
-            BlocProvider(
-              lazy: false,
-              create: (_) => getIt<TransactionsCubit>(),
             ),
             BlocProvider(
               lazy: false,
@@ -223,6 +221,10 @@ class _MyAppState extends State<MyApp> {
             BlocProvider(
               lazy: false,
               create: (_) => getIt<FreelanceDoneCubit>(),
+            ),
+            BlocProvider(
+              lazy: false,
+              create: (_) => getIt<BusinessesCubit>(),
             ),
           ],
           child: MaterialApp.router(

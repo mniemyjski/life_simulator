@@ -184,7 +184,9 @@ class _$_Job implements _Job {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_JobToJson(this);
+    return _$$_JobToJson(
+      this,
+    );
   }
 }
 
@@ -198,13 +200,13 @@ abstract class _Job implements Job {
   factory _Job.fromJson(Map<String, dynamic> json) = _$_Job.fromJson;
 
   @override
-  String get id => throw _privateConstructorUsedError;
+  String get id;
   @override
-  String get company => throw _privateConstructorUsedError;
+  String get company;
   @override
-  ETypeIndustry get industry => throw _privateConstructorUsedError;
+  ETypeIndustry get industry;
   @override
-  List<Experience> get experiences => throw _privateConstructorUsedError;
+  List<Experience> get experiences;
   @override
   @JsonKey(ignore: true)
   _$$_JobCopyWith<_$_Job> get copyWith => throw _privateConstructorUsedError;

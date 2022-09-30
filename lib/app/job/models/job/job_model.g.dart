@@ -18,7 +18,7 @@ _$_Job _$$_JobFromJson(Map<String, dynamic> json) => _$_Job(
 Map<String, dynamic> _$$_JobToJson(_$_Job instance) => <String, dynamic>{
       'id': instance.id,
       'company': instance.company,
-      'industry': _$ETypeIndustryEnumMap[instance.industry],
+      'industry': _$ETypeIndustryEnumMap[instance.industry]!,
       'experiences': instance.experiences.map((e) => e.toJson()).toList(),
     };
 

@@ -322,7 +322,10 @@ class _GameScreenState extends State<GameScreen> {
                   ),
                   ButtonElement(
                     key: keyButton5,
-                    onPressed: null,
+                    onPressed: () {
+                      context.read<AudioCubit>().getSounds(AudioCollection.click()).play();
+                      context.router.push(const BusinessesRoute());
+                    },
                     icon: const FaIcon(FontAwesomeIcons.globe),
                   ),
                   ButtonElement(
@@ -382,19 +385,28 @@ class _GameScreenState extends State<GameScreen> {
                     },
                     icon: const FaIcon(FontAwesomeIcons.xmark),
                   ),
+                  ButtonElement(
+                    onPressed: () {
+                      context.router.push(const TestRoute());
+                    },
+                    icon: const FaIcon(FontAwesomeIcons.shuffle),
+                  ),
                 ],
               ),
               const SizedBox(height: 80),
             ],
           ),
           floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const SizedBox(width: 45),
-              NextDayButton(key: keyButton10),
-              const SizedBox(width: 45),
-            ],
+          floatingActionButton: Padding(
+            padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const SizedBox(width: 56),
+                NextDayButton(key: keyButton10),
+                const SizedBox(width: 56),
+              ],
+            ),
           )),
     );
   }

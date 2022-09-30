@@ -29,7 +29,7 @@ Map<String, dynamic> _$$_FreelanceJobToJson(_$_FreelanceJob instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'eTypeFreelance': _$ETypeFreelanceEnumMap[instance.eTypeFreelance],
+      'eTypeFreelance': _$ETypeFreelanceEnumMap[instance.eTypeFreelance]!,
       'level': instance.level,
       'workTime': instance.workTime,
       'leftWorkTime': instance.leftWorkTime,
@@ -44,4 +44,5 @@ const _$ETypeFreelanceEnumMap = {
   ETypeFreelance.course: 'course',
   ETypeFreelance.youtube: 'youtube',
   ETypeFreelance.application: 'application',
+  ETypeFreelance.handicrafts: 'handicrafts',
 };

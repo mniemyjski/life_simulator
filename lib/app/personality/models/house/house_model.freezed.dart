@@ -277,7 +277,9 @@ class _$_House implements _House {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_HouseToJson(this);
+    return _$$_HouseToJson(
+      this,
+    );
   }
 }
 
@@ -296,23 +298,23 @@ abstract class _House implements House {
   factory _House.fromJson(Map<String, dynamic> json) = _$_House.fromJson;
 
   @override
-  String get id => throw _privateConstructorUsedError;
+  String get id;
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  ETypeHouse get eTypeHouse => throw _privateConstructorUsedError;
+  ETypeHouse get eTypeHouse;
   @override
-  double get cost => throw _privateConstructorUsedError;
+  double get cost;
   @override
-  double get monthlyCost => throw _privateConstructorUsedError;
+  double get monthlyCost;
   @override
-  DateTime? get dateBuy => throw _privateConstructorUsedError;
+  DateTime? get dateBuy;
   @override
-  int get bonusToRelax => throw _privateConstructorUsedError;
+  int get bonusToRelax;
   @override
-  int get bonusToSleep => throw _privateConstructorUsedError;
+  int get bonusToSleep;
   @override
-  int get bonusToLearn => throw _privateConstructorUsedError;
+  int get bonusToLearn;
   @override
   @JsonKey(ignore: true)
   _$$_HouseCopyWith<_$_House> get copyWith =>

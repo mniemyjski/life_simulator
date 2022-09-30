@@ -235,7 +235,9 @@ class _$_Loan extends _Loan {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LoanToJson(this);
+    return _$$_LoanToJson(
+      this,
+    );
   }
 }
 
@@ -253,19 +255,19 @@ abstract class _Loan extends Loan {
   factory _Loan.fromJson(Map<String, dynamic> json) = _$_Loan.fromJson;
 
   @override
-  double get borrowed => throw _privateConstructorUsedError;
+  double get borrowed;
   @override
-  double get leftLoan => throw _privateConstructorUsedError;
+  double get leftLoan;
   @override
-  double get monthlyRate => throw _privateConstructorUsedError;
+  double get monthlyRate;
   @override
-  double get interest => throw _privateConstructorUsedError;
+  double get interest;
   @override
-  int get months => throw _privateConstructorUsedError;
+  int get months;
   @override
-  int get leftMonths => throw _privateConstructorUsedError;
+  int get leftMonths;
   @override
-  DateTime? get next => throw _privateConstructorUsedError;
+  DateTime? get next;
   @override
   @JsonKey(ignore: true)
   _$$_LoanCopyWith<_$_Loan> get copyWith => throw _privateConstructorUsedError;

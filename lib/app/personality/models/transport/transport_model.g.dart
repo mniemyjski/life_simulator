@@ -28,7 +28,7 @@ Map<String, dynamic> _$$_TransportToJson(_$_Transport instance) =>
       'id': instance.id,
       'name': instance.name,
       'brand': instance.brand,
-      'eTypeTransport': _$ETypeTransportEnumMap[instance.eTypeTransport],
+      'eTypeTransport': _$ETypeTransportEnumMap[instance.eTypeTransport]!,
       'cost': instance.cost,
       'monthlyCost': instance.monthlyCost,
       'dateBuy': instance.dateBuy?.toIso8601String(),

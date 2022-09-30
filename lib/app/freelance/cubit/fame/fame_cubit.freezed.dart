@@ -205,7 +205,9 @@ class _$Initial implements Initial {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$InitialToJson(this);
+    return _$$InitialToJson(
+      this,
+    );
   }
 }
 
@@ -327,7 +329,9 @@ class _$Loading implements Loading {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LoadingToJson(this);
+    return _$$LoadingToJson(
+      this,
+    );
   }
 }
 
@@ -473,7 +477,9 @@ class _$Loaded implements Loaded {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LoadedToJson(this);
+    return _$$LoadedToJson(
+      this,
+    );
   }
 }
 
@@ -482,7 +488,7 @@ abstract class Loaded implements FameState {
 
   factory Loaded.fromJson(Map<String, dynamic> json) = _$Loaded.fromJson;
 
-  double get fame => throw _privateConstructorUsedError;
+  double get fame;
   @JsonKey(ignore: true)
   _$$LoadedCopyWith<_$Loaded> get copyWith =>
       throw _privateConstructorUsedError;

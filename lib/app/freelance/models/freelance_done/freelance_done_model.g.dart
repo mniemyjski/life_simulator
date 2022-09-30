@@ -22,7 +22,7 @@ Map<String, dynamic> _$$_FreelanceDoneToJson(_$_FreelanceDone instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'eTypeFreelance': _$ETypeFreelanceEnumMap[instance.eTypeFreelance],
+      'eTypeFreelance': _$ETypeFreelanceEnumMap[instance.eTypeFreelance]!,
       'fame': instance.fame,
       'price': instance.price,
       'dateCre': instance.dateCre.toIso8601String(),
@@ -34,4 +34,5 @@ const _$ETypeFreelanceEnumMap = {
   ETypeFreelance.course: 'course',
   ETypeFreelance.youtube: 'youtube',
   ETypeFreelance.application: 'application',
+  ETypeFreelance.handicrafts: 'handicrafts',
 };

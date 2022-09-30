@@ -1,4 +1,11 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:richeable/app/business/business_screen.dart';
+import 'package:richeable/app/business/business_transactions_screen.dart';
+import 'package:richeable/app/business/businesses_screen.dart';
+import 'package:richeable/app/business/employees_screen.dart';
+import 'package:richeable/app/business/products_screen.dart';
+import 'package:richeable/app/business/upgrade_screen.dart';
+import 'package:richeable/app/test/test_screen.dart';
 
 import '../../app/assets/asset_screen.dart';
 import '../../app/assets/assets_screen.dart';
@@ -141,6 +148,41 @@ import '../../app/time_spend/time_spend_screen.dart';
     ),
     CustomRoute(
       page: FreelanceJobsScreen,
+      transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
+      durationInMilliseconds: 300,
+    ),
+    CustomRoute(
+      page: BusinessesScreen,
+      transitionsBuilder: TransitionsBuilders.fadeIn,
+      durationInMilliseconds: 300,
+    ),
+    CustomRoute(
+      page: BusinessScreen,
+      transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
+      durationInMilliseconds: 300,
+    ),
+    CustomRoute(
+      page: BusinessTransactionsScreen,
+      transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
+      durationInMilliseconds: 300,
+    ),
+    CustomRoute(
+      page: EmployeesScreen,
+      transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
+      durationInMilliseconds: 300,
+    ),
+    CustomRoute(
+      page: UpgradeScreen,
+      transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
+      durationInMilliseconds: 300,
+    ),
+    CustomRoute(
+      page: ProductScreen,
+      transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
+      durationInMilliseconds: 300,
+    ),
+    CustomRoute(
+      page: TestScreen,
       transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
       durationInMilliseconds: 300,
     ),

@@ -7,7 +7,7 @@ import 'package:injectable/injectable.dart';
 
 import '../../database/cubit/database_cubit.dart';
 import '../../date/cubit/date_cubit.dart';
-import '../../money/cubit/money_cubit.dart';
+import '../../money/cubit/money/money_cubit.dart';
 import '../../money/models/transaction/transaction_model.dart';
 import '../../new_game/new_game_cubit.dart';
 import '../models/game_event/game_event_model.dart';
@@ -112,7 +112,7 @@ class EventCubit extends HydratedCubit<EventState> {
 
       if (event.eTypeEffect == ETypeEffect.taxes) {
         _moneyCubit.addTransaction(
-            value: _moneyCubit.state * event.value,
+            value: _moneyCubit.getBalance() * event.value,
             eTypeTransactionSource: ETypeTransactionSource.unpaidTaxes);
       }
 

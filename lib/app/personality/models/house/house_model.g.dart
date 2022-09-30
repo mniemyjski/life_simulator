@@ -23,7 +23,7 @@ _$_House _$$_HouseFromJson(Map<String, dynamic> json) => _$_House(
 Map<String, dynamic> _$$_HouseToJson(_$_House instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'eTypeHouse': _$ETypeHouseEnumMap[instance.eTypeHouse],
+      'eTypeHouse': _$ETypeHouseEnumMap[instance.eTypeHouse]!,
       'cost': instance.cost,
       'monthlyCost': instance.monthlyCost,
       'dateBuy': instance.dateBuy?.toIso8601String(),

@@ -15,8 +15,8 @@ _$_TimeBonus _$$_TimeBonusFromJson(Map<String, dynamic> json) => _$_TimeBonus(
 
 Map<String, dynamic> _$$_TimeBonusToJson(_$_TimeBonus instance) =>
     <String, dynamic>{
-      'eTypeBonus': _$ETypeBonusEnumMap[instance.eTypeBonus],
-      'eTypeBonusSource': _$ETypeBonusSourceEnumMap[instance.eTypeBonusSource],
+      'eTypeBonus': _$ETypeBonusEnumMap[instance.eTypeBonus]!,
+      'eTypeBonusSource': _$ETypeBonusSourceEnumMap[instance.eTypeBonusSource]!,
       'value': instance.value,
     };
 

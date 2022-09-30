@@ -255,7 +255,9 @@ class _$_Tenants implements _Tenants {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TenantsToJson(this);
+    return _$$_TenantsToJson(
+      this,
+    );
   }
 }
 
@@ -273,21 +275,21 @@ abstract class _Tenants implements Tenant {
   factory _Tenants.fromJson(Map<String, dynamic> json) = _$_Tenants.fromJson;
 
   @override
-  String? get id => throw _privateConstructorUsedError;
+  String? get id;
   @override
-  String? get idAsset => throw _privateConstructorUsedError;
+  String? get idAsset;
   @override
-  double get minLevel => throw _privateConstructorUsedError;
+  double get minLevel;
   @override
-  double get rent => throw _privateConstructorUsedError;
+  double get rent;
   @override
-  int get rating => throw _privateConstructorUsedError;
+  int get rating;
   @override
-  bool get hasAnimal => throw _privateConstructorUsedError;
+  bool get hasAnimal;
   @override
-  int get chance => throw _privateConstructorUsedError;
+  int get chance;
   @override
-  int get satisfaction => throw _privateConstructorUsedError;
+  int get satisfaction;
   @override
   @JsonKey(ignore: true)
   _$$_TenantsCopyWith<_$_Tenants> get copyWith =>

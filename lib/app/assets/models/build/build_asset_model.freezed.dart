@@ -240,7 +240,9 @@ class _$_BuildAsset implements _BuildAsset {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_BuildAssetToJson(this);
+    return _$$_BuildAssetToJson(
+      this,
+    );
   }
 }
 
@@ -258,19 +260,19 @@ abstract class _BuildAsset implements BuildAsset {
       _$_BuildAsset.fromJson;
 
   @override
-  String get address => throw _privateConstructorUsedError;
+  String get address;
   @override
-  ETypeAsset get eTypeAsset => throw _privateConstructorUsedError;
+  ETypeAsset get eTypeAsset;
   @override
-  DateTime? get datCre => throw _privateConstructorUsedError;
+  DateTime? get datCre;
   @override
-  DateTime? get datEnd => throw _privateConstructorUsedError;
+  DateTime? get datEnd;
   @override
-  int get tenantsMax => throw _privateConstructorUsedError;
+  int get tenantsMax;
   @override
-  double get cost => throw _privateConstructorUsedError;
+  double get cost;
   @override
-  double get value => throw _privateConstructorUsedError;
+  double get value;
   @override
   @JsonKey(ignore: true)
   _$$_BuildAssetCopyWith<_$_BuildAsset> get copyWith =>

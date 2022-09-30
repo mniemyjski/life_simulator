@@ -317,7 +317,9 @@ class _$_Transport implements _Transport {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TransportToJson(this);
+    return _$$_TransportToJson(
+      this,
+    );
   }
 }
 
@@ -339,27 +341,27 @@ abstract class _Transport implements Transport {
       _$_Transport.fromJson;
 
   @override
-  String get id => throw _privateConstructorUsedError;
+  String get id;
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  String get brand => throw _privateConstructorUsedError;
+  String get brand;
   @override
-  ETypeTransport get eTypeTransport => throw _privateConstructorUsedError;
+  ETypeTransport get eTypeTransport;
   @override
-  double get cost => throw _privateConstructorUsedError;
+  double get cost;
   @override
-  double get monthlyCost => throw _privateConstructorUsedError;
+  double get monthlyCost;
   @override
-  DateTime? get dateBuy => throw _privateConstructorUsedError;
+  DateTime? get dateBuy;
   @override
-  int get bonusToRelax => throw _privateConstructorUsedError;
+  int get bonusToRelax;
   @override
-  int get bonusToSleep => throw _privateConstructorUsedError;
+  int get bonusToSleep;
   @override
-  int get bonusToLearn => throw _privateConstructorUsedError;
+  int get bonusToLearn;
   @override
-  int get commuting => throw _privateConstructorUsedError;
+  int get commuting;
   @override
   @JsonKey(ignore: true)
   _$$_TransportCopyWith<_$_Transport> get copyWith =>

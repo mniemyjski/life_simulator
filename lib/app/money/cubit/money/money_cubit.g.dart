@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'transactions_cubit.dart';
+part of 'money_cubit.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -23,13 +23,11 @@ Map<String, dynamic> _$$LoadingToJson(_$Loading instance) => <String, dynamic>{
     };
 
 _$Loaded _$$LoadedFromJson(Map<String, dynamic> json) => _$Loaded(
-      (json['transactions'] as List<dynamic>)
-          .map((e) => Transaction.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      (json['value'] as num).toDouble(),
       $type: json['runtimeType'] as String?,
     );
 
 Map<String, dynamic> _$$LoadedToJson(_$Loaded instance) => <String, dynamic>{
-      'transactions': instance.transactions.map((e) => e.toJson()).toList(),
+      'value': instance.value,
       'runtimeType': instance.$type,
     };

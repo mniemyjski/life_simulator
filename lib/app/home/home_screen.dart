@@ -93,11 +93,10 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: CustomButton(
-                onPressed: () {
+                onPressed: () async {
                   context.read<AudioCubit>().getSounds(AudioCollection.click()).play();
-                  context.read<NewGameCubit>().change(true);
+                  context.read<NewGameCubit>().change();
                   context.router.push(const GameRoute());
-                  context.read<NewGameCubit>().change(false);
                 },
                 child: Text(LocaleKeys.newGame.tr()),
               ),

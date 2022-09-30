@@ -272,7 +272,9 @@ class _$_Medicine implements _Medicine {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MedicineToJson(this);
+    return _$$_MedicineToJson(
+      this,
+    );
   }
 }
 
@@ -291,23 +293,23 @@ abstract class _Medicine implements Medicine {
   factory _Medicine.fromJson(Map<String, dynamic> json) = _$_Medicine.fromJson;
 
   @override
-  String get id => throw _privateConstructorUsedError;
+  String get id;
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  double get cost => throw _privateConstructorUsedError;
+  double get cost;
   @override
-  double get satisfaction => throw _privateConstructorUsedError;
+  double get satisfaction;
   @override
-  double get health => throw _privateConstructorUsedError;
+  double get health;
   @override
-  double get tiredness => throw _privateConstructorUsedError;
+  double get tiredness;
   @override
-  int get duration => throw _privateConstructorUsedError;
+  int get duration;
   @override
-  int get leftDuration => throw _privateConstructorUsedError;
+  int get leftDuration;
   @override
-  dynamic get active => throw _privateConstructorUsedError;
+  dynamic get active;
   @override
   @JsonKey(ignore: true)
   _$$_MedicineCopyWith<_$_Medicine> get copyWith =>

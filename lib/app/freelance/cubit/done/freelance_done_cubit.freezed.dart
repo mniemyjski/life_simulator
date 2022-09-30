@@ -114,7 +114,7 @@ class __$$InitialCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$Initial with DiagnosticableTreeMixin implements Initial {
+class _$Initial implements Initial {
   const _$Initial({final String? $type}) : $type = $type ?? 'initial';
 
   factory _$Initial.fromJson(Map<String, dynamic> json) =>
@@ -124,14 +124,8 @@ class _$Initial with DiagnosticableTreeMixin implements Initial {
   final String $type;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'FreelanceDoneState.initial()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'FreelanceDoneState.initial'));
   }
 
   @override
@@ -214,7 +208,9 @@ class _$Initial with DiagnosticableTreeMixin implements Initial {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$InitialToJson(this);
+    return _$$InitialToJson(
+      this,
+    );
   }
 }
 
@@ -243,7 +239,7 @@ class __$$LoadingCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$Loading with DiagnosticableTreeMixin implements Loading {
+class _$Loading implements Loading {
   const _$Loading({final String? $type}) : $type = $type ?? 'loading';
 
   factory _$Loading.fromJson(Map<String, dynamic> json) =>
@@ -253,14 +249,8 @@ class _$Loading with DiagnosticableTreeMixin implements Loading {
   final String $type;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'FreelanceDoneState.loading()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'FreelanceDoneState.loading'));
   }
 
   @override
@@ -343,7 +333,9 @@ class _$Loading with DiagnosticableTreeMixin implements Loading {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LoadingToJson(this);
+    return _$$LoadingToJson(
+      this,
+    );
   }
 }
 
@@ -385,7 +377,7 @@ class __$$LoadedCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$Loaded with DiagnosticableTreeMixin implements Loaded {
+class _$Loaded implements Loaded {
   _$Loaded(this.freelances, {final String? $type}) : $type = $type ?? 'loaded';
 
   factory _$Loaded.fromJson(Map<String, dynamic> json) =>
@@ -398,16 +390,8 @@ class _$Loaded with DiagnosticableTreeMixin implements Loaded {
   final String $type;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'FreelanceDoneState.loaded(freelances: $freelances)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'FreelanceDoneState.loaded'))
-      ..add(DiagnosticsProperty('freelances', freelances));
   }
 
   @override
@@ -499,7 +483,9 @@ class _$Loaded with DiagnosticableTreeMixin implements Loaded {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LoadedToJson(this);
+    return _$$LoadedToJson(
+      this,
+    );
   }
 }
 
@@ -508,7 +494,7 @@ abstract class Loaded implements FreelanceDoneState {
 
   factory Loaded.fromJson(Map<String, dynamic> json) = _$Loaded.fromJson;
 
-  List<FreelanceDone> get freelances => throw _privateConstructorUsedError;
+  List<FreelanceDone> get freelances;
   @JsonKey(ignore: true)
   _$$LoadedCopyWith<_$Loaded> get copyWith =>
       throw _privateConstructorUsedError;

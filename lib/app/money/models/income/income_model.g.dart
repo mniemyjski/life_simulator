@@ -19,9 +19,9 @@ _$_Income _$$_IncomeFromJson(Map<String, dynamic> json) => _$_Income(
 
 Map<String, dynamic> _$$_IncomeToJson(_$_Income instance) => <String, dynamic>{
       'id': instance.id,
-      'source': _$ETypeTransactionSourceEnumMap[instance.source],
-      'typeIncome': _$ETypeIncomeEnumMap[instance.typeIncome],
-      'eTypeFrequency': _$ETypeFrequencyEnumMap[instance.eTypeFrequency],
+      'source': _$ETypeTransactionSourceEnumMap[instance.source]!,
+      'typeIncome': _$ETypeIncomeEnumMap[instance.typeIncome]!,
+      'eTypeFrequency': _$ETypeFrequencyEnumMap[instance.eTypeFrequency]!,
       'value': instance.value,
       'next': instance.next?.toIso8601String(),
     };
@@ -41,6 +41,7 @@ const _$ETypeTransactionSourceEnumMap = {
   ETypeTransactionSource.medicine: 'medicine',
   ETypeTransactionSource.unpaidTaxes: 'unpaidTaxes',
   ETypeTransactionSource.addMoney: 'addMoney',
+  ETypeTransactionSource.giftFromParents: 'giftFromParents',
   ETypeTransactionSource.lostMoney: 'lostMoney',
   ETypeTransactionSource.advertisement: 'advertisement',
 };

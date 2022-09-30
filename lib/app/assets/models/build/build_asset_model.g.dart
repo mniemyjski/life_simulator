@@ -24,7 +24,7 @@ _$_BuildAsset _$$_BuildAssetFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_BuildAssetToJson(_$_BuildAsset instance) =>
     <String, dynamic>{
       'address': instance.address,
-      'eTypeAsset': _$ETypeAssetEnumMap[instance.eTypeAsset],
+      'eTypeAsset': _$ETypeAssetEnumMap[instance.eTypeAsset]!,
       'datCre': instance.datCre?.toIso8601String(),
       'datEnd': instance.datEnd?.toIso8601String(),
       'tenantsMax': instance.tenantsMax,

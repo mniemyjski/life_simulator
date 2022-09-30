@@ -5,7 +5,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../money/cubit/income/income_cubit.dart';
-import '../../../money/cubit/money_cubit.dart';
+import '../../../money/cubit/money/money_cubit.dart';
 import '../../../money/models/income/income_model.dart';
 import '../../../money/models/transaction/transaction_model.dart';
 import '../../../new_game/new_game_cubit.dart';
@@ -49,7 +49,7 @@ class TransportCubit extends HydratedCubit<TransportState> {
   }
 
   buy(Transport transport) {
-    if (_moneyCubit.state < transport.cost) return "You don't have enough money";
+    if (_moneyCubit.getBalance() < transport.cost) return "You don't have enough money";
 
     return state.whenOrNull(loaded: (oldTransport) {
       if (oldTransport != null) {

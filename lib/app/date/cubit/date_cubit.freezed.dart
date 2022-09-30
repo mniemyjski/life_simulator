@@ -205,7 +205,9 @@ class _$Initial implements Initial {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$InitialToJson(this);
+    return _$$InitialToJson(
+      this,
+    );
   }
 }
 
@@ -327,7 +329,9 @@ class _$Loading implements Loading {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LoadingToJson(this);
+    return _$$LoadingToJson(
+      this,
+    );
   }
 }
 
@@ -474,7 +478,9 @@ class _$Loaded implements Loaded {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LoadedToJson(this);
+    return _$$LoadedToJson(
+      this,
+    );
   }
 }
 
@@ -483,7 +489,7 @@ abstract class Loaded implements DateState {
 
   factory Loaded.fromJson(Map<String, dynamic> json) = _$Loaded.fromJson;
 
-  DateTime get dateTime => throw _privateConstructorUsedError;
+  DateTime get dateTime;
   @JsonKey(ignore: true)
   _$$LoadedCopyWith<_$Loaded> get copyWith =>
       throw _privateConstructorUsedError;

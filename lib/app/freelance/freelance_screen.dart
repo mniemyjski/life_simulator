@@ -1,10 +1,12 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:richeable/app/freelance/widgets/advertisement_chooser.dart';
+import 'package:richeable/app/money/cubit/money/money_cubit.dart';
 import 'package:richeable/utilities/utilities.dart';
 import 'package:richeable/widgets/widgets.dart';
 
@@ -280,16 +282,27 @@ class FreelanceScreen extends StatelessWidget {
                   ),
                   child: const FaIcon(FontAwesomeIcons.rectangleAd),
                   onTap: () {
-                    showModalBottomSheet<String>(
-                      shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(top: Radius.circular(8.0))),
-                      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                      context: context,
-                      isScrollControlled: true,
-                      builder: (BuildContext context) {
-                        return const AdvertisementChooser();
-                      },
-                    );
+                    context.read<MoneyCubit>().state.maybeWhen(orElse: () {
+                      BotToast.showText(
+                          text: LocaleKeys.tryAgain.tr(), align: const Alignment(0.1, 0.05));
+                    }, loaded: (money) {
+                      if (money > 10) {
+                        showModalBottomSheet<String>(
+                          shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(top: Radius.circular(8.0))),
+                          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                          context: context,
+                          isScrollControlled: true,
+                          builder: (BuildContext context) {
+                            return AdvertisementChooser(money);
+                          },
+                        );
+                      } else {
+                        BotToast.showText(
+                            text: LocaleKeys.notEnoughMoney.tr(),
+                            align: const Alignment(0.1, 0.05));
+                      }
+                    });
                   },
                 ),
               ],

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:richeable/utilities/utilities.dart';
 
 import '../../date/widgets/date_view.dart';
-import '../../money/cubit/money_cubit.dart';
+import '../../money/cubit/money/money_cubit.dart';
 import '../../stats/widgets/stats_indicator.dart';
 import '../../time_spend/widgets/time_spend_indicator.dart';
 
@@ -45,7 +45,7 @@ class AppBarStats extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      '${context.watch<MoneyCubit>().state.toMoney()}',
+                      '${context.watch<MoneyCubit>().state.maybeWhen(orElse: () => 0.0, loaded: (v) => v).toMoney()}',
                       style: TextStyle(color: Theme.of(context).textTheme.bodyText2!.color),
                     ),
                   ),

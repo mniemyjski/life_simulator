@@ -3,13 +3,12 @@ import 'dart:async';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:jiffy/jiffy.dart';
 import 'package:richeable/utilities/utilities.dart';
 
+import '../../../../repositories/transactions_repository.dart';
 import '../../../date/cubit/date_cubit.dart';
 import '../../models/sum_transactions/sum_transactions_model.dart';
 import '../../models/transaction/transaction_model.dart';
-import '../transactions/transactions_cubit.dart';
 
 part 'screen_transactions_cubit.freezed.dart';
 part 'screen_transactions_cubit.g.dart';
@@ -17,13 +16,13 @@ part 'screen_transactions_state.dart';
 
 @injectable
 class ScreenTransactionsCubit extends Cubit<ScreenTransactionsState> {
-  final TransactionsCubit _transactionsCubit;
   final DateCubit _dateCubit;
   late StreamSubscription _dateSub;
+  final TransactionsRepository _transactionRepository;
 
   ScreenTransactionsCubit(
-    this._transactionsCubit,
     this._dateCubit,
+    this._transactionRepository,
   ) : super(const ScreenTransactionsState.initial()) {
     _newGame();
   }
@@ -35,53 +34,54 @@ class ScreenTransactionsCubit extends Cubit<ScreenTransactionsState> {
   }
 
   _newGame() {
+    state.whenOrNull(initial: () {
+      _dateCubit.state.whenOrNull(loaded: (date) {
+        _counter(DateTime(date.year, date.month, 1));
+      });
+    });
+
     _dateSub = _dateCubit.stream.listen(
       (dateState) {
         dateState.whenOrNull(
           loaded: (date) {
-            state.whenOrNull(
-              loaded: (oldDate, oldTransport) {
-                _counter(date);
-              },
-            );
+            state.whenOrNull(loaded: (oldDate, oldTransactions) {
+              DateTime newDate = DateTime(date.year, date.month, 1);
+
+              if (newDate.millisecondsSinceEpoch > oldDate.millisecondsSinceEpoch) {
+                try {
+                  emit(
+                    ScreenTransactionsState.loaded(
+                      dateTime: newDate,
+                      transactions: [],
+                    ),
+                  );
+                } finally {}
+              }
+            });
           },
         );
       },
     );
 
-    state.whenOrNull(initial: () {
-      _dateCubit.state.whenOrNull(loaded: (date) {
-        _counter(date);
-      });
+    _transactionRepository.watchLazy().listen((event) {
+      state.whenOrNull(
+        loaded: (date, transport) {
+          _counter(DateTime(date.year, date.month, 1));
+        },
+      );
     });
   }
 
-  _counter(DateTime date) {
-    _transactionsCubit.state.whenOrNull(loaded: (allTransactions) {
-      int from = DateTime(date.year, date.month, 1).millisecondsSinceEpoch;
-      int to = Jiffy(date)
-          .add(months: 1)
-          .dateTime
-          .onlyDate()
-          .add(const Duration(days: -1))
-          .onlyDate()
-          .millisecondsSinceEpoch;
+  _counter(DateTime date) async {
+    List<Transaction> result = await _transactionRepository.getTransactions(date, ETypeDate.month);
 
-      List<Transaction> result = allTransactions
-          .where(
-            (e) =>
-                e.dateCre.millisecondsSinceEpoch >= from && e.dateCre.millisecondsSinceEpoch <= to,
-          )
-          .toList();
-
-      emit(ScreenTransactionsState.loaded(
-          dateTime: DateTime(date.year, date.month, 1), transactions: result));
-    });
+    emit(ScreenTransactionsState.loaded(
+        dateTime: DateTime(date.year, date.month, 1), transactions: result));
   }
 
   backMonth() {
     state.whenOrNull(loaded: (date, oldTransactions) {
-      DateTime newMonth = Jiffy(date).add(months: -1).dateTime.onlyDate();
+      DateTime newMonth = DateTime(date.year, date.month, 1).addDate(months: -1);
 
       if (newMonth.millisecondsSinceEpoch >= DateTime(18, 1, 1).millisecondsSinceEpoch) {
         _counter(newMonth);
@@ -91,7 +91,7 @@ class ScreenTransactionsCubit extends Cubit<ScreenTransactionsState> {
 
   nextMonth() {
     state.whenOrNull(loaded: (date, oldTransactions) {
-      DateTime newMonth = Jiffy(date).add(months: 1).dateTime.onlyDate();
+      DateTime newMonth = DateTime(date.year, date.month, 1).addDate(months: 1);
 
       _dateCubit.state.whenOrNull(loaded: (d) {
         if (newMonth.millisecondsSinceEpoch <=

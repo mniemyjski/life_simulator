@@ -134,6 +134,15 @@ abstract class  LocaleKeys {
   static const dailyFame = 'dailyFame';
   static const crypto = 'crypto';
   static const resources = 'resources';
+  static const remove = 'remove';
+  static const employees = 'employees';
+  static const scientist = 'scientist';
+  static const accountant = 'accountant';
+  static const analyst = 'analyst';
+  static const manager = 'manager';
+  static const marketer = 'marketer';
+  static const products = 'products';
+  static const tryAgain = 'tryAgain';
   static const personalScreen = 'personalScreen';
   static const personalScreenDesc = 'personalScreenDesc';
   static const transactionsScreen = 'transactionsScreen';

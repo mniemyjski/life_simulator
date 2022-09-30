@@ -335,7 +335,9 @@ class _$_Asset extends _Asset {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AssetToJson(this);
+    return _$$_AssetToJson(
+      this,
+    );
   }
 }
 
@@ -358,29 +360,29 @@ abstract class _Asset extends Asset {
   factory _Asset.fromJson(Map<String, dynamic> json) = _$_Asset.fromJson;
 
   @override
-  String get id => throw _privateConstructorUsedError;
+  String get id;
   @override
-  String get address => throw _privateConstructorUsedError;
+  String get address;
   @override
-  ETypeAsset get eTypeAsset => throw _privateConstructorUsedError;
+  ETypeAsset get eTypeAsset;
   @override
-  int get tenantsMax => throw _privateConstructorUsedError;
+  int get tenantsMax;
   @override
-  double get baseValue => throw _privateConstructorUsedError;
+  double get baseValue;
   @override
-  double get value => throw _privateConstructorUsedError;
+  double get value;
   @override
-  int get level => throw _privateConstructorUsedError;
+  int get level;
   @override
-  double get renovation => throw _privateConstructorUsedError;
+  double get renovation;
   @override
-  double get monthlyCost => throw _privateConstructorUsedError;
+  double get monthlyCost;
   @override
-  double get minRent => throw _privateConstructorUsedError;
+  double get minRent;
   @override
-  bool get friendlyAnimal => throw _privateConstructorUsedError;
+  bool get friendlyAnimal;
   @override
-  int get minRating => throw _privateConstructorUsedError;
+  int get minRating;
   @override
   @JsonKey(ignore: true)
   _$$_AssetCopyWith<_$_Asset> get copyWith =>

@@ -7,10 +7,9 @@ import 'package:jiffy/jiffy.dart';
 import 'package:richeable/utilities/utilities.dart';
 
 import '../../../date/cubit/date_cubit.dart';
-import '../../../loading/cubit/loading_cubit.dart';
 import '../../../new_game/new_game_cubit.dart';
 import '../../models/income/income_model.dart';
-import '../money_cubit.dart';
+import '../money/money_cubit.dart';
 
 part 'income_cubit.freezed.dart';
 part 'income_cubit.g.dart';
@@ -18,21 +17,18 @@ part 'income_state.dart';
 
 @lazySingleton
 class IncomeCubit extends HydratedCubit<IncomeState> {
-  final MoneyCubit _moneyCubit;
-
   final NewGameCubit _newGameCubit;
   late StreamSubscription _newGameSub;
 
   final DateCubit _dateCubit;
   late StreamSubscription _dateSub;
 
-  final LoadingCubit _loadingCubit;
+  final MoneyCubit _moneyCubit;
 
   IncomeCubit(
     this._moneyCubit,
     this._newGameCubit,
     this._dateCubit,
-    this._loadingCubit,
   ) : super(const IncomeState.initial()) {
     _newGame();
     _counting();

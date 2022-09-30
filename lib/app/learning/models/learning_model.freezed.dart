@@ -237,7 +237,9 @@ class _$_Learning implements _Learning {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LearningToJson(this);
+    return _$$_LearningToJson(
+      this,
+    );
   }
 }
 
@@ -254,19 +256,19 @@ abstract class _Learning implements Learning {
   factory _Learning.fromJson(Map<String, dynamic> json) = _$_Learning.fromJson;
 
   @override
-  String get id => throw _privateConstructorUsedError;
+  String get id;
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  ETypeSkills get skillType => throw _privateConstructorUsedError;
+  ETypeSkills get skillType;
   @override
-  int get baseTime => throw _privateConstructorUsedError;
+  int get baseTime;
   @override
-  int get exp => throw _privateConstructorUsedError;
+  int get exp;
   @override
-  int get time => throw _privateConstructorUsedError;
+  int get time;
   @override
-  double get cost => throw _privateConstructorUsedError;
+  double get cost;
   @override
   @JsonKey(ignore: true)
   _$$_LearningCopyWith<_$_Learning> get copyWith =>

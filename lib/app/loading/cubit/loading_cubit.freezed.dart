@@ -222,7 +222,9 @@ class _$Loading implements Loading {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LoadingToJson(this);
+    return _$$LoadingToJson(
+      this,
+    );
   }
 }
 
@@ -231,7 +233,7 @@ abstract class Loading implements LoadingState {
 
   factory Loading.fromJson(Map<String, dynamic> json) = _$Loading.fromJson;
 
-  List<String> get names => throw _privateConstructorUsedError;
+  List<String> get names;
   @JsonKey(ignore: true)
   _$$LoadingCopyWith<_$Loading> get copyWith =>
       throw _privateConstructorUsedError;
@@ -343,7 +345,9 @@ class _$Loaded implements Loaded {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LoadedToJson(this);
+    return _$$LoadedToJson(
+      this,
+    );
   }
 }
 

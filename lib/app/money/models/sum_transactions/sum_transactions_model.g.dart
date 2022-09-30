@@ -16,7 +16,7 @@ _$_SumTransactions _$$_SumTransactionsFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_SumTransactionsToJson(_$_SumTransactions instance) =>
     <String, dynamic>{
       'eTypeTransactionSource':
-          _$ETypeTransactionSourceEnumMap[instance.eTypeTransactionSource],
+          _$ETypeTransactionSourceEnumMap[instance.eTypeTransactionSource]!,
       'value': instance.value,
     };
 
@@ -35,6 +35,7 @@ const _$ETypeTransactionSourceEnumMap = {
   ETypeTransactionSource.medicine: 'medicine',
   ETypeTransactionSource.unpaidTaxes: 'unpaidTaxes',
   ETypeTransactionSource.addMoney: 'addMoney',
+  ETypeTransactionSource.giftFromParents: 'giftFromParents',
   ETypeTransactionSource.lostMoney: 'lostMoney',
   ETypeTransactionSource.advertisement: 'advertisement',
 };

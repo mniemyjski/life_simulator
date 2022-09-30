@@ -218,7 +218,9 @@ class _$_Income extends _Income {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_IncomeToJson(this);
+    return _$$_IncomeToJson(
+      this,
+    );
   }
 }
 
@@ -235,17 +237,17 @@ abstract class _Income extends Income {
   factory _Income.fromJson(Map<String, dynamic> json) = _$_Income.fromJson;
 
   @override
-  String get id => throw _privateConstructorUsedError;
+  String get id;
   @override
-  ETypeTransactionSource get source => throw _privateConstructorUsedError;
+  ETypeTransactionSource get source;
   @override
-  ETypeIncome get typeIncome => throw _privateConstructorUsedError;
+  ETypeIncome get typeIncome;
   @override
-  ETypeFrequency get eTypeFrequency => throw _privateConstructorUsedError;
+  ETypeFrequency get eTypeFrequency;
   @override
-  double get value => throw _privateConstructorUsedError;
+  double get value;
   @override
-  DateTime? get next => throw _privateConstructorUsedError;
+  DateTime? get next;
   @override
   @JsonKey(ignore: true)
   _$$_IncomeCopyWith<_$_Income> get copyWith =>

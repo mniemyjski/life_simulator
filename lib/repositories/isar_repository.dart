@@ -1,0 +1,27 @@
+import 'package:injectable/injectable.dart';
+import 'package:isar/isar.dart';
+import 'package:richeable/app/money/models/transaction/transaction_model.dart';
+
+@lazySingleton
+class IsarRepository {
+  late Isar _instance;
+
+  Isar get instance => _instance;
+
+  init() async {
+    if (Isar.instanceNames.isEmpty) {
+      _instance = await Isar.open([TransactionSchema]);
+    } else {
+      _instance = await Future.value(Isar.getInstance());
+    }
+  }
+
+  newGame() async {
+    if (Isar.instanceNames.isEmpty) {
+      _instance = await Isar.open([TransactionSchema]);
+      _instance.writeTxn(() => _instance.clear());
+    } else {
+      _instance.writeTxn(() => _instance.clear());
+    }
+  }
+}

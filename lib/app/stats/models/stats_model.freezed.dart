@@ -218,7 +218,9 @@ class _$_Stats implements _Stats {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_StatsToJson(this);
+    return _$$_StatsToJson(
+      this,
+    );
   }
 }
 
@@ -234,17 +236,17 @@ abstract class _Stats implements Stats {
   factory _Stats.fromJson(Map<String, dynamic> json) = _$_Stats.fromJson;
 
   @override
-  double get health => throw _privateConstructorUsedError;
+  double get health;
   @override
-  double get satisfaction => throw _privateConstructorUsedError;
+  double get satisfaction;
   @override
-  double get tiredness => throw _privateConstructorUsedError;
+  double get tiredness;
   @override
-  double get maxHealth => throw _privateConstructorUsedError;
+  double get maxHealth;
   @override
-  double get maxSatisfaction => throw _privateConstructorUsedError;
+  double get maxSatisfaction;
   @override
-  double get maxTiredness => throw _privateConstructorUsedError;
+  double get maxTiredness;
   @override
   @JsonKey(ignore: true)
   _$$_StatsCopyWith<_$_Stats> get copyWith =>

@@ -13,7 +13,7 @@ _$_Skill _$$_SkillFromJson(Map<String, dynamic> json) => _$_Skill(
     );
 
 Map<String, dynamic> _$$_SkillToJson(_$_Skill instance) => <String, dynamic>{
-      'name': _$ETypeSkillsEnumMap[instance.name],
+      'name': _$ETypeSkillsEnumMap[instance.name]!,
       'lvl': instance.lvl,
       'exp': instance.exp,
     };
@@ -26,4 +26,7 @@ const _$ETypeSkillsEnumMap = {
   ETypeSkills.management: 'management',
   ETypeSkills.confidence: 'confidence',
   ETypeSkills.communicativeness: 'communicativeness',
+  ETypeSkills.writing: 'writing',
+  ETypeSkills.creativity: 'creativity',
+  ETypeSkills.handyman: 'handyman',
 };

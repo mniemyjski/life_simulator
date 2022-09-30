@@ -214,7 +214,9 @@ class _$_Exchange implements _Exchange {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ExchangeToJson(this);
+    return _$$_ExchangeToJson(
+      this,
+    );
   }
 }
 
@@ -229,15 +231,15 @@ abstract class _Exchange implements Exchange {
   factory _Exchange.fromJson(Map<String, dynamic> json) = _$_Exchange.fromJson;
 
   @override
-  String get id => throw _privateConstructorUsedError;
+  String get id;
   @override
-  Instrument get instrument => throw _privateConstructorUsedError;
+  Instrument get instrument;
   @override
-  double get count => throw _privateConstructorUsedError;
+  double get count;
   @override
-  DateTime get datCre => throw _privateConstructorUsedError;
+  DateTime get datCre;
   @override
-  bool get close => throw _privateConstructorUsedError;
+  bool get close;
   @override
   @JsonKey(ignore: true)
   _$$_ExchangeCopyWith<_$_Exchange> get copyWith =>

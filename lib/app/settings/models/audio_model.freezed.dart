@@ -139,7 +139,9 @@ class _$_Audio implements _Audio {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AudioToJson(this);
+    return _$$_AudioToJson(
+      this,
+    );
   }
 }
 
@@ -149,9 +151,9 @@ abstract class _Audio implements Audio {
   factory _Audio.fromJson(Map<String, dynamic> json) = _$_Audio.fromJson;
 
   @override
-  double get sounds => throw _privateConstructorUsedError;
+  double get sounds;
   @override
-  double get music => throw _privateConstructorUsedError;
+  double get music;
   @override
   @JsonKey(ignore: true)
   _$$_AudioCopyWith<_$_Audio> get copyWith =>

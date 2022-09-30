@@ -278,7 +278,9 @@ class _$_TimeSpend extends _TimeSpend {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TimeSpendToJson(this);
+    return _$$_TimeSpendToJson(
+      this,
+    );
   }
 }
 
@@ -299,23 +301,23 @@ abstract class _TimeSpend extends TimeSpend {
       _$_TimeSpend.fromJson;
 
   @override
-  int get free => throw _privateConstructorUsedError;
+  int get free;
   @override
-  int get work => throw _privateConstructorUsedError;
+  int get work;
   @override
-  int get commuting => throw _privateConstructorUsedError;
+  int get commuting;
   @override
-  int get freelance => throw _privateConstructorUsedError;
+  int get freelance;
   @override
-  int get learn => throw _privateConstructorUsedError;
+  int get learn;
   @override
-  int get relax => throw _privateConstructorUsedError;
+  int get relax;
   @override
-  int get sleep => throw _privateConstructorUsedError;
+  int get sleep;
   @override
-  int get used => throw _privateConstructorUsedError;
+  int get used;
   @override
-  List<TimeBonus> get bonuses => throw _privateConstructorUsedError;
+  List<TimeBonus> get bonuses;
   @override
   @JsonKey(ignore: true)
   _$$_TimeSpendCopyWith<_$_TimeSpend> get copyWith =>

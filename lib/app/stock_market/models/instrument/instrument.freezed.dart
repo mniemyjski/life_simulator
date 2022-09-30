@@ -335,7 +335,9 @@ class _$_Instrument implements _Instrument {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_InstrumentToJson(this);
+    return _$$_InstrumentToJson(
+      this,
+    );
   }
 }
 
@@ -358,29 +360,29 @@ abstract class _Instrument implements Instrument {
       _$_Instrument.fromJson;
 
   @override
-  String get id => throw _privateConstructorUsedError;
+  String get id;
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  ETypeInstrument get eTypeInstrument => throw _privateConstructorUsedError;
+  ETypeInstrument get eTypeInstrument;
   @override
-  List<Candle> get candles => throw _privateConstructorUsedError;
+  List<Candle> get candles;
   @override
-  ETypeTrend get eTypeTrend => throw _privateConstructorUsedError;
+  ETypeTrend get eTypeTrend;
   @override
-  DateTime get datTrendEnd => throw _privateConstructorUsedError;
+  DateTime get datTrendEnd;
   @override
-  int get potentialIncrease => throw _privateConstructorUsedError;
+  int get potentialIncrease;
   @override
-  int get potentialDecrease => throw _privateConstructorUsedError;
+  int get potentialDecrease;
   @override
-  int get potentialStable => throw _privateConstructorUsedError;
+  int get potentialStable;
   @override
-  double get min => throw _privateConstructorUsedError;
+  double get min;
   @override
-  double get max => throw _privateConstructorUsedError;
+  double get max;
   @override
-  double get valorization => throw _privateConstructorUsedError;
+  double get valorization;
   @override
   @JsonKey(ignore: true)
   _$$_InstrumentCopyWith<_$_Instrument> get copyWith =>

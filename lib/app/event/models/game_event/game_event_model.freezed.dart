@@ -292,7 +292,9 @@ class _$_Event implements _Event {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_EventToJson(this);
+    return _$$_EventToJson(
+      this,
+    );
   }
 }
 
@@ -312,25 +314,25 @@ abstract class _Event implements GameEvent {
   factory _Event.fromJson(Map<String, dynamic> json) = _$_Event.fromJson;
 
   @override
-  String get id => throw _privateConstructorUsedError;
+  String get id;
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  String get description => throw _privateConstructorUsedError;
+  String get description;
   @override
-  DateTime? get datCre => throw _privateConstructorUsedError;
+  DateTime? get datCre;
   @override
-  ETypeEffect get eTypeEffect => throw _privateConstructorUsedError;
+  ETypeEffect get eTypeEffect;
   @override
-  double get value => throw _privateConstructorUsedError;
+  double get value;
   @override
-  int get duration => throw _privateConstructorUsedError;
+  int get duration;
   @override
-  int get leftDuration => throw _privateConstructorUsedError;
+  int get leftDuration;
   @override
-  int get frequency => throw _privateConstructorUsedError;
+  int get frequency;
   @override
-  bool get active => throw _privateConstructorUsedError;
+  bool get active;
   @override
   @JsonKey(ignore: true)
   _$$_EventCopyWith<_$_Event> get copyWith =>

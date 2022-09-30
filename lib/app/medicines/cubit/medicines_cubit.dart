@@ -6,7 +6,7 @@ import 'package:injectable/injectable.dart';
 
 import '../../database/cubit/database_cubit.dart';
 import '../../date/cubit/date_cubit.dart';
-import '../../money/cubit/money_cubit.dart';
+import '../../money/cubit/money/money_cubit.dart';
 import '../../money/models/transaction/transaction_model.dart';
 import '../../new_game/new_game_cubit.dart';
 import '../models/medicine_model.dart';
@@ -74,7 +74,7 @@ class MedicinesCubit extends HydratedCubit<MedicinesState> {
 
   String? buy(Medicine medicine) {
     state.whenOrNull(loaded: (medicines) {
-      if (_moneyCubit.state < medicine.cost) return "youDontHaveEnoughMoney";
+      if (_moneyCubit.getBalance() < medicine.cost) return "youDontHaveEnoughMoney";
 
       List<Medicine> result = List.from(medicines)
         ..removeWhere((element) => element.id == medicine.id);

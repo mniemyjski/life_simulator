@@ -31,7 +31,7 @@ Map<String, dynamic> _$$_ExperienceToJson(_$_Experience instance) =>
       'exp': instance.exp,
       'requirements': instance.requirements.map((e) => e.toJson()).toList(),
       'salary': instance.salary,
-      'eTypeFrequency': _$ETypeFrequencyEnumMap[instance.eTypeFrequency],
+      'eTypeFrequency': _$ETypeFrequencyEnumMap[instance.eTypeFrequency]!,
       'work': instance.work,
       'commuting': instance.commuting,
       'bonusToRelax': instance.bonusToRelax,

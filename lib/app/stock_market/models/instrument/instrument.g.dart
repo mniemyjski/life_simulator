@@ -29,9 +29,9 @@ Map<String, dynamic> _$$_InstrumentToJson(_$_Instrument instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'eTypeInstrument': _$ETypeInstrumentEnumMap[instance.eTypeInstrument],
+      'eTypeInstrument': _$ETypeInstrumentEnumMap[instance.eTypeInstrument]!,
       'candles': instance.candles.map((e) => e.toJson()).toList(),
-      'eTypeTrend': _$ETypeTrendEnumMap[instance.eTypeTrend],
+      'eTypeTrend': _$ETypeTrendEnumMap[instance.eTypeTrend]!,
       'datTrendEnd': instance.datTrendEnd.toIso8601String(),
       'potentialIncrease': instance.potentialIncrease,
       'potentialDecrease': instance.potentialDecrease,

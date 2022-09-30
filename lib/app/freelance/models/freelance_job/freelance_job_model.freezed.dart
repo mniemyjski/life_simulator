@@ -317,7 +317,9 @@ class _$_FreelanceJob extends _FreelanceJob {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_FreelanceJobToJson(this);
+    return _$$_FreelanceJobToJson(
+      this,
+    );
   }
 }
 
@@ -339,25 +341,25 @@ abstract class _FreelanceJob extends FreelanceJob implements FreelanceBase {
       _$_FreelanceJob.fromJson;
 
   @override //Base
-  String get id => throw _privateConstructorUsedError;
+  String get id;
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  ETypeFreelance get eTypeFreelance => throw _privateConstructorUsedError;
+  ETypeFreelance get eTypeFreelance;
   @override //EndBase
-  int get level => throw _privateConstructorUsedError;
+  int get level;
   @override
-  int get workTime => throw _privateConstructorUsedError;
+  int get workTime;
   @override
-  int get leftWorkTime => throw _privateConstructorUsedError;
+  int get leftWorkTime;
   @override
-  List<Skill> get reqSkills => throw _privateConstructorUsedError;
+  List<Skill> get reqSkills;
   @override
-  List<Skill> get userSkills => throw _privateConstructorUsedError;
+  List<Skill> get userSkills;
   @override
-  bool get repeat => throw _privateConstructorUsedError;
+  bool get repeat;
   @override
-  int get lastVersion => throw _privateConstructorUsedError;
+  int get lastVersion;
   @override
   @JsonKey(ignore: true)
   _$$_FreelanceJobCopyWith<_$_FreelanceJob> get copyWith =>

@@ -354,7 +354,9 @@ class _$_Database implements _Database {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_DatabaseToJson(this);
+    return _$$_DatabaseToJson(
+      this,
+    );
   }
 }
 
@@ -374,25 +376,25 @@ abstract class _Database implements Database {
   factory _Database.fromJson(Map<String, dynamic> json) = _$_Database.fromJson;
 
   @override
-  List<Job> get jobsDB => throw _privateConstructorUsedError;
+  List<Job> get jobsDB;
   @override
-  List<Learning> get learningsDB => throw _privateConstructorUsedError;
+  List<Learning> get learningsDB;
   @override
-  List<Food> get foodsDB => throw _privateConstructorUsedError;
+  List<Food> get foodsDB;
   @override
-  List<House> get housesDB => throw _privateConstructorUsedError;
+  List<House> get housesDB;
   @override
-  List<Transport> get transportsDB => throw _privateConstructorUsedError;
+  List<Transport> get transportsDB;
   @override
-  List<GameEvent> get eventsDB => throw _privateConstructorUsedError;
+  List<GameEvent> get eventsDB;
   @override
-  List<Medicine> get medicinesDB => throw _privateConstructorUsedError;
+  List<Medicine> get medicinesDB;
   @override
-  List<Asset> get assetsDB => throw _privateConstructorUsedError;
+  List<Asset> get assetsDB;
   @override
-  List<Tenant> get tenantsDB => throw _privateConstructorUsedError;
+  List<Tenant> get tenantsDB;
   @override
-  List<Instrument> get instrumentDB => throw _privateConstructorUsedError;
+  List<Instrument> get instrumentDB;
   @override
   @JsonKey(ignore: true)
   _$$_DatabaseCopyWith<_$_Database> get copyWith =>

@@ -7,7 +7,7 @@ import 'package:uuid/uuid.dart';
 
 import '../../../utilities/utilities.dart';
 import '../../date/cubit/date_cubit.dart';
-import '../../money/cubit/money_cubit.dart';
+import '../../money/cubit/money/money_cubit.dart';
 import '../../money/models/transaction/transaction_model.dart';
 import '../../new_game/new_game_cubit.dart';
 import '../../skills/cubit/skills_cubit.dart';
@@ -91,7 +91,7 @@ class LearningCubit extends HydratedCubit<LearningState> {
   }
 
   add(Learning learning) {
-    if (_moneyCubit.state < -learning.cost) return 'notEnoughMoney';
+    if (_moneyCubit.getBalance() < -learning.cost) return 'notEnoughMoney';
     state.whenOrNull(loaded: (learnings) {
       List<Learning> result = List.from(learnings)..add(learning.copyWith(id: Uuid().v1()));
 
