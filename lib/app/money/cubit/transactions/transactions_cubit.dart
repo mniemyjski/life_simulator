@@ -10,20 +10,20 @@ import '../../../date/cubit/date_cubit.dart';
 import '../../models/sum_transactions/sum_transactions_model.dart';
 import '../../models/transaction/transaction_model.dart';
 
-part 'screen_transactions_cubit.freezed.dart';
-part 'screen_transactions_cubit.g.dart';
-part 'screen_transactions_state.dart';
+part 'transactions_cubit.freezed.dart';
+part 'transactions_cubit.g.dart';
+part 'transactions_state.dart';
 
 @injectable
-class ScreenTransactionsCubit extends Cubit<ScreenTransactionsState> {
+class TransactionsCubit extends Cubit<TransactionsState> {
   final DateCubit _dateCubit;
   late StreamSubscription _dateSub;
   final TransactionsRepository _transactionRepository;
 
-  ScreenTransactionsCubit(
+  TransactionsCubit(
     this._dateCubit,
     this._transactionRepository,
-  ) : super(const ScreenTransactionsState.initial()) {
+  ) : super(const TransactionsState.initial()) {
     _newGame();
   }
 
@@ -50,7 +50,7 @@ class ScreenTransactionsCubit extends Cubit<ScreenTransactionsState> {
               if (newDate.millisecondsSinceEpoch > oldDate.millisecondsSinceEpoch) {
                 try {
                   emit(
-                    ScreenTransactionsState.loaded(
+                    TransactionsState.loaded(
                       dateTime: newDate,
                       transactions: [],
                     ),
@@ -75,7 +75,7 @@ class ScreenTransactionsCubit extends Cubit<ScreenTransactionsState> {
   _counter(DateTime date) async {
     List<Transaction> result = await _transactionRepository.getTransactions(date, ETypeDate.month);
 
-    emit(ScreenTransactionsState.loaded(
+    emit(TransactionsState.loaded(
         dateTime: DateTime(date.year, date.month, 1), transactions: result));
   }
 

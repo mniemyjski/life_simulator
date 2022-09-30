@@ -10,7 +10,7 @@ import '../../constants/locale_keys.g.dart';
 import '../../utilities/utilities.dart';
 import '../date/widgets/next_day.dart';
 import '../game/widget/app_bar_stats.dart';
-import 'cubit/screen_transactions/screen_transactions_cubit.dart';
+import 'cubit/transactions/transactions_cubit.dart';
 import 'models/sum_transactions/sum_transactions_model.dart';
 import 'models/transaction/transaction_model.dart';
 
@@ -70,9 +70,9 @@ class TransactionsScreen extends StatelessWidget {
     }
 
     return BlocProvider(
-      create: (_) => getIt<ScreenTransactionsCubit>(),
+      create: (_) => getIt<TransactionsCubit>(),
       child: CustomScaffold(
-        body: BlocBuilder<ScreenTransactionsCubit, ScreenTransactionsState>(
+        body: BlocBuilder<TransactionsCubit, TransactionsState>(
           builder: (context, state) {
             return state.maybeWhen(
                 orElse: () => Container(),
@@ -84,8 +84,7 @@ class TransactionsScreen extends StatelessWidget {
                         children: [
                           Card(
                             child: IconButton(
-                                onPressed: () =>
-                                    context.read<ScreenTransactionsCubit>().backMonth(),
+                                onPressed: () => context.read<TransactionsCubit>().backMonth(),
                                 icon: const Icon(
                                   FontAwesomeIcons.arrowLeft,
                                 )),
@@ -108,8 +107,7 @@ class TransactionsScreen extends StatelessWidget {
                           ),
                           Card(
                             child: IconButton(
-                                onPressed: () =>
-                                    context.read<ScreenTransactionsCubit>().nextMonth(),
+                                onPressed: () => context.read<TransactionsCubit>().nextMonth(),
                                 icon: const Icon(
                                   FontAwesomeIcons.arrowRight,
                                 )),
@@ -128,7 +126,7 @@ class TransactionsScreen extends StatelessWidget {
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Text(
-                                        '${LocaleKeys.revenue.tr()}: ${context.watch<ScreenTransactionsCubit>().getTotalSum(ETypeTransaction.revenue).toMoney()}',
+                                        '${LocaleKeys.revenue.tr()}: ${context.watch<TransactionsCubit>().getTotalSum(ETypeTransaction.revenue).toMoney()}',
                                         style: TextStyle(
                                             color: Theme.of(context).textTheme.bodyText2!.color),
                                       ),
@@ -140,7 +138,7 @@ class TransactionsScreen extends StatelessWidget {
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Text(
-                                        '${LocaleKeys.net.tr()}: ${context.watch<ScreenTransactionsCubit>().getTotalSum(null).toMoney()}',
+                                        '${LocaleKeys.net.tr()}: ${context.watch<TransactionsCubit>().getTotalSum(null).toMoney()}',
                                         style: TextStyle(
                                             color: Theme.of(context).textTheme.bodyText1!.color),
                                       ),
@@ -153,7 +151,7 @@ class TransactionsScreen extends StatelessWidget {
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Text(
-                                        '${LocaleKeys.expense.tr()}: ${context.watch<ScreenTransactionsCubit>().getTotalSum(ETypeTransaction.expense).toMoney()}',
+                                        '${LocaleKeys.expense.tr()}: ${context.watch<TransactionsCubit>().getTotalSum(ETypeTransaction.expense).toMoney()}',
                                         style: TextStyle(
                                             color: Theme.of(context).textTheme.bodyText2!.color),
                                       ),
@@ -173,12 +171,12 @@ class TransactionsScreen extends StatelessWidget {
                                     Expanded(
                                       child: ListView.builder(
                                         itemCount: context
-                                            .watch<ScreenTransactionsCubit>()
+                                            .watch<TransactionsCubit>()
                                             .getSumByType(ETypeTransaction.revenue)
                                             .length,
                                         itemBuilder: (context, index) {
                                           SumTransactions element = context
-                                              .watch<ScreenTransactionsCubit>()
+                                              .watch<TransactionsCubit>()
                                               .getSumByType(ETypeTransaction.revenue)[index];
 
                                           return _elementList(element);
@@ -188,12 +186,12 @@ class TransactionsScreen extends StatelessWidget {
                                     Expanded(
                                       child: ListView.builder(
                                         itemCount: context
-                                            .watch<ScreenTransactionsCubit>()
+                                            .watch<TransactionsCubit>()
                                             .getSumByType(ETypeTransaction.expense)
                                             .length,
                                         itemBuilder: (context, index) {
                                           SumTransactions element = context
-                                              .watch<ScreenTransactionsCubit>()
+                                              .watch<TransactionsCubit>()
                                               .getSumByType(ETypeTransaction.expense)[index];
 
                                           return _elementList(element);

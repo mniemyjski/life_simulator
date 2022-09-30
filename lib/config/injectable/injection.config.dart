@@ -26,8 +26,7 @@ import '../../app/loading/cubit/loading_cubit.dart' as _i7;
 import '../../app/medicines/cubit/medicines_cubit.dart' as _i30;
 import '../../app/money/cubit/income/income_cubit.dart' as _i26;
 import '../../app/money/cubit/money/money_cubit.dart' as _i15;
-import '../../app/money/cubit/screen_transactions/screen_transactions_cubit.dart'
-    as _i16;
+import '../../app/money/cubit/transactions/transactions_cubit.dart' as _i18;
 import '../../app/new_game/new_game_cubit.dart' as _i8;
 import '../../app/personality/cubit/food/food_cubit.dart' as _i36;
 import '../../app/personality/cubit/house/house_cubit.dart' as _i37;
@@ -40,8 +39,8 @@ import '../../app/skills/cubit/skills_cubit.dart' as _i9;
 import '../../app/stats/cubit/stats_cubit.dart' as _i31;
 import '../../app/stock_market/cubit/exchanges/exchanges_cubit.dart' as _i22;
 import '../../app/stock_market/cubit/stock_market/stock_market_cubit.dart'
-    as _i17;
-import '../../app/time_spend/cubit/time_spend_cubit.dart' as _i18;
+    as _i16;
+import '../../app/time_spend/cubit/time_spend_cubit.dart' as _i17;
 import '../../app/tutorial/cubit/tutorial_cubit.dart' as _i11;
 import '../../repositories/isar_repository.dart' as _i6;
 import '../../repositories/transactions_repository.dart'
@@ -73,15 +72,15 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       get<_i10.TransactionsRepository>(),
       get<_i13.DateCubit>(),
       get<_i8.NewGameCubit>()));
-  gh.factory<_i16.ScreenTransactionsCubit>(() => _i16.ScreenTransactionsCubit(
-      get<_i13.DateCubit>(), get<_i10.TransactionsRepository>()));
-  gh.lazySingleton<_i17.StockMarketCubit>(() => _i17.StockMarketCubit(
+  gh.lazySingleton<_i16.StockMarketCubit>(() => _i16.StockMarketCubit(
       get<_i8.NewGameCubit>(),
       get<_i13.DateCubit>(),
       get<_i12.DatabaseCubit>(),
       get<_i7.LoadingCubit>()));
-  gh.lazySingleton<_i18.TimeSpendCubit>(() =>
-      _i18.TimeSpendCubit(get<_i8.NewGameCubit>(), get<_i13.DateCubit>()));
+  gh.lazySingleton<_i17.TimeSpendCubit>(() =>
+      _i17.TimeSpendCubit(get<_i8.NewGameCubit>(), get<_i13.DateCubit>()));
+  gh.factory<_i18.TransactionsCubit>(() => _i18.TransactionsCubit(
+      get<_i13.DateCubit>(), get<_i10.TransactionsRepository>()));
   gh.lazySingleton<_i19.BusinessesCubit>(() =>
       _i19.BusinessesCubit(get<_i8.NewGameCubit>(), get<_i15.MoneyCubit>()));
   gh.lazySingleton<_i20.BuyAssetCubit>(() =>
@@ -94,7 +93,7 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   gh.lazySingleton<_i22.ExchangesCubit>(() => _i22.ExchangesCubit(
       get<_i8.NewGameCubit>(),
       get<_i13.DateCubit>(),
-      get<_i17.StockMarketCubit>(),
+      get<_i16.StockMarketCubit>(),
       get<_i15.MoneyCubit>()));
   gh.lazySingleton<_i23.FameCubit>(() => _i23.FameCubit(
       get<_i8.NewGameCubit>(), get<_i13.DateCubit>(), get<_i15.MoneyCubit>()));
@@ -107,7 +106,7 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   gh.lazySingleton<_i25.FreelanceJobCubit>(() => _i25.FreelanceJobCubit(
       get<_i8.NewGameCubit>(),
       get<_i13.DateCubit>(),
-      get<_i18.TimeSpendCubit>(),
+      get<_i17.TimeSpendCubit>(),
       get<_i24.FreelanceDoneCubit>(),
       get<_i9.SkillsCubit>()));
   gh.lazySingleton<_i26.IncomeCubit>(() => _i26.IncomeCubit(
@@ -115,7 +114,7 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   gh.lazySingleton<_i27.JobCubit>(() => _i27.JobCubit(
       get<_i8.NewGameCubit>(),
       get<_i26.IncomeCubit>(),
-      get<_i18.TimeSpendCubit>(),
+      get<_i17.TimeSpendCubit>(),
       get<_i9.SkillsCubit>(),
       get<_i15.MoneyCubit>(),
       get<_i13.DateCubit>()));
@@ -123,7 +122,7 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       get<_i8.NewGameCubit>(),
       get<_i9.SkillsCubit>(),
       get<_i15.MoneyCubit>(),
-      get<_i18.TimeSpendCubit>(),
+      get<_i17.TimeSpendCubit>(),
       get<_i13.DateCubit>()));
   gh.lazySingleton<_i29.LoanCubit>(() => _i29.LoanCubit(
       get<_i15.MoneyCubit>(), get<_i13.DateCubit>(), get<_i8.NewGameCubit>()));
@@ -134,7 +133,7 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       get<_i13.DateCubit>()));
   gh.lazySingleton<_i31.StatsCubit>(() => _i31.StatsCubit(
       get<_i8.NewGameCubit>(),
-      get<_i18.TimeSpendCubit>(),
+      get<_i17.TimeSpendCubit>(),
       get<_i21.EventCubit>(),
       get<_i30.MedicinesCubit>(),
       get<_i13.DateCubit>()));
@@ -145,7 +144,7 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   gh.lazySingleton<_i33.TransportCubit>(() => _i33.TransportCubit(
       get<_i15.MoneyCubit>(),
       get<_i26.IncomeCubit>(),
-      get<_i18.TimeSpendCubit>(),
+      get<_i17.TimeSpendCubit>(),
       get<_i8.NewGameCubit>()));
   gh.lazySingleton<_i34.AssetsCubit>(() => _i34.AssetsCubit(
       get<_i8.NewGameCubit>(),
@@ -164,10 +163,10 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       get<_i26.IncomeCubit>(),
       get<_i12.DatabaseCubit>(),
       get<_i8.NewGameCubit>(),
-      get<_i18.TimeSpendCubit>()));
+      get<_i17.TimeSpendCubit>()));
   gh.lazySingleton<_i37.HouseCubit>(() => _i37.HouseCubit(
       get<_i15.MoneyCubit>(),
-      get<_i18.TimeSpendCubit>(),
+      get<_i17.TimeSpendCubit>(),
       get<_i26.IncomeCubit>(),
       get<_i8.NewGameCubit>(),
       get<_i12.DatabaseCubit>()));
