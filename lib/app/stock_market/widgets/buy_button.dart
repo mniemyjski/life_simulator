@@ -4,6 +4,7 @@ import 'package:richeable/utilities/utilities.dart';
 
 import '../../../constants/constants.dart';
 import '../../money/cubit/money/money_cubit.dart';
+import '../models/candle/candle.dart';
 import '../models/instrument/instrument.dart';
 import 'buy_bottom_sheet.dart';
 
@@ -11,9 +12,11 @@ class BuyButton extends StatelessWidget {
   const BuyButton({
     Key? key,
     required this.instrument,
+    required this.lastCandle,
   }) : super(key: key);
 
   final Instrument instrument;
+  final Candle lastCandle;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +40,7 @@ class BuyButton extends StatelessWidget {
                                   builder: (BuildContext context) {
                                     return BuyBottomSheet(
                                       instrument: instrument,
+                                      lastCandle: lastCandle,
                                       buttonName: LocaleKeys.buy.tr(),
                                       money: money,
                                     );

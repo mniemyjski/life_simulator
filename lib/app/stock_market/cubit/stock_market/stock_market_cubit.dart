@@ -4,13 +4,13 @@ import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:richeable/app/stock_market/services/stock_market_services.dart';
 import 'package:richeable/utilities/utilities.dart';
 
+import '../../../../repositories/stock_market_repository.dart';
 import '../../../database/cubit/database_cubit.dart';
 import '../../../date/cubit/date_cubit.dart';
-import '../../../loading/cubit/loading_cubit.dart';
 import '../../../new_game/new_game_cubit.dart';
+import '../../models/candle/candle.dart';
 import '../../models/instrument/instrument.dart';
 
 part 'stock_market_cubit.freezed.dart';
@@ -27,13 +27,13 @@ class StockMarketCubit extends HydratedCubit<StockMarketState> {
 
   final DatabaseCubit _databaseCubit;
 
-  final LoadingCubit _loadingCubit;
+  final StockMarketRepository _marketRepository;
 
   StockMarketCubit(
     this._newGameCubit,
     this._dateCubit,
     this._databaseCubit,
-    this._loadingCubit,
+    this._marketRepository,
   ) : super(const StockMarketState.initial()) {
     _newGame();
     _counting();
@@ -46,20 +46,22 @@ class StockMarketCubit extends HydratedCubit<StockMarketState> {
     super.close();
   }
 
-  _newGame() {
+  _newGame() async {
     if (_newGameCubit.state) {
-      List<Instrument> result = StockMarketServices.firstOneYearGenerate(
+      List<Instrument> result = await _marketRepository.firstOneYearGenerate(
         _databaseCubit.state.instrumentDB,
       );
-
-      emit(StockMarketState.loaded(result));
+      final result2 = await _marketRepository.getLastYearCandle(DateTime(18, 1, 1));
+      emit(StockMarketState.loaded(result, result2));
     }
-    _newGameSub = _newGameCubit.stream.listen((newGame) {
+    _newGameSub = _newGameCubit.stream.listen((newGame) async {
       if (newGame) {
-        List<Instrument> result = StockMarketServices.firstOneYearGenerate(
+        List<Instrument> result = await _marketRepository.firstOneYearGenerate(
           _databaseCubit.state.instrumentDB,
         );
-        emit(StockMarketState.loaded(result));
+        final result2 = await _marketRepository.getLastYearCandle(DateTime(18, 1, 1));
+
+        emit(StockMarketState.loaded(result, result2));
       }
     });
   }
@@ -67,12 +69,13 @@ class StockMarketCubit extends HydratedCubit<StockMarketState> {
   _counting() {
     _dateSub = _dateCubit.stream.listen((dataState) {
       dataState.whenOrNull(loaded: (date) {
-        state.whenOrNull(loaded: (instruments) {
+        state.whenOrNull(loaded: (instruments, candles) async {
           if (date == DateTime(18, 1, 1)) return;
-          // final result = await compute(StockMarketServices.countingInstrument, [instruments, date]);
           final result =
-              StockMarketServices.countingInstrument(instruments: instruments, date: date);
-          emit(StockMarketState.loaded(result));
+              await _marketRepository.countingInstruments(instruments: instruments, date: date);
+          final result2 = await _marketRepository.getLastYearCandle(date);
+
+          emit(StockMarketState.loaded(result, result2));
         });
       });
     });
@@ -82,10 +85,10 @@ class StockMarketCubit extends HydratedCubit<StockMarketState> {
       {required Instrument instrument,
       required ETypeTrend eTypeTrend,
       required DateTime dateTime}) {
-    state.whenOrNull(loaded: (instruments) {
+    state.whenOrNull(loaded: (instruments, candles) {
       List<Instrument> result = List.from(instruments)..removeWhere((e) => e.id == instrument.id);
       result.add(instrument.copyWith(eTypeTrend: eTypeTrend));
-      emit(StockMarketState.loaded(result));
+      emit(StockMarketState.loaded(result, candles));
     });
   }
 

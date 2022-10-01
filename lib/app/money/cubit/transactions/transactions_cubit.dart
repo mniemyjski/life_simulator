@@ -48,14 +48,12 @@ class TransactionsCubit extends Cubit<TransactionsState> {
               DateTime newDate = DateTime(date.year, date.month, 1);
 
               if (newDate.millisecondsSinceEpoch > oldDate.millisecondsSinceEpoch) {
-                try {
-                  emit(
-                    TransactionsState.loaded(
-                      dateTime: newDate,
-                      transactions: [],
-                    ),
-                  );
-                } finally {}
+                emit(
+                  TransactionsState.loaded(
+                    dateTime: newDate,
+                    transactions: [],
+                  ),
+                );
               }
             });
           },

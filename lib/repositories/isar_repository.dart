@@ -1,6 +1,7 @@
 import 'package:injectable/injectable.dart';
 import 'package:isar/isar.dart';
 import 'package:richeable/app/money/models/transaction/transaction_model.dart';
+import 'package:richeable/app/stock_market/models/candle/candle.dart';
 
 @lazySingleton
 class IsarRepository {
@@ -10,7 +11,7 @@ class IsarRepository {
 
   init() async {
     if (Isar.instanceNames.isEmpty) {
-      _instance = await Isar.open([TransactionSchema]);
+      _instance = await Isar.open([TransactionSchema, CandleSchema]);
     } else {
       _instance = await Future.value(Isar.getInstance());
     }

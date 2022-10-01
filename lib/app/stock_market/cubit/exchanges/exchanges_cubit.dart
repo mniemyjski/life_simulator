@@ -9,6 +9,7 @@ import '../../../date/cubit/date_cubit.dart';
 import '../../../money/cubit/money/money_cubit.dart';
 import '../../../money/models/transaction/transaction_model.dart';
 import '../../../new_game/new_game_cubit.dart';
+import '../../models/candle/candle.dart';
 import '../../models/exchange/exchange.dart';
 import '../../models/instrument/instrument.dart';
 import '../stock_market/stock_market_cubit.dart';
@@ -54,10 +55,11 @@ class ExchangesCubit extends HydratedCubit<ExchangesState> {
     required double count,
   }) {
     return _stockMarketCubit.state.maybeWhen(
-        loaded: (market) {
+        loaded: (market, candles) {
           Instrument instrument = market.where((e) => e.id == idInstrument).first;
+          Candle lastCandle = candles.where((e) => e.instrument == instrument.name).first;
 
-          if (_moneyCubit.getBalance() < (count * instrument.candles.last.close)) {
+          if (_moneyCubit.getBalance() < (count * lastCandle.close)) {
             return "You don't have enough money";
           }
 
@@ -73,7 +75,7 @@ class ExchangesCubit extends HydratedCubit<ExchangesState> {
                       result.add(newTransaction);
 
                       _moneyCubit.addTransaction(
-                          value: -instrument.candles.last.close * count,
+                          value: -lastCandle.close * count,
                           eTypeTransactionSource: ETypeTransactionSource.market);
                       emit(ExchangesState.loaded(result));
                       return 'Succeed';
@@ -87,8 +89,9 @@ class ExchangesCubit extends HydratedCubit<ExchangesState> {
 
   String sell({required String idInstrument, required double count}) {
     return _stockMarketCubit.state.maybeWhen(
-        loaded: (market) {
+        loaded: (market, candles) {
           Instrument instrument = market.where((e) => e.id == idInstrument).first;
+          Candle lastCandle = candles.where((e) => e.instrument == instrument.name).first;
 
           return _dateCubit.state.maybeWhen(
               loaded: (date) {
@@ -104,13 +107,13 @@ class ExchangesCubit extends HydratedCubit<ExchangesState> {
                         if (i.count > tCount && tCount > 0) {
                           result.add(i.copyWith(count: i.count - tCount));
                           tCount -= i.count;
-                          addMoney += i.count * instrument.candles.last.close;
+                          addMoney += i.count * lastCandle.close;
                         } else if (i.count == tCount && tCount > 0) {
                           result.add(i.copyWith(count: 0, close: true));
-                          addMoney += i.count * instrument.candles.last.close;
+                          addMoney += i.count * lastCandle.close;
                         } else if (i.count < tCount && tCount > 0) {
                           result.add(i.copyWith(count: 0, close: true));
-                          addMoney += i.count * instrument.candles.last.close;
+                          addMoney += i.count * lastCandle.close;
                         } else if (tCount == 0) {
                           result.add(i);
                         }

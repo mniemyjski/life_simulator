@@ -5,10 +5,12 @@ import 'package:richeable/utilities/utilities.dart';
 
 import '../../../widgets/widgets.dart';
 import '../cubit/exchanges/exchanges_cubit.dart';
+import '../models/candle/candle.dart';
 import '../models/instrument/instrument.dart';
 
 class BuyBottomSheet extends StatefulWidget {
   final Instrument instrument;
+  final Candle lastCandle;
   final String buttonName;
   final double money;
 
@@ -16,6 +18,7 @@ class BuyBottomSheet extends StatefulWidget {
     required this.instrument,
     required this.buttonName,
     required this.money,
+    required this.lastCandle,
     Key? key,
   }) : super(key: key);
 
@@ -29,8 +32,7 @@ class _BuyBottomSheetState extends State<BuyBottomSheet> {
   @override
   Widget build(BuildContext context) {
     double maxMoney = 1000000;
-    double max =
-        (widget.money <= maxMoney ? widget.money : maxMoney) / widget.instrument.candles.last.close;
+    double max = (widget.money <= maxMoney ? widget.money : maxMoney) / widget.lastCandle.close;
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -54,7 +56,7 @@ class _BuyBottomSheetState extends State<BuyBottomSheet> {
               Column(
                 children: [
                   Text('${(value * 0.99).toStringAsFixed(4)} ${widget.instrument.name}'),
-                  Text('${(value * widget.instrument.candles.last.close).toMoney()}'),
+                  Text('${(value * widget.lastCandle.close).toMoney()}'),
                 ],
               )
             ],

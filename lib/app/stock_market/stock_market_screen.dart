@@ -10,6 +10,7 @@ import '../../widgets/widgets.dart';
 import '../date/widgets/next_day.dart';
 import '../game/widget/app_bar_stats.dart';
 import 'cubit/stock_market/stock_market_cubit.dart';
+import 'models/candle/candle.dart';
 import 'models/instrument/instrument.dart';
 
 class StockMarketScreen extends StatefulWidget {
@@ -59,7 +60,7 @@ class _StockMarketScreenState extends State<StockMarketScreen> {
           builder: (context, state) {
             return state.maybeWhen(
                 orElse: () => Container(),
-                loaded: (instruments) {
+                loaded: (instruments, candles) {
                   return Padding(
                     padding: const EdgeInsets.all(4.0),
                     child: Container(
@@ -99,25 +100,31 @@ class _StockMarketScreenState extends State<StockMarketScreen> {
                           ],
                           rows: instruments.where((e) => e.eTypeInstrument == eTypeInstrument).map(
                             (i) {
-                              double hours =
-                                  (i.candles.last.close / i.candles[i.candles.length - 2].close -
-                                          1) *
-                                      100;
-                              double days7 =
-                                  (i.candles.last.close / i.candles[i.candles.length - 8].close -
-                                          1) *
-                                      100;
-                              double days30 =
-                                  (i.candles.last.close / i.candles[i.candles.length - 31].close -
-                                          1) *
-                                      100;
+                              List<Candle> candlesForInstrument =
+                                  List.of(candles).where((c) => c.instrument == i.name).toList();
+
+                              double hours = (candlesForInstrument.last.close /
+                                          candlesForInstrument[candlesForInstrument.length - 2]
+                                              .close -
+                                      1) *
+                                  100;
+                              double days7 = (candlesForInstrument.last.close /
+                                          candlesForInstrument[candlesForInstrument.length - 8]
+                                              .close -
+                                      1) *
+                                  100;
+                              double days30 = (candlesForInstrument.last.close /
+                                          candlesForInstrument[candlesForInstrument.length - 31]
+                                              .close -
+                                      1) *
+                                  100;
 
                               return DataRow(
                                   onSelectChanged: (b) {
                                     context.router.push(InstrumentRoute(id: i.id));
                                   },
                                   cells: [
-                                    DataCell(Text(i.name)),
+                                    DataCell(Text(Enums.toText(i.name))),
                                     DataCell(
                                       Text('${hours.toStringAsFixed(2)}%',
                                           style: TextStyle(
@@ -134,7 +141,7 @@ class _StockMarketScreenState extends State<StockMarketScreen> {
                                               color: days30 < 0 ? Colors.red : Colors.green)),
                                     ),
                                     DataCell(
-                                      Text(i.candles.last.close.toMoney()),
+                                      Text(candlesForInstrument.last.close.toMoney()),
                                     ),
                                   ]);
                             },

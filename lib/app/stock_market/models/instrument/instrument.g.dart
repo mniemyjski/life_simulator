@@ -9,12 +9,9 @@ part of 'instrument.dart';
 _$_Instrument _$$_InstrumentFromJson(Map<String, dynamic> json) =>
     _$_Instrument(
       id: json['id'] as String,
-      name: json['name'] as String,
+      name: $enumDecode(_$ENameInstrumentEnumMap, json['name']),
       eTypeInstrument:
           $enumDecode(_$ETypeInstrumentEnumMap, json['eTypeInstrument']),
-      candles: (json['candles'] as List<dynamic>)
-          .map((e) => Candle.fromJson(e as Map<String, dynamic>))
-          .toList(),
       eTypeTrend: $enumDecode(_$ETypeTrendEnumMap, json['eTypeTrend']),
       datTrendEnd: DateTime.parse(json['datTrendEnd'] as String),
       potentialIncrease: json['potentialIncrease'] as int,
@@ -23,14 +20,14 @@ _$_Instrument _$$_InstrumentFromJson(Map<String, dynamic> json) =>
       min: (json['min'] as num).toDouble(),
       max: (json['max'] as num).toDouble(),
       valorization: (json['valorization'] as num).toDouble(),
+      lastValorization: DateTime.parse(json['lastValorization'] as String),
     );
 
 Map<String, dynamic> _$$_InstrumentToJson(_$_Instrument instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'name': instance.name,
+      'name': _$ENameInstrumentEnumMap[instance.name]!,
       'eTypeInstrument': _$ETypeInstrumentEnumMap[instance.eTypeInstrument]!,
-      'candles': instance.candles.map((e) => e.toJson()).toList(),
       'eTypeTrend': _$ETypeTrendEnumMap[instance.eTypeTrend]!,
       'datTrendEnd': instance.datTrendEnd.toIso8601String(),
       'potentialIncrease': instance.potentialIncrease,
@@ -39,7 +36,21 @@ Map<String, dynamic> _$$_InstrumentToJson(_$_Instrument instance) =>
       'min': instance.min,
       'max': instance.max,
       'valorization': instance.valorization,
+      'lastValorization': instance.lastValorization.toIso8601String(),
     };
+
+const _$ENameInstrumentEnumMap = {
+  ENameInstrument.btc: 'btc',
+  ENameInstrument.eth: 'eth',
+  ENameInstrument.bnb: 'bnb',
+  ENameInstrument.hero: 'hero',
+  ENameInstrument.dome: 'dome',
+  ENameInstrument.oil: 'oil',
+  ENameInstrument.gold: 'gold',
+  ENameInstrument.silver: 'silver',
+  ENameInstrument.tesla: 'tesla',
+  ENameInstrument.apple: 'apple',
+};
 
 const _$ETypeInstrumentEnumMap = {
   ETypeInstrument.crypto: 'crypto',

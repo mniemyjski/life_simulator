@@ -48,8 +48,10 @@ class InstrumentScreen extends StatelessWidget {
             builder: (context, state) {
               return state.maybeWhen(
                   orElse: () => Container(),
-                  loaded: (instruments) {
+                  loaded: (instruments, candles) {
                     Instrument instrument = instruments.where((e) => e.id == id).toList().first;
+                    List<Candle> candlesFroI =
+                        candles.where((e) => e.instrument == instrument.name).toList();
 
                     return Column(
                       children: [
@@ -58,7 +60,7 @@ class InstrumentScreen extends StatelessWidget {
                           child: SizedBox(
                             height: 300,
                             child: InteractiveChart(
-                              candles: _toCandleData(instrument.candles),
+                              candles: _toCandleData(candlesFroI),
                               style: ChartStyle(
                                 priceGridLineColor: Colors.white,
                                 priceLabelStyle: const TextStyle(color: Colors.white, fontSize: 8),
@@ -93,8 +95,8 @@ class InstrumentScreen extends StatelessWidget {
                         ),
                         Row(
                           children: [
-                            BuyButton(instrument: instrument),
-                            SellButton(instrument: instrument),
+                            BuyButton(instrument: instrument, lastCandle: candlesFroI.last),
+                            SellButton(instrument: instrument, lastCandle: candlesFroI.last),
                           ],
                         ),
                         Padding(
@@ -117,8 +119,8 @@ class InstrumentScreen extends StatelessWidget {
 
                                   for (var element in transactions) {
                                     amount += element.count;
-                                    value += element.count * instrument.candles.last.close;
-                                    cost += element.count * element.instrument.candles.last.close;
+                                    value += element.count * candlesFroI.last.close;
+                                    cost += element.count * candlesFroI.last.close;
                                   }
 
                                   double change = cost > 0 ? (value / cost - 1) * 100 : 0;

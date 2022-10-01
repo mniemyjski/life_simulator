@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'stock_market_cubit.dart';
+part of 'transactions_cubit.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -23,17 +23,15 @@ Map<String, dynamic> _$$LoadingToJson(_$Loading instance) => <String, dynamic>{
     };
 
 _$Loaded _$$LoadedFromJson(Map<String, dynamic> json) => _$Loaded(
-      (json['instruments'] as List<dynamic>)
-          .map((e) => Instrument.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      (json['candles'] as List<dynamic>)
-          .map((e) => Candle.fromJson(e as Map<String, dynamic>))
+      dateTime: DateTime.parse(json['dateTime'] as String),
+      transactions: (json['transactions'] as List<dynamic>)
+          .map((e) => Transaction.fromJson(e as Map<String, dynamic>))
           .toList(),
       $type: json['runtimeType'] as String?,
     );
 
 Map<String, dynamic> _$$LoadedToJson(_$Loaded instance) => <String, dynamic>{
-      'instruments': instance.instruments.map((e) => e.toJson()).toList(),
-      'candles': instance.candles.map((e) => e.toJson()).toList(),
+      'dateTime': instance.dateTime.toIso8601String(),
+      'transactions': instance.transactions.map((e) => e.toJson()).toList(),
       'runtimeType': instance.$type,
     };
