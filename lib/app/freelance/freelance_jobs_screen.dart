@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -15,7 +16,10 @@ class FreelanceJobsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      appBar: AppBar(title: Text(LocaleKeys.jobs.tr())),
+      appBar: AppBar(
+        title: Text(LocaleKeys.jobs.tr()),
+        automaticallyImplyLeading: false,
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -62,7 +66,11 @@ class FreelanceJobsScreen extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const SizedBox(height: 56),
+            FloatingActionButton(
+              heroTag: null,
+              onPressed: () => context.router.pop(),
+              child: const FaIcon(FontAwesomeIcons.arrowRotateLeft),
+            ),
             const SizedBox(height: 56),
             FloatingActionButton(
               heroTag: null,

@@ -26,6 +26,10 @@ class AudioCubit extends HydratedCubit<Audio> {
       ..setVolume(state.sounds);
   }
 
+  AudioPlayer stopSounds() {
+    return _soundPlayer..stop();
+  }
+
   AudioPlayer getMusic(String music) {
     return _musicPlayer
       ..setAsset(music)

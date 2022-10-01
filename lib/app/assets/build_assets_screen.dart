@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -23,6 +24,7 @@ class _BuildAssetsScreenState extends State<BuildAssetsScreen> {
     return CustomScaffold(
       appBar: AppBar(
         title: Text(LocaleKeys.buildAssets.tr()),
+        automaticallyImplyLeading: false,
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,21 +58,36 @@ class _BuildAssetsScreenState extends State<BuildAssetsScreen> {
           const SizedBox(height: 80),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        heroTag: null,
-        onPressed: () async {
-          showModalBottomSheet<String>(
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.vertical(top: Radius.circular(8.0))),
-            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-            context: context,
-            isScrollControlled: true,
-            builder: (BuildContext context) {
-              return const AssetBuilder();
-            },
-          );
-        },
-        child: const FaIcon(FontAwesomeIcons.plus),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            FloatingActionButton(
+              heroTag: null,
+              onPressed: () => context.router.pop(),
+              child: const FaIcon(FontAwesomeIcons.arrowRotateLeft),
+            ),
+            const SizedBox(width: 56),
+            FloatingActionButton(
+              heroTag: null,
+              onPressed: () async {
+                showModalBottomSheet<String>(
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(top: Radius.circular(8.0))),
+                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                  context: context,
+                  isScrollControlled: true,
+                  builder: (BuildContext context) {
+                    return const AssetBuilder();
+                  },
+                );
+              },
+              child: const FaIcon(FontAwesomeIcons.plus),
+            )
+          ],
+        ),
       ),
     );
   }

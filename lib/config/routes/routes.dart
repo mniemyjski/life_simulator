@@ -5,7 +5,6 @@ import 'package:richeable/app/business/businesses_screen.dart';
 import 'package:richeable/app/business/employees_screen.dart';
 import 'package:richeable/app/business/products_screen.dart';
 import 'package:richeable/app/business/upgrade_screen.dart';
-import 'package:richeable/app/test/test_screen.dart';
 
 import '../../app/assets/asset_screen.dart';
 import '../../app/assets/assets_screen.dart';
@@ -178,11 +177,6 @@ import '../../app/time_spend/time_spend_screen.dart';
     ),
     CustomRoute(
       page: ProductScreen,
-      transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
-      durationInMilliseconds: 300,
-    ),
-    CustomRoute(
-      page: TestScreen,
       transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
       durationInMilliseconds: 300,
     ),

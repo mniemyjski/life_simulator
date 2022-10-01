@@ -385,12 +385,6 @@ class _GameScreenState extends State<GameScreen> {
                     },
                     icon: const FaIcon(FontAwesomeIcons.xmark),
                   ),
-                  ButtonElement(
-                    onPressed: () {
-                      context.router.push(const TestRoute());
-                    },
-                    icon: const FaIcon(FontAwesomeIcons.shuffle),
-                  ),
                 ],
               ),
               const SizedBox(height: 80),

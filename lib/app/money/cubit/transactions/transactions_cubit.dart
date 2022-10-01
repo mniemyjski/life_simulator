@@ -40,26 +40,26 @@ class TransactionsCubit extends Cubit<TransactionsState> {
       });
     });
 
-    _dateSub = _dateCubit.stream.listen(
-      (dateState) {
-        dateState.whenOrNull(
-          loaded: (date) {
-            state.whenOrNull(loaded: (oldDate, oldTransactions) {
-              DateTime newDate = DateTime(date.year, date.month, 1);
-
-              if (newDate.millisecondsSinceEpoch > oldDate.millisecondsSinceEpoch) {
-                emit(
-                  TransactionsState.loaded(
-                    dateTime: newDate,
-                    transactions: [],
-                  ),
-                );
-              }
-            });
-          },
-        );
-      },
-    );
+    // _dateSub = _dateCubit.stream.listen(
+    //   (dateState) {
+    //     dateState.whenOrNull(
+    //       loaded: (date) {
+    //         state.whenOrNull(loaded: (oldDate, oldTransactions) {
+    //           DateTime newDate = DateTime(date.year, date.month, 1);
+    //
+    //           if (newDate.millisecondsSinceEpoch > oldDate.millisecondsSinceEpoch) {
+    //             emit(
+    //               TransactionsState.loaded(
+    //                 dateTime: newDate,
+    //                 transactions: [],
+    //               ),
+    //             );
+    //           }
+    //         });
+    //       },
+    //     );
+    //   },
+    // );
 
     _transactionRepository.watchLazy().listen((event) {
       state.whenOrNull(

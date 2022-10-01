@@ -42,7 +42,7 @@ class DateCubit extends HydratedCubit<DateState> {
     });
   }
 
-  nextDay() async {
+  Future nextDay() async {
     String uid = _loadingCubit.add();
     for (var i = 0; i < _daySettingCubit.state; i++) {
       await Future.delayed(const Duration(milliseconds: 200));
@@ -53,6 +53,8 @@ class DateCubit extends HydratedCubit<DateState> {
       });
     }
     _loadingCubit.remove(uid);
+
+    return;
   }
 
   @override

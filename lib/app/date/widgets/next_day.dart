@@ -51,9 +51,8 @@ class _NextDayButtonState extends State<NextDayButton> {
                 if (!(areYouSure ?? false)) return;
               }
 
-              if (mounted) {
-                context.read<DateCubit>().nextDay();
-              }
+              if (mounted) await context.read<DateCubit>().nextDay();
+              if (mounted) context.read<AudioCubit>().stopSounds();
             },
             child: Badge(
               badgeColor: Theme.of(context).primaryColor.withOpacity(1),

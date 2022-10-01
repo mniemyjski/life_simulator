@@ -45,10 +45,8 @@ class _StockMarketScreenState extends State<StockMarketScreen> {
           selectedColor: Colors.white,
           fillColor: Theme.of(context).scaffoldBackgroundColor,
           color: Colors.white70,
-          constraints: const BoxConstraints(
-            minHeight: 40.0,
-            minWidth: 80.0,
-          ),
+          constraints:
+              BoxConstraints(minWidth: (MediaQuery.of(context).size.width - 16) / 3, minHeight: 56),
           isSelected: _selectedFruits,
           children: [
             Text(Enums.toText(ETypeInstrument.crypto).tr()),
