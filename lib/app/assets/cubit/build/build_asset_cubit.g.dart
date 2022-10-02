@@ -26,10 +26,12 @@ _$Loaded _$$LoadedFromJson(Map<String, dynamic> json) => _$Loaded(
       (json['buildAssets'] as List<dynamic>)
           .map((e) => BuildAsset.fromJson(e as Map<String, dynamic>))
           .toList(),
+      DateTime.parse(json['currentDate'] as String),
       $type: json['runtimeType'] as String?,
     );
 
 Map<String, dynamic> _$$LoadedToJson(_$Loaded instance) => <String, dynamic>{
       'buildAssets': instance.buildAssets.map((e) => e.toJson()).toList(),
+      'currentDate': instance.currentDate.toIso8601String(),
       'runtimeType': instance.$type,
     };

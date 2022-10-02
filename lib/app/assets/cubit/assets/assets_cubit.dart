@@ -5,8 +5,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../utilities/utilities.dart';
-import '../../../date/cubit/date_cubit.dart';
 import '../../../money/cubit/income/income_cubit.dart';
 import '../../../money/cubit/money/money_cubit.dart';
 import '../../../money/models/income/income_model.dart';
@@ -29,9 +27,6 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
   final MoneyCubit _moneyCubit;
   final BuyAssetCubit _buyAssetCubit;
 
-  final DateCubit _dateCubit;
-  late StreamSubscription _dateSub;
-
   final TenantsCubit _tenantsCubit;
 
   final IncomeCubit _incomeCubit;
@@ -40,25 +35,22 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
     this._newGameCubit,
     this._moneyCubit,
     this._buyAssetCubit,
-    this._dateCubit,
     this._tenantsCubit,
     this._incomeCubit,
   ) : super(const AssetsState.initial()) {
     _newGame();
-    _counting();
   }
 
   @override
   Future<void> close() async {
     _newGameSub.cancel();
-    _dateSub.cancel();
     super.close();
   }
 
   _newGame() {
-    if (_newGameCubit.state) emit(const AssetsState.loaded([]));
+    if (_newGameCubit.state) emit(AssetsState.loaded([], DateTime(18, 1, 1)));
     _newGameSub = _newGameCubit.stream.listen((newGame) {
-      if (newGame) emit(const AssetsState.loaded([]));
+      if (newGame) emit(AssetsState.loaded([], DateTime(18, 1, 1)));
     });
   }
 
@@ -68,18 +60,16 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
 
     return state.maybeWhen(
         orElse: () => throw 'error',
-        loaded: (assets) {
-          _dateCubit.state.whenOrNull(loaded: (date) {
-            _moneyCubit.addTransaction(
-                dateTime: date,
-                value: -asset.value,
-                eTypeTransactionSource: ETypeTransactionSource.asset);
-          });
+        loaded: (assets, currentDate) {
+          _moneyCubit.addTransaction(
+              dateTime: currentDate,
+              value: -asset.value,
+              eTypeTransactionSource: ETypeTransactionSource.asset);
 
           _buyAssetCubit.remove(asset);
           _addIncome(asset);
 
-          emit(AssetsState.loaded(List.of(assets)..add(asset)));
+          emit(AssetsState.loaded(List.of(assets)..add(asset), currentDate));
         });
   }
 
@@ -87,10 +77,10 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
   String add(Asset asset) {
     return state.maybeWhen(
         orElse: () => throw 'error',
-        loaded: (assets) {
+        loaded: (assets, currentDate) {
           List<Asset> result = List.from(assets)..add(asset);
           _addIncome(asset);
-          emit(AssetsState.loaded(result));
+          emit(AssetsState.loaded(result, currentDate));
           return 'succeed';
         });
   }
@@ -99,20 +89,18 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
   String sell(Asset asset) {
     return state.maybeWhen(
         orElse: () => throw 'error',
-        loaded: (assets) {
+        loaded: (assets, currentDate) {
           List<Asset> result = List.of(assets)..removeWhere((element) => element.id == asset.id);
 
-          _dateCubit.state.whenOrNull(loaded: (date) {
-            _moneyCubit.addTransaction(
-                dateTime: date,
-                value: asset.value,
-                eTypeTransactionSource: ETypeTransactionSource.asset);
-          });
+          _moneyCubit.addTransaction(
+              dateTime: currentDate,
+              value: asset.value,
+              eTypeTransactionSource: ETypeTransactionSource.asset);
 
           _buyAssetCubit.add(asset.copyWith(friendlyAnimal: true, minRent: 800));
           _tenantsCubit.removeTenantInAsset(asset);
           _removeIncome(asset);
-          emit(AssetsState.loaded(result));
+          emit(AssetsState.loaded(result, currentDate));
           return 'succeed';
         });
   }
@@ -143,19 +131,19 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
 
     return state.maybeWhen(
         orElse: () => throw 'error',
-        loaded: (assets) {
+        loaded: (assets, currentDate) {
           List<Asset> result = List.from(assets)..remove(asset);
 
-          _dateCubit.state.whenOrNull(loaded: (date) {
-            _moneyCubit.addTransaction(
-                dateTime: date, value: cost, eTypeTransactionSource: ETypeTransactionSource.asset);
-          });
+          _moneyCubit.addTransaction(
+              dateTime: currentDate,
+              value: cost,
+              eTypeTransactionSource: ETypeTransactionSource.asset);
 
           Asset newAsset = asset.copyWith(
               renovation: asset.renovation + renovation,
               value: asset.value + (asset.baseValue * (renovation / 100)));
           result.add(newAsset);
-          emit(AssetsState.loaded(result));
+          emit(AssetsState.loaded(result, currentDate));
           return 'succeed';
         });
   }
@@ -170,18 +158,18 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
 
     return state.maybeWhen(
         orElse: () => throw 'error',
-        loaded: (assets) {
+        loaded: (assets, currentDate) {
           List<Asset> result = List.from(assets)..remove(asset);
 
-          _dateCubit.state.whenOrNull(loaded: (date) {
-            _moneyCubit.addTransaction(
-                dateTime: date, value: cost, eTypeTransactionSource: ETypeTransactionSource.asset);
-          });
+          _moneyCubit.addTransaction(
+              dateTime: currentDate,
+              value: cost,
+              eTypeTransactionSource: ETypeTransactionSource.asset);
 
           Asset newAsset =
               asset.copyWith(level: asset.level + level, value: asset.value + (-cost * 1.5));
           result.add(newAsset);
-          emit(AssetsState.loaded(result));
+          emit(AssetsState.loaded(result, currentDate));
         });
   }
 
@@ -192,11 +180,11 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
   }) {
     state.maybeWhen(
         orElse: () => throw 'error',
-        loaded: (assets) {
+        loaded: (assets, currentDate) {
           List<Asset> result = List.from(assets)..remove(asset);
           Asset newAsset = asset.copyWith(friendlyAnimal: friendlyAnimal);
           result.add(newAsset);
-          emit(AssetsState.loaded(result));
+          emit(AssetsState.loaded(result, currentDate));
         });
   }
 
@@ -207,11 +195,11 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
   }) {
     state.maybeWhen(
         orElse: () => throw 'error',
-        loaded: (assets) {
+        loaded: (assets, currentDate) {
           List<Asset> result = List.from(assets)..remove(asset);
           Asset newAsset = asset.copyWith(minRating: minRating);
           result.add(newAsset);
-          emit(AssetsState.loaded(result));
+          emit(AssetsState.loaded(result, currentDate));
         });
   }
 
@@ -222,31 +210,28 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
   }) {
     state.maybeWhen(
         orElse: () => throw 'error',
-        loaded: (assets) {
+        loaded: (assets, currentDate) {
           List<Asset> result = List.from(assets)..remove(asset);
           Asset newAsset = asset.copyWith(minRent: rent);
           result.add(newAsset);
-          emit(AssetsState.loaded(result));
+          emit(AssetsState.loaded(result, currentDate));
         });
   }
 
-  //counting asset
-  _counting() {
-    _dateSub = _dateCubit.stream.listen((event) {
-      state.maybeWhen(
-          orElse: () => throw 'error',
-          loaded: (assets) {
-            final List<Asset> result = [];
-            for (var element in assets) {
-              Asset newAsset = _decreaseRenovation(element);
-              _tenantsCubit.changeSatisfaction(newAsset);
-              _tenantsCubit.removeTenantBelowSatisfaction(newAsset);
-              _tenantsCubit.addTenant(newAsset);
-              result.add(newAsset);
-              emit(AssetsState.loaded(result));
-            }
-          });
-    });
+  counting(DateTime dateTime) {
+    state.maybeWhen(
+        orElse: () => throw 'error',
+        loaded: (assets, currentDate) {
+          final List<Asset> result = [];
+          for (var element in assets) {
+            Asset newAsset = _decreaseRenovation(element);
+            _tenantsCubit.changeSatisfaction(newAsset);
+            _tenantsCubit.removeTenantBelowSatisfaction(newAsset);
+            _tenantsCubit.addTenant(newAsset);
+            result.add(newAsset);
+            emit(AssetsState.loaded(result, dateTime));
+          }
+        });
   }
 
   //function to decrease renovation

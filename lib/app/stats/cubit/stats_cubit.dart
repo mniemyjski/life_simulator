@@ -4,7 +4,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../date/cubit/date_cubit.dart';
 import '../../event/cubit/event_cubit.dart';
 import '../../event/models/game_event/game_event_model.dart';
 import '../../medicines/cubit/medicines_cubit.dart';
@@ -26,24 +25,18 @@ class StatsCubit extends HydratedCubit<StatsState> {
 
   late StreamSubscription _newGameSub;
 
-  final DateCubit _dateCubit;
-  late StreamSubscription _dateSub;
-
   StatsCubit(
     this._newGameCubit,
     this._timeSpendCubit,
     this._eventCubit,
     this._medicinesCubit,
-    this._dateCubit,
   ) : super(const StatsState.initial()) {
     _newGame();
-    _dateSub = _dateCubit.stream.listen((d) => d.whenOrNull(loaded: (date) => _counting(date)));
   }
 
   @override
   Future<void> close() async {
     _newGameSub.cancel();
-    _dateSub.cancel();
     super.close();
   }
 
@@ -80,7 +73,7 @@ class StatsCubit extends HydratedCubit<StatsState> {
     });
   }
 
-  _counting(DateTime date) {
+  counting(DateTime date) {
     if (date == DateTime(18, 1, 1)) return;
 
     _timeSpendCubit.state.whenOrNull(loaded: (timeSpend) {
@@ -91,13 +84,13 @@ class StatsCubit extends HydratedCubit<StatsState> {
         int sleep = timeSpend.getBonus(ETypeBonus.sleep) + timeSpend.sleep;
         double sick = 0;
 
-        _eventCubit.state.whenOrNull(loaded: (events) {
+        _eventCubit.state.whenOrNull(loaded: (events, currentDate) {
           for (var element in events) {
             if (element.active && element.eTypeEffect == ETypeEffect.sick) sick -= element.value;
           }
         });
 
-        _medicinesCubit.state.whenOrNull(loaded: (medicines) {
+        _medicinesCubit.state.whenOrNull(loaded: (medicines, currentDate) {
           for (var element in medicines) {
             if (element.active) sick += element.health;
           }

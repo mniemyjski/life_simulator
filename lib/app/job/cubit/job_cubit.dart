@@ -5,9 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../date/cubit/date_cubit.dart';
 import '../../money/cubit/income/income_cubit.dart';
-import '../../money/cubit/money/money_cubit.dart';
 import '../../money/models/income/income_model.dart';
 import '../../money/models/transaction/transaction_model.dart';
 import '../../new_game/new_game_cubit.dart';
@@ -26,30 +24,22 @@ class JobCubit extends HydratedCubit<JobState> {
   final IncomeCubit _incomeCubit;
   final TimeSpendCubit _timeSpendCubit;
   final SkillsCubit _skillsCubit;
-  final MoneyCubit _moneyCubit;
 
   final NewGameCubit _newGameCubit;
   late StreamSubscription _newGameSub;
-
-  final DateCubit _dateCubit;
-  late StreamSubscription _dateSub;
 
   JobCubit(
     this._newGameCubit,
     this._incomeCubit,
     this._timeSpendCubit,
     this._skillsCubit,
-    this._moneyCubit,
-    this._dateCubit,
   ) : super(const JobState.initial()) {
     _newGame();
-    _counting();
   }
 
   @override
   Future<void> close() async {
     _newGameSub.cancel();
-    _dateSub.cancel();
     super.close();
   }
 
@@ -60,24 +50,22 @@ class JobCubit extends HydratedCubit<JobState> {
     });
   }
 
-  _counting() {
-    _dateSub = _dateCubit.stream.listen((event) {
-      state.whenOrNull(loaded: (job, experience) {
-        if (job != null && experience != null) {
-          _timeSpendCubit.state.whenOrNull(loaded: (timeSpend) {
-            _skillsCubit.state.whenOrNull(loaded: (userSkills) {
-              for (var r in experience.requirements) {
-                for (var u in userSkills) {
-                  if (r.name == u.name) {
-                    _skillsCubit.update(
-                        skill: u.name, exp: ((u.lvl + 1) * (timeSpend.work / 3)).toDouble());
-                  }
+  counting() {
+    state.whenOrNull(loaded: (job, experience) {
+      if (job != null && experience != null) {
+        _timeSpendCubit.state.whenOrNull(loaded: (timeSpend) {
+          _skillsCubit.state.whenOrNull(loaded: (userSkills) {
+            for (var r in experience.requirements) {
+              for (var u in userSkills) {
+                if (r.name == u.name) {
+                  _skillsCubit.update(
+                      skill: u.name, exp: ((u.lvl + 1) * (timeSpend.work / 3)).toDouble());
                 }
               }
-            });
+            }
           });
-        }
-      });
+        });
+      }
     });
   }
 
@@ -152,7 +140,7 @@ class JobCubit extends HydratedCubit<JobState> {
 
   leaveJob() {
     state.whenOrNull(loaded: (job, experience) {
-      _incomeCubit.state.whenOrNull(loaded: (incomes) {
+      _incomeCubit.state.whenOrNull(loaded: (incomes, currentDate) {
         for (var element in incomes) {
           //Todo if you left job you need get money
           // if (element.id == job!.id && element.timeLeft <= 20) {

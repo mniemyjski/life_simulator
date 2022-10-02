@@ -23,7 +23,7 @@ class MedicinesScreen extends StatelessWidget {
             builder: (context, state) {
               return state.maybeWhen(
                   orElse: () => Container(),
-                  loaded: (medicines) {
+                  loaded: (medicines, currentDate) {
                     return ListView.builder(
                         itemCount: medicines.length,
                         itemBuilder: (context, index) {

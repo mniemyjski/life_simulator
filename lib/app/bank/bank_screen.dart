@@ -296,7 +296,7 @@ class BankScreen extends StatelessWidget {
             builder: (context, state) {
               return state.maybeWhen(
                   orElse: () => Container(),
-                  loaded: (loans) {
+                  loaded: (loans, currentDate) {
                     if (loans.isEmpty) {
                       return Center(
                         child: Text(

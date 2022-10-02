@@ -35,7 +35,7 @@ class _BuildAssetsScreenState extends State<BuildAssetsScreen> {
               builder: (context, state) {
                 return state.maybeWhen(
                     orElse: () => Container(),
-                    loaded: (buildAssets) {
+                    loaded: (buildAssets, currentDate) {
                       if (buildAssets.isEmpty) {
                         return Center(
                           child: Text(

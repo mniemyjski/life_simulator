@@ -19,7 +19,7 @@ class EventsList extends StatelessWidget {
           builder: (context, state) {
             return state.maybeWhen(
                 orElse: () => Container(),
-                loaded: (events) {
+                loaded: (events, currentDate) {
                   return ListView.builder(
                       itemCount: events.length + 1,
                       itemBuilder: (context, index) {

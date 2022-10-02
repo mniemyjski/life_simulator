@@ -3,10 +3,8 @@ import 'dart:async';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:jiffy/jiffy.dart';
 import 'package:richeable/utilities/utilities.dart';
 
-import '../../../date/cubit/date_cubit.dart';
 import '../../../new_game/new_game_cubit.dart';
 import '../../models/income/income_model.dart';
 import '../money/money_cubit.dart';
@@ -20,119 +18,105 @@ class IncomeCubit extends HydratedCubit<IncomeState> {
   final NewGameCubit _newGameCubit;
   late StreamSubscription _newGameSub;
 
-  final DateCubit _dateCubit;
-  late StreamSubscription _dateSub;
-
   final MoneyCubit _moneyCubit;
 
   IncomeCubit(
     this._moneyCubit,
     this._newGameCubit,
-    this._dateCubit,
   ) : super(const IncomeState.initial()) {
     _newGame();
-    _counting();
   }
 
   @override
   Future<void> close() async {
     _newGameSub.cancel();
-    _dateSub.cancel();
     super.close();
   }
 
   _newGame() {
-    if (_newGameCubit.state) emit(const IncomeState.loaded([]));
+    if (_newGameCubit.state) emit(IncomeState.loaded([], DateTime(18, 1, 1)));
     _newGameSub = _newGameCubit.stream.listen((newGame) {
-      if (newGame) emit(const IncomeState.loaded([]));
+      if (newGame) emit(IncomeState.loaded([], DateTime(18, 1, 1)));
     });
   }
 
   add(Income income) {
-    _dateCubit.state.whenOrNull(loaded: (date) {
-      state.whenOrNull(loaded: (incomes) {
-        DateTime nextDate;
-        switch (income.eTypeFrequency) {
-          case ETypeFrequency.annually:
-            nextDate = Jiffy(date).add(years: 1).dateTime.onlyDate();
-            break;
-          case ETypeFrequency.monthly:
-            nextDate = Jiffy(date).add(months: 1).dateTime.onlyDate();
-            break;
-          case ETypeFrequency.weekly:
-            nextDate = Jiffy(date).add(weeks: 1).dateTime.onlyDate();
-            break;
-          case ETypeFrequency.daily:
-            nextDate = Jiffy(date).add(days: 1).dateTime.onlyDate();
-            break;
-        }
-        List<Income> refresh = List.from(incomes)..add(income.copyWith(next: nextDate));
-        emit(IncomeState.loaded(refresh));
-      });
+    state.whenOrNull(loaded: (incomes, currentDate) {
+      DateTime nextDate;
+      switch (income.eTypeFrequency) {
+        case ETypeFrequency.annually:
+          nextDate = currentDate.onlyDate();
+          break;
+        case ETypeFrequency.monthly:
+          nextDate = currentDate.onlyDate();
+          break;
+        case ETypeFrequency.weekly:
+          nextDate = currentDate.onlyDate();
+          break;
+        case ETypeFrequency.daily:
+          nextDate = currentDate.onlyDate();
+          break;
+      }
+      List<Income> refresh = List.from(incomes)..add(income.copyWith(next: nextDate));
+      emit(IncomeState.loaded(refresh, currentDate));
     });
   }
 
   update({required String id, required double value}) {
-    state.whenOrNull(loaded: (incomes) {
+    state.whenOrNull(loaded: (incomes, currentDate) {
       Income? income = incomes.firstWhere((element) => element.id == id);
       List<Income> refresh = List.from(incomes)..removeWhere((element) => element.id == id);
 
       refresh.add(income.copyWith(value: value));
-      emit(IncomeState.loaded(refresh));
+      emit(IncomeState.loaded(refresh, currentDate));
     });
   }
 
   remove(String id) {
-    state.whenOrNull(loaded: (incomes) {
+    state.whenOrNull(loaded: (incomes, currentDate) {
       List<Income> refresh = List.from(incomes)..removeWhere((element) => element.id == id);
-      emit(IncomeState.loaded(refresh));
+      emit(IncomeState.loaded(refresh, currentDate));
     });
   }
 
-  _counting() {
-    _dateSub = _dateCubit.stream.listen((dateState) {
-      dateState.maybeWhen(
-          orElse: () => throw "Date doesn't loaded!!!",
-          loaded: (date) {
-            state.maybeWhen(
-                orElse: () => throw "Incomes doesn't loaded!!!",
-                loaded: (incomes) {
-                  List<Income> result = [];
+  counting(DateTime dateTime) {
+    state.maybeWhen(
+        orElse: () => throw "Incomes doesn't loaded!!!",
+        loaded: (incomes, currentDate) {
+          List<Income> result = [];
 
-                  for (var element in incomes) {
-                    if (element.next == date) {
-                      DateTime nextDate;
+          for (var element in incomes) {
+            if (element.next == dateTime) {
+              DateTime nextDate;
 
-                      switch (element.eTypeFrequency) {
-                        case ETypeFrequency.annually:
-                          nextDate = date.addDate(years: 1);
-                          break;
-                        case ETypeFrequency.monthly:
-                          nextDate = date.addDate(months: 1);
-                          break;
-                        case ETypeFrequency.weekly:
-                          nextDate = date.addDate(weeks: 1);
-                          break;
-                        case ETypeFrequency.daily:
-                          nextDate = date.addDate(days: 1);
-                          break;
-                      }
+              switch (element.eTypeFrequency) {
+                case ETypeFrequency.annually:
+                  nextDate = dateTime.addDate(years: 1);
+                  break;
+                case ETypeFrequency.monthly:
+                  nextDate = dateTime.addDate(months: 1);
+                  break;
+                case ETypeFrequency.weekly:
+                  nextDate = dateTime.addDate(weeks: 1);
+                  break;
+                case ETypeFrequency.daily:
+                  nextDate = dateTime.addDate(days: 1);
+                  break;
+              }
 
-                      result.add(element.copyWith(next: nextDate));
-                      _moneyCubit.addTransaction(
-                        dateTime: date,
-                        value: element.value,
-                        eTypeTransactionSource: element.source,
-                      );
-                    } else {
-                      result.add(element);
-                    }
-                  }
+              result.add(element.copyWith(next: nextDate));
+              _moneyCubit.addTransaction(
+                dateTime: dateTime,
+                value: element.value,
+                eTypeTransactionSource: element.source,
+              );
+            } else {
+              result.add(element);
+            }
+          }
 
-                  emit(IncomeState.loaded(result));
-                });
-          });
-    });
+          emit(IncomeState.loaded(result, dateTime));
+        });
   }
 
   @override

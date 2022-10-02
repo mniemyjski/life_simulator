@@ -35,21 +35,22 @@ mixin _$LearningState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Learning> learnings) loaded,
+    required TResult Function(List<Learning> learnings, DateTime currentDate)
+        loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Learning> learnings)? loaded,
+    TResult Function(List<Learning> learnings, DateTime currentDate)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Learning> learnings)? loaded,
+    TResult Function(List<Learning> learnings, DateTime currentDate)? loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -142,7 +143,8 @@ class _$Initial implements Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Learning> learnings) loaded,
+    required TResult Function(List<Learning> learnings, DateTime currentDate)
+        loaded,
   }) {
     return initial();
   }
@@ -152,7 +154,7 @@ class _$Initial implements Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Learning> learnings)? loaded,
+    TResult Function(List<Learning> learnings, DateTime currentDate)? loaded,
   }) {
     return initial?.call();
   }
@@ -162,7 +164,7 @@ class _$Initial implements Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Learning> learnings)? loaded,
+    TResult Function(List<Learning> learnings, DateTime currentDate)? loaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -266,7 +268,8 @@ class _$Loading implements Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Learning> learnings) loaded,
+    required TResult Function(List<Learning> learnings, DateTime currentDate)
+        loaded,
   }) {
     return loading();
   }
@@ -276,7 +279,7 @@ class _$Loading implements Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Learning> learnings)? loaded,
+    TResult Function(List<Learning> learnings, DateTime currentDate)? loaded,
   }) {
     return loading?.call();
   }
@@ -286,7 +289,7 @@ class _$Loading implements Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Learning> learnings)? loaded,
+    TResult Function(List<Learning> learnings, DateTime currentDate)? loaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -347,7 +350,7 @@ abstract class Loading implements LearningState {
 abstract class _$$LoadedCopyWith<$Res> {
   factory _$$LoadedCopyWith(_$Loaded value, $Res Function(_$Loaded) then) =
       __$$LoadedCopyWithImpl<$Res>;
-  $Res call({List<Learning> learnings});
+  $Res call({List<Learning> learnings, DateTime currentDate});
 }
 
 /// @nodoc
@@ -362,12 +365,17 @@ class __$$LoadedCopyWithImpl<$Res> extends _$LearningStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? learnings = freezed,
+    Object? currentDate = freezed,
   }) {
     return _then(_$Loaded(
       learnings == freezed
           ? _value.learnings
           : learnings // ignore: cast_nullable_to_non_nullable
               as List<Learning>,
+      currentDate == freezed
+          ? _value.currentDate
+          : currentDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -375,20 +383,23 @@ class __$$LoadedCopyWithImpl<$Res> extends _$LearningStateCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$Loaded implements Loaded {
-  _$Loaded(this.learnings, {final String? $type}) : $type = $type ?? 'loaded';
+  _$Loaded(this.learnings, this.currentDate, {final String? $type})
+      : $type = $type ?? 'loaded';
 
   factory _$Loaded.fromJson(Map<String, dynamic> json) =>
       _$$LoadedFromJson(json);
 
   @override
   final List<Learning> learnings;
+  @override
+  final DateTime currentDate;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'LearningState.loaded(learnings: $learnings)';
+    return 'LearningState.loaded(learnings: $learnings, currentDate: $currentDate)';
   }
 
   @override
@@ -396,13 +407,17 @@ class _$Loaded implements Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$Loaded &&
-            const DeepCollectionEquality().equals(other.learnings, learnings));
+            const DeepCollectionEquality().equals(other.learnings, learnings) &&
+            const DeepCollectionEquality()
+                .equals(other.currentDate, currentDate));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(learnings));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(learnings),
+      const DeepCollectionEquality().hash(currentDate));
 
   @JsonKey(ignore: true)
   @override
@@ -414,9 +429,10 @@ class _$Loaded implements Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Learning> learnings) loaded,
+    required TResult Function(List<Learning> learnings, DateTime currentDate)
+        loaded,
   }) {
-    return loaded(learnings);
+    return loaded(learnings, currentDate);
   }
 
   @override
@@ -424,9 +440,9 @@ class _$Loaded implements Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Learning> learnings)? loaded,
+    TResult Function(List<Learning> learnings, DateTime currentDate)? loaded,
   }) {
-    return loaded?.call(learnings);
+    return loaded?.call(learnings, currentDate);
   }
 
   @override
@@ -434,11 +450,11 @@ class _$Loaded implements Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Learning> learnings)? loaded,
+    TResult Function(List<Learning> learnings, DateTime currentDate)? loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(learnings);
+      return loaded(learnings, currentDate);
     }
     return orElse();
   }
@@ -486,11 +502,13 @@ class _$Loaded implements Loaded {
 }
 
 abstract class Loaded implements LearningState {
-  factory Loaded(final List<Learning> learnings) = _$Loaded;
+  factory Loaded(final List<Learning> learnings, final DateTime currentDate) =
+      _$Loaded;
 
   factory Loaded.fromJson(Map<String, dynamic> json) = _$Loaded.fromJson;
 
   List<Learning> get learnings;
+  DateTime get currentDate;
   @JsonKey(ignore: true)
   _$$LoadedCopyWith<_$Loaded> get copyWith =>
       throw _privateConstructorUsedError;

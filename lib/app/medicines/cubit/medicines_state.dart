@@ -4,7 +4,7 @@ part of 'medicines_cubit.dart';
 class MedicinesState with _$MedicinesState {
   const factory MedicinesState.initial() = Initial;
   const factory MedicinesState.loading() = Loading;
-  factory MedicinesState.loaded(List<Medicine> medicines) = Loaded;
+  factory MedicinesState.loaded(List<Medicine> medicines, DateTime currentDate) = Loaded;
 
   factory MedicinesState.fromJson(Map<String, dynamic> json) => _$MedicinesStateFromJson(json);
 }

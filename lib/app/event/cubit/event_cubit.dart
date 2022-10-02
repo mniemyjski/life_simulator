@@ -6,7 +6,6 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../database/cubit/database_cubit.dart';
-import '../../date/cubit/date_cubit.dart';
 import '../../money/cubit/money/money_cubit.dart';
 import '../../money/models/transaction/transaction_model.dart';
 import '../../new_game/new_game_cubit.dart';
@@ -22,122 +21,106 @@ class EventCubit extends HydratedCubit<EventState> {
   final DatabaseCubit _databaseCubit;
   late StreamSubscription _newGameSub;
 
-  final DateCubit _dateCubit;
-  late StreamSubscription _dateSub;
-
   final MoneyCubit _moneyCubit;
 
   EventCubit(
     this._newGameCubit,
     this._databaseCubit,
-    this._dateCubit,
     this._moneyCubit,
   ) : super(const EventState.initial()) {
     _newGame();
-    _counting();
-    _draw();
   }
 
   @override
   Future<void> close() async {
     _newGameSub.cancel();
-    _dateSub.cancel();
     super.close();
   }
 
   _newGame() {
-    if (_newGameCubit.state) emit(EventState.loaded(events: []));
+    if (_newGameCubit.state) emit(EventState.loaded(events: [], currentDate: DateTime(18, 1, 1)));
     _newGameSub = _newGameCubit.stream.listen((newGame) {
-      if (newGame) emit(EventState.loaded(events: []));
+      if (newGame) emit(EventState.loaded(events: [], currentDate: DateTime(18, 1, 1)));
     });
   }
 
-  _draw() {
-    _dateSub = _dateCubit.stream.listen((dateState) {
-      dateState.whenOrNull(loaded: (date) {
-        if (date.millisecondsSinceEpoch < DateTime(18, 1, 2).millisecondsSinceEpoch) return;
-        var rng = Random();
-        state.whenOrNull(loaded: (events) {
-          for (var elementFromDataBase in _databaseCubit.state.eventsDB) {
-            int random = rng.nextInt(elementFromDataBase.frequency);
+  _draw(DateTime dateTime) {
+    var rng = Random();
+    state.whenOrNull(loaded: (events, currentDate) {
+      for (var elementFromDataBase in _databaseCubit.state.eventsDB) {
+        int random = rng.nextInt(elementFromDataBase.frequency);
 
-            if (random == elementFromDataBase.frequency ~/ 2) {
-              bool already = false;
-              for (var e in events) {
-                if (e.active && e.eTypeEffect == elementFromDataBase.eTypeEffect) {
-                  already = true;
-                  continue;
-                }
-              }
-
-              if (!already) add(elementFromDataBase.copyWith(datCre: date));
+        if (random == elementFromDataBase.frequency ~/ 2) {
+          bool already = false;
+          for (var e in events) {
+            if (e.active && e.eTypeEffect == elementFromDataBase.eTypeEffect) {
+              already = true;
+              continue;
             }
           }
-        });
-      });
+
+          if (!already) add(elementFromDataBase.copyWith(datCre: dateTime));
+        }
+      }
     });
   }
 
-  _counting() {
-    _dateSub = _dateCubit.stream.listen((dateState) {
-      dateState.whenOrNull(loaded: (date) {
-        if (date == DateTime(18, 1, 1)) return;
-        state.whenOrNull(loaded: (events) {
-          List<GameEvent> result = [];
+  counting(DateTime dateTime) {
+    if (dateTime == DateTime(18, 1, 1)) return;
+    state.whenOrNull(loaded: (events, currentDate) {
+      List<GameEvent> result = [];
 
-          for (var element in events) {
-            GameEvent gameEvent = element.copyWith(
-                leftDuration: element.leftDuration > 0 ? element.leftDuration - 1 : 0);
-            if (gameEvent.leftDuration == 0) gameEvent = gameEvent.copyWith(active: false);
-            result.add(gameEvent);
-          }
+      for (var element in events) {
+        GameEvent gameEvent =
+            element.copyWith(leftDuration: element.leftDuration > 0 ? element.leftDuration - 1 : 0);
+        if (gameEvent.leftDuration == 0) gameEvent = gameEvent.copyWith(active: false);
+        result.add(gameEvent);
+      }
 
-          emit(EventState.loaded(events: result));
-        });
-      });
+      emit(EventState.loaded(events: result, currentDate: dateTime));
     });
+
+    _draw(dateTime);
   }
 
   add(GameEvent event) {
-    _dateCubit.state.whenOrNull(loaded: (date) {
-      state.whenOrNull(loaded: (events) {
-        if (event.eTypeEffect == ETypeEffect.addMoney) {
-          _moneyCubit.addTransaction(
-              dateTime: date,
-              value: event.value,
-              eTypeTransactionSource: ETypeTransactionSource.addMoney);
-        }
+    state.whenOrNull(loaded: (events, currentDate) {
+      if (event.eTypeEffect == ETypeEffect.addMoney) {
+        _moneyCubit.addTransaction(
+            dateTime: currentDate,
+            value: event.value,
+            eTypeTransactionSource: ETypeTransactionSource.addMoney);
+      }
 
-        if (event.eTypeEffect == ETypeEffect.lostMoney) {
-          _moneyCubit.addTransaction(
-              dateTime: date,
-              value: event.value,
-              eTypeTransactionSource: ETypeTransactionSource.lostMoney);
-        }
+      if (event.eTypeEffect == ETypeEffect.lostMoney) {
+        _moneyCubit.addTransaction(
+            dateTime: currentDate,
+            value: event.value,
+            eTypeTransactionSource: ETypeTransactionSource.lostMoney);
+      }
 
-        if (event.eTypeEffect == ETypeEffect.taxes) {
-          _moneyCubit.addTransaction(
-              dateTime: date,
-              value: _moneyCubit.getBalance() * event.value,
-              eTypeTransactionSource: ETypeTransactionSource.unpaidTaxes);
-        }
+      if (event.eTypeEffect == ETypeEffect.taxes) {
+        _moneyCubit.addTransaction(
+            dateTime: currentDate,
+            value: _moneyCubit.getBalance() * event.value,
+            eTypeTransactionSource: ETypeTransactionSource.unpaidTaxes);
+      }
 
-        List<GameEvent> result = List.from(events)
-          ..add(event)
-          ..sort((a, b) => b.datCre!.compareTo(a.datCre!));
+      List<GameEvent> result = List.from(events)
+        ..add(event)
+        ..sort((a, b) => b.datCre!.compareTo(a.datCre!));
 
-        emit(EventState.loaded(events: result));
-      });
+      emit(EventState.loaded(events: result, currentDate: currentDate));
     });
   }
 
   change(GameEvent event) {
-    state.whenOrNull(loaded: (events) {
+    state.whenOrNull(loaded: (events, currentDate) {
       List<GameEvent> result = List.from(events)
         ..removeWhere((element) => element.id == id)
         ..add(event);
 
-      emit(EventState.loaded(events: result));
+      emit(EventState.loaded(events: result, currentDate: currentDate));
     });
   }
 

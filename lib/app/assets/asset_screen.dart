@@ -252,7 +252,7 @@ class AssetScreen extends StatelessWidget {
         builder: (context, state) {
           return state.maybeWhen(
               orElse: () => Container(),
-              loaded: (assets) {
+              loaded: (assets, currentDate) {
                 Asset? asset = assets.firstWhereOrNull((element) => element.id == id);
 
                 if (asset != null) return buildBody(asset);

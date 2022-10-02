@@ -149,7 +149,7 @@ class InstrumentScreen extends StatelessWidget {
                                                     ),
                                                     TextSpan(
                                                       text:
-                                                          '${amount.toStringAsFixed(4)} ${instrument.name}',
+                                                          '${amount.toStringAsFixed(4)} ${Enums.toText(instrument.name)}',
                                                     ),
                                                   ],
                                                 ),

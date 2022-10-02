@@ -209,7 +209,7 @@ class _GameScreenState extends State<GameScreen> {
         ),
         BlocListener<EventCubit, EventState>(
           listener: (context, state) {
-            state.whenOrNull(loaded: (event) {
+            state.whenOrNull(loaded: (event, currentDate) {
               // if ((last ?? '') != event.first.datCre && context.router.current is GameScreen) {
               //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               //     behavior: SnackBarBehavior.floating,
@@ -305,7 +305,7 @@ class _GameScreenState extends State<GameScreen> {
                       builder: (context, state) {
                         return state.maybeWhen(
                             orElse: () => Container(),
-                            loaded: (building) {
+                            loaded: (building, currentDate) {
                               if (building.isEmpty) return const FaIcon(FontAwesomeIcons.city);
 
                               return Badge(
@@ -346,7 +346,7 @@ class _GameScreenState extends State<GameScreen> {
                       builder: (context, state) {
                         return state.maybeWhen(
                             orElse: () => const FaIcon(FontAwesomeIcons.graduationCap),
-                            loaded: (learnings) {
+                            loaded: (learnings, currentDate) {
                               if (learnings.isEmpty) {
                                 return const FaIcon(FontAwesomeIcons.graduationCap);
                               }

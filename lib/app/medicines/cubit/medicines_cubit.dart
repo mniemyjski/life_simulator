@@ -5,7 +5,6 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../database/cubit/database_cubit.dart';
-import '../../date/cubit/date_cubit.dart';
 import '../../money/cubit/money/money_cubit.dart';
 import '../../money/models/transaction/transaction_model.dart';
 import '../../new_game/new_game_cubit.dart';
@@ -23,57 +22,51 @@ class MedicinesCubit extends HydratedCubit<MedicinesState> {
   final DatabaseCubit _databaseCubit;
   late StreamSubscription _newGameSub;
 
-  final DateCubit _dateCubit;
-  late StreamSubscription _dateSub;
-
   MedicinesCubit(
     this._moneyCubit,
     this._newGameCubit,
     this._databaseCubit,
-    this._dateCubit,
   ) : super(const MedicinesState.initial()) {
     _newGame();
-    _counting();
   }
 
   @override
   Future<void> close() async {
     _newGameSub.cancel();
-    _dateSub.cancel();
     super.close();
   }
 
   _newGame() {
-    if (_newGameCubit.state) emit(MedicinesState.loaded(_databaseCubit.state.medicinesDB));
+    if (_newGameCubit.state)
+      emit(MedicinesState.loaded(_databaseCubit.state.medicinesDB, DateTime(18, 1, 1)));
     _newGameSub = _newGameCubit.stream.listen((newGame) {
-      if (newGame) emit(MedicinesState.loaded(_databaseCubit.state.medicinesDB));
+      if (newGame)
+        emit(MedicinesState.loaded(_databaseCubit.state.medicinesDB, DateTime(18, 1, 1)));
     });
   }
 
-  _counting() {
-    _dateSub = _dateCubit.stream.listen((event) {
-      state.whenOrNull(loaded: (medicines) {
-        List<Medicine> result = [];
+  counting(DateTime dateTime) {
+    state.whenOrNull(loaded: (medicines, currentDate) {
+      List<Medicine> result = [];
 
-        for (var element in medicines) {
-          if (element.active) {
-            Medicine medicine = element.copyWith(leftDuration: element.leftDuration - 1);
-            if (medicine.leftDuration == 0) {
-              medicine = element.copyWith(leftDuration: element.duration, active: false);
-            }
-            result.add(medicine);
-          } else {
-            result.add(element);
+      for (var element in medicines) {
+        if (element.active) {
+          Medicine medicine = element.copyWith(leftDuration: element.leftDuration - 1);
+          if (medicine.leftDuration == 0) {
+            medicine = element.copyWith(leftDuration: element.duration, active: false);
           }
+          result.add(medicine);
+        } else {
+          result.add(element);
         }
+      }
 
-        emit(MedicinesState.loaded(result));
-      });
+      emit(MedicinesState.loaded(result, dateTime));
     });
   }
 
   String? buy(Medicine medicine) {
-    state.whenOrNull(loaded: (medicines) {
+    state.whenOrNull(loaded: (medicines, currentDate) {
       if (_moneyCubit.getBalance() < medicine.cost) return "youDontHaveEnoughMoney";
 
       List<Medicine> result = List.from(medicines)
@@ -82,17 +75,15 @@ class MedicinesCubit extends HydratedCubit<MedicinesState> {
         if (element.id == medicine.id) {
           result.add(element.copyWith(active: true));
 
-          _dateCubit.state.whenOrNull(loaded: (date) {
-            _moneyCubit.addTransaction(
-                dateTime: date,
-                value: element.cost,
-                eTypeTransactionSource: ETypeTransactionSource.medicine);
-          });
+          _moneyCubit.addTransaction(
+              dateTime: currentDate,
+              value: element.cost,
+              eTypeTransactionSource: ETypeTransactionSource.medicine);
         }
       }
 
       result = result..sort(((a, b) => a.id.compareTo(b.id)));
-      emit(MedicinesState.loaded(result));
+      emit(MedicinesState.loaded(result, currentDate));
     });
     return null;
   }

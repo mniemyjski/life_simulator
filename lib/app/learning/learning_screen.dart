@@ -44,7 +44,7 @@ class LearningScreen extends StatelessWidget {
                 builder: (context, state) {
                   return state.maybeWhen(
                       orElse: () => Container(),
-                      loaded: (learnings) {
+                      loaded: (learnings, currentDate) {
                         List<Learning> list = _filtered(learnings);
 
                         if (list.isEmpty) {

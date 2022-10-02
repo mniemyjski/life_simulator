@@ -25,7 +25,7 @@ class IncomeScreen extends StatelessWidget {
           children: [
             context.watch<IncomeCubit>().state.maybeWhen(
                 orElse: () => Container(),
-                loaded: (incomes) {
+                loaded: (incomes, currentDate) {
                   if (incomes.isEmpty) {
                     return const Expanded(
                       child: Center(child: Text("You don't have any income yet!")),

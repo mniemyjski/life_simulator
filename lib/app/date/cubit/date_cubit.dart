@@ -5,12 +5,22 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:richeable/utilities/utilities.dart';
 
+import '../../assets/cubit/assets/assets_cubit.dart';
+import '../../assets/cubit/build/build_asset_cubit.dart';
+import '../../bank/cubit/deposit/deposit_cubit.dart';
+import '../../bank/cubit/loan/loan_cubit.dart';
+import '../../event/cubit/event_cubit.dart';
 import '../../freelance/cubit/done/freelance_done_cubit.dart';
 import '../../freelance/cubit/fame/fame_cubit.dart';
 import '../../freelance/cubit/job/freelance_job_cubit.dart';
+import '../../job/cubit/job_cubit.dart';
+import '../../learning/cubit/learning_cubit.dart';
 import '../../loading/cubit/loading_cubit.dart';
+import '../../medicines/cubit/medicines_cubit.dart';
+import '../../money/cubit/income/income_cubit.dart';
 import '../../new_game/new_game_cubit.dart';
 import '../../settings/cubit/day_setting_cubit.dart';
+import '../../stats/cubit/stats_cubit.dart';
 import '../../stock_market/cubit/stock_market/stock_market_cubit.dart';
 import '../../time_spend/cubit/time_spend_cubit.dart';
 
@@ -31,6 +41,16 @@ class DateCubit extends HydratedCubit<DateState> {
   final FreelanceDoneCubit _freelanceDoneCubit;
   final FameCubit _fameCubit;
   final TimeSpendCubit _timeSpendCubit;
+  final LearningCubit _learningCubit;
+  final EventCubit _eventCubit;
+  final StatsCubit _statsCubit;
+  final MedicinesCubit _medicinesCubit;
+  final IncomeCubit _incomeCubit;
+  final JobCubit _jobCubit;
+  final AssetsCubit _assetsCubit;
+  final BuildAssetCubit _buildAssetsCubit;
+  final DepositCubit _depositCubit;
+  final LoanCubit _loanCubit;
 
   DateCubit(
     this._newGameCubit,
@@ -41,6 +61,16 @@ class DateCubit extends HydratedCubit<DateState> {
     this._fameCubit,
     this._freelanceJobCubit,
     this._timeSpendCubit,
+    this._learningCubit,
+    this._eventCubit,
+    this._statsCubit,
+    this._medicinesCubit,
+    this._incomeCubit,
+    this._jobCubit,
+    this._assetsCubit,
+    this._buildAssetsCubit,
+    this._depositCubit,
+    this._loanCubit,
   ) : super(const DateState.initial()) {
     _newGame();
   }
@@ -68,6 +98,16 @@ class DateCubit extends HydratedCubit<DateState> {
         await _freelanceJobCubit.counting(dateTime);
         await _freelanceDoneCubit.counting(dateTime);
         await _fameCubit.counting(dateTime);
+        await _learningCubit.counting(dateTime);
+        await _eventCubit.counting(dateTime);
+        await _statsCubit.counting(dateTime);
+        await _medicinesCubit.counting(dateTime);
+        await _incomeCubit.counting(dateTime);
+        await _jobCubit.counting();
+        await _assetsCubit.counting(dateTime);
+        await _buildAssetsCubit.counting(dateTime);
+        await _depositCubit.counting(dateTime);
+        await _loanCubit.counting(dateTime);
         await _timeSpendCubit.counting();
 
         emit(DateState.loaded(dateTime));

@@ -26,7 +26,7 @@ class AssetsScreen extends StatelessWidget {
               builder: (context, state) {
                 return state.maybeWhen(
                     orElse: () => Container(),
-                    loaded: (assets) {
+                    loaded: (assets, currentDate) {
                       if (assets.isEmpty) {
                         return Center(
                           child: Text(LocaleKeys.youDontHaveAnyAssets.tr(),

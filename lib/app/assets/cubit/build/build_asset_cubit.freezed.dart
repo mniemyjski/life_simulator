@@ -35,21 +35,25 @@ mixin _$BuildAssetState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<BuildAsset> buildAssets) loaded,
+    required TResult Function(
+            List<BuildAsset> buildAssets, DateTime currentDate)
+        loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<BuildAsset> buildAssets)? loaded,
+    TResult Function(List<BuildAsset> buildAssets, DateTime currentDate)?
+        loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<BuildAsset> buildAssets)? loaded,
+    TResult Function(List<BuildAsset> buildAssets, DateTime currentDate)?
+        loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -142,7 +146,9 @@ class _$Initial implements Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<BuildAsset> buildAssets) loaded,
+    required TResult Function(
+            List<BuildAsset> buildAssets, DateTime currentDate)
+        loaded,
   }) {
     return initial();
   }
@@ -152,7 +158,8 @@ class _$Initial implements Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<BuildAsset> buildAssets)? loaded,
+    TResult Function(List<BuildAsset> buildAssets, DateTime currentDate)?
+        loaded,
   }) {
     return initial?.call();
   }
@@ -162,7 +169,8 @@ class _$Initial implements Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<BuildAsset> buildAssets)? loaded,
+    TResult Function(List<BuildAsset> buildAssets, DateTime currentDate)?
+        loaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -266,7 +274,9 @@ class _$Loading implements Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<BuildAsset> buildAssets) loaded,
+    required TResult Function(
+            List<BuildAsset> buildAssets, DateTime currentDate)
+        loaded,
   }) {
     return loading();
   }
@@ -276,7 +286,8 @@ class _$Loading implements Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<BuildAsset> buildAssets)? loaded,
+    TResult Function(List<BuildAsset> buildAssets, DateTime currentDate)?
+        loaded,
   }) {
     return loading?.call();
   }
@@ -286,7 +297,8 @@ class _$Loading implements Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<BuildAsset> buildAssets)? loaded,
+    TResult Function(List<BuildAsset> buildAssets, DateTime currentDate)?
+        loaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -347,7 +359,7 @@ abstract class Loading implements BuildAssetState {
 abstract class _$$LoadedCopyWith<$Res> {
   factory _$$LoadedCopyWith(_$Loaded value, $Res Function(_$Loaded) then) =
       __$$LoadedCopyWithImpl<$Res>;
-  $Res call({List<BuildAsset> buildAssets});
+  $Res call({List<BuildAsset> buildAssets, DateTime currentDate});
 }
 
 /// @nodoc
@@ -362,12 +374,17 @@ class __$$LoadedCopyWithImpl<$Res> extends _$BuildAssetStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? buildAssets = freezed,
+    Object? currentDate = freezed,
   }) {
     return _then(_$Loaded(
       buildAssets == freezed
           ? _value.buildAssets
           : buildAssets // ignore: cast_nullable_to_non_nullable
               as List<BuildAsset>,
+      currentDate == freezed
+          ? _value.currentDate
+          : currentDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -375,20 +392,23 @@ class __$$LoadedCopyWithImpl<$Res> extends _$BuildAssetStateCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$Loaded implements Loaded {
-  _$Loaded(this.buildAssets, {final String? $type}) : $type = $type ?? 'loaded';
+  _$Loaded(this.buildAssets, this.currentDate, {final String? $type})
+      : $type = $type ?? 'loaded';
 
   factory _$Loaded.fromJson(Map<String, dynamic> json) =>
       _$$LoadedFromJson(json);
 
   @override
   final List<BuildAsset> buildAssets;
+  @override
+  final DateTime currentDate;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'BuildAssetState.loaded(buildAssets: $buildAssets)';
+    return 'BuildAssetState.loaded(buildAssets: $buildAssets, currentDate: $currentDate)';
   }
 
   @override
@@ -397,13 +417,17 @@ class _$Loaded implements Loaded {
         (other.runtimeType == runtimeType &&
             other is _$Loaded &&
             const DeepCollectionEquality()
-                .equals(other.buildAssets, buildAssets));
+                .equals(other.buildAssets, buildAssets) &&
+            const DeepCollectionEquality()
+                .equals(other.currentDate, currentDate));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(buildAssets));
+      runtimeType,
+      const DeepCollectionEquality().hash(buildAssets),
+      const DeepCollectionEquality().hash(currentDate));
 
   @JsonKey(ignore: true)
   @override
@@ -415,9 +439,11 @@ class _$Loaded implements Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<BuildAsset> buildAssets) loaded,
+    required TResult Function(
+            List<BuildAsset> buildAssets, DateTime currentDate)
+        loaded,
   }) {
-    return loaded(buildAssets);
+    return loaded(buildAssets, currentDate);
   }
 
   @override
@@ -425,9 +451,10 @@ class _$Loaded implements Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<BuildAsset> buildAssets)? loaded,
+    TResult Function(List<BuildAsset> buildAssets, DateTime currentDate)?
+        loaded,
   }) {
-    return loaded?.call(buildAssets);
+    return loaded?.call(buildAssets, currentDate);
   }
 
   @override
@@ -435,11 +462,12 @@ class _$Loaded implements Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<BuildAsset> buildAssets)? loaded,
+    TResult Function(List<BuildAsset> buildAssets, DateTime currentDate)?
+        loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(buildAssets);
+      return loaded(buildAssets, currentDate);
     }
     return orElse();
   }
@@ -487,11 +515,14 @@ class _$Loaded implements Loaded {
 }
 
 abstract class Loaded implements BuildAssetState {
-  factory Loaded(final List<BuildAsset> buildAssets) = _$Loaded;
+  factory Loaded(
+          final List<BuildAsset> buildAssets, final DateTime currentDate) =
+      _$Loaded;
 
   factory Loaded.fromJson(Map<String, dynamic> json) = _$Loaded.fromJson;
 
   List<BuildAsset> get buildAssets;
+  DateTime get currentDate;
   @JsonKey(ignore: true)
   _$$LoadedCopyWith<_$Loaded> get copyWith =>
       throw _privateConstructorUsedError;
