@@ -20,6 +20,7 @@ part 'candle.g.dart';
 // }
 
 @Collection(ignore: {'props', 'stringify'})
+@Name('Stock Market Courses')
 class Candle extends Equatable {
   final Id? id;
 

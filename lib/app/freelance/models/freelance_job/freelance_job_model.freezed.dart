@@ -21,7 +21,8 @@ FreelanceJob _$FreelanceJobFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$FreelanceJob {
 //Base
-  String get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
+  String get uid => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   ETypeFreelance get eTypeFreelance =>
       throw _privateConstructorUsedError; //EndBase
@@ -45,7 +46,8 @@ abstract class $FreelanceJobCopyWith<$Res> {
           FreelanceJob value, $Res Function(FreelanceJob) then) =
       _$FreelanceJobCopyWithImpl<$Res>;
   $Res call(
-      {String id,
+      {int? id,
+      String uid,
       String name,
       ETypeFreelance eTypeFreelance,
       int level,
@@ -68,6 +70,7 @@ class _$FreelanceJobCopyWithImpl<$Res> implements $FreelanceJobCopyWith<$Res> {
   @override
   $Res call({
     Object? id = freezed,
+    Object? uid = freezed,
     Object? name = freezed,
     Object? eTypeFreelance = freezed,
     Object? level = freezed,
@@ -82,6 +85,10 @@ class _$FreelanceJobCopyWithImpl<$Res> implements $FreelanceJobCopyWith<$Res> {
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      uid: uid == freezed
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
               as String,
       name: name == freezed
           ? _value.name
@@ -131,7 +138,8 @@ abstract class _$$_FreelanceJobCopyWith<$Res>
       __$$_FreelanceJobCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String id,
+      {int? id,
+      String uid,
       String name,
       ETypeFreelance eTypeFreelance,
       int level,
@@ -157,6 +165,7 @@ class __$$_FreelanceJobCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
+    Object? uid = freezed,
     Object? name = freezed,
     Object? eTypeFreelance = freezed,
     Object? level = freezed,
@@ -171,6 +180,10 @@ class __$$_FreelanceJobCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      uid: uid == freezed
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
               as String,
       name: name == freezed
           ? _value.name
@@ -216,7 +229,8 @@ class __$$_FreelanceJobCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_FreelanceJob extends _FreelanceJob {
   const _$_FreelanceJob(
-      {required this.id,
+      {this.id,
+      required this.uid,
       required this.name,
       required this.eTypeFreelance,
       required this.level,
@@ -235,7 +249,9 @@ class _$_FreelanceJob extends _FreelanceJob {
 
 //Base
   @override
-  final String id;
+  final int? id;
+  @override
+  final String uid;
   @override
   final String name;
   @override
@@ -270,7 +286,7 @@ class _$_FreelanceJob extends _FreelanceJob {
 
   @override
   String toString() {
-    return 'FreelanceJob(id: $id, name: $name, eTypeFreelance: $eTypeFreelance, level: $level, workTime: $workTime, leftWorkTime: $leftWorkTime, reqSkills: $reqSkills, userSkills: $userSkills, repeat: $repeat, lastVersion: $lastVersion)';
+    return 'FreelanceJob(id: $id, uid: $uid, name: $name, eTypeFreelance: $eTypeFreelance, level: $level, workTime: $workTime, leftWorkTime: $leftWorkTime, reqSkills: $reqSkills, userSkills: $userSkills, repeat: $repeat, lastVersion: $lastVersion)';
   }
 
   @override
@@ -279,6 +295,7 @@ class _$_FreelanceJob extends _FreelanceJob {
         (other.runtimeType == runtimeType &&
             other is _$_FreelanceJob &&
             const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality().equals(other.uid, uid) &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality()
                 .equals(other.eTypeFreelance, eTypeFreelance) &&
@@ -300,6 +317,7 @@ class _$_FreelanceJob extends _FreelanceJob {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(uid),
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(eTypeFreelance),
       const DeepCollectionEquality().hash(level),
@@ -325,7 +343,8 @@ class _$_FreelanceJob extends _FreelanceJob {
 
 abstract class _FreelanceJob extends FreelanceJob implements FreelanceBase {
   const factory _FreelanceJob(
-      {required final String id,
+      {final int? id,
+      required final String uid,
       required final String name,
       required final ETypeFreelance eTypeFreelance,
       required final int level,
@@ -341,7 +360,9 @@ abstract class _FreelanceJob extends FreelanceJob implements FreelanceBase {
       _$_FreelanceJob.fromJson;
 
   @override //Base
-  String get id;
+  int? get id;
+  @override
+  String get uid;
   @override
   String get name;
   @override

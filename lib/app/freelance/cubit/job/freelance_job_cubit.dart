@@ -5,7 +5,6 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../utilities/utilities.dart';
-import '../../../date/cubit/date_cubit.dart';
 import '../../../new_game/new_game_cubit.dart';
 import '../../../skills/cubit/skills_cubit.dart';
 import '../../../skills/models/skill_model.dart';
@@ -22,28 +21,22 @@ class FreelanceJobCubit extends HydratedCubit<FreelanceJobState> {
   final NewGameCubit _newGameCubit;
   late StreamSubscription _newGameSub;
 
-  final DateCubit _dateCubit;
-  late StreamSubscription _dateSub;
-
   final TimeSpendCubit _timeSpendCubit;
   final FreelanceDoneCubit _freelanceDoneCubit;
   final SkillsCubit _skillsCubit;
 
   FreelanceJobCubit(
     this._newGameCubit,
-    this._dateCubit,
     this._timeSpendCubit,
     this._freelanceDoneCubit,
     this._skillsCubit,
   ) : super(const FreelanceJobState.initial()) {
     _newGame();
-    _counting();
   }
 
   @override
   Future<void> close() async {
     _newGameSub.cancel();
-    _dateSub.cancel();
     super.close();
   }
 
@@ -54,54 +47,48 @@ class FreelanceJobCubit extends HydratedCubit<FreelanceJobState> {
     });
   }
 
-  _counting() {
-    _dateSub = _dateCubit.stream.listen((event) {
-      event.maybeWhen(
-          orElse: () => throw 'error',
-          loaded: (date) {
-            _timeSpendCubit.state.maybeWhen(
-                orElse: () => throw 'error',
-                loaded: (timeSpend) {
-                  state.maybeWhen(
-                      orElse: () => throw 'error',
-                      loaded: (freelanceJobs) {
-                        int time = timeSpend.freelance;
-                        List<FreelanceJob> result = [];
+  Future counting(DateTime dateTime) async {
+    await _timeSpendCubit.state.maybeWhen(
+        orElse: () => throw 'error',
+        loaded: (timeSpend) async {
+          await state.maybeWhen(
+              orElse: () => throw 'error',
+              loaded: (freelanceJobs) async {
+                int time = timeSpend.freelance;
+                List<FreelanceJob> result = [];
 
-                        for (var e in freelanceJobs) {
-                          if (e.leftWorkTime > time) {
-                            result.add(
-                              e.copyWith(leftWorkTime: e.leftWorkTime - time),
-                            );
-                            _countingExp(
-                              reqSkills: e.reqSkills,
-                              userSkills: e.userSkills,
-                              hours: time,
-                            );
-                            time = 0;
-                          }
-                          if (e.leftWorkTime <= time) {
-                            _freelanceDoneCubit.add(e.toDone(date));
-                            _countingExp(
-                              reqSkills: e.reqSkills,
-                              userSkills: e.userSkills,
-                              hours: e.leftWorkTime,
-                            );
-                            time = time - e.leftWorkTime;
+                for (var e in freelanceJobs) {
+                  if (e.leftWorkTime > time) {
+                    result.add(
+                      e.copyWith(leftWorkTime: e.leftWorkTime - time),
+                    );
+                    _countingExp(
+                      reqSkills: e.reqSkills,
+                      userSkills: e.userSkills,
+                      hours: time,
+                    );
+                    time = 0;
+                  }
+                  if (e.leftWorkTime <= time) {
+                    await _freelanceDoneCubit.add(e.toDone(dateTime));
+                    _countingExp(
+                      reqSkills: e.reqSkills,
+                      userSkills: e.userSkills,
+                      hours: e.leftWorkTime,
+                    );
+                    time = time - e.leftWorkTime;
 
-                            if (e.repeat) {
-                              result = [e.repeater(), ...result];
-                            }
-                          }
-                        }
-                        if (result.isEmpty) {
-                          _timeSpendCubit.changeFreelance(-timeSpend.freelance);
-                        }
-                        emit(FreelanceJobState.loaded(result));
-                      });
-                });
-          });
-    });
+                    if (e.repeat) {
+                      result = [e.repeater(), ...result];
+                    }
+                  }
+                }
+                if (result.isEmpty) {
+                  _timeSpendCubit.changeFreelance(-timeSpend.freelance);
+                }
+                emit(FreelanceJobState.loaded(result));
+              });
+        });
   }
 
   _countingExp({
@@ -158,11 +145,11 @@ class FreelanceJobCubit extends HydratedCubit<FreelanceJobState> {
     return test.length == reqSkill.length ? true : false;
   }
 
-  remove(String id) {
+  remove(String uid) {
     state.maybeWhen(
         orElse: () => 'error',
         loaded: (list) {
-          emit(FreelanceJobState.loaded(List.from(list)..removeWhere((e) => e.id == id)));
+          emit(FreelanceJobState.loaded(List.from(list)..removeWhere((e) => e.uid == uid)));
         });
   }
 
@@ -171,7 +158,7 @@ class FreelanceJobCubit extends HydratedCubit<FreelanceJobState> {
         orElse: () => 'error',
         loaded: (list) {
           List<FreelanceJob> result = List.of(list);
-          int index = result.indexWhere((e) => e.id == element.id);
+          int index = result.indexWhere((e) => e.uid == element.uid);
           result[index] = element.copyWith(repeat: !element.repeat);
 
           emit(FreelanceJobState.loaded(result));

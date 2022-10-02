@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:isar/isar.dart';
 import 'package:richeable/utilities/utilities.dart';
 import 'package:uuid/uuid.dart';
 
@@ -18,7 +19,8 @@ class FreelanceJob with _$FreelanceJob {
   @Implements<FreelanceBase>()
   const factory FreelanceJob({
     //Base
-    required String id,
+    Id? id,
+    required String uid,
     required String name,
     required ETypeFreelance eTypeFreelance,
     //EndBase
@@ -42,7 +44,7 @@ class FreelanceJob with _$FreelanceJob {
     required List<Skill> userSkills,
   }) {
     return FreelanceJob(
-      id: const Uuid().v1(),
+      uid: const Uuid().v1(),
       name: name,
       eTypeFreelance: eTypeFreelance,
       level: level,
@@ -59,11 +61,7 @@ class FreelanceJob with _$FreelanceJob {
         : '$name 1';
 
     return copyWith(
-        id: const Uuid().v1(),
-        name: newName,
-        workTime: workTime,
-        leftWorkTime: workTime,
-        lastVersion: lastVersion + 1);
+        name: newName, workTime: workTime, leftWorkTime: workTime, lastVersion: lastVersion + 1);
   }
 
   int _generateRating() {
@@ -143,7 +141,7 @@ class FreelanceJob with _$FreelanceJob {
     }
 
     return FreelanceDone(
-      id: id,
+      uid: uid,
       name: name,
       eTypeFreelance: eTypeFreelance,
       fame: fame * rating * level,

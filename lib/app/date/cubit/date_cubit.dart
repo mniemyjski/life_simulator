@@ -7,10 +7,12 @@ import 'package:richeable/utilities/utilities.dart';
 
 import '../../freelance/cubit/done/freelance_done_cubit.dart';
 import '../../freelance/cubit/fame/fame_cubit.dart';
+import '../../freelance/cubit/job/freelance_job_cubit.dart';
 import '../../loading/cubit/loading_cubit.dart';
 import '../../new_game/new_game_cubit.dart';
 import '../../settings/cubit/day_setting_cubit.dart';
 import '../../stock_market/cubit/stock_market/stock_market_cubit.dart';
+import '../../time_spend/cubit/time_spend_cubit.dart';
 
 part 'date_cubit.freezed.dart';
 part 'date_cubit.g.dart';
@@ -25,8 +27,10 @@ class DateCubit extends HydratedCubit<DateState> {
   final LoadingCubit _loadingCubit;
 
   final StockMarketCubit _stockMarketCubit;
+  final FreelanceJobCubit _freelanceJobCubit;
   final FreelanceDoneCubit _freelanceDoneCubit;
   final FameCubit _fameCubit;
+  final TimeSpendCubit _timeSpendCubit;
 
   DateCubit(
     this._newGameCubit,
@@ -35,6 +39,8 @@ class DateCubit extends HydratedCubit<DateState> {
     this._stockMarketCubit,
     this._freelanceDoneCubit,
     this._fameCubit,
+    this._freelanceJobCubit,
+    this._timeSpendCubit,
   ) : super(const DateState.initial()) {
     _newGame();
   }
@@ -59,8 +65,10 @@ class DateCubit extends HydratedCubit<DateState> {
       await state.whenOrNull(loaded: (date) async {
         DateTime dateTime = date.addDate(days: 1);
         await _stockMarketCubit.counting(dateTime);
+        await _freelanceJobCubit.counting(dateTime);
         await _freelanceDoneCubit.counting(dateTime);
         await _fameCubit.counting(dateTime);
+        await _timeSpendCubit.counting();
 
         emit(DateState.loaded(dateTime));
       });

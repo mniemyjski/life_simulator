@@ -14,8 +14,8 @@ extension GetCandleCollection on Isar {
 }
 
 const CandleSchema = CollectionSchema(
-  name: r'Candle',
-  id: -4582591780913179026,
+  name: r'Stock Market Courses',
+  id: 6427917390003222243,
   properties: {
     r'close': PropertySchema(
       id: 0,

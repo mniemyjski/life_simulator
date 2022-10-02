@@ -143,6 +143,7 @@ abstract class  LocaleKeys {
   static const marketer = 'marketer';
   static const products = 'products';
   static const tryAgain = 'tryAgain';
+  static const end = 'end';
   static const personalScreen = 'personalScreen';
   static const personalScreenDesc = 'personalScreenDesc';
   static const transactionsScreen = 'transactionsScreen';

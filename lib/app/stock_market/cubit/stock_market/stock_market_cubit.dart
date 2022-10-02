@@ -57,7 +57,7 @@ class StockMarketCubit extends HydratedCubit<StockMarketState> {
   }
 
   Future counting(DateTime dateTime) async {
-    state.whenOrNull(loaded: (instruments, candles) async {
+    await state.whenOrNull(loaded: (instruments, candles) async {
       if (dateTime == DateTime(18, 1, 1)) return;
       final result =
           await _marketRepository.countingInstruments(instruments: instruments, date: dateTime);

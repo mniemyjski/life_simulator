@@ -1,5 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:isar/isar.dart';
+import 'package:richeable/app/freelance/models/freelance_done/freelance_done_model.dart';
 import 'package:richeable/app/money/models/transaction/transaction_model.dart';
 import 'package:richeable/app/stock_market/models/candle/candle.dart';
 
@@ -11,7 +12,7 @@ class IsarRepository {
 
   init() async {
     if (Isar.instanceNames.isEmpty) {
-      _instance = await Isar.open([TransactionSchema, CandleSchema]);
+      _instance = await Isar.open([TransactionSchema, CandleSchema, FreelanceDoneSchema]);
     } else {
       _instance = await Future.value(Isar.getInstance());
     }

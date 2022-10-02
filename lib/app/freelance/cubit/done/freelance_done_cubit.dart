@@ -8,6 +8,7 @@ import 'package:richeable/app/freelance/models/freelance_counting_model.dart';
 import 'package:richeable/app/freelance/services/freelance_services.dart';
 import 'package:richeable/utilities/utilities.dart';
 
+import '../../../../repositories/freelance_repository.dart';
 import '../../../money/cubit/money/money_cubit.dart';
 import '../../../money/models/transaction/transaction_model.dart';
 import '../../../new_game/new_game_cubit.dart';
@@ -26,18 +27,27 @@ class FreelanceDoneCubit extends HydratedCubit<FreelanceDoneState> {
   final FameCubit _fameCubit;
 
   final MoneyCubit _moneyCubit;
+  final FreelanceRepository _freelanceRepository;
+  late StreamSubscription _freelanceSub;
 
   FreelanceDoneCubit(
     this._newGameCubit,
     this._fameCubit,
     this._moneyCubit,
+    this._freelanceRepository,
   ) : super(const FreelanceDoneState.initial()) {
     _newGame();
+
+    _freelanceSub = _freelanceRepository.watch().listen((freelances) {
+      emit(FreelanceDoneState.loaded(freelances));
+    });
   }
 
   @override
   Future<void> close() async {
     _newGameSub.cancel();
+    _freelanceSub.cancel();
+
     super.close();
   }
 
@@ -49,40 +59,33 @@ class FreelanceDoneCubit extends HydratedCubit<FreelanceDoneState> {
   }
 
   Future counting(DateTime dateTime) async {
-    return state.whenOrNull(
-      loaded: (freelances) {
-        return _fameCubit.state.whenOrNull(
-          loaded: (fame, currentDate) async {
-            final FreelanceCounting result =
-                await FreelanceServices.reduceFameAndCountingFameAndMoney(
-              date: dateTime,
-              fame: fame,
-              freelances: freelances,
-            );
+    List<FreelanceDone> freelances = await _freelanceRepository.getAll();
+    if (freelances.isEmpty) return;
 
-            if (result.addFame > 0) _fameCubit.add(result.addFame);
+    await _fameCubit.state.whenOrNull(
+      loaded: (fame, currentDate) async {
+        final FreelanceCounting result = await compute(
+                FreelanceServices.reduceFameAndCountingFameAndMoney, [dateTime, fame, freelances])
+            as FreelanceCounting;
 
-            if (result.addMoney > 0) {
-              _moneyCubit.addTransaction(
-                dateTime: dateTime,
-                value: result.addMoney,
-                eTypeTransactionSource: ETypeTransactionSource.freelance,
-              );
-            }
+        if (result.addFame > 0) _fameCubit.add(result.addFame);
 
-            emit(FreelanceDoneState.loaded(result.freelances));
-            return;
-          },
-        );
+        if (result.addMoney > 0) {
+          _moneyCubit.addTransaction(
+            dateTime: dateTime,
+            value: result.addMoney,
+            eTypeTransactionSource: ETypeTransactionSource.freelance,
+          );
+        }
+
+        _freelanceRepository.addAll(result.freelances);
       },
     );
   }
 
-  add(FreelanceDone freelanceDone) {
-    state.whenOrNull(loaded: (freelances) {
-      List<FreelanceDone> result = [freelanceDone, ...freelances];
-
-      emit(FreelanceDoneState.loaded(result));
+  Future add(FreelanceDone freelanceDone) async {
+    await state.whenOrNull(loaded: (freelances) async {
+      await _freelanceRepository.add(freelanceDone);
     });
   }
 

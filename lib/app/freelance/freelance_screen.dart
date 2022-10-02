@@ -174,6 +174,21 @@ class FreelanceScreen extends StatelessWidget {
                                                 ],
                                               ),
                                             ),
+                                            RichText(
+                                              text: TextSpan(
+                                                style: Theme.of(context).textTheme.bodyText1,
+                                                children: <TextSpan>[
+                                                  TextSpan(
+                                                    text: '${LocaleKeys.end.tr()}: ',
+                                                    style: const TextStyle(
+                                                        fontWeight: FontWeight.bold),
+                                                  ),
+                                                  TextSpan(
+                                                      text: Enums.toText(
+                                                          element.next3.onlyDateToString())),
+                                                ],
+                                              ),
+                                            ),
                                           ],
                                         ),
                                         RatingBarIndicator(

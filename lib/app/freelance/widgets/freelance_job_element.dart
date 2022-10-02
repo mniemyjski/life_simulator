@@ -82,7 +82,7 @@ class FreelanceJobElement extends StatelessWidget {
           width: 50,
           padding: const EdgeInsets.all(4.0),
           child: IconButton(
-              onPressed: () => context.read<FreelanceJobCubit>().remove(element.id),
+              onPressed: () => context.read<FreelanceJobCubit>().remove(element.uid),
               icon: FaIcon(
                 FontAwesomeIcons.trash,
                 color: Colors.red[900]!.withOpacity(0.7),

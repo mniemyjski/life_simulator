@@ -14,8 +14,8 @@ extension GetTransactionCollection on Isar {
 }
 
 const TransactionSchema = CollectionSchema(
-  name: r'Transaction',
-  id: 5320225499417954855,
+  name: r'Transactions',
+  id: -3666024191998772642,
   properties: {
     r'dateCre': PropertySchema(
       id: 0,

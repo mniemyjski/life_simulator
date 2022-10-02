@@ -29,6 +29,7 @@ enum ETypeTransactionSource {
 }
 
 @Collection(ignore: {'props', 'stringify'})
+@Name('Transactions')
 class Transaction extends Equatable {
   final Id? id;
   final String? idSource;

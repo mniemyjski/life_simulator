@@ -4,7 +4,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../date/cubit/date_cubit.dart';
 import '../../new_game/new_game_cubit.dart';
 import '../models/time_bonus/time_bonus_model.dart';
 import '../models/time_spend_model/time_spend_model.dart';
@@ -18,21 +17,15 @@ class TimeSpendCubit extends HydratedCubit<TimeSpendState> {
   final NewGameCubit _newGameCubit;
   late StreamSubscription _newGameSub;
 
-  final DateCubit _dateCubit;
-  late StreamSubscription _dateSub;
-
   TimeSpendCubit(
     this._newGameCubit,
-    this._dateCubit,
   ) : super(const TimeSpendState.initial()) {
     _newGame();
-    _counting();
   }
 
   @override
   Future<void> close() async {
     _newGameSub.cancel();
-    _dateSub.cancel();
     super.close();
   }
 
@@ -47,21 +40,19 @@ class TimeSpendCubit extends HydratedCubit<TimeSpendState> {
     });
   }
 
-  _counting() {
-    _dateSub = _dateCubit.stream.listen((event) {
-      state.whenOrNull(loaded: (timeSpend) {
-        TimeSpend refresh = timeSpend.copyWith(
-          used: 0,
-          free: 24 -
-              timeSpend.learn -
-              timeSpend.work -
-              timeSpend.relax -
-              timeSpend.sleep -
-              timeSpend.freelance -
-              timeSpend.getBonus(ETypeBonus.commuting),
-        );
-        emit(TimeSpendState.loaded(refresh));
-      });
+  counting() {
+    state.whenOrNull(loaded: (timeSpend) {
+      TimeSpend refresh = timeSpend.copyWith(
+        used: 0,
+        free: 24 -
+            timeSpend.learn -
+            timeSpend.work -
+            timeSpend.relax -
+            timeSpend.sleep -
+            timeSpend.freelance -
+            timeSpend.getBonus(ETypeBonus.commuting),
+      );
+      emit(TimeSpendState.loaded(refresh));
     });
   }
 

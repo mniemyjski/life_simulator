@@ -42,7 +42,6 @@ abstract class FreelanceServices {
       case ETypeFreelance.course:
         return (90 * lvl).toInt();
       case ETypeFreelance.youtube:
-        return (8 * lvl).toInt();
         return 60 ~/ lvl;
       case ETypeFreelance.application:
         return (240 * lvl).toInt();
@@ -51,11 +50,11 @@ abstract class FreelanceServices {
     }
   }
 
-  static reduceFameAndCountingFameAndMoney({
-    required DateTime date,
-    required double fame,
-    required List<FreelanceDone> freelances,
-  }) {
+  static reduceFameAndCountingFameAndMoney(List<dynamic> args) {
+    final DateTime date = args[0];
+    final double fame = args[1];
+    final List<FreelanceDone> freelances = args[2];
+
     double fame10 = fame / 30000;
     double addMoney = 0;
     double addFame = 0;
@@ -63,9 +62,9 @@ abstract class FreelanceServices {
     List<FreelanceDone> result = [];
 
     for (var e in freelances) {
-      DateTime next1 = e.dateCre.addDate(months: 6 * e.rating);
-      DateTime next2 = e.dateCre.addDate(years: 1 * e.rating);
-      DateTime next3 = e.dateCre.addDate(years: 2 * e.rating);
+      DateTime next1 = e.next1;
+      DateTime next2 = e.next2;
+      DateTime next3 = e.next3;
 
       if (next1 == date.onlyDate()) {
         addMoney += (e.price / 2) * fame10;

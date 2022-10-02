@@ -49,7 +49,7 @@ class FreelanceJobsScreen extends StatelessWidget {
                               listJobs[index],
                               index + 1,
                               key: ValueKey(
-                                listJobs[index].id,
+                                listJobs[index].uid,
                               ),
                             );
                           });

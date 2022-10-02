@@ -39,11 +39,10 @@ class FameCubit extends HydratedCubit<FameState> {
     });
   }
 
-  Future counting(DateTime dateTime) async {
+  counting(DateTime dateTime) {
     state.whenOrNull(loaded: (fame, currentDate) {
       double result = fame - (fame * 0.001);
       emit(FameState.loaded(result, dateTime));
-      return;
     });
   }
 

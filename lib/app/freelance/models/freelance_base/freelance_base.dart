@@ -1,3 +1,5 @@
+import 'package:isar/isar.dart';
+
 enum ETypeFreelance {
   book,
   course,
@@ -7,9 +9,13 @@ enum ETypeFreelance {
 }
 
 abstract class FreelanceBase {
-  final String id;
+  final Id? id;
+  final String uid;
   final String name;
+
+  @enumerated
   final ETypeFreelance eTypeFreelance;
 
-  const FreelanceBase(this.id, this.name, this.eTypeFreelance);
+  const FreelanceBase(
+      {this.id, required this.uid, required this.name, required this.eTypeFreelance});
 }
