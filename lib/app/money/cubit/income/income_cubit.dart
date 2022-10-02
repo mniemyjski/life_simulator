@@ -45,16 +45,16 @@ class IncomeCubit extends HydratedCubit<IncomeState> {
       DateTime nextDate;
       switch (income.eTypeFrequency) {
         case ETypeFrequency.annually:
-          nextDate = currentDate.onlyDate();
+          nextDate = currentDate.addDate(years: 1);
           break;
         case ETypeFrequency.monthly:
-          nextDate = currentDate.onlyDate();
+          nextDate = currentDate.addDate(months: 1);
           break;
         case ETypeFrequency.weekly:
-          nextDate = currentDate.onlyDate();
+          nextDate = currentDate.addDate(weeks: 1);
           break;
         case ETypeFrequency.daily:
-          nextDate = currentDate.onlyDate();
+          nextDate = currentDate.addDate(days: 1);
           break;
       }
       List<Income> refresh = List.from(incomes)..add(income.copyWith(next: nextDate));
