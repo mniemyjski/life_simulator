@@ -64,7 +64,9 @@ class BuildAssetCubit extends HydratedCubit<BuildAssetState> {
         );
 
         _moneyCubit.addTransaction(
-            value: -buildAsset.cost, eTypeTransactionSource: ETypeTransactionSource.asset);
+            dateTime: date,
+            value: -buildAsset.cost,
+            eTypeTransactionSource: ETypeTransactionSource.asset);
 
         emit(BuildAssetState.loaded(List.of(buildAssets)..add(newBuildAssets)));
       });

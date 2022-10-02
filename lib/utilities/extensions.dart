@@ -7,6 +7,8 @@ import 'utilities.dart';
 
 extension DateT on DateTime {
   DateTime onlyDate() => DateTime(year, month, day);
+  DateTime monthDate() => DateTime(year, month, 1);
+  DateTime yearDate() => DateTime(year, 1, 1);
   String onlyDateToString() {
     if (year < 99) return DateFormat('yy/MM/dd').format(DateTime(year, month, day));
     if (year < 999) return DateFormat('yyy/MM/dd').format(DateTime(year, month, day));

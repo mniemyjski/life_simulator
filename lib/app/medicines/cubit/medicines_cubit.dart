@@ -81,8 +81,13 @@ class MedicinesCubit extends HydratedCubit<MedicinesState> {
       for (var element in medicines) {
         if (element.id == medicine.id) {
           result.add(element.copyWith(active: true));
-          _moneyCubit.addTransaction(
-              value: element.cost, eTypeTransactionSource: ETypeTransactionSource.medicine);
+
+          _dateCubit.state.whenOrNull(loaded: (date) {
+            _moneyCubit.addTransaction(
+                dateTime: date,
+                value: element.cost,
+                eTypeTransactionSource: ETypeTransactionSource.medicine);
+          });
         }
       }
 

@@ -42,6 +42,7 @@ abstract class FreelanceServices {
       case ETypeFreelance.course:
         return (90 * lvl).toInt();
       case ETypeFreelance.youtube:
+        return (8 * lvl).toInt();
         return 60 ~/ lvl;
       case ETypeFreelance.application:
         return (240 * lvl).toInt();

@@ -8,8 +8,6 @@ import 'package:richeable/app/freelance/models/freelance_counting_model.dart';
 import 'package:richeable/app/freelance/services/freelance_services.dart';
 import 'package:richeable/utilities/utilities.dart';
 
-import '../../../date/cubit/date_cubit.dart';
-import '../../../loading/cubit/loading_cubit.dart';
 import '../../../money/cubit/money/money_cubit.dart';
 import '../../../money/models/transaction/transaction_model.dart';
 import '../../../new_game/new_game_cubit.dart';
@@ -25,30 +23,21 @@ class FreelanceDoneCubit extends HydratedCubit<FreelanceDoneState> {
   final NewGameCubit _newGameCubit;
   late StreamSubscription _newGameSub;
 
-  final DateCubit _dateCubit;
-  late StreamSubscription _dateSub;
-
   final FameCubit _fameCubit;
 
   final MoneyCubit _moneyCubit;
 
-  final LoadingCubit _loadingCubit;
-
   FreelanceDoneCubit(
     this._newGameCubit,
-    this._dateCubit,
     this._fameCubit,
     this._moneyCubit,
-    this._loadingCubit,
   ) : super(const FreelanceDoneState.initial()) {
     _newGame();
-    _counting();
   }
 
   @override
   Future<void> close() async {
     _newGameSub.cancel();
-    _dateSub.cancel();
     super.close();
   }
 
@@ -59,36 +48,34 @@ class FreelanceDoneCubit extends HydratedCubit<FreelanceDoneState> {
     });
   }
 
-  _counting() {
-    _dateSub = _dateCubit.stream.listen((event) {
-      event.whenOrNull(loaded: (date) {
-        state.whenOrNull(
-          loaded: (freelances) {
-            _fameCubit.state.whenOrNull(
-              loaded: (fame) {
-                final FreelanceCounting result =
-                    FreelanceServices.reduceFameAndCountingFameAndMoney(
-                  date: date,
-                  fame: fame,
-                  freelances: freelances,
-                );
-
-                if (result.addFame > 0) _fameCubit.add(result.addFame);
-
-                if (result.addMoney > 0) {
-                  _moneyCubit.addTransaction(
-                    value: result.addMoney,
-                    eTypeTransactionSource: ETypeTransactionSource.freelance,
-                  );
-                }
-
-                emit(FreelanceDoneState.loaded(result.freelances));
-              },
+  Future counting(DateTime dateTime) async {
+    return state.whenOrNull(
+      loaded: (freelances) {
+        return _fameCubit.state.whenOrNull(
+          loaded: (fame, currentDate) async {
+            final FreelanceCounting result =
+                await FreelanceServices.reduceFameAndCountingFameAndMoney(
+              date: dateTime,
+              fame: fame,
+              freelances: freelances,
             );
+
+            if (result.addFame > 0) _fameCubit.add(result.addFame);
+
+            if (result.addMoney > 0) {
+              _moneyCubit.addTransaction(
+                dateTime: dateTime,
+                value: result.addMoney,
+                eTypeTransactionSource: ETypeTransactionSource.freelance,
+              );
+            }
+
+            emit(FreelanceDoneState.loaded(result.freelances));
+            return;
           },
         );
-      });
-    });
+      },
+    );
   }
 
   add(FreelanceDone freelanceDone) {

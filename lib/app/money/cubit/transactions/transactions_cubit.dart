@@ -17,8 +17,8 @@ part 'transactions_state.dart';
 @injectable
 class TransactionsCubit extends Cubit<TransactionsState> {
   final DateCubit _dateCubit;
-  late StreamSubscription _dateSub;
   final TransactionsRepository _transactionRepository;
+  late StreamSubscription _transactionsSub;
 
   TransactionsCubit(
     this._dateCubit,
@@ -29,42 +29,33 @@ class TransactionsCubit extends Cubit<TransactionsState> {
 
   @override
   Future<void> close() async {
-    _dateSub.cancel();
+    _transactionsSub.cancel();
     super.close();
   }
 
   _newGame() {
     state.whenOrNull(initial: () {
       _dateCubit.state.whenOrNull(loaded: (date) {
-        _counter(DateTime(date.year, date.month, 1));
+        _counter(date.monthDate());
+        _listen(date.monthDate());
       });
     });
+  }
 
-    // _dateSub = _dateCubit.stream.listen(
-    //   (dateState) {
-    //     dateState.whenOrNull(
-    //       loaded: (date) {
-    //         state.whenOrNull(loaded: (oldDate, oldTransactions) {
-    //           DateTime newDate = DateTime(date.year, date.month, 1);
-    //
-    //           if (newDate.millisecondsSinceEpoch > oldDate.millisecondsSinceEpoch) {
-    //             emit(
-    //               TransactionsState.loaded(
-    //                 dateTime: newDate,
-    //                 transactions: [],
-    //               ),
-    //             );
-    //           }
-    //         });
-    //       },
-    //     );
-    //   },
-    // );
+  _listen(DateTime dateTime) {
+    try {
+      _transactionsSub.cancel();
+    } catch (_) {}
 
-    _transactionRepository.watchLazy().listen((event) {
-      state.whenOrNull(
-        loaded: (date, transport) {
-          _counter(DateTime(date.year, date.month, 1));
+    _transactionsSub = _transactionRepository.watchLazyTotal().listen((event) {
+      _dateCubit.state.whenOrNull(
+        loaded: (currentDate) {
+          if (currentDate.monthDate().millisecondsSinceEpoch >=
+              dateTime.monthDate().millisecondsSinceEpoch) {
+            _counter(DateTime(currentDate.year, currentDate.month, 1));
+          } else {
+            _counter(DateTime(dateTime.year, dateTime.month, 1));
+          }
         },
       );
     });
@@ -79,22 +70,23 @@ class TransactionsCubit extends Cubit<TransactionsState> {
 
   backMonth() {
     state.whenOrNull(loaded: (date, oldTransactions) {
-      DateTime newMonth = DateTime(date.year, date.month, 1).addDate(months: -1);
+      DateTime newMonth = date.monthDate().addDate(months: -1);
 
       if (newMonth.millisecondsSinceEpoch >= DateTime(18, 1, 1).millisecondsSinceEpoch) {
         _counter(newMonth);
+        _listen(newMonth);
       }
     });
   }
 
   nextMonth() {
     state.whenOrNull(loaded: (date, oldTransactions) {
-      DateTime newMonth = DateTime(date.year, date.month, 1).addDate(months: 1);
+      DateTime newMonth = date.monthDate().addDate(months: 1);
 
       _dateCubit.state.whenOrNull(loaded: (d) {
-        if (newMonth.millisecondsSinceEpoch <=
-            DateTime(d.year, d.month, 1).millisecondsSinceEpoch) {
+        if (newMonth.millisecondsSinceEpoch <= d.monthDate().millisecondsSinceEpoch) {
           _counter(newMonth);
+          _listen(newMonth);
         }
       });
     });

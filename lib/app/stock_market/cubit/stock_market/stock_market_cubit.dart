@@ -1,14 +1,11 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:richeable/utilities/utilities.dart';
 
 import '../../../../repositories/stock_market_repository.dart';
 import '../../../database/cubit/database_cubit.dart';
-import '../../../date/cubit/date_cubit.dart';
 import '../../../new_game/new_game_cubit.dart';
 import '../../models/candle/candle.dart';
 import '../../models/instrument/instrument.dart';
@@ -22,27 +19,20 @@ class StockMarketCubit extends HydratedCubit<StockMarketState> {
   final NewGameCubit _newGameCubit;
   late StreamSubscription _newGameSub;
 
-  final DateCubit _dateCubit;
-  late StreamSubscription _dateSub;
-
   final DatabaseCubit _databaseCubit;
-
   final StockMarketRepository _marketRepository;
 
   StockMarketCubit(
     this._newGameCubit,
-    this._dateCubit,
     this._databaseCubit,
     this._marketRepository,
   ) : super(const StockMarketState.initial()) {
     _newGame();
-    _counting();
   }
 
   @override
   Future<void> close() async {
     _newGameSub.cancel();
-    _dateSub.cancel();
     super.close();
   }
 
@@ -66,18 +56,14 @@ class StockMarketCubit extends HydratedCubit<StockMarketState> {
     });
   }
 
-  _counting() {
-    _dateSub = _dateCubit.stream.listen((dataState) {
-      dataState.whenOrNull(loaded: (date) {
-        state.whenOrNull(loaded: (instruments, candles) async {
-          if (date == DateTime(18, 1, 1)) return;
-          final result =
-              await _marketRepository.countingInstruments(instruments: instruments, date: date);
-          final result2 = await _marketRepository.getLastYearCandle(date);
+  Future counting(DateTime dateTime) async {
+    state.whenOrNull(loaded: (instruments, candles) async {
+      if (dateTime == DateTime(18, 1, 1)) return;
+      final result =
+          await _marketRepository.countingInstruments(instruments: instruments, date: dateTime);
+      final result2 = await _marketRepository.getLastYearCandle(dateTime);
 
-          emit(StockMarketState.loaded(result, result2));
-        });
-      });
+      emit(StockMarketState.loaded(result, result2));
     });
   }
 

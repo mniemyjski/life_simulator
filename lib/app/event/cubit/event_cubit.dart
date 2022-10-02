@@ -99,28 +99,35 @@ class EventCubit extends HydratedCubit<EventState> {
   }
 
   add(GameEvent event) {
-    state.whenOrNull(loaded: (events) {
-      if (event.eTypeEffect == ETypeEffect.addMoney) {
-        _moneyCubit.addTransaction(
-            value: event.value, eTypeTransactionSource: ETypeTransactionSource.addMoney);
-      }
+    _dateCubit.state.whenOrNull(loaded: (date) {
+      state.whenOrNull(loaded: (events) {
+        if (event.eTypeEffect == ETypeEffect.addMoney) {
+          _moneyCubit.addTransaction(
+              dateTime: date,
+              value: event.value,
+              eTypeTransactionSource: ETypeTransactionSource.addMoney);
+        }
 
-      if (event.eTypeEffect == ETypeEffect.lostMoney) {
-        _moneyCubit.addTransaction(
-            value: event.value, eTypeTransactionSource: ETypeTransactionSource.lostMoney);
-      }
+        if (event.eTypeEffect == ETypeEffect.lostMoney) {
+          _moneyCubit.addTransaction(
+              dateTime: date,
+              value: event.value,
+              eTypeTransactionSource: ETypeTransactionSource.lostMoney);
+        }
 
-      if (event.eTypeEffect == ETypeEffect.taxes) {
-        _moneyCubit.addTransaction(
-            value: _moneyCubit.getBalance() * event.value,
-            eTypeTransactionSource: ETypeTransactionSource.unpaidTaxes);
-      }
+        if (event.eTypeEffect == ETypeEffect.taxes) {
+          _moneyCubit.addTransaction(
+              dateTime: date,
+              value: _moneyCubit.getBalance() * event.value,
+              eTypeTransactionSource: ETypeTransactionSource.unpaidTaxes);
+        }
 
-      List<GameEvent> result = List.from(events)
-        ..add(event)
-        ..sort((a, b) => b.datCre!.compareTo(a.datCre!));
+        List<GameEvent> result = List.from(events)
+          ..add(event)
+          ..sort((a, b) => b.datCre!.compareTo(a.datCre!));
 
-      emit(EventState.loaded(events: result));
+        emit(EventState.loaded(events: result));
+      });
     });
   }
 

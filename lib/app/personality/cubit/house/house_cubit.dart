@@ -6,6 +6,7 @@ import 'package:injectable/injectable.dart';
 
 import '../../../../utilities/utilities.dart';
 import '../../../database/cubit/database_cubit.dart';
+import '../../../date/cubit/date_cubit.dart';
 import '../../../money/cubit/income/income_cubit.dart';
 import '../../../money/cubit/money/money_cubit.dart';
 import '../../../money/models/income/income_model.dart';
@@ -28,12 +29,15 @@ class HouseCubit extends HydratedCubit<HouseState> {
   final NewGameCubit _newGameCubit;
   late StreamSubscription _newGameSub;
 
+  final DateCubit _dateCubit;
+
   HouseCubit(
     this._moneyCubit,
     this._timeSpendCubit,
     this._incomeCubit,
     this._newGameCubit,
     this._databaseCubit,
+    this._dateCubit,
   ) : super(const HouseState.initial()) {
     _newGame();
   }
@@ -142,8 +146,12 @@ class HouseCubit extends HydratedCubit<HouseState> {
         ],
       );
 
-      _moneyCubit.addTransaction(
-          value: newHouse.cost, eTypeTransactionSource: ETypeTransactionSource.home);
+      _dateCubit.state.whenOrNull(loaded: (date) {
+        _moneyCubit.addTransaction(
+            dateTime: date,
+            value: newHouse.cost,
+            eTypeTransactionSource: ETypeTransactionSource.home);
+      });
 
       _incomeCubit.add(income);
       if (oldHouse != null && oldHouse.eTypeHouse == ETypeHouse.rent) {
@@ -157,14 +165,18 @@ class HouseCubit extends HydratedCubit<HouseState> {
   }
 
   sell() {
-    state.whenOrNull(loaded: (house) {
-      if (house != null) {
-        _timeSpendCubit.removeBonus(ETypeBonusSource.house);
-        _incomeCubit.remove(house.id);
-        _moneyCubit.addTransaction(
-            value: house.cost * 0.8, eTypeTransactionSource: ETypeTransactionSource.home);
-        emit(const HouseState.loaded(house: null));
-      }
+    _dateCubit.state.whenOrNull(loaded: (date) {
+      state.whenOrNull(loaded: (house) {
+        if (house != null) {
+          _timeSpendCubit.removeBonus(ETypeBonusSource.house);
+          _incomeCubit.remove(house.id);
+          _moneyCubit.addTransaction(
+              dateTime: date,
+              value: house.cost * 0.8,
+              eTypeTransactionSource: ETypeTransactionSource.home);
+          emit(const HouseState.loaded(house: null));
+        }
+      });
     });
   }
 

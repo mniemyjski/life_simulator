@@ -47,7 +47,8 @@ class FreelanceScreen extends StatelessWidget {
                         ),
                         Text(
                           context.watch<FameCubit>().state.maybeWhen(
-                              orElse: () => '0', loaded: (v) => v.roundToDouble().toExp()),
+                              orElse: () => '0',
+                              loaded: (v, currentDate) => v.roundToDouble().toExp()),
                           style: Theme.of(context).textTheme.bodyText1,
                         ),
                       ],

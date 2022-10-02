@@ -6,7 +6,6 @@ import 'package:injectable/injectable.dart';
 import 'package:richeable/app/money/models/transaction/transaction_model.dart';
 
 import '../../../../repositories/transactions_repository.dart';
-import '../../../date/cubit/date_cubit.dart';
 import '../../../new_game/new_game_cubit.dart';
 
 part 'money_cubit.freezed.dart';
@@ -19,16 +18,19 @@ class MoneyCubit extends Cubit<MoneyState> {
   late StreamSubscription _newGameSub;
 
   final TransactionsRepository _transactionRepository;
-  final DateCubit _dateCubit;
+  late StreamSubscription _transactionSub;
 
   MoneyCubit(
     this._transactionRepository,
-    this._dateCubit,
     this._newGameCubit,
   ) : super(const MoneyState.initial()) {
     _newGame();
 
-    _transactionRepository.watchLazy().listen((event) async {
+    try {
+      _transactionSub.cancel();
+    } catch (_) {}
+
+    _transactionSub = _transactionRepository.watchLazyTotal().listen((event) async {
       double value = await _transactionRepository.sum();
       emit(MoneyState.loaded(value));
     });
@@ -37,6 +39,7 @@ class MoneyCubit extends Cubit<MoneyState> {
   @override
   Future<void> close() async {
     _newGameSub.cancel();
+    _transactionSub.cancel();
     super.close();
   }
 
@@ -61,27 +64,20 @@ class MoneyCubit extends Cubit<MoneyState> {
     return state.maybeWhen(orElse: () => 0, loaded: (balance) => balance);
   }
 
-  Future<double> lastYearIncome() async {
-    return _dateCubit.state.maybeWhen(
-        orElse: () => 0,
-        loaded: (date) {
-          return _transactionRepository.lastYearIncome(date);
-        });
+  Future<double> lastYearIncome(DateTime dateTime) async {
+    return await _transactionRepository.lastYearIncome(dateTime);
   }
 
   Future addTransaction({
     required double value,
     required ETypeTransactionSource eTypeTransactionSource,
+    required DateTime dateTime,
   }) async {
-    _dateCubit.state.maybeWhen(
-        orElse: () => throw "Date doesn't loaded!!!",
-        loaded: (date) async {
-          Transaction transaction = Transaction(
-            value: value,
-            eTypeTransactionSource: eTypeTransactionSource,
-            dateCre: date,
-          );
-          await _transactionRepository.add(transaction);
-        });
+    Transaction transaction = Transaction(
+      value: value,
+      eTypeTransactionSource: eTypeTransactionSource,
+      dateCre: dateTime,
+    );
+    await _transactionRepository.add(transaction);
   }
 }

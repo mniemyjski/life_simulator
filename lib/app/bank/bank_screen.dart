@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:richeable/app/date/cubit/date_cubit.dart';
 import 'package:richeable/utilities/utilities.dart';
 
 import '../../constants/constants.dart';
@@ -61,19 +62,23 @@ class BankScreen extends StatelessWidget {
                 ),
                 CustomButton(
                     onPressed: () {
-                      if (newDeposit > oldDeposit) {
-                        context.read<DepositCubit>().change(newDeposit);
+                      context.read<DateCubit>().state.whenOrNull(loaded: (date) {
+                        if (newDeposit > oldDeposit) {
+                          context.read<DepositCubit>().change(newDeposit);
 
-                        context.read<MoneyCubit>().addTransaction(
-                            value: -newDeposit,
-                            eTypeTransactionSource: ETypeTransactionSource.bankDeposit);
-                      } else if (newDeposit < oldDeposit) {
-                        context.read<DepositCubit>().change(-oldDeposit + newDeposit);
-                        context.read<MoneyCubit>().addTransaction(
-                            value: oldDeposit - newDeposit,
-                            eTypeTransactionSource: ETypeTransactionSource.bankDeposit);
-                      }
-                      context.router.pop();
+                          context.read<MoneyCubit>().addTransaction(
+                              dateTime: date,
+                              value: -newDeposit,
+                              eTypeTransactionSource: ETypeTransactionSource.bankDeposit);
+                        } else if (newDeposit < oldDeposit) {
+                          context.read<DepositCubit>().change(-oldDeposit + newDeposit);
+                          context.read<MoneyCubit>().addTransaction(
+                              dateTime: date,
+                              value: oldDeposit - newDeposit,
+                              eTypeTransactionSource: ETypeTransactionSource.bankDeposit);
+                        }
+                        context.router.pop();
+                      });
                     },
                     child: Text(
                       LocaleKeys.confirm.tr(),

@@ -35,21 +35,21 @@ mixin _$FameState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(double fame) loaded,
+    required TResult Function(double fame, DateTime currentDate) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(double fame)? loaded,
+    TResult Function(double fame, DateTime currentDate)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(double fame)? loaded,
+    TResult Function(double fame, DateTime currentDate)? loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -140,7 +140,7 @@ class _$Initial implements Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(double fame) loaded,
+    required TResult Function(double fame, DateTime currentDate) loaded,
   }) {
     return initial();
   }
@@ -150,7 +150,7 @@ class _$Initial implements Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(double fame)? loaded,
+    TResult Function(double fame, DateTime currentDate)? loaded,
   }) {
     return initial?.call();
   }
@@ -160,7 +160,7 @@ class _$Initial implements Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(double fame)? loaded,
+    TResult Function(double fame, DateTime currentDate)? loaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -264,7 +264,7 @@ class _$Loading implements Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(double fame) loaded,
+    required TResult Function(double fame, DateTime currentDate) loaded,
   }) {
     return loading();
   }
@@ -274,7 +274,7 @@ class _$Loading implements Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(double fame)? loaded,
+    TResult Function(double fame, DateTime currentDate)? loaded,
   }) {
     return loading?.call();
   }
@@ -284,7 +284,7 @@ class _$Loading implements Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(double fame)? loaded,
+    TResult Function(double fame, DateTime currentDate)? loaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -345,7 +345,7 @@ abstract class Loading implements FameState {
 abstract class _$$LoadedCopyWith<$Res> {
   factory _$$LoadedCopyWith(_$Loaded value, $Res Function(_$Loaded) then) =
       __$$LoadedCopyWithImpl<$Res>;
-  $Res call({double fame});
+  $Res call({double fame, DateTime currentDate});
 }
 
 /// @nodoc
@@ -360,12 +360,17 @@ class __$$LoadedCopyWithImpl<$Res> extends _$FameStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? fame = freezed,
+    Object? currentDate = freezed,
   }) {
     return _then(_$Loaded(
       fame == freezed
           ? _value.fame
           : fame // ignore: cast_nullable_to_non_nullable
               as double,
+      currentDate == freezed
+          ? _value.currentDate
+          : currentDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -373,20 +378,23 @@ class __$$LoadedCopyWithImpl<$Res> extends _$FameStateCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$Loaded implements Loaded {
-  const _$Loaded(this.fame, {final String? $type}) : $type = $type ?? 'loaded';
+  const _$Loaded(this.fame, this.currentDate, {final String? $type})
+      : $type = $type ?? 'loaded';
 
   factory _$Loaded.fromJson(Map<String, dynamic> json) =>
       _$$LoadedFromJson(json);
 
   @override
   final double fame;
+  @override
+  final DateTime currentDate;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'FameState.loaded(fame: $fame)';
+    return 'FameState.loaded(fame: $fame, currentDate: $currentDate)';
   }
 
   @override
@@ -394,13 +402,17 @@ class _$Loaded implements Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$Loaded &&
-            const DeepCollectionEquality().equals(other.fame, fame));
+            const DeepCollectionEquality().equals(other.fame, fame) &&
+            const DeepCollectionEquality()
+                .equals(other.currentDate, currentDate));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(fame));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(fame),
+      const DeepCollectionEquality().hash(currentDate));
 
   @JsonKey(ignore: true)
   @override
@@ -412,9 +424,9 @@ class _$Loaded implements Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(double fame) loaded,
+    required TResult Function(double fame, DateTime currentDate) loaded,
   }) {
-    return loaded(fame);
+    return loaded(fame, currentDate);
   }
 
   @override
@@ -422,9 +434,9 @@ class _$Loaded implements Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(double fame)? loaded,
+    TResult Function(double fame, DateTime currentDate)? loaded,
   }) {
-    return loaded?.call(fame);
+    return loaded?.call(fame, currentDate);
   }
 
   @override
@@ -432,11 +444,11 @@ class _$Loaded implements Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(double fame)? loaded,
+    TResult Function(double fame, DateTime currentDate)? loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(fame);
+      return loaded(fame, currentDate);
     }
     return orElse();
   }
@@ -484,11 +496,13 @@ class _$Loaded implements Loaded {
 }
 
 abstract class Loaded implements FameState {
-  const factory Loaded(final double fame) = _$Loaded;
+  const factory Loaded(final double fame, final DateTime currentDate) =
+      _$Loaded;
 
   factory Loaded.fromJson(Map<String, dynamic> json) = _$Loaded.fromJson;
 
   double get fame;
+  DateTime get currentDate;
   @JsonKey(ignore: true)
   _$$LoadedCopyWith<_$Loaded> get copyWith =>
       throw _privateConstructorUsedError;

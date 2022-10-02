@@ -48,14 +48,18 @@ class LoanCubit extends HydratedCubit<LoanState> {
     });
   }
 
-  Future<bool> _creditworthiness(double borrow) async {
-    if (loan() + borrow > 50000 + await _moneyCubit.lastYearIncome()) return true;
+  Future<bool> _creditworthiness({required double borrow, required DateTime dateTime}) async {
+    if (loan() + borrow > 50000 + await _moneyCubit.lastYearIncome(dateTime)) return true;
 
     return false;
   }
 
   Future<String> add(Loan loan) async {
-    if (await _creditworthiness(loan.borrowed)) return "You don't have creditworthiness";
+    await _dateCubit.state.whenOrNull(loaded: (date) async {
+      if (await _creditworthiness(borrow: loan.borrowed, dateTime: date)) {
+        return "You don't have creditworthiness";
+      }
+    });
 
     return _dateCubit.state.maybeWhen(
         loaded: (date) {
@@ -65,9 +69,12 @@ class LoanCubit extends HydratedCubit<LoanState> {
 
                 result.add(loan.copyWith(next: Jiffy(date).add(months: 1).dateTime));
 
-                _moneyCubit.addTransaction(
-                    value: loan.borrowed,
-                    eTypeTransactionSource: ETypeTransactionSource.bankBorrowed);
+                _dateCubit.state.whenOrNull(loaded: (date) {
+                  _moneyCubit.addTransaction(
+                      dateTime: date,
+                      value: loan.borrowed,
+                      eTypeTransactionSource: ETypeTransactionSource.bankBorrowed);
+                });
 
                 emit(LoanState.loaded(result));
                 return "Succeed";
@@ -117,6 +124,7 @@ class LoanCubit extends HydratedCubit<LoanState> {
               if (loan.leftLoan > 0) result.add(loan);
 
               _moneyCubit.addTransaction(
+                  dateTime: date,
                   value: -element.leftLoan - element.getRate(),
                   eTypeTransactionSource: ETypeTransactionSource.bankInterest);
             } else {

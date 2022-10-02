@@ -44,7 +44,7 @@ class TransactionsRepository {
     }
   }
 
-  Stream watchLazy() {
+  Stream watchLazyTotal() {
     final isar = getIt<IsarRepository>().instance;
     return isar.transactions.watchLazy();
   }

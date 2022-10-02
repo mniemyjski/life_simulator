@@ -75,6 +75,7 @@ class ExchangesCubit extends HydratedCubit<ExchangesState> {
                       result.add(newTransaction);
 
                       _moneyCubit.addTransaction(
+                          dateTime: date,
                           value: -lastCandle.close * count,
                           eTypeTransactionSource: ETypeTransactionSource.market);
                       emit(ExchangesState.loaded(result));
@@ -120,7 +121,9 @@ class ExchangesCubit extends HydratedCubit<ExchangesState> {
                       }
 
                       _moneyCubit.addTransaction(
-                          value: addMoney, eTypeTransactionSource: ETypeTransactionSource.market);
+                          value: addMoney,
+                          eTypeTransactionSource: ETypeTransactionSource.market,
+                          dateTime: date);
                       emit(ExchangesState.loaded(result));
                       return 'Succeed';
                     },

@@ -95,8 +95,13 @@ class LearningCubit extends HydratedCubit<LearningState> {
     state.whenOrNull(loaded: (learnings) {
       List<Learning> result = List.from(learnings)..add(learning.copyWith(id: Uuid().v1()));
 
-      _moneyCubit.addTransaction(
-          value: learning.cost, eTypeTransactionSource: ETypeTransactionSource.learning);
+      _dateCubit.state.whenOrNull(loaded: (date) {
+        _moneyCubit.addTransaction(
+            dateTime: date,
+            value: learning.cost,
+            eTypeTransactionSource: ETypeTransactionSource.learning);
+      });
+
       emit(LearningState.loaded(result));
     });
   }

@@ -4,6 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../date/cubit/date_cubit.dart';
 import '../../../money/cubit/income/income_cubit.dart';
 import '../../../money/cubit/money/money_cubit.dart';
 import '../../../money/models/income/income_model.dart';
@@ -26,11 +27,14 @@ class TransportCubit extends HydratedCubit<TransportState> {
   final NewGameCubit _newGameCubit;
   late StreamSubscription _newGameSub;
 
+  final DateCubit _dateCubit;
+
   TransportCubit(
     this._moneyCubit,
     this._incomeCubit,
     this._timeSpendCubit,
     this._newGameCubit,
+    this._dateCubit,
   ) : super(const TransportState.initial()) {
     _newGame();
   }
@@ -89,8 +93,12 @@ class TransportCubit extends HydratedCubit<TransportState> {
         ],
       );
 
-      _moneyCubit.addTransaction(
-          value: transport.cost, eTypeTransactionSource: ETypeTransactionSource.transport);
+      _dateCubit.state.whenOrNull(loaded: (date) {
+        _moneyCubit.addTransaction(
+            dateTime: date,
+            value: transport.cost,
+            eTypeTransactionSource: ETypeTransactionSource.transport);
+      });
 
       _incomeCubit.add(income);
 
@@ -105,8 +113,13 @@ class TransportCubit extends HydratedCubit<TransportState> {
       if (transport != null) {
         _timeSpendCubit.removeBonus(ETypeBonusSource.transport);
         _incomeCubit.remove(transport.id);
-        _moneyCubit.addTransaction(
-            value: transport.cost * 0.8, eTypeTransactionSource: ETypeTransactionSource.transport);
+
+        _dateCubit.state.whenOrNull(loaded: (date) {
+          _moneyCubit.addTransaction(
+              dateTime: date,
+              value: transport.cost * 0.8,
+              eTypeTransactionSource: ETypeTransactionSource.transport);
+        });
 
         emit(const TransportState.loaded(transport: null));
       }

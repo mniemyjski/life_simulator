@@ -6,7 +6,6 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../utilities/utilities.dart';
-import '../../../database/cubit/database_cubit.dart';
 import '../../../date/cubit/date_cubit.dart';
 import '../../../money/cubit/income/income_cubit.dart';
 import '../../../money/cubit/money/money_cubit.dart';
@@ -33,7 +32,6 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
   final DateCubit _dateCubit;
   late StreamSubscription _dateSub;
 
-  final DatabaseCubit _databaseCubit;
   final TenantsCubit _tenantsCubit;
 
   final IncomeCubit _incomeCubit;
@@ -43,7 +41,6 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
     this._moneyCubit,
     this._buyAssetCubit,
     this._dateCubit,
-    this._databaseCubit,
     this._tenantsCubit,
     this._incomeCubit,
   ) : super(const AssetsState.initial()) {
@@ -72,8 +69,13 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
     return state.maybeWhen(
         orElse: () => throw 'error',
         loaded: (assets) {
-          _moneyCubit.addTransaction(
-              value: -asset.value, eTypeTransactionSource: ETypeTransactionSource.asset);
+          _dateCubit.state.whenOrNull(loaded: (date) {
+            _moneyCubit.addTransaction(
+                dateTime: date,
+                value: -asset.value,
+                eTypeTransactionSource: ETypeTransactionSource.asset);
+          });
+
           _buyAssetCubit.remove(asset);
           _addIncome(asset);
 
@@ -99,8 +101,14 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
         orElse: () => throw 'error',
         loaded: (assets) {
           List<Asset> result = List.of(assets)..removeWhere((element) => element.id == asset.id);
-          _moneyCubit.addTransaction(
-              value: asset.value, eTypeTransactionSource: ETypeTransactionSource.asset);
+
+          _dateCubit.state.whenOrNull(loaded: (date) {
+            _moneyCubit.addTransaction(
+                dateTime: date,
+                value: asset.value,
+                eTypeTransactionSource: ETypeTransactionSource.asset);
+          });
+
           _buyAssetCubit.add(asset.copyWith(friendlyAnimal: true, minRent: 800));
           _tenantsCubit.removeTenantInAsset(asset);
           _removeIncome(asset);
@@ -138,8 +146,11 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
         loaded: (assets) {
           List<Asset> result = List.from(assets)..remove(asset);
 
-          _moneyCubit.addTransaction(
-              value: cost, eTypeTransactionSource: ETypeTransactionSource.asset);
+          _dateCubit.state.whenOrNull(loaded: (date) {
+            _moneyCubit.addTransaction(
+                dateTime: date, value: cost, eTypeTransactionSource: ETypeTransactionSource.asset);
+          });
+
           Asset newAsset = asset.copyWith(
               renovation: asset.renovation + renovation,
               value: asset.value + (asset.baseValue * (renovation / 100)));
@@ -161,8 +172,12 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
         orElse: () => throw 'error',
         loaded: (assets) {
           List<Asset> result = List.from(assets)..remove(asset);
-          _moneyCubit.addTransaction(
-              value: cost, eTypeTransactionSource: ETypeTransactionSource.asset);
+
+          _dateCubit.state.whenOrNull(loaded: (date) {
+            _moneyCubit.addTransaction(
+                dateTime: date, value: cost, eTypeTransactionSource: ETypeTransactionSource.asset);
+          });
+
           Asset newAsset =
               asset.copyWith(level: asset.level + level, value: asset.value + (-cost * 1.5));
           result.add(newAsset);

@@ -120,6 +120,7 @@ class IncomeCubit extends HydratedCubit<IncomeState> {
 
                       result.add(element.copyWith(next: nextDate));
                       _moneyCubit.addTransaction(
+                        dateTime: date,
                         value: element.value,
                         eTypeTransactionSource: element.source,
                       );
