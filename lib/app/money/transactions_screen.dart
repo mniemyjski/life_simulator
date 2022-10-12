@@ -9,7 +9,7 @@ import '../../config/routes/routes.gr.dart';
 import '../../constants/locale_keys.g.dart';
 import '../../utilities/utilities.dart';
 import '../date/widgets/next_day.dart';
-import '../game/widget/app_bar_stats.dart';
+import '../game/widget/app_bar_game.dart';
 import 'cubit/transactions/transactions_cubit.dart';
 import 'models/sum_transactions/sum_transactions_model.dart';
 import 'models/transaction/transaction_model.dart';
@@ -72,6 +72,7 @@ class TransactionsScreen extends StatelessWidget {
     return BlocProvider(
       create: (_) => getIt<TransactionsCubit>(),
       child: CustomScaffold(
+        appBar: AppBarGame(title: LocaleKeys.transactions.tr()),
         body: BlocBuilder<TransactionsCubit, TransactionsState>(
           builder: (context, state) {
             return state.maybeWhen(
@@ -79,7 +80,6 @@ class TransactionsScreen extends StatelessWidget {
                 loaded: (date, transactions) {
                   return Column(
                     children: [
-                      const AppBarStats(),
                       Row(
                         children: [
                           Card(

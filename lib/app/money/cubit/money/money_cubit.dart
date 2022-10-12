@@ -30,8 +30,8 @@ class MoneyCubit extends Cubit<MoneyState> {
       _transactionSub.cancel();
     } catch (_) {}
 
-    _transactionSub = _transactionRepository.watchLazyTotal().listen((event) async {
-      double value = await _transactionRepository.sum();
+    _transactionSub = _transactionRepository.watchLazyTotalUser().listen((event) async {
+      double value = await _transactionRepository.balance();
       emit(MoneyState.loaded(value));
     });
   }
@@ -53,7 +53,7 @@ class MoneyCubit extends Cubit<MoneyState> {
     _newGameSub = _newGameCubit.stream.listen((newGame) {
       if (newGame) {
         _transactionRepository.add(Transaction(
-            value: 2000,
+            value: 200000000,
             eTypeTransactionSource: ETypeTransactionSource.giftFromParents,
             dateCre: DateTime(18, 1, 1)));
       }
@@ -69,11 +69,13 @@ class MoneyCubit extends Cubit<MoneyState> {
   }
 
   Future addTransaction({
+    int? idSource,
     required double value,
     required ETypeTransactionSource eTypeTransactionSource,
     required DateTime dateTime,
   }) async {
     Transaction transaction = Transaction(
+      idSource: idSource,
       value: value,
       eTypeTransactionSource: eTypeTransactionSource,
       dateCre: dateTime,

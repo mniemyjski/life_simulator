@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:richeable/app/business/cubit/businesses/businesses_cubit.dart';
 import 'package:richeable/app/business/models/business/business_model.dart';
+import 'package:richeable/app/date/cubit/date_cubit.dart';
 import 'package:richeable/utilities/utilities.dart';
 import 'package:richeable/widgets/custom_button.dart';
 
@@ -87,14 +88,18 @@ class _BusinessCreatorState extends State<BusinessCreator> {
             CustomButton(
               onPressed: () {
                 if (formKey.currentState!.validate()) {
-                  String? toast =
-                      context.read<BusinessesCubit>().create(Business.builder(controller.text));
+                  context.read<DateCubit>().state.whenOrNull(loaded: (date) {
+                    String? toast = context.read<BusinessesCubit>().create(Business(
+                          name: controller.text,
+                          dateCre: date,
+                        ));
 
-                  if (toast != null) {
-                    BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
-                  } else {
-                    context.router.pop();
-                  }
+                    if (toast != null) {
+                      BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
+                    } else {
+                      context.router.pop();
+                    }
+                  });
                 }
               },
               child: Text(LocaleKeys.create.tr()),

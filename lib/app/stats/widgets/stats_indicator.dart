@@ -24,24 +24,31 @@ class StatsIndicator extends StatelessWidget {
     return GestureDetector(
       onTap: () => null,
       child: Padding(
-        padding: const EdgeInsets.all(2.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
+        padding: const EdgeInsets.only(left: 4, right: 4),
+        child: Row(
+          // crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            StatsElement(
-              name: LocaleKeys.satisfaction.tr(),
-              color: Colors.yellow[600]!.withOpacity(0.7),
-              value: _satisfaction,
+            Expanded(
+              child: StatsElement(
+                name: LocaleKeys.satisfaction.tr(),
+                color: Colors.yellow[900]!.withOpacity(0.7),
+                value: _satisfaction,
+              ),
             ),
-            StatsElement(
-              name: LocaleKeys.tiredness.tr(),
-              color: Colors.blue[600]!.withOpacity(0.7),
-              value: _tiredness,
+            Expanded(
+              child: StatsElement(
+                name: LocaleKeys.tiredness.tr(),
+                color: Colors.blue[800]!.withOpacity(0.7),
+                value: _tiredness,
+              ),
             ),
-            StatsElement(
-              name: LocaleKeys.health.tr(),
-              color: Colors.red[800]!.withOpacity(0.7),
-              value: _health,
+            Expanded(
+              child: StatsElement(
+                name: LocaleKeys.health.tr(),
+                color: Colors.red[800]!.withOpacity(0.7),
+                value: _health,
+              ),
             ),
           ],
         ),

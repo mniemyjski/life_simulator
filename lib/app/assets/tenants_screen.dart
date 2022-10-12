@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:richeable/widgets/widgets.dart';
 
-import '../game/widget/app_bar_stats.dart';
+import '../game/widget/app_bar_game.dart';
 
 class TenantsScreen extends StatelessWidget {
   const TenantsScreen({Key? key}) : super(key: key);
@@ -11,10 +11,9 @@ class TenantsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
+      appBar: AppBarGame(title: ''),
       body: Column(
-        children: const [
-          AppBarStats(),
-        ],
+        children: const [],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Padding(

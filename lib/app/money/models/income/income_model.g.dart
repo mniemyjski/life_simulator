@@ -44,6 +44,9 @@ const _$ETypeTransactionSourceEnumMap = {
   ETypeTransactionSource.giftFromParents: 'giftFromParents',
   ETypeTransactionSource.lostMoney: 'lostMoney',
   ETypeTransactionSource.advertisement: 'advertisement',
+  ETypeTransactionSource.employeeWages: 'employeeWages',
+  ETypeTransactionSource.withdraw: 'withdraw',
+  ETypeTransactionSource.deposit: 'deposit',
 };
 
 const _$ETypeIncomeEnumMap = {

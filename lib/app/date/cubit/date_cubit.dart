@@ -9,6 +9,7 @@ import '../../assets/cubit/assets/assets_cubit.dart';
 import '../../assets/cubit/build/build_asset_cubit.dart';
 import '../../bank/cubit/deposit/deposit_cubit.dart';
 import '../../bank/cubit/loan/loan_cubit.dart';
+import '../../business/cubit/businesses/businesses_cubit.dart';
 import '../../event/cubit/event_cubit.dart';
 import '../../freelance/cubit/done/freelance_done_cubit.dart';
 import '../../freelance/cubit/fame/fame_cubit.dart';
@@ -51,6 +52,7 @@ class DateCubit extends HydratedCubit<DateState> {
   final BuildAssetCubit _buildAssetsCubit;
   final DepositCubit _depositCubit;
   final LoanCubit _loanCubit;
+  final BusinessesCubit _businessesCubit;
 
   DateCubit(
     this._newGameCubit,
@@ -71,6 +73,7 @@ class DateCubit extends HydratedCubit<DateState> {
     this._buildAssetsCubit,
     this._depositCubit,
     this._loanCubit,
+    this._businessesCubit,
   ) : super(const DateState.initial()) {
     _newGame();
   }
@@ -90,10 +93,12 @@ class DateCubit extends HydratedCubit<DateState> {
 
   Future nextDay() async {
     String uid = _loadingCubit.add();
-    await Future.delayed(const Duration(milliseconds: 300));
+    await Future.delayed(const Duration(milliseconds: 200));
+
     for (var i = 0; i < _daySettingCubit.state; i++) {
       await state.whenOrNull(loaded: (date) async {
         DateTime dateTime = date.addDate(days: 1);
+
         await _stockMarketCubit.counting(dateTime);
         await _freelanceJobCubit.counting(dateTime);
         await _freelanceDoneCubit.counting(dateTime);
@@ -108,6 +113,7 @@ class DateCubit extends HydratedCubit<DateState> {
         await _buildAssetsCubit.counting(dateTime);
         await _depositCubit.counting(dateTime);
         await _loanCubit.counting(dateTime);
+        await _businessesCubit.counting(dateTime);
         await _timeSpendCubit.counting();
 
         emit(DateState.loaded(dateTime));

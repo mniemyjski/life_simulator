@@ -52,6 +52,16 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // CustomButton(
+            //     onPressed: () async {
+            //       // final test = File('assets/images/background.png');
+            //       // final test2 = test.readAsBytesSync();
+            //       final bytes = await rootBundle.load('assets/images/background.png');
+            //       final test = bytes.buffer.asUint8List();
+            //
+            //       print(test.length);
+            //     },
+            //     child: Text('test')),
             Padding(
               padding: const EdgeInsets.only(bottom: 24.0),
               child: RichText(

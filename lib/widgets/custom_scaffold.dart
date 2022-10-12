@@ -21,6 +21,7 @@ class CustomScaffold extends StatefulWidget {
 
 class _CustomScaffoldState extends State<CustomScaffold> {
   late Image background;
+  late Widget bg;
   bool test = true;
 
   @override
@@ -63,6 +64,14 @@ class _CustomScaffoldState extends State<CustomScaffold> {
       child: Stack(
         children: [
           background,
+          // SvgPicture.asset(
+          //   'assets/images/background (1).svg',
+          //   height: MediaQueryData.fromWindow(WidgetsBinding.instance.window).size.height,
+          //   width: MediaQueryData.fromWindow(WidgetsBinding.instance.window).size.width,
+          //   fit: BoxFit.cover,
+          //   // color: Colors.blue,
+          // ),
+
           Scaffold(
             backgroundColor: Colors.black.withOpacity(0.5),
             appBar: widget.appBar,

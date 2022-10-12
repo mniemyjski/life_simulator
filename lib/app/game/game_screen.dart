@@ -8,6 +8,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:richeable/app/assets/cubit/build/build_asset_cubit.dart';
 import 'package:richeable/app/event/cubit/event_cubit.dart';
 import 'package:richeable/app/freelance/cubit/job/freelance_job_cubit.dart';
+import 'package:richeable/app/game/widget/app_bar_game.dart';
 import 'package:richeable/app/learning/cubit/learning_cubit.dart';
 import 'package:richeable/app/loading/cubit/loading_cubit.dart';
 import 'package:richeable/app/tutorial/cubit/tutorial_cubit.dart';
@@ -23,8 +24,6 @@ import '../event/widgets/events_list.dart';
 import '../rules/cubit/rules_cubit.dart';
 import '../settings/cubit/audio_cubit.dart';
 import '../tutorial/models/tutorial_model.dart';
-import 'widget/app_bar_stats.dart';
-import 'widget/button_element.dart';
 
 class GameScreen extends StatefulWidget {
   const GameScreen({Key? key}) : super(key: key);
@@ -227,165 +226,177 @@ class _GameScreenState extends State<GameScreen> {
         ),
       ],
       child: CustomScaffold(
+          appBar: AppBarGame(
+            title: 'RicheAble',
+            keyTimeSpend: keyButton14,
+            keyStats: keyButton13,
+            keyDate: keyButton11,
+            keyMoney: keyButton12,
+          ),
           body: Column(
             children: [
-              AppBarStats(
-                keyTimeSpend: keyButton14,
-                keyStats: keyButton13,
-                keyDate: keyButton11,
-                keyMoney: keyButton12,
-              ),
+              // AppBarStats(
+              //   keyTimeSpend: keyButton14,
+              //   keyStats: keyButton13,
+              //   keyDate: keyButton11,
+              //   keyMoney: keyButton12,
+              // ),
               Expanded(
                   child: EventsList(
                 key: keyButton15,
               )),
-              GridView.count(
-                padding: const EdgeInsets.all(1),
-                crossAxisSpacing: 4,
-                mainAxisSpacing: 4,
-                crossAxisCount: 6,
-                shrinkWrap: true,
-                children: <Widget>[
-                  ButtonElement(
-                    key: keyButton,
-                    onPressed: () {
-                      context.read<AudioCubit>().getSounds(AudioCollection.click()).play();
-                      context.router.push(const PersonalityRoute());
-                    },
-                    icon: const FaIcon(FontAwesomeIcons.userLarge),
-                  ),
-                  ButtonElement(
-                    key: keyButton1,
-                    onPressed: () {
-                      context.read<AudioCubit>().getSounds(AudioCollection.click()).play();
-                      context.router.push(const TransactionsRoute());
-                    },
-                    icon: const FaIcon(FontAwesomeIcons.scaleBalanced),
-                  ),
-                  ButtonElement(
-                    key: keyButton2,
-                    onPressed: () {
-                      context.read<AudioCubit>().getSounds(AudioCollection.click()).play();
-                      context.router.push(const JobRoute());
-                    },
-                    icon: const FaIcon(FontAwesomeIcons.briefcase),
-                  ),
-                  ButtonElement(
-                    key: keyButton3,
-                    onPressed: () {
-                      context.read<AudioCubit>().getSounds(AudioCollection.click()).play();
-                      context.router.push(const FreelanceRoute());
-                    },
-                    icon: BlocBuilder<FreelanceJobCubit, FreelanceJobState>(
-                      builder: (context, state) {
-                        return state.maybeWhen(
-                            orElse: () => Container(),
-                            loaded: (freelance) {
-                              if (freelance.isEmpty) return const FaIcon(FontAwesomeIcons.computer);
-
-                              return Badge(
-                                padding: const EdgeInsets.all(4),
-                                badgeContent: Text(
-                                  freelance.length.toString(),
-                                  style: const TextStyle(fontSize: 8),
-                                ),
-                                child: const FaIcon(FontAwesomeIcons.computer),
-                              );
-                            });
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: GridView.count(
+                  padding: const EdgeInsets.all(1),
+                  crossAxisSpacing: 8,
+                  mainAxisSpacing: 8,
+                  crossAxisCount: 6,
+                  shrinkWrap: true,
+                  children: <Widget>[
+                    CustomButton(
+                      key: keyButton,
+                      onPressed: () {
+                        context.read<AudioCubit>().getSounds(AudioCollection.click()).play();
+                        context.router.push(const PersonalityRoute());
                       },
+                      child: const FaIcon(FontAwesomeIcons.userLarge),
                     ),
-                  ),
-                  ButtonElement(
-                    key: keyButton4,
-                    onPressed: () {
-                      context.read<AudioCubit>().getSounds(AudioCollection.click()).play();
-                      context.router.push(const AssetsRoute());
-                    },
-                    icon: BlocBuilder<BuildAssetCubit, BuildAssetState>(
-                      builder: (context, state) {
-                        return state.maybeWhen(
-                            orElse: () => Container(),
-                            loaded: (building, currentDate) {
-                              if (building.isEmpty) return const FaIcon(FontAwesomeIcons.city);
-
-                              return Badge(
-                                padding: const EdgeInsets.all(4),
-                                badgeContent: Text(
-                                  building.length.toString(),
-                                  style: const TextStyle(fontSize: 8),
-                                ),
-                                child: const FaIcon(FontAwesomeIcons.city),
-                              );
-                            });
+                    CustomButton(
+                      key: keyButton1,
+                      onPressed: () {
+                        context.read<AudioCubit>().getSounds(AudioCollection.click()).play();
+                        context.router.push(const TransactionsRoute());
                       },
+                      child: const FaIcon(FontAwesomeIcons.scaleBalanced),
                     ),
-                  ),
-                  ButtonElement(
-                    key: keyButton5,
-                    onPressed: () {
-                      context.read<AudioCubit>().getSounds(AudioCollection.click()).play();
-                      context.router.push(const BusinessesRoute());
-                    },
-                    icon: const FaIcon(FontAwesomeIcons.globe),
-                  ),
-                  ButtonElement(
-                    key: keyButton6,
-                    onPressed: () {
-                      context.read<AudioCubit>().getSounds(AudioCollection.click()).play();
-                      context.router.push(const StockMarketRoute());
-                    },
-                    icon: const FaIcon(FontAwesomeIcons.chartLine),
-                  ),
-                  ButtonElement(
-                    key: keyButton7,
-                    onPressed: () {
-                      context.read<AudioCubit>().getSounds(AudioCollection.click()).play();
-                      context.router.push(const LearningRoute());
-                    },
-                    icon: BlocBuilder<LearningCubit, LearningState>(
-                      builder: (context, state) {
-                        return state.maybeWhen(
-                            orElse: () => const FaIcon(FontAwesomeIcons.graduationCap),
-                            loaded: (learnings, currentDate) {
-                              if (learnings.isEmpty) {
-                                return const FaIcon(FontAwesomeIcons.graduationCap);
-                              }
-
-                              return Badge(
-                                padding: const EdgeInsets.all(4),
-                                badgeContent: Text(
-                                  learnings.length.toString(),
-                                  style: const TextStyle(fontSize: 8),
-                                ),
-                                child: const FaIcon(FontAwesomeIcons.graduationCap),
-                              );
-                            });
+                    CustomButton(
+                      key: keyButton2,
+                      onPressed: () {
+                        context.read<AudioCubit>().getSounds(AudioCollection.click()).play();
+                        context.router.push(const JobRoute());
                       },
+                      child: const FaIcon(FontAwesomeIcons.briefcase),
                     ),
-                  ),
-                  ButtonElement(
-                    key: keyButton8,
-                    onPressed: () {
-                      context.read<AudioCubit>().getSounds(AudioCollection.click()).play();
-                      context.router.push(const BankRoute());
-                    },
-                    icon: const FaIcon(FontAwesomeIcons.piggyBank),
-                  ),
-                  ButtonElement(
-                    key: keyButton9,
-                    onPressed: () {
-                      context.read<AudioCubit>().getSounds(AudioCollection.click()).play();
-                      context.router.push(const MedicinesRoute());
-                    },
-                    icon: const FaIcon(FontAwesomeIcons.capsules),
-                  ),
-                  ButtonElement(
-                    onPressed: () {
-                      context.router.pop();
-                    },
-                    icon: const FaIcon(FontAwesomeIcons.xmark),
-                  ),
-                ],
+                    CustomButton(
+                      key: keyButton3,
+                      onPressed: () {
+                        context.read<AudioCubit>().getSounds(AudioCollection.click()).play();
+                        context.router.push(const FreelanceRoute());
+                      },
+                      child: BlocBuilder<FreelanceJobCubit, FreelanceJobState>(
+                        builder: (context, state) {
+                          return state.maybeWhen(
+                              orElse: () => Container(),
+                              loaded: (freelance) {
+                                if (freelance.isEmpty)
+                                  return const FaIcon(FontAwesomeIcons.computer);
+
+                                return Badge(
+                                  padding: const EdgeInsets.all(4),
+                                  badgeContent: Text(
+                                    freelance.length.toString(),
+                                    style: const TextStyle(fontSize: 8),
+                                  ),
+                                  child: const FaIcon(FontAwesomeIcons.computer),
+                                );
+                              });
+                        },
+                      ),
+                    ),
+                    CustomButton(
+                      key: keyButton4,
+                      onPressed: () {
+                        context.read<AudioCubit>().getSounds(AudioCollection.click()).play();
+                        context.router.push(const AssetsRoute());
+                      },
+                      child: BlocBuilder<BuildAssetCubit, BuildAssetState>(
+                        builder: (context, state) {
+                          return state.maybeWhen(
+                              orElse: () => Container(),
+                              loaded: (building, currentDate) {
+                                if (building.isEmpty) return const FaIcon(FontAwesomeIcons.city);
+
+                                return Badge(
+                                  padding: const EdgeInsets.all(4),
+                                  badgeContent: Text(
+                                    building.length.toString(),
+                                    style: const TextStyle(fontSize: 8),
+                                  ),
+                                  child: const FaIcon(FontAwesomeIcons.city),
+                                );
+                              });
+                        },
+                      ),
+                    ),
+                    CustomButton(
+                      key: keyButton5,
+                      onPressed: () {
+                        context.read<AudioCubit>().getSounds(AudioCollection.click()).play();
+                        context.router.push(const BusinessesRoute());
+                        // context.pushRoute(const BusinessesRouter(children: [BusinessesRoute()]));
+                      },
+                      child: const FaIcon(FontAwesomeIcons.globe),
+                    ),
+                    CustomButton(
+                      key: keyButton6,
+                      onPressed: () {
+                        context.read<AudioCubit>().getSounds(AudioCollection.click()).play();
+                        context.router.push(const StockMarketRoute());
+                      },
+                      child: const FaIcon(FontAwesomeIcons.chartLine),
+                    ),
+                    CustomButton(
+                      key: keyButton7,
+                      onPressed: () {
+                        context.read<AudioCubit>().getSounds(AudioCollection.click()).play();
+                        context.router.push(const LearningRoute());
+                      },
+                      child: BlocBuilder<LearningCubit, LearningState>(
+                        builder: (context, state) {
+                          return state.maybeWhen(
+                              orElse: () => const FaIcon(FontAwesomeIcons.graduationCap),
+                              loaded: (learnings, currentDate) {
+                                if (learnings.isEmpty) {
+                                  return const FaIcon(FontAwesomeIcons.graduationCap);
+                                }
+
+                                return Badge(
+                                  padding: const EdgeInsets.all(4),
+                                  badgeContent: Text(
+                                    learnings.length.toString(),
+                                    style: const TextStyle(fontSize: 8),
+                                  ),
+                                  child: const FaIcon(FontAwesomeIcons.graduationCap),
+                                );
+                              });
+                        },
+                      ),
+                    ),
+                    CustomButton(
+                      key: keyButton8,
+                      onPressed: () {
+                        context.read<AudioCubit>().getSounds(AudioCollection.click()).play();
+                        context.router.push(const BankRoute());
+                      },
+                      child: const FaIcon(FontAwesomeIcons.piggyBank),
+                    ),
+                    CustomButton(
+                      key: keyButton9,
+                      onPressed: () {
+                        context.read<AudioCubit>().getSounds(AudioCollection.click()).play();
+                        context.router.push(const MedicinesRoute());
+                      },
+                      child: const FaIcon(FontAwesomeIcons.capsules),
+                    ),
+                    CustomButton(
+                      onPressed: () {
+                        context.router.pop();
+                      },
+                      child: const FaIcon(FontAwesomeIcons.xmark),
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(height: 80),
             ],

@@ -7,7 +7,7 @@ import 'package:richeable/widgets/widgets.dart';
 
 import '../../config/routes/routes.gr.dart';
 import '../../constants/constants.dart';
-import '../game/widget/app_bar_stats.dart';
+import '../game/widget/app_bar_game.dart';
 import 'cubit/assets/assets_cubit.dart';
 import 'widgets/asset_element.dart';
 import 'widgets/assets_menu.dart';
@@ -18,9 +18,9 @@ class AssetsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
+      appBar: AppBarGame(title: LocaleKeys.assets.tr()),
       body: Column(
         children: [
-          const AppBarStats(),
           Expanded(
             child: BlocBuilder<AssetsCubit, AssetsState>(
               builder: (context, state) {

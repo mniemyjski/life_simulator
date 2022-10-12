@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:richeable/utilities/utilities.dart';
+import 'package:richeable/widgets/custom_button.dart';
 
 import '../../../constants/constants.dart';
 import '../cubit/exchanges/exchanges_cubit.dart';
@@ -38,10 +39,8 @@ class SellButton extends StatelessWidget {
                     amount += element.count;
                   }
 
-                  return ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor: amount > 0 ? null : MaterialStateProperty.all(Colors.grey),
-                      ),
+                  return CustomButton(
+                      backgroundColor: amount > 0 ? null : Colors.grey,
                       onPressed: amount == 0
                           ? null
                           : () async {
@@ -50,7 +49,6 @@ class SellButton extends StatelessWidget {
                                   context: context,
                                   builder: (BuildContext context) {
                                     return SellBottomSheet(
-                                      lastCandle: lastCandle,
                                       instrument: instrument,
                                       buttonName: LocaleKeys.sell.tr(),
                                       amount: amount,

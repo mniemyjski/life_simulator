@@ -24,7 +24,7 @@ class TransactionsCubit extends Cubit<TransactionsState> {
     this._dateCubit,
     this._transactionRepository,
   ) : super(const TransactionsState.initial()) {
-    _newGame();
+    init();
   }
 
   @override
@@ -33,7 +33,7 @@ class TransactionsCubit extends Cubit<TransactionsState> {
     super.close();
   }
 
-  _newGame() {
+  init() {
     state.whenOrNull(initial: () {
       _dateCubit.state.whenOrNull(loaded: (date) {
         _counter(date.monthDate());
@@ -47,7 +47,7 @@ class TransactionsCubit extends Cubit<TransactionsState> {
       _transactionsSub.cancel();
     } catch (_) {}
 
-    _transactionsSub = _transactionRepository.watchLazyTotal().listen((event) {
+    _transactionsSub = _transactionRepository.watchLazyTotalUser().listen((event) {
       _dateCubit.state.whenOrNull(
         loaded: (currentDate) {
           if (currentDate.monthDate().millisecondsSinceEpoch >=

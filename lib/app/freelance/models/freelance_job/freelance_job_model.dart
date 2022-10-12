@@ -1,29 +1,31 @@
 import 'dart:math';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:isar/isar.dart';
 import 'package:richeable/utilities/utilities.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../skills/models/skill_model.dart';
-import '../freelance_base/freelance_base.dart';
 import '../freelance_done/freelance_done_model.dart';
 
 part 'freelance_job_model.freezed.dart';
 part 'freelance_job_model.g.dart';
 
+enum ETypeFreelance {
+  book,
+  course,
+  youtube,
+  application,
+  handicrafts,
+}
+
 @freezed
 class FreelanceJob with _$FreelanceJob {
   const FreelanceJob._();
 
-  @Implements<FreelanceBase>()
   const factory FreelanceJob({
-    //Base
-    Id? id,
     required String uid,
     required String name,
     required ETypeFreelance eTypeFreelance,
-    //EndBase
     required int level,
     required int workTime,
     required int leftWorkTime,
@@ -43,7 +45,7 @@ class FreelanceJob with _$FreelanceJob {
     required List<Skill> reqSkills,
     required List<Skill> userSkills,
   }) {
-    return FreelanceJob(
+    return _FreelanceJob(
       uid: const Uuid().v1(),
       name: name,
       eTypeFreelance: eTypeFreelance,
@@ -141,7 +143,6 @@ class FreelanceJob with _$FreelanceJob {
     }
 
     return FreelanceDone(
-      uid: uid,
       name: name,
       eTypeFreelance: eTypeFreelance,
       fame: fame * rating * level,

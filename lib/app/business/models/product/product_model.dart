@@ -1,16 +1,26 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:equatable/equatable.dart';
+import 'package:isar/isar.dart';
 
-part 'product_model.freezed.dart';
 part 'product_model.g.dart';
 
-@freezed
-class Product with _$Product {
-  const factory Product({
-    required String id,
-    required String businessId,
-    required double fame,
-    required double price,
-  }) = _Product;
+@Collection(ignore: {'props', 'stringify'})
+@Name('Employees')
+class Product extends Equatable {
+  final Id id;
+  final int businessId;
 
-  factory Product.fromJson(Map<String, dynamic> json) => _$ProductFromJson(json);
+  const Product({this.id = Isar.autoIncrement, required this.businessId});
+
+  @override
+  List<Object?> get props => [id, businessId];
+
+  Product copyWith({
+    Id? id,
+    int? businessId,
+  }) {
+    return Product(
+      id: id ?? this.id,
+      businessId: businessId ?? this.businessId,
+    );
+  }
 }

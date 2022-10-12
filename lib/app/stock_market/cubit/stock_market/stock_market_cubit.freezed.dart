@@ -35,25 +35,21 @@ mixin _$StockMarketState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            List<Instrument> instruments, List<Candle> candles)
-        loaded,
+    required TResult Function(List<Instrument> instruments) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Instrument> instruments, List<Candle> candles)?
-        loaded,
+    TResult Function(List<Instrument> instruments)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Instrument> instruments, List<Candle> candles)?
-        loaded,
+    TResult Function(List<Instrument> instruments)? loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -146,9 +142,7 @@ class _$Initial implements Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            List<Instrument> instruments, List<Candle> candles)
-        loaded,
+    required TResult Function(List<Instrument> instruments) loaded,
   }) {
     return initial();
   }
@@ -158,8 +152,7 @@ class _$Initial implements Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Instrument> instruments, List<Candle> candles)?
-        loaded,
+    TResult Function(List<Instrument> instruments)? loaded,
   }) {
     return initial?.call();
   }
@@ -169,8 +162,7 @@ class _$Initial implements Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Instrument> instruments, List<Candle> candles)?
-        loaded,
+    TResult Function(List<Instrument> instruments)? loaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -274,9 +266,7 @@ class _$Loading implements Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            List<Instrument> instruments, List<Candle> candles)
-        loaded,
+    required TResult Function(List<Instrument> instruments) loaded,
   }) {
     return loading();
   }
@@ -286,8 +276,7 @@ class _$Loading implements Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Instrument> instruments, List<Candle> candles)?
-        loaded,
+    TResult Function(List<Instrument> instruments)? loaded,
   }) {
     return loading?.call();
   }
@@ -297,8 +286,7 @@ class _$Loading implements Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Instrument> instruments, List<Candle> candles)?
-        loaded,
+    TResult Function(List<Instrument> instruments)? loaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -359,7 +347,7 @@ abstract class Loading implements StockMarketState {
 abstract class _$$LoadedCopyWith<$Res> {
   factory _$$LoadedCopyWith(_$Loaded value, $Res Function(_$Loaded) then) =
       __$$LoadedCopyWithImpl<$Res>;
-  $Res call({List<Instrument> instruments, List<Candle> candles});
+  $Res call({List<Instrument> instruments});
 }
 
 /// @nodoc
@@ -374,17 +362,12 @@ class __$$LoadedCopyWithImpl<$Res> extends _$StockMarketStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? instruments = freezed,
-    Object? candles = freezed,
   }) {
     return _then(_$Loaded(
       instruments == freezed
           ? _value.instruments
           : instruments // ignore: cast_nullable_to_non_nullable
               as List<Instrument>,
-      candles == freezed
-          ? _value.candles
-          : candles // ignore: cast_nullable_to_non_nullable
-              as List<Candle>,
     ));
   }
 }
@@ -392,23 +375,20 @@ class __$$LoadedCopyWithImpl<$Res> extends _$StockMarketStateCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$Loaded implements Loaded {
-  _$Loaded(this.instruments, this.candles, {final String? $type})
-      : $type = $type ?? 'loaded';
+  _$Loaded(this.instruments, {final String? $type}) : $type = $type ?? 'loaded';
 
   factory _$Loaded.fromJson(Map<String, dynamic> json) =>
       _$$LoadedFromJson(json);
 
   @override
   final List<Instrument> instruments;
-  @override
-  final List<Candle> candles;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'StockMarketState.loaded(instruments: $instruments, candles: $candles)';
+    return 'StockMarketState.loaded(instruments: $instruments)';
   }
 
   @override
@@ -417,16 +397,13 @@ class _$Loaded implements Loaded {
         (other.runtimeType == runtimeType &&
             other is _$Loaded &&
             const DeepCollectionEquality()
-                .equals(other.instruments, instruments) &&
-            const DeepCollectionEquality().equals(other.candles, candles));
+                .equals(other.instruments, instruments));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(instruments),
-      const DeepCollectionEquality().hash(candles));
+      runtimeType, const DeepCollectionEquality().hash(instruments));
 
   @JsonKey(ignore: true)
   @override
@@ -438,11 +415,9 @@ class _$Loaded implements Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            List<Instrument> instruments, List<Candle> candles)
-        loaded,
+    required TResult Function(List<Instrument> instruments) loaded,
   }) {
-    return loaded(instruments, candles);
+    return loaded(instruments);
   }
 
   @override
@@ -450,10 +425,9 @@ class _$Loaded implements Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Instrument> instruments, List<Candle> candles)?
-        loaded,
+    TResult Function(List<Instrument> instruments)? loaded,
   }) {
-    return loaded?.call(instruments, candles);
+    return loaded?.call(instruments);
   }
 
   @override
@@ -461,12 +435,11 @@ class _$Loaded implements Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Instrument> instruments, List<Candle> candles)?
-        loaded,
+    TResult Function(List<Instrument> instruments)? loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(instruments, candles);
+      return loaded(instruments);
     }
     return orElse();
   }
@@ -514,14 +487,11 @@ class _$Loaded implements Loaded {
 }
 
 abstract class Loaded implements StockMarketState {
-  factory Loaded(
-          final List<Instrument> instruments, final List<Candle> candles) =
-      _$Loaded;
+  factory Loaded(final List<Instrument> instruments) = _$Loaded;
 
   factory Loaded.fromJson(Map<String, dynamic> json) = _$Loaded.fromJson;
 
   List<Instrument> get instruments;
-  List<Candle> get candles;
   @JsonKey(ignore: true)
   _$$LoadedCopyWith<_$Loaded> get copyWith =>
       throw _privateConstructorUsedError;

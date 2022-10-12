@@ -2,8 +2,8 @@ import 'package:richeable/app/freelance/models/freelance_counting_model.dart';
 import 'package:richeable/utilities/utilities.dart';
 
 import '../../skills/models/skill_model.dart';
-import '../models/freelance_base/freelance_base.dart';
 import '../models/freelance_done/freelance_done_model.dart';
+import '../models/freelance_job/freelance_job_model.dart';
 
 abstract class FreelanceServices {
   static List<Skill> getList({required ETypeFreelance selected, required int lvl}) {
@@ -55,6 +55,8 @@ abstract class FreelanceServices {
     final double fame = args[1];
     final List<FreelanceDone> freelances = args[2];
 
+    if (freelances.isEmpty) return;
+
     double fame10 = fame / 30000;
     double addMoney = 0;
     double addFame = 0;
@@ -79,8 +81,8 @@ abstract class FreelanceServices {
         continue;
       }
       if (next3.millisecondsSinceEpoch > date.onlyDate().millisecondsSinceEpoch) {
-        addMoney += (e.price / 2) * fame10;
-        addFame += (e.fame / 2);
+        addMoney += e.price * fame10;
+        addFame += e.fame;
         result.add(e);
         continue;
       }

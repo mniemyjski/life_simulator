@@ -3,12 +3,12 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:richeable/app/game/widget/app_bar_game.dart';
 import 'package:richeable/utilities/utilities.dart';
 import 'package:richeable/widgets/widgets.dart';
 
 import '../../constants/constants.dart';
 import '../date/widgets/next_day.dart';
-import '../game/widget/app_bar_stats.dart';
 import 'cubit/time_spend_cubit.dart';
 import 'models/time_bonus/time_bonus_model.dart';
 
@@ -18,9 +18,12 @@ class TimeSpendScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
+      appBar: AppBarGame(
+        title: LocaleKeys.timeSpend.tr(),
+        showTimeSpend: false,
+      ),
       body: Column(
         children: [
-          const AppBarStats(),
           BlocBuilder<TimeSpendCubit, TimeSpendState>(
             builder: (context, state) {
               return state.maybeWhen(
@@ -246,7 +249,7 @@ class TimeSpendScreen extends StatelessWidget {
               child: Center(
                 child: Text(
                   name,
-                  style: TextStyle(color: Theme.of(context).textTheme.bodyText1!.color),
+                  style: Theme.of(context).textTheme.bodyText1,
                 ),
               ),
             )),

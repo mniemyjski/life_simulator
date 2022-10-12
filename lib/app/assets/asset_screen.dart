@@ -2,12 +2,12 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:richeable/app/game/widget/app_bar_game.dart';
 import 'package:richeable/utilities/utilities.dart';
 
 import '../../constants/locale_keys.g.dart';
 import '../../widgets/widgets.dart';
 import '../date/widgets/next_day.dart';
-import '../game/widget/app_bar_stats.dart';
 import 'cubit/assets/assets_cubit.dart';
 import 'cubit/tenant/tenants_cubit.dart';
 import 'models/asset/asset_model.dart';
@@ -28,7 +28,6 @@ class AssetScreen extends StatelessWidget {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const AppBarStats(),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -248,6 +247,7 @@ class AssetScreen extends StatelessWidget {
     }
 
     return CustomScaffold(
+      appBar: AppBarGame(title: LocaleKeys.asset.tr()),
       body: BlocBuilder<AssetsCubit, AssetsState>(
         builder: (context, state) {
           return state.maybeWhen(

@@ -122,7 +122,7 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
   }
 
   //function to change renovation for asset
-  String changeRenovation({
+  String? changeRenovation({
     required Asset asset,
     required double renovation,
     required double cost,
@@ -144,7 +144,6 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
               value: asset.value + (asset.baseValue * (renovation / 100)));
           result.add(newAsset);
           emit(AssetsState.loaded(result, currentDate));
-          return 'succeed';
         });
   }
 

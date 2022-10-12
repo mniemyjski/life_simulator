@@ -50,16 +50,15 @@ class ExchangesCubit extends HydratedCubit<ExchangesState> {
     });
   }
 
-  String buy({
+  String? buy({
     required String idInstrument,
     required double count,
   }) {
     return _stockMarketCubit.state.maybeWhen(
-        loaded: (market, candles) {
+        loaded: (market) {
           Instrument instrument = market.where((e) => e.id == idInstrument).first;
-          Candle lastCandle = candles.where((e) => e.instrument == instrument.name).first;
 
-          if (_moneyCubit.getBalance() < (count * lastCandle.close)) {
+          if (_moneyCubit.getBalance() < (count * instrument.lastCandle.close)) {
             return "You don't have enough money";
           }
 
@@ -70,16 +69,15 @@ class ExchangesCubit extends HydratedCubit<ExchangesState> {
                       var uuid = const Uuid();
                       List<Exchange> result = List.from(transactions);
                       Exchange newTransaction = Exchange(
-                          id: uuid.v1(), instrument: instrument, count: count, datCre: date);
+                          id: uuid.v1(), instrument: instrument, count: count * 0.99, datCre: date);
 
                       result.add(newTransaction);
 
                       _moneyCubit.addTransaction(
                           dateTime: date,
-                          value: -lastCandle.close * count,
+                          value: -instrument.lastCandle.close * count,
                           eTypeTransactionSource: ETypeTransactionSource.market);
                       emit(ExchangesState.loaded(result));
-                      return 'Succeed';
                     },
                     orElse: () => 'error');
               },
@@ -88,11 +86,11 @@ class ExchangesCubit extends HydratedCubit<ExchangesState> {
         orElse: () => 'error');
   }
 
-  String sell({required String idInstrument, required double count}) {
+  String? sell({required String idInstrument, required double count}) {
     return _stockMarketCubit.state.maybeWhen(
-        loaded: (market, candles) {
+        loaded: (market) {
           Instrument instrument = market.where((e) => e.id == idInstrument).first;
-          Candle lastCandle = candles.where((e) => e.instrument == instrument.name).first;
+          Candle lastCandle = instrument.lastCandle;
 
           return _dateCubit.state.maybeWhen(
               loaded: (date) {
@@ -125,7 +123,6 @@ class ExchangesCubit extends HydratedCubit<ExchangesState> {
                           eTypeTransactionSource: ETypeTransactionSource.market,
                           dateTime: date);
                       emit(ExchangesState.loaded(result));
-                      return 'Succeed';
                     },
                     orElse: () => 'error');
               },

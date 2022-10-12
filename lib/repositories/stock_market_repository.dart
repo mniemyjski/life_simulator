@@ -2,19 +2,23 @@ import 'dart:math';
 
 import 'package:injectable/injectable.dart';
 import 'package:isar/isar.dart';
-import 'package:richeable/app/database/data/data_instruments_candle.dart';
 import 'package:richeable/utilities/utilities.dart';
 
 import '../app/stock_market/models/candle/candle.dart';
 import '../app/stock_market/models/instrument/instrument.dart';
+import '../config/injectable/app_module.dart';
 import '../config/injectable/injection.dart';
-import 'isar_repository.dart';
 
 @lazySingleton
 class StockMarketRepository {
+  late Isar _isar;
+
+  StockMarketRepository() {
+    _isar = getIt<AppModule>().instance;
+  }
+
   Future<Candle> getLast(Instrument instrument) async {
-    final isar = getIt<IsarRepository>().instance;
-    final result = await isar.candles
+    final result = await _isar.candles
         .filter()
         .instrumentEqualTo(instrument.name)
         .sortByDateTimeDesc()
@@ -23,8 +27,7 @@ class StockMarketRepository {
   }
 
   Future<List<Candle>> getLastYearCandle(DateTime dateTime) async {
-    final isar = getIt<IsarRepository>().instance;
-    return await isar.candles
+    return await _isar.candles
         .filter()
         .dateTimeBetween(dateTime.addDate(years: -1), dateTime)
         .findAll();
@@ -32,10 +35,9 @@ class StockMarketRepository {
 
   Future<List<Instrument>> firstOneYearGenerate(List<Instrument> instrumentDB) async {
     List<Instrument> newInstruments = [];
-    List<Candle> init = DataCandle.db();
 
     for (var i in instrumentDB) {
-      List<Candle> newCandles = [init.firstWhere((element) => element.instrument == i.name)];
+      List<Candle> newCandles = [i.lastCandle];
       Instrument newInstrument = i;
 
       do {
@@ -76,24 +78,24 @@ class StockMarketRepository {
       } while (newCandles.last.dateTime.millisecondsSinceEpoch <
           DateTime(18, 01, 01).millisecondsSinceEpoch);
 
-      newInstruments.add(newInstrument);
+      newInstruments.add(newInstrument.copyWith(lastCandle: newCandles.last));
 
-      final isar = getIt<IsarRepository>().instance;
-      await isar.writeTxn(() async {
-        await isar.candles.putAll(newCandles);
+      await _isar.writeTxn(() async {
+        await _isar.candles.putAll(newCandles);
       });
     }
     return newInstruments;
   }
 
-  countingInstruments({required List<Instrument> instruments, required DateTime date}) async {
+  Future countingInstruments(
+      {required List<Instrument> instruments, required DateTime date}) async {
     List<Instrument> newInstruments = [];
 
     for (var i in instruments) {
       Instrument newInstrument = i;
       Candle newCandle;
 
-      Candle lastCandle = await getLast(newInstrument);
+      Candle lastCandle = newInstrument.lastCandle;
       newInstrument = _valorization(instrument: newInstrument, candles: lastCandle);
 
       if (lastCandle.dateTime.millisecondsSinceEpoch >
@@ -125,11 +127,10 @@ class StockMarketRepository {
           break;
       }
 
-      final isar = getIt<IsarRepository>().instance;
-      await isar.writeTxn(() async {
-        await isar.candles.put(newCandle);
+      await _isar.writeTxn(() async {
+        await _isar.candles.put(newCandle);
       });
-      newInstruments.add(newInstrument);
+      newInstruments.add(newInstrument.copyWith(lastCandle: newCandle));
     }
     return newInstruments;
   }

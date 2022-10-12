@@ -42,7 +42,7 @@ const TransactionSchema = CollectionSchema(
     r'idSource': PropertySchema(
       id: 4,
       name: r'idSource',
-      type: IsarType.string,
+      type: IsarType.long,
     ),
     r'monthCre': PropertySchema(
       id: 5,
@@ -98,7 +98,7 @@ const TransactionSchema = CollectionSchema(
   getId: _transactionGetId,
   getLinks: _transactionGetLinks,
   attach: _transactionAttach,
-  version: '3.0.1',
+  version: '3.0.2',
 );
 
 int _transactionEstimateSize(
@@ -107,12 +107,6 @@ int _transactionEstimateSize(
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
-  {
-    final value = object.idSource;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
   return bytesCount;
 }
 
@@ -126,7 +120,7 @@ void _transactionSerialize(
   writer.writeByte(offsets[1], object.eTypeTransaction.index);
   writer.writeByte(offsets[2], object.eTypeTransactionSource.index);
   writer.writeLong(offsets[3], object.hashCode);
-  writer.writeString(offsets[4], object.idSource);
+  writer.writeLong(offsets[4], object.idSource);
   writer.writeDateTime(offsets[5], object.monthCre);
   writer.writeDouble(offsets[6], object.value);
   writer.writeDateTime(offsets[7], object.yearCre);
@@ -144,7 +138,7 @@ Transaction _transactionDeserialize(
             reader.readByteOrNull(offsets[2])] ??
         ETypeTransactionSource.job,
     id: id,
-    idSource: reader.readStringOrNull(offsets[4]),
+    idSource: reader.readLongOrNull(offsets[4]),
     value: reader.readDouble(offsets[6]),
   );
   return object;
@@ -170,7 +164,7 @@ P _transactionDeserializeProp<P>(
     case 3:
       return (reader.readLong(offset)) as P;
     case 4:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readLongOrNull(offset)) as P;
     case 5:
       return (reader.readDateTime(offset)) as P;
     case 6:
@@ -208,6 +202,9 @@ const _TransactioneTypeTransactionSourceEnumValueMap = {
   'giftFromParents': 14,
   'lostMoney': 15,
   'advertisement': 16,
+  'employeeWages': 17,
+  'withdraw': 18,
+  'deposit': 19,
 };
 const _TransactioneTypeTransactionSourceValueEnumMap = {
   0: ETypeTransactionSource.job,
@@ -227,10 +224,13 @@ const _TransactioneTypeTransactionSourceValueEnumMap = {
   14: ETypeTransactionSource.giftFromParents,
   15: ETypeTransactionSource.lostMoney,
   16: ETypeTransactionSource.advertisement,
+  17: ETypeTransactionSource.employeeWages,
+  18: ETypeTransactionSource.withdraw,
+  19: ETypeTransactionSource.deposit,
 };
 
 Id _transactionGetId(Transaction object) {
-  return object.id ?? Isar.autoIncrement;
+  return object.id;
 }
 
 List<IsarLinkBase<dynamic>> _transactionGetLinks(Transaction object) {
@@ -737,24 +737,8 @@ extension TransactionQueryFilter
     });
   }
 
-  QueryBuilder<Transaction, Transaction, QAfterFilterCondition> idIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'id',
-      ));
-    });
-  }
-
-  QueryBuilder<Transaction, Transaction, QAfterFilterCondition> idIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'id',
-      ));
-    });
-  }
-
   QueryBuilder<Transaction, Transaction, QAfterFilterCondition> idEqualTo(
-      Id? value) {
+      Id value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'id',
@@ -764,7 +748,7 @@ extension TransactionQueryFilter
   }
 
   QueryBuilder<Transaction, Transaction, QAfterFilterCondition> idGreaterThan(
-    Id? value, {
+    Id value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -777,7 +761,7 @@ extension TransactionQueryFilter
   }
 
   QueryBuilder<Transaction, Transaction, QAfterFilterCondition> idLessThan(
-    Id? value, {
+    Id value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -790,8 +774,8 @@ extension TransactionQueryFilter
   }
 
   QueryBuilder<Transaction, Transaction, QAfterFilterCondition> idBetween(
-    Id? lower,
-    Id? upper, {
+    Id lower,
+    Id upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
@@ -825,56 +809,48 @@ extension TransactionQueryFilter
   }
 
   QueryBuilder<Transaction, Transaction, QAfterFilterCondition> idSourceEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
+      int? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'idSource',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<Transaction, Transaction, QAfterFilterCondition>
       idSourceGreaterThan(
-    String? value, {
+    int? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
         property: r'idSource',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<Transaction, Transaction, QAfterFilterCondition>
       idSourceLessThan(
-    String? value, {
+    int? value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
         property: r'idSource',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<Transaction, Transaction, QAfterFilterCondition> idSourceBetween(
-    String? lower,
-    String? upper, {
+    int? lower,
+    int? upper, {
     bool includeLower = true,
     bool includeUpper = true,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -883,78 +859,6 @@ extension TransactionQueryFilter
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Transaction, Transaction, QAfterFilterCondition>
-      idSourceStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'idSource',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Transaction, Transaction, QAfterFilterCondition>
-      idSourceEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'idSource',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Transaction, Transaction, QAfterFilterCondition>
-      idSourceContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'idSource',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Transaction, Transaction, QAfterFilterCondition> idSourceMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'idSource',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Transaction, Transaction, QAfterFilterCondition>
-      idSourceIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'idSource',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<Transaction, Transaction, QAfterFilterCondition>
-      idSourceIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'idSource',
-        value: '',
       ));
     });
   }
@@ -1384,10 +1288,9 @@ extension TransactionQueryWhereDistinct
     });
   }
 
-  QueryBuilder<Transaction, Transaction, QDistinct> distinctByIdSource(
-      {bool caseSensitive = true}) {
+  QueryBuilder<Transaction, Transaction, QDistinct> distinctByIdSource() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'idSource', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'idSource');
     });
   }
 
@@ -1444,7 +1347,7 @@ extension TransactionQueryProperty
     });
   }
 
-  QueryBuilder<Transaction, String?, QQueryOperations> idSourceProperty() {
+  QueryBuilder<Transaction, int?, QQueryOperations> idSourceProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'idSource');
     });

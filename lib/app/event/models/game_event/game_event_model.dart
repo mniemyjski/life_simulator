@@ -28,11 +28,4 @@ class GameEvent with _$GameEvent {
   }) = _Event;
 
   factory GameEvent.fromJson(Map<String, dynamic> json) => _$GameEventFromJson(json);
-
-  // String dateToString() {
-  //   if (this.datCre == null) throw 'Next date is null';
-  //   if (this.datCre!.year < 99) return DateFormat('yy-MM-dd').format(this.datCre!);
-  //   if (this.datCre!.year < 999) return DateFormat('yyy-MM-dd').format(this.datCre!);
-  //   return DateFormat('yyyy-MM-dd').format(this.datCre!);
-  // }
 }

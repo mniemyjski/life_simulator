@@ -8,7 +8,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:richeable/app/business/cubit/businesses/businesses_cubit.dart';
 import 'package:richeable/app/loading/cubit/loading_cubit.dart';
 import 'package:richeable/app/settings/cubit/audio_cubit.dart';
-import 'package:richeable/repositories/isar_repository.dart';
+import 'package:richeable/config/injectable/app_module.dart';
 import 'package:url_strategy/url_strategy.dart';
 
 import 'app/assets/cubit/assets/assets_cubit.dart';
@@ -49,9 +49,9 @@ import 'utilities/utilities.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-  configureDependencies(Env.dev);
+  await configureDependencies(Env.dev);
+  await getIt<AppModule>().init();
   setPathUrlStrategy();
-  await getIt<IsarRepository>().init();
 
   final storage = await HydratedStorage.build(
     storageDirectory: kIsWeb ? HydratedStorage.webStorageDirectory : await getTemporaryDirectory(),

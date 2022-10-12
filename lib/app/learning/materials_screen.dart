@@ -7,10 +7,9 @@ import 'package:richeable/widgets/widgets.dart';
 
 import '../../constants/constants.dart';
 import '../../utilities/utilities.dart';
-import '../../widgets/custom_drop_down_button.dart';
 import '../database/cubit/database_cubit.dart';
 import '../database/models/database.dart';
-import '../game/widget/app_bar_stats.dart';
+import '../game/widget/app_bar_game.dart';
 import '../skills/models/skill_model.dart';
 import 'cubit/learning_cubit.dart';
 import 'models/learning_model.dart';
@@ -37,10 +36,10 @@ class _MaterialsScreenState extends State<MaterialsScreen> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
+      appBar: AppBarGame(title: LocaleKeys.materials.tr()),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const AppBarStats(),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: CustomDropDownButton(

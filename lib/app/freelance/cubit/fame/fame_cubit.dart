@@ -41,7 +41,12 @@ class FameCubit extends HydratedCubit<FameState> {
 
   counting(DateTime dateTime) {
     state.whenOrNull(loaded: (fame, currentDate) {
-      double result = fame - (fame * 0.001);
+      double decrease = 0;
+      if (fame < 1000000) decrease = (fame * 0.001);
+      if (fame > 1000000 && fame < 10000000) decrease = (fame * 0.005);
+      if (fame > 10000000) decrease = (fame * 0.02);
+
+      double result = fame - decrease;
       emit(FameState.loaded(result, dateTime));
     });
   }

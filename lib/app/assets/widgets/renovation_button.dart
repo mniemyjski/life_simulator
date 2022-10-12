@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:richeable/utilities/utilities.dart';
@@ -57,12 +58,16 @@ class RenovationButton extends StatelessWidget {
                         ),
                         CustomButton(
                             onPressed: () {
-                              context.read<AssetsCubit>().changeRenovation(
+                              final toast = context.read<AssetsCubit>().changeRenovation(
                                   asset: asset,
                                   renovation: newRenovation - asset.renovation,
                                   cost: -cost);
 
-                              context.router.pop();
+                              if (toast != null) {
+                                BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
+                              } else {
+                                context.router.pop();
+                              }
                             },
                             child: Text(
                               LocaleKeys.confirm.tr(),

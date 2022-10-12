@@ -21,6 +21,7 @@ _$_Instrument _$$_InstrumentFromJson(Map<String, dynamic> json) =>
       max: (json['max'] as num).toDouble(),
       valorization: (json['valorization'] as num).toDouble(),
       lastValorization: DateTime.parse(json['lastValorization'] as String),
+      lastCandle: Candle.fromJson(json['lastCandle'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_InstrumentToJson(_$_Instrument instance) =>
@@ -37,6 +38,7 @@ Map<String, dynamic> _$$_InstrumentToJson(_$_Instrument instance) =>
       'max': instance.max,
       'valorization': instance.valorization,
       'lastValorization': instance.lastValorization.toIso8601String(),
+      'lastCandle': instance.lastCandle.toJson(),
     };
 
 const _$ENameInstrumentEnumMap = {

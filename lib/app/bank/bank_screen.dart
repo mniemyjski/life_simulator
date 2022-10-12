@@ -10,7 +10,7 @@ import 'package:richeable/utilities/utilities.dart';
 import '../../constants/constants.dart';
 import '../../widgets/widgets.dart';
 import '../date/widgets/next_day.dart';
-import '../game/widget/app_bar_stats.dart';
+import '../game/widget/app_bar_game.dart';
 import '../money/cubit/money/money_cubit.dart';
 import '../money/models/transaction/transaction_model.dart';
 import 'cubit/deposit/deposit_cubit.dart';
@@ -212,10 +212,10 @@ class BankScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
+      appBar: AppBarGame(title: LocaleKeys.bank.tr()),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const AppBarStats(),
           Card(
             child: Container(
               width: double.infinity,

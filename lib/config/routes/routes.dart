@@ -1,10 +1,9 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:richeable/app/business/business_screen.dart';
+import 'package:flutter/material.dart';
 import 'package:richeable/app/business/business_transactions_screen.dart';
-import 'package:richeable/app/business/businesses_screen.dart';
-import 'package:richeable/app/business/employees_screen.dart';
 import 'package:richeable/app/business/products_screen.dart';
 import 'package:richeable/app/business/upgrade_screen.dart';
+import 'package:richeable/widgets/custom_scaffold.dart';
 
 import '../../app/assets/asset_screen.dart';
 import '../../app/assets/assets_screen.dart';
@@ -12,6 +11,10 @@ import '../../app/assets/build_assets_screen.dart';
 import '../../app/assets/buy_assets_screen.dart';
 import '../../app/assets/tenants_screen.dart';
 import '../../app/bank/bank_screen.dart';
+import '../../app/business/business_screen.dart';
+import '../../app/business/businesses_screen.dart';
+import '../../app/business/employees_screen.dart';
+import '../../app/business/human_resources_screen.dart';
 import '../../app/freelance/freelance_jobs_screen.dart';
 import '../../app/freelance/freelance_screen.dart';
 import '../../app/game/game_screen.dart';
@@ -152,7 +155,7 @@ import '../../app/time_spend/time_spend_screen.dart';
     ),
     CustomRoute(
       page: BusinessesScreen,
-      transitionsBuilder: TransitionsBuilders.fadeIn,
+      transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
       durationInMilliseconds: 300,
     ),
     CustomRoute(
@@ -166,11 +169,6 @@ import '../../app/time_spend/time_spend_screen.dart';
       durationInMilliseconds: 300,
     ),
     CustomRoute(
-      page: EmployeesScreen,
-      transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
-      durationInMilliseconds: 300,
-    ),
-    CustomRoute(
       page: UpgradeScreen,
       transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
       durationInMilliseconds: 300,
@@ -180,6 +178,25 @@ import '../../app/time_spend/time_spend_screen.dart';
       transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
       durationInMilliseconds: 300,
     ),
+    CustomRoute(
+      page: EmployeesScreen,
+      transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
+      durationInMilliseconds: 300,
+    ),
+    CustomRoute(
+      page: HumanResourcesScreen,
+      transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
+      durationInMilliseconds: 300,
+    ),
   ],
 )
 class $AppRouter {}
+
+class EmptyScreen extends StatelessWidget {
+  const EmptyScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const CustomScaffold(body: AutoRouter());
+  }
+}

@@ -12,7 +12,6 @@ import '../../../widgets/widgets.dart';
 import '../../skills/cubit/skills_cubit.dart';
 import '../../skills/models/skill_model.dart';
 import '../cubit/job/freelance_job_cubit.dart';
-import '../models/freelance_base/freelance_base.dart';
 import '../models/freelance_job/freelance_job_model.dart';
 
 class FreelanceJobCreator extends StatefulWidget {

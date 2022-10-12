@@ -99,7 +99,7 @@ class FreelanceJobCubit extends HydratedCubit<FreelanceJobState> {
     for (var r in reqSkills) {
       for (var u in userSkills) {
         if (u.name == r.name) {
-          _skillsCubit.update(skill: u.name, exp: ((u.lvl + 1) * hours / 3).toDouble());
+          _skillsCubit.update(skill: u.name, exp: hours / 2.toDouble());
         }
       }
     }

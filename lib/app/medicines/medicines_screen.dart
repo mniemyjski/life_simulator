@@ -1,12 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bot_toast/bot_toast.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:richeable/constants/constants.dart';
 import 'package:richeable/widgets/widgets.dart';
 
 import '../date/widgets/next_day.dart';
-import '../game/widget/app_bar_stats.dart';
+import '../game/widget/app_bar_game.dart';
 import 'cubit/medicines_cubit.dart';
 import 'models/medicine_model.dart';
 
@@ -16,9 +18,9 @@ class MedicinesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
+      appBar: AppBarGame(title: LocaleKeys.medicine.tr()),
       body: Column(
         children: [
-          const AppBarStats(),
           Expanded(child: BlocBuilder<MedicinesCubit, MedicinesState>(
             builder: (context, state) {
               return state.maybeWhen(

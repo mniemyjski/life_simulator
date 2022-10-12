@@ -59,26 +59,31 @@ class FreelanceDoneCubit extends HydratedCubit<FreelanceDoneState> {
   }
 
   Future counting(DateTime dateTime) async {
-    List<FreelanceDone> freelances = await _freelanceRepository.getAll();
-    if (freelances.isEmpty) return;
-
     await _fameCubit.state.whenOrNull(
       loaded: (fame, currentDate) async {
-        final FreelanceCounting result = await compute(
-                FreelanceServices.reduceFameAndCountingFameAndMoney, [dateTime, fame, freelances])
-            as FreelanceCounting;
+        List<FreelanceDone> freelances = await _freelanceRepository.getToReduce(dateTime);
+        if (freelances.isNotEmpty) {
+          final FreelanceCounting result =
+              await FreelanceServices.reduceFameAndCountingFameAndMoney(
+                  [dateTime, fame, freelances]);
 
-        if (result.addFame > 0) _fameCubit.add(result.addFame);
+          _freelanceRepository.change(result.freelances);
+        }
 
-        if (result.addMoney > 0) {
+        double addFame = await _freelanceRepository.dailyFame();
+        double addMoney = await _freelanceRepository.dailyPrice();
+        addMoney = addMoney * (fame / 30000);
+
+        if (addFame > 0) _fameCubit.add(addFame);
+
+        if (addMoney > 0) {
           _moneyCubit.addTransaction(
             dateTime: dateTime,
-            value: result.addMoney,
+            value: addMoney,
             eTypeTransactionSource: ETypeTransactionSource.freelance,
           );
         }
-
-        _freelanceRepository.addAll(result.freelances);
+        _freelanceRepository.removeOld(dateTime);
       },
     );
   }

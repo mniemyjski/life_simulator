@@ -10,39 +10,43 @@ class StatsElement extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 2.0),
-      child: Row(
-        children: [
-          Text(name),
-          Stack(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(2.0),
-                width: 50,
-                child: ClipRRect(
-                  borderRadius: const BorderRadius.all(Radius.circular(10)),
-                  child: LinearProgressIndicator(
-                    value: value,
-                    minHeight: 8,
-                    color: color,
-                  ),
-                ),
-              ),
-              Positioned.fill(
-                child: Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    '${(value * 100).round()}%',
-                    style:
-                        TextStyle(fontSize: 7, color: Theme.of(context).textTheme.bodyText1!.color),
-                  ),
-                ),
-              ),
-            ],
+    return Stack(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(4.0),
+          width: double.infinity,
+          child: ClipRRect(
+            borderRadius: const BorderRadius.all(Radius.circular(4)),
+            child: LinearProgressIndicator(
+              value: value,
+              minHeight: 14,
+              color: color,
+              backgroundColor: Colors.white30,
+            ),
           ),
-        ],
-      ),
+        ),
+        Positioned.fill(
+          child: Align(
+            alignment: Alignment.center,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8, right: 8, top: 1),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    name,
+                    style: const TextStyle(fontSize: 9),
+                  ),
+                  Text(
+                    '${(value * 100).round()}%',
+                    style: const TextStyle(fontSize: 9),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

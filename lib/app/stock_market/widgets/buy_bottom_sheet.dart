@@ -1,16 +1,15 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:richeable/utilities/utilities.dart';
 
 import '../../../widgets/widgets.dart';
 import '../cubit/exchanges/exchanges_cubit.dart';
-import '../models/candle/candle.dart';
 import '../models/instrument/instrument.dart';
 
 class BuyBottomSheet extends StatefulWidget {
   final Instrument instrument;
-  final Candle lastCandle;
   final String buttonName;
   final double money;
 
@@ -18,7 +17,6 @@ class BuyBottomSheet extends StatefulWidget {
     required this.instrument,
     required this.buttonName,
     required this.money,
-    required this.lastCandle,
     Key? key,
   }) : super(key: key);
 
@@ -27,12 +25,13 @@ class BuyBottomSheet extends StatefulWidget {
 }
 
 class _BuyBottomSheetState extends State<BuyBottomSheet> {
-  double value = 0;
+  double count = 0;
 
   @override
   Widget build(BuildContext context) {
     double maxMoney = 1000000;
-    double max = (widget.money <= maxMoney ? widget.money : maxMoney) / widget.lastCandle.close;
+    double max =
+        (widget.money <= maxMoney ? widget.money : maxMoney) / widget.instrument.lastCandle.close;
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -44,29 +43,34 @@ class _BuyBottomSheetState extends State<BuyBottomSheet> {
             children: [
               Expanded(
                 child: Slider(
-                  value: value,
+                  value: count,
                   min: 0,
                   max: max,
                   activeColor: Colors.white70,
                   inactiveColor: Colors.white70,
                   divisions: 100,
-                  onChanged: (double v) => setState(() => value = v),
+                  onChanged: (double v) => setState(() => count = v),
                 ),
               ),
               Column(
                 children: [
-                  Text('${(value * 0.99).toStringAsFixed(4)} ${widget.instrument.name}'),
-                  Text('${(value * widget.lastCandle.close).toMoney()}'),
+                  Text(
+                      '${(count * 0.99).toStringAsFixed(4)} ${Enums.toText(widget.instrument.name)}'),
+                  Text('${(count * widget.instrument.lastCandle.close).toMoney()}'),
                 ],
               )
             ],
           ),
           CustomButton(
               onPressed: () {
-                context
+                final toast = context
                     .read<ExchangesCubit>()
-                    .buy(idInstrument: widget.instrument.id, count: value * 0.99);
-                context.router.pop();
+                    .buy(idInstrument: widget.instrument.id, count: count);
+                if (toast != null) {
+                  BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
+                } else {
+                  context.router.pop();
+                }
               },
               child: Text(
                 widget.buttonName,

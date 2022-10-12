@@ -2,60 +2,43 @@ import 'package:equatable/equatable.dart';
 import 'package:isar/isar.dart';
 import 'package:richeable/utilities/utilities.dart';
 
-import '../freelance_base/freelance_base.dart';
+import '../freelance_job/freelance_job_model.dart';
 
-// part 'freelance_done_model.freezed.dart';
 part 'freelance_done_model.g.dart';
-
-// @freezed
-// class FreelanceDone with _$FreelanceDone {
-//   const FreelanceDone._();
-//
-//   @Implements<FreelanceBase>()
-//   @Assert('rating > 0', 'rating < 6')
-//   const factory FreelanceDone({
-//     //Base
-//     required String id,
-//     required String name,
-//     required ETypeFreelance eTypeFreelance,
-//     //EndBase
-//     required double fame,
-//     required double price,
-//     required DateTime dateCre,
-//     required int rating,
-//   }) = _FreelanceDone;
-//
-//   factory FreelanceDone.fromJson(Map<String, dynamic> json) => _$FreelanceDoneFromJson(json);
-// }
 
 @Collection(ignore: {'props', 'stringify'})
 @Name('Freelances')
-class FreelanceDone extends FreelanceBase with EquatableMixin {
+class FreelanceDone extends Equatable {
+  final Id id;
+  final String name;
+
+  @enumerated
+  final ETypeFreelance eTypeFreelance;
   final double fame;
   final double price;
   final DateTime dateCre;
   final int rating;
+  @Index()
   final DateTime next1;
+  @Index()
   final DateTime next2;
+  @Index()
   final DateTime next3;
 
   FreelanceDone({
-    Id? id,
-    required String uid,
-    required String name,
-    required ETypeFreelance eTypeFreelance,
+    this.id = Isar.autoIncrement,
+    required this.name,
+    required this.eTypeFreelance,
     required this.fame,
     required this.price,
     required this.dateCre,
     required this.rating,
   })  : next1 = dateCre.addDate(months: 3 * rating),
         next2 = dateCre.addDate(years: 1 * rating),
-        next3 = dateCre.addDate(years: 2 * rating),
-        super(id: id, name: name, eTypeFreelance: eTypeFreelance, uid: uid);
+        next3 = dateCre.addDate(years: 2 * rating);
 
   @override
   List<Object> get props => [
-        uid,
         name,
         eTypeFreelance,
         fame,
@@ -68,6 +51,7 @@ class FreelanceDone extends FreelanceBase with EquatableMixin {
       ];
 
   FreelanceDone copyWith({
+    int? id,
     double? fame,
     double? price,
     DateTime? dateCre,
@@ -77,18 +61,19 @@ class FreelanceDone extends FreelanceBase with EquatableMixin {
     String? uid,
   }) {
     return FreelanceDone(
+      id: id ?? this.id,
       fame: fame ?? this.fame,
       price: price ?? this.price,
       dateCre: dateCre ?? this.dateCre,
       rating: rating ?? this.rating,
       name: name ?? this.name,
       eTypeFreelance: eTypeFreelance ?? this.eTypeFreelance,
-      uid: uid ?? this.uid,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
       'fame': fame,
       'price': price,
       'dateCre': dateCre.millisecondsSinceEpoch,
@@ -100,13 +85,13 @@ class FreelanceDone extends FreelanceBase with EquatableMixin {
 
   factory FreelanceDone.fromJson(Map<String, dynamic> map) {
     return FreelanceDone(
+      id: map['id'] as int,
       fame: map['fame'] as double,
       price: map['price'] as double,
       dateCre: DateTime.fromMillisecondsSinceEpoch(map['dateCre']),
       rating: map['rating'] as int,
       name: map['name'] as String,
       eTypeFreelance: Enums.toEnum(map['eTypeFreelance'], ETypeFreelance.values) as ETypeFreelance,
-      uid: map['uid'],
     );
   }
 }

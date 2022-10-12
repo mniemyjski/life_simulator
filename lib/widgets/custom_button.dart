@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
@@ -21,20 +23,29 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
       padding: padding ?? EdgeInsets.zero,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: backgroundColor,
-          minimumSize: const Size(45, 45),
-          maximumSize: const Size(450, 450),
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(borderRadius ?? 2)),
+      child: ClipRect(
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              shadowColor: Colors.black,
+              side: BorderSide(
+                color: Colors.black.withOpacity(0.3),
+              ),
+              disabledBackgroundColor: Colors.grey.withOpacity(0.5),
+              backgroundColor: backgroundColor?.withOpacity(0.5) ??
+                  Theme.of(context).primaryColor.withOpacity(0.5),
+              minimumSize: const Size(45, 45),
+              // padding: const EdgeInsets.symmetric(horizontal: 16),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(borderRadius ?? 2)),
+              ),
+            ),
+            onPressed: onPressed,
+            child: Center(child: child),
           ),
         ),
-        onPressed: onPressed,
-        child: child,
       ),
     );
   }

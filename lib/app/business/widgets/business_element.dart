@@ -7,17 +7,21 @@ import '../../../constants/constants.dart';
 import '../models/business/business_model.dart';
 
 class BusinessElement extends StatelessWidget {
+  final Business element;
+
   const BusinessElement({
     Key? key,
     required this.element,
   }) : super(key: key);
 
-  final Business element;
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => context.router.push(BusinessRoute(id: element.id, name: element.name)),
+      onTap: () {
+        context.router.push(BusinessRoute(
+          businessId: element.id,
+        ));
+      },
       child: Card(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -44,7 +48,7 @@ class BusinessElement extends StatelessWidget {
                       text: '${LocaleKeys.employees.tr()}: ',
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    TextSpan(text: '0/${element.upgrade.maxEmployees}'),
+                    TextSpan(text: '${element.countWorkers}/${element.maxWorkers}'),
                   ],
                 ),
               ),
@@ -56,7 +60,7 @@ class BusinessElement extends StatelessWidget {
                       text: '${LocaleKeys.scientist.tr()}: ',
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    TextSpan(text: '0/${element.upgrade.maxScientist}'),
+                    TextSpan(text: '${element.countScientist}/${element.maxScientist}'),
                   ],
                 ),
               ),
@@ -68,7 +72,7 @@ class BusinessElement extends StatelessWidget {
                       text: '${LocaleKeys.accountant.tr()}: ',
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    TextSpan(text: '0/${element.upgrade.accountant ? "1" : "0"}'),
+                    TextSpan(text: '${element.countAccountant}/${element.maxAccountant}'),
                   ],
                 ),
               ),
@@ -80,7 +84,7 @@ class BusinessElement extends StatelessWidget {
                       text: '${LocaleKeys.analyst.tr()}: ',
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    TextSpan(text: '0/${element.upgrade.analyst ? "1" : "0"}'),
+                    TextSpan(text: '${element.countAnalyst}/${element.maxAnalyst}'),
                   ],
                 ),
               ),
@@ -92,7 +96,7 @@ class BusinessElement extends StatelessWidget {
                       text: '${LocaleKeys.manager.tr()}: ',
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    TextSpan(text: '0/${element.upgrade.manager ? "1" : "0"}'),
+                    TextSpan(text: '${element.countManager}/${element.maxManager}'),
                   ],
                 ),
               ),
@@ -104,7 +108,7 @@ class BusinessElement extends StatelessWidget {
                       text: '${LocaleKeys.marketer.tr()}: ',
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    TextSpan(text: '0/${element.upgrade.marketer ? "1" : "0"}'),
+                    TextSpan(text: '${element.countMarketer}/${element.maxMarketer}'),
                   ],
                 ),
               ),

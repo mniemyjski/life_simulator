@@ -34,7 +34,7 @@ class TimeSpend extends StatelessWidget {
                   color: Colors.transparent,
                   shadowColor: Colors.transparent,
                   child: Container(
-                    padding: const EdgeInsets.only(top: 8.0, left: 4.0, right: 4.0),
+                    padding: const EdgeInsets.only(top: 0.0, left: 4.0, right: 4.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

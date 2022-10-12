@@ -93,7 +93,6 @@ class LoanCubit extends HydratedCubit<LoanState> {
   }
 
   counting(DateTime dateTime) {
-    if (dateTime == DateTime(18, 1, 1)) return;
     state.whenOrNull(loaded: (loans, currentDate) {
       List<Loan> result = [];
 
@@ -109,7 +108,7 @@ class LoanCubit extends HydratedCubit<LoanState> {
 
           _moneyCubit.addTransaction(
               dateTime: dateTime,
-              value: -element.leftLoan - element.getRate(),
+              value: -element.getRate(),
               eTypeTransactionSource: ETypeTransactionSource.bankInterest);
         } else {
           result.add(element);

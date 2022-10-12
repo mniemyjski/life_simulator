@@ -1,5 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../candle/candle.dart';
+
 part 'instrument.freezed.dart';
 part 'instrument.g.dart';
 
@@ -24,6 +26,7 @@ class Instrument with _$Instrument {
     required double max,
     required double valorization,
     required DateTime lastValorization,
+    required Candle lastCandle,
   }) = _Instrument;
 
   factory Instrument.fromJson(Map<String, dynamic> json) => _$InstrumentFromJson(json);

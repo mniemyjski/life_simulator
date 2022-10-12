@@ -8,7 +8,7 @@ import 'package:richeable/widgets/widgets.dart';
 import '../../config/routes/routes.gr.dart';
 import '../../constants/constants.dart';
 import '../date/widgets/next_day.dart';
-import '../game/widget/app_bar_stats.dart';
+import '../game/widget/app_bar_game.dart';
 import 'cubit/learning_cubit.dart';
 import 'models/learning_model.dart';
 import 'widgets/learning_element.dart';
@@ -25,10 +25,10 @@ class LearningScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
+      appBar: AppBarGame(title: LocaleKeys.learning.tr()),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const AppBarStats(),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(

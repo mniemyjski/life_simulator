@@ -1,14 +1,16 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:richeable/app/business/cubit/businesses/businesses_cubit.dart';
 import 'package:richeable/app/business/models/business/business_model.dart';
 import 'package:richeable/app/business/widgets/business_creator.dart';
+import 'package:richeable/app/game/widget/app_bar_game.dart';
+import 'package:richeable/constants/locale_keys.g.dart';
 import 'package:richeable/widgets/custom_scaffold.dart';
 
 import '../date/widgets/next_day.dart';
-import '../game/widget/app_bar_stats.dart';
 import 'widgets/business_element.dart';
 
 class BusinessesScreen extends StatelessWidget {
@@ -17,9 +19,13 @@ class BusinessesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
+      appBar: AppBarGame(
+        title: LocaleKeys.businesses.tr(),
+        showTimeSpend: false,
+      ),
       body: Column(
         children: [
-          const AppBarStats(),
+          // const AppBarStats(),
           Expanded(
             child: BlocBuilder<BusinessesCubit, BusinessesState>(
               builder: (context, state) {

@@ -10,10 +10,6 @@ abstract class Env {
 
 final getIt = GetIt.instance;
 
-@InjectableInit(
-  initializerName: r'$initGetIt', // default
-  preferRelativeImports: true, // default
-  asExtension: false, // default
-)
 @injectableInit
-void configureDependencies(String environment) => $initGetIt(getIt, environment: environment);
+Future<void> configureDependencies(String environment) async =>
+    await $initGetIt(getIt, environment: environment);

@@ -3,8 +3,12 @@ import 'dart:async';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:richeable/repositories/employee_repository.dart';
+import 'package:richeable/repositories/transactions_repository.dart';
 
+import '../../../../repositories/businesses_repository.dart';
 import '../../../money/cubit/money/money_cubit.dart';
+import '../../../money/models/transaction/transaction_model.dart';
 import '../../../new_game/new_game_cubit.dart';
 import '../../models/business/business_model.dart';
 
@@ -17,16 +21,31 @@ class BusinessesCubit extends HydratedCubit<BusinessesState> {
   final NewGameCubit _newGameCubit;
   late StreamSubscription _newGameSub;
 
+  final BusinessesRepository _businessesRepository;
+  final TransactionsRepository _transactionsRepository;
+  late StreamSubscription _businessesSub;
+
+  final EmployeeRepository _employeeRepository;
   final MoneyCubit _moneyCubit;
 
-  BusinessesCubit(this._newGameCubit, this._moneyCubit) : super(const BusinessesState.initial()) {
+  BusinessesCubit(
+    this._newGameCubit,
+    this._businessesRepository,
+    this._employeeRepository,
+    this._moneyCubit,
+    this._transactionsRepository,
+  ) : super(const BusinessesState.initial()) {
     _newGame();
-    _counting();
+
+    _businessesSub = _businessesRepository.watchBusiness().listen((businesses) {
+      emit(BusinessesState.loaded(businesses));
+    });
   }
 
   @override
   Future<void> close() async {
     _newGameSub.cancel();
+    _businessesSub.cancel();
     super.close();
   }
 
@@ -37,61 +56,56 @@ class BusinessesCubit extends HydratedCubit<BusinessesState> {
     });
   }
 
-  _counting() {}
+  counting(DateTime dateTime) {
+    if (dateTime.day == 10) {
+      state.whenOrNull(loaded: (businesses) async {
+        for (var element in businesses) {
+          final double cost = await _employeeRepository.getSalaryToPay(element.id);
+          if (cost != 0) {
+            _moneyCubit.addTransaction(
+              idSource: element.id,
+              dateTime: dateTime,
+              value: -cost,
+              eTypeTransactionSource: ETypeTransactionSource.employeeWages,
+            );
+          }
+        }
+      });
+    }
+    _employeeRepository.removeFiredEmployee(dateTime);
+  }
 
   String? create(Business business) {
-    // if (_moneyCubit.state < 5000) {
-    //   return "You don't have enough money.";
-    // }
-
-    state.maybeWhen(
-        orElse: () => 'Error',
-        loaded: (businesses) {
-          List<Business> result = List.of(businesses);
-          result.add(business);
-          emit(BusinessesState.loaded(result));
-        });
+    _businessesRepository.addBusiness(business);
     return null;
   }
 
   remove(Business business) {
-    state.maybeWhen(
-        orElse: () => 'error',
-        loaded: (businesses) {
-          List<Business> result = List.of(businesses);
-          result.removeWhere((element) => element.id == business.id);
-          emit(BusinessesState.loaded(result));
-        });
+    _businessesRepository.removeBusiness(business);
   }
 
-  increaseMaxEmployees(Business business) {
-    state.maybeWhen(
-        orElse: () => 'error',
-        loaded: (businesses) {
-          List<Business> result = List.of(businesses);
-          int index = result.indexOf(business);
-          result.removeAt(index);
-          result.insert(
-            index,
-            business.copyWith.upgrade(maxEmployees: business.upgrade.maxEmployees + 1),
-          );
-          emit(BusinessesState.loaded(result));
-        });
+  increaseMaxWorkers(Business business) {
+    _businessesRepository.updateBusiness(business.copyWith(maxWorkers: business.maxWorkers + 10));
   }
 
   increaseMaxScientist(Business business) {
-    state.maybeWhen(
-        orElse: () => 'error',
-        loaded: (businesses) {
-          List<Business> result = List.of(businesses);
-          int index = result.indexOf(business);
-          result.removeAt(index);
-          result.insert(
-            index,
-            business.copyWith.upgrade(maxEmployees: business.upgrade.maxScientist + 1),
-          );
-          emit(BusinessesState.loaded(result));
-        });
+    _businessesRepository.updateBusiness(business.copyWith(maxWorkers: business.maxScientist + 2));
+  }
+
+  increaseMaxAccountant(Business business) {
+    _businessesRepository.updateBusiness(business.copyWith(maxWorkers: business.maxAccountant + 1));
+  }
+
+  increaseMaxAnalyst(Business business) {
+    _businessesRepository.updateBusiness(business.copyWith(maxWorkers: business.maxAnalyst + 1));
+  }
+
+  increaseMaxManager(Business business) {
+    _businessesRepository.updateBusiness(business.copyWith(maxWorkers: business.maxManager + 1));
+  }
+
+  increaseMaxMarketer(Business business) {
+    _businessesRepository.updateBusiness(business.copyWith(maxWorkers: business.maxMarketer + 1));
   }
 
   @override

@@ -26,13 +26,16 @@ enum ETypeTransactionSource {
   giftFromParents,
   lostMoney,
   advertisement,
+  employeeWages,
+  withdraw,
+  deposit,
 }
 
 @Collection(ignore: {'props', 'stringify'})
 @Name('Transactions')
 class Transaction extends Equatable {
-  final Id? id;
-  final String? idSource;
+  final Id id;
+  final int? idSource;
   final double value;
   @enumerated
   final ETypeTransaction eTypeTransaction;
@@ -45,8 +48,8 @@ class Transaction extends Equatable {
   final DateTime yearCre;
 
   Transaction({
-    this.id,
-    this.idSource = 'user',
+    this.id = Isar.autoIncrement,
+    this.idSource,
     required this.value,
     required this.eTypeTransactionSource,
     required this.dateCre,
@@ -82,7 +85,7 @@ class Transaction extends Equatable {
   factory Transaction.fromJson(Map<String, dynamic> map) {
     return Transaction(
         id: map['id'] as Id,
-        idSource: map['idSource'] as String,
+        idSource: map['idSource'] as int,
         value: map['value'] as double,
         eTypeTransactionSource: map['eTypeTransactionSource'] as ETypeTransactionSource,
         dateCre: map['dateCre'] as DateTime);

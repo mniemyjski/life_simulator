@@ -4,7 +4,7 @@ import 'package:richeable/utilities/utilities.dart';
 import 'package:richeable/widgets/widgets.dart';
 
 import '../../constants/constants.dart';
-import '../game/widget/app_bar_stats.dart';
+import '../game/widget/app_bar_game.dart';
 import '../skills/cubit/skills_cubit.dart';
 import 'widgets/personality/personality_menu.dart';
 import 'widgets/personality/personality_skill_element.dart';
@@ -20,10 +20,10 @@ class _PersonalityScreenState extends State<PersonalityScreen> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
+      appBar: AppBarGame(title: LocaleKeys.personality.tr()),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const AppBarStats(),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(

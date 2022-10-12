@@ -19,44 +19,38 @@ class TimeSpendElement extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextStyle textStyle = value > (minValue ?? -1)
-        ? Theme.of(context).textTheme.bodyText1!
-        : Theme.of(context)
-            .textTheme
-            .bodyText1!
-            .copyWith(color: Colors.red[600], fontWeight: FontWeight.bold);
+        ? const TextStyle(fontSize: 9)
+        : TextStyle(fontSize: 9, color: Colors.red[800], fontWeight: FontWeight.bold);
 
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8.0),
-      child: Column(
-        children: [
-          Text(name),
-          Stack(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(4.0),
-                width: 50,
-                child: ClipRRect(
-                  borderRadius: const BorderRadius.all(Radius.circular(10)),
-                  child: LinearProgressIndicator(
-                    value: value / 24,
-                    minHeight: 12,
-                    color: color,
-                  ),
+    return Column(
+      children: [
+        Text(
+          name,
+          style: textStyle,
+        ),
+        Stack(
+          children: [
+            SizedBox(
+              width: 50,
+              child: ClipRRect(
+                borderRadius: const BorderRadius.all(Radius.circular(4)),
+                child: LinearProgressIndicator(
+                  value: value / 24,
+                  minHeight: 13,
+                  color: color,
+                  backgroundColor: Colors.white30,
                 ),
               ),
-              Positioned.fill(
-                child: Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    valueName,
-                    style: textStyle,
-                  ),
-                ),
+            ),
+            Positioned.fill(
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Text(valueName, style: textStyle),
               ),
-            ],
-          ),
-        ],
-      ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

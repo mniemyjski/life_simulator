@@ -1,0 +1,3 @@
+class AssetsRepository {
+  getTenantsInAsset() {}
+}

@@ -67,11 +67,6 @@ const FreelanceDoneSchema = CollectionSchema(
       id: 9,
       name: r'rating',
       type: IsarType.long,
-    ),
-    r'uid': PropertySchema(
-      id: 10,
-      name: r'uid',
-      type: IsarType.string,
     )
   },
   estimateSize: _freelanceDoneEstimateSize,
@@ -79,13 +74,53 @@ const FreelanceDoneSchema = CollectionSchema(
   deserialize: _freelanceDoneDeserialize,
   deserializeProp: _freelanceDoneDeserializeProp,
   idName: r'id',
-  indexes: {},
+  indexes: {
+    r'next1': IndexSchema(
+      id: -605068969830150124,
+      name: r'next1',
+      unique: false,
+      replace: false,
+      properties: [
+        IndexPropertySchema(
+          name: r'next1',
+          type: IndexType.value,
+          caseSensitive: false,
+        )
+      ],
+    ),
+    r'next2': IndexSchema(
+      id: -2140858904699054928,
+      name: r'next2',
+      unique: false,
+      replace: false,
+      properties: [
+        IndexPropertySchema(
+          name: r'next2',
+          type: IndexType.value,
+          caseSensitive: false,
+        )
+      ],
+    ),
+    r'next3': IndexSchema(
+      id: -2115849612667372786,
+      name: r'next3',
+      unique: false,
+      replace: false,
+      properties: [
+        IndexPropertySchema(
+          name: r'next3',
+          type: IndexType.value,
+          caseSensitive: false,
+        )
+      ],
+    )
+  },
   links: {},
   embeddedSchemas: {},
   getId: _freelanceDoneGetId,
   getLinks: _freelanceDoneGetLinks,
   attach: _freelanceDoneAttach,
-  version: '3.0.1',
+  version: '3.0.2',
 );
 
 int _freelanceDoneEstimateSize(
@@ -95,7 +130,6 @@ int _freelanceDoneEstimateSize(
 ) {
   var bytesCount = offsets.last;
   bytesCount += 3 + object.name.length * 3;
-  bytesCount += 3 + object.uid.length * 3;
   return bytesCount;
 }
 
@@ -115,7 +149,6 @@ void _freelanceDoneSerialize(
   writer.writeDateTime(offsets[7], object.next3);
   writer.writeDouble(offsets[8], object.price);
   writer.writeLong(offsets[9], object.rating);
-  writer.writeString(offsets[10], object.uid);
 }
 
 FreelanceDone _freelanceDoneDeserialize(
@@ -134,7 +167,6 @@ FreelanceDone _freelanceDoneDeserialize(
     name: reader.readString(offsets[4]),
     price: reader.readDouble(offsets[8]),
     rating: reader.readLong(offsets[9]),
-    uid: reader.readString(offsets[10]),
   );
   return object;
 }
@@ -168,8 +200,6 @@ P _freelanceDoneDeserializeProp<P>(
       return (reader.readDouble(offset)) as P;
     case 9:
       return (reader.readLong(offset)) as P;
-    case 10:
-      return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -191,7 +221,7 @@ const _FreelanceDoneeTypeFreelanceValueEnumMap = {
 };
 
 Id _freelanceDoneGetId(FreelanceDone object) {
-  return object.id ?? Isar.autoIncrement;
+  return object.id;
 }
 
 List<IsarLinkBase<dynamic>> _freelanceDoneGetLinks(FreelanceDone object) {
@@ -206,6 +236,30 @@ extension FreelanceDoneQueryWhereSort
   QueryBuilder<FreelanceDone, FreelanceDone, QAfterWhere> anyId() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(const IdWhereClause.any());
+    });
+  }
+
+  QueryBuilder<FreelanceDone, FreelanceDone, QAfterWhere> anyNext1() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(
+        const IndexWhereClause.any(indexName: r'next1'),
+      );
+    });
+  }
+
+  QueryBuilder<FreelanceDone, FreelanceDone, QAfterWhere> anyNext2() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(
+        const IndexWhereClause.any(indexName: r'next2'),
+      );
+    });
+  }
+
+  QueryBuilder<FreelanceDone, FreelanceDone, QAfterWhere> anyNext3() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(
+        const IndexWhereClause.any(indexName: r'next3'),
+      );
     });
   }
 }
@@ -276,6 +330,279 @@ extension FreelanceDoneQueryWhere
         lower: lowerId,
         includeLower: includeLower,
         upper: upperId,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<FreelanceDone, FreelanceDone, QAfterWhereClause> next1EqualTo(
+      DateTime next1) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'next1',
+        value: [next1],
+      ));
+    });
+  }
+
+  QueryBuilder<FreelanceDone, FreelanceDone, QAfterWhereClause> next1NotEqualTo(
+      DateTime next1) {
+    return QueryBuilder.apply(this, (query) {
+      if (query.whereSort == Sort.asc) {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'next1',
+              lower: [],
+              upper: [next1],
+              includeUpper: false,
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'next1',
+              lower: [next1],
+              includeLower: false,
+              upper: [],
+            ));
+      } else {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'next1',
+              lower: [next1],
+              includeLower: false,
+              upper: [],
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'next1',
+              lower: [],
+              upper: [next1],
+              includeUpper: false,
+            ));
+      }
+    });
+  }
+
+  QueryBuilder<FreelanceDone, FreelanceDone, QAfterWhereClause>
+      next1GreaterThan(
+    DateTime next1, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'next1',
+        lower: [next1],
+        includeLower: include,
+        upper: [],
+      ));
+    });
+  }
+
+  QueryBuilder<FreelanceDone, FreelanceDone, QAfterWhereClause> next1LessThan(
+    DateTime next1, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'next1',
+        lower: [],
+        upper: [next1],
+        includeUpper: include,
+      ));
+    });
+  }
+
+  QueryBuilder<FreelanceDone, FreelanceDone, QAfterWhereClause> next1Between(
+    DateTime lowerNext1,
+    DateTime upperNext1, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'next1',
+        lower: [lowerNext1],
+        includeLower: includeLower,
+        upper: [upperNext1],
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<FreelanceDone, FreelanceDone, QAfterWhereClause> next2EqualTo(
+      DateTime next2) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'next2',
+        value: [next2],
+      ));
+    });
+  }
+
+  QueryBuilder<FreelanceDone, FreelanceDone, QAfterWhereClause> next2NotEqualTo(
+      DateTime next2) {
+    return QueryBuilder.apply(this, (query) {
+      if (query.whereSort == Sort.asc) {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'next2',
+              lower: [],
+              upper: [next2],
+              includeUpper: false,
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'next2',
+              lower: [next2],
+              includeLower: false,
+              upper: [],
+            ));
+      } else {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'next2',
+              lower: [next2],
+              includeLower: false,
+              upper: [],
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'next2',
+              lower: [],
+              upper: [next2],
+              includeUpper: false,
+            ));
+      }
+    });
+  }
+
+  QueryBuilder<FreelanceDone, FreelanceDone, QAfterWhereClause>
+      next2GreaterThan(
+    DateTime next2, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'next2',
+        lower: [next2],
+        includeLower: include,
+        upper: [],
+      ));
+    });
+  }
+
+  QueryBuilder<FreelanceDone, FreelanceDone, QAfterWhereClause> next2LessThan(
+    DateTime next2, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'next2',
+        lower: [],
+        upper: [next2],
+        includeUpper: include,
+      ));
+    });
+  }
+
+  QueryBuilder<FreelanceDone, FreelanceDone, QAfterWhereClause> next2Between(
+    DateTime lowerNext2,
+    DateTime upperNext2, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'next2',
+        lower: [lowerNext2],
+        includeLower: includeLower,
+        upper: [upperNext2],
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<FreelanceDone, FreelanceDone, QAfterWhereClause> next3EqualTo(
+      DateTime next3) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'next3',
+        value: [next3],
+      ));
+    });
+  }
+
+  QueryBuilder<FreelanceDone, FreelanceDone, QAfterWhereClause> next3NotEqualTo(
+      DateTime next3) {
+    return QueryBuilder.apply(this, (query) {
+      if (query.whereSort == Sort.asc) {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'next3',
+              lower: [],
+              upper: [next3],
+              includeUpper: false,
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'next3',
+              lower: [next3],
+              includeLower: false,
+              upper: [],
+            ));
+      } else {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'next3',
+              lower: [next3],
+              includeLower: false,
+              upper: [],
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'next3',
+              lower: [],
+              upper: [next3],
+              includeUpper: false,
+            ));
+      }
+    });
+  }
+
+  QueryBuilder<FreelanceDone, FreelanceDone, QAfterWhereClause>
+      next3GreaterThan(
+    DateTime next3, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'next3',
+        lower: [next3],
+        includeLower: include,
+        upper: [],
+      ));
+    });
+  }
+
+  QueryBuilder<FreelanceDone, FreelanceDone, QAfterWhereClause> next3LessThan(
+    DateTime next3, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'next3',
+        lower: [],
+        upper: [next3],
+        includeUpper: include,
+      ));
+    });
+  }
+
+  QueryBuilder<FreelanceDone, FreelanceDone, QAfterWhereClause> next3Between(
+    DateTime lowerNext3,
+    DateTime upperNext3, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'next3',
+        lower: [lowerNext3],
+        includeLower: includeLower,
+        upper: [upperNext3],
         includeUpper: includeUpper,
       ));
     });
@@ -516,25 +843,8 @@ extension FreelanceDoneQueryFilter
     });
   }
 
-  QueryBuilder<FreelanceDone, FreelanceDone, QAfterFilterCondition> idIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'id',
-      ));
-    });
-  }
-
-  QueryBuilder<FreelanceDone, FreelanceDone, QAfterFilterCondition>
-      idIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'id',
-      ));
-    });
-  }
-
   QueryBuilder<FreelanceDone, FreelanceDone, QAfterFilterCondition> idEqualTo(
-      Id? value) {
+      Id value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'id',
@@ -545,7 +855,7 @@ extension FreelanceDoneQueryFilter
 
   QueryBuilder<FreelanceDone, FreelanceDone, QAfterFilterCondition>
       idGreaterThan(
-    Id? value, {
+    Id value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -558,7 +868,7 @@ extension FreelanceDoneQueryFilter
   }
 
   QueryBuilder<FreelanceDone, FreelanceDone, QAfterFilterCondition> idLessThan(
-    Id? value, {
+    Id value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -571,8 +881,8 @@ extension FreelanceDoneQueryFilter
   }
 
   QueryBuilder<FreelanceDone, FreelanceDone, QAfterFilterCondition> idBetween(
-    Id? lower,
-    Id? upper, {
+    Id lower,
+    Id upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
@@ -1011,140 +1321,6 @@ extension FreelanceDoneQueryFilter
       ));
     });
   }
-
-  QueryBuilder<FreelanceDone, FreelanceDone, QAfterFilterCondition> uidEqualTo(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'uid',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<FreelanceDone, FreelanceDone, QAfterFilterCondition>
-      uidGreaterThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'uid',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<FreelanceDone, FreelanceDone, QAfterFilterCondition> uidLessThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'uid',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<FreelanceDone, FreelanceDone, QAfterFilterCondition> uidBetween(
-    String lower,
-    String upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'uid',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<FreelanceDone, FreelanceDone, QAfterFilterCondition>
-      uidStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'uid',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<FreelanceDone, FreelanceDone, QAfterFilterCondition> uidEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'uid',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<FreelanceDone, FreelanceDone, QAfterFilterCondition> uidContains(
-      String value,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'uid',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<FreelanceDone, FreelanceDone, QAfterFilterCondition> uidMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'uid',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<FreelanceDone, FreelanceDone, QAfterFilterCondition>
-      uidIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'uid',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<FreelanceDone, FreelanceDone, QAfterFilterCondition>
-      uidIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'uid',
-        value: '',
-      ));
-    });
-  }
 }
 
 extension FreelanceDoneQueryObject
@@ -1275,18 +1451,6 @@ extension FreelanceDoneQuerySortBy
   QueryBuilder<FreelanceDone, FreelanceDone, QAfterSortBy> sortByRatingDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'rating', Sort.desc);
-    });
-  }
-
-  QueryBuilder<FreelanceDone, FreelanceDone, QAfterSortBy> sortByUid() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'uid', Sort.asc);
-    });
-  }
-
-  QueryBuilder<FreelanceDone, FreelanceDone, QAfterSortBy> sortByUidDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'uid', Sort.desc);
     });
   }
 }
@@ -1427,18 +1591,6 @@ extension FreelanceDoneQuerySortThenBy
       return query.addSortBy(r'rating', Sort.desc);
     });
   }
-
-  QueryBuilder<FreelanceDone, FreelanceDone, QAfterSortBy> thenByUid() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'uid', Sort.asc);
-    });
-  }
-
-  QueryBuilder<FreelanceDone, FreelanceDone, QAfterSortBy> thenByUidDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'uid', Sort.desc);
-    });
-  }
 }
 
 extension FreelanceDoneQueryWhereDistinct
@@ -1502,13 +1654,6 @@ extension FreelanceDoneQueryWhereDistinct
   QueryBuilder<FreelanceDone, FreelanceDone, QDistinct> distinctByRating() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'rating');
-    });
-  }
-
-  QueryBuilder<FreelanceDone, FreelanceDone, QDistinct> distinctByUid(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'uid', caseSensitive: caseSensitive);
     });
   }
 }
@@ -1579,12 +1724,6 @@ extension FreelanceDoneQueryProperty
   QueryBuilder<FreelanceDone, int, QQueryOperations> ratingProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'rating');
-    });
-  }
-
-  QueryBuilder<FreelanceDone, String, QQueryOperations> uidProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'uid');
     });
   }
 }

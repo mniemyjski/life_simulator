@@ -1,8 +1,8 @@
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../config/injectable/app_module.dart';
 import '../../config/injectable/injection.dart';
-import '../../repositories/isar_repository.dart';
 
 @lazySingleton
 class NewGameCubit extends HydratedCubit<bool> {
@@ -10,7 +10,7 @@ class NewGameCubit extends HydratedCubit<bool> {
 
   change() async {
     emit(true);
-    getIt<IsarRepository>().newGame();
+    getIt<AppModule>().newGame();
     emit(false);
   }
 

@@ -7,7 +7,6 @@ import 'package:injectable/injectable.dart';
 import '../../../../repositories/stock_market_repository.dart';
 import '../../../database/cubit/database_cubit.dart';
 import '../../../new_game/new_game_cubit.dart';
-import '../../models/candle/candle.dart';
 import '../../models/instrument/instrument.dart';
 
 part 'stock_market_cubit.freezed.dart';
@@ -41,29 +40,28 @@ class StockMarketCubit extends HydratedCubit<StockMarketState> {
       List<Instrument> result = await _marketRepository.firstOneYearGenerate(
         _databaseCubit.state.instrumentDB,
       );
-      final result2 = await _marketRepository.getLastYearCandle(DateTime(18, 1, 1));
-      emit(StockMarketState.loaded(result, result2));
+      // final result2 = await _marketRepository.getLastYearCandle(DateTime(18, 1, 1));
+      emit(StockMarketState.loaded(result));
     }
     _newGameSub = _newGameCubit.stream.listen((newGame) async {
       if (newGame) {
         List<Instrument> result = await _marketRepository.firstOneYearGenerate(
           _databaseCubit.state.instrumentDB,
         );
-        final result2 = await _marketRepository.getLastYearCandle(DateTime(18, 1, 1));
+        // final result2 = await _marketRepository.getLastYearCandle(DateTime(18, 1, 1));
 
-        emit(StockMarketState.loaded(result, result2));
+        emit(StockMarketState.loaded(result));
       }
     });
   }
 
   Future counting(DateTime dateTime) async {
-    await state.whenOrNull(loaded: (instruments, candles) async {
-      if (dateTime == DateTime(18, 1, 1)) return;
+    await state.whenOrNull(loaded: (instruments) async {
       final result =
           await _marketRepository.countingInstruments(instruments: instruments, date: dateTime);
-      final result2 = await _marketRepository.getLastYearCandle(dateTime);
+      // final result2 = await _marketRepository.getLastYearCandle(dateTime);
 
-      emit(StockMarketState.loaded(result, result2));
+      emit(StockMarketState.loaded(result));
     });
   }
 
@@ -71,10 +69,10 @@ class StockMarketCubit extends HydratedCubit<StockMarketState> {
       {required Instrument instrument,
       required ETypeTrend eTypeTrend,
       required DateTime dateTime}) {
-    state.whenOrNull(loaded: (instruments, candles) {
+    state.whenOrNull(loaded: (instruments) {
       List<Instrument> result = List.from(instruments)..removeWhere((e) => e.id == instrument.id);
       result.add(instrument.copyWith(eTypeTrend: eTypeTrend));
-      emit(StockMarketState.loaded(result, candles));
+      emit(StockMarketState.loaded(result));
     });
   }
 

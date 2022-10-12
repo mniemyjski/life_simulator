@@ -32,6 +32,7 @@ mixin _$Instrument {
   double get max => throw _privateConstructorUsedError;
   double get valorization => throw _privateConstructorUsedError;
   DateTime get lastValorization => throw _privateConstructorUsedError;
+  Candle get lastCandle => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -56,7 +57,8 @@ abstract class $InstrumentCopyWith<$Res> {
       double min,
       double max,
       double valorization,
-      DateTime lastValorization});
+      DateTime lastValorization,
+      Candle lastCandle});
 }
 
 /// @nodoc
@@ -81,6 +83,7 @@ class _$InstrumentCopyWithImpl<$Res> implements $InstrumentCopyWith<$Res> {
     Object? max = freezed,
     Object? valorization = freezed,
     Object? lastValorization = freezed,
+    Object? lastCandle = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -131,6 +134,10 @@ class _$InstrumentCopyWithImpl<$Res> implements $InstrumentCopyWith<$Res> {
           ? _value.lastValorization
           : lastValorization // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      lastCandle: lastCandle == freezed
+          ? _value.lastCandle
+          : lastCandle // ignore: cast_nullable_to_non_nullable
+              as Candle,
     ));
   }
 }
@@ -154,7 +161,8 @@ abstract class _$$_InstrumentCopyWith<$Res>
       double min,
       double max,
       double valorization,
-      DateTime lastValorization});
+      DateTime lastValorization,
+      Candle lastCandle});
 }
 
 /// @nodoc
@@ -181,6 +189,7 @@ class __$$_InstrumentCopyWithImpl<$Res> extends _$InstrumentCopyWithImpl<$Res>
     Object? max = freezed,
     Object? valorization = freezed,
     Object? lastValorization = freezed,
+    Object? lastCandle = freezed,
   }) {
     return _then(_$_Instrument(
       id: id == freezed
@@ -231,6 +240,10 @@ class __$$_InstrumentCopyWithImpl<$Res> extends _$InstrumentCopyWithImpl<$Res>
           ? _value.lastValorization
           : lastValorization // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      lastCandle: lastCandle == freezed
+          ? _value.lastCandle
+          : lastCandle // ignore: cast_nullable_to_non_nullable
+              as Candle,
     ));
   }
 }
@@ -250,7 +263,8 @@ class _$_Instrument implements _Instrument {
       required this.min,
       required this.max,
       required this.valorization,
-      required this.lastValorization});
+      required this.lastValorization,
+      required this.lastCandle});
 
   factory _$_Instrument.fromJson(Map<String, dynamic> json) =>
       _$$_InstrumentFromJson(json);
@@ -279,10 +293,12 @@ class _$_Instrument implements _Instrument {
   final double valorization;
   @override
   final DateTime lastValorization;
+  @override
+  final Candle lastCandle;
 
   @override
   String toString() {
-    return 'Instrument(id: $id, name: $name, eTypeInstrument: $eTypeInstrument, eTypeTrend: $eTypeTrend, datTrendEnd: $datTrendEnd, potentialIncrease: $potentialIncrease, potentialDecrease: $potentialDecrease, potentialStable: $potentialStable, min: $min, max: $max, valorization: $valorization, lastValorization: $lastValorization)';
+    return 'Instrument(id: $id, name: $name, eTypeInstrument: $eTypeInstrument, eTypeTrend: $eTypeTrend, datTrendEnd: $datTrendEnd, potentialIncrease: $potentialIncrease, potentialDecrease: $potentialDecrease, potentialStable: $potentialStable, min: $min, max: $max, valorization: $valorization, lastValorization: $lastValorization, lastCandle: $lastCandle)';
   }
 
   @override
@@ -309,7 +325,9 @@ class _$_Instrument implements _Instrument {
             const DeepCollectionEquality()
                 .equals(other.valorization, valorization) &&
             const DeepCollectionEquality()
-                .equals(other.lastValorization, lastValorization));
+                .equals(other.lastValorization, lastValorization) &&
+            const DeepCollectionEquality()
+                .equals(other.lastCandle, lastCandle));
   }
 
   @JsonKey(ignore: true)
@@ -327,7 +345,8 @@ class _$_Instrument implements _Instrument {
       const DeepCollectionEquality().hash(min),
       const DeepCollectionEquality().hash(max),
       const DeepCollectionEquality().hash(valorization),
-      const DeepCollectionEquality().hash(lastValorization));
+      const DeepCollectionEquality().hash(lastValorization),
+      const DeepCollectionEquality().hash(lastCandle));
 
   @JsonKey(ignore: true)
   @override
@@ -355,7 +374,8 @@ abstract class _Instrument implements Instrument {
       required final double min,
       required final double max,
       required final double valorization,
-      required final DateTime lastValorization}) = _$_Instrument;
+      required final DateTime lastValorization,
+      required final Candle lastCandle}) = _$_Instrument;
 
   factory _Instrument.fromJson(Map<String, dynamic> json) =
       _$_Instrument.fromJson;
@@ -384,6 +404,8 @@ abstract class _Instrument implements Instrument {
   double get valorization;
   @override
   DateTime get lastValorization;
+  @override
+  Candle get lastCandle;
   @override
   @JsonKey(ignore: true)
   _$$_InstrumentCopyWith<_$_Instrument> get copyWith =>

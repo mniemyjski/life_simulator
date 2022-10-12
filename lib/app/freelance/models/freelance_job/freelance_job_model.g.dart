@@ -8,7 +8,6 @@ part of 'freelance_job_model.dart';
 
 _$_FreelanceJob _$$_FreelanceJobFromJson(Map<String, dynamic> json) =>
     _$_FreelanceJob(
-      id: json['id'] as int?,
       uid: json['uid'] as String,
       name: json['name'] as String,
       eTypeFreelance:
@@ -28,7 +27,6 @@ _$_FreelanceJob _$$_FreelanceJobFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$_FreelanceJobToJson(_$_FreelanceJob instance) =>
     <String, dynamic>{
-      'id': instance.id,
       'uid': instance.uid,
       'name': instance.name,
       'eTypeFreelance': _$ETypeFreelanceEnumMap[instance.eTypeFreelance]!,

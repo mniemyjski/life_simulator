@@ -26,14 +26,10 @@ _$Loaded _$$LoadedFromJson(Map<String, dynamic> json) => _$Loaded(
       (json['instruments'] as List<dynamic>)
           .map((e) => Instrument.fromJson(e as Map<String, dynamic>))
           .toList(),
-      (json['candles'] as List<dynamic>)
-          .map((e) => Candle.fromJson(e as Map<String, dynamic>))
-          .toList(),
       $type: json['runtimeType'] as String?,
     );
 
 Map<String, dynamic> _$$LoadedToJson(_$Loaded instance) => <String, dynamic>{
       'instruments': instance.instruments.map((e) => e.toJson()).toList(),
-      'candles': instance.candles.map((e) => e.toJson()).toList(),
       'runtimeType': instance.$type,
     };

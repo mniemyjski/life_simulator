@@ -13,7 +13,7 @@ import 'package:richeable/widgets/widgets.dart';
 import '../../config/routes/routes.gr.dart';
 import '../../constants/constants.dart';
 import '../date/widgets/next_day.dart';
-import '../game/widget/app_bar_stats.dart';
+import '../game/widget/app_bar_game.dart';
 import 'cubit/done/freelance_done_cubit.dart';
 import 'cubit/fame/fame_cubit.dart';
 import 'models/freelance_done/freelance_done_model.dart';
@@ -24,9 +24,9 @@ class FreelanceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
+      appBar: AppBarGame(title: LocaleKeys.freelances.tr()),
       body: Column(
         children: [
-          const AppBarStats(),
           Row(
             children: [
               Expanded(

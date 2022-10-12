@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:richeable/utilities/utilities.dart';
+import 'package:richeable/widgets/custom_button.dart';
 
 import '../../../constants/constants.dart';
 import '../../money/cubit/money/money_cubit.dart';
@@ -28,10 +29,8 @@ class BuyButton extends StatelessWidget {
             return state.maybeWhen(
                 orElse: () => Container(),
                 loaded: (money) {
-                  return ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor: money > 0 ? null : MaterialStateProperty.all(Colors.grey),
-                      ),
+                  return CustomButton(
+                      backgroundColor: money > 0 ? null : Colors.grey,
                       onPressed: money > 0
                           ? () async {
                               return showModalBottomSheet<void>(
@@ -40,7 +39,6 @@ class BuyButton extends StatelessWidget {
                                   builder: (BuildContext context) {
                                     return BuyBottomSheet(
                                       instrument: instrument,
-                                      lastCandle: lastCandle,
                                       buttonName: LocaleKeys.buy.tr(),
                                       money: money,
                                     );
