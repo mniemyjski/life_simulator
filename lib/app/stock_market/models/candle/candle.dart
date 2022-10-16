@@ -1,15 +1,17 @@
+import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:equatable/equatable.dart';
 import 'package:isar/isar.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:richeable/app/stock_market/models/instrument/instrument.dart';
-
-import '../../../../utilities/utilities.dart';
 
 part 'candle.g.dart';
 
+@CopyWith()
+@JsonSerializable()
 @Collection(ignore: {'props', 'stringify'})
 @Name('Stock Market Courses')
 class Candle extends Equatable {
-  final Id? id;
+  final Id id;
 
   @Index(composite: [CompositeIndex('dateTime')])
   @enumerated
@@ -23,7 +25,7 @@ class Candle extends Equatable {
   final double close;
 
   const Candle({
-    this.id,
+    this.id = Isar.autoIncrement,
     required this.instrument,
     required this.dateTime,
     required this.open,
@@ -35,27 +37,6 @@ class Candle extends Equatable {
   @override
   List<Object> get props => [instrument, dateTime, open, high, low, close];
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'instrument': Enums.toText(instrument),
-      'dateTime': dateTime.millisecondsSinceEpoch,
-      'open': open,
-      'high': high,
-      'low': low,
-      'close': close,
-    };
-  }
-
-  factory Candle.fromJson(Map<String, dynamic> map) {
-    return Candle(
-      id: map['id'] as Id,
-      instrument: Enums.toEnum(map['instrument'], ENameInstrument.values) as ENameInstrument,
-      dateTime: DateTime.fromMillisecondsSinceEpoch(map['dateTime']) as DateTime,
-      open: map['open'] as double,
-      high: map['high'] as double,
-      low: map['low'] as double,
-      close: map['close'] as double,
-    );
-  }
+  factory Candle.fromJson(Map<String, dynamic> json) => _$CandleFromJson(json);
+  Map<String, dynamic> toJson() => _$CandleToJson(this);
 }

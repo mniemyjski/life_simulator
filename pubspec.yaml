@@ -29,7 +29,7 @@ dependencies:
   auto_route: ^5.0.1
   freezed_annotation: ^2.0.3
   json_annotation: ^4.7.0
-  copy_with_extension_gen: ^4.0.4
+  copy_with_extension: ^4.0.4
 
   connectivity_plus: ^2.3.9
   validators: ^3.0.0
@@ -74,6 +74,7 @@ dev_dependencies:
   injectable_generator: ^1.5.4
   auto_route_generator: ^5.0.2
   isar_generator: ^3.0.2
+  copy_with_extension_gen: ^4.0.4
 
 
 flutter:

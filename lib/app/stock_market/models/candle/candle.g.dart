@@ -3,6 +3,126 @@
 part of 'candle.dart';
 
 // **************************************************************************
+// CopyWithGenerator
+// **************************************************************************
+
+abstract class _$CandleCWProxy {
+  Candle close(double close);
+
+  Candle dateTime(DateTime dateTime);
+
+  Candle high(double high);
+
+  Candle id(int id);
+
+  Candle instrument(ENameInstrument instrument);
+
+  Candle low(double low);
+
+  Candle open(double open);
+
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `Candle(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  ///
+  /// Usage
+  /// ```dart
+  /// Candle(...).copyWith(id: 12, name: "My name")
+  /// ````
+  Candle call({
+    double? close,
+    DateTime? dateTime,
+    double? high,
+    int? id,
+    ENameInstrument? instrument,
+    double? low,
+    double? open,
+  });
+}
+
+/// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfCandle.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfCandle.copyWith.fieldName(...)`
+class _$CandleCWProxyImpl implements _$CandleCWProxy {
+  final Candle _value;
+
+  const _$CandleCWProxyImpl(this._value);
+
+  @override
+  Candle close(double close) => this(close: close);
+
+  @override
+  Candle dateTime(DateTime dateTime) => this(dateTime: dateTime);
+
+  @override
+  Candle high(double high) => this(high: high);
+
+  @override
+  Candle id(int id) => this(id: id);
+
+  @override
+  Candle instrument(ENameInstrument instrument) => this(instrument: instrument);
+
+  @override
+  Candle low(double low) => this(low: low);
+
+  @override
+  Candle open(double open) => this(open: open);
+
+  @override
+
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `Candle(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  ///
+  /// Usage
+  /// ```dart
+  /// Candle(...).copyWith(id: 12, name: "My name")
+  /// ````
+  Candle call({
+    Object? close = const $CopyWithPlaceholder(),
+    Object? dateTime = const $CopyWithPlaceholder(),
+    Object? high = const $CopyWithPlaceholder(),
+    Object? id = const $CopyWithPlaceholder(),
+    Object? instrument = const $CopyWithPlaceholder(),
+    Object? low = const $CopyWithPlaceholder(),
+    Object? open = const $CopyWithPlaceholder(),
+  }) {
+    return Candle(
+      close: close == const $CopyWithPlaceholder() || close == null
+          ? _value.close
+          // ignore: cast_nullable_to_non_nullable
+          : close as double,
+      dateTime: dateTime == const $CopyWithPlaceholder() || dateTime == null
+          ? _value.dateTime
+          // ignore: cast_nullable_to_non_nullable
+          : dateTime as DateTime,
+      high: high == const $CopyWithPlaceholder() || high == null
+          ? _value.high
+          // ignore: cast_nullable_to_non_nullable
+          : high as double,
+      id: id == const $CopyWithPlaceholder() || id == null
+          ? _value.id
+          // ignore: cast_nullable_to_non_nullable
+          : id as int,
+      instrument:
+          instrument == const $CopyWithPlaceholder() || instrument == null
+              ? _value.instrument
+              // ignore: cast_nullable_to_non_nullable
+              : instrument as ENameInstrument,
+      low: low == const $CopyWithPlaceholder() || low == null
+          ? _value.low
+          // ignore: cast_nullable_to_non_nullable
+          : low as double,
+      open: open == const $CopyWithPlaceholder() || open == null
+          ? _value.open
+          // ignore: cast_nullable_to_non_nullable
+          : open as double,
+    );
+  }
+}
+
+extension $CandleCopyWith on Candle {
+  /// Returns a callable class that can be used as follows: `instanceOfCandle.copyWith(...)` or like so:`instanceOfCandle.copyWith.fieldName(...)`.
+  // ignore: library_private_types_in_public_api
+  _$CandleCWProxy get copyWith => _$CandleCWProxyImpl(this);
+}
+
+// **************************************************************************
 // IsarCollectionGenerator
 // **************************************************************************
 
@@ -197,7 +317,7 @@ const _CandleinstrumentValueEnumMap = {
 };
 
 Id _candleGetId(Candle object) {
-  return object.id ?? Isar.autoIncrement;
+  return object.id;
 }
 
 List<IsarLinkBase<dynamic>> _candleGetLinks(Candle object) {
@@ -806,23 +926,7 @@ extension CandleQueryFilter on QueryBuilder<Candle, Candle, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Candle, Candle, QAfterFilterCondition> idIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'id',
-      ));
-    });
-  }
-
-  QueryBuilder<Candle, Candle, QAfterFilterCondition> idIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'id',
-      ));
-    });
-  }
-
-  QueryBuilder<Candle, Candle, QAfterFilterCondition> idEqualTo(Id? value) {
+  QueryBuilder<Candle, Candle, QAfterFilterCondition> idEqualTo(Id value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'id',
@@ -832,7 +936,7 @@ extension CandleQueryFilter on QueryBuilder<Candle, Candle, QFilterCondition> {
   }
 
   QueryBuilder<Candle, Candle, QAfterFilterCondition> idGreaterThan(
-    Id? value, {
+    Id value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -845,7 +949,7 @@ extension CandleQueryFilter on QueryBuilder<Candle, Candle, QFilterCondition> {
   }
 
   QueryBuilder<Candle, Candle, QAfterFilterCondition> idLessThan(
-    Id? value, {
+    Id value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -858,8 +962,8 @@ extension CandleQueryFilter on QueryBuilder<Candle, Candle, QFilterCondition> {
   }
 
   QueryBuilder<Candle, Candle, QAfterFilterCondition> idBetween(
-    Id? lower,
-    Id? upper, {
+    Id lower,
+    Id upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
@@ -1333,3 +1437,40 @@ extension CandleQueryProperty on QueryBuilder<Candle, Candle, QQueryProperty> {
     });
   }
 }
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+Candle _$CandleFromJson(Map<String, dynamic> json) => Candle(
+      id: json['id'] as int? ?? Isar.autoIncrement,
+      instrument: $enumDecode(_$ENameInstrumentEnumMap, json['instrument']),
+      dateTime: DateTime.parse(json['dateTime'] as String),
+      open: (json['open'] as num).toDouble(),
+      high: (json['high'] as num).toDouble(),
+      low: (json['low'] as num).toDouble(),
+      close: (json['close'] as num).toDouble(),
+    );
+
+Map<String, dynamic> _$CandleToJson(Candle instance) => <String, dynamic>{
+      'id': instance.id,
+      'instrument': _$ENameInstrumentEnumMap[instance.instrument]!,
+      'dateTime': instance.dateTime.toIso8601String(),
+      'open': instance.open,
+      'high': instance.high,
+      'low': instance.low,
+      'close': instance.close,
+    };
+
+const _$ENameInstrumentEnumMap = {
+  ENameInstrument.btc: 'btc',
+  ENameInstrument.eth: 'eth',
+  ENameInstrument.bnb: 'bnb',
+  ENameInstrument.hero: 'hero',
+  ENameInstrument.dome: 'dome',
+  ENameInstrument.oil: 'oil',
+  ENameInstrument.gold: 'gold',
+  ENameInstrument.silver: 'silver',
+  ENameInstrument.tesla: 'tesla',
+  ENameInstrument.apple: 'apple',
+};
