@@ -4,6 +4,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:richeable/utilities/utilities.dart';
 
 import '../../../constants/constants.dart';
+import '../../../widgets/custom_card.dart';
 import '../cubit/tenant/tenants_cubit.dart';
 import '../models/asset/asset_model.dart';
 
@@ -19,7 +20,7 @@ class AssetElement extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return CustomCard(
         child: Padding(
       padding: const EdgeInsets.all(4.0),
       child: Row(
@@ -45,13 +46,13 @@ class AssetElement extends StatelessWidget {
                 children: [
                   RichText(
                     text: TextSpan(
-                      style: Theme.of(context).textTheme.bodyText1,
+                      style: Theme.of(context).textTheme.bodyText2,
                       children: <TextSpan>[
                         TextSpan(
                           text: '${LocaleKeys.address.tr()}: ',
                           style: Theme.of(context)
                               .textTheme
-                              .bodyText1!
+                              .bodyText2!
                               .copyWith(fontWeight: FontWeight.bold),
                         ),
                         TextSpan(
@@ -62,13 +63,13 @@ class AssetElement extends StatelessWidget {
                   ),
                   RichText(
                     text: TextSpan(
-                      style: Theme.of(context).textTheme.bodyText1,
+                      style: Theme.of(context).textTheme.bodyText2,
                       children: <TextSpan>[
                         TextSpan(
                           text: '${LocaleKeys.type.tr()}: ',
                           style: Theme.of(context)
                               .textTheme
-                              .bodyText1!
+                              .bodyText2!
                               .copyWith(fontWeight: FontWeight.bold),
                         ),
                         TextSpan(
@@ -79,13 +80,13 @@ class AssetElement extends StatelessWidget {
                   ),
                   RichText(
                     text: TextSpan(
-                      style: Theme.of(context).textTheme.bodyText1,
+                      style: Theme.of(context).textTheme.bodyText2,
                       children: <TextSpan>[
                         TextSpan(
                           text: '${LocaleKeys.value.tr()}: ',
                           style: Theme.of(context)
                               .textTheme
-                              .bodyText1!
+                              .bodyText2!
                               .copyWith(fontWeight: FontWeight.bold),
                         ),
                         TextSpan(
@@ -96,13 +97,13 @@ class AssetElement extends StatelessWidget {
                   ),
                   RichText(
                     text: TextSpan(
-                      style: Theme.of(context).textTheme.bodyText1,
+                      style: Theme.of(context).textTheme.bodyText2,
                       children: <TextSpan>[
                         TextSpan(
                           text: '${LocaleKeys.renovation.tr()}: ',
                           style: Theme.of(context)
                               .textTheme
-                              .bodyText1!
+                              .bodyText2!
                               .copyWith(fontWeight: FontWeight.bold),
                         ),
                         TextSpan(
@@ -113,13 +114,13 @@ class AssetElement extends StatelessWidget {
                   ),
                   RichText(
                     text: TextSpan(
-                      style: Theme.of(context).textTheme.bodyText1,
+                      style: Theme.of(context).textTheme.bodyText2,
                       children: <TextSpan>[
                         TextSpan(
                           text: '${LocaleKeys.tenants.tr()}: ',
                           style: Theme.of(context)
                               .textTheme
-                              .bodyText1!
+                              .bodyText2!
                               .copyWith(fontWeight: FontWeight.bold),
                         ),
                         TextSpan(
@@ -131,13 +132,13 @@ class AssetElement extends StatelessWidget {
                   ),
                   RichText(
                     text: TextSpan(
-                      style: Theme.of(context).textTheme.bodyText1,
+                      style: Theme.of(context).textTheme.bodyText2,
                       children: <TextSpan>[
                         TextSpan(
                           text: '${LocaleKeys.rent.tr()}: ',
                           style: Theme.of(context)
                               .textTheme
-                              .bodyText1!
+                              .bodyText2!
                               .copyWith(fontWeight: FontWeight.bold),
                         ),
                         TextSpan(

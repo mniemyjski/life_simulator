@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:richeable/app/assets/cubit/build/build_asset_cubit.dart';
-import 'package:richeable/app/event/cubit/event_cubit.dart';
 import 'package:richeable/app/freelance/cubit/job/freelance_job_cubit.dart';
 import 'package:richeable/app/game/widget/app_bar_game.dart';
 import 'package:richeable/app/learning/cubit/learning_cubit.dart';
@@ -206,28 +205,10 @@ class _GameScreenState extends State<GameScreen> {
             });
           },
         ),
-        BlocListener<EventCubit, EventState>(
-          listener: (context, state) {
-            state.whenOrNull(loaded: (event, currentDate) {
-              // if ((last ?? '') != event.first.datCre && context.router.current is GameScreen) {
-              //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              //     behavior: SnackBarBehavior.floating,
-              //     content: Text(event.first.name),
-              //     action: SnackBarAction(
-              //       label: 'Undo',
-              //       onPressed: () {},
-              //     ),
-              //   ));
-              //
-              //   last = event.first.datCre;
-              // }
-            });
-          },
-        ),
       ],
       child: CustomScaffold(
           appBar: AppBarGame(
-            title: 'RicheAble',
+            title: 'RichAble',
             keyTimeSpend: keyButton14,
             keyStats: keyButton13,
             keyDate: keyButton11,
@@ -235,12 +216,6 @@ class _GameScreenState extends State<GameScreen> {
           ),
           body: Column(
             children: [
-              // AppBarStats(
-              //   keyTimeSpend: keyButton14,
-              //   keyStats: keyButton13,
-              //   keyDate: keyButton11,
-              //   keyMoney: keyButton12,
-              // ),
               Expanded(
                   child: EventsList(
                 key: keyButton15,

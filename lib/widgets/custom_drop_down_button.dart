@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -22,16 +24,6 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
     super.initState();
   }
 
-  List<int> _getDividersIndexes() {
-    List<int> dividersIndexes = [];
-    for (var i = 0; i < (widget.items.length * 2) - 1; i++) {
-      if (i.isOdd) {
-        dividersIndexes.add(i);
-      }
-    }
-    return dividersIndexes;
-  }
-
   List<DropdownMenuItem<String>> _addDividersAfterItems() {
     List<DropdownMenuItem<String>> menuItems = [];
     for (var item in widget.items) {
@@ -43,16 +35,16 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Text(
                 item.tr(),
-                style: const TextStyle(
-                  fontSize: 14,
-                ),
+                style: Theme.of(context).textTheme.bodyText2,
               ),
             ),
           ),
           if (item != widget.items.last)
             const DropdownMenuItem<String>(
               enabled: false,
-              child: Divider(),
+              child: Divider(
+                color: Colors.white,
+              ),
             ),
         ],
       );
@@ -62,30 +54,60 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButtonHideUnderline(
-      child: DropdownButton2(
-        isExpanded: true,
-        items: _addDividersAfterItems(),
-        customItemsIndexes: _getDividersIndexes(),
-        customItemsHeight: 4,
-        value: selectedItem,
-        onChanged: (value) {
-          setState(() {
-            selectedItem = value as String;
-            widget.onChanged!(value);
-          });
-        },
-        buttonDecoration: BoxDecoration(
-          border: Border.all(
-            color: Colors.black26,
+    return ClipRRect(
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                const Color.fromRGBO(1, 132, 194, 1.0).withOpacity(0.6),
+                Colors.blueGrey.withOpacity(0.1),
+              ],
+            ),
+            borderRadius: BorderRadius.circular(8.0),
+            border: Border.all(width: 1, color: Colors.white10),
           ),
-          color: Theme.of(context).cardColor,
+          child: DropdownButtonHideUnderline(
+            child: DropdownButton2(
+              isExpanded: true,
+              items: _addDividersAfterItems(),
+              value: selectedItem,
+              onChanged: (value) {
+                setState(() {
+                  selectedItem = value as String;
+                  widget.onChanged!(value);
+                });
+              },
+              style: Theme.of(context).textTheme.bodyText2,
+              buttonDecoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.transparent,
+                ),
+                color: Colors.transparent,
+              ),
+              dropdownDecoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                gradient: const LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Color.fromRGBO(0, 83, 143, 1),
+                    Colors.black,
+                  ],
+                ),
+              ),
+              buttonHeight: 40,
+              buttonWidth: 160,
+              itemHeight: 20,
+              itemPadding: const EdgeInsets.symmetric(horizontal: 8.0),
+              buttonElevation: 2,
+              offset: const Offset(0, -4),
+            ),
+          ),
         ),
-        buttonHeight: 40,
-        buttonWidth: 160,
-        itemHeight: 40,
-        itemPadding: const EdgeInsets.symmetric(horizontal: 8.0),
-        buttonElevation: 2,
       ),
     );
   }

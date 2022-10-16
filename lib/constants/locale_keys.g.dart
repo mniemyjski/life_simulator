@@ -55,6 +55,12 @@ abstract class  LocaleKeys {
   static const bank = 'bank';
   static const medicine = 'medicine';
   static const freelances = 'freelances';
+  static const scientists = 'scientists';
+  static const taxes = 'taxes';
+  static const research = 'research';
+  static const marketing = 'marketing';
+  static const typeProduct = 'typeProduct';
+  static const typeQuality = 'typeQuality';
   static const learning = 'learning';
   static const stockMarket = 'stockMarket';
   static const renovationCost = 'renovationCost';
@@ -62,6 +68,10 @@ abstract class  LocaleKeys {
   static const minRating = 'minRating';
   static const friendlyAnimal = 'friendlyAnimal';
   static const duration = 'duration';
+  static const yes = 'yes';
+  static const no = 'no';
+  static const areYouSure = 'areYouSure';
+  static const areYouSureRemoveResearch = 'areYouSureRemoveResearch';
   static const datEnd = 'datEnd';
   static const hasAnimal = 'hasAnimal';
   static const rating = 'rating';

@@ -246,6 +246,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.1"
+  copy_with_extension:
+    dependency: transitive
+    description:
+      name: copy_with_extension
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.4"
+  copy_with_extension_gen:
+    dependency: "direct main"
+    description:
+      name: copy_with_extension_gen
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.4"
   coverage:
     dependency: transitive
     description:
@@ -336,7 +350,7 @@ packages:
       name: dropdown_button2
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.6.2"
+    version: "1.8.5"
   easy_localization:
     dependency: "direct main"
     description:

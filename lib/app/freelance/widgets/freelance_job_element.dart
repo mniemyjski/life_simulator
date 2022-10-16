@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:richeable/widgets/custom_card.dart';
 
 import '../../../constants/constants.dart';
 import '../../../utilities/utilities.dart';
@@ -17,7 +18,7 @@ class FreelanceJobElement extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: Card(
+          child: CustomCard(
             child: Container(
               height: 50,
               padding: const EdgeInsets.all(4.0),
@@ -26,7 +27,7 @@ class FreelanceJobElement extends StatelessWidget {
                 children: [
                   RichText(
                     text: TextSpan(
-                      style: Theme.of(context).textTheme.bodyText1,
+                      style: Theme.of(context).textTheme.bodyText2,
                       children: <TextSpan>[
                         TextSpan(
                           text: '${LocaleKeys.name.tr()}: ',
@@ -38,7 +39,7 @@ class FreelanceJobElement extends StatelessWidget {
                   ),
                   RichText(
                     text: TextSpan(
-                      style: Theme.of(context).textTheme.bodyText1,
+                      style: Theme.of(context).textTheme.bodyText2,
                       children: <TextSpan>[
                         TextSpan(
                           text: '${LocaleKeys.type.tr()}: ',
@@ -50,7 +51,7 @@ class FreelanceJobElement extends StatelessWidget {
                   ),
                   RichText(
                     text: TextSpan(
-                      style: Theme.of(context).textTheme.bodyText1,
+                      style: Theme.of(context).textTheme.bodyText2,
                       children: <TextSpan>[
                         TextSpan(
                           text: '${LocaleKeys.duration.tr()}: ',
@@ -65,7 +66,7 @@ class FreelanceJobElement extends StatelessWidget {
             ),
           ),
         ),
-        Card(
+        CustomCard(
             child: Container(
           height: 50,
           width: 50,
@@ -74,9 +75,10 @@ class FreelanceJobElement extends StatelessWidget {
               onPressed: () => context.read<FreelanceJobCubit>().repeat(element),
               icon: FaIcon(
                 element.repeat ? FontAwesomeIcons.repeat : FontAwesomeIcons.one,
+                color: Colors.white,
               )),
         )),
-        Card(
+        CustomCard(
             child: Container(
           height: 50,
           width: 50,
@@ -85,7 +87,7 @@ class FreelanceJobElement extends StatelessWidget {
               onPressed: () => context.read<FreelanceJobCubit>().remove(element.uid),
               icon: FaIcon(
                 FontAwesomeIcons.trash,
-                color: Colors.red[900]!.withOpacity(0.7),
+                color: Colors.red[300]!.withOpacity(0.7),
               )),
         )),
       ],

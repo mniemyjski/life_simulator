@@ -69,7 +69,6 @@ class _HumanResourcesScreenState extends State<HumanResourcesScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          const SizedBox(height: 8),
           ToggleButtons(
             onPressed: (int index) => _changeMarket(index),
             borderRadius: const BorderRadius.all(Radius.circular(0)),
@@ -102,7 +101,10 @@ class _HumanResourcesScreenState extends State<HumanResourcesScreen> {
 
                   return EmployeeElement(
                     employee: element,
-                    icon: const FaIcon(FontAwesomeIcons.cartShopping),
+                    icon: const FaIcon(
+                      FontAwesomeIcons.cartShopping,
+                      color: Colors.white,
+                    ),
                     onPressed: () {
                       context.read<EmployeesCubit>().addEmployee(element);
                       context.router.pop();

@@ -359,9 +359,13 @@ class AppRouter extends _i32.RootStackRouter {
       );
     },
     ProductRoute.name: (routeData) {
+      final args = routeData.argsAs<ProductRouteArgs>();
       return _i32.CustomPage<dynamic>(
         routeData: routeData,
-        child: const _i29.ProductScreen(),
+        child: _i29.ProductScreen(
+          key: args.key,
+          businessId: args.businessId,
+        ),
         transitionsBuilder: _i32.TransitionsBuilders.slideLeftWithFade,
         durationInMilliseconds: 300,
         opaque: true,
@@ -1005,14 +1009,36 @@ class UpgradeRouteArgs {
 
 /// generated route for
 /// [_i29.ProductScreen]
-class ProductRoute extends _i32.PageRouteInfo<void> {
-  const ProductRoute()
-      : super(
+class ProductRoute extends _i32.PageRouteInfo<ProductRouteArgs> {
+  ProductRoute({
+    _i33.Key? key,
+    required int businessId,
+  }) : super(
           ProductRoute.name,
           path: '/product-screen',
+          args: ProductRouteArgs(
+            key: key,
+            businessId: businessId,
+          ),
         );
 
   static const String name = 'ProductRoute';
+}
+
+class ProductRouteArgs {
+  const ProductRouteArgs({
+    this.key,
+    required this.businessId,
+  });
+
+  final _i33.Key? key;
+
+  final int businessId;
+
+  @override
+  String toString() {
+    return 'ProductRouteArgs{key: $key, businessId: $businessId}';
+  }
 }
 
 /// generated route for

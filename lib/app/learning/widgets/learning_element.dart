@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:richeable/widgets/custom_card.dart';
 
 import '../../../utilities/utilities.dart';
 import '../models/learning_model.dart';
@@ -18,7 +19,7 @@ class LearningElement extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return CustomCard(
         child: Row(
       children: [
         Expanded(
@@ -31,34 +32,34 @@ class LearningElement extends StatelessWidget {
                 Text(
                   element.name,
                   style:
-                      Theme.of(context).textTheme.bodyText1!.copyWith(fontWeight: FontWeight.bold),
+                      Theme.of(context).textTheme.bodyText2!.copyWith(fontWeight: FontWeight.bold),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 4),
                   child: Text(
                     'Exp: ${element.exp}',
-                    style: Theme.of(context).textTheme.bodyText1,
+                    style: Theme.of(context).textTheme.bodyText2,
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 4),
                   child: Text(
                     'Time: ${element.time}h',
-                    style: Theme.of(context).textTheme.bodyText1,
+                    style: Theme.of(context).textTheme.bodyText2,
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 4),
                   child: Text(
                     'Cost: ${element.cost.toMoney()}',
-                    style: Theme.of(context).textTheme.bodyText1,
+                    style: Theme.of(context).textTheme.bodyText2,
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 4),
                   child: Text(
                     'Skills: ${Enums.toText(element.skillType)}',
-                    style: Theme.of(context).textTheme.bodyText1,
+                    style: Theme.of(context).textTheme.bodyText2,
                   ),
                 ),
               ],
@@ -68,7 +69,10 @@ class LearningElement extends StatelessWidget {
         if (onPressed != null)
           IconButton(
             onPressed: onPressed,
-            icon: FaIcon(iconData ?? FontAwesomeIcons.moneyBill),
+            icon: FaIcon(
+              iconData ?? FontAwesomeIcons.moneyBill,
+              color: Colors.white,
+            ),
           )
       ],
     ));

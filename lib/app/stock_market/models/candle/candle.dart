@@ -6,28 +6,16 @@ import '../../../../utilities/utilities.dart';
 
 part 'candle.g.dart';
 
-// @freezed
-// class Candle with _$Candle {
-//   const factory Candle({
-//     required DateTime dateTime,
-//     required double open,
-//     required double high,
-//     required double low,
-//     required double close,
-//   }) = _Candle;
-//
-//   factory Candle.fromJson(Map<String, dynamic> json) => _$CandleFromJson(json);
-// }
-
 @Collection(ignore: {'props', 'stringify'})
 @Name('Stock Market Courses')
 class Candle extends Equatable {
   final Id? id;
 
-  @Index()
+  @Index(composite: [CompositeIndex('dateTime')])
   @enumerated
   final ENameInstrument instrument;
 
+  @Index()
   final DateTime dateTime;
   final double open;
   final double high;

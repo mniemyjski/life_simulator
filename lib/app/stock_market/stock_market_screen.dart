@@ -54,7 +54,7 @@ class _StockMarketScreenState extends State<StockMarketScreen> {
             fillColor: Theme.of(context).scaffoldBackgroundColor,
             color: Colors.white70,
             constraints: BoxConstraints(
-                minWidth: (MediaQuery.of(context).size.width - 16) / 3, minHeight: 56),
+                minWidth: (MediaQuery.of(context).size.width - 12) / 3, minHeight: 56),
             isSelected: _selectedFruits,
             children: [
               Text(Enums.toText(ETypeInstrument.crypto).tr()),
@@ -89,16 +89,27 @@ class _StockMarketScreenState extends State<StockMarketScreen> {
                 padding: const EdgeInsets.all(4.0),
                 child: Container(
                   width: double.infinity,
-                  color: Theme.of(context).cardColor,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        const Color.fromRGBO(1, 132, 194, 1.0).withOpacity(0.4),
+                        Colors.blueGrey.withOpacity(0.2),
+                      ],
+                    ),
+                    borderRadius: BorderRadius.circular(8.0),
+                    border: Border.all(width: 1, color: Colors.white10),
+                  ),
                   child: SingleChildScrollView(
                     child: DataTable(
                       sortColumnIndex: 2,
                       showCheckboxColumn: false,
                       columnSpacing: 32,
-                      dataTextStyle: Theme.of(context).textTheme.bodyText1,
+                      dataTextStyle: Theme.of(context).textTheme.bodyText2,
                       headingTextStyle: Theme.of(context)
                           .textTheme
-                          .bodyText1!
+                          .bodyText2!
                           .copyWith(fontWeight: FontWeight.bold),
                       columns: [
                         DataColumn(

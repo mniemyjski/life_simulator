@@ -7,4 +7,5 @@ export 'custom_drop_down_button.dart';
 export 'custom_flash_bar.dart';
 export 'custom_loading_widget.dart';
 export 'custom_scaffold.dart';
+export 'custom_sheet_design.dart';
 export 'custom_text_field.dart';

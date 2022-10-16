@@ -112,21 +112,20 @@ class AssetScreen extends StatelessWidget {
               Expanded(child: MinRatingButton(asset: asset)),
             ],
           ),
-          CustomButton(
+          Padding(
             padding: const EdgeInsets.all(4.0),
-            onPressed: () {
-              context.read<AssetsCubit>().sell(asset);
-              context.router.pop();
-            },
-            child: Text(
-              LocaleKeys.sell.tr(),
+            child: CustomButton(
+              onPressed: () {
+                context.read<AssetsCubit>().sell(asset);
+                context.router.pop();
+              },
+              child: Text(
+                LocaleKeys.sell.tr(),
+              ),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.all(4.0),
-            child: Divider(
-              color: Colors.white,
-            ),
+          Divider(
+            color: Colors.white,
           ),
           Expanded(
             child: Builder(builder: (context) {

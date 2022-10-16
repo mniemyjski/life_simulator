@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class TimeSpendElement extends StatelessWidget {
@@ -30,15 +32,30 @@ class TimeSpendElement extends StatelessWidget {
         ),
         Stack(
           children: [
-            SizedBox(
+            Container(
               width: 50,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(4)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.white12,
+                    offset: Offset(-1, -1),
+                    blurRadius: 1.0,
+                  ),
+                  BoxShadow(
+                    color: Colors.black26,
+                    offset: Offset(2, 2),
+                    blurRadius: 1.0,
+                  ),
+                ],
+              ),
               child: ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(4)),
                 child: LinearProgressIndicator(
                   value: value / 24,
                   minHeight: 13,
-                  color: color,
-                  backgroundColor: Colors.white30,
+                  color: color?.withOpacity(0.6),
+                  backgroundColor: Colors.white12,
                 ),
               ),
             ),

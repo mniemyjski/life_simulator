@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:richeable/app/business/widgets/employee_element.dart';
+import 'package:richeable/app/game/widget/app_bar_game.dart';
 import 'package:richeable/utilities/utilities.dart';
 
 import '../../config/injectable/injection.dart';
@@ -45,9 +46,9 @@ class _EmployeesScreenState extends State<EmployeesScreen> {
       create: (_) => getIt<EmployeesCubit>(param1: widget.businessId),
       child: Builder(builder: (context) {
         return CustomScaffold(
-          appBar: AppBar(
-            title: Text(LocaleKeys.employees.tr()),
-            automaticallyImplyLeading: false,
+          appBar: AppBarGame(
+            title: LocaleKeys.employees.tr(),
+            showTimeSpend: false,
           ),
           body: BlocBuilder<EmployeesCubit, EmployeesState>(
             builder: (context, state) {
@@ -59,7 +60,6 @@ class _EmployeesScreenState extends State<EmployeesScreen> {
 
                     return Column(
                       children: [
-                        const SizedBox(height: 8),
                         ToggleButtons(
                           onPressed: (int index) => _change(index),
                           borderRadius: const BorderRadius.all(Radius.circular(0)),
@@ -68,8 +68,7 @@ class _EmployeesScreenState extends State<EmployeesScreen> {
                           fillColor: Theme.of(context).scaffoldBackgroundColor,
                           color: Colors.white70,
                           constraints: BoxConstraints(
-                              minWidth: (MediaQuery.of(context).size.width - 16) / 5,
-                              minHeight: 56),
+                              minWidth: (MediaQuery.of(context).size.width - 8) / 5, minHeight: 56),
                           isSelected: _selected,
                           children: [
                             Text(Enums.toText(ETypeEmployees.worker).tr()),

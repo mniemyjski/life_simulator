@@ -2,6 +2,8 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:richeable/utilities/utilities.dart';
+import 'package:richeable/widgets/custom_card.dart';
+import 'package:richeable/widgets/custom_sheet_design.dart';
 
 import '../cubit/event_cubit.dart';
 
@@ -32,116 +34,130 @@ class EventsList extends StatelessWidget {
                         return GestureDetector(
                           onTap: () {
                             showModalBottomSheet<void>(
+                              backgroundColor: Colors.transparent,
                               context: context,
                               builder: (BuildContext context) {
                                 return StatefulBuilder(builder: (context, setState) {
-                                  return Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Text(
-                                          element.datCre!.onlyDateToString(),
-                                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                fontStyle: FontStyle.italic,
-                                                color: element.active ? null : Colors.grey[700],
-                                              ),
-                                        ),
-                                        Row(
-                                          children: [
-                                            RichText(
-                                              text: TextSpan(
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .bodyText1!
-                                                    .copyWith(
-                                                      color:
-                                                          element.active ? null : Colors.grey[700],
+                                  return CustomSheetDesign(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Text(
+                                            element.datCre!.onlyDateToString(),
+                                            style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                                                  fontStyle: FontStyle.italic,
+                                                  color: element.active ? null : Colors.grey[700],
+                                                ),
+                                          ),
+                                          Row(
+                                            children: [
+                                              RichText(
+                                                text: TextSpan(
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyText2!
+                                                      .copyWith(
+                                                        color: element.active
+                                                            ? null
+                                                            : Colors.grey[700],
+                                                      ),
+                                                  children: <TextSpan>[
+                                                    const TextSpan(
+                                                      text: 'Event: ',
+                                                      style: TextStyle(
+                                                        fontWeight: FontWeight.bold,
+                                                      ),
                                                     ),
-                                                children: <TextSpan>[
-                                                  const TextSpan(
-                                                    text: 'Event: ',
-                                                    style: TextStyle(
-                                                      fontWeight: FontWeight.bold,
+                                                    TextSpan(
+                                                      text: element.name,
                                                     ),
-                                                  ),
-                                                  TextSpan(
-                                                    text: element.name,
-                                                  ),
-                                                ],
+                                                  ],
+                                                ),
                                               ),
+                                            ],
+                                          ),
+                                          RichText(
+                                            text: TextSpan(
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyText2!
+                                                  .copyWith(
+                                                    color: element.active ? null : Colors.grey[700],
+                                                  ),
+                                              children: <TextSpan>[
+                                                const TextSpan(
+                                                  text: 'Description: ',
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                                TextSpan(
+                                                  text: element.description,
+                                                ),
+                                              ],
                                             ),
-                                          ],
-                                        ),
-                                        RichText(
-                                          text: TextSpan(
-                                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                  color: element.active ? null : Colors.grey[700],
-                                                ),
-                                            children: <TextSpan>[
-                                              const TextSpan(
-                                                text: 'Description: ',
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                              TextSpan(
-                                                text: element.description,
-                                              ),
-                                            ],
                                           ),
-                                        ),
-                                        RichText(
-                                          text: TextSpan(
-                                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                  color: element.active ? null : Colors.grey[700],
+                                          RichText(
+                                            text: TextSpan(
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyText2!
+                                                  .copyWith(
+                                                    color: element.active ? null : Colors.grey[700],
+                                                  ),
+                                              children: <TextSpan>[
+                                                const TextSpan(
+                                                  text: 'Value: ',
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
                                                 ),
-                                            children: <TextSpan>[
-                                              const TextSpan(
-                                                text: 'Value: ',
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                              TextSpan(
-                                                  text: element.value is int
-                                                      ? '${element.value * 100}%'
-                                                      : element.value.toString()),
-                                            ],
+                                                TextSpan(
+                                                    text: element.value is int
+                                                        ? '${element.value * 100}%'
+                                                        : element.value.toString()),
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                        RichText(
-                                          text: TextSpan(
-                                            style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                                  color: element.active ? null : Colors.grey[700],
+                                          RichText(
+                                            text: TextSpan(
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyText2!
+                                                  .copyWith(
+                                                    color: element.active ? null : Colors.grey[700],
+                                                  ),
+                                              children: <TextSpan>[
+                                                const TextSpan(
+                                                  text: 'Duration: ',
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
                                                 ),
-                                            children: <TextSpan>[
-                                              const TextSpan(
-                                                text: 'Duration: ',
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
+                                                TextSpan(
+                                                  text:
+                                                      '${element.leftDuration}/${element.duration}',
                                                 ),
-                                              ),
-                                              TextSpan(
-                                                text: '${element.leftDuration}/${element.duration}',
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   );
                                 });
                               },
                             );
                           },
-                          child: Card(
+                          child: CustomCard(
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: RichText(
                                 text: TextSpan(
-                                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                                  style: Theme.of(context).textTheme.bodyText2!.copyWith(
                                         color: element.active ? null : Colors.grey[700],
                                       ),
                                   children: <TextSpan>[

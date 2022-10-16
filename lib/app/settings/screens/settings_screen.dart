@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:richeable/app/settings/cubit/audio_cubit.dart';
+import 'package:richeable/widgets/custom_card.dart';
 
 import '../../../constants/constants.dart';
 import '../../../utilities/utilities.dart';
@@ -63,7 +64,7 @@ class SettingsScreen extends StatelessWidget {
             ),
             BlocBuilder<AudioCubit, Audio>(
               builder: (context, state) {
-                return Card(
+                return CustomCard(
                   child: Slider(
                     value: state.sounds,
                     min: 0,
@@ -80,7 +81,7 @@ class SettingsScreen extends StatelessWidget {
             ),
             BlocBuilder<AudioCubit, Audio>(
               builder: (context, state) {
-                return Card(
+                return CustomCard(
                   child: Slider(
                     value: state.music,
                     min: 0,

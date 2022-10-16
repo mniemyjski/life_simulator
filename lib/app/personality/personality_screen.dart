@@ -20,17 +20,10 @@ class _PersonalityScreenState extends State<PersonalityScreen> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      appBar: AppBarGame(title: LocaleKeys.personality.tr()),
+      appBar: AppBarGame(title: LocaleKeys.skills.tr()),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              '${LocaleKeys.skills.tr()}:',
-              style: Theme.of(context).textTheme.headline6!.copyWith(color: Colors.white),
-            ),
-          ),
           Expanded(
             child: BlocBuilder<SkillsCubit, SkillsState>(
               builder: (context, state) {

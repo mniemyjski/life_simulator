@@ -19,14 +19,14 @@ class StockMarketRepository {
 
   Future<Candle> getLast(Instrument instrument) async {
     final result = await _isar.candles
-        .filter()
-        .instrumentEqualTo(instrument.name)
-        .sortByDateTimeDesc()
+        .where(sort: Sort.desc)
+        .instrumentEqualToAnyDateTime(instrument.name)
         .findFirst();
+
     return result as Candle;
   }
 
-  Future<List<Candle>> getLastYearCandle(DateTime dateTime) async {
+  Future<List<Candle>> getLastYearCandles(DateTime dateTime) async {
     return await _isar.candles
         .filter()
         .dateTimeBetween(dateTime.addDate(years: -1), dateTime)
@@ -91,47 +91,49 @@ class StockMarketRepository {
       {required List<Instrument> instruments, required DateTime date}) async {
     List<Instrument> newInstruments = [];
 
-    for (var i in instruments) {
-      Instrument newInstrument = i;
-      Candle newCandle;
+    await _isar.writeTxn(() async {
+      for (var i in instruments) {
+        Instrument newInstrument = i;
+        Candle newCandle;
 
-      Candle lastCandle = newInstrument.lastCandle;
-      newInstrument = _valorization(instrument: newInstrument, candles: lastCandle);
+        // Candle lastCandle = newInstrument.lastCandle;
+        Candle lastCandle = await getLast(newInstrument);
+        newInstrument = _valorization(instrument: newInstrument, candles: lastCandle);
 
-      if (lastCandle.dateTime.millisecondsSinceEpoch >
-          newInstrument.datTrendEnd.millisecondsSinceEpoch) {
-        newInstrument = _randomChangeTrend(instrument: newInstrument, candle: lastCandle);
-      }
+        if (lastCandle.dateTime.millisecondsSinceEpoch >
+            newInstrument.datTrendEnd.millisecondsSinceEpoch) {
+          newInstrument = _randomChangeTrend(instrument: newInstrument, candle: lastCandle);
+        }
 
-      switch (newInstrument.eTypeTrend) {
-        case ETypeTrend.stable:
-          newCandle = _stable(
-            instrument: newInstrument,
-            candle: lastCandle,
-            dateTime: date,
-          );
-          break;
-        case ETypeTrend.decrease:
-          newCandle = _decrease(
-            instrument: newInstrument,
-            candle: lastCandle,
-            dateTime: date,
-          );
-          break;
-        case ETypeTrend.increase:
-          newCandle = _increase(
-            instrument: newInstrument,
-            candle: lastCandle,
-            dateTime: date,
-          );
-          break;
-      }
+        switch (newInstrument.eTypeTrend) {
+          case ETypeTrend.stable:
+            newCandle = _stable(
+              instrument: newInstrument,
+              candle: lastCandle,
+              dateTime: date,
+            );
+            break;
+          case ETypeTrend.decrease:
+            newCandle = _decrease(
+              instrument: newInstrument,
+              candle: lastCandle,
+              dateTime: date,
+            );
+            break;
+          case ETypeTrend.increase:
+            newCandle = _increase(
+              instrument: newInstrument,
+              candle: lastCandle,
+              dateTime: date,
+            );
+            break;
+        }
 
-      await _isar.writeTxn(() async {
         await _isar.candles.put(newCandle);
-      });
-      newInstruments.add(newInstrument.copyWith(lastCandle: newCandle));
-    }
+
+        newInstruments.add(newInstrument.copyWith(lastCandle: newCandle));
+      }
+    });
     return newInstruments;
   }
 

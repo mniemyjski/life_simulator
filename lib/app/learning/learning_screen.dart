@@ -29,13 +29,6 @@ class LearningScreen extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              '${LocaleKeys.queue.tr()}:',
-              style: Theme.of(context).textTheme.headline6!.copyWith(color: Colors.white),
-            ),
-          ),
           Expanded(
             flex: 1,
             child: Padding(

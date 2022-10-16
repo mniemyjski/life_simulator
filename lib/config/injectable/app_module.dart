@@ -2,6 +2,7 @@ import 'package:injectable/injectable.dart';
 import 'package:isar/isar.dart';
 import 'package:richeable/app/business/models/business/business_model.dart';
 import 'package:richeable/app/business/models/employee/employee_model.dart';
+import 'package:richeable/app/business/models/product/product_model.dart';
 import 'package:richeable/app/freelance/models/freelance_done/freelance_done_model.dart';
 import 'package:richeable/app/money/models/transaction/transaction_model.dart';
 import 'package:richeable/app/stock_market/models/candle/candle.dart';
@@ -17,7 +18,8 @@ class AppModule {
     CandleSchema,
     FreelanceDoneSchema,
     BusinessSchema,
-    EmployeeSchema
+    EmployeeSchema,
+    ProductSchema,
   ];
 
   Future init() async {

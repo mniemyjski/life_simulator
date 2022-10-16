@@ -60,14 +60,32 @@ const CandleSchema = CollectionSchema(
   deserializeProp: _candleDeserializeProp,
   idName: r'id',
   indexes: {
-    r'instrument': IndexSchema(
-      id: 3092707332867366884,
-      name: r'instrument',
+    r'instrument_dateTime': IndexSchema(
+      id: 326737848939681596,
+      name: r'instrument_dateTime',
       unique: false,
       replace: false,
       properties: [
         IndexPropertySchema(
           name: r'instrument',
+          type: IndexType.value,
+          caseSensitive: false,
+        ),
+        IndexPropertySchema(
+          name: r'dateTime',
+          type: IndexType.value,
+          caseSensitive: false,
+        )
+      ],
+    ),
+    r'dateTime': IndexSchema(
+      id: -138851979697481250,
+      name: r'dateTime',
+      unique: false,
+      replace: false,
+      properties: [
+        IndexPropertySchema(
+          name: r'dateTime',
           type: IndexType.value,
           caseSensitive: false,
         )
@@ -195,10 +213,18 @@ extension CandleQueryWhereSort on QueryBuilder<Candle, Candle, QWhere> {
     });
   }
 
-  QueryBuilder<Candle, Candle, QAfterWhere> anyInstrument() {
+  QueryBuilder<Candle, Candle, QAfterWhere> anyInstrumentDateTime() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
-        const IndexWhereClause.any(indexName: r'instrument'),
+        const IndexWhereClause.any(indexName: r'instrument_dateTime'),
+      );
+    });
+  }
+
+  QueryBuilder<Candle, Candle, QAfterWhere> anyDateTime() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(
+        const IndexWhereClause.any(indexName: r'dateTime'),
       );
     });
   }
@@ -270,29 +296,29 @@ extension CandleQueryWhere on QueryBuilder<Candle, Candle, QWhereClause> {
     });
   }
 
-  QueryBuilder<Candle, Candle, QAfterWhereClause> instrumentEqualTo(
+  QueryBuilder<Candle, Candle, QAfterWhereClause> instrumentEqualToAnyDateTime(
       ENameInstrument instrument) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.equalTo(
-        indexName: r'instrument',
+        indexName: r'instrument_dateTime',
         value: [instrument],
       ));
     });
   }
 
-  QueryBuilder<Candle, Candle, QAfterWhereClause> instrumentNotEqualTo(
-      ENameInstrument instrument) {
+  QueryBuilder<Candle, Candle, QAfterWhereClause>
+      instrumentNotEqualToAnyDateTime(ENameInstrument instrument) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
             .addWhereClause(IndexWhereClause.between(
-              indexName: r'instrument',
+              indexName: r'instrument_dateTime',
               lower: [],
               upper: [instrument],
               includeUpper: false,
             ))
             .addWhereClause(IndexWhereClause.between(
-              indexName: r'instrument',
+              indexName: r'instrument_dateTime',
               lower: [instrument],
               includeLower: false,
               upper: [],
@@ -300,13 +326,13 @@ extension CandleQueryWhere on QueryBuilder<Candle, Candle, QWhereClause> {
       } else {
         return query
             .addWhereClause(IndexWhereClause.between(
-              indexName: r'instrument',
+              indexName: r'instrument_dateTime',
               lower: [instrument],
               includeLower: false,
               upper: [],
             ))
             .addWhereClause(IndexWhereClause.between(
-              indexName: r'instrument',
+              indexName: r'instrument_dateTime',
               lower: [],
               upper: [instrument],
               includeUpper: false,
@@ -315,13 +341,14 @@ extension CandleQueryWhere on QueryBuilder<Candle, Candle, QWhereClause> {
     });
   }
 
-  QueryBuilder<Candle, Candle, QAfterWhereClause> instrumentGreaterThan(
+  QueryBuilder<Candle, Candle, QAfterWhereClause>
+      instrumentGreaterThanAnyDateTime(
     ENameInstrument instrument, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.between(
-        indexName: r'instrument',
+        indexName: r'instrument_dateTime',
         lower: [instrument],
         includeLower: include,
         upper: [],
@@ -329,13 +356,13 @@ extension CandleQueryWhere on QueryBuilder<Candle, Candle, QWhereClause> {
     });
   }
 
-  QueryBuilder<Candle, Candle, QAfterWhereClause> instrumentLessThan(
+  QueryBuilder<Candle, Candle, QAfterWhereClause> instrumentLessThanAnyDateTime(
     ENameInstrument instrument, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.between(
-        indexName: r'instrument',
+        indexName: r'instrument_dateTime',
         lower: [],
         upper: [instrument],
         includeUpper: include,
@@ -343,7 +370,7 @@ extension CandleQueryWhere on QueryBuilder<Candle, Candle, QWhereClause> {
     });
   }
 
-  QueryBuilder<Candle, Candle, QAfterWhereClause> instrumentBetween(
+  QueryBuilder<Candle, Candle, QAfterWhereClause> instrumentBetweenAnyDateTime(
     ENameInstrument lowerInstrument,
     ENameInstrument upperInstrument, {
     bool includeLower = true,
@@ -351,10 +378,197 @@ extension CandleQueryWhere on QueryBuilder<Candle, Candle, QWhereClause> {
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.between(
-        indexName: r'instrument',
+        indexName: r'instrument_dateTime',
         lower: [lowerInstrument],
         includeLower: includeLower,
         upper: [upperInstrument],
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<Candle, Candle, QAfterWhereClause> instrumentDateTimeEqualTo(
+      ENameInstrument instrument, DateTime dateTime) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'instrument_dateTime',
+        value: [instrument, dateTime],
+      ));
+    });
+  }
+
+  QueryBuilder<Candle, Candle, QAfterWhereClause>
+      instrumentEqualToDateTimeNotEqualTo(
+          ENameInstrument instrument, DateTime dateTime) {
+    return QueryBuilder.apply(this, (query) {
+      if (query.whereSort == Sort.asc) {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'instrument_dateTime',
+              lower: [instrument],
+              upper: [instrument, dateTime],
+              includeUpper: false,
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'instrument_dateTime',
+              lower: [instrument, dateTime],
+              includeLower: false,
+              upper: [instrument],
+            ));
+      } else {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'instrument_dateTime',
+              lower: [instrument, dateTime],
+              includeLower: false,
+              upper: [instrument],
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'instrument_dateTime',
+              lower: [instrument],
+              upper: [instrument, dateTime],
+              includeUpper: false,
+            ));
+      }
+    });
+  }
+
+  QueryBuilder<Candle, Candle, QAfterWhereClause>
+      instrumentEqualToDateTimeGreaterThan(
+    ENameInstrument instrument,
+    DateTime dateTime, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'instrument_dateTime',
+        lower: [instrument, dateTime],
+        includeLower: include,
+        upper: [instrument],
+      ));
+    });
+  }
+
+  QueryBuilder<Candle, Candle, QAfterWhereClause>
+      instrumentEqualToDateTimeLessThan(
+    ENameInstrument instrument,
+    DateTime dateTime, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'instrument_dateTime',
+        lower: [instrument],
+        upper: [instrument, dateTime],
+        includeUpper: include,
+      ));
+    });
+  }
+
+  QueryBuilder<Candle, Candle, QAfterWhereClause>
+      instrumentEqualToDateTimeBetween(
+    ENameInstrument instrument,
+    DateTime lowerDateTime,
+    DateTime upperDateTime, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'instrument_dateTime',
+        lower: [instrument, lowerDateTime],
+        includeLower: includeLower,
+        upper: [instrument, upperDateTime],
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<Candle, Candle, QAfterWhereClause> dateTimeEqualTo(
+      DateTime dateTime) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'dateTime',
+        value: [dateTime],
+      ));
+    });
+  }
+
+  QueryBuilder<Candle, Candle, QAfterWhereClause> dateTimeNotEqualTo(
+      DateTime dateTime) {
+    return QueryBuilder.apply(this, (query) {
+      if (query.whereSort == Sort.asc) {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'dateTime',
+              lower: [],
+              upper: [dateTime],
+              includeUpper: false,
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'dateTime',
+              lower: [dateTime],
+              includeLower: false,
+              upper: [],
+            ));
+      } else {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'dateTime',
+              lower: [dateTime],
+              includeLower: false,
+              upper: [],
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'dateTime',
+              lower: [],
+              upper: [dateTime],
+              includeUpper: false,
+            ));
+      }
+    });
+  }
+
+  QueryBuilder<Candle, Candle, QAfterWhereClause> dateTimeGreaterThan(
+    DateTime dateTime, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'dateTime',
+        lower: [dateTime],
+        includeLower: include,
+        upper: [],
+      ));
+    });
+  }
+
+  QueryBuilder<Candle, Candle, QAfterWhereClause> dateTimeLessThan(
+    DateTime dateTime, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'dateTime',
+        lower: [],
+        upper: [dateTime],
+        includeUpper: include,
+      ));
+    });
+  }
+
+  QueryBuilder<Candle, Candle, QAfterWhereClause> dateTimeBetween(
+    DateTime lowerDateTime,
+    DateTime upperDateTime, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'dateTime',
+        lower: [lowerDateTime],
+        includeLower: includeLower,
+        upper: [upperDateTime],
         includeUpper: includeUpper,
       ));
     });

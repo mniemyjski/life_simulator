@@ -41,7 +41,10 @@ class AssetsScreen extends StatelessWidget {
                               iconButton: IconButton(
                                 onPressed: () =>
                                     context.router.push(AssetRoute(id: assets[index].id)),
-                                icon: const FaIcon(FontAwesomeIcons.pencil),
+                                icon: const FaIcon(
+                                  FontAwesomeIcons.pencil,
+                                  color: Colors.white,
+                                ),
                               ),
                               asset: assets[index],
                             );

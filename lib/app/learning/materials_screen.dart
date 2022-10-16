@@ -51,13 +51,6 @@ class _MaterialsScreenState extends State<MaterialsScreen> {
               },
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              '${LocaleKeys.materials.tr()}:',
-              style: Theme.of(context).textTheme.headline6!.copyWith(color: Colors.white),
-            ),
-          ),
           Expanded(
             flex: 2,
             child: Padding(

@@ -8,7 +8,6 @@ class CustomButton extends StatelessWidget {
   final Color textColor;
   final VoidCallback? onPressed;
   final double? borderRadius;
-  final EdgeInsetsGeometry? padding;
 
   const CustomButton({
     Key? key,
@@ -17,30 +16,49 @@ class CustomButton extends StatelessWidget {
     this.textColor = Colors.white,
     this.backgroundColor,
     this.borderRadius,
-    this.padding,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: padding ?? EdgeInsets.zero,
-      child: ClipRect(
+      decoration: BoxDecoration(
+        // boxShadow: const [
+        //   BoxShadow(
+        //     color: Colors.white24,
+        //     offset: Offset(-1, -1),
+        //     blurRadius: 1.0,
+        //   ),
+        //   BoxShadow(
+        //     color: Colors.black54,
+        //     offset: Offset(1, 1),
+        //     blurRadius: 1.0,
+        //   )
+        // ],
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          stops: const [0.0, 1.0],
+          colors: [
+            if (onPressed != null) Theme.of(context).scaffoldBackgroundColor.withOpacity(0.6),
+            if (onPressed != null) Theme.of(context).scaffoldBackgroundColor.withOpacity(0.1),
+            if (onPressed == null) Colors.grey.withOpacity(0.6),
+            if (onPressed == null) Colors.grey.withOpacity(0.1),
+          ],
+        ),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.white10, width: 1),
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(8),
         child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+          filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              shadowColor: Colors.black,
-              side: BorderSide(
-                color: Colors.black.withOpacity(0.3),
-              ),
-              disabledBackgroundColor: Colors.grey.withOpacity(0.5),
-              backgroundColor: backgroundColor?.withOpacity(0.5) ??
-                  Theme.of(context).primaryColor.withOpacity(0.5),
+              side: const BorderSide(color: Colors.transparent),
+              disabledBackgroundColor: Colors.transparent,
+              backgroundColor: Colors.transparent,
+              shadowColor: Colors.transparent,
               minimumSize: const Size(45, 45),
-              // padding: const EdgeInsets.symmetric(horizontal: 16),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(borderRadius ?? 2)),
-              ),
             ),
             onPressed: onPressed,
             child: Center(child: child),

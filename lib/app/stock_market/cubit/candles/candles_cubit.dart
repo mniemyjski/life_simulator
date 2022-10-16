@@ -21,13 +21,13 @@ class CandlesCubit extends Cubit<CandlesState> {
 
   CandlesCubit(this._marketRepository, this._dateCubit) : super(const CandlesState.initial()) {
     state.whenOrNull(initial: () async {
-      final result = await _marketRepository.getLastYearCandle(DateTime(18, 1, 1));
+      final result = await _marketRepository.getLastYearCandles(DateTime(18, 1, 1));
       emit(CandlesState.loaded(result));
     });
 
     _dateSub = _dateCubit.stream.listen((event) {
       event.whenOrNull(loaded: (date) async {
-        final result = await _marketRepository.getLastYearCandle(date);
+        final result = await _marketRepository.getLastYearCandles(date);
         emit(CandlesState.loaded(result));
       });
     });

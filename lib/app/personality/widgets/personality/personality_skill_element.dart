@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:richeable/widgets/custom_card.dart';
 
 import '../../../../constants/constants.dart';
 import '../../../../utilities/utilities.dart';
@@ -14,7 +15,7 @@ class PersonalitySkillElement extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return CustomCard(
       child: Padding(
         padding: const EdgeInsets.all(4.0),
         child: Row(
@@ -25,7 +26,7 @@ class PersonalitySkillElement extends StatelessWidget {
               children: [
                 RichText(
                   text: TextSpan(
-                    style: Theme.of(context).textTheme.bodyText1,
+                    style: Theme.of(context).textTheme.bodyText2,
                     children: <TextSpan>[
                       TextSpan(
                           text: '${Enums.toText(element.name).tr()}: ',
@@ -36,7 +37,7 @@ class PersonalitySkillElement extends StatelessWidget {
                 ),
                 RichText(
                   text: TextSpan(
-                    style: Theme.of(context).textTheme.bodyText1,
+                    style: Theme.of(context).textTheme.bodyText2,
                     children: <TextSpan>[
                       TextSpan(
                           text: '${LocaleKeys.exp.tr()}: ',
@@ -52,12 +53,14 @@ class PersonalitySkillElement extends StatelessWidget {
               children: [
                 Text(
                   '${(element.getPercentToNextLvl() * 100).toInt()}%',
-                  style: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 10),
+                  style: Theme.of(context).textTheme.bodyText2!.copyWith(fontSize: 10),
                 ),
-                CircularProgressIndicator(
-                  backgroundColor: Colors.grey[400],
-                  value: element.getPercentToNextLvl(),
-                  strokeWidth: 3,
+                Center(
+                  child: CircularProgressIndicator(
+                    color: Theme.of(context).scaffoldBackgroundColor,
+                    value: element.getPercentToNextLvl(),
+                    strokeWidth: 3,
+                  ),
                 ),
               ],
             )

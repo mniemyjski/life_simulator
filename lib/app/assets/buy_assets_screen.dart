@@ -48,7 +48,10 @@ class BuyAssetsScreen extends StatelessWidget {
                                     context.router.pop();
                                   }
                                 },
-                                icon: const FaIcon(FontAwesomeIcons.basketShopping),
+                                icon: const FaIcon(
+                                  FontAwesomeIcons.basketShopping,
+                                  color: Colors.white,
+                                ),
                               ),
                             );
                           }),

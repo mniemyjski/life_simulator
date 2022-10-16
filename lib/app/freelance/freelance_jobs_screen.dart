@@ -7,8 +7,8 @@ import 'package:richeable/widgets/widgets.dart';
 
 import '../../constants/constants.dart';
 import 'cubit/job/freelance_job_cubit.dart';
-import 'widgets/freelance_job_creator.dart';
 import 'widgets/freelance_job_element.dart';
+import 'widgets/freelance_job_sheet.dart';
 
 class FreelanceJobsScreen extends StatelessWidget {
   const FreelanceJobsScreen({Key? key}) : super(key: key);
@@ -76,11 +76,9 @@ class FreelanceJobsScreen extends StatelessWidget {
               heroTag: null,
               onPressed: () => showModalBottomSheet<void>(
                   isScrollControlled: true,
-                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                  backgroundColor: Colors.transparent,
                   context: context,
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.vertical(top: Radius.circular(8.0))),
-                  builder: (BuildContext context) => const FreelanceJobCreator()),
+                  builder: (BuildContext context) => const FreelanceJobSheet()),
               child: const FaIcon(FontAwesomeIcons.plus),
             ),
           ],

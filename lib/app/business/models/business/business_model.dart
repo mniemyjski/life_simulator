@@ -9,8 +9,10 @@ class Business extends Equatable {
   final Id id;
   final String name;
   final DateTime dateCre;
+
   final int efficiencyEmployees;
   final int efficiencyScientist;
+
   final int maxWorkers;
   final int maxScientist;
   final int maxAccountant;
@@ -24,6 +26,9 @@ class Business extends Equatable {
   final int countAnalyst;
   final int countManager;
   final int countMarketer;
+
+  final double balance;
+  final double taxes;
 
   const Business({
     this.id = Isar.autoIncrement,
@@ -43,7 +48,13 @@ class Business extends Equatable {
     this.countAnalyst = 0,
     this.countManager = 0,
     this.countMarketer = 0,
-  })  : assert(maxAccountant <= 1),
+    this.balance = 0,
+    this.taxes = 0,
+  })  : assert(maxWorkers <= 1000),
+        assert(maxWorkers >= 0),
+        assert(maxScientist <= 50),
+        assert(maxScientist >= 0),
+        assert(maxAccountant <= 1),
         assert(maxAccountant >= 0),
         assert(maxManager <= 1),
         assert(maxManager >= 0),

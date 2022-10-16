@@ -2,10 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:richeable/widgets/custom_card.dart';
 import 'package:richeable/widgets/widgets.dart';
 
 import '../../config/injectable/injection.dart';
-import '../../config/routes/routes.gr.dart';
 import '../../constants/locale_keys.g.dart';
 import '../../utilities/utilities.dart';
 import '../date/widgets/next_day.dart';
@@ -21,48 +21,46 @@ class TransactionsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Builder _elementList(SumTransactions element) {
       return Builder(builder: (context) {
-        return Card(
-          child: Container(
-            color: element.value < 0 ? Colors.red.withOpacity(0.3) : Colors.green.withOpacity(0.3),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Column(
-                    children: [
-                      Column(
-                        children: [
-                          Text(
-                            '${Enums.toText(element.eTypeTransactionSource).tr()}:',
-                            style: TextStyle(
-                              color: Theme.of(context).textTheme.bodyText1!.color,
-                              fontWeight: FontWeight.bold,
-                            ),
+        return CustomCard(
+          color: element.value < 0 ? Colors.red.withOpacity(0.2) : Colors.green.withOpacity(0.2),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Column(
+                  children: [
+                    Column(
+                      children: [
+                        Text(
+                          '${Enums.toText(element.eTypeTransactionSource).tr()}:',
+                          style: TextStyle(
+                            color: Theme.of(context).textTheme.bodyText2!.color,
+                            fontWeight: FontWeight.bold,
                           ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        '${LocaleKeys.value.tr()}: ',
-                        style: TextStyle(
-                          color: Theme.of(context).textTheme.bodyText1!.color,
-                          fontWeight: FontWeight.bold,
                         ),
+                      ],
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text(
+                      '${LocaleKeys.value.tr()}: ',
+                      style: TextStyle(
+                        color: Theme.of(context).textTheme.bodyText2!.color,
+                        fontWeight: FontWeight.bold,
                       ),
-                      Text(
-                        element.value.toMoney(),
-                        style: TextStyle(
-                          color: Theme.of(context).textTheme.bodyText1!.color,
-                        ),
+                    ),
+                    Text(
+                      element.value.toMoney(),
+                      style: TextStyle(
+                        color: Theme.of(context).textTheme.bodyText2!.color,
                       ),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         );
@@ -82,15 +80,16 @@ class TransactionsScreen extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Card(
+                          CustomCard(
                             child: IconButton(
                                 onPressed: () => context.read<TransactionsCubit>().backMonth(),
                                 icon: const Icon(
                                   FontAwesomeIcons.arrowLeft,
+                                  color: Colors.white,
                                 )),
                           ),
                           Expanded(
-                            child: Card(
+                            child: CustomCard(
                               child: Container(
                                 height: 48,
                                 padding: const EdgeInsets.all(8.0),
@@ -99,17 +98,18 @@ class TransactionsScreen extends StatelessWidget {
                                   date.onlyDateToString(),
                                   style: Theme.of(context)
                                       .textTheme
-                                      .bodyText1!
+                                      .bodyText2!
                                       .copyWith(fontWeight: FontWeight.bold),
                                 )),
                               ),
                             ),
                           ),
-                          Card(
+                          CustomCard(
                             child: IconButton(
                                 onPressed: () => context.read<TransactionsCubit>().nextMonth(),
                                 icon: const Icon(
                                   FontAwesomeIcons.arrowRight,
+                                  color: Colors.white,
                                 )),
                           ),
                         ],
@@ -121,8 +121,9 @@ class TransactionsScreen extends StatelessWidget {
                             Row(
                               children: [
                                 Expanded(
-                                  child: Card(
-                                    color: Colors.green.withOpacity(0.6),
+                                  child: CustomCard(
+                                    border: 0,
+                                    color: Colors.green.withOpacity(0.7),
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Text(
@@ -134,26 +135,26 @@ class TransactionsScreen extends StatelessWidget {
                                   ),
                                 ),
                                 Expanded(
-                                  child: Card(
+                                  child: CustomCard(
+                                    border: 0,
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Text(
                                         '${LocaleKeys.net.tr()}: ${context.watch<TransactionsCubit>().getTotalSum(null).toMoney()}',
-                                        style: TextStyle(
-                                            color: Theme.of(context).textTheme.bodyText1!.color),
+                                        style: Theme.of(context).textTheme.bodyText2,
                                       ),
                                     ),
                                   ),
                                 ),
                                 Expanded(
-                                  child: Card(
-                                    color: Colors.red.withOpacity(0.6),
+                                  child: CustomCard(
+                                    border: 0,
+                                    color: Colors.red.withOpacity(0.7),
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Text(
                                         '${LocaleKeys.expense.tr()}: ${context.watch<TransactionsCubit>().getTotalSum(ETypeTransaction.expense).toMoney()}',
-                                        style: TextStyle(
-                                            color: Theme.of(context).textTheme.bodyText2!.color),
+                                        style: Theme.of(context).textTheme.bodyText2,
                                       ),
                                     ),
                                   ),
@@ -221,13 +222,7 @@ class TransactionsScreen extends StatelessWidget {
                 child: const FaIcon(FontAwesomeIcons.arrowRotateLeft),
               ),
               const NextDayButton(),
-              FloatingActionButton(
-                heroTag: null,
-                onPressed: () {
-                  context.router.push(const IncomeRoute());
-                },
-                child: const FaIcon(FontAwesomeIcons.solidNoteSticky),
-              ),
+              const SizedBox(width: 56),
             ],
           ),
         ),

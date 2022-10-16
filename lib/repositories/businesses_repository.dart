@@ -31,6 +31,10 @@ class BusinessesRepository {
     });
   }
 
+  Future<List<Business>> getBusinesses() async {
+    return await _isar.business.where().findAll();
+  }
+
   Stream watchBusiness() {
     return _isar.business.where().watch();
   }

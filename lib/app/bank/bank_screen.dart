@@ -1,18 +1,17 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:richeable/app/date/cubit/date_cubit.dart';
+import 'package:richeable/app/bank/widgets/deposit_sheet.dart';
+import 'package:richeable/app/bank/widgets/loan_sheet.dart';
 import 'package:richeable/utilities/utilities.dart';
+import 'package:richeable/widgets/custom_card.dart';
 
 import '../../constants/constants.dart';
 import '../../widgets/widgets.dart';
 import '../date/widgets/next_day.dart';
 import '../game/widget/app_bar_game.dart';
-import '../money/cubit/money/money_cubit.dart';
-import '../money/models/transaction/transaction_model.dart';
 import 'cubit/deposit/deposit_cubit.dart';
 import 'cubit/loan/loan_cubit.dart';
 import 'models/loan/loan_model.dart';
@@ -22,190 +21,17 @@ class BankScreen extends StatelessWidget {
 
   _onTapDeposit(BuildContext context) async {
     return showModalBottomSheet<void>(
-      shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(8.0))),
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: Colors.transparent,
       context: context,
-      builder: (BuildContext context) {
-        double newDeposit = context.read<DepositCubit>().state;
-        final double oldDeposit = context.read<DepositCubit>().state;
-        final double money = context.watch<MoneyCubit>().getBalance();
-        final double max = context.read<DepositCubit>().state + (money > 0 ? money : 0);
-
-        return StatefulBuilder(builder: (context, setState) {
-          return Container(
-            color: Colors.black.withOpacity(0.5),
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  '${LocaleKeys.deposit.tr()}:',
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Slider(
-                        value: newDeposit,
-                        activeColor: Colors.white70,
-                        inactiveColor: Colors.white70,
-                        min: 0,
-                        max: max,
-                        divisions: max ~/ 10,
-                        onChanged: (double value) => setState(() => newDeposit = value),
-                      ),
-                    ),
-                    Text('${newDeposit.toMoney()}'),
-                  ],
-                ),
-                CustomButton(
-                    onPressed: () {
-                      context.read<DateCubit>().state.whenOrNull(loaded: (date) {
-                        if (newDeposit > oldDeposit) {
-                          context.read<DepositCubit>().change(newDeposit);
-
-                          context.read<MoneyCubit>().addTransaction(
-                              dateTime: date,
-                              value: -newDeposit,
-                              eTypeTransactionSource: ETypeTransactionSource.bankDeposit);
-                        } else if (newDeposit < oldDeposit) {
-                          context.read<DepositCubit>().change(-oldDeposit + newDeposit);
-                          context.read<MoneyCubit>().addTransaction(
-                              dateTime: date,
-                              value: oldDeposit - newDeposit,
-                              eTypeTransactionSource: ETypeTransactionSource.bankDeposit);
-                        }
-                        context.router.pop();
-                      });
-                    },
-                    child: Text(
-                      LocaleKeys.confirm.tr(),
-                    ))
-              ],
-            ),
-          );
-        });
-      },
+      builder: (BuildContext context) => const DepositSheet(),
     );
   }
 
   _onTapLoan(BuildContext context) async {
     showModalBottomSheet<void>(
-      shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(8.0))),
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: Colors.transparent,
       context: context,
-      builder: (BuildContext context) {
-        double interest = 0.04;
-
-        //toDo add last year income
-        double maxBorrow = 50000;
-        double maxTurns = 60;
-        double turns = 3;
-        double borrow = 1000;
-
-        return StatefulBuilder(builder: (context, setState) {
-          return Container(
-            color: Colors.black.withOpacity(0.5),
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Text(
-                  '${LocaleKeys.loan.tr()}:',
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Slider(
-                        value: borrow,
-                        min: 1000,
-                        max: maxBorrow,
-                        activeColor: Colors.white70,
-                        inactiveColor: Colors.white70,
-                        divisions: maxBorrow ~/ 1000,
-                        onChanged: (double value) => setState(() => borrow = value),
-                      ),
-                    ),
-                    Text('${borrow.toMoney()}')
-                  ],
-                ),
-                Text(
-                  '${LocaleKeys.months.tr()}:',
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Slider(
-                        value: turns,
-                        min: 3,
-                        max: maxTurns,
-                        activeColor: Colors.white70,
-                        inactiveColor: Colors.white70,
-                        divisions: maxTurns.toInt(),
-                        onChanged: (double value) => setState(() => turns = value),
-                      ),
-                    ),
-                    Text(turns.toInt().toString()),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: RichText(
-                    text: TextSpan(
-                      style: Theme.of(context).textTheme.bodyText2,
-                      children: <TextSpan>[
-                        TextSpan(
-                            text: '${LocaleKeys.monthlyRate.tr()}: ',
-                            style: const TextStyle(fontWeight: FontWeight.bold)),
-                        TextSpan(text: '${(borrow + (borrow * turns * interest)) ~/ turns}\$')
-                      ],
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: RichText(
-                    text: TextSpan(
-                      style: Theme.of(context).textTheme.bodyText2,
-                      children: <TextSpan>[
-                        TextSpan(
-                            text: '${LocaleKeys.cost.tr()}: ',
-                            style: const TextStyle(fontWeight: FontWeight.bold)),
-                        TextSpan(
-                          text: '${(borrow + (borrow * turns * interest)).toInt()}\$',
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                CustomButton(
-                    onPressed: () async {
-                      Loan loan = Loan(
-                        borrowed: borrow.toInt().toDouble(),
-                        leftLoan: (borrow + (borrow * turns * interest)).toInt().toDouble(),
-                        monthlyRate: ((borrow + (borrow * turns * interest)) ~/ turns).toDouble(),
-                        interest: interest,
-                        months: turns.toInt(),
-                        leftMonths: turns.toInt(),
-                      );
-                      String? toast = await context.read<LoanCubit>().add(loan);
-                      BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
-                      context.router.pop();
-                    },
-                    child: Text(
-                      LocaleKeys.confirm.tr(),
-                    )),
-              ],
-            ),
-          );
-        });
-      },
+      builder: (BuildContext context) => const LoanSheet(),
     );
   }
 
@@ -216,19 +42,19 @@ class BankScreen extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Card(
+          CustomCard(
             child: Container(
               width: double.infinity,
               padding: const EdgeInsets.all(8.0),
               child: RichText(
                 text: TextSpan(
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).textTheme.bodyText2,
                   children: <TextSpan>[
                     TextSpan(
                       text: '${LocaleKeys.deposit.tr()}: ',
                       style: Theme.of(context)
                           .textTheme
-                          .bodyText1!
+                          .bodyText2!
                           .copyWith(fontWeight: FontWeight.bold),
                     ),
                     TextSpan(
@@ -239,19 +65,19 @@ class BankScreen extends StatelessWidget {
               ),
             ),
           ),
-          Card(
+          CustomCard(
             child: Container(
               width: double.infinity,
               padding: const EdgeInsets.all(8.0),
               child: RichText(
                 text: TextSpan(
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).textTheme.bodyText2,
                   children: <TextSpan>[
                     TextSpan(
                       text: '${LocaleKeys.loan.tr()}: ',
                       style: Theme.of(context)
                           .textTheme
-                          .bodyText1!
+                          .bodyText2!
                           .copyWith(fontWeight: FontWeight.bold),
                     ),
                     TextSpan(
@@ -262,19 +88,19 @@ class BankScreen extends StatelessWidget {
               ),
             ),
           ),
-          Card(
+          CustomCard(
             child: Container(
               width: double.infinity,
               padding: const EdgeInsets.all(8.0),
               child: RichText(
                 text: TextSpan(
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).textTheme.bodyText2,
                   children: <TextSpan>[
                     TextSpan(
                       text: '${LocaleKeys.monthlyRate.tr()}: ',
                       style: Theme.of(context)
                           .textTheme
-                          .bodyText1!
+                          .bodyText2!
                           .copyWith(fontWeight: FontWeight.bold),
                     ),
                     TextSpan(
@@ -311,7 +137,7 @@ class BankScreen extends StatelessWidget {
                         itemBuilder: (context, index) {
                           Loan element = loans[index];
 
-                          return Card(
+                          return CustomCard(
                               child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Column(
@@ -319,7 +145,7 @@ class BankScreen extends StatelessWidget {
                               children: [
                                 RichText(
                                   text: TextSpan(
-                                    style: Theme.of(context).textTheme.bodyText1,
+                                    style: Theme.of(context).textTheme.bodyText2,
                                     children: <TextSpan>[
                                       TextSpan(text: '${LocaleKeys.borrowed.tr()}: '),
                                       TextSpan(
@@ -330,7 +156,7 @@ class BankScreen extends StatelessWidget {
                                 ),
                                 RichText(
                                   text: TextSpan(
-                                    style: Theme.of(context).textTheme.bodyText1,
+                                    style: Theme.of(context).textTheme.bodyText2,
                                     children: <TextSpan>[
                                       TextSpan(text: '${LocaleKeys.left.tr()}: '),
                                       TextSpan(
@@ -341,7 +167,7 @@ class BankScreen extends StatelessWidget {
                                 ),
                                 RichText(
                                   text: TextSpan(
-                                    style: Theme.of(context).textTheme.bodyText1,
+                                    style: Theme.of(context).textTheme.bodyText2,
                                     children: <TextSpan>[
                                       TextSpan(text: '${LocaleKeys.monthlyRate.tr()}: '),
                                       TextSpan(
@@ -352,7 +178,7 @@ class BankScreen extends StatelessWidget {
                                 ),
                                 RichText(
                                   text: TextSpan(
-                                    style: Theme.of(context).textTheme.bodyText1,
+                                    style: Theme.of(context).textTheme.bodyText2,
                                     children: <TextSpan>[
                                       TextSpan(text: '${LocaleKeys.nextRate.tr()}: '),
                                       TextSpan(

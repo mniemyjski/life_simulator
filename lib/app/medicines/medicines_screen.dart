@@ -7,6 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:richeable/constants/constants.dart';
 import 'package:richeable/widgets/widgets.dart';
 
+import '../../widgets/custom_card.dart';
 import '../date/widgets/next_day.dart';
 import '../game/widget/app_bar_game.dart';
 import 'cubit/medicines_cubit.dart';
@@ -31,21 +32,9 @@ class MedicinesScreen extends StatelessWidget {
                         itemBuilder: (context, index) {
                           final Medicine medicine = medicines[index];
 
-                          TextStyle txtStyle = medicine.active
-                              ? TextStyle(
-                                  color:
-                                      Theme.of(context).textTheme.bodyText2?.color ?? Colors.white,
-                                  fontSize: 10)
-                              : TextStyle(
-                                  color:
-                                      Theme.of(context).textTheme.bodyText1?.color ?? Colors.black,
-                                  fontSize: 10);
+                          TextStyle txtStyle = Theme.of(context).textTheme.bodyText2!;
 
-                          return Card(
-                            color: medicine.active ? Theme.of(context).primaryColor : null,
-                            shape: BeveledRectangleBorder(
-                              borderRadius: BorderRadius.circular(0),
-                            ),
+                          return CustomCard(
                             child: Padding(
                               padding: const EdgeInsets.all(4.0),
                               child: Row(
@@ -114,7 +103,10 @@ class MedicinesScreen extends StatelessWidget {
                                               text: toast, align: const Alignment(0.1, 0.05));
                                         }
                                       },
-                                      icon: const FaIcon(FontAwesomeIcons.plus),
+                                      icon: const FaIcon(
+                                        FontAwesomeIcons.plus,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                 ],
                               ),

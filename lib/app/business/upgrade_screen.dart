@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:richeable/app/business/cubit/businesses/businesses_cubit.dart';
+import 'package:richeable/app/business/widgets/upgrade_element.dart';
 import 'package:richeable/utilities/utilities.dart';
 
 import '../../constants/constants.dart';
@@ -31,25 +32,50 @@ class UpgradeScreen extends StatelessWidget {
                   automaticallyImplyLeading: false,
                 ),
                 body: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.only(top: 4),
                   child: Column(
                     children: [
-                      Row(
-                        children: [
-                          Card(
-                            child: Container(
-                              width: 43,
-                              height: 43,
-                              child: Center(child: Text(business.maxWorkers.toString())),
-                            ),
-                          ),
-                          Expanded(
-                            child: CustomButton(
-                                onPressed: () =>
-                                    context.read<BusinessesCubit>().increaseMaxWorkers(business),
-                                child: Text('add 10 workers')),
-                          ),
-                        ],
+                      UpgradeElement(
+                        value: business.maxWorkers,
+                        text: LocaleKeys.workers.tr(),
+                        buttonText: 'add 10 slots for 50k',
+                        onPressed: () =>
+                            context.read<BusinessesCubit>().increaseMaxWorkers(business),
+                      ),
+                      UpgradeElement(
+                        value: business.maxScientist,
+                        text: LocaleKeys.scientists.tr(),
+                        buttonText: 'add 1 slot for 50k',
+                        onPressed: () =>
+                            context.read<BusinessesCubit>().increaseMaxScientist(business),
+                      ),
+                      UpgradeElement(
+                        value: business.maxAccountant,
+                        text: LocaleKeys.accountant.tr(),
+                        buttonText: 'add 1 slot for 50k',
+                        onPressed: () =>
+                            context.read<BusinessesCubit>().increaseMaxAccountant(business),
+                      ),
+                      UpgradeElement(
+                        value: business.maxAnalyst,
+                        text: LocaleKeys.analyst.tr(),
+                        buttonText: 'add 1 slot for 50k',
+                        onPressed: () =>
+                            context.read<BusinessesCubit>().increaseMaxAnalyst(business),
+                      ),
+                      UpgradeElement(
+                        value: business.maxManager,
+                        text: LocaleKeys.manager.tr(),
+                        buttonText: 'add 1 slot for 50k',
+                        onPressed: () =>
+                            context.read<BusinessesCubit>().increaseMaxManager(business),
+                      ),
+                      UpgradeElement(
+                        value: business.maxMarketer,
+                        text: LocaleKeys.marketer.tr(),
+                        buttonText: 'add 1 slot for 50k',
+                        onPressed: () =>
+                            context.read<BusinessesCubit>().increaseMaxMarketer(business),
                       ),
                     ],
                   ),

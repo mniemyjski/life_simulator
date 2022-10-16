@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:richeable/utilities/utilities.dart';
+import 'package:richeable/widgets/custom_card.dart';
 
 import '../../../constants/constants.dart';
 import '../models/employee/employee_model.dart';
@@ -17,7 +18,7 @@ class EmployeeElement extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return CustomCard(
       child: Padding(
         padding: const EdgeInsets.all(4.0),
         child: Row(
@@ -27,7 +28,10 @@ class EmployeeElement extends StatelessWidget {
               children: [
                 const Padding(
                   padding: EdgeInsets.only(left: 8, right: 8),
-                  child: Icon(FontAwesomeIcons.user),
+                  child: Icon(
+                    FontAwesomeIcons.user,
+                    color: Colors.white,
+                  ),
                 ),
                 RatingBarIndicator(
                   rating: employee.rating.toDouble(),
@@ -46,7 +50,7 @@ class EmployeeElement extends StatelessWidget {
                     if (employee.id >= 0)
                       RichText(
                         text: TextSpan(
-                          style: Theme.of(context).textTheme.bodyText1,
+                          style: Theme.of(context).textTheme.bodyText2,
                           children: <TextSpan>[
                             const TextSpan(
                               text: 'Id: ',
@@ -58,7 +62,7 @@ class EmployeeElement extends StatelessWidget {
                       ),
                     RichText(
                       text: TextSpan(
-                        style: Theme.of(context).textTheme.bodyText1,
+                        style: Theme.of(context).textTheme.bodyText2,
                         children: <TextSpan>[
                           const TextSpan(
                             text: '${LocaleKeys.satisfaction}: ',
@@ -70,7 +74,7 @@ class EmployeeElement extends StatelessWidget {
                     ),
                     RichText(
                       text: TextSpan(
-                        style: Theme.of(context).textTheme.bodyText1,
+                        style: Theme.of(context).textTheme.bodyText2,
                         children: <TextSpan>[
                           const TextSpan(
                             text: '${LocaleKeys.efficiency}: ',
@@ -82,7 +86,7 @@ class EmployeeElement extends StatelessWidget {
                     ),
                     RichText(
                       text: TextSpan(
-                        style: Theme.of(context).textTheme.bodyText1,
+                        style: Theme.of(context).textTheme.bodyText2,
                         children: <TextSpan>[
                           const TextSpan(
                             text: '${LocaleKeys.cost}: ',
@@ -95,7 +99,7 @@ class EmployeeElement extends StatelessWidget {
                     if (employee.fired != null)
                       RichText(
                         text: TextSpan(
-                          style: Theme.of(context).textTheme.bodyText1,
+                          style: Theme.of(context).textTheme.bodyText2,
                           children: <TextSpan>[
                             const TextSpan(
                               text: '${LocaleKeys.dateTimeFired}: ',

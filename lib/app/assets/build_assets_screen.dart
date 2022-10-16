@@ -9,7 +9,7 @@ import '../../utilities/utilities.dart';
 import 'cubit/build/build_asset_cubit.dart';
 import 'models/build/build_asset_model.dart';
 import 'widgets/asset_build_element.dart';
-import 'widgets/asset_builder.dart';
+import 'widgets/asset_builder_sheet.dart';
 
 class BuildAssetsScreen extends StatefulWidget {
   const BuildAssetsScreen({Key? key}) : super(key: key);
@@ -75,13 +75,11 @@ class _BuildAssetsScreenState extends State<BuildAssetsScreen> {
               onPressed: () async {
                 showModalBottomSheet<String>(
                   shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.vertical(top: Radius.circular(8.0))),
-                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                      borderRadius: BorderRadius.vertical(top: Radius.circular(12.0))),
+                  backgroundColor: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.5),
                   context: context,
                   isScrollControlled: true,
-                  builder: (BuildContext context) {
-                    return const AssetBuilder();
-                  },
+                  builder: (BuildContext context) => const AssetBuilderSheet(),
                 );
               },
               child: const FaIcon(FontAwesomeIcons.plus),

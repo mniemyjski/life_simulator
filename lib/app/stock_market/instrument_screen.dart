@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:interactive_chart/interactive_chart.dart';
 import 'package:richeable/app/stock_market/cubit/candles/candles_cubit.dart';
 import 'package:richeable/utilities/utilities.dart';
+import 'package:richeable/widgets/custom_card.dart';
 import 'package:richeable/widgets/widgets.dart';
 
 import '../../constants/locale_keys.g.dart';
@@ -100,6 +101,7 @@ class InstrumentScreen extends StatelessWidget implements AutoRouteWrapper {
                             SellButton(instrument: instrument, lastCandle: candlesFroI.last),
                           ],
                         ),
+                        const SizedBox(height: 16),
                         BlocBuilder<ExchangesCubit, ExchangesState>(
                           builder: (context, state) {
                             return state.maybeWhen(
@@ -124,21 +126,18 @@ class InstrumentScreen extends StatelessWidget implements AutoRouteWrapper {
                                       Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Card(
-                                            shape: BeveledRectangleBorder(
-                                              borderRadius: BorderRadius.circular(0),
-                                            ),
+                                          CustomCard(
                                             child: Padding(
                                               padding: const EdgeInsets.all(8.0),
                                               child: RichText(
                                                 text: TextSpan(
-                                                  style: Theme.of(context).textTheme.bodyText1,
+                                                  style: Theme.of(context).textTheme.bodyText2,
                                                   children: <TextSpan>[
                                                     TextSpan(
                                                       text: '${LocaleKeys.amount.tr()}: ',
                                                       style: Theme.of(context)
                                                           .textTheme
-                                                          .bodyText1!
+                                                          .bodyText2!
                                                           .copyWith(fontWeight: FontWeight.bold),
                                                     ),
                                                     TextSpan(
@@ -153,21 +152,18 @@ class InstrumentScreen extends StatelessWidget implements AutoRouteWrapper {
                                           Row(
                                             children: [
                                               Expanded(
-                                                  child: Card(
-                                                shape: BeveledRectangleBorder(
-                                                  borderRadius: BorderRadius.circular(0),
-                                                ),
+                                                  child: CustomCard(
                                                 child: Padding(
                                                   padding: const EdgeInsets.all(8.0),
                                                   child: RichText(
                                                     text: TextSpan(
-                                                      style: Theme.of(context).textTheme.bodyText1,
+                                                      style: Theme.of(context).textTheme.bodyText2,
                                                       children: <TextSpan>[
                                                         TextSpan(
                                                           text: '${LocaleKeys.value.tr()}: ',
                                                           style: Theme.of(context)
                                                               .textTheme
-                                                              .bodyText1!
+                                                              .bodyText2!
                                                               .copyWith(
                                                                   fontWeight: FontWeight.bold),
                                                         ),
@@ -180,21 +176,18 @@ class InstrumentScreen extends StatelessWidget implements AutoRouteWrapper {
                                                 ),
                                               )),
                                               Expanded(
-                                                  child: Card(
-                                                shape: BeveledRectangleBorder(
-                                                  borderRadius: BorderRadius.circular(0),
-                                                ),
+                                                  child: CustomCard(
                                                 child: Padding(
                                                   padding: const EdgeInsets.all(8.0),
                                                   child: RichText(
                                                     text: TextSpan(
-                                                      style: Theme.of(context).textTheme.bodyText1,
+                                                      style: Theme.of(context).textTheme.bodyText2,
                                                       children: <TextSpan>[
                                                         TextSpan(
                                                           text: '${LocaleKeys.change.tr()}: ',
                                                           style: Theme.of(context)
                                                               .textTheme
-                                                              .bodyText1!
+                                                              .bodyText2!
                                                               .copyWith(
                                                                   fontWeight: FontWeight.bold),
                                                         ),
@@ -213,21 +206,18 @@ class InstrumentScreen extends StatelessWidget implements AutoRouteWrapper {
                                       Row(
                                         children: [
                                           Expanded(
-                                              child: Card(
-                                            shape: BeveledRectangleBorder(
-                                              borderRadius: BorderRadius.circular(0),
-                                            ),
+                                              child: CustomCard(
                                             child: Padding(
                                               padding: const EdgeInsets.all(8.0),
                                               child: RichText(
                                                 text: TextSpan(
-                                                  style: Theme.of(context).textTheme.bodyText1,
+                                                  style: Theme.of(context).textTheme.bodyText2,
                                                   children: <TextSpan>[
                                                     TextSpan(
                                                       text: '${LocaleKeys.cost.tr()}: ',
                                                       style: Theme.of(context)
                                                           .textTheme
-                                                          .bodyText1!
+                                                          .bodyText2!
                                                           .copyWith(fontWeight: FontWeight.bold),
                                                     ),
                                                     TextSpan(
@@ -239,21 +229,18 @@ class InstrumentScreen extends StatelessWidget implements AutoRouteWrapper {
                                             ),
                                           )),
                                           Expanded(
-                                              child: Card(
-                                            shape: BeveledRectangleBorder(
-                                              borderRadius: BorderRadius.circular(0),
-                                            ),
+                                              child: CustomCard(
                                             child: Padding(
                                               padding: const EdgeInsets.all(8.0),
                                               child: RichText(
                                                 text: TextSpan(
-                                                  style: Theme.of(context).textTheme.bodyText1,
+                                                  style: Theme.of(context).textTheme.bodyText2,
                                                   children: <TextSpan>[
                                                     TextSpan(
                                                       text: '${LocaleKeys.average.tr()}: ',
                                                       style: Theme.of(context)
                                                           .textTheme
-                                                          .bodyText1!
+                                                          .bodyText2!
                                                           .copyWith(fontWeight: FontWeight.bold),
                                                     ),
                                                     TextSpan(

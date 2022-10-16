@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:richeable/app/game/widget/app_bar_game.dart';
 import 'package:richeable/utilities/utilities.dart';
+import 'package:richeable/widgets/custom_card.dart';
 import 'package:richeable/widgets/widgets.dart';
 
 import '../../constants/constants.dart';
@@ -24,6 +25,7 @@ class TimeSpendScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
+          const SizedBox(height: 4),
           BlocBuilder<TimeSpendCubit, TimeSpendState>(
             builder: (context, state) {
               return state.maybeWhen(
@@ -124,7 +126,7 @@ class TimeSpendScreen extends StatelessWidget {
                               itemCount: bonuses.length,
                               itemBuilder: (context, index) {
                                 TimeBonus element = bonuses[index];
-                                return Card(
+                                return CustomCard(
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Column(
@@ -132,13 +134,13 @@ class TimeSpendScreen extends StatelessWidget {
                                       children: [
                                         RichText(
                                           text: TextSpan(
-                                            style: Theme.of(context).textTheme.bodyText1,
+                                            style: Theme.of(context).textTheme.bodyText2,
                                             children: <TextSpan>[
                                               TextSpan(
                                                 text: '${LocaleKeys.source.tr()}: ',
                                                 style: Theme.of(context)
                                                     .textTheme
-                                                    .bodyText1!
+                                                    .bodyText2!
                                                     .copyWith(fontWeight: FontWeight.bold),
                                               ),
                                               TextSpan(
@@ -149,13 +151,13 @@ class TimeSpendScreen extends StatelessWidget {
                                         ),
                                         RichText(
                                           text: TextSpan(
-                                            style: Theme.of(context).textTheme.bodyText1,
+                                            style: Theme.of(context).textTheme.bodyText2,
                                             children: <TextSpan>[
                                               TextSpan(
                                                 text: '${Enums.toText(element.eTypeBonus)}: ',
                                                 style: Theme.of(context)
                                                     .textTheme
-                                                    .bodyText1!
+                                                    .bodyText2!
                                                     .copyWith(fontWeight: FontWeight.bold),
                                               ),
                                               TextSpan(
@@ -171,7 +173,7 @@ class TimeSpendScreen extends StatelessWidget {
                               },
                             ),
                           ),
-                          SizedBox(height: 80),
+                          const SizedBox(height: 80),
                         ],
                       ),
                     );
@@ -204,7 +206,7 @@ class TimeSpendScreen extends StatelessWidget {
       return Row(
         children: [
           Expanded(
-            child: Card(
+            child: CustomCard(
               child: Container(
                 width: double.infinity,
                 height: 47,
@@ -212,13 +214,13 @@ class TimeSpendScreen extends StatelessWidget {
                 child: Center(
                   child: Text(
                     name,
-                    style: Theme.of(context).textTheme.bodyText1,
+                    style: Theme.of(context).textTheme.bodyText2,
                   ),
                 ),
               ),
             ),
           ),
-          Card(
+          CustomCard(
             child: Container(
               width: 48,
               height: 48,
@@ -226,7 +228,7 @@ class TimeSpendScreen extends StatelessWidget {
               child: Center(
                 child: Text(
                   value.toString(),
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).textTheme.bodyText2,
                 ),
               ),
             ),
@@ -242,19 +244,19 @@ class TimeSpendScreen extends StatelessWidget {
       return Row(
         children: [
           Expanded(
-            child: Card(
+            child: CustomCard(
                 child: Container(
               height: 48,
               padding: const EdgeInsets.all(8.0),
               child: Center(
                 child: Text(
                   name,
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).textTheme.bodyText2,
                 ),
               ),
             )),
           ),
-          Card(
+          CustomCard(
             child: Container(
               width: 48,
               height: 48,
@@ -262,13 +264,25 @@ class TimeSpendScreen extends StatelessWidget {
               child: Center(
                 child: Text(
                   value.toString(),
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).textTheme.bodyText2,
                 ),
               ),
             ),
           ),
-          Card(child: IconButton(onPressed: add, icon: const FaIcon(Icons.add))),
-          Card(child: IconButton(onPressed: remove, icon: const FaIcon(Icons.remove))),
+          CustomCard(
+              child: IconButton(
+                  onPressed: add,
+                  icon: const FaIcon(
+                    Icons.add,
+                    color: Colors.white,
+                  ))),
+          CustomCard(
+              child: IconButton(
+                  onPressed: remove,
+                  icon: const FaIcon(
+                    Icons.remove,
+                    color: Colors.white,
+                  ))),
         ],
       );
     });

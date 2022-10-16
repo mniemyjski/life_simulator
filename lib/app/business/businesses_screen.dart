@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:richeable/app/business/cubit/businesses/businesses_cubit.dart';
 import 'package:richeable/app/business/models/business/business_model.dart';
-import 'package:richeable/app/business/widgets/business_creator.dart';
+import 'package:richeable/app/business/widgets/business_creator_sheet.dart';
 import 'package:richeable/app/game/widget/app_bar_game.dart';
 import 'package:richeable/constants/locale_keys.g.dart';
 import 'package:richeable/widgets/custom_scaffold.dart';
@@ -62,11 +62,9 @@ class BusinessesScreen extends StatelessWidget {
               heroTag: null,
               onPressed: () => showModalBottomSheet<void>(
                   isScrollControlled: true,
-                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                  backgroundColor: Colors.transparent,
                   context: context,
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.vertical(top: Radius.circular(8.0))),
-                  builder: (BuildContext context) => const BusinessCreator()),
+                  builder: (BuildContext context) => const BusinessCreatorSheet()),
               child: const FaIcon(FontAwesomeIcons.plus),
             ),
           ],

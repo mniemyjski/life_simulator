@@ -11,6 +11,7 @@ import '../../../money/cubit/money/money_cubit.dart';
 import '../../../money/models/transaction/transaction_model.dart';
 import '../../../new_game/new_game_cubit.dart';
 import '../../models/business/business_model.dart';
+import '../../services/business_service.dart';
 
 part 'businesses_cubit.freezed.dart';
 part 'businesses_cubit.g.dart';
@@ -27,6 +28,7 @@ class BusinessesCubit extends HydratedCubit<BusinessesState> {
 
   final EmployeeRepository _employeeRepository;
   final MoneyCubit _moneyCubit;
+  final BusinessService _businessService;
 
   BusinessesCubit(
     this._newGameCubit,
@@ -34,6 +36,7 @@ class BusinessesCubit extends HydratedCubit<BusinessesState> {
     this._employeeRepository,
     this._moneyCubit,
     this._transactionsRepository,
+    this._businessService,
   ) : super(const BusinessesState.initial()) {
     _newGame();
 
@@ -57,6 +60,7 @@ class BusinessesCubit extends HydratedCubit<BusinessesState> {
   }
 
   counting(DateTime dateTime) {
+    // _businessService.count(dateTime);
     if (dateTime.day == 10) {
       state.whenOrNull(loaded: (businesses) async {
         for (var element in businesses) {
@@ -89,23 +93,25 @@ class BusinessesCubit extends HydratedCubit<BusinessesState> {
   }
 
   increaseMaxScientist(Business business) {
-    _businessesRepository.updateBusiness(business.copyWith(maxWorkers: business.maxScientist + 2));
+    _businessesRepository
+        .updateBusiness(business.copyWith(maxScientist: business.maxScientist + 2));
   }
 
   increaseMaxAccountant(Business business) {
-    _businessesRepository.updateBusiness(business.copyWith(maxWorkers: business.maxAccountant + 1));
+    _businessesRepository
+        .updateBusiness(business.copyWith(maxAccountant: business.maxAccountant + 1));
   }
 
   increaseMaxAnalyst(Business business) {
-    _businessesRepository.updateBusiness(business.copyWith(maxWorkers: business.maxAnalyst + 1));
+    _businessesRepository.updateBusiness(business.copyWith(maxAnalyst: business.maxAnalyst + 1));
   }
 
   increaseMaxManager(Business business) {
-    _businessesRepository.updateBusiness(business.copyWith(maxWorkers: business.maxManager + 1));
+    _businessesRepository.updateBusiness(business.copyWith(maxManager: business.maxManager + 1));
   }
 
   increaseMaxMarketer(Business business) {
-    _businessesRepository.updateBusiness(business.copyWith(maxWorkers: business.maxMarketer + 1));
+    _businessesRepository.updateBusiness(business.copyWith(maxMarketer: business.maxMarketer + 1));
   }
 
   @override

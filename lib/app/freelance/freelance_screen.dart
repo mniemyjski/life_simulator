@@ -5,9 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:richeable/app/freelance/widgets/advertisement_chooser.dart';
+import 'package:richeable/app/freelance/widgets/advertisement_sheet.dart';
 import 'package:richeable/app/money/cubit/money/money_cubit.dart';
 import 'package:richeable/utilities/utilities.dart';
+import 'package:richeable/widgets/custom_card.dart';
 import 'package:richeable/widgets/widgets.dart';
 
 import '../../config/routes/routes.gr.dart';
@@ -30,7 +31,7 @@ class FreelanceScreen extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: Card(
+                child: CustomCard(
                   child: Container(
                     height: 50,
                     padding: const EdgeInsets.all(4.0),
@@ -42,21 +43,21 @@ class FreelanceScreen extends StatelessWidget {
                           '${LocaleKeys.fame.tr()}:',
                           style: Theme.of(context)
                               .textTheme
-                              .bodyText1!
+                              .bodyText2!
                               .copyWith(fontWeight: FontWeight.bold),
                         ),
                         Text(
                           context.watch<FameCubit>().state.maybeWhen(
                               orElse: () => '0',
                               loaded: (v, currentDate) => v.roundToDouble().toExp()),
-                          style: Theme.of(context).textTheme.bodyText1,
+                          style: Theme.of(context).textTheme.bodyText2,
                         ),
                       ],
                     ),
                   ),
                 ),
               ),
-              Card(
+              CustomCard(
                   child: Container(
                 height: 50,
                 width: 75,
@@ -68,14 +69,14 @@ class FreelanceScreen extends StatelessWidget {
                     Text('${LocaleKeys.dailyFame.tr()}:',
                         style: Theme.of(context)
                             .textTheme
-                            .bodyText1!
+                            .bodyText2!
                             .copyWith(fontWeight: FontWeight.bold)),
                     Text(context.watch<FreelanceDoneCubit>().getDailyFame().toExp(),
-                        style: Theme.of(context).textTheme.bodyText1),
+                        style: Theme.of(context).textTheme.bodyText2),
                   ],
                 ),
               )),
-              Card(
+              CustomCard(
                   child: Container(
                 height: 50,
                 width: 75,
@@ -87,10 +88,10 @@ class FreelanceScreen extends StatelessWidget {
                     Text('${LocaleKeys.value.tr()}:',
                         style: Theme.of(context)
                             .textTheme
-                            .bodyText1!
+                            .bodyText2!
                             .copyWith(fontWeight: FontWeight.bold)),
                     Text(context.watch<FreelanceDoneCubit>().getValue().toMoney(),
-                        style: Theme.of(context).textTheme.bodyText1),
+                        style: Theme.of(context).textTheme.bodyText2),
                   ],
                 ),
               )),
@@ -122,7 +123,7 @@ class FreelanceScreen extends StatelessWidget {
                             return Row(
                               children: [
                                 Expanded(
-                                  child: Card(
+                                  child: CustomCard(
                                       child: Container(
                                     height: 60,
                                     padding: const EdgeInsets.all(4.0),
@@ -134,7 +135,7 @@ class FreelanceScreen extends StatelessWidget {
                                           children: [
                                             RichText(
                                               text: TextSpan(
-                                                style: Theme.of(context).textTheme.bodyText1,
+                                                style: Theme.of(context).textTheme.bodyText2,
                                                 children: <TextSpan>[
                                                   TextSpan(
                                                     text: '${LocaleKeys.name.tr()}: ',
@@ -147,7 +148,7 @@ class FreelanceScreen extends StatelessWidget {
                                             ),
                                             RichText(
                                               text: TextSpan(
-                                                style: Theme.of(context).textTheme.bodyText1,
+                                                style: Theme.of(context).textTheme.bodyText2,
                                                 children: <TextSpan>[
                                                   TextSpan(
                                                     text: '${LocaleKeys.type.tr()}: ',
@@ -161,7 +162,7 @@ class FreelanceScreen extends StatelessWidget {
                                             ),
                                             RichText(
                                               text: TextSpan(
-                                                style: Theme.of(context).textTheme.bodyText1,
+                                                style: Theme.of(context).textTheme.bodyText2,
                                                 children: <TextSpan>[
                                                   TextSpan(
                                                     text: '${LocaleKeys.dateCre.tr()}: ',
@@ -176,7 +177,7 @@ class FreelanceScreen extends StatelessWidget {
                                             ),
                                             RichText(
                                               text: TextSpan(
-                                                style: Theme.of(context).textTheme.bodyText1,
+                                                style: Theme.of(context).textTheme.bodyText2,
                                                 children: <TextSpan>[
                                                   TextSpan(
                                                     text: '${LocaleKeys.end.tr()}: ',
@@ -205,7 +206,7 @@ class FreelanceScreen extends StatelessWidget {
                                     ),
                                   )),
                                 ),
-                                Card(
+                                CustomCard(
                                   child: Container(
                                     height: 60,
                                     width: 75,
@@ -213,12 +214,12 @@ class FreelanceScreen extends StatelessWidget {
                                     child: Center(
                                       child: Text(
                                         '${element.fame.toInt()}',
-                                        style: Theme.of(context).textTheme.bodyText1,
+                                        style: Theme.of(context).textTheme.bodyText2,
                                       ),
                                     ),
                                   ),
                                 ),
-                                Card(
+                                CustomCard(
                                   child: Container(
                                     height: 60,
                                     width: 75,
@@ -226,7 +227,7 @@ class FreelanceScreen extends StatelessWidget {
                                     child: Center(
                                       child: Text(
                                         '${element.price.toMoney()}',
-                                        style: Theme.of(context).textTheme.bodyText1,
+                                        style: Theme.of(context).textTheme.bodyText2,
                                       ),
                                     ),
                                   ),
@@ -304,13 +305,11 @@ class FreelanceScreen extends StatelessWidget {
                     }, loaded: (money) {
                       if (money > 10) {
                         showModalBottomSheet<String>(
-                          shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.vertical(top: Radius.circular(8.0))),
-                          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                          backgroundColor: Colors.transparent,
                           context: context,
                           isScrollControlled: true,
                           builder: (BuildContext context) {
-                            return AdvertisementChooser(money);
+                            return AdvertisementSheet(money);
                           },
                         );
                       } else {

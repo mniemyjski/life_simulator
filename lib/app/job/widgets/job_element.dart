@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:richeable/utilities/utilities.dart';
+import 'package:richeable/widgets/custom_card.dart';
 
 import '../../../constants/constants.dart';
 import '../../database/cubit/database_cubit.dart';
@@ -15,9 +16,9 @@ class JobElement extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return CustomCard(
         child: Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(4.0),
       child: Column(
         children: [
           Row(
@@ -32,7 +33,7 @@ class JobElement extends StatelessWidget {
                         children: [
                           RichText(
                             text: TextSpan(
-                              style: Theme.of(context).textTheme.bodyText1,
+                              style: Theme.of(context).textTheme.bodyText2,
                               children: <TextSpan>[
                                 TextSpan(
                                   text: '${LocaleKeys.name.tr()}: ',
@@ -44,7 +45,7 @@ class JobElement extends StatelessWidget {
                           ),
                           RichText(
                             text: TextSpan(
-                              style: Theme.of(context).textTheme.bodyText1,
+                              style: Theme.of(context).textTheme.bodyText2,
                               children: <TextSpan>[
                                 TextSpan(
                                   text: '${LocaleKeys.company.tr()}: ',
@@ -56,7 +57,7 @@ class JobElement extends StatelessWidget {
                           ),
                           RichText(
                             text: TextSpan(
-                              style: Theme.of(context).textTheme.bodyText1,
+                              style: Theme.of(context).textTheme.bodyText2,
                               children: <TextSpan>[
                                 TextSpan(
                                   text: '${LocaleKeys.industry.tr()}: ',
@@ -68,7 +69,7 @@ class JobElement extends StatelessWidget {
                           ),
                           RichText(
                             text: TextSpan(
-                              style: Theme.of(context).textTheme.bodyText1,
+                              style: Theme.of(context).textTheme.bodyText2,
                               children: <TextSpan>[
                                 TextSpan(
                                   text: '${LocaleKeys.salary.tr()}: ',
@@ -80,7 +81,7 @@ class JobElement extends StatelessWidget {
                           ),
                           RichText(
                             text: TextSpan(
-                              style: Theme.of(context).textTheme.bodyText1,
+                              style: Theme.of(context).textTheme.bodyText2,
                               children: <TextSpan>[
                                 TextSpan(
                                   text: '${LocaleKeys.experience.tr()}: ',
@@ -101,7 +102,7 @@ class JobElement extends StatelessWidget {
                             '${LocaleKeys.skills.tr()}:',
                             style: Theme.of(context)
                                 .textTheme
-                                .bodyText1!
+                                .bodyText2!
                                 .copyWith(fontWeight: FontWeight.bold),
                           ),
                           ListView.builder(
@@ -114,7 +115,7 @@ class JobElement extends StatelessWidget {
                                   padding: const EdgeInsets.only(left: 8.0),
                                   child: Text(
                                     '${Enums.toText(skill.name).tr()}: ${skill.lvl}',
-                                    style: Theme.of(context).textTheme.bodyText1,
+                                    style: Theme.of(context).textTheme.bodyText2,
                                   ),
                                 );
                               }),
@@ -137,7 +138,10 @@ class JobElement extends StatelessWidget {
 
                   BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
                 },
-                icon: const FaIcon(FontAwesomeIcons.circleCheck),
+                icon: const FaIcon(
+                  FontAwesomeIcons.circleCheck,
+                  color: Colors.white,
+                ),
               ),
             ],
           ),

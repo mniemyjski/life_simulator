@@ -1,6 +1,9 @@
+import 'dart:ui';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:richeable/utilities/utilities.dart';
+import 'package:richeable/widgets/custom_card.dart';
 
 import '../../../config/routes/routes.gr.dart';
 import '../../../constants/constants.dart';
@@ -22,7 +25,7 @@ class BusinessElement extends StatelessWidget {
           businessId: element.id,
         ));
       },
-      child: Card(
+      child: CustomCard(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -30,7 +33,7 @@ class BusinessElement extends StatelessWidget {
             children: [
               RichText(
                 text: TextSpan(
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).textTheme.bodyText2,
                   children: <TextSpan>[
                     TextSpan(
                       text: '${LocaleKeys.name.tr()}: ',
@@ -42,7 +45,7 @@ class BusinessElement extends StatelessWidget {
               ),
               RichText(
                 text: TextSpan(
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).textTheme.bodyText2,
                   children: <TextSpan>[
                     TextSpan(
                       text: '${LocaleKeys.employees.tr()}: ',
@@ -54,7 +57,7 @@ class BusinessElement extends StatelessWidget {
               ),
               RichText(
                 text: TextSpan(
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).textTheme.bodyText2,
                   children: <TextSpan>[
                     TextSpan(
                       text: '${LocaleKeys.scientist.tr()}: ',
@@ -66,7 +69,7 @@ class BusinessElement extends StatelessWidget {
               ),
               RichText(
                 text: TextSpan(
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).textTheme.bodyText2,
                   children: <TextSpan>[
                     TextSpan(
                       text: '${LocaleKeys.accountant.tr()}: ',
@@ -78,7 +81,7 @@ class BusinessElement extends StatelessWidget {
               ),
               RichText(
                 text: TextSpan(
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).textTheme.bodyText2,
                   children: <TextSpan>[
                     TextSpan(
                       text: '${LocaleKeys.analyst.tr()}: ',
@@ -90,7 +93,7 @@ class BusinessElement extends StatelessWidget {
               ),
               RichText(
                 text: TextSpan(
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).textTheme.bodyText2,
                   children: <TextSpan>[
                     TextSpan(
                       text: '${LocaleKeys.manager.tr()}: ',
@@ -102,7 +105,7 @@ class BusinessElement extends StatelessWidget {
               ),
               RichText(
                 text: TextSpan(
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).textTheme.bodyText2,
                   children: <TextSpan>[
                     TextSpan(
                       text: '${LocaleKeys.marketer.tr()}: ',

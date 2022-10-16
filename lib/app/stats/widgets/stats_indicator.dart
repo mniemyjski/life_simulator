@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:richeable/utilities/utilities.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../../constants/constants.dart';
 import '../cubit/stats_cubit.dart';
 import 'stats_element.dart';
 
@@ -31,23 +30,35 @@ class StatsIndicator extends StatelessWidget {
           children: [
             Expanded(
               child: StatsElement(
-                name: LocaleKeys.satisfaction.tr(),
-                color: Colors.yellow[900]!.withOpacity(0.7),
+                color: Colors.yellow[900],
                 value: _satisfaction,
+                child: const Icon(
+                  FontAwesomeIcons.faceSmileWink,
+                  size: 10,
+                  color: Colors.white70,
+                ),
               ),
             ),
             Expanded(
               child: StatsElement(
-                name: LocaleKeys.tiredness.tr(),
-                color: Colors.blue[800]!.withOpacity(0.7),
+                color: Colors.blue[800],
                 value: _tiredness,
+                child: const Icon(
+                  FontAwesomeIcons.bed,
+                  size: 10,
+                  color: Colors.white70,
+                ),
               ),
             ),
             Expanded(
               child: StatsElement(
-                name: LocaleKeys.health.tr(),
-                color: Colors.red[800]!.withOpacity(0.7),
+                color: Colors.red[800],
                 value: _health,
+                child: const Icon(
+                  FontAwesomeIcons.heart,
+                  size: 10,
+                  color: Colors.white70,
+                ),
               ),
             ),
           ],

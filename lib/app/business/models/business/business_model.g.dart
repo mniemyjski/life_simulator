@@ -17,90 +17,100 @@ const BusinessSchema = CollectionSchema(
   name: r'Businesses',
   id: 1694791745919376702,
   properties: {
-    r'countAccountant': PropertySchema(
+    r'balance': PropertySchema(
       id: 0,
+      name: r'balance',
+      type: IsarType.double,
+    ),
+    r'countAccountant': PropertySchema(
+      id: 1,
       name: r'countAccountant',
       type: IsarType.long,
     ),
     r'countAnalyst': PropertySchema(
-      id: 1,
+      id: 2,
       name: r'countAnalyst',
       type: IsarType.long,
     ),
     r'countManager': PropertySchema(
-      id: 2,
+      id: 3,
       name: r'countManager',
       type: IsarType.long,
     ),
     r'countMarketer': PropertySchema(
-      id: 3,
+      id: 4,
       name: r'countMarketer',
       type: IsarType.long,
     ),
     r'countScientist': PropertySchema(
-      id: 4,
+      id: 5,
       name: r'countScientist',
       type: IsarType.long,
     ),
     r'countWorkers': PropertySchema(
-      id: 5,
+      id: 6,
       name: r'countWorkers',
       type: IsarType.long,
     ),
     r'dateCre': PropertySchema(
-      id: 6,
+      id: 7,
       name: r'dateCre',
       type: IsarType.dateTime,
     ),
     r'efficiencyEmployees': PropertySchema(
-      id: 7,
+      id: 8,
       name: r'efficiencyEmployees',
       type: IsarType.long,
     ),
     r'efficiencyScientist': PropertySchema(
-      id: 8,
+      id: 9,
       name: r'efficiencyScientist',
       type: IsarType.long,
     ),
     r'hashCode': PropertySchema(
-      id: 9,
+      id: 10,
       name: r'hashCode',
       type: IsarType.long,
     ),
     r'maxAccountant': PropertySchema(
-      id: 10,
+      id: 11,
       name: r'maxAccountant',
       type: IsarType.long,
     ),
     r'maxAnalyst': PropertySchema(
-      id: 11,
+      id: 12,
       name: r'maxAnalyst',
       type: IsarType.long,
     ),
     r'maxManager': PropertySchema(
-      id: 12,
+      id: 13,
       name: r'maxManager',
       type: IsarType.long,
     ),
     r'maxMarketer': PropertySchema(
-      id: 13,
+      id: 14,
       name: r'maxMarketer',
       type: IsarType.long,
     ),
     r'maxScientist': PropertySchema(
-      id: 14,
+      id: 15,
       name: r'maxScientist',
       type: IsarType.long,
     ),
     r'maxWorkers': PropertySchema(
-      id: 15,
+      id: 16,
       name: r'maxWorkers',
       type: IsarType.long,
     ),
     r'name': PropertySchema(
-      id: 16,
+      id: 17,
       name: r'name',
       type: IsarType.string,
+    ),
+    r'taxes': PropertySchema(
+      id: 18,
+      name: r'taxes',
+      type: IsarType.double,
     )
   },
   estimateSize: _businessEstimateSize,
@@ -133,23 +143,25 @@ void _businessSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeLong(offsets[0], object.countAccountant);
-  writer.writeLong(offsets[1], object.countAnalyst);
-  writer.writeLong(offsets[2], object.countManager);
-  writer.writeLong(offsets[3], object.countMarketer);
-  writer.writeLong(offsets[4], object.countScientist);
-  writer.writeLong(offsets[5], object.countWorkers);
-  writer.writeDateTime(offsets[6], object.dateCre);
-  writer.writeLong(offsets[7], object.efficiencyEmployees);
-  writer.writeLong(offsets[8], object.efficiencyScientist);
-  writer.writeLong(offsets[9], object.hashCode);
-  writer.writeLong(offsets[10], object.maxAccountant);
-  writer.writeLong(offsets[11], object.maxAnalyst);
-  writer.writeLong(offsets[12], object.maxManager);
-  writer.writeLong(offsets[13], object.maxMarketer);
-  writer.writeLong(offsets[14], object.maxScientist);
-  writer.writeLong(offsets[15], object.maxWorkers);
-  writer.writeString(offsets[16], object.name);
+  writer.writeDouble(offsets[0], object.balance);
+  writer.writeLong(offsets[1], object.countAccountant);
+  writer.writeLong(offsets[2], object.countAnalyst);
+  writer.writeLong(offsets[3], object.countManager);
+  writer.writeLong(offsets[4], object.countMarketer);
+  writer.writeLong(offsets[5], object.countScientist);
+  writer.writeLong(offsets[6], object.countWorkers);
+  writer.writeDateTime(offsets[7], object.dateCre);
+  writer.writeLong(offsets[8], object.efficiencyEmployees);
+  writer.writeLong(offsets[9], object.efficiencyScientist);
+  writer.writeLong(offsets[10], object.hashCode);
+  writer.writeLong(offsets[11], object.maxAccountant);
+  writer.writeLong(offsets[12], object.maxAnalyst);
+  writer.writeLong(offsets[13], object.maxManager);
+  writer.writeLong(offsets[14], object.maxMarketer);
+  writer.writeLong(offsets[15], object.maxScientist);
+  writer.writeLong(offsets[16], object.maxWorkers);
+  writer.writeString(offsets[17], object.name);
+  writer.writeDouble(offsets[18], object.taxes);
 }
 
 Business _businessDeserialize(
@@ -159,23 +171,25 @@ Business _businessDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = Business(
-    countAccountant: reader.readLongOrNull(offsets[0]) ?? 0,
-    countAnalyst: reader.readLongOrNull(offsets[1]) ?? 0,
-    countManager: reader.readLongOrNull(offsets[2]) ?? 0,
-    countMarketer: reader.readLongOrNull(offsets[3]) ?? 0,
-    countScientist: reader.readLongOrNull(offsets[4]) ?? 0,
-    countWorkers: reader.readLongOrNull(offsets[5]) ?? 0,
-    dateCre: reader.readDateTime(offsets[6]),
-    efficiencyEmployees: reader.readLongOrNull(offsets[7]) ?? 1,
-    efficiencyScientist: reader.readLongOrNull(offsets[8]) ?? 1,
+    balance: reader.readDoubleOrNull(offsets[0]) ?? 0,
+    countAccountant: reader.readLongOrNull(offsets[1]) ?? 0,
+    countAnalyst: reader.readLongOrNull(offsets[2]) ?? 0,
+    countManager: reader.readLongOrNull(offsets[3]) ?? 0,
+    countMarketer: reader.readLongOrNull(offsets[4]) ?? 0,
+    countScientist: reader.readLongOrNull(offsets[5]) ?? 0,
+    countWorkers: reader.readLongOrNull(offsets[6]) ?? 0,
+    dateCre: reader.readDateTime(offsets[7]),
+    efficiencyEmployees: reader.readLongOrNull(offsets[8]) ?? 1,
+    efficiencyScientist: reader.readLongOrNull(offsets[9]) ?? 1,
     id: id,
-    maxAccountant: reader.readLongOrNull(offsets[10]) ?? 0,
-    maxAnalyst: reader.readLongOrNull(offsets[11]) ?? 0,
-    maxManager: reader.readLongOrNull(offsets[12]) ?? 0,
-    maxMarketer: reader.readLongOrNull(offsets[13]) ?? 0,
-    maxScientist: reader.readLongOrNull(offsets[14]) ?? 2,
-    maxWorkers: reader.readLongOrNull(offsets[15]) ?? 10,
-    name: reader.readString(offsets[16]),
+    maxAccountant: reader.readLongOrNull(offsets[11]) ?? 0,
+    maxAnalyst: reader.readLongOrNull(offsets[12]) ?? 0,
+    maxManager: reader.readLongOrNull(offsets[13]) ?? 0,
+    maxMarketer: reader.readLongOrNull(offsets[14]) ?? 0,
+    maxScientist: reader.readLongOrNull(offsets[15]) ?? 2,
+    maxWorkers: reader.readLongOrNull(offsets[16]) ?? 10,
+    name: reader.readString(offsets[17]),
+    taxes: reader.readDoubleOrNull(offsets[18]) ?? 0,
   );
   return object;
 }
@@ -188,7 +202,7 @@ P _businessDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readLongOrNull(offset) ?? 0) as P;
+      return (reader.readDoubleOrNull(offset) ?? 0) as P;
     case 1:
       return (reader.readLongOrNull(offset) ?? 0) as P;
     case 2:
@@ -200,15 +214,15 @@ P _businessDeserializeProp<P>(
     case 5:
       return (reader.readLongOrNull(offset) ?? 0) as P;
     case 6:
-      return (reader.readDateTime(offset)) as P;
+      return (reader.readLongOrNull(offset) ?? 0) as P;
     case 7:
-      return (reader.readLongOrNull(offset) ?? 1) as P;
+      return (reader.readDateTime(offset)) as P;
     case 8:
       return (reader.readLongOrNull(offset) ?? 1) as P;
     case 9:
-      return (reader.readLong(offset)) as P;
+      return (reader.readLongOrNull(offset) ?? 1) as P;
     case 10:
-      return (reader.readLongOrNull(offset) ?? 0) as P;
+      return (reader.readLong(offset)) as P;
     case 11:
       return (reader.readLongOrNull(offset) ?? 0) as P;
     case 12:
@@ -216,11 +230,15 @@ P _businessDeserializeProp<P>(
     case 13:
       return (reader.readLongOrNull(offset) ?? 0) as P;
     case 14:
-      return (reader.readLongOrNull(offset) ?? 2) as P;
+      return (reader.readLongOrNull(offset) ?? 0) as P;
     case 15:
-      return (reader.readLongOrNull(offset) ?? 10) as P;
+      return (reader.readLongOrNull(offset) ?? 2) as P;
     case 16:
+      return (reader.readLongOrNull(offset) ?? 10) as P;
+    case 17:
       return (reader.readString(offset)) as P;
+    case 18:
+      return (reader.readDoubleOrNull(offset) ?? 0) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -313,6 +331,68 @@ extension BusinessQueryWhere on QueryBuilder<Business, Business, QWhereClause> {
 
 extension BusinessQueryFilter
     on QueryBuilder<Business, Business, QFilterCondition> {
+  QueryBuilder<Business, Business, QAfterFilterCondition> balanceEqualTo(
+    double value, {
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'balance',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Business, Business, QAfterFilterCondition> balanceGreaterThan(
+    double value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'balance',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Business, Business, QAfterFilterCondition> balanceLessThan(
+    double value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'balance',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Business, Business, QAfterFilterCondition> balanceBetween(
+    double lower,
+    double upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'balance',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
   QueryBuilder<Business, Business, QAfterFilterCondition>
       countAccountantEqualTo(int value) {
     return QueryBuilder.apply(this, (query) {
@@ -1360,6 +1440,68 @@ extension BusinessQueryFilter
       ));
     });
   }
+
+  QueryBuilder<Business, Business, QAfterFilterCondition> taxesEqualTo(
+    double value, {
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'taxes',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Business, Business, QAfterFilterCondition> taxesGreaterThan(
+    double value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'taxes',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Business, Business, QAfterFilterCondition> taxesLessThan(
+    double value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'taxes',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Business, Business, QAfterFilterCondition> taxesBetween(
+    double lower,
+    double upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'taxes',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        epsilon: epsilon,
+      ));
+    });
+  }
 }
 
 extension BusinessQueryObject
@@ -1369,6 +1511,18 @@ extension BusinessQueryLinks
     on QueryBuilder<Business, Business, QFilterCondition> {}
 
 extension BusinessQuerySortBy on QueryBuilder<Business, Business, QSortBy> {
+  QueryBuilder<Business, Business, QAfterSortBy> sortByBalance() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'balance', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Business, Business, QAfterSortBy> sortByBalanceDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'balance', Sort.desc);
+    });
+  }
+
   QueryBuilder<Business, Business, QAfterSortBy> sortByCountAccountant() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'countAccountant', Sort.asc);
@@ -1574,10 +1728,34 @@ extension BusinessQuerySortBy on QueryBuilder<Business, Business, QSortBy> {
       return query.addSortBy(r'name', Sort.desc);
     });
   }
+
+  QueryBuilder<Business, Business, QAfterSortBy> sortByTaxes() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'taxes', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Business, Business, QAfterSortBy> sortByTaxesDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'taxes', Sort.desc);
+    });
+  }
 }
 
 extension BusinessQuerySortThenBy
     on QueryBuilder<Business, Business, QSortThenBy> {
+  QueryBuilder<Business, Business, QAfterSortBy> thenByBalance() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'balance', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Business, Business, QAfterSortBy> thenByBalanceDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'balance', Sort.desc);
+    });
+  }
+
   QueryBuilder<Business, Business, QAfterSortBy> thenByCountAccountant() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'countAccountant', Sort.asc);
@@ -1795,10 +1973,28 @@ extension BusinessQuerySortThenBy
       return query.addSortBy(r'name', Sort.desc);
     });
   }
+
+  QueryBuilder<Business, Business, QAfterSortBy> thenByTaxes() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'taxes', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Business, Business, QAfterSortBy> thenByTaxesDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'taxes', Sort.desc);
+    });
+  }
 }
 
 extension BusinessQueryWhereDistinct
     on QueryBuilder<Business, Business, QDistinct> {
+  QueryBuilder<Business, Business, QDistinct> distinctByBalance() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'balance');
+    });
+  }
+
   QueryBuilder<Business, Business, QDistinct> distinctByCountAccountant() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'countAccountant');
@@ -1901,6 +2097,12 @@ extension BusinessQueryWhereDistinct
       return query.addDistinctBy(r'name', caseSensitive: caseSensitive);
     });
   }
+
+  QueryBuilder<Business, Business, QDistinct> distinctByTaxes() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'taxes');
+    });
+  }
 }
 
 extension BusinessQueryProperty
@@ -1908,6 +2110,12 @@ extension BusinessQueryProperty
   QueryBuilder<Business, int, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
+    });
+  }
+
+  QueryBuilder<Business, double, QQueryOperations> balanceProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'balance');
     });
   }
 
@@ -2010,6 +2218,12 @@ extension BusinessQueryProperty
   QueryBuilder<Business, String, QQueryOperations> nameProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'name');
+    });
+  }
+
+  QueryBuilder<Business, double, QQueryOperations> taxesProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'taxes');
     });
   }
 }
