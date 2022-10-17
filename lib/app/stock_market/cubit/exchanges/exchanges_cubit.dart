@@ -3,141 +3,125 @@ import 'dart:async';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:uuid/uuid.dart';
+import 'package:richeable/app/stock_market/models/instrument/instrument.dart';
+import 'package:richeable/repositories/transactions_repository.dart';
 
 import '../../../date/cubit/date_cubit.dart';
-import '../../../money/cubit/money/money_cubit.dart';
-import '../../../money/models/transaction/transaction_model.dart';
-import '../../../new_game/new_game_cubit.dart';
-import '../../models/candle/candle.dart';
 import '../../models/exchange/exchange.dart';
-import '../../models/instrument/instrument.dart';
-import '../stock_market/stock_market_cubit.dart';
+import '../../repositories/stock_market_repository.dart';
 
 part 'exchanges_cubit.freezed.dart';
 part 'exchanges_cubit.g.dart';
 part 'exchanges_state.dart';
 
-@lazySingleton
-class ExchangesCubit extends HydratedCubit<ExchangesState> {
-  final NewGameCubit _newGameCubit;
-  late StreamSubscription _newGameSub;
+@injectable
+class ExchangesCubit extends Cubit<ExchangesState> {
+  final StockMarketRepository _stockMarketRepository;
+  final TransactionsRepository _transactionsRepository;
+  late StreamSubscription _exchangesSub;
 
   final DateCubit _dateCubit;
 
-  final StockMarketCubit _stockMarketCubit;
-  final MoneyCubit _moneyCubit;
+  final int instrumentId;
 
   ExchangesCubit(
-    this._newGameCubit,
+    @factoryParam this.instrumentId,
+    this._stockMarketRepository,
     this._dateCubit,
-    this._stockMarketCubit,
-    this._moneyCubit,
+    this._transactionsRepository,
   ) : super(const ExchangesState.initial()) {
-    _newGame();
+    _init();
   }
 
   @override
   Future<void> close() async {
-    _newGameSub.cancel();
+    _exchangesSub.cancel();
     super.close();
   }
 
-  _newGame() {
-    if (_newGameCubit.state) emit(const ExchangesState.loaded([]));
-    _newGameSub = _newGameCubit.stream.listen((newGame) {
-      if (newGame) emit(const ExchangesState.loaded([]));
+  _init() {
+    state.whenOrNull(initial: () async {
+      List<Exchange> result =
+          await _stockMarketRepository.getAllExchangesForInstrument(instrumentId);
+      emit(ExchangesState.loaded(result));
+    });
+
+    _exchangesSub = _stockMarketRepository.exchangesWatcher().listen((event) async {
+      List<Exchange> result =
+          await _stockMarketRepository.getAllExchangesForInstrument(instrumentId);
+      emit(ExchangesState.loaded(result));
     });
   }
 
-  String? buy({
-    required String idInstrument,
+  Future<String?> buy({
+    required int instrumentId,
     required double count,
-  }) {
-    return _stockMarketCubit.state.maybeWhen(
-        loaded: (market) {
-          Instrument instrument = market.where((e) => e.id == idInstrument).first;
-
-          if (_moneyCubit.getBalance() < (count * instrument.lastCandle.close)) {
-            return "You don't have enough money";
-          }
-
-          return _dateCubit.state.maybeWhen(
-              loaded: (date) {
-                return state.maybeWhen(
-                    loaded: (transactions) {
-                      var uuid = const Uuid();
-                      List<Exchange> result = List.from(transactions);
-                      Exchange newTransaction = Exchange(
-                          id: uuid.v1(), instrument: instrument, count: count * 0.99, datCre: date);
-
-                      result.add(newTransaction);
-
-                      _moneyCubit.addTransaction(
-                          dateTime: date,
-                          value: -instrument.lastCandle.close * count,
-                          eTypeTransactionSource: ETypeTransactionSource.market);
-                      emit(ExchangesState.loaded(result));
-                    },
-                    orElse: () => 'error');
-              },
-              orElse: () => 'error');
-        },
-        orElse: () => 'error');
+  }) async {
+    return _dateCubit.state.maybeWhen(
+        orElse: () => 'error',
+        loaded: (date) async {
+          return await _stockMarketRepository.buy(
+            instrumentId: instrumentId,
+            count: count,
+            dateCre: date,
+          );
+        });
   }
 
-  String? sell({required String idInstrument, required double count}) {
-    return _stockMarketCubit.state.maybeWhen(
-        loaded: (market) {
-          Instrument instrument = market.where((e) => e.id == idInstrument).first;
-          Candle lastCandle = instrument.lastCandle;
-
-          return _dateCubit.state.maybeWhen(
-              loaded: (date) {
-                return state.maybeWhen(
-                    loaded: (transactions) {
-                      List<Exchange> oldTransactions =
-                          List.from(transactions.where((e) => e.instrument.id == instrument.id));
-                      List<Exchange> result = [];
-                      double addMoney = 0;
-                      double tCount = count;
-
-                      for (Exchange i in oldTransactions) {
-                        if (i.count > tCount && tCount > 0) {
-                          result.add(i.copyWith(count: i.count - tCount));
-                          tCount -= i.count;
-                          addMoney += i.count * lastCandle.close;
-                        } else if (i.count == tCount && tCount > 0) {
-                          result.add(i.copyWith(count: 0, close: true));
-                          addMoney += i.count * lastCandle.close;
-                        } else if (i.count < tCount && tCount > 0) {
-                          result.add(i.copyWith(count: 0, close: true));
-                          addMoney += i.count * lastCandle.close;
-                        } else if (tCount == 0) {
-                          result.add(i);
-                        }
-                      }
-
-                      _moneyCubit.addTransaction(
-                          value: addMoney,
-                          eTypeTransactionSource: ETypeTransactionSource.market,
-                          dateTime: date);
-                      emit(ExchangesState.loaded(result));
-                    },
-                    orElse: () => 'error');
-              },
-              orElse: () => 'error');
-        },
-        orElse: () => 'error');
-  }
-
-  @override
-  ExchangesState? fromJson(Map<String, dynamic> json) {
-    return ExchangesState.fromJson(json);
-  }
-
-  @override
-  Map<String, dynamic>? toJson(ExchangesState state) {
-    return state.toJson();
+  Future<String?> sell({
+    required ENameInstrument eNameInstrument,
+    required double count,
+  }) async {
+    return _dateCubit.state.maybeWhen(
+        orElse: () => 'error',
+        loaded: (date) async {
+          return await _stockMarketRepository.sell(
+            instrumentId: instrumentId,
+            count: count,
+            dateCre: date,
+          );
+        });
+    // return _stockMarketCubit.state.maybeWhen(
+    //     loaded: (market) {
+    //       Instrument instrument = market.where((e) => e.uid == idInstrument).first;
+    //       double lastClose = instrument.lastClose;
+    //
+    //       return _dateCubit.state.maybeWhen(
+    //           loaded: (date) {
+    //             return state.maybeWhen(
+    //                 loaded: (transactions) {
+    //                   List<Exchange> oldTransactions = List.from(
+    //                       transactions.where((e) => e.eNameInstrument.uid == instrument.uid));
+    //                   List<Exchange> result = [];
+    //                   double addMoney = 0;
+    //                   double tCount = count;
+    //
+    //                   for (Exchange i in oldTransactions) {
+    //                     if (i.count > tCount && tCount > 0) {
+    //                       result.add(i.copyWith(count: i.count - tCount));
+    //                       tCount -= i.count;
+    //                       addMoney += i.count * lastClose;
+    //                     } else if (i.count == tCount && tCount > 0) {
+    //                       result.add(i.copyWith(count: 0, close: true));
+    //                       addMoney += i.count * lastClose;
+    //                     } else if (i.count < tCount && tCount > 0) {
+    //                       result.add(i.copyWith(count: 0, close: true));
+    //                       addMoney += i.count * lastClose;
+    //                     } else if (tCount == 0) {
+    //                       result.add(i);
+    //                     }
+    //                   }
+    //
+    //                   _moneyCubit.addTransaction(
+    //                       value: addMoney,
+    //                       eTypeTransactionSource: ETypeTransactionSource.market,
+    //                       dateTime: date);
+    //                   emit(ExchangesState.loaded(result));
+    //                 },
+    //                 orElse: () => 'error');
+    //           },
+    //           orElse: () => 'error');
+    //     },
+    //     orElse: () => 'error');
   }
 }

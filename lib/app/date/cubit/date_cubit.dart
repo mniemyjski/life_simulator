@@ -22,7 +22,7 @@ import '../../money/cubit/income/income_cubit.dart';
 import '../../new_game/new_game_cubit.dart';
 import '../../settings/cubit/day_setting_cubit.dart';
 import '../../stats/cubit/stats_cubit.dart';
-import '../../stock_market/cubit/stock_market/stock_market_cubit.dart';
+import '../../stock_market/repositories/stock_market_repository.dart';
 import '../../time_spend/cubit/time_spend_cubit.dart';
 
 part 'date_cubit.freezed.dart';
@@ -37,7 +37,6 @@ class DateCubit extends HydratedCubit<DateState> {
 
   final LoadingCubit _loadingCubit;
 
-  final StockMarketCubit _stockMarketCubit;
   final FreelanceJobCubit _freelanceJobCubit;
   final FreelanceDoneCubit _freelanceDoneCubit;
   final FameCubit _fameCubit;
@@ -54,11 +53,13 @@ class DateCubit extends HydratedCubit<DateState> {
   final LoanCubit _loanCubit;
   final BusinessesCubit _businessesCubit;
 
+  final StockMarketRepository _stockMarketRepository;
+
   DateCubit(
     this._newGameCubit,
     this._daySettingCubit,
     this._loadingCubit,
-    this._stockMarketCubit,
+    this._stockMarketRepository,
     this._freelanceDoneCubit,
     this._fameCubit,
     this._freelanceJobCubit,
@@ -96,11 +97,17 @@ class DateCubit extends HydratedCubit<DateState> {
     await Future.delayed(const Duration(milliseconds: 200));
 
     DateTime start = DateTime.now();
+
+    await state.whenOrNull(loaded: (date) async {
+      DateTime dateTime = date.addDate(days: 1);
+
+      await _stockMarketRepository.counting(dateTime, _daySettingCubit.state);
+    });
+
     for (var i = 0; i < _daySettingCubit.state; i++) {
       await state.whenOrNull(loaded: (date) async {
         DateTime dateTime = date.addDate(days: 1);
 
-        await _stockMarketCubit.counting(dateTime);
         await _freelanceJobCubit.counting(dateTime);
         await _freelanceDoneCubit.counting(dateTime);
         await _fameCubit.counting(dateTime);

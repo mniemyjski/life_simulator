@@ -11,11 +11,13 @@ abstract class _$CandleCWProxy {
 
   Candle dateTime(DateTime dateTime);
 
+  Candle eNameInstrument(ENameInstrument eNameInstrument);
+
   Candle high(double high);
 
   Candle id(int id);
 
-  Candle instrument(ENameInstrument instrument);
+  Candle instrumentId(int instrumentId);
 
   Candle low(double low);
 
@@ -30,9 +32,10 @@ abstract class _$CandleCWProxy {
   Candle call({
     double? close,
     DateTime? dateTime,
+    ENameInstrument? eNameInstrument,
     double? high,
     int? id,
-    ENameInstrument? instrument,
+    int? instrumentId,
     double? low,
     double? open,
   });
@@ -51,13 +54,17 @@ class _$CandleCWProxyImpl implements _$CandleCWProxy {
   Candle dateTime(DateTime dateTime) => this(dateTime: dateTime);
 
   @override
+  Candle eNameInstrument(ENameInstrument eNameInstrument) =>
+      this(eNameInstrument: eNameInstrument);
+
+  @override
   Candle high(double high) => this(high: high);
 
   @override
   Candle id(int id) => this(id: id);
 
   @override
-  Candle instrument(ENameInstrument instrument) => this(instrument: instrument);
+  Candle instrumentId(int instrumentId) => this(instrumentId: instrumentId);
 
   @override
   Candle low(double low) => this(low: low);
@@ -76,9 +83,10 @@ class _$CandleCWProxyImpl implements _$CandleCWProxy {
   Candle call({
     Object? close = const $CopyWithPlaceholder(),
     Object? dateTime = const $CopyWithPlaceholder(),
+    Object? eNameInstrument = const $CopyWithPlaceholder(),
     Object? high = const $CopyWithPlaceholder(),
     Object? id = const $CopyWithPlaceholder(),
-    Object? instrument = const $CopyWithPlaceholder(),
+    Object? instrumentId = const $CopyWithPlaceholder(),
     Object? low = const $CopyWithPlaceholder(),
     Object? open = const $CopyWithPlaceholder(),
   }) {
@@ -91,6 +99,11 @@ class _$CandleCWProxyImpl implements _$CandleCWProxy {
           ? _value.dateTime
           // ignore: cast_nullable_to_non_nullable
           : dateTime as DateTime,
+      eNameInstrument: eNameInstrument == const $CopyWithPlaceholder() ||
+              eNameInstrument == null
+          ? _value.eNameInstrument
+          // ignore: cast_nullable_to_non_nullable
+          : eNameInstrument as ENameInstrument,
       high: high == const $CopyWithPlaceholder() || high == null
           ? _value.high
           // ignore: cast_nullable_to_non_nullable
@@ -99,11 +112,11 @@ class _$CandleCWProxyImpl implements _$CandleCWProxy {
           ? _value.id
           // ignore: cast_nullable_to_non_nullable
           : id as int,
-      instrument:
-          instrument == const $CopyWithPlaceholder() || instrument == null
-              ? _value.instrument
+      instrumentId:
+          instrumentId == const $CopyWithPlaceholder() || instrumentId == null
+              ? _value.instrumentId
               // ignore: cast_nullable_to_non_nullable
-              : instrument as ENameInstrument,
+              : instrumentId as int,
       low: low == const $CopyWithPlaceholder() || low == null
           ? _value.low
           // ignore: cast_nullable_to_non_nullable
@@ -134,8 +147,8 @@ extension GetCandleCollection on Isar {
 }
 
 const CandleSchema = CollectionSchema(
-  name: r'Stock Market Courses',
-  id: 6427917390003222243,
+  name: r'Courses',
+  id: 8479178045851352164,
   properties: {
     r'close': PropertySchema(
       id: 0,
@@ -147,29 +160,34 @@ const CandleSchema = CollectionSchema(
       name: r'dateTime',
       type: IsarType.dateTime,
     ),
-    r'hashCode': PropertySchema(
+    r'eNameInstrument': PropertySchema(
       id: 2,
+      name: r'eNameInstrument',
+      type: IsarType.byte,
+      enumMap: _CandleeNameInstrumentEnumValueMap,
+    ),
+    r'hashCode': PropertySchema(
+      id: 3,
       name: r'hashCode',
       type: IsarType.long,
     ),
     r'high': PropertySchema(
-      id: 3,
+      id: 4,
       name: r'high',
       type: IsarType.double,
     ),
-    r'instrument': PropertySchema(
-      id: 4,
-      name: r'instrument',
-      type: IsarType.byte,
-      enumMap: _CandleinstrumentEnumValueMap,
+    r'instrumentId': PropertySchema(
+      id: 5,
+      name: r'instrumentId',
+      type: IsarType.long,
     ),
     r'low': PropertySchema(
-      id: 5,
+      id: 6,
       name: r'low',
       type: IsarType.double,
     ),
     r'open': PropertySchema(
-      id: 6,
+      id: 7,
       name: r'open',
       type: IsarType.double,
     )
@@ -180,14 +198,32 @@ const CandleSchema = CollectionSchema(
   deserializeProp: _candleDeserializeProp,
   idName: r'id',
   indexes: {
-    r'instrument_dateTime': IndexSchema(
-      id: 326737848939681596,
-      name: r'instrument_dateTime',
+    r'instrumentId_dateTime': IndexSchema(
+      id: 17213871989371454,
+      name: r'instrumentId_dateTime',
       unique: false,
       replace: false,
       properties: [
         IndexPropertySchema(
-          name: r'instrument',
+          name: r'instrumentId',
+          type: IndexType.value,
+          caseSensitive: false,
+        ),
+        IndexPropertySchema(
+          name: r'dateTime',
+          type: IndexType.value,
+          caseSensitive: false,
+        )
+      ],
+    ),
+    r'eNameInstrument_dateTime': IndexSchema(
+      id: 2303082242461299481,
+      name: r'eNameInstrument_dateTime',
+      unique: false,
+      replace: false,
+      properties: [
+        IndexPropertySchema(
+          name: r'eNameInstrument',
           type: IndexType.value,
           caseSensitive: false,
         ),
@@ -237,11 +273,12 @@ void _candleSerialize(
 ) {
   writer.writeDouble(offsets[0], object.close);
   writer.writeDateTime(offsets[1], object.dateTime);
-  writer.writeLong(offsets[2], object.hashCode);
-  writer.writeDouble(offsets[3], object.high);
-  writer.writeByte(offsets[4], object.instrument.index);
-  writer.writeDouble(offsets[5], object.low);
-  writer.writeDouble(offsets[6], object.open);
+  writer.writeByte(offsets[2], object.eNameInstrument.index);
+  writer.writeLong(offsets[3], object.hashCode);
+  writer.writeDouble(offsets[4], object.high);
+  writer.writeLong(offsets[5], object.instrumentId);
+  writer.writeDouble(offsets[6], object.low);
+  writer.writeDouble(offsets[7], object.open);
 }
 
 Candle _candleDeserialize(
@@ -253,13 +290,14 @@ Candle _candleDeserialize(
   final object = Candle(
     close: reader.readDouble(offsets[0]),
     dateTime: reader.readDateTime(offsets[1]),
-    high: reader.readDouble(offsets[3]),
-    id: id,
-    instrument:
-        _CandleinstrumentValueEnumMap[reader.readByteOrNull(offsets[4])] ??
+    eNameInstrument:
+        _CandleeNameInstrumentValueEnumMap[reader.readByteOrNull(offsets[2])] ??
             ENameInstrument.btc,
-    low: reader.readDouble(offsets[5]),
-    open: reader.readDouble(offsets[6]),
+    high: reader.readDouble(offsets[4]),
+    id: id,
+    instrumentId: reader.readLong(offsets[5]),
+    low: reader.readDouble(offsets[6]),
+    open: reader.readDouble(offsets[7]),
   );
   return object;
 }
@@ -276,22 +314,25 @@ P _candleDeserializeProp<P>(
     case 1:
       return (reader.readDateTime(offset)) as P;
     case 2:
-      return (reader.readLong(offset)) as P;
-    case 3:
-      return (reader.readDouble(offset)) as P;
-    case 4:
-      return (_CandleinstrumentValueEnumMap[reader.readByteOrNull(offset)] ??
+      return (_CandleeNameInstrumentValueEnumMap[
+              reader.readByteOrNull(offset)] ??
           ENameInstrument.btc) as P;
-    case 5:
+    case 3:
+      return (reader.readLong(offset)) as P;
+    case 4:
       return (reader.readDouble(offset)) as P;
+    case 5:
+      return (reader.readLong(offset)) as P;
     case 6:
+      return (reader.readDouble(offset)) as P;
+    case 7:
       return (reader.readDouble(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
 }
 
-const _CandleinstrumentEnumValueMap = {
+const _CandleeNameInstrumentEnumValueMap = {
   'btc': 0,
   'eth': 1,
   'bnb': 2,
@@ -303,7 +344,7 @@ const _CandleinstrumentEnumValueMap = {
   'tesla': 8,
   'apple': 9,
 };
-const _CandleinstrumentValueEnumMap = {
+const _CandleeNameInstrumentValueEnumMap = {
   0: ENameInstrument.btc,
   1: ENameInstrument.eth,
   2: ENameInstrument.bnb,
@@ -333,10 +374,18 @@ extension CandleQueryWhereSort on QueryBuilder<Candle, Candle, QWhere> {
     });
   }
 
-  QueryBuilder<Candle, Candle, QAfterWhere> anyInstrumentDateTime() {
+  QueryBuilder<Candle, Candle, QAfterWhere> anyInstrumentIdDateTime() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
-        const IndexWhereClause.any(indexName: r'instrument_dateTime'),
+        const IndexWhereClause.any(indexName: r'instrumentId_dateTime'),
+      );
+    });
+  }
+
+  QueryBuilder<Candle, Candle, QAfterWhere> anyENameInstrumentDateTime() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(
+        const IndexWhereClause.any(indexName: r'eNameInstrument_dateTime'),
       );
     });
   }
@@ -416,45 +465,45 @@ extension CandleQueryWhere on QueryBuilder<Candle, Candle, QWhereClause> {
     });
   }
 
-  QueryBuilder<Candle, Candle, QAfterWhereClause> instrumentEqualToAnyDateTime(
-      ENameInstrument instrument) {
+  QueryBuilder<Candle, Candle, QAfterWhereClause>
+      instrumentIdEqualToAnyDateTime(int instrumentId) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.equalTo(
-        indexName: r'instrument_dateTime',
-        value: [instrument],
+        indexName: r'instrumentId_dateTime',
+        value: [instrumentId],
       ));
     });
   }
 
   QueryBuilder<Candle, Candle, QAfterWhereClause>
-      instrumentNotEqualToAnyDateTime(ENameInstrument instrument) {
+      instrumentIdNotEqualToAnyDateTime(int instrumentId) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
             .addWhereClause(IndexWhereClause.between(
-              indexName: r'instrument_dateTime',
+              indexName: r'instrumentId_dateTime',
               lower: [],
-              upper: [instrument],
+              upper: [instrumentId],
               includeUpper: false,
             ))
             .addWhereClause(IndexWhereClause.between(
-              indexName: r'instrument_dateTime',
-              lower: [instrument],
+              indexName: r'instrumentId_dateTime',
+              lower: [instrumentId],
               includeLower: false,
               upper: [],
             ));
       } else {
         return query
             .addWhereClause(IndexWhereClause.between(
-              indexName: r'instrument_dateTime',
-              lower: [instrument],
+              indexName: r'instrumentId_dateTime',
+              lower: [instrumentId],
               includeLower: false,
               upper: [],
             ))
             .addWhereClause(IndexWhereClause.between(
-              indexName: r'instrument_dateTime',
+              indexName: r'instrumentId_dateTime',
               lower: [],
-              upper: [instrument],
+              upper: [instrumentId],
               includeUpper: false,
             ));
       }
@@ -462,91 +511,93 @@ extension CandleQueryWhere on QueryBuilder<Candle, Candle, QWhereClause> {
   }
 
   QueryBuilder<Candle, Candle, QAfterWhereClause>
-      instrumentGreaterThanAnyDateTime(
-    ENameInstrument instrument, {
+      instrumentIdGreaterThanAnyDateTime(
+    int instrumentId, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.between(
-        indexName: r'instrument_dateTime',
-        lower: [instrument],
+        indexName: r'instrumentId_dateTime',
+        lower: [instrumentId],
         includeLower: include,
         upper: [],
       ));
     });
   }
 
-  QueryBuilder<Candle, Candle, QAfterWhereClause> instrumentLessThanAnyDateTime(
-    ENameInstrument instrument, {
+  QueryBuilder<Candle, Candle, QAfterWhereClause>
+      instrumentIdLessThanAnyDateTime(
+    int instrumentId, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.between(
-        indexName: r'instrument_dateTime',
+        indexName: r'instrumentId_dateTime',
         lower: [],
-        upper: [instrument],
+        upper: [instrumentId],
         includeUpper: include,
       ));
     });
   }
 
-  QueryBuilder<Candle, Candle, QAfterWhereClause> instrumentBetweenAnyDateTime(
-    ENameInstrument lowerInstrument,
-    ENameInstrument upperInstrument, {
+  QueryBuilder<Candle, Candle, QAfterWhereClause>
+      instrumentIdBetweenAnyDateTime(
+    int lowerInstrumentId,
+    int upperInstrumentId, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.between(
-        indexName: r'instrument_dateTime',
-        lower: [lowerInstrument],
+        indexName: r'instrumentId_dateTime',
+        lower: [lowerInstrumentId],
         includeLower: includeLower,
-        upper: [upperInstrument],
+        upper: [upperInstrumentId],
         includeUpper: includeUpper,
       ));
     });
   }
 
-  QueryBuilder<Candle, Candle, QAfterWhereClause> instrumentDateTimeEqualTo(
-      ENameInstrument instrument, DateTime dateTime) {
+  QueryBuilder<Candle, Candle, QAfterWhereClause> instrumentIdDateTimeEqualTo(
+      int instrumentId, DateTime dateTime) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.equalTo(
-        indexName: r'instrument_dateTime',
-        value: [instrument, dateTime],
+        indexName: r'instrumentId_dateTime',
+        value: [instrumentId, dateTime],
       ));
     });
   }
 
   QueryBuilder<Candle, Candle, QAfterWhereClause>
-      instrumentEqualToDateTimeNotEqualTo(
-          ENameInstrument instrument, DateTime dateTime) {
+      instrumentIdEqualToDateTimeNotEqualTo(
+          int instrumentId, DateTime dateTime) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
             .addWhereClause(IndexWhereClause.between(
-              indexName: r'instrument_dateTime',
-              lower: [instrument],
-              upper: [instrument, dateTime],
+              indexName: r'instrumentId_dateTime',
+              lower: [instrumentId],
+              upper: [instrumentId, dateTime],
               includeUpper: false,
             ))
             .addWhereClause(IndexWhereClause.between(
-              indexName: r'instrument_dateTime',
-              lower: [instrument, dateTime],
+              indexName: r'instrumentId_dateTime',
+              lower: [instrumentId, dateTime],
               includeLower: false,
-              upper: [instrument],
+              upper: [instrumentId],
             ));
       } else {
         return query
             .addWhereClause(IndexWhereClause.between(
-              indexName: r'instrument_dateTime',
-              lower: [instrument, dateTime],
+              indexName: r'instrumentId_dateTime',
+              lower: [instrumentId, dateTime],
               includeLower: false,
-              upper: [instrument],
+              upper: [instrumentId],
             ))
             .addWhereClause(IndexWhereClause.between(
-              indexName: r'instrument_dateTime',
-              lower: [instrument],
-              upper: [instrument, dateTime],
+              indexName: r'instrumentId_dateTime',
+              lower: [instrumentId],
+              upper: [instrumentId, dateTime],
               includeUpper: false,
             ));
       }
@@ -554,40 +605,40 @@ extension CandleQueryWhere on QueryBuilder<Candle, Candle, QWhereClause> {
   }
 
   QueryBuilder<Candle, Candle, QAfterWhereClause>
-      instrumentEqualToDateTimeGreaterThan(
-    ENameInstrument instrument,
+      instrumentIdEqualToDateTimeGreaterThan(
+    int instrumentId,
     DateTime dateTime, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.between(
-        indexName: r'instrument_dateTime',
-        lower: [instrument, dateTime],
+        indexName: r'instrumentId_dateTime',
+        lower: [instrumentId, dateTime],
         includeLower: include,
-        upper: [instrument],
+        upper: [instrumentId],
       ));
     });
   }
 
   QueryBuilder<Candle, Candle, QAfterWhereClause>
-      instrumentEqualToDateTimeLessThan(
-    ENameInstrument instrument,
+      instrumentIdEqualToDateTimeLessThan(
+    int instrumentId,
     DateTime dateTime, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.between(
-        indexName: r'instrument_dateTime',
-        lower: [instrument],
-        upper: [instrument, dateTime],
+        indexName: r'instrumentId_dateTime',
+        lower: [instrumentId],
+        upper: [instrumentId, dateTime],
         includeUpper: include,
       ));
     });
   }
 
   QueryBuilder<Candle, Candle, QAfterWhereClause>
-      instrumentEqualToDateTimeBetween(
-    ENameInstrument instrument,
+      instrumentIdEqualToDateTimeBetween(
+    int instrumentId,
     DateTime lowerDateTime,
     DateTime upperDateTime, {
     bool includeLower = true,
@@ -595,10 +646,201 @@ extension CandleQueryWhere on QueryBuilder<Candle, Candle, QWhereClause> {
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.between(
-        indexName: r'instrument_dateTime',
-        lower: [instrument, lowerDateTime],
+        indexName: r'instrumentId_dateTime',
+        lower: [instrumentId, lowerDateTime],
         includeLower: includeLower,
-        upper: [instrument, upperDateTime],
+        upper: [instrumentId, upperDateTime],
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<Candle, Candle, QAfterWhereClause>
+      eNameInstrumentEqualToAnyDateTime(ENameInstrument eNameInstrument) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'eNameInstrument_dateTime',
+        value: [eNameInstrument],
+      ));
+    });
+  }
+
+  QueryBuilder<Candle, Candle, QAfterWhereClause>
+      eNameInstrumentNotEqualToAnyDateTime(ENameInstrument eNameInstrument) {
+    return QueryBuilder.apply(this, (query) {
+      if (query.whereSort == Sort.asc) {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'eNameInstrument_dateTime',
+              lower: [],
+              upper: [eNameInstrument],
+              includeUpper: false,
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'eNameInstrument_dateTime',
+              lower: [eNameInstrument],
+              includeLower: false,
+              upper: [],
+            ));
+      } else {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'eNameInstrument_dateTime',
+              lower: [eNameInstrument],
+              includeLower: false,
+              upper: [],
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'eNameInstrument_dateTime',
+              lower: [],
+              upper: [eNameInstrument],
+              includeUpper: false,
+            ));
+      }
+    });
+  }
+
+  QueryBuilder<Candle, Candle, QAfterWhereClause>
+      eNameInstrumentGreaterThanAnyDateTime(
+    ENameInstrument eNameInstrument, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'eNameInstrument_dateTime',
+        lower: [eNameInstrument],
+        includeLower: include,
+        upper: [],
+      ));
+    });
+  }
+
+  QueryBuilder<Candle, Candle, QAfterWhereClause>
+      eNameInstrumentLessThanAnyDateTime(
+    ENameInstrument eNameInstrument, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'eNameInstrument_dateTime',
+        lower: [],
+        upper: [eNameInstrument],
+        includeUpper: include,
+      ));
+    });
+  }
+
+  QueryBuilder<Candle, Candle, QAfterWhereClause>
+      eNameInstrumentBetweenAnyDateTime(
+    ENameInstrument lowerENameInstrument,
+    ENameInstrument upperENameInstrument, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'eNameInstrument_dateTime',
+        lower: [lowerENameInstrument],
+        includeLower: includeLower,
+        upper: [upperENameInstrument],
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<Candle, Candle, QAfterWhereClause>
+      eNameInstrumentDateTimeEqualTo(
+          ENameInstrument eNameInstrument, DateTime dateTime) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'eNameInstrument_dateTime',
+        value: [eNameInstrument, dateTime],
+      ));
+    });
+  }
+
+  QueryBuilder<Candle, Candle, QAfterWhereClause>
+      eNameInstrumentEqualToDateTimeNotEqualTo(
+          ENameInstrument eNameInstrument, DateTime dateTime) {
+    return QueryBuilder.apply(this, (query) {
+      if (query.whereSort == Sort.asc) {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'eNameInstrument_dateTime',
+              lower: [eNameInstrument],
+              upper: [eNameInstrument, dateTime],
+              includeUpper: false,
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'eNameInstrument_dateTime',
+              lower: [eNameInstrument, dateTime],
+              includeLower: false,
+              upper: [eNameInstrument],
+            ));
+      } else {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'eNameInstrument_dateTime',
+              lower: [eNameInstrument, dateTime],
+              includeLower: false,
+              upper: [eNameInstrument],
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'eNameInstrument_dateTime',
+              lower: [eNameInstrument],
+              upper: [eNameInstrument, dateTime],
+              includeUpper: false,
+            ));
+      }
+    });
+  }
+
+  QueryBuilder<Candle, Candle, QAfterWhereClause>
+      eNameInstrumentEqualToDateTimeGreaterThan(
+    ENameInstrument eNameInstrument,
+    DateTime dateTime, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'eNameInstrument_dateTime',
+        lower: [eNameInstrument, dateTime],
+        includeLower: include,
+        upper: [eNameInstrument],
+      ));
+    });
+  }
+
+  QueryBuilder<Candle, Candle, QAfterWhereClause>
+      eNameInstrumentEqualToDateTimeLessThan(
+    ENameInstrument eNameInstrument,
+    DateTime dateTime, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'eNameInstrument_dateTime',
+        lower: [eNameInstrument],
+        upper: [eNameInstrument, dateTime],
+        includeUpper: include,
+      ));
+    });
+  }
+
+  QueryBuilder<Candle, Candle, QAfterWhereClause>
+      eNameInstrumentEqualToDateTimeBetween(
+    ENameInstrument eNameInstrument,
+    DateTime lowerDateTime,
+    DateTime upperDateTime, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'eNameInstrument_dateTime',
+        lower: [eNameInstrument, lowerDateTime],
+        includeLower: includeLower,
+        upper: [eNameInstrument, upperDateTime],
         includeUpper: includeUpper,
       ));
     });
@@ -811,6 +1053,60 @@ extension CandleQueryFilter on QueryBuilder<Candle, Candle, QFilterCondition> {
     });
   }
 
+  QueryBuilder<Candle, Candle, QAfterFilterCondition> eNameInstrumentEqualTo(
+      ENameInstrument value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'eNameInstrument',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<Candle, Candle, QAfterFilterCondition>
+      eNameInstrumentGreaterThan(
+    ENameInstrument value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'eNameInstrument',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<Candle, Candle, QAfterFilterCondition> eNameInstrumentLessThan(
+    ENameInstrument value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'eNameInstrument',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<Candle, Candle, QAfterFilterCondition> eNameInstrumentBetween(
+    ENameInstrument lower,
+    ENameInstrument upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'eNameInstrument',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
   QueryBuilder<Candle, Candle, QAfterFilterCondition> hashCodeEqualTo(
       int value) {
     return QueryBuilder.apply(this, (query) {
@@ -978,51 +1274,51 @@ extension CandleQueryFilter on QueryBuilder<Candle, Candle, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Candle, Candle, QAfterFilterCondition> instrumentEqualTo(
-      ENameInstrument value) {
+  QueryBuilder<Candle, Candle, QAfterFilterCondition> instrumentIdEqualTo(
+      int value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'instrument',
+        property: r'instrumentId',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<Candle, Candle, QAfterFilterCondition> instrumentGreaterThan(
-    ENameInstrument value, {
+  QueryBuilder<Candle, Candle, QAfterFilterCondition> instrumentIdGreaterThan(
+    int value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'instrument',
+        property: r'instrumentId',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<Candle, Candle, QAfterFilterCondition> instrumentLessThan(
-    ENameInstrument value, {
+  QueryBuilder<Candle, Candle, QAfterFilterCondition> instrumentIdLessThan(
+    int value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'instrument',
+        property: r'instrumentId',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<Candle, Candle, QAfterFilterCondition> instrumentBetween(
-    ENameInstrument lower,
-    ENameInstrument upper, {
+  QueryBuilder<Candle, Candle, QAfterFilterCondition> instrumentIdBetween(
+    int lower,
+    int upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'instrument',
+        property: r'instrumentId',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -1185,6 +1481,18 @@ extension CandleQuerySortBy on QueryBuilder<Candle, Candle, QSortBy> {
     });
   }
 
+  QueryBuilder<Candle, Candle, QAfterSortBy> sortByENameInstrument() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'eNameInstrument', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Candle, Candle, QAfterSortBy> sortByENameInstrumentDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'eNameInstrument', Sort.desc);
+    });
+  }
+
   QueryBuilder<Candle, Candle, QAfterSortBy> sortByHashCode() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'hashCode', Sort.asc);
@@ -1209,15 +1517,15 @@ extension CandleQuerySortBy on QueryBuilder<Candle, Candle, QSortBy> {
     });
   }
 
-  QueryBuilder<Candle, Candle, QAfterSortBy> sortByInstrument() {
+  QueryBuilder<Candle, Candle, QAfterSortBy> sortByInstrumentId() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'instrument', Sort.asc);
+      return query.addSortBy(r'instrumentId', Sort.asc);
     });
   }
 
-  QueryBuilder<Candle, Candle, QAfterSortBy> sortByInstrumentDesc() {
+  QueryBuilder<Candle, Candle, QAfterSortBy> sortByInstrumentIdDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'instrument', Sort.desc);
+      return query.addSortBy(r'instrumentId', Sort.desc);
     });
   }
 
@@ -1271,6 +1579,18 @@ extension CandleQuerySortThenBy on QueryBuilder<Candle, Candle, QSortThenBy> {
     });
   }
 
+  QueryBuilder<Candle, Candle, QAfterSortBy> thenByENameInstrument() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'eNameInstrument', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Candle, Candle, QAfterSortBy> thenByENameInstrumentDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'eNameInstrument', Sort.desc);
+    });
+  }
+
   QueryBuilder<Candle, Candle, QAfterSortBy> thenByHashCode() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'hashCode', Sort.asc);
@@ -1307,15 +1627,15 @@ extension CandleQuerySortThenBy on QueryBuilder<Candle, Candle, QSortThenBy> {
     });
   }
 
-  QueryBuilder<Candle, Candle, QAfterSortBy> thenByInstrument() {
+  QueryBuilder<Candle, Candle, QAfterSortBy> thenByInstrumentId() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'instrument', Sort.asc);
+      return query.addSortBy(r'instrumentId', Sort.asc);
     });
   }
 
-  QueryBuilder<Candle, Candle, QAfterSortBy> thenByInstrumentDesc() {
+  QueryBuilder<Candle, Candle, QAfterSortBy> thenByInstrumentIdDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'instrument', Sort.desc);
+      return query.addSortBy(r'instrumentId', Sort.desc);
     });
   }
 
@@ -1357,6 +1677,12 @@ extension CandleQueryWhereDistinct on QueryBuilder<Candle, Candle, QDistinct> {
     });
   }
 
+  QueryBuilder<Candle, Candle, QDistinct> distinctByENameInstrument() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'eNameInstrument');
+    });
+  }
+
   QueryBuilder<Candle, Candle, QDistinct> distinctByHashCode() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'hashCode');
@@ -1369,9 +1695,9 @@ extension CandleQueryWhereDistinct on QueryBuilder<Candle, Candle, QDistinct> {
     });
   }
 
-  QueryBuilder<Candle, Candle, QDistinct> distinctByInstrument() {
+  QueryBuilder<Candle, Candle, QDistinct> distinctByInstrumentId() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'instrument');
+      return query.addDistinctBy(r'instrumentId');
     });
   }
 
@@ -1407,6 +1733,13 @@ extension CandleQueryProperty on QueryBuilder<Candle, Candle, QQueryProperty> {
     });
   }
 
+  QueryBuilder<Candle, ENameInstrument, QQueryOperations>
+      eNameInstrumentProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'eNameInstrument');
+    });
+  }
+
   QueryBuilder<Candle, int, QQueryOperations> hashCodeProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'hashCode');
@@ -1419,9 +1752,9 @@ extension CandleQueryProperty on QueryBuilder<Candle, Candle, QQueryProperty> {
     });
   }
 
-  QueryBuilder<Candle, ENameInstrument, QQueryOperations> instrumentProperty() {
+  QueryBuilder<Candle, int, QQueryOperations> instrumentIdProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'instrument');
+      return query.addPropertyName(r'instrumentId');
     });
   }
 
@@ -1444,7 +1777,9 @@ extension CandleQueryProperty on QueryBuilder<Candle, Candle, QQueryProperty> {
 
 Candle _$CandleFromJson(Map<String, dynamic> json) => Candle(
       id: json['id'] as int? ?? Isar.autoIncrement,
-      instrument: $enumDecode(_$ENameInstrumentEnumMap, json['instrument']),
+      instrumentId: json['instrumentId'] as int,
+      eNameInstrument:
+          $enumDecode(_$ENameInstrumentEnumMap, json['eNameInstrument']),
       dateTime: DateTime.parse(json['dateTime'] as String),
       open: (json['open'] as num).toDouble(),
       high: (json['high'] as num).toDouble(),
@@ -1454,7 +1789,8 @@ Candle _$CandleFromJson(Map<String, dynamic> json) => Candle(
 
 Map<String, dynamic> _$CandleToJson(Candle instance) => <String, dynamic>{
       'id': instance.id,
-      'instrument': _$ENameInstrumentEnumMap[instance.instrument]!,
+      'instrumentId': instance.instrumentId,
+      'eNameInstrument': _$ENameInstrumentEnumMap[instance.eNameInstrument]!,
       'dateTime': instance.dateTime.toIso8601String(),
       'open': instance.open,
       'high': instance.high,

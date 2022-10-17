@@ -30,12 +30,12 @@ class SellButton extends StatelessWidget {
             return state.maybeWhen(
                 orElse: () => Container(),
                 loaded: (t) {
-                  List<Exchange> transactions =
-                      List.from(t.where((e) => e.instrument.id == instrument.id));
+                  List<Exchange> exchanges =
+                      List.from(t.where((e) => e.eNameInstrument == instrument.eNameInstrument));
 
                   double amount = 0;
 
-                  for (var element in transactions) {
+                  for (var element in exchanges) {
                     amount += element.count;
                   }
 
@@ -45,13 +45,16 @@ class SellButton extends StatelessWidget {
                           ? null
                           : () async {
                               return showModalBottomSheet<void>(
-                                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                                  backgroundColor: Colors.transparent,
                                   context: context,
-                                  builder: (BuildContext context) {
-                                    return SellBottomSheet(
-                                      instrument: instrument,
-                                      buttonName: LocaleKeys.sell.tr(),
-                                      amount: amount,
+                                  builder: (_) {
+                                    return BlocProvider.value(
+                                      value: BlocProvider.of<ExchangesCubit>(context),
+                                      child: SellBottomSheet(
+                                        instrument: instrument,
+                                        buttonName: LocaleKeys.sell.tr(),
+                                        amount: amount,
+                                      ),
                                     );
                                   });
                             },

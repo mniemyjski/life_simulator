@@ -21,7 +21,7 @@ extension DateT on DateTime {
         .add(days: days, weeks: weeks, months: months, years: years)
         .dateTime
         .onlyDate();
-    if (newDate == onlyDate()) {
+    if (newDate == onlyDate() && days > 0) {
       newDate = Jiffy(onlyDate())
           .add(days: days + 1, weeks: weeks, months: months, years: years)
           .dateTime

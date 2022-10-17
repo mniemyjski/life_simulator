@@ -12,7 +12,7 @@ import '../../utilities/utilities.dart';
 import '../../widgets/widgets.dart';
 import '../date/widgets/next_day.dart';
 import '../game/widget/app_bar_game.dart';
-import 'cubit/stock_market/stock_market_cubit.dart';
+import 'cubit/instruments/instruments_cubit.dart';
 import 'models/candle/candle.dart';
 import 'models/instrument/instrument.dart';
 
@@ -38,8 +38,15 @@ class _StockMarketScreenState extends State<StockMarketScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<CandlesCubit>(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => getIt<InstrumentsCubit>(),
+        ),
+        BlocProvider(
+          create: (_) => getIt<CandlesCubit>(),
+        ),
+      ],
       child: CustomScaffold(
         appBar: AppBarGame(
           title: LocaleKeys.stockMarket.tr(),
@@ -70,7 +77,7 @@ class _StockMarketScreenState extends State<StockMarketScreen> {
                   .maybeWhen(orElse: () => [], loaded: (candles) => candles);
 
               final List<Instrument> totalInstruments = context
-                  .watch<StockMarketCubit>()
+                  .watch<InstrumentsCubit>()
                   .state
                   .maybeWhen(orElse: () => [], loaded: (instruments) => instruments);
 
@@ -135,8 +142,9 @@ class _StockMarketScreenState extends State<StockMarketScreen> {
                       ],
                       rows: totalInstruments.where((e) => e.eTypeInstrument == eTypeInstrument).map(
                         (i) {
-                          List<Candle> candlesForInstrument =
-                              totalCandles.where((g) => g.instrument == i.name).toList();
+                          List<Candle> candlesForInstrument = totalCandles
+                              .where((g) => g.eNameInstrument == i.eNameInstrument)
+                              .toList();
 
                           double hours = (candlesForInstrument.last.close /
                                       candlesForInstrument[candlesForInstrument.length - 2].close -
@@ -154,11 +162,12 @@ class _StockMarketScreenState extends State<StockMarketScreen> {
                           return DataRow(
                               onSelectChanged: (b) {
                                 context.router.push(InstrumentRoute(
-                                    id: i.id,
-                                    blocProvider: BlocProvider.of<CandlesCubit>(context)));
+                                    instrumentId: i.id,
+                                    instrumentsCubit: BlocProvider.of<InstrumentsCubit>(context),
+                                    candlesProvider: BlocProvider.of<CandlesCubit>(context)));
                               },
                               cells: [
-                                DataCell(Text(Enums.toText(i.name))),
+                                DataCell(Text(Enums.toText(i.eNameInstrument))),
                                 DataCell(
                                   Text('${hours.toStringAsFixed(2)}%',
                                       style:

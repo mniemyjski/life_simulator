@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:richeable/app/stock_market/cubit/exchanges/exchanges_cubit.dart';
 import 'package:richeable/utilities/utilities.dart';
 import 'package:richeable/widgets/custom_button.dart';
 
@@ -10,14 +11,14 @@ import '../models/instrument/instrument.dart';
 import 'buy_bottom_sheet.dart';
 
 class BuyButton extends StatelessWidget {
+  final Instrument instrument;
+  final Candle lastCandle;
+
   const BuyButton({
     Key? key,
     required this.instrument,
     required this.lastCandle,
   }) : super(key: key);
-
-  final Instrument instrument;
-  final Candle lastCandle;
 
   @override
   Widget build(BuildContext context) {
@@ -34,13 +35,16 @@ class BuyButton extends StatelessWidget {
                       onPressed: money > 0
                           ? () async {
                               return showModalBottomSheet<void>(
-                                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                                  backgroundColor: Colors.transparent,
                                   context: context,
-                                  builder: (BuildContext context) {
-                                    return BuyBottomSheet(
-                                      instrument: instrument,
-                                      buttonName: LocaleKeys.buy.tr(),
-                                      money: money,
+                                  builder: (_) {
+                                    return BlocProvider.value(
+                                      value: BlocProvider.of<ExchangesCubit>(context),
+                                      child: BuyBottomSheet(
+                                        instrument: instrument,
+                                        buttonName: LocaleKeys.buy.tr(),
+                                        money: money,
+                                      ),
                                     );
                                   });
                             }

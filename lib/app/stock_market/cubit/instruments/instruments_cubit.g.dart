@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'stock_market_cubit.dart';
+part of 'instruments_cubit.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

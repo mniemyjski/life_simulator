@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'stock_market_cubit.dart';
+part of 'instruments_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-StockMarketState _$StockMarketStateFromJson(Map<String, dynamic> json) {
+InstrumentsState _$InstrumentsStateFromJson(Map<String, dynamic> json) {
   switch (json['runtimeType']) {
     case 'initial':
       return Initial.fromJson(json);
@@ -24,13 +24,13 @@ StockMarketState _$StockMarketStateFromJson(Map<String, dynamic> json) {
       return Loaded.fromJson(json);
 
     default:
-      throw CheckedFromJsonException(json, 'runtimeType', 'StockMarketState',
+      throw CheckedFromJsonException(json, 'runtimeType', 'InstrumentsState',
           'Invalid union type "${json['runtimeType']}"!');
   }
 }
 
 /// @nodoc
-mixin _$StockMarketState {
+mixin _$InstrumentsState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
@@ -79,20 +79,20 @@ mixin _$StockMarketState {
 }
 
 /// @nodoc
-abstract class $StockMarketStateCopyWith<$Res> {
-  factory $StockMarketStateCopyWith(
-          StockMarketState value, $Res Function(StockMarketState) then) =
-      _$StockMarketStateCopyWithImpl<$Res>;
+abstract class $InstrumentsStateCopyWith<$Res> {
+  factory $InstrumentsStateCopyWith(
+          InstrumentsState value, $Res Function(InstrumentsState) then) =
+      _$InstrumentsStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$StockMarketStateCopyWithImpl<$Res>
-    implements $StockMarketStateCopyWith<$Res> {
-  _$StockMarketStateCopyWithImpl(this._value, this._then);
+class _$InstrumentsStateCopyWithImpl<$Res>
+    implements $InstrumentsStateCopyWith<$Res> {
+  _$InstrumentsStateCopyWithImpl(this._value, this._then);
 
-  final StockMarketState _value;
+  final InstrumentsState _value;
   // ignore: unused_field
-  final $Res Function(StockMarketState) _then;
+  final $Res Function(InstrumentsState) _then;
 }
 
 /// @nodoc
@@ -102,7 +102,7 @@ abstract class _$$InitialCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$InitialCopyWithImpl<$Res> extends _$StockMarketStateCopyWithImpl<$Res>
+class __$$InitialCopyWithImpl<$Res> extends _$InstrumentsStateCopyWithImpl<$Res>
     implements _$$InitialCopyWith<$Res> {
   __$$InitialCopyWithImpl(_$Initial _value, $Res Function(_$Initial) _then)
       : super(_value, (v) => _then(v as _$Initial));
@@ -124,7 +124,7 @@ class _$Initial implements Initial {
 
   @override
   String toString() {
-    return 'StockMarketState.initial()';
+    return 'InstrumentsState.initial()';
   }
 
   @override
@@ -213,7 +213,7 @@ class _$Initial implements Initial {
   }
 }
 
-abstract class Initial implements StockMarketState {
+abstract class Initial implements InstrumentsState {
   const factory Initial() = _$Initial;
 
   factory Initial.fromJson(Map<String, dynamic> json) = _$Initial.fromJson;
@@ -226,7 +226,7 @@ abstract class _$$LoadingCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$LoadingCopyWithImpl<$Res> extends _$StockMarketStateCopyWithImpl<$Res>
+class __$$LoadingCopyWithImpl<$Res> extends _$InstrumentsStateCopyWithImpl<$Res>
     implements _$$LoadingCopyWith<$Res> {
   __$$LoadingCopyWithImpl(_$Loading _value, $Res Function(_$Loading) _then)
       : super(_value, (v) => _then(v as _$Loading));
@@ -248,7 +248,7 @@ class _$Loading implements Loading {
 
   @override
   String toString() {
-    return 'StockMarketState.loading()';
+    return 'InstrumentsState.loading()';
   }
 
   @override
@@ -337,7 +337,7 @@ class _$Loading implements Loading {
   }
 }
 
-abstract class Loading implements StockMarketState {
+abstract class Loading implements InstrumentsState {
   const factory Loading() = _$Loading;
 
   factory Loading.fromJson(Map<String, dynamic> json) = _$Loading.fromJson;
@@ -351,7 +351,7 @@ abstract class _$$LoadedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$LoadedCopyWithImpl<$Res> extends _$StockMarketStateCopyWithImpl<$Res>
+class __$$LoadedCopyWithImpl<$Res> extends _$InstrumentsStateCopyWithImpl<$Res>
     implements _$$LoadedCopyWith<$Res> {
   __$$LoadedCopyWithImpl(_$Loaded _value, $Res Function(_$Loaded) _then)
       : super(_value, (v) => _then(v as _$Loaded));
@@ -388,7 +388,7 @@ class _$Loaded implements Loaded {
 
   @override
   String toString() {
-    return 'StockMarketState.loaded(instruments: $instruments)';
+    return 'InstrumentsState.loaded(instruments: $instruments)';
   }
 
   @override
@@ -486,7 +486,7 @@ class _$Loaded implements Loaded {
   }
 }
 
-abstract class Loaded implements StockMarketState {
+abstract class Loaded implements InstrumentsState {
   factory Loaded(final List<Instrument> instruments) = _$Loaded;
 
   factory Loaded.fromJson(Map<String, dynamic> json) = _$Loaded.fromJson;

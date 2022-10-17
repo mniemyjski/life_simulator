@@ -38,8 +38,6 @@ import 'app/rules/cubit/rules_cubit.dart';
 import 'app/settings/cubit/day_setting_cubit.dart';
 import 'app/skills/cubit/skills_cubit.dart';
 import 'app/stats/cubit/stats_cubit.dart';
-import 'app/stock_market/cubit/exchanges/exchanges_cubit.dart';
-import 'app/stock_market/cubit/stock_market/stock_market_cubit.dart';
 import 'app/time_spend/cubit/time_spend_cubit.dart';
 import 'app/tutorial/cubit/tutorial_cubit.dart';
 import 'config/injectable/injection.dart';
@@ -203,14 +201,6 @@ class _MyAppState extends State<MyApp> {
             BlocProvider(
               lazy: false,
               create: (_) => getIt<BuildAssetCubit>(),
-            ),
-            BlocProvider(
-              lazy: false,
-              create: (_) => getIt<StockMarketCubit>(),
-            ),
-            BlocProvider(
-              lazy: false,
-              create: (_) => getIt<ExchangesCubit>(),
             ),
             BlocProvider(
               lazy: false,

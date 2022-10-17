@@ -9,13 +9,14 @@ part 'candle.g.dart';
 @CopyWith()
 @JsonSerializable()
 @Collection(ignore: {'props', 'stringify'})
-@Name('Stock Market Courses')
+@Name('Courses')
 class Candle extends Equatable {
   final Id id;
-
+  @Index(composite: [CompositeIndex('dateTime')])
+  final int instrumentId;
   @Index(composite: [CompositeIndex('dateTime')])
   @enumerated
-  final ENameInstrument instrument;
+  final ENameInstrument eNameInstrument;
 
   @Index()
   final DateTime dateTime;
@@ -26,7 +27,8 @@ class Candle extends Equatable {
 
   const Candle({
     this.id = Isar.autoIncrement,
-    required this.instrument,
+    required this.instrumentId,
+    required this.eNameInstrument,
     required this.dateTime,
     required this.open,
     required this.high,
@@ -35,7 +37,7 @@ class Candle extends Equatable {
   });
 
   @override
-  List<Object> get props => [instrument, dateTime, open, high, low, close];
+  List<Object> get props => [instrumentId, eNameInstrument, dateTime, open, high, low, close];
 
   factory Candle.fromJson(Map<String, dynamic> json) => _$CandleFromJson(json);
   Map<String, dynamic> toJson() => _$CandleToJson(this);

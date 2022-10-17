@@ -3,12 +3,12 @@ import 'dart:async';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../constants/data/instruments_data.dart';
 import '../../new_game/new_game_cubit.dart';
 import '../data/data_assets.dart';
 import '../data/data_events.dart';
 import '../data/data_foods.dart';
 import '../data/data_houses.dart';
-import '../data/data_instruments.dart';
 import '../data/data_jobs.dart';
 import '../data/data_learnings.dart';
 import '../data/data_medicines.dart';
@@ -33,7 +33,7 @@ class DatabaseCubit extends HydratedCubit<Database> {
             medicinesDB: DataMedicines.db(),
             assetsDB: DataAssets.db(),
             tenantsDB: DataTenants.db(),
-            instrumentDB: DataInstruments.db(),
+            instrumentDB: InstrumentsData.init(),
           ),
         ) {
     _newGame();
@@ -57,7 +57,7 @@ class DatabaseCubit extends HydratedCubit<Database> {
         medicinesDB: DataMedicines.db(),
         assetsDB: DataAssets.db(),
         tenantsDB: DataTenants.db(),
-        instrumentDB: DataInstruments.db(),
+        instrumentDB: InstrumentsData.init(),
       ));
     }
     _newGameSub = _newGameCubit.stream.listen((newGame) {
@@ -72,7 +72,7 @@ class DatabaseCubit extends HydratedCubit<Database> {
           medicinesDB: DataMedicines.db(),
           assetsDB: DataAssets.db(),
           tenantsDB: DataTenants.db(),
-          instrumentDB: DataInstruments.db(),
+          instrumentDB: InstrumentsData.init(),
         ));
       }
     });

@@ -1,15 +1,11 @@
-import 'package:uuid/uuid.dart';
+import '../../app/stock_market/models/instrument/instrument.dart';
 
-import '../../stock_market/models/candle/candle.dart';
-import '../../stock_market/models/instrument/instrument.dart';
-
-class DataInstruments {
-  static List<Instrument> db() {
-    var uuid = const Uuid();
+class InstrumentsData {
+  static List<Instrument> init() {
     return [
       Instrument(
-        id: uuid.v1(),
-        name: ENameInstrument.btc,
+        id: 1,
+        eNameInstrument: ENameInstrument.btc,
         eTypeInstrument: ETypeInstrument.crypto,
         eTypeTrend: ETypeTrend.stable,
         datTrendEnd: DateTime(17, 1, 1),
@@ -20,18 +16,10 @@ class DataInstruments {
         max: 30000,
         valorization: 1.2,
         lastValorization: DateTime(17, 1, 1),
-        lastCandle: Candle(
-          instrument: ENameInstrument.btc,
-          dateTime: DateTime(17, 1, 1),
-          open: 3543,
-          high: 3543,
-          low: 3543,
-          close: 3543,
-        ),
       ),
       Instrument(
-        id: uuid.v1(),
-        name: ENameInstrument.eth,
+        id: 2,
+        eNameInstrument: ENameInstrument.eth,
         eTypeInstrument: ETypeInstrument.crypto,
         eTypeTrend: ETypeTrend.stable,
         datTrendEnd: DateTime(17, 1, 1),
@@ -42,18 +30,10 @@ class DataInstruments {
         max: 2000,
         valorization: 1.2,
         lastValorization: DateTime(17, 1, 1),
-        lastCandle: Candle(
-          instrument: ENameInstrument.eth,
-          dateTime: DateTime(17, 1, 1),
-          open: 500,
-          high: 500,
-          low: 500,
-          close: 500,
-        ),
       ),
       Instrument(
-        id: uuid.v1(),
-        name: ENameInstrument.bnb,
+        id: 3,
+        eNameInstrument: ENameInstrument.bnb,
         eTypeInstrument: ETypeInstrument.crypto,
         eTypeTrend: ETypeTrend.stable,
         datTrendEnd: DateTime(17, 1, 1),
@@ -64,18 +44,10 @@ class DataInstruments {
         max: 600,
         valorization: 1.2,
         lastValorization: DateTime(17, 1, 1),
-        lastCandle: Candle(
-          instrument: ENameInstrument.bnb,
-          dateTime: DateTime(17, 1, 1),
-          open: 150,
-          high: 150,
-          low: 150,
-          close: 150,
-        ),
       ),
       Instrument(
-        id: uuid.v1(),
-        name: ENameInstrument.hero,
+        id: 4,
+        eNameInstrument: ENameInstrument.hero,
         eTypeInstrument: ETypeInstrument.crypto,
         eTypeTrend: ETypeTrend.stable,
         datTrendEnd: DateTime(17, 1, 1),
@@ -86,18 +58,10 @@ class DataInstruments {
         max: 0.26,
         valorization: 1.2,
         lastValorization: DateTime(17, 1, 1),
-        lastCandle: Candle(
-          instrument: ENameInstrument.hero,
-          dateTime: DateTime(17, 1, 1),
-          open: 0.01,
-          high: 0.01,
-          low: 0.01,
-          close: 0.01,
-        ),
       ),
       Instrument(
-        id: uuid.v1(),
-        name: ENameInstrument.dome,
+        id: 5,
+        eNameInstrument: ENameInstrument.dome,
         eTypeInstrument: ETypeInstrument.crypto,
         eTypeTrend: ETypeTrend.stable,
         datTrendEnd: DateTime(17, 1, 1),
@@ -108,18 +72,10 @@ class DataInstruments {
         max: 0.26,
         valorization: 1.2,
         lastValorization: DateTime(17, 1, 1),
-        lastCandle: Candle(
-          instrument: ENameInstrument.dome,
-          dateTime: DateTime(17, 1, 1),
-          open: 0.01,
-          high: 0.01,
-          low: 0.01,
-          close: 0.01,
-        ),
       ),
       Instrument(
-        id: uuid.v1(),
-        name: ENameInstrument.oil,
+        id: 6,
+        eNameInstrument: ENameInstrument.oil,
         eTypeInstrument: ETypeInstrument.resources,
         eTypeTrend: ETypeTrend.stable,
         datTrendEnd: DateTime(17, 1, 1),
@@ -130,18 +86,10 @@ class DataInstruments {
         max: 200,
         valorization: 1.05,
         lastValorization: DateTime(17, 1, 1),
-        lastCandle: Candle(
-          instrument: ENameInstrument.oil,
-          dateTime: DateTime(17, 1, 1),
-          open: 100,
-          high: 100,
-          low: 100,
-          close: 100,
-        ),
       ),
       Instrument(
-        id: uuid.v1(),
-        name: ENameInstrument.gold,
+        id: 7,
+        eNameInstrument: ENameInstrument.gold,
         eTypeInstrument: ETypeInstrument.resources,
         eTypeTrend: ETypeTrend.stable,
         datTrendEnd: DateTime(17, 1, 1),
@@ -152,18 +100,10 @@ class DataInstruments {
         max: 2200,
         valorization: 1.05,
         lastValorization: DateTime(17, 1, 1),
-        lastCandle: Candle(
-          instrument: ENameInstrument.gold,
-          dateTime: DateTime(17, 1, 1),
-          open: 1500,
-          high: 1500,
-          low: 1500,
-          close: 1500,
-        ),
       ),
       Instrument(
-        id: uuid.v1(),
-        name: ENameInstrument.silver,
+        id: 8,
+        eNameInstrument: ENameInstrument.silver,
         eTypeInstrument: ETypeInstrument.resources,
         eTypeTrend: ETypeTrend.stable,
         datTrendEnd: DateTime(17, 1, 1),
@@ -174,18 +114,10 @@ class DataInstruments {
         max: 1000,
         valorization: 1.05,
         lastValorization: DateTime(17, 1, 1),
-        lastCandle: Candle(
-          instrument: ENameInstrument.silver,
-          dateTime: DateTime(17, 1, 1),
-          open: 500,
-          high: 500,
-          low: 500,
-          close: 500,
-        ),
       ),
       Instrument(
-        id: uuid.v1(),
-        name: ENameInstrument.tesla,
+        id: 9,
+        eNameInstrument: ENameInstrument.tesla,
         eTypeInstrument: ETypeInstrument.company,
         eTypeTrend: ETypeTrend.stable,
         datTrendEnd: DateTime(17, 1, 1),
@@ -196,18 +128,10 @@ class DataInstruments {
         max: 600,
         valorization: 1.05,
         lastValorization: DateTime(17, 1, 1),
-        lastCandle: Candle(
-          instrument: ENameInstrument.tesla,
-          dateTime: DateTime(17, 1, 1),
-          open: 400,
-          high: 400,
-          low: 400,
-          close: 400,
-        ),
       ),
       Instrument(
-        id: uuid.v1(),
-        name: ENameInstrument.apple,
+        id: 10,
+        eNameInstrument: ENameInstrument.apple,
         eTypeInstrument: ETypeInstrument.company,
         eTypeTrend: ETypeTrend.stable,
         datTrendEnd: DateTime(17, 1, 1),
@@ -218,14 +142,6 @@ class DataInstruments {
         max: 600,
         valorization: 1.05,
         lastValorization: DateTime(17, 1, 1),
-        lastCandle: Candle(
-          instrument: ENameInstrument.apple,
-          dateTime: DateTime(17, 1, 1),
-          open: 400,
-          high: 400,
-          low: 400,
-          close: 400,
-        ),
       ),
     ];
   }

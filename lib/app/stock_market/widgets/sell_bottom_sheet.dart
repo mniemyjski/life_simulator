@@ -28,44 +28,46 @@ class _SellBottomSheetState extends State<SellBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Row(
-            children: [
-              Expanded(
-                child: Slider(
-                  value: value,
-                  min: 0,
-                  max: widget.amount,
-                  activeColor: Colors.white70,
-                  inactiveColor: Colors.white70,
-                  divisions: 100,
-                  onChanged: (double v) => setState(() => value = v),
+    return CustomSheetDesign(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Row(
+              children: [
+                Expanded(
+                  child: Slider(
+                    value: value,
+                    min: 0,
+                    max: widget.amount,
+                    activeColor: Colors.white70,
+                    inactiveColor: Colors.white70,
+                    divisions: 100,
+                    onChanged: (double v) => setState(() => value = v),
+                  ),
                 ),
-              ),
-              Column(
-                children: [
-                  Text('${value.toExp()} ${Enums.toText(widget.instrument.name)}'),
-                  Text('${(value * widget.instrument.lastCandle.close).toMoney()}'),
-                ],
-              )
-            ],
-          ),
-          CustomButton(
-              onPressed: () {
-                context
-                    .read<ExchangesCubit>()
-                    .sell(idInstrument: widget.instrument.id, count: value);
-                context.router.pop();
-              },
-              child: Text(
-                widget.buttonName,
-              )),
-        ],
+                Column(
+                  children: [
+                    Text('${value.toExp()} ${Enums.toText(widget.instrument.eNameInstrument)}'),
+                    Text('${(value * widget.instrument.lastClose).toMoney()}'),
+                  ],
+                )
+              ],
+            ),
+            CustomButton(
+                onPressed: () {
+                  context
+                      .read<ExchangesCubit>()
+                      .sell(eNameInstrument: widget.instrument.eNameInstrument, count: value);
+                  context.router.pop();
+                },
+                child: Text(
+                  widget.buttonName,
+                )),
+          ],
+        ),
       ),
     );
   }

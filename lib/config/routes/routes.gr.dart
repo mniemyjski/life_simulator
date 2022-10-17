@@ -23,10 +23,10 @@ import '../../app/bank/bank_screen.dart' as _i14;
 import '../../app/business/business_screen.dart' as _i26;
 import '../../app/business/business_transactions_screen.dart' as _i27;
 import '../../app/business/businesses_screen.dart' as _i25;
-import '../../app/business/cubit/employees_list/employees_cubit.dart' as _i36;
+import '../../app/business/cubit/employees_list/employees_cubit.dart' as _i37;
 import '../../app/business/employees_screen.dart' as _i30;
 import '../../app/business/human_resources_screen.dart' as _i31;
-import '../../app/business/models/employee/employee_model.dart' as _i37;
+import '../../app/business/models/employee/employee_model.dart' as _i38;
 import '../../app/business/products_screen.dart' as _i29;
 import '../../app/business/upgrade_screen.dart' as _i28;
 import '../../app/freelance/freelance_jobs_screen.dart' as _i24;
@@ -46,6 +46,8 @@ import '../../app/personality/personality_screen.dart' as _i10;
 import '../../app/personality/transport_screen.dart' as _i12;
 import '../../app/settings/screens/settings_screen.dart' as _i2;
 import '../../app/stock_market/cubit/candles/candles_cubit.dart' as _i35;
+import '../../app/stock_market/cubit/instruments/instruments_cubit.dart'
+    as _i36;
 import '../../app/stock_market/instrument_screen.dart' as _i22;
 import '../../app/stock_market/stock_market_screen.dart' as _i21;
 import '../../app/time_spend/time_spend_screen.dart' as _i5;
@@ -277,8 +279,9 @@ class AppRouter extends _i32.RootStackRouter {
         child: _i32.WrappedRoute(
             child: _i22.InstrumentScreen(
           key: args.key,
-          id: args.id,
-          blocProvider: args.blocProvider,
+          instrumentId: args.instrumentId,
+          candlesProvider: args.candlesProvider,
+          instrumentsCubit: args.instrumentsCubit,
         )),
         transitionsBuilder: _i32.TransitionsBuilders.fadeIn,
         durationInMilliseconds: 300,
@@ -834,15 +837,17 @@ class StockMarketRoute extends _i32.PageRouteInfo<void> {
 class InstrumentRoute extends _i32.PageRouteInfo<InstrumentRouteArgs> {
   InstrumentRoute({
     _i33.Key? key,
-    required String id,
-    required _i35.CandlesCubit blocProvider,
+    required int instrumentId,
+    required _i35.CandlesCubit candlesProvider,
+    required _i36.InstrumentsCubit instrumentsCubit,
   }) : super(
           InstrumentRoute.name,
           path: '/instrument-screen',
           args: InstrumentRouteArgs(
             key: key,
-            id: id,
-            blocProvider: blocProvider,
+            instrumentId: instrumentId,
+            candlesProvider: candlesProvider,
+            instrumentsCubit: instrumentsCubit,
           ),
         );
 
@@ -852,19 +857,22 @@ class InstrumentRoute extends _i32.PageRouteInfo<InstrumentRouteArgs> {
 class InstrumentRouteArgs {
   const InstrumentRouteArgs({
     this.key,
-    required this.id,
-    required this.blocProvider,
+    required this.instrumentId,
+    required this.candlesProvider,
+    required this.instrumentsCubit,
   });
 
   final _i33.Key? key;
 
-  final String id;
+  final int instrumentId;
 
-  final _i35.CandlesCubit blocProvider;
+  final _i35.CandlesCubit candlesProvider;
+
+  final _i36.InstrumentsCubit instrumentsCubit;
 
   @override
   String toString() {
-    return 'InstrumentRouteArgs{key: $key, id: $id, blocProvider: $blocProvider}';
+    return 'InstrumentRouteArgs{key: $key, instrumentId: $instrumentId, candlesProvider: $candlesProvider, instrumentsCubit: $instrumentsCubit}';
   }
 }
 
@@ -1080,8 +1088,8 @@ class EmployeesRouteArgs {
 class HumanResourcesRoute extends _i32.PageRouteInfo<HumanResourcesRouteArgs> {
   HumanResourcesRoute({
     _i33.Key? key,
-    required _i36.EmployeesCubit blocProvider,
-    required _i37.ETypeEmployees eTypeEmployees,
+    required _i37.EmployeesCubit blocProvider,
+    required _i38.ETypeEmployees eTypeEmployees,
   }) : super(
           HumanResourcesRoute.name,
           path: '/human-resources-screen',
@@ -1104,9 +1112,9 @@ class HumanResourcesRouteArgs {
 
   final _i33.Key? key;
 
-  final _i36.EmployeesCubit blocProvider;
+  final _i37.EmployeesCubit blocProvider;
 
-  final _i37.ETypeEmployees eTypeEmployees;
+  final _i38.ETypeEmployees eTypeEmployees;
 
   @override
   String toString() {
