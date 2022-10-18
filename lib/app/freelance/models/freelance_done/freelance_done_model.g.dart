@@ -3,6 +3,127 @@
 part of 'freelance_done_model.dart';
 
 // **************************************************************************
+// CopyWithGenerator
+// **************************************************************************
+
+abstract class _$FreelanceDoneCWProxy {
+  FreelanceDone dateCre(DateTime dateCre);
+
+  FreelanceDone eTypeFreelance(ETypeFreelance eTypeFreelance);
+
+  FreelanceDone fame(double fame);
+
+  FreelanceDone id(int id);
+
+  FreelanceDone name(String name);
+
+  FreelanceDone price(double price);
+
+  FreelanceDone rating(int rating);
+
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `FreelanceDone(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  ///
+  /// Usage
+  /// ```dart
+  /// FreelanceDone(...).copyWith(id: 12, name: "My name")
+  /// ````
+  FreelanceDone call({
+    DateTime? dateCre,
+    ETypeFreelance? eTypeFreelance,
+    double? fame,
+    int? id,
+    String? name,
+    double? price,
+    int? rating,
+  });
+}
+
+/// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfFreelanceDone.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfFreelanceDone.copyWith.fieldName(...)`
+class _$FreelanceDoneCWProxyImpl implements _$FreelanceDoneCWProxy {
+  final FreelanceDone _value;
+
+  const _$FreelanceDoneCWProxyImpl(this._value);
+
+  @override
+  FreelanceDone dateCre(DateTime dateCre) => this(dateCre: dateCre);
+
+  @override
+  FreelanceDone eTypeFreelance(ETypeFreelance eTypeFreelance) =>
+      this(eTypeFreelance: eTypeFreelance);
+
+  @override
+  FreelanceDone fame(double fame) => this(fame: fame);
+
+  @override
+  FreelanceDone id(int id) => this(id: id);
+
+  @override
+  FreelanceDone name(String name) => this(name: name);
+
+  @override
+  FreelanceDone price(double price) => this(price: price);
+
+  @override
+  FreelanceDone rating(int rating) => this(rating: rating);
+
+  @override
+
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `FreelanceDone(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  ///
+  /// Usage
+  /// ```dart
+  /// FreelanceDone(...).copyWith(id: 12, name: "My name")
+  /// ````
+  FreelanceDone call({
+    Object? dateCre = const $CopyWithPlaceholder(),
+    Object? eTypeFreelance = const $CopyWithPlaceholder(),
+    Object? fame = const $CopyWithPlaceholder(),
+    Object? id = const $CopyWithPlaceholder(),
+    Object? name = const $CopyWithPlaceholder(),
+    Object? price = const $CopyWithPlaceholder(),
+    Object? rating = const $CopyWithPlaceholder(),
+  }) {
+    return FreelanceDone(
+      dateCre: dateCre == const $CopyWithPlaceholder() || dateCre == null
+          ? _value.dateCre
+          // ignore: cast_nullable_to_non_nullable
+          : dateCre as DateTime,
+      eTypeFreelance: eTypeFreelance == const $CopyWithPlaceholder() ||
+              eTypeFreelance == null
+          ? _value.eTypeFreelance
+          // ignore: cast_nullable_to_non_nullable
+          : eTypeFreelance as ETypeFreelance,
+      fame: fame == const $CopyWithPlaceholder() || fame == null
+          ? _value.fame
+          // ignore: cast_nullable_to_non_nullable
+          : fame as double,
+      id: id == const $CopyWithPlaceholder() || id == null
+          ? _value.id
+          // ignore: cast_nullable_to_non_nullable
+          : id as int,
+      name: name == const $CopyWithPlaceholder() || name == null
+          ? _value.name
+          // ignore: cast_nullable_to_non_nullable
+          : name as String,
+      price: price == const $CopyWithPlaceholder() || price == null
+          ? _value.price
+          // ignore: cast_nullable_to_non_nullable
+          : price as double,
+      rating: rating == const $CopyWithPlaceholder() || rating == null
+          ? _value.rating
+          // ignore: cast_nullable_to_non_nullable
+          : rating as int,
+    );
+  }
+}
+
+extension $FreelanceDoneCopyWith on FreelanceDone {
+  /// Returns a callable class that can be used as follows: `instanceOfFreelanceDone.copyWith(...)` or like so:`instanceOfFreelanceDone.copyWith.fieldName(...)`.
+  // ignore: library_private_types_in_public_api
+  _$FreelanceDoneCWProxy get copyWith => _$FreelanceDoneCWProxyImpl(this);
+}
+
+// **************************************************************************
 // IsarCollectionGenerator
 // **************************************************************************
 
@@ -75,6 +196,19 @@ const FreelanceDoneSchema = CollectionSchema(
   deserializeProp: _freelanceDoneDeserializeProp,
   idName: r'id',
   indexes: {
+    r'dateCre': IndexSchema(
+      id: 5606027685643564601,
+      name: r'dateCre',
+      unique: false,
+      replace: false,
+      properties: [
+        IndexPropertySchema(
+          name: r'dateCre',
+          type: IndexType.value,
+          caseSensitive: false,
+        )
+      ],
+    ),
     r'next1': IndexSchema(
       id: -605068969830150124,
       name: r'next1',
@@ -239,6 +373,14 @@ extension FreelanceDoneQueryWhereSort
     });
   }
 
+  QueryBuilder<FreelanceDone, FreelanceDone, QAfterWhere> anyDateCre() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(
+        const IndexWhereClause.any(indexName: r'dateCre'),
+      );
+    });
+  }
+
   QueryBuilder<FreelanceDone, FreelanceDone, QAfterWhere> anyNext1() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
@@ -330,6 +472,97 @@ extension FreelanceDoneQueryWhere
         lower: lowerId,
         includeLower: includeLower,
         upper: upperId,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<FreelanceDone, FreelanceDone, QAfterWhereClause> dateCreEqualTo(
+      DateTime dateCre) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'dateCre',
+        value: [dateCre],
+      ));
+    });
+  }
+
+  QueryBuilder<FreelanceDone, FreelanceDone, QAfterWhereClause>
+      dateCreNotEqualTo(DateTime dateCre) {
+    return QueryBuilder.apply(this, (query) {
+      if (query.whereSort == Sort.asc) {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'dateCre',
+              lower: [],
+              upper: [dateCre],
+              includeUpper: false,
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'dateCre',
+              lower: [dateCre],
+              includeLower: false,
+              upper: [],
+            ));
+      } else {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'dateCre',
+              lower: [dateCre],
+              includeLower: false,
+              upper: [],
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'dateCre',
+              lower: [],
+              upper: [dateCre],
+              includeUpper: false,
+            ));
+      }
+    });
+  }
+
+  QueryBuilder<FreelanceDone, FreelanceDone, QAfterWhereClause>
+      dateCreGreaterThan(
+    DateTime dateCre, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'dateCre',
+        lower: [dateCre],
+        includeLower: include,
+        upper: [],
+      ));
+    });
+  }
+
+  QueryBuilder<FreelanceDone, FreelanceDone, QAfterWhereClause> dateCreLessThan(
+    DateTime dateCre, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'dateCre',
+        lower: [],
+        upper: [dateCre],
+        includeUpper: include,
+      ));
+    });
+  }
+
+  QueryBuilder<FreelanceDone, FreelanceDone, QAfterWhereClause> dateCreBetween(
+    DateTime lowerDateCre,
+    DateTime upperDateCre, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'dateCre',
+        lower: [lowerDateCre],
+        includeLower: includeLower,
+        upper: [upperDateCre],
         includeUpper: includeUpper,
       ));
     });
@@ -1727,3 +1960,38 @@ extension FreelanceDoneQueryProperty
     });
   }
 }
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+FreelanceDone _$FreelanceDoneFromJson(Map<String, dynamic> json) =>
+    FreelanceDone(
+      id: json['id'] as int? ?? Isar.autoIncrement,
+      name: json['name'] as String,
+      eTypeFreelance:
+          $enumDecode(_$ETypeFreelanceEnumMap, json['eTypeFreelance']),
+      fame: (json['fame'] as num).toDouble(),
+      price: (json['price'] as num).toDouble(),
+      dateCre: DateTime.parse(json['dateCre'] as String),
+      rating: json['rating'] as int,
+    );
+
+Map<String, dynamic> _$FreelanceDoneToJson(FreelanceDone instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'eTypeFreelance': _$ETypeFreelanceEnumMap[instance.eTypeFreelance]!,
+      'fame': instance.fame,
+      'price': instance.price,
+      'dateCre': instance.dateCre.toIso8601String(),
+      'rating': instance.rating,
+    };
+
+const _$ETypeFreelanceEnumMap = {
+  ETypeFreelance.book: 'book',
+  ETypeFreelance.course: 'course',
+  ETypeFreelance.youtube: 'youtube',
+  ETypeFreelance.application: 'application',
+  ETypeFreelance.handicrafts: 'handicrafts',
+};

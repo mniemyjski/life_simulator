@@ -11,9 +11,8 @@ import '../../bank/cubit/deposit/deposit_cubit.dart';
 import '../../bank/cubit/loan/loan_cubit.dart';
 import '../../business/cubit/businesses/businesses_cubit.dart';
 import '../../event/cubit/event_cubit.dart';
-import '../../freelance/cubit/done/freelance_done_cubit.dart';
-import '../../freelance/cubit/fame/fame_cubit.dart';
 import '../../freelance/cubit/job/freelance_job_cubit.dart';
+import '../../freelance/repositories/freelance_repository.dart';
 import '../../job/cubit/job_cubit.dart';
 import '../../learning/cubit/learning_cubit.dart';
 import '../../loading/cubit/loading_cubit.dart';
@@ -38,8 +37,6 @@ class DateCubit extends HydratedCubit<DateState> {
   final LoadingCubit _loadingCubit;
 
   final FreelanceJobCubit _freelanceJobCubit;
-  final FreelanceDoneCubit _freelanceDoneCubit;
-  final FameCubit _fameCubit;
   final TimeSpendCubit _timeSpendCubit;
   final LearningCubit _learningCubit;
   final EventCubit _eventCubit;
@@ -53,15 +50,15 @@ class DateCubit extends HydratedCubit<DateState> {
   final LoanCubit _loanCubit;
   final BusinessesCubit _businessesCubit;
 
+  //
   final StockMarketRepository _stockMarketRepository;
+  final FreelanceRepository _freelanceRepository;
 
   DateCubit(
     this._newGameCubit,
     this._daySettingCubit,
     this._loadingCubit,
     this._stockMarketRepository,
-    this._freelanceDoneCubit,
-    this._fameCubit,
     this._freelanceJobCubit,
     this._timeSpendCubit,
     this._learningCubit,
@@ -75,6 +72,7 @@ class DateCubit extends HydratedCubit<DateState> {
     this._depositCubit,
     this._loanCubit,
     this._businessesCubit,
+    this._freelanceRepository,
   ) : super(const DateState.initial()) {
     _newGame();
   }
@@ -108,9 +106,10 @@ class DateCubit extends HydratedCubit<DateState> {
       await state.whenOrNull(loaded: (date) async {
         DateTime dateTime = date.addDate(days: 1);
 
+        //
+        await _freelanceRepository.counting(dateTime);
+        //
         await _freelanceJobCubit.counting(dateTime);
-        await _freelanceDoneCubit.counting(dateTime);
-        await _fameCubit.counting(dateTime);
         await _learningCubit.counting(dateTime);
         await _eventCubit.counting(dateTime);
         await _statsCubit.counting(dateTime);

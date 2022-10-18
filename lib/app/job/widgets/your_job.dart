@@ -70,8 +70,9 @@ class YourJob extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   CustomButton(
-                                    onPressed: () {
-                                      var toast = context.read<JobCubit>().applyForPromotion();
+                                    onPressed: () async {
+                                      var toast =
+                                          await context.read<JobCubit>().applyForPromotion();
                                       if (toast != null) {
                                         BotToast.showText(text: toast, align: Alignment(0.1, 0.05));
                                       }

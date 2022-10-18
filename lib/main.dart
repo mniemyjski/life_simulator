@@ -22,8 +22,6 @@ import 'app/bank/cubit/loan/loan_cubit.dart';
 import 'app/database/cubit/database_cubit.dart';
 import 'app/date/cubit/date_cubit.dart';
 import 'app/event/cubit/event_cubit.dart';
-import 'app/freelance/cubit/done/freelance_done_cubit.dart';
-import 'app/freelance/cubit/fame/fame_cubit.dart';
 import 'app/freelance/cubit/job/freelance_job_cubit.dart';
 import 'app/job/cubit/job_cubit.dart';
 import 'app/learning/cubit/learning_cubit.dart';
@@ -204,15 +202,7 @@ class _MyAppState extends State<MyApp> {
             ),
             BlocProvider(
               lazy: false,
-              create: (_) => getIt<FameCubit>(),
-            ),
-            BlocProvider(
-              lazy: false,
               create: (_) => getIt<FreelanceJobCubit>(),
-            ),
-            BlocProvider(
-              lazy: false,
-              create: (_) => getIt<FreelanceDoneCubit>(),
             ),
             BlocProvider(
               lazy: false,

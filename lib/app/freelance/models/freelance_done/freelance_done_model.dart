@@ -1,11 +1,15 @@
+import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:equatable/equatable.dart';
 import 'package:isar/isar.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:richeable/utilities/utilities.dart';
 
 import '../freelance_job/freelance_job_model.dart';
 
 part 'freelance_done_model.g.dart';
 
+@CopyWith()
+@JsonSerializable()
 @Collection(ignore: {'props', 'stringify'})
 @Name('Freelances')
 class FreelanceDone extends Equatable {
@@ -16,6 +20,7 @@ class FreelanceDone extends Equatable {
   final ETypeFreelance eTypeFreelance;
   final double fame;
   final double price;
+  @Index()
   final DateTime dateCre;
   final int rating;
   @Index()
@@ -50,48 +55,6 @@ class FreelanceDone extends Equatable {
         next3,
       ];
 
-  FreelanceDone copyWith({
-    int? id,
-    double? fame,
-    double? price,
-    DateTime? dateCre,
-    int? rating,
-    String? name,
-    ETypeFreelance? eTypeFreelance,
-    String? uid,
-  }) {
-    return FreelanceDone(
-      id: id ?? this.id,
-      fame: fame ?? this.fame,
-      price: price ?? this.price,
-      dateCre: dateCre ?? this.dateCre,
-      rating: rating ?? this.rating,
-      name: name ?? this.name,
-      eTypeFreelance: eTypeFreelance ?? this.eTypeFreelance,
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'fame': fame,
-      'price': price,
-      'dateCre': dateCre.millisecondsSinceEpoch,
-      'rating': rating,
-      'name': name,
-      'eTypeFreelance': Enums.toText(eTypeFreelance),
-    };
-  }
-
-  factory FreelanceDone.fromJson(Map<String, dynamic> map) {
-    return FreelanceDone(
-      id: map['id'] as int,
-      fame: map['fame'] as double,
-      price: map['price'] as double,
-      dateCre: DateTime.fromMillisecondsSinceEpoch(map['dateCre']),
-      rating: map['rating'] as int,
-      name: map['name'] as String,
-      eTypeFreelance: Enums.toEnum(map['eTypeFreelance'], ETypeFreelance.values) as ETypeFreelance,
-    );
-  }
+  factory FreelanceDone.fromJson(Map<String, dynamic> json) => _$FreelanceDoneFromJson(json);
+  Map<String, dynamic> toJson() => _$FreelanceDoneToJson(this);
 }

@@ -74,7 +74,7 @@ class _AdvertisementSheetState extends State<AdvertisementSheet> {
             padding: const EdgeInsets.all(4.0),
             child: CustomButton(
                 onPressed: () {
-                  context.read<FameCubit>().buyAdv(money: value.toDouble(), fame: value * 10);
+                  context.read<FameCubit>().buyAdv(money: value.toDouble(), value: value * 10);
                   context.router.pop();
                 },
                 child: Text(

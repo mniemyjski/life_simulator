@@ -5,8 +5,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../new_game/new_game_cubit.dart';
 import '../models/skill_model.dart';
+import '../repositories/skills_repository.dart';
 
 part 'skills_cubit.freezed.dart';
 part 'skills_cubit.g.dart';
@@ -14,49 +14,25 @@ part 'skills_state.dart';
 
 @lazySingleton
 class SkillsCubit extends HydratedCubit<SkillsState> {
-  final NewGameCubit _newGameCubit;
-  late StreamSubscription _newGameSub;
+  late StreamSubscription _skillsSub;
+  final SkillsRepository _skillsRepository;
 
-  SkillsCubit(
-    this._newGameCubit,
-  ) : super(const SkillsState.initial()) {
-    _newGame();
+  SkillsCubit(this._skillsRepository) : super(const SkillsState.initial()) {
+    state.maybeWhen(orElse: () async {
+      List<Skill> result = await _skillsRepository.getAllSkills();
+      emit(SkillsState.loaded(result));
+    });
+
+    _skillsSub = _skillsRepository.watchSkills().listen((event) async {
+      List<Skill> result = await _skillsRepository.getAllSkills();
+      emit(SkillsState.loaded(result));
+    });
   }
 
   @override
   Future<void> close() async {
-    _newGameSub.cancel();
+    _skillsSub.cancel();
     super.close();
-  }
-
-  _newGame() {
-    List<Skill> skills = [];
-    for (var element in ETypeSkills.values) {
-      skills.add(Skill(name: element, exp: 82000, lvl: 10));
-    }
-
-    if (_newGameCubit.state) emit(SkillsState.loaded(skills));
-    _newGameSub = _newGameCubit.stream.listen((newGame) {
-      if (newGame) emit(SkillsState.loaded(skills));
-    });
-  }
-
-  update({required ETypeSkills skill, required double exp}) {
-    state.maybeWhen(
-        orElse: () => 'error',
-        loaded: (skills) {
-          for (var i = 0; i < skills.length; i++) {
-            Skill element = skills[i];
-
-            if (element.name == skill) {
-              List<Skill> result = List.from(skills);
-
-              result[i] = element.copyWith(
-                  exp: element.exp + exp, lvl: element.getNewLevel(element.exp + exp));
-              emit(SkillsState.loaded(result));
-            }
-          }
-        });
   }
 
   @override

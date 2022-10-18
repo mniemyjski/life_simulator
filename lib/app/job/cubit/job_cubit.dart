@@ -9,7 +9,8 @@ import '../../money/cubit/income/income_cubit.dart';
 import '../../money/models/income/income_model.dart';
 import '../../money/models/transaction/transaction_model.dart';
 import '../../new_game/new_game_cubit.dart';
-import '../../skills/cubit/skills_cubit.dart';
+import '../../skills/models/skill_model.dart';
+import '../../skills/repositories/skills_repository.dart';
 import '../../time_spend/cubit/time_spend_cubit.dart';
 import '../../time_spend/models/time_bonus/time_bonus_model.dart';
 import '../models/experience/experience_model.dart';
@@ -23,7 +24,7 @@ part 'job_state.dart';
 class JobCubit extends HydratedCubit<JobState> {
   final IncomeCubit _incomeCubit;
   final TimeSpendCubit _timeSpendCubit;
-  final SkillsCubit _skillsCubit;
+  final SkillsRepository _skillsRepository;
 
   final NewGameCubit _newGameCubit;
   late StreamSubscription _newGameSub;
@@ -32,7 +33,7 @@ class JobCubit extends HydratedCubit<JobState> {
     this._newGameCubit,
     this._incomeCubit,
     this._timeSpendCubit,
-    this._skillsCubit,
+    this._skillsRepository,
   ) : super(const JobState.initial()) {
     _newGame();
   }
@@ -53,28 +54,27 @@ class JobCubit extends HydratedCubit<JobState> {
   counting() {
     state.whenOrNull(loaded: (job, experience) {
       if (job != null && experience != null) {
-        _timeSpendCubit.state.whenOrNull(loaded: (timeSpend) {
-          _skillsCubit.state.whenOrNull(loaded: (userSkills) {
-            for (var r in experience.requirements) {
-              for (var u in userSkills) {
-                if (r.name == u.name) {
-                  _skillsCubit.update(skill: u.name, exp: timeSpend.work / 2.toDouble());
-                }
+        _timeSpendCubit.state.whenOrNull(loaded: (timeSpend) async {
+          List<Skill> userSkills = await _skillsRepository.getAllSkills();
+          for (var r in experience.requirements) {
+            for (var u in userSkills) {
+              if (r.name == u.name) {
+                _skillsRepository.update(skill: u.name, exp: timeSpend.work / 2.toDouble());
               }
             }
-          });
+          }
         });
       }
     });
   }
 
-  String getJob({required Job job, required Experience experience}) {
+  Future<String> getJob({required Job job, required Experience experience}) async {
     bool hasFreeTime = _timeSpendCubit.checkFreeTime(1 + experience.work + experience.commuting);
     if (!hasFreeTime) return "You don't have free time";
 
     _timeSpendCubit.changeUsed(1);
-    bool test = !_testSkills(experience);
-    if (test) return "You didn't get a job";
+    bool test = await _testSkills(experience);
+    if (!test) return "You didn't get a job";
 
     return state.maybeWhen(
         loaded: (_job, _experience) {
@@ -116,25 +116,21 @@ class JobCubit extends HydratedCubit<JobState> {
         orElse: () => 'error');
   }
 
-  bool _testSkills(Experience experience) {
+  Future<bool> _testSkills(Experience experience) async {
     var rng = Random();
 
     if (experience.requirements.isEmpty) return true;
 
-    return _skillsCubit.state.maybeWhen(
-        loaded: (skills) {
-          List<bool> test = [];
-          for (var r in experience.requirements) {
-            for (var u in skills) {
-              if (u.name == r.name && u.lvl >= r.lvl) test.add(true);
-            }
-          }
+    List<Skill> skills = await _skillsRepository.getAllSkills();
 
-          return test.length == experience.requirements.length
-              ? (rng.nextBool() ? true : false)
-              : false;
-        },
-        orElse: () => false);
+    List<bool> test = [];
+    for (var r in experience.requirements) {
+      for (var u in skills) {
+        if (u.name == r.name && u.lvl >= r.lvl) test.add(true);
+      }
+    }
+
+    return test.length == experience.requirements.length ? (rng.nextBool() ? true : false) : false;
   }
 
   leaveJob() {
@@ -157,9 +153,9 @@ class JobCubit extends HydratedCubit<JobState> {
     });
   }
 
-  String? applyForPromotion() {
-    return state.maybeWhen(
-        loaded: (job, experience) {
+  Future<String?> applyForPromotion() async {
+    return await state.maybeWhen(
+        loaded: (job, experience) async {
           int exp = experience!.exp + 1;
 
           if (exp >= job!.experiences.length) return 'max';
@@ -172,8 +168,8 @@ class JobCubit extends HydratedCubit<JobState> {
 
           _timeSpendCubit.changeUsed(1);
 
-          bool test = !_testSkills(newExperience);
-          if (test) return "You didn't get a promote";
+          bool test = await _testSkills(newExperience);
+          if (!test) return "You didn't get a promote";
 
           _timeSpendCubit.changeCommuting(newExperience.commuting - experience.commuting);
 

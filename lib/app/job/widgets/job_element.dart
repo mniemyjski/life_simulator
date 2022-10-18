@@ -126,8 +126,8 @@ class JobElement extends StatelessWidget {
                 ),
               ),
               IconButton(
-                onPressed: () {
-                  String toast = context.read<JobCubit>().getJob(
+                onPressed: () async {
+                  String toast = await context.read<JobCubit>().getJob(
                         job: context
                             .read<DatabaseCubit>()
                             .state

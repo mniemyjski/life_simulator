@@ -3,13 +3,13 @@ import 'dart:async';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:richeable/app/skills/repositories/skills_repository.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../utilities/utilities.dart';
 import '../../money/cubit/money/money_cubit.dart';
 import '../../money/models/transaction/transaction_model.dart';
 import '../../new_game/new_game_cubit.dart';
-import '../../skills/cubit/skills_cubit.dart';
 import '../../time_spend/cubit/time_spend_cubit.dart';
 import '../models/learning_model.dart';
 
@@ -20,7 +20,7 @@ part 'learning_state.dart';
 @lazySingleton
 class LearningCubit extends HydratedCubit<LearningState> {
   final NewGameCubit _newGameCubit;
-  final SkillsCubit _skillsCubit;
+  final SkillsRepository _skillsRepository;
   final MoneyCubit _moneyCubit;
   final TimeSpendCubit _timeSpendCubit;
 
@@ -28,7 +28,7 @@ class LearningCubit extends HydratedCubit<LearningState> {
 
   LearningCubit(
     this._newGameCubit,
-    this._skillsCubit,
+    this._skillsRepository,
     this._moneyCubit,
     this._timeSpendCubit,
   ) : super(const LearningState.initial()) {
@@ -57,17 +57,17 @@ class LearningCubit extends HydratedCubit<LearningState> {
         for (var i = 0; i < result.length; i++) {
           if (result[i].time > hours) {
             result[i] = result[i].copyWith(time: result[i].time - hours);
-            _skillsCubit.update(
+            _skillsRepository.update(
                 skill: result[i].skillType, exp: (result[i].exp / result[i].baseTime) * hours);
             break;
           } else if (result[i].time == hours) {
-            _skillsCubit.update(
+            _skillsRepository.update(
                 skill: result[i].skillType, exp: (result[i].exp / result[i].baseTime) * hours);
             result.removeAt(i);
             break;
           } else {
             hours -= result[i].time;
-            _skillsCubit.update(
+            _skillsRepository.update(
                 skill: result[i].skillType, exp: (result[i].exp / result[i].baseTime) * hours);
             result.removeAt(i);
           }

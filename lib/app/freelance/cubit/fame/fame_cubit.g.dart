@@ -24,12 +24,10 @@ Map<String, dynamic> _$$LoadingToJson(_$Loading instance) => <String, dynamic>{
 
 _$Loaded _$$LoadedFromJson(Map<String, dynamic> json) => _$Loaded(
       (json['fame'] as num).toDouble(),
-      DateTime.parse(json['currentDate'] as String),
       $type: json['runtimeType'] as String?,
     );
 
 Map<String, dynamic> _$$LoadedToJson(_$Loaded instance) => <String, dynamic>{
       'fame': instance.fame,
-      'currentDate': instance.currentDate.toIso8601String(),
       'runtimeType': instance.$type,
     };

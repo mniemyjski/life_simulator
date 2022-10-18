@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:logger/logger.dart';
 import 'package:richeable/app/money/models/transaction/transaction_model.dart';
 import 'package:richeable/constants/constants.dart';
 
@@ -32,7 +31,6 @@ class BalanceBusinessCubit extends Cubit<BalanceBusinessState> {
 
   @override
   Future<void> close() async {
-    Logger().wtf('dispose balance');
     transactionsSub.cancel();
     super.close();
   }

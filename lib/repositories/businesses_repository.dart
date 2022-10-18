@@ -26,7 +26,6 @@ class BusinessesRepository {
 
   Future updateBusiness(Business business) async {
     return await _isar.writeTxn(() async {
-      await _isar.business.delete(business.id);
       await _isar.business.put(business);
     });
   }

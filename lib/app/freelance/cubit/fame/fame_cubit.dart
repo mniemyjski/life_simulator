@@ -4,68 +4,42 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../money/cubit/money/money_cubit.dart';
-import '../../../money/models/transaction/transaction_model.dart';
-import '../../../new_game/new_game_cubit.dart';
+import '../../../../utilities/utilities.dart';
+import '../../../date/cubit/date_cubit.dart';
+import '../../models/fame/fame_model.dart';
+import '../../repositories/freelance_repository.dart';
 
 part 'fame_cubit.freezed.dart';
 part 'fame_cubit.g.dart';
 part 'fame_state.dart';
 
-@lazySingleton
+@injectable
 class FameCubit extends HydratedCubit<FameState> {
-  final NewGameCubit _newGameCubit;
-  late StreamSubscription _newGameSub;
+  late StreamSubscription _fameSub;
+  final FreelanceRepository _freelanceRepository;
+  final DateCubit _dateCubit;
 
-  final MoneyCubit _moneyCubit;
+  FameCubit(this._freelanceRepository, this._dateCubit) : super(const FameState.initial()) {
+    state.maybeWhen(orElse: () async {
+      Fame fame = await _freelanceRepository.getFame();
+      emit(FameState.loaded(fame.fame));
+    });
 
-  FameCubit(
-    this._newGameCubit,
-    this._moneyCubit,
-  ) : super(const FameState.initial()) {
-    _newGame();
+    _fameSub = _freelanceRepository.watchFame().listen((_) async {
+      Fame fame = await _freelanceRepository.getFame();
+      emit(FameState.loaded(fame.fame));
+    });
   }
 
   @override
   Future<void> close() async {
-    _newGameSub.cancel();
+    _fameSub.cancel();
     super.close();
   }
 
-  _newGame() {
-    if (_newGameCubit.state) emit(FameState.loaded(0, DateTime(18, 1, 1)));
-    _newGameSub = _newGameCubit.stream.listen((newGame) {
-      if (newGame) emit(FameState.loaded(0, DateTime(18, 1, 1)));
-    });
-  }
-
-  counting(DateTime dateTime) {
-    state.whenOrNull(loaded: (fame, currentDate) {
-      double decrease = 0;
-      if (fame < 1000000) decrease = (fame * 0.001);
-      if (fame > 1000000 && fame < 10000000) decrease = (fame * 0.005);
-      if (fame > 10000000) decrease = (fame * 0.02);
-
-      double result = fame - decrease;
-      emit(FameState.loaded(result, dateTime));
-    });
-  }
-
-  add(double fame) {
-    state.whenOrNull(loaded: (value, currentDate) {
-      emit(FameState.loaded(value += fame, currentDate));
-    });
-  }
-
-  buyAdv({required double money, required int fame}) {
-    if (_moneyCubit.getBalance() < money) return 'notEnoughMoney';
-    state.whenOrNull(loaded: (value, currentDate) {
-      _moneyCubit.addTransaction(
-          dateTime: currentDate,
-          value: -money,
-          eTypeTransactionSource: ETypeTransactionSource.advertisement);
-
-      emit(FameState.loaded(value += fame, currentDate));
+  Future buyAdv({required double money, required int value}) async {
+    await _dateCubit.state.whenOrNull(loaded: (date) async {
+      await _freelanceRepository.buyAdv(money: money, value: value, dateTime: date);
     });
   }
 

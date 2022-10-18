@@ -1,6 +1,8 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:copy_with_extension/copy_with_extension.dart';
+import 'package:equatable/equatable.dart';
+import 'package:isar/isar.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-part 'skill_model.freezed.dart';
 part 'skill_model.g.dart';
 
 enum ETypeSkills {
@@ -16,14 +18,26 @@ enum ETypeSkills {
   handyman,
 }
 
-@freezed
-class Skill with _$Skill {
-  const Skill._();
-  const factory Skill({
-    required ETypeSkills name,
-    @Default(0) int lvl,
-    @Default(0) double exp,
-  }) = _Skill;
+@CopyWith()
+@JsonSerializable()
+@Collection(ignore: {'props', 'stringify'})
+@Name('Skills')
+class Skill extends Equatable {
+  final Id id;
+  @enumerated
+  final ETypeSkills name;
+  final int lvl;
+  final double exp;
+
+  const Skill({
+    this.id = Isar.autoIncrement,
+    required this.name,
+    this.lvl = 0,
+    this.exp = 0,
+  });
+
+  @override
+  List<Object> get props => [name, lvl, exp];
 
   double getPercentToNextLvl() {
     List<double> progressList = getProgress();
@@ -48,4 +62,5 @@ class Skill with _$Skill {
   }
 
   factory Skill.fromJson(Map<String, dynamic> json) => _$SkillFromJson(json);
+  Map<String, dynamic> toJson() => _$SkillToJson(this);
 }

@@ -11,6 +11,7 @@ import 'package:richeable/utilities/utilities.dart';
 import 'package:richeable/widgets/custom_card.dart';
 import 'package:richeable/widgets/widgets.dart';
 
+import '../../config/injectable/injection.dart';
 import '../../config/routes/routes.gr.dart';
 import '../../constants/constants.dart';
 import '../date/widgets/next_day.dart';
@@ -24,307 +25,324 @@ class FreelanceScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
-      appBar: AppBarGame(title: LocaleKeys.freelances.tr()),
-      body: Column(
-        children: [
-          Row(
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          lazy: false,
+          create: (_) => getIt<FameCubit>(),
+        ),
+        BlocProvider(
+          lazy: false,
+          create: (_) => getIt<FreelanceDoneCubit>(),
+        ),
+      ],
+      child: Builder(builder: (context) {
+        return CustomScaffold(
+          appBar: AppBarGame(title: LocaleKeys.freelances.tr()),
+          body: Column(
             children: [
-              Expanded(
-                child: CustomCard(
-                  child: Container(
+              Row(
+                children: [
+                  Expanded(
+                    child: CustomCard(
+                      child: Container(
+                        height: 50,
+                        padding: const EdgeInsets.all(4.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              '${LocaleKeys.fame.tr()}:',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyText2!
+                                  .copyWith(fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              context.watch<FameCubit>().state.maybeWhen(
+                                  orElse: () => '0', loaded: (v) => v.roundToDouble().toExp()),
+                              style: Theme.of(context).textTheme.bodyText2,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  CustomCard(
+                      child: Container(
                     height: 50,
+                    width: 75,
                     padding: const EdgeInsets.all(4.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text(
-                          '${LocaleKeys.fame.tr()}:',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyText2!
-                              .copyWith(fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          context.watch<FameCubit>().state.maybeWhen(
-                              orElse: () => '0',
-                              loaded: (v, currentDate) => v.roundToDouble().toExp()),
-                          style: Theme.of(context).textTheme.bodyText2,
-                        ),
+                        Text('${LocaleKeys.dailyFame.tr()}:',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText2!
+                                .copyWith(fontWeight: FontWeight.bold)),
+                        Text(context.watch<FreelanceDoneCubit>().getDailyFame().toExp(),
+                            style: Theme.of(context).textTheme.bodyText2),
                       ],
                     ),
-                  ),
+                  )),
+                  CustomCard(
+                      child: Container(
+                    height: 50,
+                    width: 75,
+                    padding: const EdgeInsets.all(4.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text('${LocaleKeys.value.tr()}:',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText2!
+                                .copyWith(fontWeight: FontWeight.bold)),
+                        Text(context.watch<FreelanceDoneCubit>().getValue().toMoney(),
+                            style: Theme.of(context).textTheme.bodyText2),
+                      ],
+                    ),
+                  )),
+                ],
+              ),
+              const Padding(
+                padding: EdgeInsets.only(left: 8.0, right: 8.0),
+                child: Divider(
+                  color: Colors.white70,
                 ),
               ),
-              CustomCard(
-                  child: Container(
-                height: 50,
-                width: 75,
-                padding: const EdgeInsets.all(4.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text('${LocaleKeys.dailyFame.tr()}:',
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyText2!
-                            .copyWith(fontWeight: FontWeight.bold)),
-                    Text(context.watch<FreelanceDoneCubit>().getDailyFame().toExp(),
-                        style: Theme.of(context).textTheme.bodyText2),
-                  ],
-                ),
-              )),
-              CustomCard(
-                  child: Container(
-                height: 50,
-                width: 75,
-                padding: const EdgeInsets.all(4.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text('${LocaleKeys.value.tr()}:',
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyText2!
-                            .copyWith(fontWeight: FontWeight.bold)),
-                    Text(context.watch<FreelanceDoneCubit>().getValue().toMoney(),
-                        style: Theme.of(context).textTheme.bodyText2),
-                  ],
-                ),
-              )),
-            ],
-          ),
-          const Padding(
-            padding: EdgeInsets.only(left: 8.0, right: 8.0),
-            child: Divider(
-              color: Colors.white70,
-            ),
-          ),
-          Expanded(
-            child: BlocBuilder<FreelanceDoneCubit, FreelanceDoneState>(
-              builder: (context, state) {
-                return state.maybeWhen(
-                    orElse: () => Container(),
-                    loaded: (freelances) {
-                      if (freelances.isEmpty) {
-                        return Center(
-                          child: Text(LocaleKeys.youDontHaveAnyProduct.tr()),
-                        );
-                      }
+              Expanded(
+                child: BlocBuilder<FreelanceDoneCubit, FreelanceDoneState>(
+                  builder: (context, state) {
+                    return state.maybeWhen(
+                        orElse: () => Container(),
+                        loaded: (freelances) {
+                          if (freelances.isEmpty) {
+                            return Center(
+                              child: Text(LocaleKeys.youDontHaveAnyProduct.tr()),
+                            );
+                          }
 
-                      return ListView.builder(
-                          itemCount: freelances.length,
-                          itemBuilder: (context, index) {
-                            FreelanceDone element = freelances[index];
+                          return ListView.builder(
+                              itemCount: freelances.length,
+                              itemBuilder: (context, index) {
+                                FreelanceDone element = freelances[index];
 
-                            return Row(
-                              children: [
-                                Expanded(
-                                  child: CustomCard(
-                                      child: Container(
-                                    height: 60,
-                                    padding: const EdgeInsets.all(4.0),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                return Row(
+                                  children: [
+                                    Expanded(
+                                      child: CustomCard(
+                                          child: Container(
+                                        height: 60,
+                                        padding: const EdgeInsets.all(4.0),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
-                                            RichText(
-                                              text: TextSpan(
-                                                style: Theme.of(context).textTheme.bodyText2,
-                                                children: <TextSpan>[
-                                                  TextSpan(
-                                                    text: '${LocaleKeys.name.tr()}: ',
-                                                    style: const TextStyle(
-                                                        fontWeight: FontWeight.bold),
+                                            Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                RichText(
+                                                  text: TextSpan(
+                                                    style: Theme.of(context).textTheme.bodyText2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                        text: '${LocaleKeys.name.tr()}: ',
+                                                        style: const TextStyle(
+                                                            fontWeight: FontWeight.bold),
+                                                      ),
+                                                      TextSpan(text: element.name),
+                                                    ],
                                                   ),
-                                                  TextSpan(text: element.name),
-                                                ],
-                                              ),
-                                            ),
-                                            RichText(
-                                              text: TextSpan(
-                                                style: Theme.of(context).textTheme.bodyText2,
-                                                children: <TextSpan>[
-                                                  TextSpan(
-                                                    text: '${LocaleKeys.type.tr()}: ',
-                                                    style: const TextStyle(
-                                                        fontWeight: FontWeight.bold),
+                                                ),
+                                                RichText(
+                                                  text: TextSpan(
+                                                    style: Theme.of(context).textTheme.bodyText2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                        text: '${LocaleKeys.type.tr()}: ',
+                                                        style: const TextStyle(
+                                                            fontWeight: FontWeight.bold),
+                                                      ),
+                                                      TextSpan(
+                                                          text:
+                                                              Enums.toText(element.eTypeFreelance)),
+                                                    ],
                                                   ),
-                                                  TextSpan(
-                                                      text: Enums.toText(element.eTypeFreelance)),
-                                                ],
-                                              ),
-                                            ),
-                                            RichText(
-                                              text: TextSpan(
-                                                style: Theme.of(context).textTheme.bodyText2,
-                                                children: <TextSpan>[
-                                                  TextSpan(
-                                                    text: '${LocaleKeys.dateCre.tr()}: ',
-                                                    style: const TextStyle(
-                                                        fontWeight: FontWeight.bold),
+                                                ),
+                                                RichText(
+                                                  text: TextSpan(
+                                                    style: Theme.of(context).textTheme.bodyText2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                        text: '${LocaleKeys.dateCre.tr()}: ',
+                                                        style: const TextStyle(
+                                                            fontWeight: FontWeight.bold),
+                                                      ),
+                                                      TextSpan(
+                                                          text: Enums.toText(
+                                                              element.dateCre.onlyDateToString())),
+                                                    ],
                                                   ),
-                                                  TextSpan(
-                                                      text: Enums.toText(
-                                                          element.dateCre.onlyDateToString())),
-                                                ],
-                                              ),
-                                            ),
-                                            RichText(
-                                              text: TextSpan(
-                                                style: Theme.of(context).textTheme.bodyText2,
-                                                children: <TextSpan>[
-                                                  TextSpan(
-                                                    text: '${LocaleKeys.end.tr()}: ',
-                                                    style: const TextStyle(
-                                                        fontWeight: FontWeight.bold),
+                                                ),
+                                                RichText(
+                                                  text: TextSpan(
+                                                    style: Theme.of(context).textTheme.bodyText2,
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                        text: '${LocaleKeys.end.tr()}: ',
+                                                        style: const TextStyle(
+                                                            fontWeight: FontWeight.bold),
+                                                      ),
+                                                      TextSpan(
+                                                          text: Enums.toText(
+                                                              element.next3.onlyDateToString())),
+                                                    ],
                                                   ),
-                                                  TextSpan(
-                                                      text: Enums.toText(
-                                                          element.next3.onlyDateToString())),
-                                                ],
-                                              ),
+                                                ),
+                                              ],
                                             ),
+                                            RatingBarIndicator(
+                                              rating: element.rating.toDouble(),
+                                              itemBuilder: (context, index) => const Icon(
+                                                Icons.star,
+                                                color: Colors.amber,
+                                              ),
+                                              itemCount: 5,
+                                              itemSize: 10,
+                                              direction: Axis.vertical,
+                                            )
                                           ],
                                         ),
-                                        RatingBarIndicator(
-                                          rating: element.rating.toDouble(),
-                                          itemBuilder: (context, index) => const Icon(
-                                            Icons.star,
-                                            color: Colors.amber,
+                                      )),
+                                    ),
+                                    CustomCard(
+                                      child: Container(
+                                        height: 60,
+                                        width: 75,
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Center(
+                                          child: Text(
+                                            '${element.fame.toInt()}',
+                                            style: Theme.of(context).textTheme.bodyText2,
                                           ),
-                                          itemCount: 5,
-                                          itemSize: 10,
-                                          direction: Axis.vertical,
-                                        )
-                                      ],
-                                    ),
-                                  )),
-                                ),
-                                CustomCard(
-                                  child: Container(
-                                    height: 60,
-                                    width: 75,
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Center(
-                                      child: Text(
-                                        '${element.fame.toInt()}',
-                                        style: Theme.of(context).textTheme.bodyText2,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ),
-                                CustomCard(
-                                  child: Container(
-                                    height: 60,
-                                    width: 75,
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Center(
-                                      child: Text(
-                                        '${element.price.toMoney()}',
-                                        style: Theme.of(context).textTheme.bodyText2,
+                                    CustomCard(
+                                      child: Container(
+                                        height: 60,
+                                        width: 75,
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Center(
+                                          child: Text(
+                                            '${element.price.toMoney()}',
+                                            style: Theme.of(context).textTheme.bodyText2,
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ),
-                              ],
-                            );
-                          });
-                    });
-              },
-            ),
-          ),
-          const SizedBox(height: 85),
-        ],
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            FloatingActionButton(
-              heroTag: null,
-              onPressed: () => context.router.pop(),
-              child: const FaIcon(FontAwesomeIcons.arrowRotateLeft),
-            ),
-            const NextDayButton(),
-            SpeedDial(
-              animatedIcon: AnimatedIcons.menu_close,
-              spaceBetweenChildren: 4,
-              spacing: 15,
-              overlayColor: Colors.black,
-              overlayOpacity: 0.5,
-              children: [
-                SpeedDialChild(
-                  labelWidget: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Card(
-                      child: Container(
-                        width: 100,
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                          child: Text(
-                            LocaleKeys.create.tr(),
-                            style: Theme.of(context).textTheme.bodyText1,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  child: const FaIcon(FontAwesomeIcons.plus),
-                  onTap: () => context.router.push(const FreelanceJobsRoute()),
-                ),
-                SpeedDialChild(
-                  labelWidget: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Card(
-                      child: Container(
-                        width: 100,
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                          child: Text(
-                            LocaleKeys.advertisement.tr(),
-                            style: Theme.of(context).textTheme.bodyText1,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  child: const FaIcon(FontAwesomeIcons.rectangleAd),
-                  onTap: () {
-                    context.read<MoneyCubit>().state.maybeWhen(orElse: () {
-                      BotToast.showText(
-                          text: LocaleKeys.tryAgain.tr(), align: const Alignment(0.1, 0.05));
-                    }, loaded: (money) {
-                      if (money > 10) {
-                        showModalBottomSheet<String>(
-                          backgroundColor: Colors.transparent,
-                          context: context,
-                          isScrollControlled: true,
-                          builder: (BuildContext context) {
-                            return AdvertisementSheet(money);
-                          },
-                        );
-                      } else {
-                        BotToast.showText(
-                            text: LocaleKeys.notEnoughMoney.tr(),
-                            align: const Alignment(0.1, 0.05));
-                      }
-                    });
+                                  ],
+                                );
+                              });
+                        });
                   },
+                ),
+              ),
+              const SizedBox(height: 85),
+            ],
+          ),
+          floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+          floatingActionButton: Padding(
+            padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                FloatingActionButton(
+                  heroTag: null,
+                  onPressed: () => context.router.pop(),
+                  child: const FaIcon(FontAwesomeIcons.arrowRotateLeft),
+                ),
+                const NextDayButton(),
+                SpeedDial(
+                  animatedIcon: AnimatedIcons.menu_close,
+                  spaceBetweenChildren: 4,
+                  spacing: 15,
+                  overlayColor: Colors.black,
+                  overlayOpacity: 0.5,
+                  children: [
+                    SpeedDialChild(
+                      labelWidget: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Card(
+                          child: Container(
+                            width: 100,
+                            padding: const EdgeInsets.all(8.0),
+                            child: Center(
+                              child: Text(
+                                LocaleKeys.create.tr(),
+                                style: Theme.of(context).textTheme.bodyText1,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      child: const FaIcon(FontAwesomeIcons.plus),
+                      onTap: () => context.router.push(const FreelanceJobsRoute()),
+                    ),
+                    SpeedDialChild(
+                      labelWidget: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Card(
+                          child: Container(
+                            width: 100,
+                            padding: const EdgeInsets.all(8.0),
+                            child: Center(
+                              child: Text(
+                                LocaleKeys.advertisement.tr(),
+                                style: Theme.of(context).textTheme.bodyText1,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      child: const FaIcon(FontAwesomeIcons.rectangleAd),
+                      onTap: () {
+                        context.read<MoneyCubit>().state.maybeWhen(orElse: () {
+                          BotToast.showText(
+                              text: LocaleKeys.tryAgain.tr(), align: const Alignment(0.1, 0.05));
+                        }, loaded: (money) {
+                          if (money > 10) {
+                            showModalBottomSheet<String>(
+                              backgroundColor: Colors.transparent,
+                              context: context,
+                              isScrollControlled: true,
+                              builder: (BuildContext context) {
+                                return BlocProvider.value(
+                                  value: BlocProvider.of<FameCubit>(context),
+                                  child: AdvertisementSheet(money),
+                                );
+                              },
+                            );
+                          } else {
+                            BotToast.showText(
+                                text: LocaleKeys.notEnoughMoney.tr(),
+                                align: const Alignment(0.1, 0.05));
+                          }
+                        });
+                      },
+                    ),
+                  ],
                 ),
               ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      }),
     );
   }
 }

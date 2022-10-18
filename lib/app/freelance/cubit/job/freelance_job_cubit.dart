@@ -6,8 +6,8 @@ import 'package:injectable/injectable.dart';
 
 import '../../../../utilities/utilities.dart';
 import '../../../new_game/new_game_cubit.dart';
-import '../../../skills/cubit/skills_cubit.dart';
 import '../../../skills/models/skill_model.dart';
+import '../../../skills/repositories/skills_repository.dart';
 import '../../../time_spend/cubit/time_spend_cubit.dart';
 import '../../models/freelance_job/freelance_job_model.dart';
 import '../done/freelance_done_cubit.dart';
@@ -23,13 +23,13 @@ class FreelanceJobCubit extends HydratedCubit<FreelanceJobState> {
 
   final TimeSpendCubit _timeSpendCubit;
   final FreelanceDoneCubit _freelanceDoneCubit;
-  final SkillsCubit _skillsCubit;
+  final SkillsRepository _skillsRepository;
 
   FreelanceJobCubit(
     this._newGameCubit,
     this._timeSpendCubit,
     this._freelanceDoneCubit,
-    this._skillsCubit,
+    this._skillsRepository,
   ) : super(const FreelanceJobState.initial()) {
     _newGame();
   }
@@ -99,7 +99,7 @@ class FreelanceJobCubit extends HydratedCubit<FreelanceJobState> {
     for (var r in reqSkills) {
       for (var u in userSkills) {
         if (u.name == r.name) {
-          _skillsCubit.update(skill: u.name, exp: hours / 2.toDouble());
+          _skillsRepository.update(skill: u.name, exp: hours / 2.toDouble());
         }
       }
     }
