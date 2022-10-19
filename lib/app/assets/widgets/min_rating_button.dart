@@ -21,54 +21,57 @@ class MinRatingButton extends StatelessWidget {
           onPressed: () async {
             showModalBottomSheet<void>(
               context: context,
+              backgroundColor: Colors.transparent,
               builder: (BuildContext context) {
                 int newMinRating = asset.minRating;
 
                 return StatefulBuilder(builder: (context, setState) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          '${LocaleKeys.minRating.tr()}:',
-                          style: TextStyle(
-                              color: Theme.of(context).textTheme.bodyText1!.color,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          padding: const EdgeInsets.all(8.0),
-                          child: Center(
-                            child: RatingBar.builder(
-                              initialRating: asset.minRating.toDouble(),
-                              minRating: 1,
-                              direction: Axis.horizontal,
-                              itemCount: 5,
-                              itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-                              itemBuilder: (context, _) => const Icon(
-                                Icons.star,
-                                color: Colors.amber,
+                  return CustomSheetDesign(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            '${LocaleKeys.minRating.tr()}:',
+                            style: TextStyle(
+                                color: Theme.of(context).textTheme.bodyText2!.color,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.all(8.0),
+                            child: Center(
+                              child: RatingBar.builder(
+                                initialRating: asset.minRating.toDouble(),
+                                minRating: 1,
+                                direction: Axis.horizontal,
+                                itemCount: 5,
+                                itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                                itemBuilder: (context, _) => const Icon(
+                                  Icons.star,
+                                  color: Colors.amber,
+                                ),
+                                onRatingUpdate: (rating) =>
+                                    setState(() => newMinRating = rating.toInt()),
                               ),
-                              onRatingUpdate: (rating) =>
-                                  setState(() => newMinRating = rating.toInt()),
                             ),
                           ),
-                        ),
-                        CustomButton(
-                            onPressed: () {
-                              context.read<AssetsCubit>().changeMinRating(
-                                    asset: asset,
-                                    minRating: newMinRating,
-                                  );
+                          CustomButton(
+                              onPressed: () {
+                                context.read<AssetsCubit>().changeMinRating(
+                                      asset: asset,
+                                      minRating: newMinRating,
+                                    );
 
-                              context.router.pop();
-                            },
-                            child: Text(
-                              LocaleKeys.confirm.tr(),
-                            ))
-                      ],
+                                context.router.pop();
+                              },
+                              child: Text(
+                                LocaleKeys.confirm.tr(),
+                              ))
+                        ],
+                      ),
                     ),
                   );
                 });

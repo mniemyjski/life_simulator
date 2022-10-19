@@ -7,7 +7,7 @@ import '../../app/business/models/employee/employee_model.dart';
 import '../../app/business/models/product/product_model.dart';
 import '../../app/freelance/models/freelance_done/freelance_done_model.dart';
 import '../../app/money/models/transaction/transaction_model.dart';
-import '../../app/skills/models/skill_model.dart';
+import '../../app/skills/models/skill/skill_model.dart';
 import '../../app/stock_market/models/candle/candle.dart';
 import '../../app/stock_market/models/exchange/exchange.dart';
 import '../../app/stock_market/models/instrument/instrument.dart';

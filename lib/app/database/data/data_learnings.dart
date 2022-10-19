@@ -1,5 +1,5 @@
 import '../../learning/models/learning_model.dart';
-import '../../skills/models/skill_model.dart';
+import '../../skills/models/skill/skill_model.dart';
 
 class DataLearnings {
   static List<Learning> db() {

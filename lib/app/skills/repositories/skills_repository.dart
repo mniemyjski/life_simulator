@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:isar/isar.dart';
-import 'package:richeable/app/skills/models/skill_model.dart';
+import 'package:richeable/app/skills/models/skill/skill_model.dart';
 import 'package:richeable/constants/data/skills_data.dart';
 
 import '../../../config/injectable/app_module.dart';
@@ -16,7 +16,7 @@ class SkillsRepository {
 
   init() async {
     return await _isar.writeTxn(() async {
-      await _isar.skills.putAll(SkillsData.db());
+      await _isar.skills.putAll(SkillsData.programmer());
     });
   }
 

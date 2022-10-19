@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../utilities/utilities.dart';
-import '../../skills/models/skill_model.dart';
+import '../../skills/models/skill/skill_model.dart';
 
 class SkillElement extends StatelessWidget {
   final Skill element;

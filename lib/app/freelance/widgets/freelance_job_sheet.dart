@@ -13,7 +13,7 @@ import 'package:richeable/widgets/custom_card.dart';
 import '../../../constants/constants.dart';
 import '../../../widgets/widgets.dart';
 import '../../skills/cubit/skills_cubit.dart';
-import '../../skills/models/skill_model.dart';
+import '../../skills/models/skill_emb/skill_emb_model.dart';
 import '../cubit/job/freelance_job_cubit.dart';
 import '../models/freelance_job/freelance_job_model.dart';
 
@@ -29,7 +29,7 @@ class _FreelanceJobSheetState extends State<FreelanceJobSheet> {
   late ETypeFreelance typeJob = ETypeFreelance.book;
 
   late int duration = FreelanceServices.calcDuration(typeJob: typeJob, lvl: lvl);
-  late List<Skill> req = FreelanceServices.getList(selected: typeJob, lvl: lvl);
+  late List<SkillEmb> req = FreelanceServices.getList(selected: typeJob, lvl: lvl);
 
   late TextEditingController controller;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -203,7 +203,9 @@ class _FreelanceJobSheetState extends State<FreelanceJobSheet> {
                             orElse: () => Container(),
                             loaded: (skills) {
                               return Wrap(
-                                  children: _buildWidgetReq(reqSkills: req, userSkill: skills));
+                                  children: _buildWidgetReq(
+                                      reqSkills: req,
+                                      userSkill: skills.map((e) => e.toSkillEmb()).toList()));
                             },
                           );
                         },
@@ -217,7 +219,7 @@ class _FreelanceJobSheetState extends State<FreelanceJobSheet> {
                               eTypeFreelance: typeJob,
                               workTime: duration,
                               reqSkills: req,
-                              userSkills: skills,
+                              userSkills: skills.map((e) => e.toSkillEmb()).toList(),
                               level: lvl,
                             );
 
@@ -240,9 +242,10 @@ class _FreelanceJobSheetState extends State<FreelanceJobSheet> {
     );
   }
 
-  List<Widget> _buildWidgetReq({required List<Skill> reqSkills, required List<Skill> userSkill}) {
+  List<Widget> _buildWidgetReq(
+      {required List<SkillEmb> reqSkills, required List<SkillEmb> userSkill}) {
     return reqSkills.map((element) {
-      Skill test = userSkill.firstWhere((e) => e.name == element.name);
+      SkillEmb test = userSkill.firstWhere((e) => e.name == element.name);
 
       return Builder(builder: (context) {
         return CustomCard(

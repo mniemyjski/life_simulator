@@ -5,7 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../models/skill_model.dart';
+import '../models/skill/skill_model.dart';
 import '../repositories/skills_repository.dart';
 
 part 'skills_cubit.freezed.dart';

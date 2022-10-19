@@ -20,43 +20,46 @@ class RentButton extends StatelessWidget {
           onPressed: () async {
             showModalBottomSheet<void>(
               context: context,
+              backgroundColor: Colors.transparent,
               builder: (BuildContext context) {
                 double newRent = asset.minRent;
 
                 return StatefulBuilder(builder: (context, setState) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          '${LocaleKeys.rent.tr()}:',
-                          style: TextStyle(
-                              color: Theme.of(context).textTheme.bodyText1!.color,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Slider(
-                          value: newRent,
-                          min: 0,
-                          max: 2000,
-                          divisions: 100,
-                          label: '${(newRent).toMoney()}',
-                          onChanged: (double value) => setState(() => newRent = value),
-                        ),
-                        CustomButton(
-                            onPressed: () {
-                              context.read<AssetsCubit>().changeRent(
-                                    asset: asset,
-                                    rent: newRent,
-                                  );
+                  return CustomSheetDesign(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            '${LocaleKeys.rent.tr()}:',
+                            style: TextStyle(
+                                color: Theme.of(context).textTheme.bodyText2!.color,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Slider(
+                            value: newRent,
+                            min: 0,
+                            max: 2000,
+                            divisions: 100,
+                            label: '${(newRent).toMoney()}',
+                            onChanged: (double value) => setState(() => newRent = value),
+                          ),
+                          CustomButton(
+                              onPressed: () {
+                                context.read<AssetsCubit>().changeRent(
+                                      asset: asset,
+                                      rent: newRent,
+                                    );
 
-                              context.router.pop();
-                            },
-                            child: Text(
-                              LocaleKeys.confirm.tr(),
-                            ))
-                      ],
+                                context.router.pop();
+                              },
+                              child: Text(
+                                LocaleKeys.confirm.tr(),
+                              ))
+                        ],
+                      ),
                     ),
                   );
                 });

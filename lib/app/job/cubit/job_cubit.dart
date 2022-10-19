@@ -9,7 +9,7 @@ import '../../money/cubit/income/income_cubit.dart';
 import '../../money/models/income/income_model.dart';
 import '../../money/models/transaction/transaction_model.dart';
 import '../../new_game/new_game_cubit.dart';
-import '../../skills/models/skill_model.dart';
+import '../../skills/models/skill/skill_model.dart';
 import '../../skills/repositories/skills_repository.dart';
 import '../../time_spend/cubit/time_spend_cubit.dart';
 import '../../time_spend/models/time_bonus/time_bonus_model.dart';

@@ -1,6 +1,7 @@
 import 'package:injectable/injectable.dart';
 import 'package:isar/isar.dart';
 import 'package:richeable/app/freelance/models/fame/fame_model.dart';
+import 'package:richeable/app/freelance/models/freelance_job/freelance_job_model.dart';
 import 'package:richeable/app/money/models/transaction/transaction_model.dart';
 
 import '../../../config/injectable/app_module.dart';
@@ -68,6 +69,16 @@ class FreelanceRepository {
   Future add(FreelanceDone freelanceDone) async {
     await _isar.writeTxn(() async {
       await _isar.freelanceDones.put(freelanceDone);
+    });
+  }
+
+  countingJob() {}
+
+  countingExp() {}
+
+  Future addJob(FreelanceJob job) async {
+    await _isar.writeTxn(() async {
+      await _isar.freelanceJobs.put(job);
     });
   }
 

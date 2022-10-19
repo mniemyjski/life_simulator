@@ -22,6 +22,7 @@ class UpgradeButton extends StatelessWidget {
           onPressed: () async {
             showModalBottomSheet<void>(
               context: context,
+              backgroundColor: Colors.transparent,
               builder: (BuildContext context) {
                 int newLevel = asset.level;
                 double cost = 0;
@@ -36,50 +37,52 @@ class UpgradeButton extends StatelessWidget {
                     }
                   }
 
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          '${LocaleKeys.levelCost.tr()}: ${(-cost).toMoney()}',
-                          style: TextStyle(
-                              color: Theme.of(context).textTheme.bodyText1!.color,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          padding: const EdgeInsets.all(8.0),
-                          child: Center(
-                            child: RatingBar.builder(
-                              initialRating: asset.level.toDouble(),
-                              minRating: asset.level.toDouble(),
-                              direction: Axis.horizontal,
-                              itemCount: 5,
-                              itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-                              itemBuilder: (context, _) => const Icon(
-                                Icons.star,
-                                color: Colors.amber,
+                  return CustomSheetDesign(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            '${LocaleKeys.levelCost.tr()}: ${(-cost).toMoney()}',
+                            style: TextStyle(
+                                color: Theme.of(context).textTheme.bodyText2!.color,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.all(8.0),
+                            child: Center(
+                              child: RatingBar.builder(
+                                initialRating: asset.level.toDouble(),
+                                minRating: asset.level.toDouble(),
+                                direction: Axis.horizontal,
+                                itemCount: 5,
+                                itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                                itemBuilder: (context, _) => const Icon(
+                                  Icons.star,
+                                  color: Colors.amber,
+                                ),
+                                onRatingUpdate: (rating) => _setState(rating.toInt()),
                               ),
-                              onRatingUpdate: (rating) => _setState(rating.toInt()),
                             ),
                           ),
-                        ),
-                        CustomButton(
-                            onPressed: () {
-                              String? toast = context.read<AssetsCubit>().changeLevel(
-                                  asset: asset, level: newLevel - asset.level, cost: -cost);
-                              if (toast != null) {
-                                BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
-                              } else {
-                                context.router.pop();
-                              }
-                            },
-                            child: Text(
-                              LocaleKeys.confirm.tr(),
-                            ))
-                      ],
+                          CustomButton(
+                              onPressed: () {
+                                String? toast = context.read<AssetsCubit>().changeLevel(
+                                    asset: asset, level: newLevel - asset.level, cost: -cost);
+                                if (toast != null) {
+                                  BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
+                                } else {
+                                  context.router.pop();
+                                }
+                              },
+                              child: Text(
+                                LocaleKeys.confirm.tr(),
+                              ))
+                        ],
+                      ),
                     ),
                   );
                 });

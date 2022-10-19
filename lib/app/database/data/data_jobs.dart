@@ -3,7 +3,7 @@ import 'package:uuid/uuid.dart';
 import '../../job/models/experience/experience_model.dart';
 import '../../job/models/job/job_model.dart';
 import '../../money/models/income/income_model.dart';
-import '../../skills/models/skill_model.dart';
+import '../../skills/models/skill/skill_model.dart';
 
 class DataJobs {
   static List<Job> db() {

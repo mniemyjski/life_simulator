@@ -3,6 +3,8 @@ import 'package:equatable/equatable.dart';
 import 'package:isar/isar.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import '../skill_emb/skill_emb_model.dart';
+
 part 'skill_model.g.dart';
 
 enum ETypeSkills {
@@ -38,6 +40,10 @@ class Skill extends Equatable {
 
   @override
   List<Object> get props => [name, lvl, exp];
+
+  SkillEmb toSkillEmb() {
+    return SkillEmb(name: name, lvl: lvl);
+  }
 
   double getPercentToNextLvl() {
     List<double> progressList = getProgress();

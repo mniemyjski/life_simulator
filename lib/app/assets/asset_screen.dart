@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:richeable/app/game/widget/app_bar_game.dart';
 import 'package:richeable/utilities/utilities.dart';
+import 'package:richeable/widgets/custom_card.dart';
 
 import '../../constants/locale_keys.g.dart';
 import '../../widgets/widgets.dart';
@@ -37,7 +38,7 @@ class AssetScreen extends StatelessWidget {
                 children: [
                   SizedBox(
                     width: double.infinity,
-                    child: Card(
+                    child: CustomCard(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
@@ -45,13 +46,13 @@ class AssetScreen extends StatelessWidget {
                           children: [
                             RichText(
                               text: TextSpan(
-                                style: Theme.of(context).textTheme.bodyText1,
+                                style: Theme.of(context).textTheme.bodyText2,
                                 children: <TextSpan>[
                                   TextSpan(
                                     text: '${LocaleKeys.rent.tr()}: ',
                                     style: Theme.of(context)
                                         .textTheme
-                                        .bodyText1!
+                                        .bodyText2!
                                         .copyWith(fontWeight: FontWeight.bold),
                                   ),
                                   TextSpan(
@@ -62,13 +63,13 @@ class AssetScreen extends StatelessWidget {
                             ),
                             RichText(
                               text: TextSpan(
-                                style: Theme.of(context).textTheme.bodyText1,
+                                style: Theme.of(context).textTheme.bodyText2,
                                 children: <TextSpan>[
                                   TextSpan(
                                     text: '${LocaleKeys.minRating.tr()}: ',
                                     style: Theme.of(context)
                                         .textTheme
-                                        .bodyText1!
+                                        .bodyText2!
                                         .copyWith(fontWeight: FontWeight.bold),
                                   ),
                                   TextSpan(

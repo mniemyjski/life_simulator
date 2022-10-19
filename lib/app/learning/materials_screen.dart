@@ -10,7 +10,7 @@ import '../../utilities/utilities.dart';
 import '../database/cubit/database_cubit.dart';
 import '../database/models/database.dart';
 import '../game/widget/app_bar_game.dart';
-import '../skills/models/skill_model.dart';
+import '../skills/models/skill/skill_model.dart';
 import 'cubit/learning_cubit.dart';
 import 'models/learning_model.dart';
 import 'widgets/learning_element.dart';

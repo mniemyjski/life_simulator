@@ -1,35 +1,36 @@
+import 'package:richeable/app/skills/models/skill_emb/skill_emb_model.dart';
 import 'package:richeable/utilities/utilities.dart';
 
-import '../../skills/models/skill_model.dart';
+import '../../skills/models/skill/skill_model.dart';
 import '../models/freelance_done/freelance_done_model.dart';
 import '../models/freelance_job/freelance_job_model.dart';
 
 abstract class FreelanceServices {
-  static List<Skill> getList({required ETypeFreelance selected, required int lvl}) {
+  static List<SkillEmb> getList({required ETypeFreelance selected, required int lvl}) {
     switch (selected) {
       case ETypeFreelance.book:
         return [
-          Skill(name: ETypeSkills.writing, lvl: lvl),
-          Skill(name: ETypeSkills.creativity, lvl: lvl),
+          SkillEmb(name: ETypeSkills.writing, lvl: lvl),
+          SkillEmb(name: ETypeSkills.creativity, lvl: lvl),
         ];
       case ETypeFreelance.course:
         return [
-          Skill(name: ETypeSkills.communicativeness, lvl: lvl),
-          Skill(name: ETypeSkills.confidence, lvl: lvl),
+          SkillEmb(name: ETypeSkills.communicativeness, lvl: lvl),
+          SkillEmb(name: ETypeSkills.confidence, lvl: lvl),
         ];
       case ETypeFreelance.youtube:
         return [
-          Skill(name: ETypeSkills.communicativeness, lvl: lvl),
-          Skill(name: ETypeSkills.confidence, lvl: lvl),
+          SkillEmb(name: ETypeSkills.communicativeness, lvl: lvl),
+          SkillEmb(name: ETypeSkills.confidence, lvl: lvl),
         ];
       case ETypeFreelance.application:
         return [
-          Skill(name: ETypeSkills.programming, lvl: lvl),
+          SkillEmb(name: ETypeSkills.programming, lvl: lvl),
         ];
       case ETypeFreelance.handicrafts:
         return [
-          Skill(name: ETypeSkills.handyman, lvl: lvl),
-          Skill(name: ETypeSkills.creativity, lvl: lvl),
+          SkillEmb(name: ETypeSkills.handyman, lvl: lvl),
+          SkillEmb(name: ETypeSkills.creativity, lvl: lvl),
         ];
     }
   }
@@ -75,5 +76,16 @@ abstract class FreelanceServices {
       }
     }
     return result;
+  }
+
+  static bool testReqSkill({required List<SkillEmb> reqSkill, required List<SkillEmb> userSkills}) {
+    List<bool> test = [];
+    for (var r in reqSkill) {
+      for (var u in userSkills) {
+        if (u.name == r.name && u.lvl >= r.lvl) test.add(true);
+      }
+    }
+
+    return test.length == reqSkill.length ? true : false;
   }
 }

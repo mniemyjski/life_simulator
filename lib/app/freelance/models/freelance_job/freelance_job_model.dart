@@ -1,13 +1,14 @@
 import 'dart:math';
 
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:richeable/utilities/utilities.dart';
+import 'package:copy_with_extension/copy_with_extension.dart';
+import 'package:equatable/equatable.dart';
+import 'package:isar/isar.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../../skills/models/skill_model.dart';
+import '../../../skills/models/skill_emb/skill_emb_model.dart';
 import '../freelance_done/freelance_done_model.dart';
 
-part 'freelance_job_model.freezed.dart';
 part 'freelance_job_model.g.dart';
 
 enum ETypeFreelance {
@@ -18,34 +19,46 @@ enum ETypeFreelance {
   handicrafts,
 }
 
-@freezed
-class FreelanceJob with _$FreelanceJob {
-  const FreelanceJob._();
+@CopyWith()
+@JsonSerializable()
+@Collection(ignore: {'props', 'stringify'})
+class FreelanceJob extends Equatable {
+  final Id id;
+  final String uid;
+  final String name;
+  @enumerated
+  final ETypeFreelance eTypeFreelance;
+  final int level;
+  final int workTime;
+  final int leftWorkTime;
+  final List<SkillEmb> reqSkills;
+  final List<SkillEmb> userSkills;
+  final bool repeat;
+  final int lastVersion;
 
-  const factory FreelanceJob({
-    required String uid,
-    required String name,
-    required ETypeFreelance eTypeFreelance,
-    required int level,
-    required int workTime,
-    required int leftWorkTime,
-    required List<Skill> reqSkills,
-    required List<Skill> userSkills,
-    @Default(false) bool repeat,
-    @Default(0) int lastVersion,
-  }) = _FreelanceJob;
-
-  factory FreelanceJob.fromJson(Map<String, dynamic> json) => _$FreelanceJobFromJson(json);
+  const FreelanceJob({
+    this.id = Isar.autoIncrement,
+    required this.uid,
+    required this.name,
+    required this.eTypeFreelance,
+    required this.level,
+    required this.workTime,
+    required this.leftWorkTime,
+    required this.reqSkills,
+    required this.userSkills,
+    this.repeat = false,
+    this.lastVersion = 0,
+  });
 
   static FreelanceJob builder({
     required String name,
     required ETypeFreelance eTypeFreelance,
     required int level,
     required int workTime,
-    required List<Skill> reqSkills,
-    required List<Skill> userSkills,
+    required List<SkillEmb> reqSkills,
+    required List<SkillEmb> userSkills,
   }) {
-    return _FreelanceJob(
+    return FreelanceJob(
       uid: const Uuid().v1(),
       name: name,
       eTypeFreelance: eTypeFreelance,
@@ -56,6 +69,23 @@ class FreelanceJob with _$FreelanceJob {
       userSkills: userSkills,
     );
   }
+
+  @override
+  List<Object> get props => [
+        uid,
+        name,
+        eTypeFreelance,
+        level,
+        workTime,
+        leftWorkTime,
+        reqSkills,
+        userSkills,
+        repeat,
+        lastVersion,
+      ];
+
+  factory FreelanceJob.fromJson(Map<String, dynamic> json) => _$FreelanceJobFromJson(json);
+  Map<String, dynamic> toJson() => _$FreelanceJobToJson(this);
 
   FreelanceJob repeater() {
     String newName = lastVersion > 0
@@ -70,7 +100,7 @@ class FreelanceJob with _$FreelanceJob {
     int skills = 0;
     int rating = 0;
     for (var r in reqSkills) {
-      Skill skill = userSkills.firstWhere((u) => r.name == u.name);
+      SkillEmb skill = userSkills.firstWhere((u) => r.name == u.name);
       skills += skill.lvl;
     }
 

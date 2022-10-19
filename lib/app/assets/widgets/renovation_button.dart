@@ -21,6 +21,7 @@ class RenovationButton extends StatelessWidget {
           onPressed: () async {
             showModalBottomSheet<void>(
               context: context,
+              backgroundColor: Colors.transparent,
               builder: (BuildContext context) {
                 double newRenovation = asset.renovation;
                 double cost = 0;
@@ -36,43 +37,45 @@ class RenovationButton extends StatelessWidget {
                     }
                   }
 
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          '${LocaleKeys.renovationCost.tr()}: ${-cost.toInt()}\$',
-                          style: TextStyle(
-                              color: Theme.of(context).textTheme.bodyText1!.color,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Slider(
-                          value: newRenovation,
-                          min: 0,
-                          max: 100,
-                          divisions: 100,
-                          label: '${(newRenovation).toMoney()}%',
-                          onChanged: (double value) => _setState(value),
-                        ),
-                        CustomButton(
-                            onPressed: () {
-                              final toast = context.read<AssetsCubit>().changeRenovation(
-                                  asset: asset,
-                                  renovation: newRenovation - asset.renovation,
-                                  cost: -cost);
+                  return CustomSheetDesign(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            '${LocaleKeys.renovationCost.tr()}: ${-cost.toInt()}\$',
+                            style: TextStyle(
+                                color: Theme.of(context).textTheme.bodyText2!.color,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Slider(
+                            value: newRenovation,
+                            min: 0,
+                            max: 100,
+                            divisions: 100,
+                            label: '${(newRenovation).toMoney()}%',
+                            onChanged: (double value) => _setState(value),
+                          ),
+                          CustomButton(
+                              onPressed: () {
+                                final toast = context.read<AssetsCubit>().changeRenovation(
+                                    asset: asset,
+                                    renovation: newRenovation - asset.renovation,
+                                    cost: -cost);
 
-                              if (toast != null) {
-                                BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
-                              } else {
-                                context.router.pop();
-                              }
-                            },
-                            child: Text(
-                              LocaleKeys.confirm.tr(),
-                            ))
-                      ],
+                                if (toast != null) {
+                                  BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
+                                } else {
+                                  context.router.pop();
+                                }
+                              },
+                              child: Text(
+                                LocaleKeys.confirm.tr(),
+                              ))
+                        ],
+                      ),
                     ),
                   );
                 });

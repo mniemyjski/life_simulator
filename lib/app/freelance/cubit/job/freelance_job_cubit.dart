@@ -3,10 +3,11 @@ import 'dart:async';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:richeable/app/freelance/services/freelance_services.dart';
 
 import '../../../../utilities/utilities.dart';
 import '../../../new_game/new_game_cubit.dart';
-import '../../../skills/models/skill_model.dart';
+import '../../../skills/models/skill_emb/skill_emb_model.dart';
 import '../../../skills/repositories/skills_repository.dart';
 import '../../../time_spend/cubit/time_spend_cubit.dart';
 import '../../models/freelance_job/freelance_job_model.dart';
@@ -92,8 +93,8 @@ class FreelanceJobCubit extends HydratedCubit<FreelanceJobState> {
   }
 
   _countingExp({
-    required List<Skill> reqSkills,
-    required List<Skill> userSkills,
+    required List<SkillEmb> reqSkills,
+    required List<SkillEmb> userSkills,
     required int hours,
   }) {
     for (var r in reqSkills) {
@@ -106,8 +107,10 @@ class FreelanceJobCubit extends HydratedCubit<FreelanceJobState> {
   }
 
   String? add(FreelanceJob freelanceWork) {
-    bool test =
-        _testReqSkill(reqSkill: freelanceWork.reqSkills, userSkills: freelanceWork.userSkills);
+    bool test = FreelanceServices.testReqSkill(
+      reqSkill: freelanceWork.reqSkills,
+      userSkills: freelanceWork.userSkills,
+    );
     if (!test) {
       return "youCannotDoThis";
     }
@@ -132,17 +135,6 @@ class FreelanceJobCubit extends HydratedCubit<FreelanceJobState> {
 
       emit(FreelanceJobState.loaded(result));
     });
-  }
-
-  _testReqSkill({required List<Skill> reqSkill, required List<Skill> userSkills}) {
-    List<bool> test = [];
-    for (var r in reqSkill) {
-      for (var u in userSkills) {
-        if (u.name == r.name && u.lvl >= r.lvl) test.add(true);
-      }
-    }
-
-    return test.length == reqSkill.length ? true : false;
   }
 
   remove(String uid) {
