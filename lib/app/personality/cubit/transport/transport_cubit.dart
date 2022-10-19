@@ -4,13 +4,13 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../../repositories/time_spend_repository.dart';
 import '../../../date/cubit/date_cubit.dart';
 import '../../../money/cubit/income/income_cubit.dart';
 import '../../../money/cubit/money/money_cubit.dart';
 import '../../../money/models/income/income_model.dart';
 import '../../../money/models/transaction/transaction_model.dart';
 import '../../../new_game/new_game_cubit.dart';
-import '../../../time_spend/cubit/time_spend_cubit.dart';
 import '../../../time_spend/models/time_bonus/time_bonus_model.dart';
 import '../../models/transport/transport_model.dart';
 
@@ -22,7 +22,7 @@ part 'transport_state.dart';
 class TransportCubit extends HydratedCubit<TransportState> {
   final MoneyCubit _moneyCubit;
   final IncomeCubit _incomeCubit;
-  final TimeSpendCubit _timeSpendCubit;
+  final TimeSpendRepository _timeSpendRepository;
 
   final NewGameCubit _newGameCubit;
   late StreamSubscription _newGameSub;
@@ -32,9 +32,9 @@ class TransportCubit extends HydratedCubit<TransportState> {
   TransportCubit(
     this._moneyCubit,
     this._incomeCubit,
-    this._timeSpendCubit,
     this._newGameCubit,
     this._dateCubit,
+    this._timeSpendRepository,
   ) : super(const TransportState.initial()) {
     _newGame();
   }
@@ -72,7 +72,7 @@ class TransportCubit extends HydratedCubit<TransportState> {
         eTypeFrequency: ETypeFrequency.monthly,
       );
 
-      _timeSpendCubit.addBonus(
+      _timeSpendRepository.addBonuses(
         [
           TimeBonus(
               eTypeBonus: ETypeBonus.commuting,
@@ -111,7 +111,7 @@ class TransportCubit extends HydratedCubit<TransportState> {
   sell() {
     return state.whenOrNull(loaded: (transport) {
       if (transport != null) {
-        _timeSpendCubit.removeBonus(ETypeBonusSource.transport);
+        _timeSpendRepository.removeBonus(ETypeBonusSource.transport);
         _incomeCubit.remove(transport.id);
 
         _dateCubit.state.whenOrNull(loaded: (date) {

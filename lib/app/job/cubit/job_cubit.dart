@@ -4,14 +4,15 @@ import 'dart:math';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:richeable/app/time_spend/models/time_spend_model/time_spend_model.dart';
 
+import '../../../repositories/time_spend_repository.dart';
 import '../../money/cubit/income/income_cubit.dart';
 import '../../money/models/income/income_model.dart';
 import '../../money/models/transaction/transaction_model.dart';
 import '../../new_game/new_game_cubit.dart';
 import '../../skills/models/skill/skill_model.dart';
 import '../../skills/repositories/skills_repository.dart';
-import '../../time_spend/cubit/time_spend_cubit.dart';
 import '../../time_spend/models/time_bonus/time_bonus_model.dart';
 import '../models/experience/experience_model.dart';
 import '../models/job/job_model.dart';
@@ -23,7 +24,7 @@ part 'job_state.dart';
 @lazySingleton
 class JobCubit extends HydratedCubit<JobState> {
   final IncomeCubit _incomeCubit;
-  final TimeSpendCubit _timeSpendCubit;
+  final TimeSpendRepository _timeSpendRepository;
   final SkillsRepository _skillsRepository;
 
   final NewGameCubit _newGameCubit;
@@ -32,8 +33,8 @@ class JobCubit extends HydratedCubit<JobState> {
   JobCubit(
     this._newGameCubit,
     this._incomeCubit,
-    this._timeSpendCubit,
     this._skillsRepository,
+    this._timeSpendRepository,
   ) : super(const JobState.initial()) {
     _newGame();
   }
@@ -51,35 +52,36 @@ class JobCubit extends HydratedCubit<JobState> {
     });
   }
 
-  counting() {
-    state.whenOrNull(loaded: (job, experience) {
+  counting() async {
+    state.whenOrNull(loaded: (job, experience) async {
       if (job != null && experience != null) {
-        _timeSpendCubit.state.whenOrNull(loaded: (timeSpend) async {
-          List<Skill> userSkills = await _skillsRepository.getAllSkills();
-          for (var r in experience.requirements) {
-            for (var u in userSkills) {
-              if (r.name == u.name) {
-                _skillsRepository.update(skill: u.name, exp: timeSpend.work / 2.toDouble());
-              }
+        TimeSpend timeSpend = await _timeSpendRepository.getTimeSpend();
+
+        List<Skill> userSkills = await _skillsRepository.getAllSkills();
+        for (var r in experience.requirements) {
+          for (var u in userSkills) {
+            if (r.name == u.name) {
+              _skillsRepository.update(skill: u.name, exp: timeSpend.work / 2.toDouble());
             }
           }
-        });
+        }
       }
     });
   }
 
   Future<String> getJob({required Job job, required Experience experience}) async {
-    bool hasFreeTime = _timeSpendCubit.checkFreeTime(1 + experience.work + experience.commuting);
+    TimeSpend timeSpend = await _timeSpendRepository.getTimeSpend();
+    bool hasFreeTime = timeSpend.checkFreeTime(1 + experience.work + experience.commuting);
     if (!hasFreeTime) return "You don't have free time";
 
-    _timeSpendCubit.changeUsed(1);
+    _timeSpendRepository.changeUsed(1);
     bool test = await _testSkills(experience);
     if (!test) return "You didn't get a job";
 
     return state.maybeWhen(
         loaded: (_job, _experience) {
-          _timeSpendCubit.changeWork(experience.work);
-          _timeSpendCubit.changeCommuting(experience.commuting);
+          _timeSpendRepository.changeWork(experience.work);
+          _timeSpendRepository.changeCommuting(experience.commuting);
 
           Income income = Income(
             id: job.id,
@@ -89,7 +91,7 @@ class JobCubit extends HydratedCubit<JobState> {
             eTypeFrequency: experience.eTypeFrequency,
           );
 
-          _timeSpendCubit.addBonus(
+          _timeSpendRepository.addBonuses(
             [
               if (experience.bonusToRelax != 0)
                 TimeBonus(
@@ -144,10 +146,10 @@ class JobCubit extends HydratedCubit<JobState> {
         }
       });
 
-      _timeSpendCubit.removeBonus(ETypeBonusSource.job);
+      _timeSpendRepository.removeBonus(ETypeBonusSource.job);
       _incomeCubit.remove(job!.id);
-      _timeSpendCubit.changeWork(-experience!.work);
-      _timeSpendCubit.changeCommuting(-experience.commuting);
+      _timeSpendRepository.changeWork(-experience!.work);
+      _timeSpendRepository.changeCommuting(-experience.commuting);
 
       emit(const JobState.loaded(job: null, experience: null));
     });
@@ -162,18 +164,18 @@ class JobCubit extends HydratedCubit<JobState> {
 
           Experience newExperience = job.experiences[exp];
 
-          bool hasFreeTime =
-              _timeSpendCubit.checkFreeTime(1 + newExperience.work - experience.work);
+          TimeSpend timeSpend = await _timeSpendRepository.getTimeSpend();
+          bool hasFreeTime = timeSpend.checkFreeTime(1 + newExperience.work - experience.work);
           if (!hasFreeTime) return "You don't have free time";
 
-          _timeSpendCubit.changeUsed(1);
+          _timeSpendRepository.changeUsed(1);
 
           bool test = await _testSkills(newExperience);
           if (!test) return "You didn't get a promote";
 
-          _timeSpendCubit.changeCommuting(newExperience.commuting - experience.commuting);
+          _timeSpendRepository.changeCommuting(newExperience.commuting - experience.commuting);
 
-          _timeSpendCubit.addBonus(
+          _timeSpendRepository.addBonuses(
             [
               TimeBonus(
                   eTypeBonus: ETypeBonus.relax,

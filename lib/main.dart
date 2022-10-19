@@ -10,6 +10,7 @@ import 'package:richeable/app/business/cubit/products/products_cubit.dart';
 import 'package:richeable/app/business/cubit/research_product/research_product_cubit.dart';
 import 'package:richeable/app/loading/cubit/loading_cubit.dart';
 import 'package:richeable/app/settings/cubit/audio_cubit.dart';
+import 'package:richeable/app/skills/cubit/skills_cubit.dart';
 import 'package:richeable/config/injectable/app_module.dart';
 import 'package:url_strategy/url_strategy.dart';
 
@@ -34,9 +35,7 @@ import 'app/personality/cubit/house/house_cubit.dart';
 import 'app/personality/cubit/transport/transport_cubit.dart';
 import 'app/rules/cubit/rules_cubit.dart';
 import 'app/settings/cubit/day_setting_cubit.dart';
-import 'app/skills/cubit/skills_cubit.dart';
 import 'app/stats/cubit/stats_cubit.dart';
-import 'app/time_spend/cubit/time_spend_cubit.dart';
 import 'app/tutorial/cubit/tutorial_cubit.dart';
 import 'config/injectable/injection.dart';
 import 'config/routes/routes.gr.dart';
@@ -143,10 +142,6 @@ class _MyAppState extends State<MyApp> {
             BlocProvider(
               lazy: false,
               create: (_) => getIt<JobCubit>(),
-            ),
-            BlocProvider(
-              lazy: false,
-              create: (_) => getIt<TimeSpendCubit>(),
             ),
             BlocProvider(
               lazy: false,

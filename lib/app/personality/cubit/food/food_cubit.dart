@@ -5,11 +5,11 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:richeable/app/money/models/transaction/transaction_model.dart';
 
+import '../../../../repositories/time_spend_repository.dart';
 import '../../../database/cubit/database_cubit.dart';
 import '../../../money/cubit/income/income_cubit.dart';
 import '../../../money/models/income/income_model.dart';
 import '../../../new_game/new_game_cubit.dart';
-import '../../../time_spend/cubit/time_spend_cubit.dart';
 import '../../../time_spend/models/time_bonus/time_bonus_model.dart';
 import '../../models/food/food_model.dart';
 
@@ -23,13 +23,13 @@ class FoodCubit extends HydratedCubit<FoodState> {
   final DatabaseCubit _databaseCubit;
   final NewGameCubit _newGameCubit;
   late StreamSubscription _newGameSub;
-  final TimeSpendCubit _timeSpendCubit;
+  final TimeSpendRepository _timeSpendRepository;
 
   FoodCubit(
     this._incomeCubit,
     this._databaseCubit,
     this._newGameCubit,
-    this._timeSpendCubit,
+    this._timeSpendRepository,
   ) : super(const FoodState.initial()) {
     _newGame();
   }
@@ -52,7 +52,7 @@ class FoodCubit extends HydratedCubit<FoodState> {
       );
       emit(FoodState.loaded(food: list.first));
       _incomeCubit.add(income);
-      _timeSpendCubit.addBonus(
+      _timeSpendRepository.addBonuses(
         [
           TimeBonus(
             eTypeBonus: ETypeBonus.relax,
@@ -84,7 +84,7 @@ class FoodCubit extends HydratedCubit<FoodState> {
         );
         emit(FoodState.loaded(food: list.first));
         _incomeCubit.add(income);
-        _timeSpendCubit.addBonus(
+        _timeSpendRepository.addBonuses(
           [
             TimeBonus(
               eTypeBonus: ETypeBonus.relax,
@@ -117,7 +117,7 @@ class FoodCubit extends HydratedCubit<FoodState> {
         eTypeFrequency: ETypeFrequency.daily,
       );
 
-      _timeSpendCubit.addBonus(
+      _timeSpendRepository.addBonuses(
         [
           TimeBonus(
               eTypeBonus: ETypeBonus.relax,

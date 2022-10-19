@@ -5,11 +5,12 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:richeable/app/freelance/services/freelance_services.dart';
 
+import '../../../../repositories/time_spend_repository.dart';
 import '../../../../utilities/utilities.dart';
 import '../../../new_game/new_game_cubit.dart';
 import '../../../skills/models/skill_emb/skill_emb_model.dart';
 import '../../../skills/repositories/skills_repository.dart';
-import '../../../time_spend/cubit/time_spend_cubit.dart';
+import '../../../time_spend/models/time_spend_model/time_spend_model.dart';
 import '../../models/freelance_job/freelance_job_model.dart';
 import '../done/freelance_done_cubit.dart';
 
@@ -22,15 +23,15 @@ class FreelanceJobCubit extends HydratedCubit<FreelanceJobState> {
   final NewGameCubit _newGameCubit;
   late StreamSubscription _newGameSub;
 
-  final TimeSpendCubit _timeSpendCubit;
   final FreelanceDoneCubit _freelanceDoneCubit;
   final SkillsRepository _skillsRepository;
+  final TimeSpendRepository _timeSpendRepository;
 
   FreelanceJobCubit(
     this._newGameCubit,
-    this._timeSpendCubit,
     this._freelanceDoneCubit,
     this._skillsRepository,
+    this._timeSpendRepository,
   ) : super(const FreelanceJobState.initial()) {
     _newGame();
   }
@@ -49,46 +50,43 @@ class FreelanceJobCubit extends HydratedCubit<FreelanceJobState> {
   }
 
   Future counting(DateTime dateTime) async {
-    await _timeSpendCubit.state.maybeWhen(
+    await state.maybeWhen(
         orElse: () => throw 'error',
-        loaded: (timeSpend) async {
-          await state.maybeWhen(
-              orElse: () => throw 'error',
-              loaded: (freelanceJobs) async {
-                int time = timeSpend.freelance;
-                List<FreelanceJob> result = [];
+        loaded: (freelanceJobs) async {
+          TimeSpend timeSpend = await _timeSpendRepository.getTimeSpend();
+          int time = timeSpend.freelance;
+          List<FreelanceJob> result = [];
 
-                for (var e in freelanceJobs) {
-                  if (e.leftWorkTime > time) {
-                    result.add(
-                      e.copyWith(leftWorkTime: e.leftWorkTime - time),
-                    );
-                    _countingExp(
-                      reqSkills: e.reqSkills,
-                      userSkills: e.userSkills,
-                      hours: time,
-                    );
-                    time = 0;
-                  }
-                  if (e.leftWorkTime <= time) {
-                    await _freelanceDoneCubit.add(e.toDone(dateTime));
-                    _countingExp(
-                      reqSkills: e.reqSkills,
-                      userSkills: e.userSkills,
-                      hours: e.leftWorkTime,
-                    );
-                    time = time - e.leftWorkTime;
+          for (var e in freelanceJobs) {
+            if (e.leftWorkTime > time) {
+              result.add(
+                e.copyWith(leftWorkTime: e.leftWorkTime - time),
+              );
+              _countingExp(
+                reqSkills: e.reqSkills,
+                userSkills: e.userSkills,
+                hours: time,
+              );
+              time = 0;
+            }
+            if (e.leftWorkTime <= time) {
+              await _freelanceDoneCubit.add(e.toDone(dateTime));
+              _countingExp(
+                reqSkills: e.reqSkills,
+                userSkills: e.userSkills,
+                hours: e.leftWorkTime,
+              );
+              time = time - e.leftWorkTime;
 
-                    if (e.repeat) {
-                      result = [e.repeater(), ...result];
-                    }
-                  }
-                }
-                if (result.isEmpty) {
-                  _timeSpendCubit.changeFreelance(-timeSpend.freelance);
-                }
-                emit(FreelanceJobState.loaded(result));
-              });
+              if (e.repeat) {
+                result = [e.repeater(), ...result];
+              }
+            }
+          }
+          if (result.isEmpty) {
+            _timeSpendRepository.changeFreelance(-timeSpend.freelance);
+          }
+          emit(FreelanceJobState.loaded(result));
         });
   }
 

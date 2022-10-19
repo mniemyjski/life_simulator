@@ -9,8 +9,6 @@ import 'package:richeable/utilities/utilities.dart';
 import '../../../config/routes/routes.gr.dart';
 import '../../../constants/constants.dart';
 import '../../settings/cubit/audio_cubit.dart';
-import '../../time_spend/cubit/time_spend_cubit.dart';
-import '../../time_spend/models/time_bonus/time_bonus_model.dart';
 import '../cubit/date_cubit.dart';
 
 class NextDayButton extends StatefulWidget {
@@ -43,13 +41,13 @@ class _NextDayButtonState extends State<NextDayButton> {
             onPressed: () async {
               context.read<AudioCubit>().getSounds(AudioCollection.nextTurn()).play();
 
-              if (!context.read<TimeSpendCubit>().checkBonusSource(ETypeBonusSource.house)) {
-                bool? areYouSure = await showDialog<bool>(
-                  context: context,
-                  builder: (BuildContext context) => _buildAlertDialog(context),
-                );
-                if (!(areYouSure ?? false)) return;
-              }
+              // if (!context.read<TimeSpendCubit>().checkBonusSource(ETypeBonusSource.house)) {
+              //   bool? areYouSure = await showDialog<bool>(
+              //     context: context,
+              //     builder: (BuildContext context) => _buildAlertDialog(context),
+              //   );
+              //   if (!(areYouSure ?? false)) return;
+              // }
 
               if (mounted) await context.read<DateCubit>().nextDay();
               if (mounted) context.read<AudioCubit>().stopSounds();

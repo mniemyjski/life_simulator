@@ -348,8 +348,6 @@ abstract class _$$LoadedCopyWith<$Res> {
   factory _$$LoadedCopyWith(_$Loaded value, $Res Function(_$Loaded) then) =
       __$$LoadedCopyWithImpl<$Res>;
   $Res call({TimeSpend timeSpend});
-
-  $TimeSpendCopyWith<$Res> get timeSpend;
 }
 
 /// @nodoc
@@ -371,13 +369,6 @@ class __$$LoadedCopyWithImpl<$Res> extends _$TimeSpendStateCopyWithImpl<$Res>
           : timeSpend // ignore: cast_nullable_to_non_nullable
               as TimeSpend,
     ));
-  }
-
-  @override
-  $TimeSpendCopyWith<$Res> get timeSpend {
-    return $TimeSpendCopyWith<$Res>(_value.timeSpend, (value) {
-      return _then(_value.copyWith(timeSpend: value));
-    });
   }
 }
 

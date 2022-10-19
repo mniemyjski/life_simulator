@@ -4,6 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../../repositories/time_spend_repository.dart';
 import '../../../../utilities/utilities.dart';
 import '../../../database/cubit/database_cubit.dart';
 import '../../../date/cubit/date_cubit.dart';
@@ -12,7 +13,6 @@ import '../../../money/cubit/money/money_cubit.dart';
 import '../../../money/models/income/income_model.dart';
 import '../../../money/models/transaction/transaction_model.dart';
 import '../../../new_game/new_game_cubit.dart';
-import '../../../time_spend/cubit/time_spend_cubit.dart';
 import '../../../time_spend/models/time_bonus/time_bonus_model.dart';
 import '../../models/house/house_model.dart';
 
@@ -23,7 +23,7 @@ part 'house_state.dart';
 @lazySingleton
 class HouseCubit extends HydratedCubit<HouseState> {
   final MoneyCubit _moneyCubit;
-  final TimeSpendCubit _timeSpendCubit;
+  final TimeSpendRepository _timeSpendRepository;
   final IncomeCubit _incomeCubit;
   final DatabaseCubit _databaseCubit;
   final NewGameCubit _newGameCubit;
@@ -33,11 +33,11 @@ class HouseCubit extends HydratedCubit<HouseState> {
 
   HouseCubit(
     this._moneyCubit,
-    this._timeSpendCubit,
     this._incomeCubit,
     this._newGameCubit,
     this._databaseCubit,
     this._dateCubit,
+    this._timeSpendRepository,
   ) : super(const HouseState.initial()) {
     _newGame();
   }
@@ -58,7 +58,7 @@ class HouseCubit extends HydratedCubit<HouseState> {
         value: house.monthlyCost,
         eTypeFrequency: ETypeFrequency.monthly,
       );
-      _timeSpendCubit.addBonus(
+      _timeSpendRepository.addBonuses(
         [
           TimeBonus(
               eTypeBonus: ETypeBonus.relax,
@@ -89,7 +89,7 @@ class HouseCubit extends HydratedCubit<HouseState> {
           value: house.monthlyCost,
           eTypeFrequency: ETypeFrequency.monthly,
         );
-        _timeSpendCubit.addBonus(
+        _timeSpendRepository.addBonuses(
           [
             TimeBonus(
                 eTypeBonus: ETypeBonus.relax,
@@ -129,7 +129,7 @@ class HouseCubit extends HydratedCubit<HouseState> {
           value: newHouse.monthlyCost,
           eTypeFrequency: ETypeFrequency.monthly);
 
-      _timeSpendCubit.addBonus(
+      _timeSpendRepository.addBonuses(
         [
           TimeBonus(
               eTypeBonus: ETypeBonus.relax,
@@ -168,7 +168,7 @@ class HouseCubit extends HydratedCubit<HouseState> {
     _dateCubit.state.whenOrNull(loaded: (date) {
       state.whenOrNull(loaded: (house) {
         if (house != null) {
-          _timeSpendCubit.removeBonus(ETypeBonusSource.house);
+          _timeSpendRepository.removeBonus(ETypeBonusSource.house);
           _incomeCubit.remove(house.id);
           _moneyCubit.addTransaction(
               dateTime: date,

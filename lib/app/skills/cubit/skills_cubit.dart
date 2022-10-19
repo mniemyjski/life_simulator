@@ -12,7 +12,7 @@ part 'skills_cubit.freezed.dart';
 part 'skills_cubit.g.dart';
 part 'skills_state.dart';
 
-@lazySingleton
+@injectable
 class SkillsCubit extends HydratedCubit<SkillsState> {
   late StreamSubscription _skillsSub;
   final SkillsRepository _skillsRepository;

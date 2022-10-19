@@ -13,8 +13,9 @@ import '../date/widgets/next_day.dart';
 import 'cubit/time_spend_cubit.dart';
 import 'models/time_bonus/time_bonus_model.dart';
 
-class TimeSpendScreen extends StatelessWidget {
-  const TimeSpendScreen({Key? key}) : super(key: key);
+class TimeSpendScreen extends StatelessWidget with AutoRouteWrapper {
+  final TimeSpendCubit timeSpendProvider;
+  const TimeSpendScreen({Key? key, required this.timeSpendProvider}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -53,14 +54,16 @@ class TimeSpendScreen extends StatelessWidget {
                           buildElement(
                             value: timeSpend.freelance,
                             name: LocaleKeys.freelance.tr(),
-                            add: () {
-                              String? toast = context.read<TimeSpendCubit>().changeFreelance(1);
+                            add: () async {
+                              String? toast =
+                                  await context.read<TimeSpendCubit>().changeFreelance(1);
                               if (toast != null) {
                                 BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
                               }
                             },
-                            remove: () {
-                              String? toast = context.read<TimeSpendCubit>().changeFreelance(-1);
+                            remove: () async {
+                              String? toast =
+                                  await context.read<TimeSpendCubit>().changeFreelance(-1);
                               if (toast != null) {
                                 BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
                               }
@@ -69,14 +72,16 @@ class TimeSpendScreen extends StatelessWidget {
                           buildElement(
                             value: timeSpend.learn,
                             name: LocaleKeys.learn.tr(),
-                            add: () {
-                              String? toast = context.read<TimeSpendCubit>().changeLearn(1);
+                            add: () async {
+                              String? toast =
+                                  await context.read<TimeSpendCubit>().changeLearning(1);
                               if (toast != null) {
                                 BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
                               }
                             },
-                            remove: () {
-                              String? toast = context.read<TimeSpendCubit>().changeLearn(-1);
+                            remove: () async {
+                              String? toast =
+                                  await context.read<TimeSpendCubit>().changeLearning(-1);
                               if (toast != null) {
                                 BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
                               }
@@ -85,14 +90,14 @@ class TimeSpendScreen extends StatelessWidget {
                           buildElement(
                             value: timeSpend.relax,
                             name: LocaleKeys.relax.tr(),
-                            add: () {
-                              String? toast = context.read<TimeSpendCubit>().changeRelax(1);
+                            add: () async {
+                              String? toast = await context.read<TimeSpendCubit>().changeRelax(1);
                               if (toast != null) {
                                 BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
                               }
                             },
-                            remove: () {
-                              String? toast = context.read<TimeSpendCubit>().changeRelax(-1);
+                            remove: () async {
+                              String? toast = await context.read<TimeSpendCubit>().changeRelax(-1);
                               if (toast != null) {
                                 BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
                               }
@@ -101,14 +106,14 @@ class TimeSpendScreen extends StatelessWidget {
                           buildElement(
                             value: timeSpend.sleep,
                             name: LocaleKeys.sleep.tr(),
-                            add: () {
-                              String? toast = context.read<TimeSpendCubit>().changeSleep(1);
+                            add: () async {
+                              String? toast = await context.read<TimeSpendCubit>().changeSleep(1);
                               if (toast != null) {
                                 BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
                               }
                             },
-                            remove: () {
-                              String? toast = context.read<TimeSpendCubit>().changeSleep(-1);
+                            remove: () async {
+                              String? toast = await context.read<TimeSpendCubit>().changeSleep(-1);
                               if (toast != null) {
                                 BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
                               }
@@ -286,5 +291,13 @@ class TimeSpendScreen extends StatelessWidget {
         ],
       );
     });
+  }
+
+  @override
+  Widget wrappedRoute(BuildContext context) {
+    return BlocProvider.value(
+      value: timeSpendProvider,
+      child: this,
+    );
   }
 }

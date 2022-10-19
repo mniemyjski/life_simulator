@@ -23,10 +23,10 @@ import '../../app/bank/bank_screen.dart' as _i14;
 import '../../app/business/business_screen.dart' as _i26;
 import '../../app/business/business_transactions_screen.dart' as _i27;
 import '../../app/business/businesses_screen.dart' as _i25;
-import '../../app/business/cubit/employees_list/employees_cubit.dart' as _i37;
+import '../../app/business/cubit/employees_list/employees_cubit.dart' as _i38;
 import '../../app/business/employees_screen.dart' as _i30;
 import '../../app/business/human_resources_screen.dart' as _i31;
-import '../../app/business/models/employee/employee_model.dart' as _i38;
+import '../../app/business/models/employee/employee_model.dart' as _i39;
 import '../../app/business/products_screen.dart' as _i29;
 import '../../app/business/upgrade_screen.dart' as _i28;
 import '../../app/freelance/freelance_jobs_screen.dart' as _i24;
@@ -41,15 +41,16 @@ import '../../app/money/income_screen.dart' as _i8;
 import '../../app/money/transactions_screen.dart' as _i9;
 import '../../app/personality/food_screen.dart' as _i13;
 import '../../app/personality/house_screen.dart' as _i11;
-import '../../app/personality/models/house/house_model.dart' as _i34;
+import '../../app/personality/models/house/house_model.dart' as _i35;
 import '../../app/personality/personality_screen.dart' as _i10;
 import '../../app/personality/transport_screen.dart' as _i12;
 import '../../app/settings/screens/settings_screen.dart' as _i2;
-import '../../app/stock_market/cubit/candles/candles_cubit.dart' as _i35;
+import '../../app/stock_market/cubit/candles/candles_cubit.dart' as _i36;
 import '../../app/stock_market/cubit/instruments/instruments_cubit.dart'
-    as _i36;
+    as _i37;
 import '../../app/stock_market/instrument_screen.dart' as _i22;
 import '../../app/stock_market/stock_market_screen.dart' as _i21;
+import '../../app/time_spend/cubit/time_spend_cubit.dart' as _i34;
 import '../../app/time_spend/time_spend_screen.dart' as _i5;
 
 class AppRouter extends _i32.RootStackRouter {
@@ -95,9 +96,14 @@ class AppRouter extends _i32.RootStackRouter {
       );
     },
     TimeSpendRoute.name: (routeData) {
+      final args = routeData.argsAs<TimeSpendRouteArgs>();
       return _i32.CustomPage<dynamic>(
         routeData: routeData,
-        child: const _i5.TimeSpendScreen(),
+        child: _i32.WrappedRoute(
+            child: _i5.TimeSpendScreen(
+          key: args.key,
+          timeSpendProvider: args.timeSpendProvider,
+        )),
         transitionsBuilder: _i32.TransitionsBuilders.fadeIn,
         durationInMilliseconds: 300,
         opaque: true,
@@ -586,14 +592,36 @@ class JobRoute extends _i32.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.TimeSpendScreen]
-class TimeSpendRoute extends _i32.PageRouteInfo<void> {
-  const TimeSpendRoute()
-      : super(
+class TimeSpendRoute extends _i32.PageRouteInfo<TimeSpendRouteArgs> {
+  TimeSpendRoute({
+    _i33.Key? key,
+    required _i34.TimeSpendCubit timeSpendProvider,
+  }) : super(
           TimeSpendRoute.name,
           path: '/time-spend-screen',
+          args: TimeSpendRouteArgs(
+            key: key,
+            timeSpendProvider: timeSpendProvider,
+          ),
         );
 
   static const String name = 'TimeSpendRoute';
+}
+
+class TimeSpendRouteArgs {
+  const TimeSpendRouteArgs({
+    this.key,
+    required this.timeSpendProvider,
+  });
+
+  final _i33.Key? key;
+
+  final _i34.TimeSpendCubit timeSpendProvider;
+
+  @override
+  String toString() {
+    return 'TimeSpendRouteArgs{key: $key, timeSpendProvider: $timeSpendProvider}';
+  }
 }
 
 /// generated route for
@@ -661,7 +689,7 @@ class PersonalityRoute extends _i32.PageRouteInfo<void> {
 class HouseRoute extends _i32.PageRouteInfo<HouseRouteArgs> {
   HouseRoute({
     _i33.Key? key,
-    required _i34.ETypeHouse eTypeHouse,
+    required _i35.ETypeHouse eTypeHouse,
   }) : super(
           HouseRoute.name,
           path: '/house-screen',
@@ -682,7 +710,7 @@ class HouseRouteArgs {
 
   final _i33.Key? key;
 
-  final _i34.ETypeHouse eTypeHouse;
+  final _i35.ETypeHouse eTypeHouse;
 
   @override
   String toString() {
@@ -838,8 +866,8 @@ class InstrumentRoute extends _i32.PageRouteInfo<InstrumentRouteArgs> {
   InstrumentRoute({
     _i33.Key? key,
     required int instrumentId,
-    required _i35.CandlesCubit candlesProvider,
-    required _i36.InstrumentsCubit instrumentsCubit,
+    required _i36.CandlesCubit candlesProvider,
+    required _i37.InstrumentsCubit instrumentsCubit,
   }) : super(
           InstrumentRoute.name,
           path: '/instrument-screen',
@@ -866,9 +894,9 @@ class InstrumentRouteArgs {
 
   final int instrumentId;
 
-  final _i35.CandlesCubit candlesProvider;
+  final _i36.CandlesCubit candlesProvider;
 
-  final _i36.InstrumentsCubit instrumentsCubit;
+  final _i37.InstrumentsCubit instrumentsCubit;
 
   @override
   String toString() {
@@ -1088,8 +1116,8 @@ class EmployeesRouteArgs {
 class HumanResourcesRoute extends _i32.PageRouteInfo<HumanResourcesRouteArgs> {
   HumanResourcesRoute({
     _i33.Key? key,
-    required _i37.EmployeesCubit blocProvider,
-    required _i38.ETypeEmployees eTypeEmployees,
+    required _i38.EmployeesCubit blocProvider,
+    required _i39.ETypeEmployees eTypeEmployees,
   }) : super(
           HumanResourcesRoute.name,
           path: '/human-resources-screen',
@@ -1112,9 +1140,9 @@ class HumanResourcesRouteArgs {
 
   final _i33.Key? key;
 
-  final _i37.EmployeesCubit blocProvider;
+  final _i38.EmployeesCubit blocProvider;
 
-  final _i38.ETypeEmployees eTypeEmployees;
+  final _i39.ETypeEmployees eTypeEmployees;
 
   @override
   String toString() {

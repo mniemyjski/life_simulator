@@ -5,6 +5,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:richeable/utilities/utilities.dart';
 
+import '../../../repositories/time_spend_repository.dart';
 import '../../assets/cubit/assets/assets_cubit.dart';
 import '../../assets/cubit/build/build_asset_cubit.dart';
 import '../../bank/cubit/deposit/deposit_cubit.dart';
@@ -22,7 +23,6 @@ import '../../new_game/new_game_cubit.dart';
 import '../../settings/cubit/day_setting_cubit.dart';
 import '../../stats/cubit/stats_cubit.dart';
 import '../../stock_market/repositories/stock_market_repository.dart';
-import '../../time_spend/cubit/time_spend_cubit.dart';
 
 part 'date_cubit.freezed.dart';
 part 'date_cubit.g.dart';
@@ -37,7 +37,6 @@ class DateCubit extends HydratedCubit<DateState> {
   final LoadingCubit _loadingCubit;
 
   final FreelanceJobCubit _freelanceJobCubit;
-  final TimeSpendCubit _timeSpendCubit;
   final LearningCubit _learningCubit;
   final EventCubit _eventCubit;
   final StatsCubit _statsCubit;
@@ -53,6 +52,7 @@ class DateCubit extends HydratedCubit<DateState> {
   //
   final StockMarketRepository _stockMarketRepository;
   final FreelanceRepository _freelanceRepository;
+  final TimeSpendRepository _timeSpendRepository;
 
   DateCubit(
     this._newGameCubit,
@@ -60,7 +60,6 @@ class DateCubit extends HydratedCubit<DateState> {
     this._loadingCubit,
     this._stockMarketRepository,
     this._freelanceJobCubit,
-    this._timeSpendCubit,
     this._learningCubit,
     this._eventCubit,
     this._statsCubit,
@@ -73,6 +72,7 @@ class DateCubit extends HydratedCubit<DateState> {
     this._loanCubit,
     this._businessesCubit,
     this._freelanceRepository,
+    this._timeSpendRepository,
   ) : super(const DateState.initial()) {
     _newGame();
   }
@@ -120,10 +120,10 @@ class DateCubit extends HydratedCubit<DateState> {
         await _buildAssetsCubit.counting(dateTime);
         await _depositCubit.counting(dateTime);
         await _loanCubit.counting(dateTime);
-
         await _businessesCubit.counting(dateTime);
 
-        await _timeSpendCubit.counting();
+        //
+        await _timeSpendRepository.counting();
 
         emit(DateState.loaded(dateTime));
       });
