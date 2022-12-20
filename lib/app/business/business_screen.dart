@@ -1,12 +1,16 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:bot_toast/bot_toast.dart';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:richeable/app/business/cubit/balance_business/balance_business_cubit.dart';
-import 'package:richeable/app/business/cubit/businesses/businesses_cubit.dart';
 import 'package:richeable/app/business/models/business/business_model.dart';
+import 'package:richeable/app/business/widgets/deposit_sheet.dart';
+import 'package:richeable/app/business/widgets/withdraw_sheet.dart';
 import 'package:richeable/app/date/widgets/next_day.dart';
 import 'package:richeable/app/game/widget/app_bar_game.dart';
+import 'package:richeable/app/money/cubit/money/money_cubit.dart';
 import 'package:richeable/constants/constants.dart';
 import 'package:richeable/utilities/utilities.dart';
 import 'package:richeable/widgets/custom_button.dart';
@@ -15,6 +19,7 @@ import 'package:richeable/widgets/custom_scaffold.dart';
 
 import '../../config/injectable/injection.dart';
 import '../../config/routes/routes.gr.dart';
+import 'cubit/businesses_list/businesses_cubit.dart';
 
 class BusinessScreen extends StatelessWidget {
   final int businessId;
@@ -201,17 +206,6 @@ class BusinessScreen extends StatelessWidget {
                               onPressed: () => null,
                               child: const Icon(FontAwesomeIcons.moneyBill),
                             ),
-                            // CustomCard(
-                            //     child: Padding(
-                            //   padding: const EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 10),
-                            //   child: IconButton(
-                            //     padding: EdgeInsets.zero,
-                            //     constraints: const BoxConstraints(),
-                            //     onPressed: () => null,
-                            //     icon: const Icon(FontAwesomeIcons.moneyBill),
-                            //     color: Colors.white70,
-                            //   ),
-                            // )),
                           ],
                         ),
                         const Padding(
@@ -220,51 +214,120 @@ class BusinessScreen extends StatelessWidget {
                             color: Colors.white38,
                           ),
                         ),
+                        Expanded(
+                            child: Padding(
+                          padding: const EdgeInsets.only(left: 8, right: 8),
+                          child: DottedBorder(
+                            color: Theme.of(context).primaryColor.withOpacity(0.4),
+                            strokeWidth: 1,
+                            child: Container(),
+                          ),
+                        )),
                         Padding(
                           padding: const EdgeInsets.all(4.0),
                           child: GridView.count(
                             padding: const EdgeInsets.all(1),
                             crossAxisSpacing: 8,
                             mainAxisSpacing: 8,
-                            crossAxisCount: 3,
+                            crossAxisCount: 4,
                             shrinkWrap: true,
                             children: [
                               CustomButton(
                                 onPressed: () {
-                                  context.router.push(ProductRoute(businessId: businessId));
+                                  context.router.push(ProductListRoute(businessId: businessId));
                                 },
-                                child: Text(LocaleKeys.products.tr()),
+                                child: Text(
+                                  LocaleKeys.products.tr(),
+                                  style: Theme.of(context).textTheme.bodyText2,
+                                ),
                               ),
                               CustomButton(
                                 onPressed: () {
                                   context.router.push(EmployeesRoute(businessId: businessId));
                                 },
-                                child: Text(LocaleKeys.employees.tr()),
+                                child: Text(
+                                  LocaleKeys.employees.tr(),
+                                  style: Theme.of(context).textTheme.bodyText2,
+                                ),
                               ),
                               CustomButton(
                                 onPressed: () {
                                   context.router.push(UpgradeRoute(businessId: businessId));
                                 },
-                                child: Text(LocaleKeys.upgrade.tr()),
+                                child: Text(
+                                  LocaleKeys.upgrade.tr(),
+                                  style: Theme.of(context).textTheme.bodyText2,
+                                ),
                               ),
                               CustomButton(
                                 onPressed: () {
                                   context.router
                                       .push(BusinessTransactionsRoute(businessId: businessId));
                                 },
-                                child: Text(LocaleKeys.transactions.tr()),
+                                child: Text(
+                                  LocaleKeys.transactions.tr(),
+                                  style: Theme.of(context).textTheme.bodyText2,
+                                ),
                               ),
                               CustomButton(
                                 onPressed: () {},
-                                child: Text(LocaleKeys.marketing.tr()),
+                                child: Text(
+                                  LocaleKeys.marketing.tr(),
+                                  style: Theme.of(context).textTheme.bodyText2,
+                                ),
                               ),
                               CustomButton(
-                                onPressed: () => context.read<BalanceBusinessCubit>().withdraw(5),
-                                child: Text(LocaleKeys.withdraw.tr()),
+                                onPressed: () {
+                                  context.read<BalanceBusinessCubit>().state.whenOrNull(
+                                      loaded: (balance) {
+                                    if (balance < 1) {
+                                      BotToast.showText(
+                                          text: 'notEnoughMoney',
+                                          align: const Alignment(0.1, 0.05));
+                                      return;
+                                    }
+                                    showModalBottomSheet<void>(
+                                        isScrollControlled: true,
+                                        backgroundColor: Colors.transparent,
+                                        context: context,
+                                        builder: (_) => BlocProvider.value(
+                                              value: BlocProvider.of<BalanceBusinessCubit>(context),
+                                              child: WithdrawSheet(
+                                                max: balance,
+                                              ),
+                                            ));
+                                  });
+                                },
+                                child: Text(
+                                  LocaleKeys.withdraw.tr(),
+                                  style: Theme.of(context).textTheme.bodyText2,
+                                ),
                               ),
                               CustomButton(
-                                onPressed: () => context.read<BalanceBusinessCubit>().deposit(5),
-                                child: Text(LocaleKeys.deposit.tr()),
+                                onPressed: () {
+                                  context.read<MoneyCubit>().state.whenOrNull(loaded: (balance) {
+                                    if (balance < 1) {
+                                      BotToast.showText(
+                                          text: 'notEnoughMoney',
+                                          align: const Alignment(0.1, 0.05));
+                                      return;
+                                    }
+                                    showModalBottomSheet<void>(
+                                        isScrollControlled: true,
+                                        backgroundColor: Colors.transparent,
+                                        context: context,
+                                        builder: (_) => BlocProvider.value(
+                                              value: BlocProvider.of<BalanceBusinessCubit>(context),
+                                              child: DepositSheet(
+                                                max: balance,
+                                              ),
+                                            ));
+                                  });
+                                },
+                                child: Text(
+                                  LocaleKeys.deposit.tr(),
+                                  style: Theme.of(context).textTheme.bodyText2,
+                                ),
                               ),
                               CustomButton(
                                 backgroundColor: Colors.red[900],
@@ -272,12 +335,15 @@ class BusinessScreen extends StatelessWidget {
                                   context.router.pop();
                                   context.read<BusinessesCubit>().remove(business);
                                 },
-                                child: Text(LocaleKeys.remove.tr()),
+                                child: Text(
+                                  LocaleKeys.remove.tr(),
+                                  style: Theme.of(context).textTheme.bodyText2,
+                                ),
                               ),
                             ],
                           ),
                         ),
-                        const SizedBox(height: 8),
+                        const SizedBox(height: 80),
                       ],
                     ),
                   ),

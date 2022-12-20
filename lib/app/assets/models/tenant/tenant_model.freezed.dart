@@ -37,7 +37,8 @@ mixin _$Tenant {
 /// @nodoc
 abstract class $TenantCopyWith<$Res> {
   factory $TenantCopyWith(Tenant value, $Res Function(Tenant) then) =
-      _$TenantCopyWithImpl<$Res>;
+      _$TenantCopyWithImpl<$Res, Tenant>;
+  @useResult
   $Res call(
       {String? id,
       String? idAsset,
@@ -50,58 +51,61 @@ abstract class $TenantCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$TenantCopyWithImpl<$Res> implements $TenantCopyWith<$Res> {
+class _$TenantCopyWithImpl<$Res, $Val extends Tenant>
+    implements $TenantCopyWith<$Res> {
   _$TenantCopyWithImpl(this._value, this._then);
 
-  final Tenant _value;
   // ignore: unused_field
-  final $Res Function(Tenant) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = freezed,
     Object? idAsset = freezed,
-    Object? minLevel = freezed,
-    Object? rent = freezed,
-    Object? rating = freezed,
-    Object? hasAnimal = freezed,
-    Object? chance = freezed,
-    Object? satisfaction = freezed,
+    Object? minLevel = null,
+    Object? rent = null,
+    Object? rating = null,
+    Object? hasAnimal = null,
+    Object? chance = null,
+    Object? satisfaction = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      idAsset: idAsset == freezed
+      idAsset: freezed == idAsset
           ? _value.idAsset
           : idAsset // ignore: cast_nullable_to_non_nullable
               as String?,
-      minLevel: minLevel == freezed
+      minLevel: null == minLevel
           ? _value.minLevel
           : minLevel // ignore: cast_nullable_to_non_nullable
               as double,
-      rent: rent == freezed
+      rent: null == rent
           ? _value.rent
           : rent // ignore: cast_nullable_to_non_nullable
               as double,
-      rating: rating == freezed
+      rating: null == rating
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
               as int,
-      hasAnimal: hasAnimal == freezed
+      hasAnimal: null == hasAnimal
           ? _value.hasAnimal
           : hasAnimal // ignore: cast_nullable_to_non_nullable
               as bool,
-      chance: chance == freezed
+      chance: null == chance
           ? _value.chance
           : chance // ignore: cast_nullable_to_non_nullable
               as int,
-      satisfaction: satisfaction == freezed
+      satisfaction: null == satisfaction
           ? _value.satisfaction
           : satisfaction // ignore: cast_nullable_to_non_nullable
               as int,
-    ));
+    ) as $Val);
   }
 }
 
@@ -111,6 +115,7 @@ abstract class _$$_TenantsCopyWith<$Res> implements $TenantCopyWith<$Res> {
           _$_Tenants value, $Res Function(_$_Tenants) then) =
       __$$_TenantsCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String? id,
       String? idAsset,
@@ -123,55 +128,54 @@ abstract class _$$_TenantsCopyWith<$Res> implements $TenantCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_TenantsCopyWithImpl<$Res> extends _$TenantCopyWithImpl<$Res>
+class __$$_TenantsCopyWithImpl<$Res>
+    extends _$TenantCopyWithImpl<$Res, _$_Tenants>
     implements _$$_TenantsCopyWith<$Res> {
   __$$_TenantsCopyWithImpl(_$_Tenants _value, $Res Function(_$_Tenants) _then)
-      : super(_value, (v) => _then(v as _$_Tenants));
+      : super(_value, _then);
 
-  @override
-  _$_Tenants get _value => super._value as _$_Tenants;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = freezed,
     Object? idAsset = freezed,
-    Object? minLevel = freezed,
-    Object? rent = freezed,
-    Object? rating = freezed,
-    Object? hasAnimal = freezed,
-    Object? chance = freezed,
-    Object? satisfaction = freezed,
+    Object? minLevel = null,
+    Object? rent = null,
+    Object? rating = null,
+    Object? hasAnimal = null,
+    Object? chance = null,
+    Object? satisfaction = null,
   }) {
     return _then(_$_Tenants(
-      id: id == freezed
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      idAsset: idAsset == freezed
+      idAsset: freezed == idAsset
           ? _value.idAsset
           : idAsset // ignore: cast_nullable_to_non_nullable
               as String?,
-      minLevel: minLevel == freezed
+      minLevel: null == minLevel
           ? _value.minLevel
           : minLevel // ignore: cast_nullable_to_non_nullable
               as double,
-      rent: rent == freezed
+      rent: null == rent
           ? _value.rent
           : rent // ignore: cast_nullable_to_non_nullable
               as double,
-      rating: rating == freezed
+      rating: null == rating
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
               as int,
-      hasAnimal: hasAnimal == freezed
+      hasAnimal: null == hasAnimal
           ? _value.hasAnimal
           : hasAnimal // ignore: cast_nullable_to_non_nullable
               as bool,
-      chance: chance == freezed
+      chance: null == chance
           ? _value.chance
           : chance // ignore: cast_nullable_to_non_nullable
               as int,
-      satisfaction: satisfaction == freezed
+      satisfaction: null == satisfaction
           ? _value.satisfaction
           : satisfaction // ignore: cast_nullable_to_non_nullable
               as int,
@@ -224,32 +228,27 @@ class _$_Tenants implements _Tenants {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Tenants &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.idAsset, idAsset) &&
-            const DeepCollectionEquality().equals(other.minLevel, minLevel) &&
-            const DeepCollectionEquality().equals(other.rent, rent) &&
-            const DeepCollectionEquality().equals(other.rating, rating) &&
-            const DeepCollectionEquality().equals(other.hasAnimal, hasAnimal) &&
-            const DeepCollectionEquality().equals(other.chance, chance) &&
-            const DeepCollectionEquality()
-                .equals(other.satisfaction, satisfaction));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.idAsset, idAsset) || other.idAsset == idAsset) &&
+            (identical(other.minLevel, minLevel) ||
+                other.minLevel == minLevel) &&
+            (identical(other.rent, rent) || other.rent == rent) &&
+            (identical(other.rating, rating) || other.rating == rating) &&
+            (identical(other.hasAnimal, hasAnimal) ||
+                other.hasAnimal == hasAnimal) &&
+            (identical(other.chance, chance) || other.chance == chance) &&
+            (identical(other.satisfaction, satisfaction) ||
+                other.satisfaction == satisfaction));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(idAsset),
-      const DeepCollectionEquality().hash(minLevel),
-      const DeepCollectionEquality().hash(rent),
-      const DeepCollectionEquality().hash(rating),
-      const DeepCollectionEquality().hash(hasAnimal),
-      const DeepCollectionEquality().hash(chance),
-      const DeepCollectionEquality().hash(satisfaction));
+  int get hashCode => Object.hash(runtimeType, id, idAsset, minLevel, rent,
+      rating, hasAnimal, chance, satisfaction);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_TenantsCopyWith<_$_Tenants> get copyWith =>
       __$$_TenantsCopyWithImpl<_$_Tenants>(this, _$identity);
 

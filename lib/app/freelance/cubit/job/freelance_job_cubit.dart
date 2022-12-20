@@ -5,14 +5,14 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:richeable/app/freelance/services/freelance_services.dart';
 
-import '../../../../repositories/time_spend_repository.dart';
 import '../../../../utilities/utilities.dart';
 import '../../../new_game/new_game_cubit.dart';
 import '../../../skills/models/skill_emb/skill_emb_model.dart';
 import '../../../skills/repositories/skills_repository.dart';
 import '../../../time_spend/models/time_spend_model/time_spend_model.dart';
+import '../../../time_spend/repositories/time_spend_repository.dart';
 import '../../models/freelance_job/freelance_job_model.dart';
-import '../done/freelance_done_cubit.dart';
+import '../../repositories/freelance_repository.dart';
 
 part 'freelance_job_cubit.freezed.dart';
 part 'freelance_job_cubit.g.dart';
@@ -23,15 +23,15 @@ class FreelanceJobCubit extends HydratedCubit<FreelanceJobState> {
   final NewGameCubit _newGameCubit;
   late StreamSubscription _newGameSub;
 
-  final FreelanceDoneCubit _freelanceDoneCubit;
   final SkillsRepository _skillsRepository;
   final TimeSpendRepository _timeSpendRepository;
+  final FreelanceRepository _freelanceRepository;
 
   FreelanceJobCubit(
     this._newGameCubit,
-    this._freelanceDoneCubit,
     this._skillsRepository,
     this._timeSpendRepository,
+    this._freelanceRepository,
   ) : super(const FreelanceJobState.initial()) {
     _newGame();
   }
@@ -70,7 +70,7 @@ class FreelanceJobCubit extends HydratedCubit<FreelanceJobState> {
               time = 0;
             }
             if (e.leftWorkTime <= time) {
-              await _freelanceDoneCubit.add(e.toDone(dateTime));
+              await _freelanceRepository.add(e.toDone(dateTime));
               _countingExp(
                 reqSkills: e.reqSkills,
                 userSkills: e.userSkills,

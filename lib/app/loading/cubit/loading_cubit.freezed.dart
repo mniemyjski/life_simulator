@@ -37,8 +37,8 @@ mixin _$LoadingState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<String> names)? loading,
-    TResult Function()? loaded,
+    TResult? Function(List<String> names)? loading,
+    TResult? Function()? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -56,8 +56,8 @@ mixin _$LoadingState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Loading value)? loading,
-    TResult Function(Loaded value)? loaded,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Loaded value)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -74,40 +74,42 @@ mixin _$LoadingState {
 abstract class $LoadingStateCopyWith<$Res> {
   factory $LoadingStateCopyWith(
           LoadingState value, $Res Function(LoadingState) then) =
-      _$LoadingStateCopyWithImpl<$Res>;
+      _$LoadingStateCopyWithImpl<$Res, LoadingState>;
 }
 
 /// @nodoc
-class _$LoadingStateCopyWithImpl<$Res> implements $LoadingStateCopyWith<$Res> {
+class _$LoadingStateCopyWithImpl<$Res, $Val extends LoadingState>
+    implements $LoadingStateCopyWith<$Res> {
   _$LoadingStateCopyWithImpl(this._value, this._then);
 
-  final LoadingState _value;
   // ignore: unused_field
-  final $Res Function(LoadingState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
 abstract class _$$LoadingCopyWith<$Res> {
   factory _$$LoadingCopyWith(_$Loading value, $Res Function(_$Loading) then) =
       __$$LoadingCopyWithImpl<$Res>;
+  @useResult
   $Res call({List<String> names});
 }
 
 /// @nodoc
-class __$$LoadingCopyWithImpl<$Res> extends _$LoadingStateCopyWithImpl<$Res>
+class __$$LoadingCopyWithImpl<$Res>
+    extends _$LoadingStateCopyWithImpl<$Res, _$Loading>
     implements _$$LoadingCopyWith<$Res> {
   __$$LoadingCopyWithImpl(_$Loading _value, $Res Function(_$Loading) _then)
-      : super(_value, (v) => _then(v as _$Loading));
+      : super(_value, _then);
 
-  @override
-  _$Loading get _value => super._value as _$Loading;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? names = freezed,
+    Object? names = null,
   }) {
     return _then(_$Loading(
-      names == freezed
+      null == names
           ? _value._names
           : names // ignore: cast_nullable_to_non_nullable
               as List<String>,
@@ -155,6 +157,7 @@ class _$Loading implements Loading {
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$LoadingCopyWith<_$Loading> get copyWith =>
       __$$LoadingCopyWithImpl<_$Loading>(this, _$identity);
 
@@ -170,8 +173,8 @@ class _$Loading implements Loading {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<String> names)? loading,
-    TResult Function()? loaded,
+    TResult? Function(List<String> names)? loading,
+    TResult? Function()? loaded,
   }) {
     return loading?.call(names);
   }
@@ -201,8 +204,8 @@ class _$Loading implements Loading {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Loading value)? loading,
-    TResult Function(Loaded value)? loaded,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Loaded value)? loaded,
   }) {
     return loading?.call(this);
   }
@@ -246,13 +249,11 @@ abstract class _$$LoadedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$LoadedCopyWithImpl<$Res> extends _$LoadingStateCopyWithImpl<$Res>
+class __$$LoadedCopyWithImpl<$Res>
+    extends _$LoadingStateCopyWithImpl<$Res, _$Loaded>
     implements _$$LoadedCopyWith<$Res> {
   __$$LoadedCopyWithImpl(_$Loaded _value, $Res Function(_$Loaded) _then)
-      : super(_value, (v) => _then(v as _$Loaded));
-
-  @override
-  _$Loaded get _value => super._value as _$Loaded;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -293,8 +294,8 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<String> names)? loading,
-    TResult Function()? loaded,
+    TResult? Function(List<String> names)? loading,
+    TResult? Function()? loaded,
   }) {
     return loaded?.call();
   }
@@ -324,8 +325,8 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Loading value)? loading,
-    TResult Function(Loaded value)? loaded,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Loaded value)? loaded,
   }) {
     return loaded?.call(this);
   }

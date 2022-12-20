@@ -7,9 +7,9 @@ import 'package:richeable/app/money/models/transaction/transaction_model.dart';
 import 'package:richeable/utilities/extensions.dart';
 import 'package:richeable/utilities/utilities.dart';
 
-import '../../../../repositories/transactions_repository.dart';
 import '../../../date/cubit/date_cubit.dart';
 import '../../../money/models/sum_transactions/sum_transactions_model.dart';
+import '../../../money/repositories/transactions_repository.dart';
 
 part 'transactions_business_cubit.freezed.dart';
 part 'transactions_business_cubit.g.dart';

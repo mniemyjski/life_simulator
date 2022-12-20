@@ -90,7 +90,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     child: CustomButton(
                       onPressed: () {
                         context.read<AudioCubit>().getSounds(AudioCollection.click()).play();
-                        context.router.push(const GameRoute());
+                        // context.router.push(const GameRoute());
+                        context.router.push(const GameRouter(children: [GameRoute()]));
                       },
                       child: Text(LocaleKeys.continueGame.tr()),
                     ),
@@ -105,8 +106,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               child: CustomButton(
                 onPressed: () async {
                   context.read<AudioCubit>().getSounds(AudioCollection.click()).play();
-                  context.read<NewGameCubit>().change();
-                  context.router.push(const GameRoute());
+                  await context.read<NewGameCubit>().change();
+                  context.router.push(const GameRouter(children: [GameRoute()]));
                 },
                 child: Text(LocaleKeys.newGame.tr()),
               ),

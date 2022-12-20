@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:richeable/app/business/cubit/transactions_list/transactions_business_cubit.dart';
 import 'package:richeable/config/injectable/injection.dart';
 import 'package:richeable/utilities/utilities.dart';
+import 'package:richeable/widgets/custom_card.dart';
 
 import '../../constants/constants.dart';
 import '../../widgets/widgets.dart';
@@ -34,16 +35,17 @@ class BusinessTransactionsScreen extends StatelessWidget {
                       const SizedBox(height: 8),
                       Row(
                         children: [
-                          Card(
+                          CustomCard(
                             child: IconButton(
                                 onPressed: () =>
                                     context.read<TransactionsBusinessCubit>().backMonth(),
                                 icon: const Icon(
                                   FontAwesomeIcons.arrowLeft,
+                                  color: Colors.white,
                                 )),
                           ),
                           Expanded(
-                            child: Card(
+                            child: CustomCard(
                               child: Container(
                                 height: 48,
                                 padding: const EdgeInsets.all(8.0),
@@ -52,18 +54,19 @@ class BusinessTransactionsScreen extends StatelessWidget {
                                   date.onlyDateToString(),
                                   style: Theme.of(context)
                                       .textTheme
-                                      .bodyText1!
+                                      .bodyText2!
                                       .copyWith(fontWeight: FontWeight.bold),
                                 )),
                               ),
                             ),
                           ),
-                          Card(
+                          CustomCard(
                             child: IconButton(
                                 onPressed: () =>
                                     context.read<TransactionsBusinessCubit>().nextMonth(),
                                 icon: const Icon(
                                   FontAwesomeIcons.arrowRight,
+                                  color: Colors.white,
                                 )),
                           ),
                         ],
@@ -75,7 +78,7 @@ class BusinessTransactionsScreen extends StatelessWidget {
                             Row(
                               children: [
                                 Expanded(
-                                  child: Card(
+                                  child: CustomCard(
                                     color: Colors.green.withOpacity(0.6),
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
@@ -88,19 +91,19 @@ class BusinessTransactionsScreen extends StatelessWidget {
                                   ),
                                 ),
                                 Expanded(
-                                  child: Card(
+                                  child: CustomCard(
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Text(
                                         '${LocaleKeys.net.tr()}: ${context.watch<TransactionsBusinessCubit>().getTotalSum(null).toMoney()}',
                                         style: TextStyle(
-                                            color: Theme.of(context).textTheme.bodyText1!.color),
+                                            color: Theme.of(context).textTheme.bodyText2!.color),
                                       ),
                                     ),
                                   ),
                                 ),
                                 Expanded(
-                                  child: Card(
+                                  child: CustomCard(
                                     color: Colors.red.withOpacity(0.6),
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
@@ -185,48 +188,46 @@ class BusinessTransactionsScreen extends StatelessWidget {
 
   Builder _elementList(SumTransactions element) {
     return Builder(builder: (context) {
-      return Card(
-        child: Container(
-          color: element.value < 0 ? Colors.red.withOpacity(0.3) : Colors.green.withOpacity(0.3),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Column(
-                  children: [
-                    Column(
-                      children: [
-                        Text(
-                          '${Enums.toText(element.eTypeTransactionSource).tr()}:',
-                          style: TextStyle(
-                            color: Theme.of(context).textTheme.bodyText1!.color,
-                            fontWeight: FontWeight.bold,
-                          ),
+      return CustomCard(
+        color: element.value < 0 ? Colors.red.withOpacity(0.2) : Colors.green.withOpacity(0.2),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Column(
+                children: [
+                  Column(
+                    children: [
+                      Text(
+                        '${Enums.toText(element.eTypeTransactionSource).tr()}:',
+                        style: TextStyle(
+                          color: Theme.of(context).textTheme.bodyText2!.color,
+                          fontWeight: FontWeight.bold,
                         ),
-                      ],
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Text(
-                      '${LocaleKeys.value.tr()}: ',
-                      style: TextStyle(
-                        color: Theme.of(context).textTheme.bodyText1!.color,
-                        fontWeight: FontWeight.bold,
                       ),
+                    ],
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Text(
+                    '${LocaleKeys.value.tr()}: ',
+                    style: TextStyle(
+                      color: Theme.of(context).textTheme.bodyText2!.color,
+                      fontWeight: FontWeight.bold,
                     ),
-                    Text(
-                      element.value.toMoney(),
-                      style: TextStyle(
-                        color: Theme.of(context).textTheme.bodyText1!.color,
-                      ),
+                  ),
+                  Text(
+                    element.value.toMoney(),
+                    style: TextStyle(
+                      color: Theme.of(context).textTheme.bodyText2!.color,
                     ),
-                  ],
-                ),
-              ],
-            ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       );

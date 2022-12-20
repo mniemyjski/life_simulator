@@ -3,8 +3,8 @@ import 'package:isar/isar.dart';
 import 'package:richeable/app/money/models/transaction/transaction_model.dart';
 import 'package:richeable/utilities/utilities.dart';
 
-import '../config/injectable/app_module.dart';
-import '../config/injectable/injection.dart';
+import '../../../config/injectable/app_module.dart';
+import '../../../config/injectable/injection.dart';
 
 enum ETypeDate { day, month, year }
 
@@ -14,6 +14,16 @@ class TransactionsRepository {
 
   TransactionsRepository() {
     _isar = getIt<AppModule>().instance;
+  }
+
+  init() async {
+    return await _isar.writeTxn(() async {
+      Transaction transaction = Transaction(
+          value: 20000000,
+          eTypeTransactionSource: ETypeTransactionSource.giftFromParents,
+          dateCre: DateTime(18, 1, 1));
+      await _isar.transactions.put(transaction);
+    });
   }
 
   Future add(Transaction transaction) async {

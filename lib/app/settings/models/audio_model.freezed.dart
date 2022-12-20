@@ -31,33 +31,37 @@ mixin _$Audio {
 /// @nodoc
 abstract class $AudioCopyWith<$Res> {
   factory $AudioCopyWith(Audio value, $Res Function(Audio) then) =
-      _$AudioCopyWithImpl<$Res>;
+      _$AudioCopyWithImpl<$Res, Audio>;
+  @useResult
   $Res call({double sounds, double music});
 }
 
 /// @nodoc
-class _$AudioCopyWithImpl<$Res> implements $AudioCopyWith<$Res> {
+class _$AudioCopyWithImpl<$Res, $Val extends Audio>
+    implements $AudioCopyWith<$Res> {
   _$AudioCopyWithImpl(this._value, this._then);
 
-  final Audio _value;
   // ignore: unused_field
-  final $Res Function(Audio) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? sounds = freezed,
-    Object? music = freezed,
+    Object? sounds = null,
+    Object? music = null,
   }) {
     return _then(_value.copyWith(
-      sounds: sounds == freezed
+      sounds: null == sounds
           ? _value.sounds
           : sounds // ignore: cast_nullable_to_non_nullable
               as double,
-      music: music == freezed
+      music: null == music
           ? _value.music
           : music // ignore: cast_nullable_to_non_nullable
               as double,
-    ));
+    ) as $Val);
   }
 }
 
@@ -66,29 +70,28 @@ abstract class _$$_AudioCopyWith<$Res> implements $AudioCopyWith<$Res> {
   factory _$$_AudioCopyWith(_$_Audio value, $Res Function(_$_Audio) then) =
       __$$_AudioCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({double sounds, double music});
 }
 
 /// @nodoc
-class __$$_AudioCopyWithImpl<$Res> extends _$AudioCopyWithImpl<$Res>
+class __$$_AudioCopyWithImpl<$Res> extends _$AudioCopyWithImpl<$Res, _$_Audio>
     implements _$$_AudioCopyWith<$Res> {
   __$$_AudioCopyWithImpl(_$_Audio _value, $Res Function(_$_Audio) _then)
-      : super(_value, (v) => _then(v as _$_Audio));
+      : super(_value, _then);
 
-  @override
-  _$_Audio get _value => super._value as _$_Audio;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? sounds = freezed,
-    Object? music = freezed,
+    Object? sounds = null,
+    Object? music = null,
   }) {
     return _then(_$_Audio(
-      sounds: sounds == freezed
+      sounds: null == sounds
           ? _value.sounds
           : sounds // ignore: cast_nullable_to_non_nullable
               as double,
-      music: music == freezed
+      music: null == music
           ? _value.music
           : music // ignore: cast_nullable_to_non_nullable
               as double,
@@ -121,19 +124,17 @@ class _$_Audio implements _Audio {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Audio &&
-            const DeepCollectionEquality().equals(other.sounds, sounds) &&
-            const DeepCollectionEquality().equals(other.music, music));
+            (identical(other.sounds, sounds) || other.sounds == sounds) &&
+            (identical(other.music, music) || other.music == music));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(sounds),
-      const DeepCollectionEquality().hash(music));
+  int get hashCode => Object.hash(runtimeType, sounds, music);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_AudioCopyWith<_$_Audio> get copyWith =>
       __$$_AudioCopyWithImpl<_$_Audio>(this, _$identity);
 

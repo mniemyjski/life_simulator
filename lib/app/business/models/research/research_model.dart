@@ -1,74 +1,82 @@
 import 'dart:math';
 
+import 'package:copy_with_extension/copy_with_extension.dart';
+import 'package:equatable/equatable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:isar/isar.dart';
 import 'package:richeable/utilities/utilities.dart';
-import 'package:uuid/uuid.dart';
 
 import '../product/product_model.dart';
 
-part 'research_model.freezed.dart';
 part 'research_model.g.dart';
 
-@freezed
-class Research with _$Research {
-  const Research._();
+@CopyWith()
+@JsonSerializable()
+@Collection(ignore: {'props', 'stringify'})
+@Name('Researches')
+class Research extends Equatable {
+  final Id id;
+  @Index()
+  final int businessId;
+  @Index()
+  final DateTime dateEnd;
+  final String name;
+  final double work;
+  final double cost;
+  @enumerated
+  final ETypeProduct eTypeProduct;
+  @enumerated
+  final ETypeQuality eTypeQuality;
 
-  const factory Research({
-    required String uid,
-    required int businessId,
-    required DateTime dateEnd,
-    required String name,
-    @Default(0) double work,
-    required double cost,
-    required ETypeProduct eTypeProduct,
-    required ETypeQuality eTypeQuality,
-  }) = _Research;
+  const Research({
+    this.id = Isar.autoIncrement,
+    required this.businessId,
+    required this.dateEnd,
+    required this.name,
+    this.work = 0,
+    required this.cost,
+    required this.eTypeProduct,
+    required this.eTypeQuality,
+  });
 
-  static Research builder({
-    required int businessId,
-    required String name,
-    required DateTime dateEnd,
-    required double cost,
-    required ETypeProduct eTypeProduct,
-    required ETypeQuality eTypeQuality,
-  }) {
-    return Research(
-      uid: const Uuid().v1(),
-      businessId: businessId,
-      name: name,
-      dateEnd: dateEnd,
-      cost: cost,
-      eTypeProduct: eTypeProduct,
-      eTypeQuality: eTypeQuality,
-    );
-  }
+  @override
+  List<Object> get props => [
+        id,
+        businessId,
+        dateEnd,
+        name,
+        work,
+        cost,
+        eTypeProduct,
+        eTypeQuality,
+      ];
 
   Product toProduct() {
     int generatedRating = _getRating();
 
     double costPerUnit;
-    double workPerUnit;
+    int unitPerWork;
     double multiplierDemand;
 
     switch (eTypeProduct) {
       case ETypeProduct.food:
         costPerUnit = 1;
-        workPerUnit = 1 / 100;
+        unitPerWork = 300;
         multiplierDemand = 100;
         break;
       case ETypeProduct.cloth:
         costPerUnit = 10;
-        workPerUnit = 1;
+        unitPerWork = 1;
         multiplierDemand = 1;
         break;
       case ETypeProduct.furniture:
         costPerUnit = 100;
-        workPerUnit = 1;
+        unitPerWork = 1;
         multiplierDemand = 1;
         break;
       case ETypeProduct.jewelery:
         costPerUnit = 300;
-        workPerUnit = 1;
+        unitPerWork = 1;
         multiplierDemand = 1;
         break;
     }
@@ -89,24 +97,22 @@ class Research with _$Research {
 
     return Product(
       costPerUnit: costPerUnit,
-      commissionPerUnit: 0.05,
-      workPerUnit: workPerUnit,
+      commissionPerUnit: 0.5,
+      unitPerWork: unitPerWork,
       name: name,
       businessId: businessId,
       eTypeProduct: eTypeProduct,
       eTypeQuality: eTypeQuality,
       rating: generatedRating,
-      dailyDemand: 0,
-      multiplierDemand: multiplierDemand,
+      marketing: 0,
+      amount: 0,
     );
   }
 
   int _getRating() {
-    //max work is 50 * 1.2 * 360 = 21600
-    //min work is 1 * 0,4 * 360 = 144
-
     return Random().nextIntInRange(1, 5);
   }
 
   factory Research.fromJson(Map<String, dynamic> json) => _$ResearchFromJson(json);
+  Map<String, dynamic> toJson() => _$ResearchToJson(this);
 }

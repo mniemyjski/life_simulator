@@ -22,6 +22,14 @@ Map<String, dynamic> _$$LoadingToJson(_$Loading instance) => <String, dynamic>{
       'runtimeType': instance.$type,
     };
 
+_$None _$$NoneFromJson(Map<String, dynamic> json) => _$None(
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$NoneToJson(_$None instance) => <String, dynamic>{
+      'runtimeType': instance.$type,
+    };
+
 _$Loaded _$$LoadedFromJson(Map<String, dynamic> json) => _$Loaded(
       (json['products'] as List<dynamic>)
           .map((e) => Product.fromJson(e as Map<String, dynamic>))

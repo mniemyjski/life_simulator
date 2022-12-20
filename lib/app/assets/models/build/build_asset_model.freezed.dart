@@ -38,7 +38,8 @@ mixin _$BuildAsset {
 abstract class $BuildAssetCopyWith<$Res> {
   factory $BuildAssetCopyWith(
           BuildAsset value, $Res Function(BuildAsset) then) =
-      _$BuildAssetCopyWithImpl<$Res>;
+      _$BuildAssetCopyWithImpl<$Res, BuildAsset>;
+  @useResult
   $Res call(
       {String address,
       ETypeAsset eTypeAsset,
@@ -50,53 +51,56 @@ abstract class $BuildAssetCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$BuildAssetCopyWithImpl<$Res> implements $BuildAssetCopyWith<$Res> {
+class _$BuildAssetCopyWithImpl<$Res, $Val extends BuildAsset>
+    implements $BuildAssetCopyWith<$Res> {
   _$BuildAssetCopyWithImpl(this._value, this._then);
 
-  final BuildAsset _value;
   // ignore: unused_field
-  final $Res Function(BuildAsset) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? address = freezed,
-    Object? eTypeAsset = freezed,
+    Object? address = null,
+    Object? eTypeAsset = null,
     Object? datCre = freezed,
     Object? datEnd = freezed,
-    Object? tenantsMax = freezed,
-    Object? cost = freezed,
-    Object? value = freezed,
+    Object? tenantsMax = null,
+    Object? cost = null,
+    Object? value = null,
   }) {
     return _then(_value.copyWith(
-      address: address == freezed
+      address: null == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String,
-      eTypeAsset: eTypeAsset == freezed
+      eTypeAsset: null == eTypeAsset
           ? _value.eTypeAsset
           : eTypeAsset // ignore: cast_nullable_to_non_nullable
               as ETypeAsset,
-      datCre: datCre == freezed
+      datCre: freezed == datCre
           ? _value.datCre
           : datCre // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      datEnd: datEnd == freezed
+      datEnd: freezed == datEnd
           ? _value.datEnd
           : datEnd // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      tenantsMax: tenantsMax == freezed
+      tenantsMax: null == tenantsMax
           ? _value.tenantsMax
           : tenantsMax // ignore: cast_nullable_to_non_nullable
               as int,
-      cost: cost == freezed
+      cost: null == cost
           ? _value.cost
           : cost // ignore: cast_nullable_to_non_nullable
               as double,
-      value: value == freezed
+      value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
               as double,
-    ));
+    ) as $Val);
   }
 }
 
@@ -107,6 +111,7 @@ abstract class _$$_BuildAssetCopyWith<$Res>
           _$_BuildAsset value, $Res Function(_$_BuildAsset) then) =
       __$$_BuildAssetCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String address,
       ETypeAsset eTypeAsset,
@@ -118,51 +123,50 @@ abstract class _$$_BuildAssetCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_BuildAssetCopyWithImpl<$Res> extends _$BuildAssetCopyWithImpl<$Res>
+class __$$_BuildAssetCopyWithImpl<$Res>
+    extends _$BuildAssetCopyWithImpl<$Res, _$_BuildAsset>
     implements _$$_BuildAssetCopyWith<$Res> {
   __$$_BuildAssetCopyWithImpl(
       _$_BuildAsset _value, $Res Function(_$_BuildAsset) _then)
-      : super(_value, (v) => _then(v as _$_BuildAsset));
+      : super(_value, _then);
 
-  @override
-  _$_BuildAsset get _value => super._value as _$_BuildAsset;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? address = freezed,
-    Object? eTypeAsset = freezed,
+    Object? address = null,
+    Object? eTypeAsset = null,
     Object? datCre = freezed,
     Object? datEnd = freezed,
-    Object? tenantsMax = freezed,
-    Object? cost = freezed,
-    Object? value = freezed,
+    Object? tenantsMax = null,
+    Object? cost = null,
+    Object? value = null,
   }) {
     return _then(_$_BuildAsset(
-      address: address == freezed
+      address: null == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String,
-      eTypeAsset: eTypeAsset == freezed
+      eTypeAsset: null == eTypeAsset
           ? _value.eTypeAsset
           : eTypeAsset // ignore: cast_nullable_to_non_nullable
               as ETypeAsset,
-      datCre: datCre == freezed
+      datCre: freezed == datCre
           ? _value.datCre
           : datCre // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      datEnd: datEnd == freezed
+      datEnd: freezed == datEnd
           ? _value.datEnd
           : datEnd // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      tenantsMax: tenantsMax == freezed
+      tenantsMax: null == tenantsMax
           ? _value.tenantsMax
           : tenantsMax // ignore: cast_nullable_to_non_nullable
               as int,
-      cost: cost == freezed
+      cost: null == cost
           ? _value.cost
           : cost // ignore: cast_nullable_to_non_nullable
               as double,
-      value: value == freezed
+      value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
               as double,
@@ -210,31 +214,25 @@ class _$_BuildAsset implements _BuildAsset {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_BuildAsset &&
-            const DeepCollectionEquality().equals(other.address, address) &&
-            const DeepCollectionEquality()
-                .equals(other.eTypeAsset, eTypeAsset) &&
-            const DeepCollectionEquality().equals(other.datCre, datCre) &&
-            const DeepCollectionEquality().equals(other.datEnd, datEnd) &&
-            const DeepCollectionEquality()
-                .equals(other.tenantsMax, tenantsMax) &&
-            const DeepCollectionEquality().equals(other.cost, cost) &&
-            const DeepCollectionEquality().equals(other.value, value));
+            (identical(other.address, address) || other.address == address) &&
+            (identical(other.eTypeAsset, eTypeAsset) ||
+                other.eTypeAsset == eTypeAsset) &&
+            (identical(other.datCre, datCre) || other.datCre == datCre) &&
+            (identical(other.datEnd, datEnd) || other.datEnd == datEnd) &&
+            (identical(other.tenantsMax, tenantsMax) ||
+                other.tenantsMax == tenantsMax) &&
+            (identical(other.cost, cost) || other.cost == cost) &&
+            (identical(other.value, value) || other.value == value));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(address),
-      const DeepCollectionEquality().hash(eTypeAsset),
-      const DeepCollectionEquality().hash(datCre),
-      const DeepCollectionEquality().hash(datEnd),
-      const DeepCollectionEquality().hash(tenantsMax),
-      const DeepCollectionEquality().hash(cost),
-      const DeepCollectionEquality().hash(value));
+  int get hashCode => Object.hash(runtimeType, address, eTypeAsset, datCre,
+      datEnd, tenantsMax, cost, value);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_BuildAssetCopyWith<_$_BuildAsset> get copyWith =>
       __$$_BuildAssetCopyWithImpl<_$_BuildAsset>(this, _$identity);
 

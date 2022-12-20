@@ -4,8 +4,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:richeable/app/business/models/employee/employee_model.dart';
-import 'package:richeable/repositories/businesses_repository.dart';
-import 'package:richeable/repositories/employee_repository.dart';
+import 'package:richeable/app/business/repositories/businesses_repository.dart';
+import 'package:richeable/app/business/repositories/employee_repository.dart';
 
 import '../../../../utilities/utilities.dart';
 import '../../../date/cubit/date_cubit.dart';
@@ -49,7 +49,7 @@ class EmployeesCubit extends HydratedCubit<EmployeesState> {
     state.whenOrNull(
       initial: () async {
         List<Employee> result =
-            await employeeRepository.getEmployeesInBusiness(businessId: businessId);
+            await employeeRepository.getTotalEmployeesInBusiness(businessId: businessId);
         emit(EmployeesState.loaded(result));
       },
     );

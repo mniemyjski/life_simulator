@@ -124,7 +124,7 @@ class _EmployeesScreenState extends State<EmployeesScreen> {
                   heroTag: null,
                   onPressed: () {
                     context.router.push(HumanResourcesRoute(
-                      blocProvider: BlocProvider.of<EmployeesCubit>(context),
+                      businessId: widget.businessId,
                       eTypeEmployees: eTypeEmployees,
                     ));
                   },

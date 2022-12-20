@@ -103,7 +103,7 @@ const FameSchema = CollectionSchema(
   getId: _fameGetId,
   getLinks: _fameGetLinks,
   attach: _fameAttach,
-  version: '3.0.2',
+  version: '3.0.5',
 );
 
 int _fameEstimateSize(

@@ -5,12 +5,12 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:richeable/app/money/models/transaction/transaction_model.dart';
 
-import '../../../../repositories/time_spend_repository.dart';
 import '../../../database/cubit/database_cubit.dart';
 import '../../../money/cubit/income/income_cubit.dart';
 import '../../../money/models/income/income_model.dart';
 import '../../../new_game/new_game_cubit.dart';
 import '../../../time_spend/models/time_bonus/time_bonus_model.dart';
+import '../../../time_spend/repositories/time_spend_repository.dart';
 import '../../models/food/food_model.dart';
 
 part 'food_cubit.freezed.dart';
@@ -44,7 +44,7 @@ class FoodCubit extends HydratedCubit<FoodState> {
     if (_newGameCubit.state) {
       List<Food> list = _databaseCubit.state.foodsDB;
       Income income = Income(
-        id: list.first.id,
+        uid: list.first.uid,
         source: ETypeTransactionSource.food,
         typeIncome: ETypeIncome.expense,
         value: list.first.cost,
@@ -76,7 +76,7 @@ class FoodCubit extends HydratedCubit<FoodState> {
       if (newGame) {
         List<Food> list = _databaseCubit.state.foodsDB;
         Income income = Income(
-          id: list.first.id,
+          uid: list.first.uid,
           source: ETypeTransactionSource.food,
           typeIncome: ETypeIncome.expense,
           value: list.first.cost,
@@ -110,7 +110,7 @@ class FoodCubit extends HydratedCubit<FoodState> {
   change(Food food) {
     state.whenOrNull(loaded: (oldFood) {
       Income income = Income(
-        id: food.id,
+        uid: food.uid,
         source: ETypeTransactionSource.food,
         typeIncome: ETypeIncome.expense,
         value: food.cost,
@@ -134,7 +134,7 @@ class FoodCubit extends HydratedCubit<FoodState> {
         ],
       );
 
-      _incomeCubit.remove(oldFood.id);
+      _incomeCubit.remove(oldFood.uid);
       _incomeCubit.add(income);
       emit(FoodState.loaded(food: food));
     });

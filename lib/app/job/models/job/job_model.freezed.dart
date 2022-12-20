@@ -33,7 +33,8 @@ mixin _$Job {
 /// @nodoc
 abstract class $JobCopyWith<$Res> {
   factory $JobCopyWith(Job value, $Res Function(Job) then) =
-      _$JobCopyWithImpl<$Res>;
+      _$JobCopyWithImpl<$Res, Job>;
+  @useResult
   $Res call(
       {String id,
       String company,
@@ -42,38 +43,40 @@ abstract class $JobCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$JobCopyWithImpl<$Res> implements $JobCopyWith<$Res> {
+class _$JobCopyWithImpl<$Res, $Val extends Job> implements $JobCopyWith<$Res> {
   _$JobCopyWithImpl(this._value, this._then);
 
-  final Job _value;
   // ignore: unused_field
-  final $Res Function(Job) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? company = freezed,
-    Object? industry = freezed,
-    Object? experiences = freezed,
+    Object? id = null,
+    Object? company = null,
+    Object? industry = null,
+    Object? experiences = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      company: company == freezed
+      company: null == company
           ? _value.company
           : company // ignore: cast_nullable_to_non_nullable
               as String,
-      industry: industry == freezed
+      industry: null == industry
           ? _value.industry
           : industry // ignore: cast_nullable_to_non_nullable
               as ETypeIndustry,
-      experiences: experiences == freezed
+      experiences: null == experiences
           ? _value.experiences
           : experiences // ignore: cast_nullable_to_non_nullable
               as List<Experience>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -82,6 +85,7 @@ abstract class _$$_JobCopyWith<$Res> implements $JobCopyWith<$Res> {
   factory _$$_JobCopyWith(_$_Job value, $Res Function(_$_Job) then) =
       __$$_JobCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String id,
       String company,
@@ -90,35 +94,33 @@ abstract class _$$_JobCopyWith<$Res> implements $JobCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_JobCopyWithImpl<$Res> extends _$JobCopyWithImpl<$Res>
+class __$$_JobCopyWithImpl<$Res> extends _$JobCopyWithImpl<$Res, _$_Job>
     implements _$$_JobCopyWith<$Res> {
   __$$_JobCopyWithImpl(_$_Job _value, $Res Function(_$_Job) _then)
-      : super(_value, (v) => _then(v as _$_Job));
+      : super(_value, _then);
 
-  @override
-  _$_Job get _value => super._value as _$_Job;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? company = freezed,
-    Object? industry = freezed,
-    Object? experiences = freezed,
+    Object? id = null,
+    Object? company = null,
+    Object? industry = null,
+    Object? experiences = null,
   }) {
     return _then(_$_Job(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      company: company == freezed
+      company: null == company
           ? _value.company
           : company // ignore: cast_nullable_to_non_nullable
               as String,
-      industry: industry == freezed
+      industry: null == industry
           ? _value.industry
           : industry // ignore: cast_nullable_to_non_nullable
               as ETypeIndustry,
-      experiences: experiences == freezed
+      experiences: null == experiences
           ? _value._experiences
           : experiences // ignore: cast_nullable_to_non_nullable
               as List<Experience>,
@@ -161,24 +163,22 @@ class _$_Job implements _Job {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Job &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.company, company) &&
-            const DeepCollectionEquality().equals(other.industry, industry) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.company, company) || other.company == company) &&
+            (identical(other.industry, industry) ||
+                other.industry == industry) &&
             const DeepCollectionEquality()
                 .equals(other._experiences, _experiences));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(company),
-      const DeepCollectionEquality().hash(industry),
+  int get hashCode => Object.hash(runtimeType, id, company, industry,
       const DeepCollectionEquality().hash(_experiences));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_JobCopyWith<_$_Job> get copyWith =>
       __$$_JobCopyWithImpl<_$_Job>(this, _$identity);
 

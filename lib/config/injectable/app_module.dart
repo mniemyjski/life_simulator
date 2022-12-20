@@ -4,6 +4,7 @@ import 'package:isar/isar.dart';
 import '../../app/business/models/business/business_model.dart';
 import '../../app/business/models/employee/employee_model.dart';
 import '../../app/business/models/product/product_model.dart';
+import '../../app/business/models/research/research_model.dart';
 import '../../app/freelance/models/fame/fame_model.dart';
 import '../../app/freelance/models/freelance_done/freelance_done_model.dart';
 import '../../app/money/models/transaction/transaction_model.dart';
@@ -22,15 +23,16 @@ class AppModule {
   static const List<CollectionSchema<dynamic>> _schema = [
     TransactionSchema,
     FreelanceDoneSchema,
-    BusinessSchema,
-    EmployeeSchema,
-    ProductSchema,
     InstrumentSchema,
     CandleSchema,
     ExchangeSchema,
     FameSchema,
     SkillSchema,
     TimeSpendSchema,
+    BusinessSchema,
+    EmployeeSchema,
+    ProductSchema,
+    ResearchSchema,
   ];
 
   Future init() async {
@@ -42,6 +44,6 @@ class AppModule {
   }
 
   Future newGame() async {
-    await _instance.writeTxn(() => _instance.clear());
+    return await _instance.writeTxn(() => _instance.clear());
   }
 }

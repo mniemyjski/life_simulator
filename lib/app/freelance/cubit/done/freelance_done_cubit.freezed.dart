@@ -40,9 +40,9 @@ mixin _$FreelanceDoneState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<FreelanceDone> freelances)? loaded,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<FreelanceDone> freelances)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -62,9 +62,9 @@ mixin _$FreelanceDoneState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Loading value)? loading,
-    TResult Function(Loaded value)? loaded,
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Loaded value)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -82,17 +82,18 @@ mixin _$FreelanceDoneState {
 abstract class $FreelanceDoneStateCopyWith<$Res> {
   factory $FreelanceDoneStateCopyWith(
           FreelanceDoneState value, $Res Function(FreelanceDoneState) then) =
-      _$FreelanceDoneStateCopyWithImpl<$Res>;
+      _$FreelanceDoneStateCopyWithImpl<$Res, FreelanceDoneState>;
 }
 
 /// @nodoc
-class _$FreelanceDoneStateCopyWithImpl<$Res>
+class _$FreelanceDoneStateCopyWithImpl<$Res, $Val extends FreelanceDoneState>
     implements $FreelanceDoneStateCopyWith<$Res> {
   _$FreelanceDoneStateCopyWithImpl(this._value, this._then);
 
-  final FreelanceDoneState _value;
   // ignore: unused_field
-  final $Res Function(FreelanceDoneState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -103,13 +104,10 @@ abstract class _$$InitialCopyWith<$Res> {
 
 /// @nodoc
 class __$$InitialCopyWithImpl<$Res>
-    extends _$FreelanceDoneStateCopyWithImpl<$Res>
+    extends _$FreelanceDoneStateCopyWithImpl<$Res, _$Initial>
     implements _$$InitialCopyWith<$Res> {
   __$$InitialCopyWithImpl(_$Initial _value, $Res Function(_$Initial) _then)
-      : super(_value, (v) => _then(v as _$Initial));
-
-  @override
-  _$Initial get _value => super._value as _$Initial;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -151,9 +149,9 @@ class _$Initial implements Initial {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<FreelanceDone> freelances)? loaded,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<FreelanceDone> freelances)? loaded,
   }) {
     return initial?.call();
   }
@@ -185,9 +183,9 @@ class _$Initial implements Initial {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Loading value)? loading,
-    TResult Function(Loaded value)? loaded,
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Loaded value)? loaded,
   }) {
     return initial?.call(this);
   }
@@ -228,13 +226,10 @@ abstract class _$$LoadingCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadingCopyWithImpl<$Res>
-    extends _$FreelanceDoneStateCopyWithImpl<$Res>
+    extends _$FreelanceDoneStateCopyWithImpl<$Res, _$Loading>
     implements _$$LoadingCopyWith<$Res> {
   __$$LoadingCopyWithImpl(_$Loading _value, $Res Function(_$Loading) _then)
-      : super(_value, (v) => _then(v as _$Loading));
-
-  @override
-  _$Loading get _value => super._value as _$Loading;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -276,9 +271,9 @@ class _$Loading implements Loading {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<FreelanceDone> freelances)? loaded,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<FreelanceDone> freelances)? loaded,
   }) {
     return loading?.call();
   }
@@ -310,9 +305,9 @@ class _$Loading implements Loading {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Loading value)? loading,
-    TResult Function(Loaded value)? loaded,
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Loaded value)? loaded,
   }) {
     return loading?.call(this);
   }
@@ -349,25 +344,24 @@ abstract class Loading implements FreelanceDoneState {
 abstract class _$$LoadedCopyWith<$Res> {
   factory _$$LoadedCopyWith(_$Loaded value, $Res Function(_$Loaded) then) =
       __$$LoadedCopyWithImpl<$Res>;
+  @useResult
   $Res call({List<FreelanceDone> freelances});
 }
 
 /// @nodoc
 class __$$LoadedCopyWithImpl<$Res>
-    extends _$FreelanceDoneStateCopyWithImpl<$Res>
+    extends _$FreelanceDoneStateCopyWithImpl<$Res, _$Loaded>
     implements _$$LoadedCopyWith<$Res> {
   __$$LoadedCopyWithImpl(_$Loaded _value, $Res Function(_$Loaded) _then)
-      : super(_value, (v) => _then(v as _$Loaded));
+      : super(_value, _then);
 
-  @override
-  _$Loaded get _value => super._value as _$Loaded;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? freelances = freezed,
+    Object? freelances = null,
   }) {
     return _then(_$Loaded(
-      freelances == freezed
+      null == freelances
           ? _value.freelances
           : freelances // ignore: cast_nullable_to_non_nullable
               as List<FreelanceDone>,
@@ -410,6 +404,7 @@ class _$Loaded implements Loaded {
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$LoadedCopyWith<_$Loaded> get copyWith =>
       __$$LoadedCopyWithImpl<_$Loaded>(this, _$identity);
 
@@ -426,9 +421,9 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<FreelanceDone> freelances)? loaded,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<FreelanceDone> freelances)? loaded,
   }) {
     return loaded?.call(freelances);
   }
@@ -460,9 +455,9 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Loading value)? loading,
-    TResult Function(Loaded value)? loaded,
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Loaded value)? loaded,
   }) {
     return loaded?.call(this);
   }

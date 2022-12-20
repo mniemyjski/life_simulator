@@ -1,3 +1,4 @@
+import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:equatable/equatable.dart';
 import 'package:isar/isar.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -8,22 +9,23 @@ enum ETypeProduct { food, cloth, furniture, jewelery }
 
 enum ETypeQuality { low, mid, high }
 
+@CopyWith()
 @JsonSerializable()
 @Collection(ignore: {'props', 'stringify'})
 @Name('Products')
 class Product extends Equatable {
   final Id id;
+  @Index()
   final int businessId;
   final String name;
 
   final int rating;
+  final double marketing;
+  final int amount;
 
-  final double dailyDemand;
-  final double multiplierDemand;
-
+  final int unitPerWork;
   final double costPerUnit;
   final double commissionPerUnit;
-  final double workPerUnit;
   @enumerated
   final ETypeProduct eTypeProduct;
   @enumerated
@@ -35,12 +37,12 @@ class Product extends Equatable {
     required this.commissionPerUnit,
     required this.name,
     required this.businessId,
-    required this.workPerUnit,
+    required this.unitPerWork,
     required this.eTypeProduct,
     required this.eTypeQuality,
     required this.rating,
-    required this.dailyDemand,
-    required this.multiplierDemand,
+    required this.marketing,
+    required this.amount,
   });
 
   @override

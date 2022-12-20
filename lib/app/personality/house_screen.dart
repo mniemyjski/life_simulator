@@ -53,7 +53,7 @@ class HouseScreen extends StatelessWidget {
                             itemCount: list.length,
                             itemBuilder: (context, index) {
                               final element = list[index];
-                              final bool owned = element.id == (house?.id ?? 'xyz');
+                              final bool owned = element.uid == (house?.uid ?? 'xyz');
 
                               return _elementListView(
                                   element: element,

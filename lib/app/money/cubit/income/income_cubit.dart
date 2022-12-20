@@ -62,10 +62,10 @@ class IncomeCubit extends HydratedCubit<IncomeState> {
     });
   }
 
-  update({required String id, required double value}) {
+  update({required String uid, required double value}) {
     state.whenOrNull(loaded: (incomes, currentDate) {
-      Income? income = incomes.firstWhere((element) => element.id == id);
-      List<Income> refresh = List.from(incomes)..removeWhere((element) => element.id == id);
+      Income? income = incomes.firstWhere((element) => element.uid == uid);
+      List<Income> refresh = List.from(incomes)..removeWhere((element) => element.uid == uid);
 
       refresh.add(income.copyWith(value: value));
       emit(IncomeState.loaded(refresh, currentDate));
@@ -74,7 +74,7 @@ class IncomeCubit extends HydratedCubit<IncomeState> {
 
   remove(String id) {
     state.whenOrNull(loaded: (incomes, currentDate) {
-      List<Income> refresh = List.from(incomes)..removeWhere((element) => element.id == id);
+      List<Income> refresh = List.from(incomes)..removeWhere((element) => element.uid == id);
       emit(IncomeState.loaded(refresh, currentDate));
     });
   }

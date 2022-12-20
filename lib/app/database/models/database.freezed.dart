@@ -40,7 +40,8 @@ mixin _$Database {
 /// @nodoc
 abstract class $DatabaseCopyWith<$Res> {
   factory $DatabaseCopyWith(Database value, $Res Function(Database) then) =
-      _$DatabaseCopyWithImpl<$Res>;
+      _$DatabaseCopyWithImpl<$Res, Database>;
+  @useResult
   $Res call(
       {List<Job> jobsDB,
       List<Learning> learningsDB,
@@ -55,68 +56,71 @@ abstract class $DatabaseCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$DatabaseCopyWithImpl<$Res> implements $DatabaseCopyWith<$Res> {
+class _$DatabaseCopyWithImpl<$Res, $Val extends Database>
+    implements $DatabaseCopyWith<$Res> {
   _$DatabaseCopyWithImpl(this._value, this._then);
 
-  final Database _value;
   // ignore: unused_field
-  final $Res Function(Database) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? jobsDB = freezed,
-    Object? learningsDB = freezed,
-    Object? foodsDB = freezed,
-    Object? housesDB = freezed,
-    Object? transportsDB = freezed,
-    Object? eventsDB = freezed,
-    Object? medicinesDB = freezed,
-    Object? assetsDB = freezed,
-    Object? tenantsDB = freezed,
-    Object? instrumentDB = freezed,
+    Object? jobsDB = null,
+    Object? learningsDB = null,
+    Object? foodsDB = null,
+    Object? housesDB = null,
+    Object? transportsDB = null,
+    Object? eventsDB = null,
+    Object? medicinesDB = null,
+    Object? assetsDB = null,
+    Object? tenantsDB = null,
+    Object? instrumentDB = null,
   }) {
     return _then(_value.copyWith(
-      jobsDB: jobsDB == freezed
+      jobsDB: null == jobsDB
           ? _value.jobsDB
           : jobsDB // ignore: cast_nullable_to_non_nullable
               as List<Job>,
-      learningsDB: learningsDB == freezed
+      learningsDB: null == learningsDB
           ? _value.learningsDB
           : learningsDB // ignore: cast_nullable_to_non_nullable
               as List<Learning>,
-      foodsDB: foodsDB == freezed
+      foodsDB: null == foodsDB
           ? _value.foodsDB
           : foodsDB // ignore: cast_nullable_to_non_nullable
               as List<Food>,
-      housesDB: housesDB == freezed
+      housesDB: null == housesDB
           ? _value.housesDB
           : housesDB // ignore: cast_nullable_to_non_nullable
               as List<House>,
-      transportsDB: transportsDB == freezed
+      transportsDB: null == transportsDB
           ? _value.transportsDB
           : transportsDB // ignore: cast_nullable_to_non_nullable
               as List<Transport>,
-      eventsDB: eventsDB == freezed
+      eventsDB: null == eventsDB
           ? _value.eventsDB
           : eventsDB // ignore: cast_nullable_to_non_nullable
               as List<GameEvent>,
-      medicinesDB: medicinesDB == freezed
+      medicinesDB: null == medicinesDB
           ? _value.medicinesDB
           : medicinesDB // ignore: cast_nullable_to_non_nullable
               as List<Medicine>,
-      assetsDB: assetsDB == freezed
+      assetsDB: null == assetsDB
           ? _value.assetsDB
           : assetsDB // ignore: cast_nullable_to_non_nullable
               as List<Asset>,
-      tenantsDB: tenantsDB == freezed
+      tenantsDB: null == tenantsDB
           ? _value.tenantsDB
           : tenantsDB // ignore: cast_nullable_to_non_nullable
               as List<Tenant>,
-      instrumentDB: instrumentDB == freezed
+      instrumentDB: null == instrumentDB
           ? _value.instrumentDB
           : instrumentDB // ignore: cast_nullable_to_non_nullable
               as List<Instrument>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -126,6 +130,7 @@ abstract class _$$_DatabaseCopyWith<$Res> implements $DatabaseCopyWith<$Res> {
           _$_Database value, $Res Function(_$_Database) then) =
       __$$_DatabaseCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {List<Job> jobsDB,
       List<Learning> learningsDB,
@@ -140,66 +145,65 @@ abstract class _$$_DatabaseCopyWith<$Res> implements $DatabaseCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_DatabaseCopyWithImpl<$Res> extends _$DatabaseCopyWithImpl<$Res>
+class __$$_DatabaseCopyWithImpl<$Res>
+    extends _$DatabaseCopyWithImpl<$Res, _$_Database>
     implements _$$_DatabaseCopyWith<$Res> {
   __$$_DatabaseCopyWithImpl(
       _$_Database _value, $Res Function(_$_Database) _then)
-      : super(_value, (v) => _then(v as _$_Database));
+      : super(_value, _then);
 
-  @override
-  _$_Database get _value => super._value as _$_Database;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? jobsDB = freezed,
-    Object? learningsDB = freezed,
-    Object? foodsDB = freezed,
-    Object? housesDB = freezed,
-    Object? transportsDB = freezed,
-    Object? eventsDB = freezed,
-    Object? medicinesDB = freezed,
-    Object? assetsDB = freezed,
-    Object? tenantsDB = freezed,
-    Object? instrumentDB = freezed,
+    Object? jobsDB = null,
+    Object? learningsDB = null,
+    Object? foodsDB = null,
+    Object? housesDB = null,
+    Object? transportsDB = null,
+    Object? eventsDB = null,
+    Object? medicinesDB = null,
+    Object? assetsDB = null,
+    Object? tenantsDB = null,
+    Object? instrumentDB = null,
   }) {
     return _then(_$_Database(
-      jobsDB: jobsDB == freezed
+      jobsDB: null == jobsDB
           ? _value._jobsDB
           : jobsDB // ignore: cast_nullable_to_non_nullable
               as List<Job>,
-      learningsDB: learningsDB == freezed
+      learningsDB: null == learningsDB
           ? _value._learningsDB
           : learningsDB // ignore: cast_nullable_to_non_nullable
               as List<Learning>,
-      foodsDB: foodsDB == freezed
+      foodsDB: null == foodsDB
           ? _value._foodsDB
           : foodsDB // ignore: cast_nullable_to_non_nullable
               as List<Food>,
-      housesDB: housesDB == freezed
+      housesDB: null == housesDB
           ? _value._housesDB
           : housesDB // ignore: cast_nullable_to_non_nullable
               as List<House>,
-      transportsDB: transportsDB == freezed
+      transportsDB: null == transportsDB
           ? _value._transportsDB
           : transportsDB // ignore: cast_nullable_to_non_nullable
               as List<Transport>,
-      eventsDB: eventsDB == freezed
+      eventsDB: null == eventsDB
           ? _value._eventsDB
           : eventsDB // ignore: cast_nullable_to_non_nullable
               as List<GameEvent>,
-      medicinesDB: medicinesDB == freezed
+      medicinesDB: null == medicinesDB
           ? _value._medicinesDB
           : medicinesDB // ignore: cast_nullable_to_non_nullable
               as List<Medicine>,
-      assetsDB: assetsDB == freezed
+      assetsDB: null == assetsDB
           ? _value._assetsDB
           : assetsDB // ignore: cast_nullable_to_non_nullable
               as List<Asset>,
-      tenantsDB: tenantsDB == freezed
+      tenantsDB: null == tenantsDB
           ? _value._tenantsDB
           : tenantsDB // ignore: cast_nullable_to_non_nullable
               as List<Tenant>,
-      instrumentDB: instrumentDB == freezed
+      instrumentDB: null == instrumentDB
           ? _value._instrumentDB
           : instrumentDB // ignore: cast_nullable_to_non_nullable
               as List<Instrument>,
@@ -349,6 +353,7 @@ class _$_Database implements _Database {
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_DatabaseCopyWith<_$_Database> get copyWith =>
       __$$_DatabaseCopyWithImpl<_$_Database>(this, _$identity);
 

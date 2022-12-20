@@ -6,8 +6,8 @@ import 'package:injectable/injectable.dart';
 import 'package:richeable/app/money/models/transaction/transaction_model.dart';
 import 'package:richeable/constants/constants.dart';
 
-import '../../../../repositories/transactions_repository.dart';
 import '../../../date/cubit/date_cubit.dart';
+import '../../../money/repositories/transactions_repository.dart';
 
 part 'balance_business_cubit.freezed.dart';
 part 'balance_business_cubit.g.dart';

@@ -5,12 +5,12 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:richeable/app/time_spend/models/time_spend_model/time_spend_model.dart';
 
-import '../../../repositories/time_spend_repository.dart';
 import '../../event/cubit/event_cubit.dart';
 import '../../event/models/game_event/game_event_model.dart';
 import '../../medicines/cubit/medicines_cubit.dart';
 import '../../new_game/new_game_cubit.dart';
 import '../../time_spend/models/time_bonus/time_bonus_model.dart';
+import '../../time_spend/repositories/time_spend_repository.dart';
 import '../models/stats_model.dart';
 
 part 'stats_cubit.freezed.dart';

@@ -107,7 +107,7 @@ class AssetsCubit extends HydratedCubit<AssetsState> {
 
   _addIncome(Asset asset) {
     Income income = Income(
-      id: asset.id,
+      uid: asset.id,
       source: ETypeTransactionSource.asset,
       typeIncome: ETypeIncome.expense,
       eTypeFrequency: ETypeFrequency.monthly,

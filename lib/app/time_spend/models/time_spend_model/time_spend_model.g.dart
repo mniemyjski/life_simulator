@@ -232,7 +232,7 @@ const TimeSpendSchema = CollectionSchema(
   getId: _timeSpendGetId,
   getLinks: _timeSpendGetLinks,
   attach: _timeSpendAttach,
-  version: '3.0.2',
+  version: '3.0.5',
 );
 
 int _timeSpendEstimateSize(

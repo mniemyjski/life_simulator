@@ -31,28 +31,32 @@ mixin _$Tutorial {
 /// @nodoc
 abstract class $TutorialCopyWith<$Res> {
   factory $TutorialCopyWith(Tutorial value, $Res Function(Tutorial) then) =
-      _$TutorialCopyWithImpl<$Res>;
+      _$TutorialCopyWithImpl<$Res, Tutorial>;
+  @useResult
   $Res call({bool main});
 }
 
 /// @nodoc
-class _$TutorialCopyWithImpl<$Res> implements $TutorialCopyWith<$Res> {
+class _$TutorialCopyWithImpl<$Res, $Val extends Tutorial>
+    implements $TutorialCopyWith<$Res> {
   _$TutorialCopyWithImpl(this._value, this._then);
 
-  final Tutorial _value;
   // ignore: unused_field
-  final $Res Function(Tutorial) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? main = freezed,
+    Object? main = null,
   }) {
     return _then(_value.copyWith(
-      main: main == freezed
+      main: null == main
           ? _value.main
           : main // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 }
 
@@ -62,25 +66,25 @@ abstract class _$$_TutorialCopyWith<$Res> implements $TutorialCopyWith<$Res> {
           _$_Tutorial value, $Res Function(_$_Tutorial) then) =
       __$$_TutorialCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({bool main});
 }
 
 /// @nodoc
-class __$$_TutorialCopyWithImpl<$Res> extends _$TutorialCopyWithImpl<$Res>
+class __$$_TutorialCopyWithImpl<$Res>
+    extends _$TutorialCopyWithImpl<$Res, _$_Tutorial>
     implements _$$_TutorialCopyWith<$Res> {
   __$$_TutorialCopyWithImpl(
       _$_Tutorial _value, $Res Function(_$_Tutorial) _then)
-      : super(_value, (v) => _then(v as _$_Tutorial));
+      : super(_value, _then);
 
-  @override
-  _$_Tutorial get _value => super._value as _$_Tutorial;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? main = freezed,
+    Object? main = null,
   }) {
     return _then(_$_Tutorial(
-      main: main == freezed
+      main: null == main
           ? _value.main
           : main // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -110,16 +114,16 @@ class _$_Tutorial implements _Tutorial {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Tutorial &&
-            const DeepCollectionEquality().equals(other.main, main));
+            (identical(other.main, main) || other.main == main));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(main));
+  int get hashCode => Object.hash(runtimeType, main);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_TutorialCopyWith<_$_Tutorial> get copyWith =>
       __$$_TutorialCopyWithImpl<_$_Tutorial>(this, _$identity);
 

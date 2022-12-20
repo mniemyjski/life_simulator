@@ -35,7 +35,8 @@ mixin _$Stats {
 /// @nodoc
 abstract class $StatsCopyWith<$Res> {
   factory $StatsCopyWith(Stats value, $Res Function(Stats) then) =
-      _$StatsCopyWithImpl<$Res>;
+      _$StatsCopyWithImpl<$Res, Stats>;
+  @useResult
   $Res call(
       {double health,
       double satisfaction,
@@ -46,48 +47,51 @@ abstract class $StatsCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$StatsCopyWithImpl<$Res> implements $StatsCopyWith<$Res> {
+class _$StatsCopyWithImpl<$Res, $Val extends Stats>
+    implements $StatsCopyWith<$Res> {
   _$StatsCopyWithImpl(this._value, this._then);
 
-  final Stats _value;
   // ignore: unused_field
-  final $Res Function(Stats) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? health = freezed,
-    Object? satisfaction = freezed,
-    Object? tiredness = freezed,
-    Object? maxHealth = freezed,
-    Object? maxSatisfaction = freezed,
-    Object? maxTiredness = freezed,
+    Object? health = null,
+    Object? satisfaction = null,
+    Object? tiredness = null,
+    Object? maxHealth = null,
+    Object? maxSatisfaction = null,
+    Object? maxTiredness = null,
   }) {
     return _then(_value.copyWith(
-      health: health == freezed
+      health: null == health
           ? _value.health
           : health // ignore: cast_nullable_to_non_nullable
               as double,
-      satisfaction: satisfaction == freezed
+      satisfaction: null == satisfaction
           ? _value.satisfaction
           : satisfaction // ignore: cast_nullable_to_non_nullable
               as double,
-      tiredness: tiredness == freezed
+      tiredness: null == tiredness
           ? _value.tiredness
           : tiredness // ignore: cast_nullable_to_non_nullable
               as double,
-      maxHealth: maxHealth == freezed
+      maxHealth: null == maxHealth
           ? _value.maxHealth
           : maxHealth // ignore: cast_nullable_to_non_nullable
               as double,
-      maxSatisfaction: maxSatisfaction == freezed
+      maxSatisfaction: null == maxSatisfaction
           ? _value.maxSatisfaction
           : maxSatisfaction // ignore: cast_nullable_to_non_nullable
               as double,
-      maxTiredness: maxTiredness == freezed
+      maxTiredness: null == maxTiredness
           ? _value.maxTiredness
           : maxTiredness // ignore: cast_nullable_to_non_nullable
               as double,
-    ));
+    ) as $Val);
   }
 }
 
@@ -96,6 +100,7 @@ abstract class _$$_StatsCopyWith<$Res> implements $StatsCopyWith<$Res> {
   factory _$$_StatsCopyWith(_$_Stats value, $Res Function(_$_Stats) then) =
       __$$_StatsCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {double health,
       double satisfaction,
@@ -106,45 +111,43 @@ abstract class _$$_StatsCopyWith<$Res> implements $StatsCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_StatsCopyWithImpl<$Res> extends _$StatsCopyWithImpl<$Res>
+class __$$_StatsCopyWithImpl<$Res> extends _$StatsCopyWithImpl<$Res, _$_Stats>
     implements _$$_StatsCopyWith<$Res> {
   __$$_StatsCopyWithImpl(_$_Stats _value, $Res Function(_$_Stats) _then)
-      : super(_value, (v) => _then(v as _$_Stats));
+      : super(_value, _then);
 
-  @override
-  _$_Stats get _value => super._value as _$_Stats;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? health = freezed,
-    Object? satisfaction = freezed,
-    Object? tiredness = freezed,
-    Object? maxHealth = freezed,
-    Object? maxSatisfaction = freezed,
-    Object? maxTiredness = freezed,
+    Object? health = null,
+    Object? satisfaction = null,
+    Object? tiredness = null,
+    Object? maxHealth = null,
+    Object? maxSatisfaction = null,
+    Object? maxTiredness = null,
   }) {
     return _then(_$_Stats(
-      health: health == freezed
+      health: null == health
           ? _value.health
           : health // ignore: cast_nullable_to_non_nullable
               as double,
-      satisfaction: satisfaction == freezed
+      satisfaction: null == satisfaction
           ? _value.satisfaction
           : satisfaction // ignore: cast_nullable_to_non_nullable
               as double,
-      tiredness: tiredness == freezed
+      tiredness: null == tiredness
           ? _value.tiredness
           : tiredness // ignore: cast_nullable_to_non_nullable
               as double,
-      maxHealth: maxHealth == freezed
+      maxHealth: null == maxHealth
           ? _value.maxHealth
           : maxHealth // ignore: cast_nullable_to_non_nullable
               as double,
-      maxSatisfaction: maxSatisfaction == freezed
+      maxSatisfaction: null == maxSatisfaction
           ? _value.maxSatisfaction
           : maxSatisfaction // ignore: cast_nullable_to_non_nullable
               as double,
-      maxTiredness: maxTiredness == freezed
+      maxTiredness: null == maxTiredness
           ? _value.maxTiredness
           : maxTiredness // ignore: cast_nullable_to_non_nullable
               as double,
@@ -189,30 +192,27 @@ class _$_Stats implements _Stats {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Stats &&
-            const DeepCollectionEquality().equals(other.health, health) &&
-            const DeepCollectionEquality()
-                .equals(other.satisfaction, satisfaction) &&
-            const DeepCollectionEquality().equals(other.tiredness, tiredness) &&
-            const DeepCollectionEquality().equals(other.maxHealth, maxHealth) &&
-            const DeepCollectionEquality()
-                .equals(other.maxSatisfaction, maxSatisfaction) &&
-            const DeepCollectionEquality()
-                .equals(other.maxTiredness, maxTiredness));
+            (identical(other.health, health) || other.health == health) &&
+            (identical(other.satisfaction, satisfaction) ||
+                other.satisfaction == satisfaction) &&
+            (identical(other.tiredness, tiredness) ||
+                other.tiredness == tiredness) &&
+            (identical(other.maxHealth, maxHealth) ||
+                other.maxHealth == maxHealth) &&
+            (identical(other.maxSatisfaction, maxSatisfaction) ||
+                other.maxSatisfaction == maxSatisfaction) &&
+            (identical(other.maxTiredness, maxTiredness) ||
+                other.maxTiredness == maxTiredness));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(health),
-      const DeepCollectionEquality().hash(satisfaction),
-      const DeepCollectionEquality().hash(tiredness),
-      const DeepCollectionEquality().hash(maxHealth),
-      const DeepCollectionEquality().hash(maxSatisfaction),
-      const DeepCollectionEquality().hash(maxTiredness));
+  int get hashCode => Object.hash(runtimeType, health, satisfaction, tiredness,
+      maxHealth, maxSatisfaction, maxTiredness);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_StatsCopyWith<_$_Stats> get copyWith =>
       __$$_StatsCopyWithImpl<_$_Stats>(this, _$identity);
 

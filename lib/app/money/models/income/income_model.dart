@@ -1,18 +1,10 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:copy_with_extension/copy_with_extension.dart';
+import 'package:equatable/equatable.dart';
+import 'package:isar/isar.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:richeable/app/money/models/transaction/transaction_model.dart';
 
-import '../../../../utilities/utilities.dart';
-
-part 'income_model.freezed.dart';
 part 'income_model.g.dart';
-
-// enum ETypeSource {
-//   job,
-//   meal,
-//   house,
-//   transport,
-//   asset,
-// }
 
 enum ETypeIncome {
   revenue,
@@ -26,20 +18,43 @@ enum ETypeFrequency {
   daily,
 }
 
-@freezed
-class Income with _$Income {
-  const Income._();
+@CopyWith()
+@JsonSerializable()
+@Collection(ignore: {'props', 'stringify'})
+@Name('Incomes')
+class Income extends Equatable {
+  final Id id;
+  final String uid;
+  @enumerated
+  final ETypeTransactionSource source;
+  @enumerated
+  final ETypeIncome typeIncome;
+  @enumerated
+  final ETypeFrequency eTypeFrequency;
+  final double value;
+  final DateTime? next;
 
-  const factory Income({
-    required String id,
-    required ETypeTransactionSource source,
-    required ETypeIncome typeIncome,
-    required ETypeFrequency eTypeFrequency,
-    required double value,
-    DateTime? next,
-  }) = _Income;
+  const Income({
+    required this.uid,
+    required this.source,
+    required this.typeIncome,
+    required this.eTypeFrequency,
+    required this.value,
+    this.next,
+  }) : id = Isar.autoIncrement;
+
+  @override
+  List<Object?> get props => [
+        uid,
+        source,
+        typeIncome,
+        eTypeFrequency,
+        value,
+        next,
+      ];
 
   factory Income.fromJson(Map<String, dynamic> json) => _$IncomeFromJson(json);
+  Map<String, dynamic> toJson() => _$IncomeToJson(this);
 
   double monthlyIncome() {
     switch (eTypeFrequency) {
@@ -55,9 +70,5 @@ class Income with _$Income {
       case ETypeFrequency.daily:
         return value * 30;
     }
-  }
-
-  String frequencyToString() {
-    return Enums.toText(eTypeFrequency).tr();
   }
 }

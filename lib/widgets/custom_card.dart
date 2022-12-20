@@ -6,12 +6,19 @@ class CustomCard extends StatelessWidget {
   final Widget? child;
   final Color? color;
   final double? border;
-  const CustomCard({Key? key, this.child, this.color, this.border = 8}) : super(key: key);
+  final double? padding;
+  const CustomCard({
+    Key? key,
+    this.child,
+    this.color,
+    this.border = 8,
+    this.padding = 4,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(4.0),
+      padding: EdgeInsets.all(padding!),
       child: ClipRRect(
           borderRadius: BorderRadius.circular(border!),
           child: BackdropFilter(

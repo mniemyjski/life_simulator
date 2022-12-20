@@ -125,6 +125,7 @@ class TimeSpend extends Equatable {
         relax,
         sleep,
         used,
+        bonuses,
       ];
 
   int getBonus(ETypeBonus eTypeBonus) {
@@ -171,7 +172,7 @@ class TimeSpend extends Equatable {
     return relax + getBonus(ETypeBonus.relax);
   }
 
-  checkFreeTime(int value) async {
+  Future<bool> checkFreeTime(int value) async {
     return free >= value ? true : false;
   }
 }

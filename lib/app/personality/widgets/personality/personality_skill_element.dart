@@ -63,7 +63,7 @@ class PersonalitySkillElement extends StatelessWidget {
                   ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),

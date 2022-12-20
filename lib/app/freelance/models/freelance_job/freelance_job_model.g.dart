@@ -258,7 +258,7 @@ const FreelanceJobSchema = CollectionSchema(
   getId: _freelanceJobGetId,
   getLinks: _freelanceJobGetLinks,
   attach: _freelanceJobAttach,
-  version: '3.0.2',
+  version: '3.0.5',
 );
 
 int _freelanceJobEstimateSize(

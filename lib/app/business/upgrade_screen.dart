@@ -3,12 +3,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:richeable/app/business/cubit/businesses/businesses_cubit.dart';
 import 'package:richeable/app/business/widgets/upgrade_element.dart';
 import 'package:richeable/utilities/utilities.dart';
 
 import '../../constants/constants.dart';
 import '../../widgets/widgets.dart';
+import 'cubit/businesses_list/businesses_cubit.dart';
 import 'models/business/business_model.dart';
 
 class UpgradeScreen extends StatelessWidget {

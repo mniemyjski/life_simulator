@@ -136,7 +136,7 @@ const SkillSchema = CollectionSchema(
   getId: _skillGetId,
   getLinks: _skillGetLinks,
   attach: _skillAttach,
-  version: '3.0.2',
+  version: '3.0.5',
 );
 
 int _skillEstimateSize(

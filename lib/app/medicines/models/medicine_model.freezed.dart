@@ -39,7 +39,8 @@ mixin _$Medicine {
 /// @nodoc
 abstract class $MedicineCopyWith<$Res> {
   factory $MedicineCopyWith(Medicine value, $Res Function(Medicine) then) =
-      _$MedicineCopyWithImpl<$Res>;
+      _$MedicineCopyWithImpl<$Res, Medicine>;
+  @useResult
   $Res call(
       {String id,
       String name,
@@ -53,63 +54,66 @@ abstract class $MedicineCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$MedicineCopyWithImpl<$Res> implements $MedicineCopyWith<$Res> {
+class _$MedicineCopyWithImpl<$Res, $Val extends Medicine>
+    implements $MedicineCopyWith<$Res> {
   _$MedicineCopyWithImpl(this._value, this._then);
 
-  final Medicine _value;
   // ignore: unused_field
-  final $Res Function(Medicine) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? cost = freezed,
-    Object? satisfaction = freezed,
-    Object? health = freezed,
-    Object? tiredness = freezed,
-    Object? duration = freezed,
-    Object? leftDuration = freezed,
-    Object? active = freezed,
+    Object? id = null,
+    Object? name = null,
+    Object? cost = null,
+    Object? satisfaction = null,
+    Object? health = null,
+    Object? tiredness = null,
+    Object? duration = null,
+    Object? leftDuration = null,
+    Object? active = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      cost: cost == freezed
+      cost: null == cost
           ? _value.cost
           : cost // ignore: cast_nullable_to_non_nullable
               as double,
-      satisfaction: satisfaction == freezed
+      satisfaction: null == satisfaction
           ? _value.satisfaction
           : satisfaction // ignore: cast_nullable_to_non_nullable
               as double,
-      health: health == freezed
+      health: null == health
           ? _value.health
           : health // ignore: cast_nullable_to_non_nullable
               as double,
-      tiredness: tiredness == freezed
+      tiredness: null == tiredness
           ? _value.tiredness
           : tiredness // ignore: cast_nullable_to_non_nullable
               as double,
-      duration: duration == freezed
+      duration: null == duration
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
               as int,
-      leftDuration: leftDuration == freezed
+      leftDuration: null == leftDuration
           ? _value.leftDuration
           : leftDuration // ignore: cast_nullable_to_non_nullable
               as int,
-      active: active == freezed
+      active: null == active
           ? _value.active
           : active // ignore: cast_nullable_to_non_nullable
               as dynamic,
-    ));
+    ) as $Val);
   }
 }
 
@@ -119,6 +123,7 @@ abstract class _$$_MedicineCopyWith<$Res> implements $MedicineCopyWith<$Res> {
           _$_Medicine value, $Res Function(_$_Medicine) then) =
       __$$_MedicineCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String id,
       String name,
@@ -132,61 +137,60 @@ abstract class _$$_MedicineCopyWith<$Res> implements $MedicineCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_MedicineCopyWithImpl<$Res> extends _$MedicineCopyWithImpl<$Res>
+class __$$_MedicineCopyWithImpl<$Res>
+    extends _$MedicineCopyWithImpl<$Res, _$_Medicine>
     implements _$$_MedicineCopyWith<$Res> {
   __$$_MedicineCopyWithImpl(
       _$_Medicine _value, $Res Function(_$_Medicine) _then)
-      : super(_value, (v) => _then(v as _$_Medicine));
+      : super(_value, _then);
 
-  @override
-  _$_Medicine get _value => super._value as _$_Medicine;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? cost = freezed,
-    Object? satisfaction = freezed,
-    Object? health = freezed,
-    Object? tiredness = freezed,
-    Object? duration = freezed,
-    Object? leftDuration = freezed,
-    Object? active = freezed,
+    Object? id = null,
+    Object? name = null,
+    Object? cost = null,
+    Object? satisfaction = null,
+    Object? health = null,
+    Object? tiredness = null,
+    Object? duration = null,
+    Object? leftDuration = null,
+    Object? active = null,
   }) {
     return _then(_$_Medicine(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      cost: cost == freezed
+      cost: null == cost
           ? _value.cost
           : cost // ignore: cast_nullable_to_non_nullable
               as double,
-      satisfaction: satisfaction == freezed
+      satisfaction: null == satisfaction
           ? _value.satisfaction
           : satisfaction // ignore: cast_nullable_to_non_nullable
               as double,
-      health: health == freezed
+      health: null == health
           ? _value.health
           : health // ignore: cast_nullable_to_non_nullable
               as double,
-      tiredness: tiredness == freezed
+      tiredness: null == tiredness
           ? _value.tiredness
           : tiredness // ignore: cast_nullable_to_non_nullable
               as double,
-      duration: duration == freezed
+      duration: null == duration
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
               as int,
-      leftDuration: leftDuration == freezed
+      leftDuration: null == leftDuration
           ? _value.leftDuration
           : leftDuration // ignore: cast_nullable_to_non_nullable
               as int,
-      active: active == freezed ? _value.active : active,
+      active: null == active ? _value.active : active,
     ));
   }
 }
@@ -238,16 +242,18 @@ class _$_Medicine implements _Medicine {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Medicine &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.cost, cost) &&
-            const DeepCollectionEquality()
-                .equals(other.satisfaction, satisfaction) &&
-            const DeepCollectionEquality().equals(other.health, health) &&
-            const DeepCollectionEquality().equals(other.tiredness, tiredness) &&
-            const DeepCollectionEquality().equals(other.duration, duration) &&
-            const DeepCollectionEquality()
-                .equals(other.leftDuration, leftDuration) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.cost, cost) || other.cost == cost) &&
+            (identical(other.satisfaction, satisfaction) ||
+                other.satisfaction == satisfaction) &&
+            (identical(other.health, health) || other.health == health) &&
+            (identical(other.tiredness, tiredness) ||
+                other.tiredness == tiredness) &&
+            (identical(other.duration, duration) ||
+                other.duration == duration) &&
+            (identical(other.leftDuration, leftDuration) ||
+                other.leftDuration == leftDuration) &&
             const DeepCollectionEquality().equals(other.active, active));
   }
 
@@ -255,18 +261,19 @@ class _$_Medicine implements _Medicine {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(cost),
-      const DeepCollectionEquality().hash(satisfaction),
-      const DeepCollectionEquality().hash(health),
-      const DeepCollectionEquality().hash(tiredness),
-      const DeepCollectionEquality().hash(duration),
-      const DeepCollectionEquality().hash(leftDuration),
+      id,
+      name,
+      cost,
+      satisfaction,
+      health,
+      tiredness,
+      duration,
+      leftDuration,
       const DeepCollectionEquality().hash(active));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_MedicineCopyWith<_$_Medicine> get copyWith =>
       __$$_MedicineCopyWithImpl<_$_Medicine>(this, _$identity);
 

@@ -136,7 +136,7 @@ class AssetScreen extends StatelessWidget {
                   itemCount: tenants.length,
                   itemBuilder: (context, index) {
                     Tenant tenant = tenants[index];
-                    return Card(
+                    return CustomCard(
                       child: Padding(
                         padding: const EdgeInsets.only(left: 4, right: 8),
                         child: Padding(
@@ -148,20 +148,23 @@ class AssetScreen extends StatelessWidget {
                                 children: [
                                   const Padding(
                                     padding: EdgeInsets.all(8.0),
-                                    child: FaIcon(FontAwesomeIcons.peopleGroup),
+                                    child: FaIcon(
+                                      FontAwesomeIcons.peopleGroup,
+                                      color: Colors.white,
+                                    ),
                                   ),
                                   Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       RichText(
                                         text: TextSpan(
-                                          style: Theme.of(context).textTheme.bodyText1,
+                                          style: Theme.of(context).textTheme.bodyText2,
                                           children: <TextSpan>[
                                             TextSpan(
                                               text: '${LocaleKeys.rent.tr()}: ',
                                               style: Theme.of(context)
                                                   .textTheme
-                                                  .bodyText1!
+                                                  .bodyText2!
                                                   .copyWith(fontWeight: FontWeight.bold),
                                             ),
                                             TextSpan(
@@ -172,13 +175,13 @@ class AssetScreen extends StatelessWidget {
                                       ),
                                       RichText(
                                         text: TextSpan(
-                                          style: Theme.of(context).textTheme.bodyText1,
+                                          style: Theme.of(context).textTheme.bodyText2,
                                           children: <TextSpan>[
                                             TextSpan(
                                               text: '${LocaleKeys.rating.tr()}: ',
                                               style: Theme.of(context)
                                                   .textTheme
-                                                  .bodyText1!
+                                                  .bodyText2!
                                                   .copyWith(fontWeight: FontWeight.bold),
                                             ),
                                             TextSpan(
@@ -189,13 +192,13 @@ class AssetScreen extends StatelessWidget {
                                       ),
                                       RichText(
                                         text: TextSpan(
-                                          style: Theme.of(context).textTheme.bodyText1,
+                                          style: Theme.of(context).textTheme.bodyText2,
                                           children: <TextSpan>[
                                             TextSpan(
                                               text: '${LocaleKeys.hasAnimal.tr()}: ',
                                               style: Theme.of(context)
                                                   .textTheme
-                                                  .bodyText1!
+                                                  .bodyText2!
                                                   .copyWith(fontWeight: FontWeight.bold),
                                             ),
                                             TextSpan(
@@ -206,13 +209,13 @@ class AssetScreen extends StatelessWidget {
                                       ),
                                       RichText(
                                         text: TextSpan(
-                                          style: Theme.of(context).textTheme.bodyText1,
+                                          style: Theme.of(context).textTheme.bodyText2,
                                           children: <TextSpan>[
                                             TextSpan(
                                               text: '${LocaleKeys.satisfaction.tr()}: ',
                                               style: Theme.of(context)
                                                   .textTheme
-                                                  .bodyText1!
+                                                  .bodyText2!
                                                   .copyWith(fontWeight: FontWeight.bold),
                                             ),
                                             TextSpan(
@@ -229,7 +232,10 @@ class AssetScreen extends StatelessWidget {
                                 onPressed: () => context
                                     .read<TenantsCubit>()
                                     .removeTenant(asset: asset, tenant: tenant),
-                                icon: const FaIcon(FontAwesomeIcons.xmark),
+                                icon: const FaIcon(
+                                  FontAwesomeIcons.xmark,
+                                  color: Colors.white,
+                                ),
                               )
                             ],
                           ),

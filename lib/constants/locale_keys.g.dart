@@ -13,11 +13,16 @@ abstract class  LocaleKeys {
   static const satisfaction = 'satisfaction';
   static const settings = 'settings';
   static const sleep = 'sleep';
+  static const submit = 'submit';
+  static const quality = 'quality';
+  static const costPerUnit = 'costPerUnit';
+  static const commissionPerUnit = 'commissionPerUnit';
   static const tiredness = 'tiredness';
   static const used = 'used';
   static const work = 'work';
   static const deposit = 'deposit';
   static const loan = 'loan';
+  static const unitPerWork = 'unitPerWork';
   static const payOffTheLoan = 'payOffTheLoan';
   static const monthlyRate = 'monthlyRate';
   static const interest = 'interest';
@@ -70,6 +75,7 @@ abstract class  LocaleKeys {
   static const duration = 'duration';
   static const yes = 'yes';
   static const no = 'no';
+  static const available = 'available';
   static const areYouSure = 'areYouSure';
   static const areYouSureRemoveResearch = 'areYouSureRemoveResearch';
   static const datEnd = 'datEnd';

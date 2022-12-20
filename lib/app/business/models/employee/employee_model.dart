@@ -1,17 +1,20 @@
+import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:equatable/equatable.dart';
 import 'package:isar/isar.dart';
-
-import '../../../../utilities/utilities.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'employee_model.g.dart';
 
 enum ETypeEmployees { worker, scientist, accountant, analyst, manager, marketer }
 
+@CopyWith()
+@JsonSerializable()
 @Collection(ignore: {'props', 'stringify'})
 @Name('Employees')
 class Employee extends Equatable {
   final Id id;
   final int? businessId;
+  final int? productId;
 
   @enumerated
   final ETypeEmployees eTypeEmployees;
@@ -24,6 +27,7 @@ class Employee extends Equatable {
 
   const Employee({
     this.id = Isar.autoIncrement,
+    this.productId,
     this.businessId,
     required this.eTypeEmployees,
     required this.cost,
@@ -38,6 +42,7 @@ class Employee extends Equatable {
   List<Object?> get props => [
         id,
         businessId,
+        productId,
         eTypeEmployees,
         cost,
         efficiency,
@@ -47,55 +52,6 @@ class Employee extends Equatable {
         fired,
       ];
 
-  Employee copyWith({
-    Id? id,
-    Id? businessId,
-    ETypeEmployees? eTypeEmployees,
-    double? cost,
-    double? efficiency,
-    int? rating,
-    int? satisfaction,
-    DateTime? dateOfEmployment,
-    DateTime? fired,
-  }) {
-    return Employee(
-      id: id ?? this.id,
-      businessId: businessId ?? this.businessId,
-      eTypeEmployees: eTypeEmployees ?? this.eTypeEmployees,
-      cost: cost ?? this.cost,
-      efficiency: efficiency ?? this.efficiency,
-      rating: rating ?? this.rating,
-      satisfaction: satisfaction ?? this.satisfaction,
-      dateOfEmployment: dateOfEmployment ?? this.dateOfEmployment,
-      fired: fired ?? this.fired,
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'businessId': businessId,
-      'eTypeEmployees': Enums.toText(eTypeEmployees),
-      'cost': cost,
-      'efficiency': efficiency,
-      'rating': rating,
-      'satisfaction': satisfaction,
-      'dateOfEmployment': dateOfEmployment?.millisecondsSinceEpoch,
-      'fired': fired?.millisecondsSinceEpoch,
-    };
-  }
-
-  factory Employee.fromJson(Map<String, dynamic> map) {
-    return Employee(
-      id: map['id'] as Id,
-      businessId: map['businessId'] as Id,
-      eTypeEmployees: Enums.toEnum(map['eTypeEmployees'], ETypeEmployees.values),
-      cost: map['cost'] as double,
-      efficiency: map['efficiency'] as double,
-      rating: map['rating'] as int,
-      satisfaction: map['satisfaction'] as int,
-      dateOfEmployment: DateTime.fromMillisecondsSinceEpoch(map['dateOfEmployment']),
-      fired: DateTime.fromMillisecondsSinceEpoch(map['fired']),
-    );
-  }
+  factory Employee.fromJson(Map<String, dynamic> json) => _$EmployeeFromJson(json);
+  Map<String, dynamic> toJson() => _$EmployeeToJson(this);
 }

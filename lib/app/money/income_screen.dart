@@ -212,7 +212,7 @@ class IncomeScreen extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    element.frequencyToString(),
+                    Enums.toText(element.eTypeFrequency).tr(),
                     style: TextStyle(
                       color: Theme.of(context).textTheme.bodyText1!.color,
                     ),

@@ -40,7 +40,8 @@ mixin _$GameEvent {
 /// @nodoc
 abstract class $GameEventCopyWith<$Res> {
   factory $GameEventCopyWith(GameEvent value, $Res Function(GameEvent) then) =
-      _$GameEventCopyWithImpl<$Res>;
+      _$GameEventCopyWithImpl<$Res, GameEvent>;
+  @useResult
   $Res call(
       {String id,
       String name,
@@ -55,68 +56,71 @@ abstract class $GameEventCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$GameEventCopyWithImpl<$Res> implements $GameEventCopyWith<$Res> {
+class _$GameEventCopyWithImpl<$Res, $Val extends GameEvent>
+    implements $GameEventCopyWith<$Res> {
   _$GameEventCopyWithImpl(this._value, this._then);
 
-  final GameEvent _value;
   // ignore: unused_field
-  final $Res Function(GameEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? description = freezed,
+    Object? id = null,
+    Object? name = null,
+    Object? description = null,
     Object? datCre = freezed,
-    Object? eTypeEffect = freezed,
-    Object? value = freezed,
-    Object? duration = freezed,
-    Object? leftDuration = freezed,
-    Object? frequency = freezed,
-    Object? active = freezed,
+    Object? eTypeEffect = null,
+    Object? value = null,
+    Object? duration = null,
+    Object? leftDuration = null,
+    Object? frequency = null,
+    Object? active = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      description: description == freezed
+      description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      datCre: datCre == freezed
+      datCre: freezed == datCre
           ? _value.datCre
           : datCre // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      eTypeEffect: eTypeEffect == freezed
+      eTypeEffect: null == eTypeEffect
           ? _value.eTypeEffect
           : eTypeEffect // ignore: cast_nullable_to_non_nullable
               as ETypeEffect,
-      value: value == freezed
+      value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
               as double,
-      duration: duration == freezed
+      duration: null == duration
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
               as int,
-      leftDuration: leftDuration == freezed
+      leftDuration: null == leftDuration
           ? _value.leftDuration
           : leftDuration // ignore: cast_nullable_to_non_nullable
               as int,
-      frequency: frequency == freezed
+      frequency: null == frequency
           ? _value.frequency
           : frequency // ignore: cast_nullable_to_non_nullable
               as int,
-      active: active == freezed
+      active: null == active
           ? _value.active
           : active // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 }
 
@@ -125,6 +129,7 @@ abstract class _$$_EventCopyWith<$Res> implements $GameEventCopyWith<$Res> {
   factory _$$_EventCopyWith(_$_Event value, $Res Function(_$_Event) then) =
       __$$_EventCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String id,
       String name,
@@ -139,65 +144,64 @@ abstract class _$$_EventCopyWith<$Res> implements $GameEventCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_EventCopyWithImpl<$Res> extends _$GameEventCopyWithImpl<$Res>
+class __$$_EventCopyWithImpl<$Res>
+    extends _$GameEventCopyWithImpl<$Res, _$_Event>
     implements _$$_EventCopyWith<$Res> {
   __$$_EventCopyWithImpl(_$_Event _value, $Res Function(_$_Event) _then)
-      : super(_value, (v) => _then(v as _$_Event));
+      : super(_value, _then);
 
-  @override
-  _$_Event get _value => super._value as _$_Event;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? description = freezed,
+    Object? id = null,
+    Object? name = null,
+    Object? description = null,
     Object? datCre = freezed,
-    Object? eTypeEffect = freezed,
-    Object? value = freezed,
-    Object? duration = freezed,
-    Object? leftDuration = freezed,
-    Object? frequency = freezed,
-    Object? active = freezed,
+    Object? eTypeEffect = null,
+    Object? value = null,
+    Object? duration = null,
+    Object? leftDuration = null,
+    Object? frequency = null,
+    Object? active = null,
   }) {
     return _then(_$_Event(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      description: description == freezed
+      description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      datCre: datCre == freezed
+      datCre: freezed == datCre
           ? _value.datCre
           : datCre // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      eTypeEffect: eTypeEffect == freezed
+      eTypeEffect: null == eTypeEffect
           ? _value.eTypeEffect
           : eTypeEffect // ignore: cast_nullable_to_non_nullable
               as ETypeEffect,
-      value: value == freezed
+      value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
               as double,
-      duration: duration == freezed
+      duration: null == duration
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
               as int,
-      leftDuration: leftDuration == freezed
+      leftDuration: null == leftDuration
           ? _value.leftDuration
           : leftDuration // ignore: cast_nullable_to_non_nullable
               as int,
-      frequency: frequency == freezed
+      frequency: null == frequency
           ? _value.frequency
           : frequency // ignore: cast_nullable_to_non_nullable
               as int,
-      active: active == freezed
+      active: null == active
           ? _value.active
           : active // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -255,38 +259,31 @@ class _$_Event implements _Event {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Event &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality()
-                .equals(other.description, description) &&
-            const DeepCollectionEquality().equals(other.datCre, datCre) &&
-            const DeepCollectionEquality()
-                .equals(other.eTypeEffect, eTypeEffect) &&
-            const DeepCollectionEquality().equals(other.value, value) &&
-            const DeepCollectionEquality().equals(other.duration, duration) &&
-            const DeepCollectionEquality()
-                .equals(other.leftDuration, leftDuration) &&
-            const DeepCollectionEquality().equals(other.frequency, frequency) &&
-            const DeepCollectionEquality().equals(other.active, active));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.datCre, datCre) || other.datCre == datCre) &&
+            (identical(other.eTypeEffect, eTypeEffect) ||
+                other.eTypeEffect == eTypeEffect) &&
+            (identical(other.value, value) || other.value == value) &&
+            (identical(other.duration, duration) ||
+                other.duration == duration) &&
+            (identical(other.leftDuration, leftDuration) ||
+                other.leftDuration == leftDuration) &&
+            (identical(other.frequency, frequency) ||
+                other.frequency == frequency) &&
+            (identical(other.active, active) || other.active == active));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(description),
-      const DeepCollectionEquality().hash(datCre),
-      const DeepCollectionEquality().hash(eTypeEffect),
-      const DeepCollectionEquality().hash(value),
-      const DeepCollectionEquality().hash(duration),
-      const DeepCollectionEquality().hash(leftDuration),
-      const DeepCollectionEquality().hash(frequency),
-      const DeepCollectionEquality().hash(active));
+  int get hashCode => Object.hash(runtimeType, id, name, description, datCre,
+      eTypeEffect, value, duration, leftDuration, frequency, active);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_EventCopyWith<_$_Event> get copyWith =>
       __$$_EventCopyWithImpl<_$_Event>(this, _$identity);
 

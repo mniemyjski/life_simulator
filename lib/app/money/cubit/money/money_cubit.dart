@@ -5,8 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:richeable/app/money/models/transaction/transaction_model.dart';
 
-import '../../../../repositories/transactions_repository.dart';
-import '../../../new_game/new_game_cubit.dart';
+import '../../repositories/transactions_repository.dart';
 
 part 'money_cubit.freezed.dart';
 part 'money_cubit.g.dart';
@@ -14,21 +13,16 @@ part 'money_state.dart';
 
 @lazySingleton
 class MoneyCubit extends Cubit<MoneyState> {
-  final NewGameCubit _newGameCubit;
-  late StreamSubscription _newGameSub;
-
   final TransactionsRepository _transactionRepository;
   late StreamSubscription _transactionSub;
 
   MoneyCubit(
     this._transactionRepository,
-    this._newGameCubit,
   ) : super(const MoneyState.initial()) {
-    _newGame();
-
-    try {
-      _transactionSub.cancel();
-    } catch (_) {}
+    state.maybeWhen(orElse: () async {
+      double value = await _transactionRepository.balance();
+      emit(MoneyState.loaded(value));
+    });
 
     _transactionSub = _transactionRepository.watchLazyTotalUser().listen((event) async {
       double value = await _transactionRepository.balance();
@@ -38,26 +32,8 @@ class MoneyCubit extends Cubit<MoneyState> {
 
   @override
   Future<void> close() async {
-    _newGameSub.cancel();
     _transactionSub.cancel();
     super.close();
-  }
-
-  _newGame() {
-    if (_newGameCubit.state) {
-      _transactionRepository.add(Transaction(
-          value: 2000,
-          eTypeTransactionSource: ETypeTransactionSource.giftFromParents,
-          dateCre: DateTime(18, 1, 1)));
-    }
-    _newGameSub = _newGameCubit.stream.listen((newGame) {
-      if (newGame) {
-        _transactionRepository.add(Transaction(
-            value: 200000000,
-            eTypeTransactionSource: ETypeTransactionSource.giftFromParents,
-            dateCre: DateTime(18, 1, 1)));
-      }
-    });
   }
 
   double getBalance() {

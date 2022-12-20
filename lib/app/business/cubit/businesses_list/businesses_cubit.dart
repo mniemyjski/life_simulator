@@ -3,15 +3,10 @@ import 'dart:async';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:richeable/repositories/employee_repository.dart';
-import 'package:richeable/repositories/transactions_repository.dart';
 
-import '../../../../repositories/businesses_repository.dart';
-import '../../../money/cubit/money/money_cubit.dart';
-import '../../../money/models/transaction/transaction_model.dart';
 import '../../../new_game/new_game_cubit.dart';
 import '../../models/business/business_model.dart';
-import '../../services/business_service.dart';
+import '../../repositories/businesses_repository.dart';
 
 part 'businesses_cubit.freezed.dart';
 part 'businesses_cubit.g.dart';
@@ -23,20 +18,11 @@ class BusinessesCubit extends HydratedCubit<BusinessesState> {
   late StreamSubscription _newGameSub;
 
   final BusinessesRepository _businessesRepository;
-  final TransactionsRepository _transactionsRepository;
   late StreamSubscription _businessesSub;
-
-  final EmployeeRepository _employeeRepository;
-  final MoneyCubit _moneyCubit;
-  final BusinessService _businessService;
 
   BusinessesCubit(
     this._newGameCubit,
     this._businessesRepository,
-    this._employeeRepository,
-    this._moneyCubit,
-    this._transactionsRepository,
-    this._businessService,
   ) : super(const BusinessesState.initial()) {
     _newGame();
 
@@ -59,29 +45,8 @@ class BusinessesCubit extends HydratedCubit<BusinessesState> {
     });
   }
 
-  counting(DateTime dateTime) {
-    // _businessService.count(dateTime);
-    if (dateTime.day == 10) {
-      state.whenOrNull(loaded: (businesses) async {
-        for (var element in businesses) {
-          final double cost = await _employeeRepository.getSalaryToPay(element.id);
-          if (cost != 0) {
-            _moneyCubit.addTransaction(
-              idSource: element.id,
-              dateTime: dateTime,
-              value: -cost,
-              eTypeTransactionSource: ETypeTransactionSource.employeeWages,
-            );
-          }
-        }
-      });
-    }
-    _employeeRepository.removeFiredEmployee(dateTime);
-  }
-
-  String? create(Business business) {
+  create(Business business) {
     _businessesRepository.addBusiness(business);
-    return null;
   }
 
   remove(Business business) {

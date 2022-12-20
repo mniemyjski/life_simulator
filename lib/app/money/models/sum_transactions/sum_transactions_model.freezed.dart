@@ -34,34 +34,37 @@ mixin _$SumTransactions {
 abstract class $SumTransactionsCopyWith<$Res> {
   factory $SumTransactionsCopyWith(
           SumTransactions value, $Res Function(SumTransactions) then) =
-      _$SumTransactionsCopyWithImpl<$Res>;
+      _$SumTransactionsCopyWithImpl<$Res, SumTransactions>;
+  @useResult
   $Res call({ETypeTransactionSource eTypeTransactionSource, double value});
 }
 
 /// @nodoc
-class _$SumTransactionsCopyWithImpl<$Res>
+class _$SumTransactionsCopyWithImpl<$Res, $Val extends SumTransactions>
     implements $SumTransactionsCopyWith<$Res> {
   _$SumTransactionsCopyWithImpl(this._value, this._then);
 
-  final SumTransactions _value;
   // ignore: unused_field
-  final $Res Function(SumTransactions) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? eTypeTransactionSource = freezed,
-    Object? value = freezed,
+    Object? eTypeTransactionSource = null,
+    Object? value = null,
   }) {
     return _then(_value.copyWith(
-      eTypeTransactionSource: eTypeTransactionSource == freezed
+      eTypeTransactionSource: null == eTypeTransactionSource
           ? _value.eTypeTransactionSource
           : eTypeTransactionSource // ignore: cast_nullable_to_non_nullable
               as ETypeTransactionSource,
-      value: value == freezed
+      value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
               as double,
-    ));
+    ) as $Val);
   }
 }
 
@@ -72,31 +75,30 @@ abstract class _$$_SumTransactionsCopyWith<$Res>
           _$_SumTransactions value, $Res Function(_$_SumTransactions) then) =
       __$$_SumTransactionsCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({ETypeTransactionSource eTypeTransactionSource, double value});
 }
 
 /// @nodoc
 class __$$_SumTransactionsCopyWithImpl<$Res>
-    extends _$SumTransactionsCopyWithImpl<$Res>
+    extends _$SumTransactionsCopyWithImpl<$Res, _$_SumTransactions>
     implements _$$_SumTransactionsCopyWith<$Res> {
   __$$_SumTransactionsCopyWithImpl(
       _$_SumTransactions _value, $Res Function(_$_SumTransactions) _then)
-      : super(_value, (v) => _then(v as _$_SumTransactions));
+      : super(_value, _then);
 
-  @override
-  _$_SumTransactions get _value => super._value as _$_SumTransactions;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? eTypeTransactionSource = freezed,
-    Object? value = freezed,
+    Object? eTypeTransactionSource = null,
+    Object? value = null,
   }) {
     return _then(_$_SumTransactions(
-      eTypeTransactionSource: eTypeTransactionSource == freezed
+      eTypeTransactionSource: null == eTypeTransactionSource
           ? _value.eTypeTransactionSource
           : eTypeTransactionSource // ignore: cast_nullable_to_non_nullable
               as ETypeTransactionSource,
-      value: value == freezed
+      value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
               as double,
@@ -128,20 +130,18 @@ class _$_SumTransactions implements _SumTransactions {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SumTransactions &&
-            const DeepCollectionEquality()
-                .equals(other.eTypeTransactionSource, eTypeTransactionSource) &&
-            const DeepCollectionEquality().equals(other.value, value));
+            (identical(other.eTypeTransactionSource, eTypeTransactionSource) ||
+                other.eTypeTransactionSource == eTypeTransactionSource) &&
+            (identical(other.value, value) || other.value == value));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(eTypeTransactionSource),
-      const DeepCollectionEquality().hash(value));
+  int get hashCode => Object.hash(runtimeType, eTypeTransactionSource, value);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SumTransactionsCopyWith<_$_SumTransactions> get copyWith =>
       __$$_SumTransactionsCopyWithImpl<_$_SumTransactions>(this, _$identity);
 

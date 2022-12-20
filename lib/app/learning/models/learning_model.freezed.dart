@@ -37,7 +37,8 @@ mixin _$Learning {
 /// @nodoc
 abstract class $LearningCopyWith<$Res> {
   factory $LearningCopyWith(Learning value, $Res Function(Learning) then) =
-      _$LearningCopyWithImpl<$Res>;
+      _$LearningCopyWithImpl<$Res, Learning>;
+  @useResult
   $Res call(
       {String id,
       String name,
@@ -49,53 +50,56 @@ abstract class $LearningCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$LearningCopyWithImpl<$Res> implements $LearningCopyWith<$Res> {
+class _$LearningCopyWithImpl<$Res, $Val extends Learning>
+    implements $LearningCopyWith<$Res> {
   _$LearningCopyWithImpl(this._value, this._then);
 
-  final Learning _value;
   // ignore: unused_field
-  final $Res Function(Learning) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? skillType = freezed,
-    Object? baseTime = freezed,
-    Object? exp = freezed,
-    Object? time = freezed,
-    Object? cost = freezed,
+    Object? id = null,
+    Object? name = null,
+    Object? skillType = null,
+    Object? baseTime = null,
+    Object? exp = null,
+    Object? time = null,
+    Object? cost = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      skillType: skillType == freezed
+      skillType: null == skillType
           ? _value.skillType
           : skillType // ignore: cast_nullable_to_non_nullable
               as ETypeSkills,
-      baseTime: baseTime == freezed
+      baseTime: null == baseTime
           ? _value.baseTime
           : baseTime // ignore: cast_nullable_to_non_nullable
               as int,
-      exp: exp == freezed
+      exp: null == exp
           ? _value.exp
           : exp // ignore: cast_nullable_to_non_nullable
               as int,
-      time: time == freezed
+      time: null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
               as int,
-      cost: cost == freezed
+      cost: null == cost
           ? _value.cost
           : cost // ignore: cast_nullable_to_non_nullable
               as double,
-    ));
+    ) as $Val);
   }
 }
 
@@ -105,6 +109,7 @@ abstract class _$$_LearningCopyWith<$Res> implements $LearningCopyWith<$Res> {
           _$_Learning value, $Res Function(_$_Learning) then) =
       __$$_LearningCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String id,
       String name,
@@ -116,51 +121,50 @@ abstract class _$$_LearningCopyWith<$Res> implements $LearningCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_LearningCopyWithImpl<$Res> extends _$LearningCopyWithImpl<$Res>
+class __$$_LearningCopyWithImpl<$Res>
+    extends _$LearningCopyWithImpl<$Res, _$_Learning>
     implements _$$_LearningCopyWith<$Res> {
   __$$_LearningCopyWithImpl(
       _$_Learning _value, $Res Function(_$_Learning) _then)
-      : super(_value, (v) => _then(v as _$_Learning));
+      : super(_value, _then);
 
-  @override
-  _$_Learning get _value => super._value as _$_Learning;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? skillType = freezed,
-    Object? baseTime = freezed,
-    Object? exp = freezed,
-    Object? time = freezed,
-    Object? cost = freezed,
+    Object? id = null,
+    Object? name = null,
+    Object? skillType = null,
+    Object? baseTime = null,
+    Object? exp = null,
+    Object? time = null,
+    Object? cost = null,
   }) {
     return _then(_$_Learning(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      skillType: skillType == freezed
+      skillType: null == skillType
           ? _value.skillType
           : skillType // ignore: cast_nullable_to_non_nullable
               as ETypeSkills,
-      baseTime: baseTime == freezed
+      baseTime: null == baseTime
           ? _value.baseTime
           : baseTime // ignore: cast_nullable_to_non_nullable
               as int,
-      exp: exp == freezed
+      exp: null == exp
           ? _value.exp
           : exp // ignore: cast_nullable_to_non_nullable
               as int,
-      time: time == freezed
+      time: null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
               as int,
-      cost: cost == freezed
+      cost: null == cost
           ? _value.cost
           : cost // ignore: cast_nullable_to_non_nullable
               as double,
@@ -209,29 +213,25 @@ class _$_Learning implements _Learning {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Learning &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.skillType, skillType) &&
-            const DeepCollectionEquality().equals(other.baseTime, baseTime) &&
-            const DeepCollectionEquality().equals(other.exp, exp) &&
-            const DeepCollectionEquality().equals(other.time, time) &&
-            const DeepCollectionEquality().equals(other.cost, cost));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.skillType, skillType) ||
+                other.skillType == skillType) &&
+            (identical(other.baseTime, baseTime) ||
+                other.baseTime == baseTime) &&
+            (identical(other.exp, exp) || other.exp == exp) &&
+            (identical(other.time, time) || other.time == time) &&
+            (identical(other.cost, cost) || other.cost == cost));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(skillType),
-      const DeepCollectionEquality().hash(baseTime),
-      const DeepCollectionEquality().hash(exp),
-      const DeepCollectionEquality().hash(time),
-      const DeepCollectionEquality().hash(cost));
+  int get hashCode =>
+      Object.hash(runtimeType, id, name, skillType, baseTime, exp, time, cost);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LearningCopyWith<_$_Learning> get copyWith =>
       __$$_LearningCopyWithImpl<_$_Learning>(this, _$identity);
 

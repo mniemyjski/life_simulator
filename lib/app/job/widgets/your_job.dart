@@ -90,18 +90,18 @@ class YourJob extends StatelessWidget {
                                         final element =
                                             job.experiences[exp.exp + 1].requirements[index];
 
-                                        return Card(
+                                        return CustomCard(
                                             child: Padding(
                                           padding: const EdgeInsets.all(8.0),
                                           child: RichText(
                                             text: TextSpan(
-                                              style: Theme.of(context).textTheme.bodyText1,
+                                              style: Theme.of(context).textTheme.bodyText2,
                                               children: <TextSpan>[
                                                 TextSpan(
                                                   text: '${Enums.toText(element.name).tr()}: ',
                                                   style: Theme.of(context)
                                                       .textTheme
-                                                      .bodyText1!
+                                                      .bodyText2!
                                                       .copyWith(fontWeight: FontWeight.bold),
                                                 ),
                                                 TextSpan(
@@ -139,14 +139,14 @@ class YourJob extends StatelessWidget {
     return Builder(builder: (context) {
       return Padding(
         padding: const EdgeInsets.only(left: 4),
-        child: Card(
+        child: CustomCard(
           child: Container(
             padding: const EdgeInsets.all(8.0),
             width: 200,
             child: Text(
               '$name: $value',
               style: TextStyle(
-                color: Theme.of(context).textTheme.bodyText1!.color,
+                color: Theme.of(context).textTheme.bodyText2!.color,
               ),
             ),
           ),

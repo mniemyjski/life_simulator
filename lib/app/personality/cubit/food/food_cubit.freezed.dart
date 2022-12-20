@@ -40,9 +40,9 @@ mixin _$FoodState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(Food food)? loaded,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(Food food)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -62,9 +62,9 @@ mixin _$FoodState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Loading value)? loading,
-    TResult Function(Loaded value)? loaded,
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Loaded value)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -81,16 +81,18 @@ mixin _$FoodState {
 /// @nodoc
 abstract class $FoodStateCopyWith<$Res> {
   factory $FoodStateCopyWith(FoodState value, $Res Function(FoodState) then) =
-      _$FoodStateCopyWithImpl<$Res>;
+      _$FoodStateCopyWithImpl<$Res, FoodState>;
 }
 
 /// @nodoc
-class _$FoodStateCopyWithImpl<$Res> implements $FoodStateCopyWith<$Res> {
+class _$FoodStateCopyWithImpl<$Res, $Val extends FoodState>
+    implements $FoodStateCopyWith<$Res> {
   _$FoodStateCopyWithImpl(this._value, this._then);
 
-  final FoodState _value;
   // ignore: unused_field
-  final $Res Function(FoodState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -100,13 +102,11 @@ abstract class _$$InitialCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$InitialCopyWithImpl<$Res> extends _$FoodStateCopyWithImpl<$Res>
+class __$$InitialCopyWithImpl<$Res>
+    extends _$FoodStateCopyWithImpl<$Res, _$Initial>
     implements _$$InitialCopyWith<$Res> {
   __$$InitialCopyWithImpl(_$Initial _value, $Res Function(_$Initial) _then)
-      : super(_value, (v) => _then(v as _$Initial));
-
-  @override
-  _$Initial get _value => super._value as _$Initial;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -148,9 +148,9 @@ class _$Initial implements Initial {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(Food food)? loaded,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(Food food)? loaded,
   }) {
     return initial?.call();
   }
@@ -182,9 +182,9 @@ class _$Initial implements Initial {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Loading value)? loading,
-    TResult Function(Loaded value)? loaded,
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Loaded value)? loaded,
   }) {
     return initial?.call(this);
   }
@@ -224,13 +224,11 @@ abstract class _$$LoadingCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$LoadingCopyWithImpl<$Res> extends _$FoodStateCopyWithImpl<$Res>
+class __$$LoadingCopyWithImpl<$Res>
+    extends _$FoodStateCopyWithImpl<$Res, _$Loading>
     implements _$$LoadingCopyWith<$Res> {
   __$$LoadingCopyWithImpl(_$Loading _value, $Res Function(_$Loading) _then)
-      : super(_value, (v) => _then(v as _$Loading));
-
-  @override
-  _$Loading get _value => super._value as _$Loading;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -272,9 +270,9 @@ class _$Loading implements Loading {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(Food food)? loaded,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(Food food)? loaded,
   }) {
     return loading?.call();
   }
@@ -306,9 +304,9 @@ class _$Loading implements Loading {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Loading value)? loading,
-    TResult Function(Loaded value)? loaded,
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Loaded value)? loaded,
   }) {
     return loading?.call(this);
   }
@@ -345,37 +343,28 @@ abstract class Loading implements FoodState {
 abstract class _$$LoadedCopyWith<$Res> {
   factory _$$LoadedCopyWith(_$Loaded value, $Res Function(_$Loaded) then) =
       __$$LoadedCopyWithImpl<$Res>;
+  @useResult
   $Res call({Food food});
-
-  $FoodCopyWith<$Res> get food;
 }
 
 /// @nodoc
-class __$$LoadedCopyWithImpl<$Res> extends _$FoodStateCopyWithImpl<$Res>
+class __$$LoadedCopyWithImpl<$Res>
+    extends _$FoodStateCopyWithImpl<$Res, _$Loaded>
     implements _$$LoadedCopyWith<$Res> {
   __$$LoadedCopyWithImpl(_$Loaded _value, $Res Function(_$Loaded) _then)
-      : super(_value, (v) => _then(v as _$Loaded));
+      : super(_value, _then);
 
-  @override
-  _$Loaded get _value => super._value as _$Loaded;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? food = freezed,
+    Object? food = null,
   }) {
     return _then(_$Loaded(
-      food: food == freezed
+      food: null == food
           ? _value.food
           : food // ignore: cast_nullable_to_non_nullable
               as Food,
     ));
-  }
-
-  @override
-  $FoodCopyWith<$Res> get food {
-    return $FoodCopyWith<$Res>(_value.food, (value) {
-      return _then(_value.copyWith(food: value));
-    });
   }
 }
 
@@ -404,16 +393,16 @@ class _$Loaded implements Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$Loaded &&
-            const DeepCollectionEquality().equals(other.food, food));
+            (identical(other.food, food) || other.food == food));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(food));
+  int get hashCode => Object.hash(runtimeType, food);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$LoadedCopyWith<_$Loaded> get copyWith =>
       __$$LoadedCopyWithImpl<_$Loaded>(this, _$identity);
 
@@ -430,9 +419,9 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(Food food)? loaded,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(Food food)? loaded,
   }) {
     return loaded?.call(food);
   }
@@ -464,9 +453,9 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Loading value)? loading,
-    TResult Function(Loaded value)? loaded,
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Loaded value)? loaded,
   }) {
     return loaded?.call(this);
   }

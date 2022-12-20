@@ -20,6 +20,8 @@ ResearchProductState _$ResearchProductStateFromJson(Map<String, dynamic> json) {
       return Initial.fromJson(json);
     case 'loading':
       return Loading.fromJson(json);
+    case 'none':
+      return None.fromJson(json);
     case 'loaded':
       return Loaded.fromJson(json);
 
@@ -38,20 +40,23 @@ mixin _$ResearchProductState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() none,
     required TResult Function(Research research) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(Research research)? loaded,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? none,
+    TResult? Function(Research research)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? none,
     TResult Function(Research research)? loaded,
     required TResult orElse(),
   }) =>
@@ -60,20 +65,23 @@ mixin _$ResearchProductState {
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
     required TResult Function(Loading value) loading,
+    required TResult Function(None value) none,
     required TResult Function(Loaded value) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Loading value)? loading,
-    TResult Function(Loaded value)? loaded,
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(None value)? none,
+    TResult? Function(Loaded value)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
     TResult Function(Loading value)? loading,
+    TResult Function(None value)? none,
     TResult Function(Loaded value)? loaded,
     required TResult orElse(),
   }) =>
@@ -85,17 +93,19 @@ mixin _$ResearchProductState {
 abstract class $ResearchProductStateCopyWith<$Res> {
   factory $ResearchProductStateCopyWith(ResearchProductState value,
           $Res Function(ResearchProductState) then) =
-      _$ResearchProductStateCopyWithImpl<$Res>;
+      _$ResearchProductStateCopyWithImpl<$Res, ResearchProductState>;
 }
 
 /// @nodoc
-class _$ResearchProductStateCopyWithImpl<$Res>
+class _$ResearchProductStateCopyWithImpl<$Res,
+        $Val extends ResearchProductState>
     implements $ResearchProductStateCopyWith<$Res> {
   _$ResearchProductStateCopyWithImpl(this._value, this._then);
 
-  final ResearchProductState _value;
   // ignore: unused_field
-  final $Res Function(ResearchProductState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -106,13 +116,10 @@ abstract class _$$InitialCopyWith<$Res> {
 
 /// @nodoc
 class __$$InitialCopyWithImpl<$Res>
-    extends _$ResearchProductStateCopyWithImpl<$Res>
+    extends _$ResearchProductStateCopyWithImpl<$Res, _$Initial>
     implements _$$InitialCopyWith<$Res> {
   __$$InitialCopyWithImpl(_$Initial _value, $Res Function(_$Initial) _then)
-      : super(_value, (v) => _then(v as _$Initial));
-
-  @override
-  _$Initial get _value => super._value as _$Initial;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -146,6 +153,7 @@ class _$Initial implements Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() none,
     required TResult Function(Research research) loaded,
   }) {
     return initial();
@@ -154,9 +162,10 @@ class _$Initial implements Initial {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(Research research)? loaded,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? none,
+    TResult? Function(Research research)? loaded,
   }) {
     return initial?.call();
   }
@@ -166,6 +175,7 @@ class _$Initial implements Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? none,
     TResult Function(Research research)? loaded,
     required TResult orElse(),
   }) {
@@ -180,6 +190,7 @@ class _$Initial implements Initial {
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
     required TResult Function(Loading value) loading,
+    required TResult Function(None value) none,
     required TResult Function(Loaded value) loaded,
   }) {
     return initial(this);
@@ -188,9 +199,10 @@ class _$Initial implements Initial {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Loading value)? loading,
-    TResult Function(Loaded value)? loaded,
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(None value)? none,
+    TResult? Function(Loaded value)? loaded,
   }) {
     return initial?.call(this);
   }
@@ -200,6 +212,7 @@ class _$Initial implements Initial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
     TResult Function(Loading value)? loading,
+    TResult Function(None value)? none,
     TResult Function(Loaded value)? loaded,
     required TResult orElse(),
   }) {
@@ -231,13 +244,10 @@ abstract class _$$LoadingCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadingCopyWithImpl<$Res>
-    extends _$ResearchProductStateCopyWithImpl<$Res>
+    extends _$ResearchProductStateCopyWithImpl<$Res, _$Loading>
     implements _$$LoadingCopyWith<$Res> {
   __$$LoadingCopyWithImpl(_$Loading _value, $Res Function(_$Loading) _then)
-      : super(_value, (v) => _then(v as _$Loading));
-
-  @override
-  _$Loading get _value => super._value as _$Loading;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -271,6 +281,7 @@ class _$Loading implements Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() none,
     required TResult Function(Research research) loaded,
   }) {
     return loading();
@@ -279,9 +290,10 @@ class _$Loading implements Loading {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(Research research)? loaded,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? none,
+    TResult? Function(Research research)? loaded,
   }) {
     return loading?.call();
   }
@@ -291,6 +303,7 @@ class _$Loading implements Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? none,
     TResult Function(Research research)? loaded,
     required TResult orElse(),
   }) {
@@ -305,6 +318,7 @@ class _$Loading implements Loading {
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
     required TResult Function(Loading value) loading,
+    required TResult Function(None value) none,
     required TResult Function(Loaded value) loaded,
   }) {
     return loading(this);
@@ -313,9 +327,10 @@ class _$Loading implements Loading {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Loading value)? loading,
-    TResult Function(Loaded value)? loaded,
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(None value)? none,
+    TResult? Function(Loaded value)? loaded,
   }) {
     return loading?.call(this);
   }
@@ -325,6 +340,7 @@ class _$Loading implements Loading {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
     TResult Function(Loading value)? loading,
+    TResult Function(None value)? none,
     TResult Function(Loaded value)? loaded,
     required TResult orElse(),
   }) {
@@ -349,41 +365,158 @@ abstract class Loading implements ResearchProductState {
 }
 
 /// @nodoc
+abstract class _$$NoneCopyWith<$Res> {
+  factory _$$NoneCopyWith(_$None value, $Res Function(_$None) then) =
+      __$$NoneCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$NoneCopyWithImpl<$Res>
+    extends _$ResearchProductStateCopyWithImpl<$Res, _$None>
+    implements _$$NoneCopyWith<$Res> {
+  __$$NoneCopyWithImpl(_$None _value, $Res Function(_$None) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$None implements None {
+  _$None({final String? $type}) : $type = $type ?? 'none';
+
+  factory _$None.fromJson(Map<String, dynamic> json) => _$$NoneFromJson(json);
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
+  @override
+  String toString() {
+    return 'ResearchProductState.none()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$None);
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() none,
+    required TResult Function(Research research) loaded,
+  }) {
+    return none();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? none,
+    TResult? Function(Research research)? loaded,
+  }) {
+    return none?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? none,
+    TResult Function(Research research)? loaded,
+    required TResult orElse(),
+  }) {
+    if (none != null) {
+      return none();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(Loading value) loading,
+    required TResult Function(None value) none,
+    required TResult Function(Loaded value) loaded,
+  }) {
+    return none(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(None value)? none,
+    TResult? Function(Loaded value)? loaded,
+  }) {
+    return none?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(Loading value)? loading,
+    TResult Function(None value)? none,
+    TResult Function(Loaded value)? loaded,
+    required TResult orElse(),
+  }) {
+    if (none != null) {
+      return none(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$NoneToJson(
+      this,
+    );
+  }
+}
+
+abstract class None implements ResearchProductState {
+  factory None() = _$None;
+
+  factory None.fromJson(Map<String, dynamic> json) = _$None.fromJson;
+}
+
+/// @nodoc
 abstract class _$$LoadedCopyWith<$Res> {
   factory _$$LoadedCopyWith(_$Loaded value, $Res Function(_$Loaded) then) =
       __$$LoadedCopyWithImpl<$Res>;
+  @useResult
   $Res call({Research research});
-
-  $ResearchCopyWith<$Res> get research;
 }
 
 /// @nodoc
 class __$$LoadedCopyWithImpl<$Res>
-    extends _$ResearchProductStateCopyWithImpl<$Res>
+    extends _$ResearchProductStateCopyWithImpl<$Res, _$Loaded>
     implements _$$LoadedCopyWith<$Res> {
   __$$LoadedCopyWithImpl(_$Loaded _value, $Res Function(_$Loaded) _then)
-      : super(_value, (v) => _then(v as _$Loaded));
+      : super(_value, _then);
 
-  @override
-  _$Loaded get _value => super._value as _$Loaded;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? research = freezed,
+    Object? research = null,
   }) {
     return _then(_$Loaded(
-      research == freezed
+      null == research
           ? _value.research
           : research // ignore: cast_nullable_to_non_nullable
               as Research,
     ));
-  }
-
-  @override
-  $ResearchCopyWith<$Res> get research {
-    return $ResearchCopyWith<$Res>(_value.research, (value) {
-      return _then(_value.copyWith(research: value));
-    });
   }
 }
 
@@ -411,16 +544,17 @@ class _$Loaded implements Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$Loaded &&
-            const DeepCollectionEquality().equals(other.research, research));
+            (identical(other.research, research) ||
+                other.research == research));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(research));
+  int get hashCode => Object.hash(runtimeType, research);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$LoadedCopyWith<_$Loaded> get copyWith =>
       __$$LoadedCopyWithImpl<_$Loaded>(this, _$identity);
 
@@ -429,6 +563,7 @@ class _$Loaded implements Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() none,
     required TResult Function(Research research) loaded,
   }) {
     return loaded(research);
@@ -437,9 +572,10 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(Research research)? loaded,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? none,
+    TResult? Function(Research research)? loaded,
   }) {
     return loaded?.call(research);
   }
@@ -449,6 +585,7 @@ class _$Loaded implements Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? none,
     TResult Function(Research research)? loaded,
     required TResult orElse(),
   }) {
@@ -463,6 +600,7 @@ class _$Loaded implements Loaded {
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
     required TResult Function(Loading value) loading,
+    required TResult Function(None value) none,
     required TResult Function(Loaded value) loaded,
   }) {
     return loaded(this);
@@ -471,9 +609,10 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Loading value)? loading,
-    TResult Function(Loaded value)? loaded,
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(None value)? none,
+    TResult? Function(Loaded value)? loaded,
   }) {
     return loaded?.call(this);
   }
@@ -483,6 +622,7 @@ class _$Loaded implements Loaded {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
     TResult Function(Loading value)? loading,
+    TResult Function(None value)? none,
     TResult Function(Loaded value)? loaded,
     required TResult orElse(),
   }) {

@@ -36,7 +36,8 @@ mixin _$Loan {
 /// @nodoc
 abstract class $LoanCopyWith<$Res> {
   factory $LoanCopyWith(Loan value, $Res Function(Loan) then) =
-      _$LoanCopyWithImpl<$Res>;
+      _$LoanCopyWithImpl<$Res, Loan>;
+  @useResult
   $Res call(
       {double borrowed,
       double leftLoan,
@@ -48,53 +49,56 @@ abstract class $LoanCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$LoanCopyWithImpl<$Res> implements $LoanCopyWith<$Res> {
+class _$LoanCopyWithImpl<$Res, $Val extends Loan>
+    implements $LoanCopyWith<$Res> {
   _$LoanCopyWithImpl(this._value, this._then);
 
-  final Loan _value;
   // ignore: unused_field
-  final $Res Function(Loan) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? borrowed = freezed,
-    Object? leftLoan = freezed,
-    Object? monthlyRate = freezed,
-    Object? interest = freezed,
-    Object? months = freezed,
-    Object? leftMonths = freezed,
+    Object? borrowed = null,
+    Object? leftLoan = null,
+    Object? monthlyRate = null,
+    Object? interest = null,
+    Object? months = null,
+    Object? leftMonths = null,
     Object? next = freezed,
   }) {
     return _then(_value.copyWith(
-      borrowed: borrowed == freezed
+      borrowed: null == borrowed
           ? _value.borrowed
           : borrowed // ignore: cast_nullable_to_non_nullable
               as double,
-      leftLoan: leftLoan == freezed
+      leftLoan: null == leftLoan
           ? _value.leftLoan
           : leftLoan // ignore: cast_nullable_to_non_nullable
               as double,
-      monthlyRate: monthlyRate == freezed
+      monthlyRate: null == monthlyRate
           ? _value.monthlyRate
           : monthlyRate // ignore: cast_nullable_to_non_nullable
               as double,
-      interest: interest == freezed
+      interest: null == interest
           ? _value.interest
           : interest // ignore: cast_nullable_to_non_nullable
               as double,
-      months: months == freezed
+      months: null == months
           ? _value.months
           : months // ignore: cast_nullable_to_non_nullable
               as int,
-      leftMonths: leftMonths == freezed
+      leftMonths: null == leftMonths
           ? _value.leftMonths
           : leftMonths // ignore: cast_nullable_to_non_nullable
               as int,
-      next: next == freezed
+      next: freezed == next
           ? _value.next
           : next // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -103,6 +107,7 @@ abstract class _$$_LoanCopyWith<$Res> implements $LoanCopyWith<$Res> {
   factory _$$_LoanCopyWith(_$_Loan value, $Res Function(_$_Loan) then) =
       __$$_LoanCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {double borrowed,
       double leftLoan,
@@ -114,50 +119,48 @@ abstract class _$$_LoanCopyWith<$Res> implements $LoanCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_LoanCopyWithImpl<$Res> extends _$LoanCopyWithImpl<$Res>
+class __$$_LoanCopyWithImpl<$Res> extends _$LoanCopyWithImpl<$Res, _$_Loan>
     implements _$$_LoanCopyWith<$Res> {
   __$$_LoanCopyWithImpl(_$_Loan _value, $Res Function(_$_Loan) _then)
-      : super(_value, (v) => _then(v as _$_Loan));
+      : super(_value, _then);
 
-  @override
-  _$_Loan get _value => super._value as _$_Loan;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? borrowed = freezed,
-    Object? leftLoan = freezed,
-    Object? monthlyRate = freezed,
-    Object? interest = freezed,
-    Object? months = freezed,
-    Object? leftMonths = freezed,
+    Object? borrowed = null,
+    Object? leftLoan = null,
+    Object? monthlyRate = null,
+    Object? interest = null,
+    Object? months = null,
+    Object? leftMonths = null,
     Object? next = freezed,
   }) {
     return _then(_$_Loan(
-      borrowed: borrowed == freezed
+      borrowed: null == borrowed
           ? _value.borrowed
           : borrowed // ignore: cast_nullable_to_non_nullable
               as double,
-      leftLoan: leftLoan == freezed
+      leftLoan: null == leftLoan
           ? _value.leftLoan
           : leftLoan // ignore: cast_nullable_to_non_nullable
               as double,
-      monthlyRate: monthlyRate == freezed
+      monthlyRate: null == monthlyRate
           ? _value.monthlyRate
           : monthlyRate // ignore: cast_nullable_to_non_nullable
               as double,
-      interest: interest == freezed
+      interest: null == interest
           ? _value.interest
           : interest // ignore: cast_nullable_to_non_nullable
               as double,
-      months: months == freezed
+      months: null == months
           ? _value.months
           : months // ignore: cast_nullable_to_non_nullable
               as int,
-      leftMonths: leftMonths == freezed
+      leftMonths: null == leftMonths
           ? _value.leftMonths
           : leftMonths // ignore: cast_nullable_to_non_nullable
               as int,
-      next: next == freezed
+      next: freezed == next
           ? _value.next
           : next // ignore: cast_nullable_to_non_nullable
               as DateTime?,
@@ -205,31 +208,28 @@ class _$_Loan extends _Loan {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Loan &&
-            const DeepCollectionEquality().equals(other.borrowed, borrowed) &&
-            const DeepCollectionEquality().equals(other.leftLoan, leftLoan) &&
-            const DeepCollectionEquality()
-                .equals(other.monthlyRate, monthlyRate) &&
-            const DeepCollectionEquality().equals(other.interest, interest) &&
-            const DeepCollectionEquality().equals(other.months, months) &&
-            const DeepCollectionEquality()
-                .equals(other.leftMonths, leftMonths) &&
-            const DeepCollectionEquality().equals(other.next, next));
+            (identical(other.borrowed, borrowed) ||
+                other.borrowed == borrowed) &&
+            (identical(other.leftLoan, leftLoan) ||
+                other.leftLoan == leftLoan) &&
+            (identical(other.monthlyRate, monthlyRate) ||
+                other.monthlyRate == monthlyRate) &&
+            (identical(other.interest, interest) ||
+                other.interest == interest) &&
+            (identical(other.months, months) || other.months == months) &&
+            (identical(other.leftMonths, leftMonths) ||
+                other.leftMonths == leftMonths) &&
+            (identical(other.next, next) || other.next == next));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(borrowed),
-      const DeepCollectionEquality().hash(leftLoan),
-      const DeepCollectionEquality().hash(monthlyRate),
-      const DeepCollectionEquality().hash(interest),
-      const DeepCollectionEquality().hash(months),
-      const DeepCollectionEquality().hash(leftMonths),
-      const DeepCollectionEquality().hash(next));
+  int get hashCode => Object.hash(runtimeType, borrowed, leftLoan, monthlyRate,
+      interest, months, leftMonths, next);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LoanCopyWith<_$_Loan> get copyWith =>
       __$$_LoanCopyWithImpl<_$_Loan>(this, _$identity);
 

@@ -20,11 +20,7 @@ class BusinessElement extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        context.router.push(BusinessRoute(
-          businessId: element.id,
-        ));
-      },
+      onTap: () => context.router.push(BusinessRoute(businessId: element.id)),
       child: CustomCard(
         child: Padding(
           padding: const EdgeInsets.all(8.0),

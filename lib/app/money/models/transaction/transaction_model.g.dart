@@ -98,7 +98,7 @@ const TransactionSchema = CollectionSchema(
   getId: _transactionGetId,
   getLinks: _transactionGetLinks,
   attach: _transactionAttach,
-  version: '3.0.2',
+  version: '3.0.5',
 );
 
 int _transactionEstimateSize(

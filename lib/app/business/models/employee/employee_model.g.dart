@@ -3,6 +3,163 @@
 part of 'employee_model.dart';
 
 // **************************************************************************
+// CopyWithGenerator
+// **************************************************************************
+
+abstract class _$EmployeeCWProxy {
+  Employee businessId(int? businessId);
+
+  Employee cost(double cost);
+
+  Employee dateOfEmployment(DateTime? dateOfEmployment);
+
+  Employee eTypeEmployees(ETypeEmployees eTypeEmployees);
+
+  Employee efficiency(double efficiency);
+
+  Employee fired(DateTime? fired);
+
+  Employee id(int id);
+
+  Employee productId(int? productId);
+
+  Employee rating(int rating);
+
+  Employee satisfaction(int satisfaction);
+
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `Employee(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  ///
+  /// Usage
+  /// ```dart
+  /// Employee(...).copyWith(id: 12, name: "My name")
+  /// ````
+  Employee call({
+    int? businessId,
+    double? cost,
+    DateTime? dateOfEmployment,
+    ETypeEmployees? eTypeEmployees,
+    double? efficiency,
+    DateTime? fired,
+    int? id,
+    int? productId,
+    int? rating,
+    int? satisfaction,
+  });
+}
+
+/// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfEmployee.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfEmployee.copyWith.fieldName(...)`
+class _$EmployeeCWProxyImpl implements _$EmployeeCWProxy {
+  final Employee _value;
+
+  const _$EmployeeCWProxyImpl(this._value);
+
+  @override
+  Employee businessId(int? businessId) => this(businessId: businessId);
+
+  @override
+  Employee cost(double cost) => this(cost: cost);
+
+  @override
+  Employee dateOfEmployment(DateTime? dateOfEmployment) =>
+      this(dateOfEmployment: dateOfEmployment);
+
+  @override
+  Employee eTypeEmployees(ETypeEmployees eTypeEmployees) =>
+      this(eTypeEmployees: eTypeEmployees);
+
+  @override
+  Employee efficiency(double efficiency) => this(efficiency: efficiency);
+
+  @override
+  Employee fired(DateTime? fired) => this(fired: fired);
+
+  @override
+  Employee id(int id) => this(id: id);
+
+  @override
+  Employee productId(int? productId) => this(productId: productId);
+
+  @override
+  Employee rating(int rating) => this(rating: rating);
+
+  @override
+  Employee satisfaction(int satisfaction) => this(satisfaction: satisfaction);
+
+  @override
+
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `Employee(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  ///
+  /// Usage
+  /// ```dart
+  /// Employee(...).copyWith(id: 12, name: "My name")
+  /// ````
+  Employee call({
+    Object? businessId = const $CopyWithPlaceholder(),
+    Object? cost = const $CopyWithPlaceholder(),
+    Object? dateOfEmployment = const $CopyWithPlaceholder(),
+    Object? eTypeEmployees = const $CopyWithPlaceholder(),
+    Object? efficiency = const $CopyWithPlaceholder(),
+    Object? fired = const $CopyWithPlaceholder(),
+    Object? id = const $CopyWithPlaceholder(),
+    Object? productId = const $CopyWithPlaceholder(),
+    Object? rating = const $CopyWithPlaceholder(),
+    Object? satisfaction = const $CopyWithPlaceholder(),
+  }) {
+    return Employee(
+      businessId: businessId == const $CopyWithPlaceholder()
+          ? _value.businessId
+          // ignore: cast_nullable_to_non_nullable
+          : businessId as int?,
+      cost: cost == const $CopyWithPlaceholder() || cost == null
+          ? _value.cost
+          // ignore: cast_nullable_to_non_nullable
+          : cost as double,
+      dateOfEmployment: dateOfEmployment == const $CopyWithPlaceholder()
+          ? _value.dateOfEmployment
+          // ignore: cast_nullable_to_non_nullable
+          : dateOfEmployment as DateTime?,
+      eTypeEmployees: eTypeEmployees == const $CopyWithPlaceholder() ||
+              eTypeEmployees == null
+          ? _value.eTypeEmployees
+          // ignore: cast_nullable_to_non_nullable
+          : eTypeEmployees as ETypeEmployees,
+      efficiency:
+          efficiency == const $CopyWithPlaceholder() || efficiency == null
+              ? _value.efficiency
+              // ignore: cast_nullable_to_non_nullable
+              : efficiency as double,
+      fired: fired == const $CopyWithPlaceholder()
+          ? _value.fired
+          // ignore: cast_nullable_to_non_nullable
+          : fired as DateTime?,
+      id: id == const $CopyWithPlaceholder() || id == null
+          ? _value.id
+          // ignore: cast_nullable_to_non_nullable
+          : id as int,
+      productId: productId == const $CopyWithPlaceholder()
+          ? _value.productId
+          // ignore: cast_nullable_to_non_nullable
+          : productId as int?,
+      rating: rating == const $CopyWithPlaceholder() || rating == null
+          ? _value.rating
+          // ignore: cast_nullable_to_non_nullable
+          : rating as int,
+      satisfaction:
+          satisfaction == const $CopyWithPlaceholder() || satisfaction == null
+              ? _value.satisfaction
+              // ignore: cast_nullable_to_non_nullable
+              : satisfaction as int,
+    );
+  }
+}
+
+extension $EmployeeCopyWith on Employee {
+  /// Returns a callable class that can be used as follows: `instanceOfEmployee.copyWith(...)` or like so:`instanceOfEmployee.copyWith.fieldName(...)`.
+  // ignore: library_private_types_in_public_api
+  _$EmployeeCWProxy get copyWith => _$EmployeeCWProxyImpl(this);
+}
+
+// **************************************************************************
 // IsarCollectionGenerator
 // **************************************************************************
 
@@ -53,13 +210,18 @@ const EmployeeSchema = CollectionSchema(
       name: r'hashCode',
       type: IsarType.long,
     ),
-    r'rating': PropertySchema(
+    r'productId': PropertySchema(
       id: 7,
+      name: r'productId',
+      type: IsarType.long,
+    ),
+    r'rating': PropertySchema(
+      id: 8,
       name: r'rating',
       type: IsarType.long,
     ),
     r'satisfaction': PropertySchema(
-      id: 8,
+      id: 9,
       name: r'satisfaction',
       type: IsarType.long,
     )
@@ -75,7 +237,7 @@ const EmployeeSchema = CollectionSchema(
   getId: _employeeGetId,
   getLinks: _employeeGetLinks,
   attach: _employeeAttach,
-  version: '3.0.2',
+  version: '3.0.5',
 );
 
 int _employeeEstimateSize(
@@ -100,8 +262,9 @@ void _employeeSerialize(
   writer.writeDouble(offsets[4], object.efficiency);
   writer.writeDateTime(offsets[5], object.fired);
   writer.writeLong(offsets[6], object.hashCode);
-  writer.writeLong(offsets[7], object.rating);
-  writer.writeLong(offsets[8], object.satisfaction);
+  writer.writeLong(offsets[7], object.productId);
+  writer.writeLong(offsets[8], object.rating);
+  writer.writeLong(offsets[9], object.satisfaction);
 }
 
 Employee _employeeDeserialize(
@@ -120,8 +283,9 @@ Employee _employeeDeserialize(
     efficiency: reader.readDouble(offsets[4]),
     fired: reader.readDateTimeOrNull(offsets[5]),
     id: id,
-    rating: reader.readLong(offsets[7]),
-    satisfaction: reader.readLongOrNull(offsets[8]) ?? 1,
+    productId: reader.readLongOrNull(offsets[7]),
+    rating: reader.readLong(offsets[8]),
+    satisfaction: reader.readLongOrNull(offsets[9]) ?? 1,
   );
   return object;
 }
@@ -150,8 +314,10 @@ P _employeeDeserializeProp<P>(
     case 6:
       return (reader.readLong(offset)) as P;
     case 7:
-      return (reader.readLong(offset)) as P;
+      return (reader.readLongOrNull(offset)) as P;
     case 8:
+      return (reader.readLong(offset)) as P;
+    case 9:
       return (reader.readLongOrNull(offset) ?? 1) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -759,6 +925,75 @@ extension EmployeeQueryFilter
     });
   }
 
+  QueryBuilder<Employee, Employee, QAfterFilterCondition> productIdIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'productId',
+      ));
+    });
+  }
+
+  QueryBuilder<Employee, Employee, QAfterFilterCondition> productIdIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'productId',
+      ));
+    });
+  }
+
+  QueryBuilder<Employee, Employee, QAfterFilterCondition> productIdEqualTo(
+      int? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'productId',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<Employee, Employee, QAfterFilterCondition> productIdGreaterThan(
+    int? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'productId',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<Employee, Employee, QAfterFilterCondition> productIdLessThan(
+    int? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'productId',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<Employee, Employee, QAfterFilterCondition> productIdBetween(
+    int? lower,
+    int? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'productId',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
   QueryBuilder<Employee, Employee, QAfterFilterCondition> ratingEqualTo(
       int value) {
     return QueryBuilder.apply(this, (query) {
@@ -958,6 +1193,18 @@ extension EmployeeQuerySortBy on QueryBuilder<Employee, Employee, QSortBy> {
     });
   }
 
+  QueryBuilder<Employee, Employee, QAfterSortBy> sortByProductId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'productId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Employee, Employee, QAfterSortBy> sortByProductIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'productId', Sort.desc);
+    });
+  }
+
   QueryBuilder<Employee, Employee, QAfterSortBy> sortByRating() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'rating', Sort.asc);
@@ -1081,6 +1328,18 @@ extension EmployeeQuerySortThenBy
     });
   }
 
+  QueryBuilder<Employee, Employee, QAfterSortBy> thenByProductId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'productId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Employee, Employee, QAfterSortBy> thenByProductIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'productId', Sort.desc);
+    });
+  }
+
   QueryBuilder<Employee, Employee, QAfterSortBy> thenByRating() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'rating', Sort.asc);
@@ -1150,6 +1409,12 @@ extension EmployeeQueryWhereDistinct
     });
   }
 
+  QueryBuilder<Employee, Employee, QDistinct> distinctByProductId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'productId');
+    });
+  }
+
   QueryBuilder<Employee, Employee, QDistinct> distinctByRating() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'rating');
@@ -1215,6 +1480,12 @@ extension EmployeeQueryProperty
     });
   }
 
+  QueryBuilder<Employee, int?, QQueryOperations> productIdProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'productId');
+    });
+  }
+
   QueryBuilder<Employee, int, QQueryOperations> ratingProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'rating');
@@ -1227,3 +1498,47 @@ extension EmployeeQueryProperty
     });
   }
 }
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+Employee _$EmployeeFromJson(Map<String, dynamic> json) => Employee(
+      id: json['id'] as int? ?? Isar.autoIncrement,
+      productId: json['productId'] as int?,
+      businessId: json['businessId'] as int?,
+      eTypeEmployees:
+          $enumDecode(_$ETypeEmployeesEnumMap, json['eTypeEmployees']),
+      cost: (json['cost'] as num).toDouble(),
+      efficiency: (json['efficiency'] as num).toDouble(),
+      rating: json['rating'] as int,
+      satisfaction: json['satisfaction'] as int? ?? 1,
+      dateOfEmployment: json['dateOfEmployment'] == null
+          ? null
+          : DateTime.parse(json['dateOfEmployment'] as String),
+      fired: json['fired'] == null
+          ? null
+          : DateTime.parse(json['fired'] as String),
+    );
+
+Map<String, dynamic> _$EmployeeToJson(Employee instance) => <String, dynamic>{
+      'id': instance.id,
+      'businessId': instance.businessId,
+      'productId': instance.productId,
+      'eTypeEmployees': _$ETypeEmployeesEnumMap[instance.eTypeEmployees]!,
+      'cost': instance.cost,
+      'efficiency': instance.efficiency,
+      'rating': instance.rating,
+      'satisfaction': instance.satisfaction,
+      'dateOfEmployment': instance.dateOfEmployment?.toIso8601String(),
+      'fired': instance.fired?.toIso8601String(),
+    };
+
+const _$ETypeEmployeesEnumMap = {
+  ETypeEmployees.worker: 'worker',
+  ETypeEmployees.scientist: 'scientist',
+  ETypeEmployees.accountant: 'accountant',
+  ETypeEmployees.analyst: 'analyst',
+  ETypeEmployees.manager: 'manager',
+  ETypeEmployees.marketer: 'marketer',
+};

@@ -299,7 +299,7 @@ const InstrumentSchema = CollectionSchema(
   getId: _instrumentGetId,
   getLinks: _instrumentGetLinks,
   attach: _instrumentAttach,
-  version: '3.0.2',
+  version: '3.0.5',
 );
 
 int _instrumentEstimateSize(

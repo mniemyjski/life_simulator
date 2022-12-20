@@ -2,9 +2,10 @@ import 'package:injectable/injectable.dart';
 import 'package:isar/isar.dart';
 import 'package:richeable/app/business/models/employee/employee_model.dart';
 
-import '../app/business/models/business/business_model.dart';
-import '../config/injectable/app_module.dart';
-import '../config/injectable/injection.dart';
+import '../../../config/injectable/app_module.dart';
+import '../../../config/injectable/injection.dart';
+import '../../money/models/transaction/transaction_model.dart';
+import '../models/business/business_model.dart';
 
 @lazySingleton
 class EmployeeRepository {
@@ -12,6 +13,27 @@ class EmployeeRepository {
 
   EmployeeRepository() {
     _isar = getIt<AppModule>().instance;
+  }
+
+  Future counting(DateTime dateTime) async {
+    if (dateTime.day != 10) return;
+
+    await _isar.writeTxn(() async {
+      List<Business> businesses = await _isar.business.where().findAll();
+      for (var element in businesses) {
+        final double cost = await getSalaryToPay(element.id);
+        if (cost != 0) {
+          Transaction transaction = Transaction(
+            idSource: element.id,
+            value: -cost,
+            eTypeTransactionSource: ETypeTransactionSource.employeeWages,
+            dateCre: dateTime,
+          );
+          await _isar.transactions.put(transaction);
+        }
+      }
+      removeFiredEmployee(dateTime);
+    });
   }
 
   Future removeFiredEmployee(DateTime dateTime) async {
@@ -42,10 +64,73 @@ class EmployeeRepository {
     return await _isar.employees.filter().businessIdEqualTo(id).costProperty().sum();
   }
 
-  getEmployeesInBusiness({
+  getTotalEmployeesInBusiness({
     required int businessId,
   }) async {
     return await _isar.employees.filter().businessIdEqualTo(businessId).findAll();
+  }
+
+  getFreeEmployeesInBusiness(
+    int businessId,
+  ) async {
+    return await _isar.employees
+        .filter()
+        .businessIdEqualTo(businessId)
+        .productIdIsNull()
+        .eTypeEmployeesEqualTo(ETypeEmployees.worker)
+        .findAll();
+  }
+
+  getWorkOnProductEmployeesInBusiness({
+    required int businessId,
+    required int productId,
+  }) async {
+    return await _isar.employees
+        .filter()
+        .businessIdEqualTo(businessId)
+        .productIdEqualTo(productId)
+        .eTypeEmployeesEqualTo(ETypeEmployees.worker)
+        .findAll();
+  }
+
+  Future assignToProduct({
+    required int businessId,
+    required int productId,
+    required int lvl,
+  }) async {
+    return await _isar.writeTxn(() async {
+      Employee? employee = await _isar.employees
+          .filter()
+          .businessIdEqualTo(businessId)
+          .productIdIsNull()
+          .ratingEqualTo(lvl)
+          .eTypeEmployeesEqualTo(ETypeEmployees.worker)
+          .findFirst();
+
+      if (employee == null) return;
+
+      await _isar.employees.put(employee.copyWith(productId: productId));
+    });
+  }
+
+  Future unAssignFromProduct({
+    required int businessId,
+    required int productId,
+    required int lvl,
+  }) async {
+    return await _isar.writeTxn(() async {
+      Employee? employee = await _isar.employees
+          .filter()
+          .businessIdEqualTo(businessId)
+          .productIdEqualTo(productId)
+          .ratingEqualTo(lvl)
+          .eTypeEmployeesEqualTo(ETypeEmployees.worker)
+          .findFirst();
+
+      if (employee == null) return;
+
+      await _isar.employees.put(employee.copyWith(productId: null));
+    });
   }
 
   Future<String> addEmployer(Employee employee) async {

@@ -9,14 +9,14 @@ class CustomButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final double? borderRadius;
 
-  const CustomButton({
-    Key? key,
-    required this.onPressed,
-    required this.child,
-    this.textColor = Colors.white,
-    this.backgroundColor,
-    this.borderRadius,
-  }) : super(key: key);
+  const CustomButton(
+      {Key? key,
+      required this.onPressed,
+      required this.child,
+      this.textColor = Colors.white,
+      this.backgroundColor,
+      this.borderRadius = 8})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -45,21 +45,21 @@ class CustomButton extends StatelessWidget {
             if (onPressed == null) Colors.grey.withOpacity(0.1),
           ],
         ),
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(borderRadius!),
         border: Border.all(color: Colors.white10, width: 1),
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(borderRadius!),
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              side: const BorderSide(color: Colors.transparent),
-              disabledBackgroundColor: Colors.transparent,
-              backgroundColor: Colors.transparent,
-              shadowColor: Colors.transparent,
-              minimumSize: const Size(45, 45),
-            ),
+                side: const BorderSide(color: Colors.transparent),
+                disabledBackgroundColor: Colors.transparent,
+                backgroundColor: Colors.transparent,
+                shadowColor: Colors.transparent,
+                minimumSize: const Size(45, 45),
+                padding: EdgeInsets.zero),
             onPressed: onPressed,
             child: Center(child: child),
           ),

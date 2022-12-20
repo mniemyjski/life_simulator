@@ -214,7 +214,7 @@ class FreelanceScreen extends StatelessWidget {
                                               itemCount: 5,
                                               itemSize: 10,
                                               direction: Axis.vertical,
-                                            )
+                                            ),
                                           ],
                                         ),
                                       )),

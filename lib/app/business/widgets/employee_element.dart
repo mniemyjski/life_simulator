@@ -33,16 +33,6 @@ class EmployeeElement extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                RatingBarIndicator(
-                  rating: employee.rating.toDouble(),
-                  itemBuilder: (context, index) => const Icon(
-                    Icons.star,
-                    color: Colors.amber,
-                  ),
-                  itemCount: 5,
-                  itemSize: 10.0,
-                  direction: Axis.vertical,
-                ),
                 const SizedBox(width: 2),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -109,6 +99,19 @@ class EmployeeElement extends StatelessWidget {
                           ],
                         ),
                       ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 4),
+                      child: RatingBarIndicator(
+                        rating: employee.rating.toDouble(),
+                        itemBuilder: (context, index) => const Icon(
+                          Icons.star,
+                          color: Colors.amber,
+                        ),
+                        itemCount: 10,
+                        itemSize: 10.0,
+                        direction: Axis.horizontal,
+                      ),
+                    ),
                   ],
                 ),
               ],

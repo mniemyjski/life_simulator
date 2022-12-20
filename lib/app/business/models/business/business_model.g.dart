@@ -3,6 +3,279 @@
 part of 'business_model.dart';
 
 // **************************************************************************
+// CopyWithGenerator
+// **************************************************************************
+
+abstract class _$BusinessCWProxy {
+  Business balance(double balance);
+
+  Business countAccountant(int countAccountant);
+
+  Business countAnalyst(int countAnalyst);
+
+  Business countManager(int countManager);
+
+  Business countMarketer(int countMarketer);
+
+  Business countScientist(int countScientist);
+
+  Business countWorkers(int countWorkers);
+
+  Business dateCre(DateTime dateCre);
+
+  Business efficiencyEmployees(int efficiencyEmployees);
+
+  Business efficiencyScientist(int efficiencyScientist);
+
+  Business id(int id);
+
+  Business maxAccountant(int maxAccountant);
+
+  Business maxAnalyst(int maxAnalyst);
+
+  Business maxManager(int maxManager);
+
+  Business maxMarketer(int maxMarketer);
+
+  Business maxScientist(int maxScientist);
+
+  Business maxWorkers(int maxWorkers);
+
+  Business name(String name);
+
+  Business taxes(double taxes);
+
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `Business(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  ///
+  /// Usage
+  /// ```dart
+  /// Business(...).copyWith(id: 12, name: "My name")
+  /// ````
+  Business call({
+    double? balance,
+    int? countAccountant,
+    int? countAnalyst,
+    int? countManager,
+    int? countMarketer,
+    int? countScientist,
+    int? countWorkers,
+    DateTime? dateCre,
+    int? efficiencyEmployees,
+    int? efficiencyScientist,
+    int? id,
+    int? maxAccountant,
+    int? maxAnalyst,
+    int? maxManager,
+    int? maxMarketer,
+    int? maxScientist,
+    int? maxWorkers,
+    String? name,
+    double? taxes,
+  });
+}
+
+/// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfBusiness.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfBusiness.copyWith.fieldName(...)`
+class _$BusinessCWProxyImpl implements _$BusinessCWProxy {
+  final Business _value;
+
+  const _$BusinessCWProxyImpl(this._value);
+
+  @override
+  Business balance(double balance) => this(balance: balance);
+
+  @override
+  Business countAccountant(int countAccountant) =>
+      this(countAccountant: countAccountant);
+
+  @override
+  Business countAnalyst(int countAnalyst) => this(countAnalyst: countAnalyst);
+
+  @override
+  Business countManager(int countManager) => this(countManager: countManager);
+
+  @override
+  Business countMarketer(int countMarketer) =>
+      this(countMarketer: countMarketer);
+
+  @override
+  Business countScientist(int countScientist) =>
+      this(countScientist: countScientist);
+
+  @override
+  Business countWorkers(int countWorkers) => this(countWorkers: countWorkers);
+
+  @override
+  Business dateCre(DateTime dateCre) => this(dateCre: dateCre);
+
+  @override
+  Business efficiencyEmployees(int efficiencyEmployees) =>
+      this(efficiencyEmployees: efficiencyEmployees);
+
+  @override
+  Business efficiencyScientist(int efficiencyScientist) =>
+      this(efficiencyScientist: efficiencyScientist);
+
+  @override
+  Business id(int id) => this(id: id);
+
+  @override
+  Business maxAccountant(int maxAccountant) =>
+      this(maxAccountant: maxAccountant);
+
+  @override
+  Business maxAnalyst(int maxAnalyst) => this(maxAnalyst: maxAnalyst);
+
+  @override
+  Business maxManager(int maxManager) => this(maxManager: maxManager);
+
+  @override
+  Business maxMarketer(int maxMarketer) => this(maxMarketer: maxMarketer);
+
+  @override
+  Business maxScientist(int maxScientist) => this(maxScientist: maxScientist);
+
+  @override
+  Business maxWorkers(int maxWorkers) => this(maxWorkers: maxWorkers);
+
+  @override
+  Business name(String name) => this(name: name);
+
+  @override
+  Business taxes(double taxes) => this(taxes: taxes);
+
+  @override
+
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `Business(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  ///
+  /// Usage
+  /// ```dart
+  /// Business(...).copyWith(id: 12, name: "My name")
+  /// ````
+  Business call({
+    Object? balance = const $CopyWithPlaceholder(),
+    Object? countAccountant = const $CopyWithPlaceholder(),
+    Object? countAnalyst = const $CopyWithPlaceholder(),
+    Object? countManager = const $CopyWithPlaceholder(),
+    Object? countMarketer = const $CopyWithPlaceholder(),
+    Object? countScientist = const $CopyWithPlaceholder(),
+    Object? countWorkers = const $CopyWithPlaceholder(),
+    Object? dateCre = const $CopyWithPlaceholder(),
+    Object? efficiencyEmployees = const $CopyWithPlaceholder(),
+    Object? efficiencyScientist = const $CopyWithPlaceholder(),
+    Object? id = const $CopyWithPlaceholder(),
+    Object? maxAccountant = const $CopyWithPlaceholder(),
+    Object? maxAnalyst = const $CopyWithPlaceholder(),
+    Object? maxManager = const $CopyWithPlaceholder(),
+    Object? maxMarketer = const $CopyWithPlaceholder(),
+    Object? maxScientist = const $CopyWithPlaceholder(),
+    Object? maxWorkers = const $CopyWithPlaceholder(),
+    Object? name = const $CopyWithPlaceholder(),
+    Object? taxes = const $CopyWithPlaceholder(),
+  }) {
+    return Business(
+      balance: balance == const $CopyWithPlaceholder() || balance == null
+          ? _value.balance
+          // ignore: cast_nullable_to_non_nullable
+          : balance as double,
+      countAccountant: countAccountant == const $CopyWithPlaceholder() ||
+              countAccountant == null
+          ? _value.countAccountant
+          // ignore: cast_nullable_to_non_nullable
+          : countAccountant as int,
+      countAnalyst:
+          countAnalyst == const $CopyWithPlaceholder() || countAnalyst == null
+              ? _value.countAnalyst
+              // ignore: cast_nullable_to_non_nullable
+              : countAnalyst as int,
+      countManager:
+          countManager == const $CopyWithPlaceholder() || countManager == null
+              ? _value.countManager
+              // ignore: cast_nullable_to_non_nullable
+              : countManager as int,
+      countMarketer:
+          countMarketer == const $CopyWithPlaceholder() || countMarketer == null
+              ? _value.countMarketer
+              // ignore: cast_nullable_to_non_nullable
+              : countMarketer as int,
+      countScientist: countScientist == const $CopyWithPlaceholder() ||
+              countScientist == null
+          ? _value.countScientist
+          // ignore: cast_nullable_to_non_nullable
+          : countScientist as int,
+      countWorkers:
+          countWorkers == const $CopyWithPlaceholder() || countWorkers == null
+              ? _value.countWorkers
+              // ignore: cast_nullable_to_non_nullable
+              : countWorkers as int,
+      dateCre: dateCre == const $CopyWithPlaceholder() || dateCre == null
+          ? _value.dateCre
+          // ignore: cast_nullable_to_non_nullable
+          : dateCre as DateTime,
+      efficiencyEmployees:
+          efficiencyEmployees == const $CopyWithPlaceholder() ||
+                  efficiencyEmployees == null
+              ? _value.efficiencyEmployees
+              // ignore: cast_nullable_to_non_nullable
+              : efficiencyEmployees as int,
+      efficiencyScientist:
+          efficiencyScientist == const $CopyWithPlaceholder() ||
+                  efficiencyScientist == null
+              ? _value.efficiencyScientist
+              // ignore: cast_nullable_to_non_nullable
+              : efficiencyScientist as int,
+      id: id == const $CopyWithPlaceholder() || id == null
+          ? _value.id
+          // ignore: cast_nullable_to_non_nullable
+          : id as int,
+      maxAccountant:
+          maxAccountant == const $CopyWithPlaceholder() || maxAccountant == null
+              ? _value.maxAccountant
+              // ignore: cast_nullable_to_non_nullable
+              : maxAccountant as int,
+      maxAnalyst:
+          maxAnalyst == const $CopyWithPlaceholder() || maxAnalyst == null
+              ? _value.maxAnalyst
+              // ignore: cast_nullable_to_non_nullable
+              : maxAnalyst as int,
+      maxManager:
+          maxManager == const $CopyWithPlaceholder() || maxManager == null
+              ? _value.maxManager
+              // ignore: cast_nullable_to_non_nullable
+              : maxManager as int,
+      maxMarketer:
+          maxMarketer == const $CopyWithPlaceholder() || maxMarketer == null
+              ? _value.maxMarketer
+              // ignore: cast_nullable_to_non_nullable
+              : maxMarketer as int,
+      maxScientist:
+          maxScientist == const $CopyWithPlaceholder() || maxScientist == null
+              ? _value.maxScientist
+              // ignore: cast_nullable_to_non_nullable
+              : maxScientist as int,
+      maxWorkers:
+          maxWorkers == const $CopyWithPlaceholder() || maxWorkers == null
+              ? _value.maxWorkers
+              // ignore: cast_nullable_to_non_nullable
+              : maxWorkers as int,
+      name: name == const $CopyWithPlaceholder() || name == null
+          ? _value.name
+          // ignore: cast_nullable_to_non_nullable
+          : name as String,
+      taxes: taxes == const $CopyWithPlaceholder() || taxes == null
+          ? _value.taxes
+          // ignore: cast_nullable_to_non_nullable
+          : taxes as double,
+    );
+  }
+}
+
+extension $BusinessCopyWith on Business {
+  /// Returns a callable class that can be used as follows: `instanceOfBusiness.copyWith(...)` or like so:`instanceOfBusiness.copyWith.fieldName(...)`.
+  // ignore: library_private_types_in_public_api
+  _$BusinessCWProxy get copyWith => _$BusinessCWProxyImpl(this);
+}
+
+// **************************************************************************
 // IsarCollectionGenerator
 // **************************************************************************
 
@@ -124,7 +397,7 @@ const BusinessSchema = CollectionSchema(
   getId: _businessGetId,
   getLinks: _businessGetLinks,
   attach: _businessAttach,
-  version: '3.0.2',
+  version: '3.0.5',
 );
 
 int _businessEstimateSize(
@@ -2227,3 +2500,51 @@ extension BusinessQueryProperty
     });
   }
 }
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+Business _$BusinessFromJson(Map<String, dynamic> json) => Business(
+      id: json['id'] as int? ?? Isar.autoIncrement,
+      name: json['name'] as String,
+      dateCre: DateTime.parse(json['dateCre'] as String),
+      maxWorkers: json['maxWorkers'] as int? ?? 10,
+      maxScientist: json['maxScientist'] as int? ?? 2,
+      efficiencyEmployees: json['efficiencyEmployees'] as int? ?? 1,
+      efficiencyScientist: json['efficiencyScientist'] as int? ?? 1,
+      maxAccountant: json['maxAccountant'] as int? ?? 0,
+      maxAnalyst: json['maxAnalyst'] as int? ?? 0,
+      maxManager: json['maxManager'] as int? ?? 0,
+      maxMarketer: json['maxMarketer'] as int? ?? 0,
+      countWorkers: json['countWorkers'] as int? ?? 0,
+      countScientist: json['countScientist'] as int? ?? 0,
+      countAccountant: json['countAccountant'] as int? ?? 0,
+      countAnalyst: json['countAnalyst'] as int? ?? 0,
+      countManager: json['countManager'] as int? ?? 0,
+      countMarketer: json['countMarketer'] as int? ?? 0,
+      balance: (json['balance'] as num?)?.toDouble() ?? 0,
+      taxes: (json['taxes'] as num?)?.toDouble() ?? 0,
+    );
+
+Map<String, dynamic> _$BusinessToJson(Business instance) => <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'dateCre': instance.dateCre.toIso8601String(),
+      'efficiencyEmployees': instance.efficiencyEmployees,
+      'efficiencyScientist': instance.efficiencyScientist,
+      'maxWorkers': instance.maxWorkers,
+      'maxScientist': instance.maxScientist,
+      'maxAccountant': instance.maxAccountant,
+      'maxAnalyst': instance.maxAnalyst,
+      'maxManager': instance.maxManager,
+      'maxMarketer': instance.maxMarketer,
+      'countWorkers': instance.countWorkers,
+      'countScientist': instance.countScientist,
+      'countAccountant': instance.countAccountant,
+      'countAnalyst': instance.countAnalyst,
+      'countManager': instance.countManager,
+      'countMarketer': instance.countMarketer,
+      'balance': instance.balance,
+      'taxes': instance.taxes,
+    };

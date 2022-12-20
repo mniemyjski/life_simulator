@@ -4,7 +4,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../repositories/time_spend_repository.dart';
 import '../../../../utilities/utilities.dart';
 import '../../../database/cubit/database_cubit.dart';
 import '../../../date/cubit/date_cubit.dart';
@@ -14,6 +13,7 @@ import '../../../money/models/income/income_model.dart';
 import '../../../money/models/transaction/transaction_model.dart';
 import '../../../new_game/new_game_cubit.dart';
 import '../../../time_spend/models/time_bonus/time_bonus_model.dart';
+import '../../../time_spend/repositories/time_spend_repository.dart';
 import '../../models/house/house_model.dart';
 
 part 'house_cubit.freezed.dart';
@@ -52,7 +52,7 @@ class HouseCubit extends HydratedCubit<HouseState> {
     if (_newGameCubit.state) {
       House house = _databaseCubit.state.housesDB.first;
       Income income = Income(
-        id: house.id,
+        uid: house.uid,
         source: ETypeTransactionSource.home,
         typeIncome: ETypeIncome.expense,
         value: house.monthlyCost,
@@ -83,7 +83,7 @@ class HouseCubit extends HydratedCubit<HouseState> {
       if (newGame) {
         House house = _databaseCubit.state.housesDB.first;
         Income income = Income(
-          id: house.id,
+          uid: house.uid,
           source: ETypeTransactionSource.home,
           typeIncome: ETypeIncome.expense,
           value: house.monthlyCost,
@@ -123,7 +123,7 @@ class HouseCubit extends HydratedCubit<HouseState> {
       }
 
       Income income = Income(
-          id: newHouse.id,
+          uid: newHouse.uid,
           source: ETypeTransactionSource.home,
           typeIncome: ETypeIncome.expense,
           value: newHouse.monthlyCost,
@@ -155,7 +155,7 @@ class HouseCubit extends HydratedCubit<HouseState> {
 
       _incomeCubit.add(income);
       if (oldHouse != null && oldHouse.eTypeHouse == ETypeHouse.rent) {
-        _incomeCubit.remove(oldHouse.id);
+        _incomeCubit.remove(oldHouse.uid);
       }
 
       emit(HouseState.loaded(house: newHouse));
@@ -169,7 +169,7 @@ class HouseCubit extends HydratedCubit<HouseState> {
       state.whenOrNull(loaded: (house) {
         if (house != null) {
           _timeSpendRepository.removeBonus(ETypeBonusSource.house);
-          _incomeCubit.remove(house.id);
+          _incomeCubit.remove(house.uid);
           _moneyCubit.addTransaction(
               dateTime: date,
               value: house.cost * 0.8,

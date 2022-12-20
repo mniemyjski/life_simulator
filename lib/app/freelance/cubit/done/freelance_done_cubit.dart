@@ -1,10 +1,8 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:richeable/utilities/utilities.dart';
 
 import '../../models/freelance_done/freelance_done_model.dart';
 import '../../repositories/freelance_repository.dart';

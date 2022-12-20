@@ -16,7 +16,7 @@ class SkillsRepository {
 
   init() async {
     return await _isar.writeTxn(() async {
-      await _isar.skills.putAll(SkillsData.programmer());
+      await _isar.skills.putAll(SkillsData.standard());
     });
   }
 

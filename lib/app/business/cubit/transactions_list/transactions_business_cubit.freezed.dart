@@ -45,9 +45,10 @@ mixin _$TransactionsBusinessState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<Transaction> transactions, DateTime dateTime)? loaded,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<Transaction> transactions, DateTime dateTime)?
+        loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -67,9 +68,9 @@ mixin _$TransactionsBusinessState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Loading value)? loading,
-    TResult Function(Loaded value)? loaded,
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Loaded value)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -87,17 +88,19 @@ mixin _$TransactionsBusinessState {
 abstract class $TransactionsBusinessStateCopyWith<$Res> {
   factory $TransactionsBusinessStateCopyWith(TransactionsBusinessState value,
           $Res Function(TransactionsBusinessState) then) =
-      _$TransactionsBusinessStateCopyWithImpl<$Res>;
+      _$TransactionsBusinessStateCopyWithImpl<$Res, TransactionsBusinessState>;
 }
 
 /// @nodoc
-class _$TransactionsBusinessStateCopyWithImpl<$Res>
+class _$TransactionsBusinessStateCopyWithImpl<$Res,
+        $Val extends TransactionsBusinessState>
     implements $TransactionsBusinessStateCopyWith<$Res> {
   _$TransactionsBusinessStateCopyWithImpl(this._value, this._then);
 
-  final TransactionsBusinessState _value;
   // ignore: unused_field
-  final $Res Function(TransactionsBusinessState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -108,13 +111,10 @@ abstract class _$$InitialCopyWith<$Res> {
 
 /// @nodoc
 class __$$InitialCopyWithImpl<$Res>
-    extends _$TransactionsBusinessStateCopyWithImpl<$Res>
+    extends _$TransactionsBusinessStateCopyWithImpl<$Res, _$Initial>
     implements _$$InitialCopyWith<$Res> {
   __$$InitialCopyWithImpl(_$Initial _value, $Res Function(_$Initial) _then)
-      : super(_value, (v) => _then(v as _$Initial));
-
-  @override
-  _$Initial get _value => super._value as _$Initial;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -157,9 +157,10 @@ class _$Initial implements Initial {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<Transaction> transactions, DateTime dateTime)? loaded,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<Transaction> transactions, DateTime dateTime)?
+        loaded,
   }) {
     return initial?.call();
   }
@@ -191,9 +192,9 @@ class _$Initial implements Initial {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Loading value)? loading,
-    TResult Function(Loaded value)? loaded,
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Loaded value)? loaded,
   }) {
     return initial?.call(this);
   }
@@ -234,13 +235,10 @@ abstract class _$$LoadingCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadingCopyWithImpl<$Res>
-    extends _$TransactionsBusinessStateCopyWithImpl<$Res>
+    extends _$TransactionsBusinessStateCopyWithImpl<$Res, _$Loading>
     implements _$$LoadingCopyWith<$Res> {
   __$$LoadingCopyWithImpl(_$Loading _value, $Res Function(_$Loading) _then)
-      : super(_value, (v) => _then(v as _$Loading));
-
-  @override
-  _$Loading get _value => super._value as _$Loading;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -283,9 +281,10 @@ class _$Loading implements Loading {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<Transaction> transactions, DateTime dateTime)? loaded,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<Transaction> transactions, DateTime dateTime)?
+        loaded,
   }) {
     return loading?.call();
   }
@@ -317,9 +316,9 @@ class _$Loading implements Loading {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Loading value)? loading,
-    TResult Function(Loaded value)? loaded,
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Loaded value)? loaded,
   }) {
     return loading?.call(this);
   }
@@ -356,30 +355,29 @@ abstract class Loading implements TransactionsBusinessState {
 abstract class _$$LoadedCopyWith<$Res> {
   factory _$$LoadedCopyWith(_$Loaded value, $Res Function(_$Loaded) then) =
       __$$LoadedCopyWithImpl<$Res>;
+  @useResult
   $Res call({List<Transaction> transactions, DateTime dateTime});
 }
 
 /// @nodoc
 class __$$LoadedCopyWithImpl<$Res>
-    extends _$TransactionsBusinessStateCopyWithImpl<$Res>
+    extends _$TransactionsBusinessStateCopyWithImpl<$Res, _$Loaded>
     implements _$$LoadedCopyWith<$Res> {
   __$$LoadedCopyWithImpl(_$Loaded _value, $Res Function(_$Loaded) _then)
-      : super(_value, (v) => _then(v as _$Loaded));
+      : super(_value, _then);
 
-  @override
-  _$Loaded get _value => super._value as _$Loaded;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? transactions = freezed,
-    Object? dateTime = freezed,
+    Object? transactions = null,
+    Object? dateTime = null,
   }) {
     return _then(_$Loaded(
-      transactions: transactions == freezed
+      transactions: null == transactions
           ? _value._transactions
           : transactions // ignore: cast_nullable_to_non_nullable
               as List<Transaction>,
-      dateTime: dateTime == freezed
+      dateTime: null == dateTime
           ? _value.dateTime
           : dateTime // ignore: cast_nullable_to_non_nullable
               as DateTime,
@@ -425,18 +423,18 @@ class _$Loaded implements Loaded {
             other is _$Loaded &&
             const DeepCollectionEquality()
                 .equals(other._transactions, _transactions) &&
-            const DeepCollectionEquality().equals(other.dateTime, dateTime));
+            (identical(other.dateTime, dateTime) ||
+                other.dateTime == dateTime));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_transactions),
-      const DeepCollectionEquality().hash(dateTime));
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_transactions), dateTime);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$LoadedCopyWith<_$Loaded> get copyWith =>
       __$$LoadedCopyWithImpl<_$Loaded>(this, _$identity);
 
@@ -454,9 +452,10 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<Transaction> transactions, DateTime dateTime)? loaded,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<Transaction> transactions, DateTime dateTime)?
+        loaded,
   }) {
     return loaded?.call(transactions, dateTime);
   }
@@ -488,9 +487,9 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Loading value)? loading,
-    TResult Function(Loaded value)? loaded,
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Loaded value)? loaded,
   }) {
     return loaded?.call(this);
   }

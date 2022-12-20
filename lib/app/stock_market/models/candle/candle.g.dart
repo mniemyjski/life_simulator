@@ -253,7 +253,7 @@ const CandleSchema = CollectionSchema(
   getId: _candleGetId,
   getLinks: _candleGetLinks,
   attach: _candleAttach,
-  version: '3.0.2',
+  version: '3.0.5',
 );
 
 int _candleEstimateSize(

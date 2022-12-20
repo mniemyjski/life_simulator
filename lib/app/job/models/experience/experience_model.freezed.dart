@@ -42,7 +42,8 @@ mixin _$Experience {
 abstract class $ExperienceCopyWith<$Res> {
   factory $ExperienceCopyWith(
           Experience value, $Res Function(Experience) then) =
-      _$ExperienceCopyWithImpl<$Res>;
+      _$ExperienceCopyWithImpl<$Res, Experience>;
+  @useResult
   $Res call(
       {String id,
       String name,
@@ -58,73 +59,76 @@ abstract class $ExperienceCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ExperienceCopyWithImpl<$Res> implements $ExperienceCopyWith<$Res> {
+class _$ExperienceCopyWithImpl<$Res, $Val extends Experience>
+    implements $ExperienceCopyWith<$Res> {
   _$ExperienceCopyWithImpl(this._value, this._then);
 
-  final Experience _value;
   // ignore: unused_field
-  final $Res Function(Experience) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? exp = freezed,
-    Object? requirements = freezed,
-    Object? salary = freezed,
-    Object? eTypeFrequency = freezed,
-    Object? work = freezed,
-    Object? commuting = freezed,
-    Object? bonusToRelax = freezed,
-    Object? bonusToSleep = freezed,
-    Object? bonusToLearn = freezed,
+    Object? id = null,
+    Object? name = null,
+    Object? exp = null,
+    Object? requirements = null,
+    Object? salary = null,
+    Object? eTypeFrequency = null,
+    Object? work = null,
+    Object? commuting = null,
+    Object? bonusToRelax = null,
+    Object? bonusToSleep = null,
+    Object? bonusToLearn = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      exp: exp == freezed
+      exp: null == exp
           ? _value.exp
           : exp // ignore: cast_nullable_to_non_nullable
               as int,
-      requirements: requirements == freezed
+      requirements: null == requirements
           ? _value.requirements
           : requirements // ignore: cast_nullable_to_non_nullable
               as List<Skill>,
-      salary: salary == freezed
+      salary: null == salary
           ? _value.salary
           : salary // ignore: cast_nullable_to_non_nullable
               as double,
-      eTypeFrequency: eTypeFrequency == freezed
+      eTypeFrequency: null == eTypeFrequency
           ? _value.eTypeFrequency
           : eTypeFrequency // ignore: cast_nullable_to_non_nullable
               as ETypeFrequency,
-      work: work == freezed
+      work: null == work
           ? _value.work
           : work // ignore: cast_nullable_to_non_nullable
               as int,
-      commuting: commuting == freezed
+      commuting: null == commuting
           ? _value.commuting
           : commuting // ignore: cast_nullable_to_non_nullable
               as int,
-      bonusToRelax: bonusToRelax == freezed
+      bonusToRelax: null == bonusToRelax
           ? _value.bonusToRelax
           : bonusToRelax // ignore: cast_nullable_to_non_nullable
               as int,
-      bonusToSleep: bonusToSleep == freezed
+      bonusToSleep: null == bonusToSleep
           ? _value.bonusToSleep
           : bonusToSleep // ignore: cast_nullable_to_non_nullable
               as int,
-      bonusToLearn: bonusToLearn == freezed
+      bonusToLearn: null == bonusToLearn
           ? _value.bonusToLearn
           : bonusToLearn // ignore: cast_nullable_to_non_nullable
               as int,
-    ));
+    ) as $Val);
   }
 }
 
@@ -135,6 +139,7 @@ abstract class _$$_ExperienceCopyWith<$Res>
           _$_Experience value, $Res Function(_$_Experience) then) =
       __$$_ExperienceCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String id,
       String name,
@@ -150,71 +155,70 @@ abstract class _$$_ExperienceCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ExperienceCopyWithImpl<$Res> extends _$ExperienceCopyWithImpl<$Res>
+class __$$_ExperienceCopyWithImpl<$Res>
+    extends _$ExperienceCopyWithImpl<$Res, _$_Experience>
     implements _$$_ExperienceCopyWith<$Res> {
   __$$_ExperienceCopyWithImpl(
       _$_Experience _value, $Res Function(_$_Experience) _then)
-      : super(_value, (v) => _then(v as _$_Experience));
+      : super(_value, _then);
 
-  @override
-  _$_Experience get _value => super._value as _$_Experience;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? exp = freezed,
-    Object? requirements = freezed,
-    Object? salary = freezed,
-    Object? eTypeFrequency = freezed,
-    Object? work = freezed,
-    Object? commuting = freezed,
-    Object? bonusToRelax = freezed,
-    Object? bonusToSleep = freezed,
-    Object? bonusToLearn = freezed,
+    Object? id = null,
+    Object? name = null,
+    Object? exp = null,
+    Object? requirements = null,
+    Object? salary = null,
+    Object? eTypeFrequency = null,
+    Object? work = null,
+    Object? commuting = null,
+    Object? bonusToRelax = null,
+    Object? bonusToSleep = null,
+    Object? bonusToLearn = null,
   }) {
     return _then(_$_Experience(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      exp: exp == freezed
+      exp: null == exp
           ? _value.exp
           : exp // ignore: cast_nullable_to_non_nullable
               as int,
-      requirements: requirements == freezed
+      requirements: null == requirements
           ? _value._requirements
           : requirements // ignore: cast_nullable_to_non_nullable
               as List<Skill>,
-      salary: salary == freezed
+      salary: null == salary
           ? _value.salary
           : salary // ignore: cast_nullable_to_non_nullable
               as double,
-      eTypeFrequency: eTypeFrequency == freezed
+      eTypeFrequency: null == eTypeFrequency
           ? _value.eTypeFrequency
           : eTypeFrequency // ignore: cast_nullable_to_non_nullable
               as ETypeFrequency,
-      work: work == freezed
+      work: null == work
           ? _value.work
           : work // ignore: cast_nullable_to_non_nullable
               as int,
-      commuting: commuting == freezed
+      commuting: null == commuting
           ? _value.commuting
           : commuting // ignore: cast_nullable_to_non_nullable
               as int,
-      bonusToRelax: bonusToRelax == freezed
+      bonusToRelax: null == bonusToRelax
           ? _value.bonusToRelax
           : bonusToRelax // ignore: cast_nullable_to_non_nullable
               as int,
-      bonusToSleep: bonusToSleep == freezed
+      bonusToSleep: null == bonusToSleep
           ? _value.bonusToSleep
           : bonusToSleep // ignore: cast_nullable_to_non_nullable
               as int,
-      bonusToLearn: bonusToLearn == freezed
+      bonusToLearn: null == bonusToLearn
           ? _value.bonusToLearn
           : bonusToLearn // ignore: cast_nullable_to_non_nullable
               as int,
@@ -283,42 +287,44 @@ class _$_Experience implements _Experience {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Experience &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.exp, exp) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.exp, exp) || other.exp == exp) &&
             const DeepCollectionEquality()
                 .equals(other._requirements, _requirements) &&
-            const DeepCollectionEquality().equals(other.salary, salary) &&
-            const DeepCollectionEquality()
-                .equals(other.eTypeFrequency, eTypeFrequency) &&
-            const DeepCollectionEquality().equals(other.work, work) &&
-            const DeepCollectionEquality().equals(other.commuting, commuting) &&
-            const DeepCollectionEquality()
-                .equals(other.bonusToRelax, bonusToRelax) &&
-            const DeepCollectionEquality()
-                .equals(other.bonusToSleep, bonusToSleep) &&
-            const DeepCollectionEquality()
-                .equals(other.bonusToLearn, bonusToLearn));
+            (identical(other.salary, salary) || other.salary == salary) &&
+            (identical(other.eTypeFrequency, eTypeFrequency) ||
+                other.eTypeFrequency == eTypeFrequency) &&
+            (identical(other.work, work) || other.work == work) &&
+            (identical(other.commuting, commuting) ||
+                other.commuting == commuting) &&
+            (identical(other.bonusToRelax, bonusToRelax) ||
+                other.bonusToRelax == bonusToRelax) &&
+            (identical(other.bonusToSleep, bonusToSleep) ||
+                other.bonusToSleep == bonusToSleep) &&
+            (identical(other.bonusToLearn, bonusToLearn) ||
+                other.bonusToLearn == bonusToLearn));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(exp),
+      id,
+      name,
+      exp,
       const DeepCollectionEquality().hash(_requirements),
-      const DeepCollectionEquality().hash(salary),
-      const DeepCollectionEquality().hash(eTypeFrequency),
-      const DeepCollectionEquality().hash(work),
-      const DeepCollectionEquality().hash(commuting),
-      const DeepCollectionEquality().hash(bonusToRelax),
-      const DeepCollectionEquality().hash(bonusToSleep),
-      const DeepCollectionEquality().hash(bonusToLearn));
+      salary,
+      eTypeFrequency,
+      work,
+      commuting,
+      bonusToRelax,
+      bonusToSleep,
+      bonusToLearn);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_ExperienceCopyWith<_$_Experience> get copyWith =>
       __$$_ExperienceCopyWithImpl<_$_Experience>(this, _$identity);
 

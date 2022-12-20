@@ -3,50 +3,79 @@ import 'dart:async';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:richeable/app/business/models/product/product_model.dart';
 import 'package:richeable/app/business/models/research/research_model.dart';
+import 'package:richeable/utilities/utilities.dart';
 
-import '../../../new_game/new_game_cubit.dart';
+import '../../../date/cubit/date_cubit.dart';
+import '../../repositories/research_repository.dart';
 
 part 'research_product_cubit.freezed.dart';
 part 'research_product_cubit.g.dart';
 part 'research_product_state.dart';
 
-@lazySingleton
+@injectable
 class ResearchProductCubit extends HydratedCubit<ResearchProductState> {
-  final NewGameCubit _newGameCubit;
-  late StreamSubscription _newGameSub;
-  ResearchProductCubit(this._newGameCubit) : super(const ResearchProductState.initial()) {
-    _newGame();
+  late StreamSubscription _researchSub;
+  final ResearchRepository _researchRepository;
+  final int businessId;
+  final DateCubit _dateCubit;
+
+  ResearchProductCubit(
+    this._researchRepository,
+    this._dateCubit,
+    @factoryParam this.businessId,
+  ) : super(const ResearchProductState.initial()) {
+    state.maybeWhen(orElse: () async {
+      Research? research = await _researchRepository.get(businessId);
+      if (research != null) {
+        emit(ResearchProductState.loaded(research));
+      } else {
+        emit(ResearchProductState.none());
+      }
+    });
+
+    _researchSub = _researchRepository.watch(businessId).listen((research) async {
+      if (research != null) {
+        emit(ResearchProductState.loaded(research));
+      } else {
+        emit(ResearchProductState.none());
+      }
+    });
   }
 
   @override
   Future<void> close() async {
-    _newGameSub.cancel();
+    _researchSub.cancel();
     super.close();
   }
 
-  _newGame() {
-    if (_newGameCubit.state) emit(const ResearchProductState.initial());
-    _newGameSub = _newGameCubit.stream.listen((newGame) {
-      if (newGame) emit(const ResearchProductState.initial());
-    });
+  Future<String?> add({
+    required String name,
+    required double cost,
+    required ETypeProduct eTypeProduct,
+    required ETypeQuality eTypeQuality,
+    required int months,
+  }) async {
+    return await _dateCubit.state.maybeWhen(
+      loaded: (date) async {
+        final research = Research(
+          businessId: businessId,
+          name: name,
+          cost: cost,
+          eTypeProduct: eTypeProduct,
+          eTypeQuality: eTypeQuality,
+          dateEnd: date.addDate(months: months),
+        );
+
+        return await _researchRepository.add(research);
+      },
+      orElse: () => 'error',
+    );
   }
 
-  counting() {
-    state.whenOrNull(loaded: (research) {});
-  }
-
-  String? add(Research research) {
-    return state.maybeWhen(
-        orElse: () => 'researchInProgress',
-        initial: () {
-          emit(ResearchProductState.loaded(research));
-          return null;
-        });
-  }
-
-  remove(Research research) {
-    emit(const ResearchProductState.initial());
+  remove(Research research) async {
+    return await _researchRepository.remove(research);
   }
 
   @override

@@ -187,7 +187,7 @@ const ExchangeSchema = CollectionSchema(
   getId: _exchangeGetId,
   getLinks: _exchangeGetLinks,
   attach: _exchangeAttach,
-  version: '3.0.2',
+  version: '3.0.5',
 );
 
 int _exchangeEstimateSize(

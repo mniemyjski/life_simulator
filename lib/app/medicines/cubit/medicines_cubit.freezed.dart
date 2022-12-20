@@ -41,9 +41,9 @@ mixin _$MedicinesState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<Medicine> medicines, DateTime currentDate)? loaded,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<Medicine> medicines, DateTime currentDate)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,9 +63,9 @@ mixin _$MedicinesState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Loading value)? loading,
-    TResult Function(Loaded value)? loaded,
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Loaded value)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -83,17 +83,18 @@ mixin _$MedicinesState {
 abstract class $MedicinesStateCopyWith<$Res> {
   factory $MedicinesStateCopyWith(
           MedicinesState value, $Res Function(MedicinesState) then) =
-      _$MedicinesStateCopyWithImpl<$Res>;
+      _$MedicinesStateCopyWithImpl<$Res, MedicinesState>;
 }
 
 /// @nodoc
-class _$MedicinesStateCopyWithImpl<$Res>
+class _$MedicinesStateCopyWithImpl<$Res, $Val extends MedicinesState>
     implements $MedicinesStateCopyWith<$Res> {
   _$MedicinesStateCopyWithImpl(this._value, this._then);
 
-  final MedicinesState _value;
   // ignore: unused_field
-  final $Res Function(MedicinesState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -103,13 +104,11 @@ abstract class _$$InitialCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$InitialCopyWithImpl<$Res> extends _$MedicinesStateCopyWithImpl<$Res>
+class __$$InitialCopyWithImpl<$Res>
+    extends _$MedicinesStateCopyWithImpl<$Res, _$Initial>
     implements _$$InitialCopyWith<$Res> {
   __$$InitialCopyWithImpl(_$Initial _value, $Res Function(_$Initial) _then)
-      : super(_value, (v) => _then(v as _$Initial));
-
-  @override
-  _$Initial get _value => super._value as _$Initial;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -152,9 +151,9 @@ class _$Initial implements Initial {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<Medicine> medicines, DateTime currentDate)? loaded,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<Medicine> medicines, DateTime currentDate)? loaded,
   }) {
     return initial?.call();
   }
@@ -186,9 +185,9 @@ class _$Initial implements Initial {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Loading value)? loading,
-    TResult Function(Loaded value)? loaded,
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Loaded value)? loaded,
   }) {
     return initial?.call(this);
   }
@@ -228,13 +227,11 @@ abstract class _$$LoadingCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$LoadingCopyWithImpl<$Res> extends _$MedicinesStateCopyWithImpl<$Res>
+class __$$LoadingCopyWithImpl<$Res>
+    extends _$MedicinesStateCopyWithImpl<$Res, _$Loading>
     implements _$$LoadingCopyWith<$Res> {
   __$$LoadingCopyWithImpl(_$Loading _value, $Res Function(_$Loading) _then)
-      : super(_value, (v) => _then(v as _$Loading));
-
-  @override
-  _$Loading get _value => super._value as _$Loading;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -277,9 +274,9 @@ class _$Loading implements Loading {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<Medicine> medicines, DateTime currentDate)? loaded,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<Medicine> medicines, DateTime currentDate)? loaded,
   }) {
     return loading?.call();
   }
@@ -311,9 +308,9 @@ class _$Loading implements Loading {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Loading value)? loading,
-    TResult Function(Loaded value)? loaded,
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Loaded value)? loaded,
   }) {
     return loading?.call(this);
   }
@@ -350,29 +347,29 @@ abstract class Loading implements MedicinesState {
 abstract class _$$LoadedCopyWith<$Res> {
   factory _$$LoadedCopyWith(_$Loaded value, $Res Function(_$Loaded) then) =
       __$$LoadedCopyWithImpl<$Res>;
+  @useResult
   $Res call({List<Medicine> medicines, DateTime currentDate});
 }
 
 /// @nodoc
-class __$$LoadedCopyWithImpl<$Res> extends _$MedicinesStateCopyWithImpl<$Res>
+class __$$LoadedCopyWithImpl<$Res>
+    extends _$MedicinesStateCopyWithImpl<$Res, _$Loaded>
     implements _$$LoadedCopyWith<$Res> {
   __$$LoadedCopyWithImpl(_$Loaded _value, $Res Function(_$Loaded) _then)
-      : super(_value, (v) => _then(v as _$Loaded));
+      : super(_value, _then);
 
-  @override
-  _$Loaded get _value => super._value as _$Loaded;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? medicines = freezed,
-    Object? currentDate = freezed,
+    Object? medicines = null,
+    Object? currentDate = null,
   }) {
     return _then(_$Loaded(
-      medicines == freezed
+      null == medicines
           ? _value.medicines
           : medicines // ignore: cast_nullable_to_non_nullable
               as List<Medicine>,
-      currentDate == freezed
+      null == currentDate
           ? _value.currentDate
           : currentDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
@@ -408,19 +405,18 @@ class _$Loaded implements Loaded {
         (other.runtimeType == runtimeType &&
             other is _$Loaded &&
             const DeepCollectionEquality().equals(other.medicines, medicines) &&
-            const DeepCollectionEquality()
-                .equals(other.currentDate, currentDate));
+            (identical(other.currentDate, currentDate) ||
+                other.currentDate == currentDate));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(medicines),
-      const DeepCollectionEquality().hash(currentDate));
+      runtimeType, const DeepCollectionEquality().hash(medicines), currentDate);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$LoadedCopyWith<_$Loaded> get copyWith =>
       __$$LoadedCopyWithImpl<_$Loaded>(this, _$identity);
 
@@ -438,9 +434,9 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<Medicine> medicines, DateTime currentDate)? loaded,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<Medicine> medicines, DateTime currentDate)? loaded,
   }) {
     return loaded?.call(medicines, currentDate);
   }
@@ -472,9 +468,9 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Loading value)? loading,
-    TResult Function(Loaded value)? loaded,
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Loaded value)? loaded,
   }) {
     return loaded?.call(this);
   }

@@ -3,14 +3,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:richeable/app/business/cubit/businesses/businesses_cubit.dart';
-import 'package:richeable/app/business/cubit/products/products_cubit.dart';
-import 'package:richeable/app/business/cubit/research_product/research_product_cubit.dart';
 import 'package:richeable/app/loading/cubit/loading_cubit.dart';
 import 'package:richeable/app/settings/cubit/audio_cubit.dart';
-import 'package:richeable/app/skills/cubit/skills_cubit.dart';
 import 'package:richeable/config/injectable/app_module.dart';
 import 'package:url_strategy/url_strategy.dart';
 
@@ -20,6 +17,7 @@ import 'app/assets/cubit/buy/buy_asset_cubit.dart';
 import 'app/assets/cubit/tenant/tenants_cubit.dart';
 import 'app/bank/cubit/deposit/deposit_cubit.dart';
 import 'app/bank/cubit/loan/loan_cubit.dart';
+import 'app/business/cubit/businesses_list/businesses_cubit.dart';
 import 'app/database/cubit/database_cubit.dart';
 import 'app/date/cubit/date_cubit.dart';
 import 'app/event/cubit/event_cubit.dart';
@@ -46,29 +44,28 @@ import 'utilities/utilities.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+  MobileAds.instance.initialize();
   await configureDependencies(Env.dev);
   await getIt<AppModule>().init();
   setPathUrlStrategy();
 
-  final storage = await HydratedStorage.build(
+  HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: kIsWeb ? HydratedStorage.webStorageDirectory : await getTemporaryDirectory(),
   );
 
-  HydratedBlocOverrides.runZoned(
-    () => runApp(
-      EasyLocalization(
-        useOnlyLangCode: true,
-        supportedLocales: const [
-          Locale('en'),
-          // Locale('pl'),
-        ],
-        path: 'assets/translations',
-        fallbackLocale: const Locale('en'),
-        child: const MyApp(),
-      ),
+  Bloc.observer = SimpleBlocObserver();
+
+  runApp(
+    EasyLocalization(
+      useOnlyLangCode: true,
+      supportedLocales: const [
+        Locale('en'),
+        // Locale('pl'),
+      ],
+      path: 'assets/translations',
+      fallbackLocale: const Locale('en'),
+      child: const MyApp(),
     ),
-    blocObserver: SimpleBlocObserver(),
-    storage: storage,
   );
 }
 
@@ -126,10 +123,6 @@ class _MyAppState extends State<MyApp> {
             BlocProvider(
               lazy: false,
               create: (_) => getIt<StatsCubit>(),
-            ),
-            BlocProvider(
-              lazy: false,
-              create: (_) => getIt<SkillsCubit>(),
             ),
             BlocProvider(
               lazy: false,
@@ -202,14 +195,6 @@ class _MyAppState extends State<MyApp> {
             BlocProvider(
               lazy: false,
               create: (_) => getIt<BusinessesCubit>(),
-            ),
-            BlocProvider(
-              lazy: false,
-              create: (_) => getIt<ResearchProductCubit>(),
-            ),
-            BlocProvider(
-              lazy: false,
-              create: (_) => getIt<ProductsCubit>(),
             ),
           ],
           child: MaterialApp.router(

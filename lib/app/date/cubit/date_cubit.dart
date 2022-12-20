@@ -5,12 +5,12 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:richeable/utilities/utilities.dart';
 
-import '../../../repositories/time_spend_repository.dart';
 import '../../assets/cubit/assets/assets_cubit.dart';
 import '../../assets/cubit/build/build_asset_cubit.dart';
 import '../../bank/cubit/deposit/deposit_cubit.dart';
 import '../../bank/cubit/loan/loan_cubit.dart';
-import '../../business/cubit/businesses/businesses_cubit.dart';
+import '../../business/repositories/employee_repository.dart';
+import '../../business/repositories/research_repository.dart';
 import '../../event/cubit/event_cubit.dart';
 import '../../freelance/cubit/job/freelance_job_cubit.dart';
 import '../../freelance/repositories/freelance_repository.dart';
@@ -23,6 +23,7 @@ import '../../new_game/new_game_cubit.dart';
 import '../../settings/cubit/day_setting_cubit.dart';
 import '../../stats/cubit/stats_cubit.dart';
 import '../../stock_market/repositories/stock_market_repository.dart';
+import '../../time_spend/repositories/time_spend_repository.dart';
 
 part 'date_cubit.freezed.dart';
 part 'date_cubit.g.dart';
@@ -47,12 +48,13 @@ class DateCubit extends HydratedCubit<DateState> {
   final BuildAssetCubit _buildAssetsCubit;
   final DepositCubit _depositCubit;
   final LoanCubit _loanCubit;
-  final BusinessesCubit _businessesCubit;
 
   //
   final StockMarketRepository _stockMarketRepository;
   final FreelanceRepository _freelanceRepository;
   final TimeSpendRepository _timeSpendRepository;
+  final ResearchRepository _researchRepository;
+  final EmployeeRepository _employeeRepository;
 
   DateCubit(
     this._newGameCubit,
@@ -70,9 +72,10 @@ class DateCubit extends HydratedCubit<DateState> {
     this._buildAssetsCubit,
     this._depositCubit,
     this._loanCubit,
-    this._businessesCubit,
     this._freelanceRepository,
     this._timeSpendRepository,
+    this._researchRepository,
+    this._employeeRepository,
   ) : super(const DateState.initial()) {
     _newGame();
   }
@@ -108,6 +111,8 @@ class DateCubit extends HydratedCubit<DateState> {
 
         //
         await _freelanceRepository.counting(dateTime);
+        await _researchRepository.counting(dateTime);
+        await _employeeRepository.counting(dateTime);
         //
         await _freelanceJobCubit.counting(dateTime);
         await _learningCubit.counting(dateTime);
@@ -120,7 +125,6 @@ class DateCubit extends HydratedCubit<DateState> {
         await _buildAssetsCubit.counting(dateTime);
         await _depositCubit.counting(dateTime);
         await _loanCubit.counting(dateTime);
-        await _businessesCubit.counting(dateTime);
 
         //
         await _timeSpendRepository.counting();

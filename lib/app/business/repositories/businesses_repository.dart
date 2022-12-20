@@ -12,10 +12,16 @@ class BusinessesRepository {
     _isar = getIt<AppModule>().instance;
   }
 
+  Future counting(DateTime dateTime) async {}
+
   Future addBusiness(Business business) async {
     return await _isar.writeTxn(() async {
       await _isar.business.put(business);
     });
+  }
+
+  Future<Business?> getBusiness(int businessId) async {
+    return await _isar.business.get(businessId);
   }
 
   Future removeBusiness(Business business) async {

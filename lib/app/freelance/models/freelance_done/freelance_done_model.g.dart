@@ -254,7 +254,7 @@ const FreelanceDoneSchema = CollectionSchema(
   getId: _freelanceDoneGetId,
   getLinks: _freelanceDoneGetLinks,
   attach: _freelanceDoneAttach,
-  version: '3.0.2',
+  version: '3.0.5',
 );
 
 int _freelanceDoneEstimateSize(

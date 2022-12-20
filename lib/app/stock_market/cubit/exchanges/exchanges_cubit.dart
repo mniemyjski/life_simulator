@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:richeable/app/money/repositories/transactions_repository.dart';
 import 'package:richeable/app/stock_market/models/instrument/instrument.dart';
-import 'package:richeable/repositories/transactions_repository.dart';
 
 import '../../../date/cubit/date_cubit.dart';
 import '../../models/exchange/exchange.dart';

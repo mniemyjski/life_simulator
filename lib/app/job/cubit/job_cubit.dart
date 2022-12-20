@@ -6,7 +6,6 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:richeable/app/time_spend/models/time_spend_model/time_spend_model.dart';
 
-import '../../../repositories/time_spend_repository.dart';
 import '../../money/cubit/income/income_cubit.dart';
 import '../../money/models/income/income_model.dart';
 import '../../money/models/transaction/transaction_model.dart';
@@ -14,6 +13,7 @@ import '../../new_game/new_game_cubit.dart';
 import '../../skills/models/skill/skill_model.dart';
 import '../../skills/repositories/skills_repository.dart';
 import '../../time_spend/models/time_bonus/time_bonus_model.dart';
+import '../../time_spend/repositories/time_spend_repository.dart';
 import '../models/experience/experience_model.dart';
 import '../models/job/job_model.dart';
 
@@ -71,7 +71,7 @@ class JobCubit extends HydratedCubit<JobState> {
 
   Future<String> getJob({required Job job, required Experience experience}) async {
     TimeSpend timeSpend = await _timeSpendRepository.getTimeSpend();
-    bool hasFreeTime = timeSpend.checkFreeTime(1 + experience.work + experience.commuting);
+    bool hasFreeTime = await timeSpend.checkFreeTime(1 + experience.work + experience.commuting);
     if (!hasFreeTime) return "You don't have free time";
 
     _timeSpendRepository.changeUsed(1);
@@ -84,7 +84,7 @@ class JobCubit extends HydratedCubit<JobState> {
           _timeSpendRepository.changeCommuting(experience.commuting);
 
           Income income = Income(
-            id: job.id,
+            uid: job.id,
             source: ETypeTransactionSource.job,
             typeIncome: ETypeIncome.revenue,
             value: experience.salary,
@@ -165,7 +165,8 @@ class JobCubit extends HydratedCubit<JobState> {
           Experience newExperience = job.experiences[exp];
 
           TimeSpend timeSpend = await _timeSpendRepository.getTimeSpend();
-          bool hasFreeTime = timeSpend.checkFreeTime(1 + newExperience.work - experience.work);
+          bool hasFreeTime =
+              await timeSpend.checkFreeTime(1 + newExperience.work - experience.work);
           if (!hasFreeTime) return "You don't have free time";
 
           _timeSpendRepository.changeUsed(1);
@@ -192,7 +193,7 @@ class JobCubit extends HydratedCubit<JobState> {
             ],
           );
 
-          _incomeCubit.update(id: job.id, value: newExperience.salary);
+          _incomeCubit.update(uid: job.id, value: newExperience.salary);
           emit(JobState.loaded(job: job, experience: newExperience));
         },
         orElse: () => 'error');

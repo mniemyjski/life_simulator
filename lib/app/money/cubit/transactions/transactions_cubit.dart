@@ -5,10 +5,10 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:richeable/utilities/utilities.dart';
 
-import '../../../../repositories/transactions_repository.dart';
 import '../../../date/cubit/date_cubit.dart';
 import '../../models/sum_transactions/sum_transactions_model.dart';
 import '../../models/transaction/transaction_model.dart';
+import '../../repositories/transactions_repository.dart';
 
 part 'transactions_cubit.freezed.dart';
 part 'transactions_cubit.g.dart';

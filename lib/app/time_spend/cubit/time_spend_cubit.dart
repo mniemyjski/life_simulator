@@ -4,8 +4,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../repositories/time_spend_repository.dart';
 import '../models/time_spend_model/time_spend_model.dart';
+import '../repositories/time_spend_repository.dart';
 
 part 'time_spend_cubit.freezed.dart';
 part 'time_spend_cubit.g.dart';
@@ -17,12 +17,12 @@ class TimeSpendCubit extends HydratedCubit<TimeSpendState> {
   late StreamSubscription _timeSpendSub;
 
   TimeSpendCubit(this._timeSpendRepository) : super(const TimeSpendState.initial()) {
-    state.maybeWhen(orElse: () async {
-      TimeSpend timeSpend = await _timeSpendRepository.getTimeSpend();
-      emit(TimeSpendState.loaded(timeSpend));
-    });
-
     _timeSpendSub = _timeSpendRepository.watchTimeSpend().listen((_) async {
+      state.maybeWhen(orElse: () async {
+        TimeSpend timeSpend = await _timeSpendRepository.getTimeSpend();
+        emit(TimeSpendState.loaded(timeSpend));
+      });
+
       TimeSpend timeSpend = await _timeSpendRepository.getTimeSpend();
       emit(TimeSpendState.loaded(timeSpend));
     });

@@ -32,12 +32,14 @@ class TransportScreen extends StatelessWidget {
                     loaded: (car) {
                       List<Transport> carsDB = context.watch<DatabaseCubit>().state.transportsDB;
 
+                      print(carsDB);
+
                       return Expanded(
                         child: ListView.builder(
                             itemCount: carsDB.length,
                             itemBuilder: (context, index) {
                               final element = carsDB[index];
-                              final bool owned = element.id == (car?.id ?? 'xyz');
+                              final bool owned = element.uid == (car?.uid ?? 'xyz');
 
                               return _element(
                                   element: element,

@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:richeable/app/business/cubit/research_product/research_product_cubit.dart';
 import 'package:richeable/app/business/models/product/product_model.dart';
-import 'package:richeable/app/business/models/research/research_model.dart';
-import 'package:richeable/app/date/cubit/date_cubit.dart';
 import 'package:richeable/constants/constants.dart';
 import 'package:richeable/utilities/utilities.dart';
 import 'package:richeable/widgets/widgets.dart';
@@ -24,6 +22,7 @@ class _ResearchCreateSheetState extends State<ResearchCreateSheet> {
   ETypeProduct eTypeProduct = ETypeProduct.food;
   ETypeQuality eTypeQuality = ETypeQuality.low;
   double cost = 50000;
+  double months = 1;
 
   @override
   void initState() {
@@ -105,38 +104,37 @@ class _ResearchCreateSheetState extends State<ResearchCreateSheet> {
           ),
           const SizedBox(height: 8),
           Text('${LocaleKeys.cost.tr()}:'),
-          Row(
-            children: [
-              Expanded(
-                child: Slider(
-                  value: cost,
-                  min: 50000,
-                  max: 1000000,
-                  divisions: 10,
-                  onChanged: (double v) => setState(() => cost = v),
-                ),
-              ),
-              Text('${cost.toMoney()}'),
-            ],
+          CustomSlider(
+            value: cost,
+            min: 50000,
+            max: 1000000,
+            division: 10,
+            txt: '${cost.toMoney()}',
+            onChanged: (double v) => setState(() => cost = v),
+          ),
+          const SizedBox(height: 8),
+          Text('${LocaleKeys.months.tr()}:'),
+          CustomSlider(
+            value: months,
+            min: 1,
+            max: 12,
+            division: 12,
+            txt: '${months.toInt()}',
+            onChanged: (double v) => setState(() => months = v),
           ),
           const SizedBox(height: 8),
           CustomButton(
-            onPressed: () {
-              context.read<DateCubit>().state.whenOrNull(loaded: (date) {
-                final research = Research.builder(
-                  businessId: widget.businessId,
+            onPressed: () async {
+              String? toast = await context.read<ResearchProductCubit>().add(
                   name: controller.text,
                   cost: cost,
                   eTypeProduct: eTypeProduct,
                   eTypeQuality: eTypeQuality,
-                  dateEnd: date.addDate(years: 1),
-                );
-                String? toast = context.read<ResearchProductCubit>().add(research);
-                if (toast != null) {
-                  BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
-                }
-                context.router.pop();
-              });
+                  months: months.toInt());
+              if (toast != null) {
+                BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
+              }
+              context.router.pop();
             },
             child: Text(
               LocaleKeys.create.tr(),

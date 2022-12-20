@@ -7,7 +7,7 @@ class DataHouses {
     var uuid = const Uuid();
     return [
       House(
-        id: uuid.v1(),
+        uid: uuid.v1(),
         name: 'House 1',
         eTypeHouse: ETypeHouse.rent,
         cost: -600,
@@ -15,14 +15,14 @@ class DataHouses {
         bonusToSleep: -1,
       ),
       House(
-        id: uuid.v1(),
+        uid: uuid.v1(),
         name: 'House 2',
         eTypeHouse: ETypeHouse.rent,
         cost: -1200,
         monthlyCost: -1200,
       ),
       House(
-        id: uuid.v1(),
+        uid: uuid.v1(),
         name: 'House 3',
         eTypeHouse: ETypeHouse.rent,
         cost: -2000,
@@ -31,7 +31,7 @@ class DataHouses {
         bonusToSleep: 0,
       ),
       House(
-        id: uuid.v1(),
+        uid: uuid.v1(),
         name: 'House 4',
         eTypeHouse: ETypeHouse.buy,
         cost: -60000,
@@ -40,7 +40,7 @@ class DataHouses {
         bonusToSleep: 0,
       ),
       House(
-        id: uuid.v1(),
+        uid: uuid.v1(),
         name: 'House 5',
         eTypeHouse: ETypeHouse.buy,
         cost: -160000,
@@ -49,7 +49,7 @@ class DataHouses {
         bonusToSleep: 0,
       ),
       House(
-        id: uuid.v1(),
+        uid: uuid.v1(),
         name: 'House 6',
         eTypeHouse: ETypeHouse.buy,
         cost: -260000,

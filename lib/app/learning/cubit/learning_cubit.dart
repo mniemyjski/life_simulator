@@ -6,12 +6,12 @@ import 'package:injectable/injectable.dart';
 import 'package:richeable/app/skills/repositories/skills_repository.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../../repositories/time_spend_repository.dart';
 import '../../../utilities/utilities.dart';
 import '../../money/cubit/money/money_cubit.dart';
 import '../../money/models/transaction/transaction_model.dart';
 import '../../new_game/new_game_cubit.dart';
 import '../../time_spend/models/time_spend_model/time_spend_model.dart';
+import '../../time_spend/repositories/time_spend_repository.dart';
 import '../models/learning_model.dart';
 
 part 'learning_cubit.freezed.dart';

@@ -4,10 +4,10 @@ import '../../personality/models/transport/transport_model.dart';
 
 class DataTransports {
   static List<Transport> db() {
-    var uuid = Uuid();
+    var uuid = const Uuid();
     return [
       Transport(
-        id: uuid.v1(),
+        uid: uuid.v1(),
         name: 'Ticket',
         eTypeTransport: ETypeTransport.publicTransport,
         brand: 'Cities transport',
@@ -16,7 +16,7 @@ class DataTransports {
         commuting: -1,
       ),
       Transport(
-        id: uuid.v1(),
+        uid: uuid.v1(),
         name: 'Car 1',
         eTypeTransport: ETypeTransport.car,
         brand: 'Brand 1',
@@ -26,7 +26,7 @@ class DataTransports {
         bonusToRelax: 0,
       ),
       Transport(
-        id: uuid.v1(),
+        uid: uuid.v1(),
         name: 'Car 2',
         eTypeTransport: ETypeTransport.car,
         brand: 'Brand 1',
@@ -37,7 +37,7 @@ class DataTransports {
         bonusToSleep: 0,
       ),
       Transport(
-        id: uuid.v1(),
+        uid: uuid.v1(),
         name: 'Car 3',
         eTypeTransport: ETypeTransport.car,
         brand: 'Brand 1',
