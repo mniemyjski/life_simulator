@@ -209,5 +209,6 @@ abstract class  LocaleKeys {
   static const timeSpendPanelDesc = 'timeSpendPanelDesc';
   static const eventScreen = 'eventScreen';
   static const eventScreenDesc = 'eventScreenDesc';
+  static const youDontHaveAnyBusiness = 'youDontHaveAnyBusiness';
 
 }

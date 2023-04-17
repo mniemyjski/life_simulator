@@ -20,27 +20,18 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Color bg =
+        backgroundColor != null ? backgroundColor! : Theme.of(context).scaffoldBackgroundColor;
+
     return Container(
       decoration: BoxDecoration(
-        // boxShadow: const [
-        //   BoxShadow(
-        //     color: Colors.white24,
-        //     offset: Offset(-1, -1),
-        //     blurRadius: 1.0,
-        //   ),
-        //   BoxShadow(
-        //     color: Colors.black54,
-        //     offset: Offset(1, 1),
-        //     blurRadius: 1.0,
-        //   )
-        // ],
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           stops: const [0.0, 1.0],
           colors: [
-            if (onPressed != null) Theme.of(context).scaffoldBackgroundColor.withOpacity(0.6),
-            if (onPressed != null) Theme.of(context).scaffoldBackgroundColor.withOpacity(0.1),
+            if (onPressed != null) bg.withOpacity(0.6),
+            if (onPressed != null) bg.withOpacity(0.1),
             if (onPressed == null) Colors.grey.withOpacity(0.6),
             if (onPressed == null) Colors.grey.withOpacity(0.1),
           ],

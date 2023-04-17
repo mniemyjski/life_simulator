@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:richeable/app/business/business_transactions_screen.dart';
 import 'package:richeable/app/business/product_list_screen.dart';
 import 'package:richeable/app/business/upgrade_screen.dart';
-import 'package:richeable/widgets/custom_scaffold.dart';
 
 import '../../app/assets/asset_screen.dart';
 import '../../app/assets/assets_screen.dart';
@@ -269,7 +268,7 @@ class EmptyScreen extends StatelessWidget {
           create: (_) => getIt<SkillsCubit>(),
         ),
       ],
-      child: const CustomScaffold(body: AutoRouter()),
+      child: AutoRouter(),
     );
   }
 }

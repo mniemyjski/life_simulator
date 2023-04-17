@@ -13,8 +13,8 @@ Future<bool> customAlertDialog({
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text(LocaleKeys.areYouSure.tr()),
-        content: Text(LocaleKeys.areYouSureRemoveResearch.tr()),
+        title: Text(title),
+        content: Text(desc),
         actions: [
           TextButton(
             child: Text(LocaleKeys.no.tr()),

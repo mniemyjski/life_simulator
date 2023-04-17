@@ -223,5 +223,7 @@
   "timeSpendPanelDesc": "Here you can see how much time you spends on certain activities, click this panel to be able to manage this time and see details",
 
   "eventScreen": "Event Screen",
-  "eventScreenDesc": "Various events that will have an impact on your gameplay will be displayed here"
+  "eventScreenDesc": "Various events that will have an impact on your gameplay will be displayed here",
+
+  "youDontHaveAnyBusiness": "You don't have any business"
 }

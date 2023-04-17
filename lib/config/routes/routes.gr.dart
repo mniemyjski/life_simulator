@@ -26,7 +26,6 @@ import '../../app/business/businesses_screen.dart' as _i26;
 import '../../app/business/employees_screen.dart' as _i31;
 import '../../app/business/human_resources_screen.dart' as _i32;
 import '../../app/business/models/employee/employee_model.dart' as _i40;
-import '../../app/business/models/product/product_model.dart' as _i41;
 import '../../app/business/product_details_screen.dart' as _i33;
 import '../../app/business/product_list_screen.dart' as _i30;
 import '../../app/business/upgrade_screen.dart' as _i29;
@@ -424,7 +423,8 @@ class AppRouter extends _i34.RootStackRouter {
         routeData: routeData,
         child: _i33.ProductDetailsScreen(
           key: args.key,
-          product: args.product,
+          productId: args.productId,
+          businessId: args.businessId,
         ),
         transitionsBuilder: _i34.TransitionsBuilders.slideLeftWithFade,
         durationInMilliseconds: 300,
@@ -1229,13 +1229,15 @@ class HumanResourcesRouteArgs {
 class ProductDetailsRoute extends _i34.PageRouteInfo<ProductDetailsRouteArgs> {
   ProductDetailsRoute({
     _i35.Key? key,
-    required _i41.Product product,
+    required int productId,
+    required int businessId,
   }) : super(
           ProductDetailsRoute.name,
           path: 'product-details-screen',
           args: ProductDetailsRouteArgs(
             key: key,
-            product: product,
+            productId: productId,
+            businessId: businessId,
           ),
         );
 
@@ -1245,15 +1247,18 @@ class ProductDetailsRoute extends _i34.PageRouteInfo<ProductDetailsRouteArgs> {
 class ProductDetailsRouteArgs {
   const ProductDetailsRouteArgs({
     this.key,
-    required this.product,
+    required this.productId,
+    required this.businessId,
   });
 
   final _i35.Key? key;
 
-  final _i41.Product product;
+  final int productId;
+
+  final int businessId;
 
   @override
   String toString() {
-    return 'ProductDetailsRouteArgs{key: $key, product: $product}';
+    return 'ProductDetailsRouteArgs{key: $key, productId: $productId, businessId: $businessId}';
   }
 }

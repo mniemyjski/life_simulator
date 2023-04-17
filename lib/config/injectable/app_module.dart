@@ -2,6 +2,7 @@ import 'package:injectable/injectable.dart';
 import 'package:isar/isar.dart';
 
 import '../../app/business/models/business/business_model.dart';
+import '../../app/business/models/contract/contract_model.dart';
 import '../../app/business/models/employee/employee_model.dart';
 import '../../app/business/models/product/product_model.dart';
 import '../../app/business/models/research/research_model.dart';
@@ -33,6 +34,7 @@ class AppModule {
     EmployeeSchema,
     ProductSchema,
     ResearchSchema,
+    ContractSchema,
   ];
 
   Future init() async {

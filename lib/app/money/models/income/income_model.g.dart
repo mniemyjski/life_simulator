@@ -289,8 +289,9 @@ const _IncomesourceEnumValueMap = {
   'lostMoney': 15,
   'advertisement': 16,
   'employeeWages': 17,
-  'withdraw': 18,
-  'deposit': 19,
+  'costProduce': 18,
+  'withdraw': 19,
+  'deposit': 20,
 };
 const _IncomesourceValueEnumMap = {
   0: ETypeTransactionSource.job,
@@ -311,8 +312,9 @@ const _IncomesourceValueEnumMap = {
   15: ETypeTransactionSource.lostMoney,
   16: ETypeTransactionSource.advertisement,
   17: ETypeTransactionSource.employeeWages,
-  18: ETypeTransactionSource.withdraw,
-  19: ETypeTransactionSource.deposit,
+  18: ETypeTransactionSource.costProduce,
+  19: ETypeTransactionSource.withdraw,
+  20: ETypeTransactionSource.deposit,
 };
 const _IncometypeIncomeEnumValueMap = {
   'revenue': 0,
@@ -1261,6 +1263,7 @@ const _$ETypeTransactionSourceEnumMap = {
   ETypeTransactionSource.lostMoney: 'lostMoney',
   ETypeTransactionSource.advertisement: 'advertisement',
   ETypeTransactionSource.employeeWages: 'employeeWages',
+  ETypeTransactionSource.costProduce: 'costProduce',
   ETypeTransactionSource.withdraw: 'withdraw',
   ETypeTransactionSource.deposit: 'deposit',
 };

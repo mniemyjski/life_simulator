@@ -62,7 +62,7 @@ class Business extends Equatable {
         assert(maxAccountant >= 0),
         assert(maxManager <= 1),
         assert(maxManager >= 0),
-        assert(maxMarketer <= 1),
+        assert(maxMarketer <= 50),
         assert(maxMarketer >= 0),
         assert(maxAnalyst <= 1),
         assert(maxAnalyst >= 0);

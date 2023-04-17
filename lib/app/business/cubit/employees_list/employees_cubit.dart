@@ -38,16 +38,12 @@ class EmployeesCubit extends HydratedCubit<EmployeesState> {
   }
 
   _init() {
-    try {
-      _employeesSub.cancel();
-    } catch (_) {}
-
     _employeesSub = employeeRepository.watchEmployees(businessId).listen((employees) {
       emit(EmployeesState.loaded(employees));
     });
 
-    state.whenOrNull(
-      initial: () async {
+    state.maybeWhen(
+      orElse: () async {
         List<Employee> result =
             await employeeRepository.getTotalEmployeesInBusiness(businessId: businessId);
         emit(EmployeesState.loaded(result));

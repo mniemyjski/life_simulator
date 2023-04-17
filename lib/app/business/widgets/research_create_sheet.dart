@@ -92,14 +92,6 @@ class _ResearchCreateSheetState extends State<ResearchCreateSheet> {
                 onChanged: (v) =>
                     setState(() => eTypeProduct = Enums.toEnum(v, ETypeProduct.values)),
               )),
-              const SizedBox(width: 8),
-              Expanded(
-                  child: CustomDropDownButton(
-                items: Enums.toList(ETypeQuality.values),
-                initialValue: Enums.toText(eTypeQuality),
-                onChanged: (v) =>
-                    setState(() => eTypeQuality = Enums.toEnum(v, ETypeQuality.values)),
-              )),
             ],
           ),
           const SizedBox(height: 8),
@@ -129,7 +121,6 @@ class _ResearchCreateSheetState extends State<ResearchCreateSheet> {
                   name: controller.text,
                   cost: cost,
                   eTypeProduct: eTypeProduct,
-                  eTypeQuality: eTypeQuality,
                   months: months.toInt());
               if (toast != null) {
                 BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));

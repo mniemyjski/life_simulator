@@ -25,8 +25,6 @@ class Research extends Equatable {
   final double cost;
   @enumerated
   final ETypeProduct eTypeProduct;
-  @enumerated
-  final ETypeQuality eTypeQuality;
 
   const Research({
     this.id = Isar.autoIncrement,
@@ -36,7 +34,6 @@ class Research extends Equatable {
     this.work = 0,
     required this.cost,
     required this.eTypeProduct,
-    required this.eTypeQuality,
   });
 
   @override
@@ -48,7 +45,6 @@ class Research extends Equatable {
         work,
         cost,
         eTypeProduct,
-        eTypeQuality,
       ];
 
   Product toProduct() {
@@ -56,56 +52,33 @@ class Research extends Equatable {
 
     double costPerUnit;
     int unitPerWork;
-    double multiplierDemand;
 
     switch (eTypeProduct) {
       case ETypeProduct.food:
         costPerUnit = 1;
         unitPerWork = 300;
-        multiplierDemand = 100;
         break;
       case ETypeProduct.cloth:
         costPerUnit = 10;
         unitPerWork = 1;
-        multiplierDemand = 1;
         break;
       case ETypeProduct.furniture:
         costPerUnit = 100;
         unitPerWork = 1;
-        multiplierDemand = 1;
         break;
       case ETypeProduct.jewelery:
         costPerUnit = 300;
         unitPerWork = 1;
-        multiplierDemand = 1;
-        break;
-    }
-    switch (eTypeQuality) {
-      case ETypeQuality.low:
-        costPerUnit = costPerUnit * 0.5;
-        multiplierDemand = multiplierDemand * 2;
-        break;
-      case ETypeQuality.mid:
-        costPerUnit = costPerUnit * 1;
-        multiplierDemand = multiplierDemand * 1;
-        break;
-      case ETypeQuality.high:
-        costPerUnit = costPerUnit * 2;
-        multiplierDemand = multiplierDemand * 0.5;
         break;
     }
 
     return Product(
       costPerUnit: costPerUnit,
-      commissionPerUnit: 0.5,
       unitPerWork: unitPerWork,
       name: name,
       businessId: businessId,
       eTypeProduct: eTypeProduct,
-      eTypeQuality: eTypeQuality,
       rating: generatedRating,
-      marketing: 0,
-      amount: 0,
     );
   }
 

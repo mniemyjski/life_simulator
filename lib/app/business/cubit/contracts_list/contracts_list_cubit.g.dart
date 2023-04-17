@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'product_details_cubit.dart';
+part of 'contracts_list_cubit.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -23,19 +23,13 @@ Map<String, dynamic> _$$LoadingToJson(_$Loading instance) => <String, dynamic>{
     };
 
 _$Loaded _$$LoadedFromJson(Map<String, dynamic> json) => _$Loaded(
-      product: Product.fromJson(json['product'] as Map<String, dynamic>),
-      free: (json['free'] as List<dynamic>)
-          .map((e) => Employee.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      busy: (json['busy'] as List<dynamic>)
-          .map((e) => Employee.fromJson(e as Map<String, dynamic>))
+      (json['contracts'] as List<dynamic>)
+          .map((e) => Contract.fromJson(e as Map<String, dynamic>))
           .toList(),
       $type: json['runtimeType'] as String?,
     );
 
 Map<String, dynamic> _$$LoadedToJson(_$Loaded instance) => <String, dynamic>{
-      'product': instance.product.toJson(),
-      'free': instance.free.map((e) => e.toJson()).toList(),
-      'busy': instance.busy.map((e) => e.toJson()).toList(),
+      'contracts': instance.contracts.map((e) => e.toJson()).toList(),
       'runtimeType': instance.$type,
     };

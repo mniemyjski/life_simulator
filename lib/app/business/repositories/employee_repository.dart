@@ -70,18 +70,11 @@ class EmployeeRepository {
     return await _isar.employees.filter().businessIdEqualTo(businessId).findAll();
   }
 
-  getFreeEmployeesInBusiness(
-    int businessId,
-  ) async {
-    return await _isar.employees
-        .filter()
-        .businessIdEqualTo(businessId)
-        .productIdIsNull()
-        .eTypeEmployeesEqualTo(ETypeEmployees.worker)
-        .findAll();
+  getFreeEmployeesInBusiness(int businessId) async {
+    return await _isar.employees.filter().businessIdEqualTo(businessId).productIdIsNull().findAll();
   }
 
-  getWorkOnProductEmployeesInBusiness({
+  getBusyEmployeesInBusiness({
     required int businessId,
     required int productId,
   }) async {
@@ -89,14 +82,14 @@ class EmployeeRepository {
         .filter()
         .businessIdEqualTo(businessId)
         .productIdEqualTo(productId)
-        .eTypeEmployeesEqualTo(ETypeEmployees.worker)
         .findAll();
   }
 
-  Future assignToProduct({
+  Future assignEmployeeToProduct({
     required int businessId,
     required int productId,
     required int lvl,
+    required ETypeEmployees eTypeEmployees,
   }) async {
     return await _isar.writeTxn(() async {
       Employee? employee = await _isar.employees
@@ -104,7 +97,7 @@ class EmployeeRepository {
           .businessIdEqualTo(businessId)
           .productIdIsNull()
           .ratingEqualTo(lvl)
-          .eTypeEmployeesEqualTo(ETypeEmployees.worker)
+          .eTypeEmployeesEqualTo(eTypeEmployees)
           .findFirst();
 
       if (employee == null) return;
@@ -113,10 +106,11 @@ class EmployeeRepository {
     });
   }
 
-  Future unAssignFromProduct({
+  Future unAssignEmployeeFromProduct({
     required int businessId,
     required int productId,
     required int lvl,
+    required ETypeEmployees eTypeEmployees,
   }) async {
     return await _isar.writeTxn(() async {
       Employee? employee = await _isar.employees
@@ -124,7 +118,7 @@ class EmployeeRepository {
           .businessIdEqualTo(businessId)
           .productIdEqualTo(productId)
           .ratingEqualTo(lvl)
-          .eTypeEmployeesEqualTo(ETypeEmployees.worker)
+          .eTypeEmployeesEqualTo(eTypeEmployees)
           .findFirst();
 
       if (employee == null) return;
@@ -133,7 +127,7 @@ class EmployeeRepository {
     });
   }
 
-  Future<String> addEmployer(Employee employee) async {
+  Future<String?> addEmployer(Employee employee) async {
     final business = await _isar.business.get(employee.businessId!) as Business;
     bool space = false;
 
@@ -200,10 +194,10 @@ class EmployeeRepository {
         final result = await _countingBusiness(business.id);
         await _isar.business.delete(business.id);
         await _isar.business.put(result);
-        return 'succeed';
       });
+    } else {
+      return 'youDontHaveEnoughSpace';
     }
-    return 'ypuDontHaveEnoughSpace';
   }
 
   Future<Business> _countingBusiness(int businessId) async {

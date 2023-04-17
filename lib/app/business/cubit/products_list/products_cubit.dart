@@ -24,7 +24,7 @@ class ProductsCubit extends Cubit<ProductsState> {
     this._dateCubit,
   ) : super(const ProductsState.initial()) {
     state.maybeWhen(orElse: () async {
-      List<Product> products = await _productsRepository.get(businessId);
+      List<Product> products = await _productsRepository.getAllProducts(businessId);
       if (products.isNotEmpty) {
         emit(ProductsState.loaded(products));
       } else {

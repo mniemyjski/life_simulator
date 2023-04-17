@@ -18,7 +18,8 @@ class ProductElement extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.router.push(ProductDetailsRoute(product: product));
+        context.router
+            .push(ProductDetailsRoute(productId: product.id, businessId: product.businessId));
       },
       child: CustomCard(
         child: Padding(
@@ -53,21 +54,21 @@ class ProductElement extends StatelessWidget {
                             product.eTypeProduct,
                           )),
                       CustomTextWithTitle(
-                          title: LocaleKeys.quality.tr(),
-                          text: Enums.toText(
-                            product.eTypeQuality,
-                          )),
-                      CustomTextWithTitle(
                           title: LocaleKeys.costPerUnit.tr(),
                           text: Enums.toText(
                             product.costPerUnit.toMoney(),
                           )),
                       CustomTextWithTitle(
-                          title: LocaleKeys.commissionPerUnit.tr(),
-                          text: '${(product.commissionPerUnit * 100).toInt()}%'),
-                      CustomTextWithTitle(
                         title: LocaleKeys.unitPerWork.tr(),
                         text: '${product.unitPerWork}',
+                      ),
+                      CustomTextWithTitle(
+                        title: LocaleKeys.quality.tr(),
+                        text: '${(product.quality * 100).toInt()}%',
+                      ),
+                      CustomTextWithTitle(
+                        title: LocaleKeys.marketing.tr(),
+                        text: '${(product.marketing * 100).toInt()}%',
                       ),
                     ],
                   ),
@@ -77,7 +78,7 @@ class ProductElement extends StatelessWidget {
                 alignment: Alignment.center,
                 children: [
                   Text(
-                    '${product.marketing.toExp()}',
+                    '${product.amount}',
                     style: Theme.of(context).textTheme.bodyText2!.copyWith(fontSize: 10),
                   ),
                   SizedBox(

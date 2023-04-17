@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -53,13 +52,11 @@ class _NextDayButtonState extends State<NextDayButton> {
               if (mounted) context.read<AudioCubit>().stopSounds();
             },
             child: Badge(
-              badgeColor: Theme.of(context).primaryColor.withOpacity(1),
               padding: const EdgeInsets.all(4),
-              badgeContent: Text(
+              label: Text(
                 context.watch<DaySettingCubit>().state.toString(),
                 style: const TextStyle(fontSize: 8),
               ),
-              toAnimate: false,
               child: const FaIcon(FontAwesomeIcons.hourglass),
             ),
           ),

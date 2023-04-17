@@ -13,6 +13,7 @@ import 'package:richeable/app/game/widget/app_bar_game.dart';
 import 'package:richeable/app/money/cubit/money/money_cubit.dart';
 import 'package:richeable/constants/constants.dart';
 import 'package:richeable/utilities/utilities.dart';
+import 'package:richeable/widgets/custom_alert_dialog.dart';
 import 'package:richeable/widgets/custom_button.dart';
 import 'package:richeable/widgets/custom_card.dart';
 import 'package:richeable/widgets/custom_scaffold.dart';
@@ -208,12 +209,6 @@ class BusinessScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        const Padding(
-                          padding: EdgeInsets.only(left: 8, right: 8),
-                          child: Divider(
-                            color: Colors.white38,
-                          ),
-                        ),
                         Expanded(
                             child: Padding(
                           padding: const EdgeInsets.only(left: 8, right: 8),
@@ -266,13 +261,6 @@ class BusinessScreen extends StatelessWidget {
                                 },
                                 child: Text(
                                   LocaleKeys.transactions.tr(),
-                                  style: Theme.of(context).textTheme.bodyText2,
-                                ),
-                              ),
-                              CustomButton(
-                                onPressed: () {},
-                                child: Text(
-                                  LocaleKeys.marketing.tr(),
                                   style: Theme.of(context).textTheme.bodyText2,
                                 ),
                               ),
@@ -331,9 +319,16 @@ class BusinessScreen extends StatelessWidget {
                               ),
                               CustomButton(
                                 backgroundColor: Colors.red[900],
-                                onPressed: () {
-                                  context.router.pop();
-                                  context.read<BusinessesCubit>().remove(business);
+                                onPressed: () async {
+                                  final result = await customAlertDialog(
+                                      context: context,
+                                      title: LocaleKeys.areYouSure.tr(),
+                                      desc: LocaleKeys.areYouSure.tr());
+
+                                  if (result) {
+                                    context.router.pop();
+                                    context.read<BusinessesCubit>().remove(business);
+                                  }
                                 },
                                 child: Text(
                                   LocaleKeys.remove.tr(),

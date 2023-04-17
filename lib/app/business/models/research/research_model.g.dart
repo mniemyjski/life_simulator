@@ -15,8 +15,6 @@ abstract class _$ResearchCWProxy {
 
   Research eTypeProduct(ETypeProduct eTypeProduct);
 
-  Research eTypeQuality(ETypeQuality eTypeQuality);
-
   Research id(int id);
 
   Research name(String name);
@@ -34,7 +32,6 @@ abstract class _$ResearchCWProxy {
     double? cost,
     DateTime? dateEnd,
     ETypeProduct? eTypeProduct,
-    ETypeQuality? eTypeQuality,
     int? id,
     String? name,
     double? work,
@@ -61,10 +58,6 @@ class _$ResearchCWProxyImpl implements _$ResearchCWProxy {
       this(eTypeProduct: eTypeProduct);
 
   @override
-  Research eTypeQuality(ETypeQuality eTypeQuality) =>
-      this(eTypeQuality: eTypeQuality);
-
-  @override
   Research id(int id) => this(id: id);
 
   @override
@@ -86,7 +79,6 @@ class _$ResearchCWProxyImpl implements _$ResearchCWProxy {
     Object? cost = const $CopyWithPlaceholder(),
     Object? dateEnd = const $CopyWithPlaceholder(),
     Object? eTypeProduct = const $CopyWithPlaceholder(),
-    Object? eTypeQuality = const $CopyWithPlaceholder(),
     Object? id = const $CopyWithPlaceholder(),
     Object? name = const $CopyWithPlaceholder(),
     Object? work = const $CopyWithPlaceholder(),
@@ -110,11 +102,6 @@ class _$ResearchCWProxyImpl implements _$ResearchCWProxy {
               ? _value.eTypeProduct
               // ignore: cast_nullable_to_non_nullable
               : eTypeProduct as ETypeProduct,
-      eTypeQuality:
-          eTypeQuality == const $CopyWithPlaceholder() || eTypeQuality == null
-              ? _value.eTypeQuality
-              // ignore: cast_nullable_to_non_nullable
-              : eTypeQuality as ETypeQuality,
       id: id == const $CopyWithPlaceholder() || id == null
           ? _value.id
           // ignore: cast_nullable_to_non_nullable
@@ -173,24 +160,18 @@ const ResearchSchema = CollectionSchema(
       type: IsarType.byte,
       enumMap: _ResearcheTypeProductEnumValueMap,
     ),
-    r'eTypeQuality': PropertySchema(
-      id: 4,
-      name: r'eTypeQuality',
-      type: IsarType.byte,
-      enumMap: _ResearcheTypeQualityEnumValueMap,
-    ),
     r'hashCode': PropertySchema(
-      id: 5,
+      id: 4,
       name: r'hashCode',
       type: IsarType.long,
     ),
     r'name': PropertySchema(
-      id: 6,
+      id: 5,
       name: r'name',
       type: IsarType.string,
     ),
     r'work': PropertySchema(
-      id: 7,
+      id: 6,
       name: r'work',
       type: IsarType.double,
     )
@@ -256,10 +237,9 @@ void _researchSerialize(
   writer.writeDouble(offsets[1], object.cost);
   writer.writeDateTime(offsets[2], object.dateEnd);
   writer.writeByte(offsets[3], object.eTypeProduct.index);
-  writer.writeByte(offsets[4], object.eTypeQuality.index);
-  writer.writeLong(offsets[5], object.hashCode);
-  writer.writeString(offsets[6], object.name);
-  writer.writeDouble(offsets[7], object.work);
+  writer.writeLong(offsets[4], object.hashCode);
+  writer.writeString(offsets[5], object.name);
+  writer.writeDouble(offsets[6], object.work);
 }
 
 Research _researchDeserialize(
@@ -275,12 +255,9 @@ Research _researchDeserialize(
     eTypeProduct:
         _ResearcheTypeProductValueEnumMap[reader.readByteOrNull(offsets[3])] ??
             ETypeProduct.food,
-    eTypeQuality:
-        _ResearcheTypeQualityValueEnumMap[reader.readByteOrNull(offsets[4])] ??
-            ETypeQuality.low,
     id: id,
-    name: reader.readString(offsets[6]),
-    work: reader.readDoubleOrNull(offsets[7]) ?? 0,
+    name: reader.readString(offsets[5]),
+    work: reader.readDoubleOrNull(offsets[6]) ?? 0,
   );
   return object;
 }
@@ -303,14 +280,10 @@ P _researchDeserializeProp<P>(
               reader.readByteOrNull(offset)] ??
           ETypeProduct.food) as P;
     case 4:
-      return (_ResearcheTypeQualityValueEnumMap[
-              reader.readByteOrNull(offset)] ??
-          ETypeQuality.low) as P;
-    case 5:
       return (reader.readLong(offset)) as P;
-    case 6:
+    case 5:
       return (reader.readString(offset)) as P;
-    case 7:
+    case 6:
       return (reader.readDoubleOrNull(offset) ?? 0) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -328,16 +301,6 @@ const _ResearcheTypeProductValueEnumMap = {
   1: ETypeProduct.cloth,
   2: ETypeProduct.furniture,
   3: ETypeProduct.jewelery,
-};
-const _ResearcheTypeQualityEnumValueMap = {
-  'low': 0,
-  'mid': 1,
-  'high': 2,
-};
-const _ResearcheTypeQualityValueEnumMap = {
-  0: ETypeQuality.low,
-  1: ETypeQuality.mid,
-  2: ETypeQuality.high,
 };
 
 Id _researchGetId(Research object) {
@@ -845,60 +808,6 @@ extension ResearchQueryFilter
     });
   }
 
-  QueryBuilder<Research, Research, QAfterFilterCondition> eTypeQualityEqualTo(
-      ETypeQuality value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'eTypeQuality',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<Research, Research, QAfterFilterCondition>
-      eTypeQualityGreaterThan(
-    ETypeQuality value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'eTypeQuality',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<Research, Research, QAfterFilterCondition> eTypeQualityLessThan(
-    ETypeQuality value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'eTypeQuality',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<Research, Research, QAfterFilterCondition> eTypeQualityBetween(
-    ETypeQuality lower,
-    ETypeQuality upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'eTypeQuality',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
-    });
-  }
-
   QueryBuilder<Research, Research, QAfterFilterCondition> hashCodeEqualTo(
       int value) {
     return QueryBuilder.apply(this, (query) {
@@ -1252,18 +1161,6 @@ extension ResearchQuerySortBy on QueryBuilder<Research, Research, QSortBy> {
     });
   }
 
-  QueryBuilder<Research, Research, QAfterSortBy> sortByETypeQuality() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'eTypeQuality', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Research, Research, QAfterSortBy> sortByETypeQualityDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'eTypeQuality', Sort.desc);
-    });
-  }
-
   QueryBuilder<Research, Research, QAfterSortBy> sortByHashCode() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'hashCode', Sort.asc);
@@ -1351,18 +1248,6 @@ extension ResearchQuerySortThenBy
     });
   }
 
-  QueryBuilder<Research, Research, QAfterSortBy> thenByETypeQuality() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'eTypeQuality', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Research, Research, QAfterSortBy> thenByETypeQualityDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'eTypeQuality', Sort.desc);
-    });
-  }
-
   QueryBuilder<Research, Research, QAfterSortBy> thenByHashCode() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'hashCode', Sort.asc);
@@ -1438,12 +1323,6 @@ extension ResearchQueryWhereDistinct
     });
   }
 
-  QueryBuilder<Research, Research, QDistinct> distinctByETypeQuality() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'eTypeQuality');
-    });
-  }
-
   QueryBuilder<Research, Research, QDistinct> distinctByHashCode() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'hashCode');
@@ -1497,13 +1376,6 @@ extension ResearchQueryProperty
     });
   }
 
-  QueryBuilder<Research, ETypeQuality, QQueryOperations>
-      eTypeQualityProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'eTypeQuality');
-    });
-  }
-
   QueryBuilder<Research, int, QQueryOperations> hashCodeProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'hashCode');
@@ -1535,7 +1407,6 @@ Research _$ResearchFromJson(Map<String, dynamic> json) => Research(
       work: (json['work'] as num?)?.toDouble() ?? 0,
       cost: (json['cost'] as num).toDouble(),
       eTypeProduct: $enumDecode(_$ETypeProductEnumMap, json['eTypeProduct']),
-      eTypeQuality: $enumDecode(_$ETypeQualityEnumMap, json['eTypeQuality']),
     );
 
 Map<String, dynamic> _$ResearchToJson(Research instance) => <String, dynamic>{
@@ -1546,7 +1417,6 @@ Map<String, dynamic> _$ResearchToJson(Research instance) => <String, dynamic>{
       'work': instance.work,
       'cost': instance.cost,
       'eTypeProduct': _$ETypeProductEnumMap[instance.eTypeProduct]!,
-      'eTypeQuality': _$ETypeQualityEnumMap[instance.eTypeQuality]!,
     };
 
 const _$ETypeProductEnumMap = {
@@ -1554,10 +1424,4 @@ const _$ETypeProductEnumMap = {
   ETypeProduct.cloth: 'cloth',
   ETypeProduct.furniture: 'furniture',
   ETypeProduct.jewelery: 'jewelery',
-};
-
-const _$ETypeQualityEnumMap = {
-  ETypeQuality.low: 'low',
-  ETypeQuality.mid: 'mid',
-  ETypeQuality.high: 'high',
 };

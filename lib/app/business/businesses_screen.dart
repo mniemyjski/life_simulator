@@ -32,6 +32,10 @@ class BusinessesScreen extends StatelessWidget {
                 return state.maybeWhen(
                     orElse: () => Container(),
                     loaded: (businesses) {
+                      if (businesses.isEmpty) {
+                        return Center(child: Text(LocaleKeys.youDontHaveAnyBusiness.tr()));
+                      }
+
                       return ListView.builder(
                           itemCount: businesses.length,
                           itemBuilder: (context, index) {

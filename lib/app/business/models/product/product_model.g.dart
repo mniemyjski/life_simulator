@@ -11,19 +11,19 @@ abstract class _$ProductCWProxy {
 
   Product businessId(int businessId);
 
-  Product commissionPerUnit(double commissionPerUnit);
-
   Product costPerUnit(double costPerUnit);
 
   Product eTypeProduct(ETypeProduct eTypeProduct);
-
-  Product eTypeQuality(ETypeQuality eTypeQuality);
 
   Product id(int id);
 
   Product marketing(double marketing);
 
+  Product monthlyMarketingCost(double monthlyMarketingCost);
+
   Product name(String name);
+
+  Product quality(double quality);
 
   Product rating(int rating);
 
@@ -38,13 +38,13 @@ abstract class _$ProductCWProxy {
   Product call({
     int? amount,
     int? businessId,
-    double? commissionPerUnit,
     double? costPerUnit,
     ETypeProduct? eTypeProduct,
-    ETypeQuality? eTypeQuality,
     int? id,
     double? marketing,
+    double? monthlyMarketingCost,
     String? name,
+    double? quality,
     int? rating,
     int? unitPerWork,
   });
@@ -63,19 +63,11 @@ class _$ProductCWProxyImpl implements _$ProductCWProxy {
   Product businessId(int businessId) => this(businessId: businessId);
 
   @override
-  Product commissionPerUnit(double commissionPerUnit) =>
-      this(commissionPerUnit: commissionPerUnit);
-
-  @override
   Product costPerUnit(double costPerUnit) => this(costPerUnit: costPerUnit);
 
   @override
   Product eTypeProduct(ETypeProduct eTypeProduct) =>
       this(eTypeProduct: eTypeProduct);
-
-  @override
-  Product eTypeQuality(ETypeQuality eTypeQuality) =>
-      this(eTypeQuality: eTypeQuality);
 
   @override
   Product id(int id) => this(id: id);
@@ -84,7 +76,14 @@ class _$ProductCWProxyImpl implements _$ProductCWProxy {
   Product marketing(double marketing) => this(marketing: marketing);
 
   @override
+  Product monthlyMarketingCost(double monthlyMarketingCost) =>
+      this(monthlyMarketingCost: monthlyMarketingCost);
+
+  @override
   Product name(String name) => this(name: name);
+
+  @override
+  Product quality(double quality) => this(quality: quality);
 
   @override
   Product rating(int rating) => this(rating: rating);
@@ -103,13 +102,13 @@ class _$ProductCWProxyImpl implements _$ProductCWProxy {
   Product call({
     Object? amount = const $CopyWithPlaceholder(),
     Object? businessId = const $CopyWithPlaceholder(),
-    Object? commissionPerUnit = const $CopyWithPlaceholder(),
     Object? costPerUnit = const $CopyWithPlaceholder(),
     Object? eTypeProduct = const $CopyWithPlaceholder(),
-    Object? eTypeQuality = const $CopyWithPlaceholder(),
     Object? id = const $CopyWithPlaceholder(),
     Object? marketing = const $CopyWithPlaceholder(),
+    Object? monthlyMarketingCost = const $CopyWithPlaceholder(),
     Object? name = const $CopyWithPlaceholder(),
+    Object? quality = const $CopyWithPlaceholder(),
     Object? rating = const $CopyWithPlaceholder(),
     Object? unitPerWork = const $CopyWithPlaceholder(),
   }) {
@@ -123,11 +122,6 @@ class _$ProductCWProxyImpl implements _$ProductCWProxy {
               ? _value.businessId
               // ignore: cast_nullable_to_non_nullable
               : businessId as int,
-      commissionPerUnit: commissionPerUnit == const $CopyWithPlaceholder() ||
-              commissionPerUnit == null
-          ? _value.commissionPerUnit
-          // ignore: cast_nullable_to_non_nullable
-          : commissionPerUnit as double,
       costPerUnit:
           costPerUnit == const $CopyWithPlaceholder() || costPerUnit == null
               ? _value.costPerUnit
@@ -138,11 +132,6 @@ class _$ProductCWProxyImpl implements _$ProductCWProxy {
               ? _value.eTypeProduct
               // ignore: cast_nullable_to_non_nullable
               : eTypeProduct as ETypeProduct,
-      eTypeQuality:
-          eTypeQuality == const $CopyWithPlaceholder() || eTypeQuality == null
-              ? _value.eTypeQuality
-              // ignore: cast_nullable_to_non_nullable
-              : eTypeQuality as ETypeQuality,
       id: id == const $CopyWithPlaceholder() || id == null
           ? _value.id
           // ignore: cast_nullable_to_non_nullable
@@ -151,10 +140,20 @@ class _$ProductCWProxyImpl implements _$ProductCWProxy {
           ? _value.marketing
           // ignore: cast_nullable_to_non_nullable
           : marketing as double,
+      monthlyMarketingCost:
+          monthlyMarketingCost == const $CopyWithPlaceholder() ||
+                  monthlyMarketingCost == null
+              ? _value.monthlyMarketingCost
+              // ignore: cast_nullable_to_non_nullable
+              : monthlyMarketingCost as double,
       name: name == const $CopyWithPlaceholder() || name == null
           ? _value.name
           // ignore: cast_nullable_to_non_nullable
           : name as String,
+      quality: quality == const $CopyWithPlaceholder() || quality == null
+          ? _value.quality
+          // ignore: cast_nullable_to_non_nullable
+          : quality as double,
       rating: rating == const $CopyWithPlaceholder() || rating == null
           ? _value.rating
           // ignore: cast_nullable_to_non_nullable
@@ -199,42 +198,41 @@ const ProductSchema = CollectionSchema(
       name: r'businessId',
       type: IsarType.long,
     ),
-    r'commissionPerUnit': PropertySchema(
-      id: 2,
-      name: r'commissionPerUnit',
-      type: IsarType.double,
-    ),
     r'costPerUnit': PropertySchema(
-      id: 3,
+      id: 2,
       name: r'costPerUnit',
       type: IsarType.double,
     ),
     r'eTypeProduct': PropertySchema(
-      id: 4,
+      id: 3,
       name: r'eTypeProduct',
       type: IsarType.byte,
       enumMap: _ProducteTypeProductEnumValueMap,
     ),
-    r'eTypeQuality': PropertySchema(
-      id: 5,
-      name: r'eTypeQuality',
-      type: IsarType.byte,
-      enumMap: _ProducteTypeQualityEnumValueMap,
-    ),
     r'hashCode': PropertySchema(
-      id: 6,
+      id: 4,
       name: r'hashCode',
       type: IsarType.long,
     ),
     r'marketing': PropertySchema(
-      id: 7,
+      id: 5,
       name: r'marketing',
       type: IsarType.double,
     ),
+    r'monthlyMarketingCost': PropertySchema(
+      id: 6,
+      name: r'monthlyMarketingCost',
+      type: IsarType.double,
+    ),
     r'name': PropertySchema(
-      id: 8,
+      id: 7,
       name: r'name',
       type: IsarType.string,
+    ),
+    r'quality': PropertySchema(
+      id: 8,
+      name: r'quality',
+      type: IsarType.double,
     ),
     r'rating': PropertySchema(
       id: 9,
@@ -293,13 +291,13 @@ void _productSerialize(
 ) {
   writer.writeLong(offsets[0], object.amount);
   writer.writeLong(offsets[1], object.businessId);
-  writer.writeDouble(offsets[2], object.commissionPerUnit);
-  writer.writeDouble(offsets[3], object.costPerUnit);
-  writer.writeByte(offsets[4], object.eTypeProduct.index);
-  writer.writeByte(offsets[5], object.eTypeQuality.index);
-  writer.writeLong(offsets[6], object.hashCode);
-  writer.writeDouble(offsets[7], object.marketing);
-  writer.writeString(offsets[8], object.name);
+  writer.writeDouble(offsets[2], object.costPerUnit);
+  writer.writeByte(offsets[3], object.eTypeProduct.index);
+  writer.writeLong(offsets[4], object.hashCode);
+  writer.writeDouble(offsets[5], object.marketing);
+  writer.writeDouble(offsets[6], object.monthlyMarketingCost);
+  writer.writeString(offsets[7], object.name);
+  writer.writeDouble(offsets[8], object.quality);
   writer.writeLong(offsets[9], object.rating);
   writer.writeLong(offsets[10], object.unitPerWork);
 }
@@ -311,19 +309,17 @@ Product _productDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = Product(
-    amount: reader.readLong(offsets[0]),
+    amount: reader.readLongOrNull(offsets[0]) ?? 0,
     businessId: reader.readLong(offsets[1]),
-    commissionPerUnit: reader.readDouble(offsets[2]),
-    costPerUnit: reader.readDouble(offsets[3]),
+    costPerUnit: reader.readDouble(offsets[2]),
     eTypeProduct:
-        _ProducteTypeProductValueEnumMap[reader.readByteOrNull(offsets[4])] ??
+        _ProducteTypeProductValueEnumMap[reader.readByteOrNull(offsets[3])] ??
             ETypeProduct.food,
-    eTypeQuality:
-        _ProducteTypeQualityValueEnumMap[reader.readByteOrNull(offsets[5])] ??
-            ETypeQuality.low,
     id: id,
-    marketing: reader.readDouble(offsets[7]),
-    name: reader.readString(offsets[8]),
+    marketing: reader.readDoubleOrNull(offsets[5]) ?? 0,
+    monthlyMarketingCost: reader.readDoubleOrNull(offsets[6]) ?? 0,
+    name: reader.readString(offsets[7]),
+    quality: reader.readDoubleOrNull(offsets[8]) ?? 1,
     rating: reader.readLong(offsets[9]),
     unitPerWork: reader.readLong(offsets[10]),
   );
@@ -338,25 +334,24 @@ P _productDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readLong(offset)) as P;
+      return (reader.readLongOrNull(offset) ?? 0) as P;
     case 1:
       return (reader.readLong(offset)) as P;
     case 2:
       return (reader.readDouble(offset)) as P;
     case 3:
-      return (reader.readDouble(offset)) as P;
-    case 4:
       return (_ProducteTypeProductValueEnumMap[reader.readByteOrNull(offset)] ??
           ETypeProduct.food) as P;
-    case 5:
-      return (_ProducteTypeQualityValueEnumMap[reader.readByteOrNull(offset)] ??
-          ETypeQuality.low) as P;
-    case 6:
+    case 4:
       return (reader.readLong(offset)) as P;
+    case 5:
+      return (reader.readDoubleOrNull(offset) ?? 0) as P;
+    case 6:
+      return (reader.readDoubleOrNull(offset) ?? 0) as P;
     case 7:
-      return (reader.readDouble(offset)) as P;
-    case 8:
       return (reader.readString(offset)) as P;
+    case 8:
+      return (reader.readDoubleOrNull(offset) ?? 1) as P;
     case 9:
       return (reader.readLong(offset)) as P;
     case 10:
@@ -377,16 +372,6 @@ const _ProducteTypeProductValueEnumMap = {
   1: ETypeProduct.cloth,
   2: ETypeProduct.furniture,
   3: ETypeProduct.jewelery,
-};
-const _ProducteTypeQualityEnumValueMap = {
-  'low': 0,
-  'mid': 1,
-  'high': 2,
-};
-const _ProducteTypeQualityValueEnumMap = {
-  0: ETypeQuality.low,
-  1: ETypeQuality.mid,
-  2: ETypeQuality.high,
 };
 
 Id _productGetId(Product object) {
@@ -680,72 +665,6 @@ extension ProductQueryFilter
     });
   }
 
-  QueryBuilder<Product, Product, QAfterFilterCondition>
-      commissionPerUnitEqualTo(
-    double value, {
-    double epsilon = Query.epsilon,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'commissionPerUnit',
-        value: value,
-        epsilon: epsilon,
-      ));
-    });
-  }
-
-  QueryBuilder<Product, Product, QAfterFilterCondition>
-      commissionPerUnitGreaterThan(
-    double value, {
-    bool include = false,
-    double epsilon = Query.epsilon,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'commissionPerUnit',
-        value: value,
-        epsilon: epsilon,
-      ));
-    });
-  }
-
-  QueryBuilder<Product, Product, QAfterFilterCondition>
-      commissionPerUnitLessThan(
-    double value, {
-    bool include = false,
-    double epsilon = Query.epsilon,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'commissionPerUnit',
-        value: value,
-        epsilon: epsilon,
-      ));
-    });
-  }
-
-  QueryBuilder<Product, Product, QAfterFilterCondition>
-      commissionPerUnitBetween(
-    double lower,
-    double upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    double epsilon = Query.epsilon,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'commissionPerUnit',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        epsilon: epsilon,
-      ));
-    });
-  }
-
   QueryBuilder<Product, Product, QAfterFilterCondition> costPerUnitEqualTo(
     double value, {
     double epsilon = Query.epsilon,
@@ -853,59 +772,6 @@ extension ProductQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
         property: r'eTypeProduct',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
-    });
-  }
-
-  QueryBuilder<Product, Product, QAfterFilterCondition> eTypeQualityEqualTo(
-      ETypeQuality value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'eTypeQuality',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<Product, Product, QAfterFilterCondition> eTypeQualityGreaterThan(
-    ETypeQuality value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'eTypeQuality',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<Product, Product, QAfterFilterCondition> eTypeQualityLessThan(
-    ETypeQuality value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'eTypeQuality',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<Product, Product, QAfterFilterCondition> eTypeQualityBetween(
-    ETypeQuality lower,
-    ETypeQuality upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'eTypeQuality',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -1081,6 +947,72 @@ extension ProductQueryFilter
     });
   }
 
+  QueryBuilder<Product, Product, QAfterFilterCondition>
+      monthlyMarketingCostEqualTo(
+    double value, {
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'monthlyMarketingCost',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Product, Product, QAfterFilterCondition>
+      monthlyMarketingCostGreaterThan(
+    double value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'monthlyMarketingCost',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Product, Product, QAfterFilterCondition>
+      monthlyMarketingCostLessThan(
+    double value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'monthlyMarketingCost',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Product, Product, QAfterFilterCondition>
+      monthlyMarketingCostBetween(
+    double lower,
+    double upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'monthlyMarketingCost',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
   QueryBuilder<Product, Product, QAfterFilterCondition> nameEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -1207,6 +1139,68 @@ extension ProductQueryFilter
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'name',
         value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Product, Product, QAfterFilterCondition> qualityEqualTo(
+    double value, {
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'quality',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Product, Product, QAfterFilterCondition> qualityGreaterThan(
+    double value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'quality',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Product, Product, QAfterFilterCondition> qualityLessThan(
+    double value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'quality',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Product, Product, QAfterFilterCondition> qualityBetween(
+    double lower,
+    double upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'quality',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        epsilon: epsilon,
       ));
     });
   }
@@ -1349,18 +1343,6 @@ extension ProductQuerySortBy on QueryBuilder<Product, Product, QSortBy> {
     });
   }
 
-  QueryBuilder<Product, Product, QAfterSortBy> sortByCommissionPerUnit() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'commissionPerUnit', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Product, Product, QAfterSortBy> sortByCommissionPerUnitDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'commissionPerUnit', Sort.desc);
-    });
-  }
-
   QueryBuilder<Product, Product, QAfterSortBy> sortByCostPerUnit() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'costPerUnit', Sort.asc);
@@ -1382,18 +1364,6 @@ extension ProductQuerySortBy on QueryBuilder<Product, Product, QSortBy> {
   QueryBuilder<Product, Product, QAfterSortBy> sortByETypeProductDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'eTypeProduct', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Product, Product, QAfterSortBy> sortByETypeQuality() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'eTypeQuality', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Product, Product, QAfterSortBy> sortByETypeQualityDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'eTypeQuality', Sort.desc);
     });
   }
 
@@ -1421,6 +1391,19 @@ extension ProductQuerySortBy on QueryBuilder<Product, Product, QSortBy> {
     });
   }
 
+  QueryBuilder<Product, Product, QAfterSortBy> sortByMonthlyMarketingCost() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'monthlyMarketingCost', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Product, Product, QAfterSortBy>
+      sortByMonthlyMarketingCostDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'monthlyMarketingCost', Sort.desc);
+    });
+  }
+
   QueryBuilder<Product, Product, QAfterSortBy> sortByName() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'name', Sort.asc);
@@ -1430,6 +1413,18 @@ extension ProductQuerySortBy on QueryBuilder<Product, Product, QSortBy> {
   QueryBuilder<Product, Product, QAfterSortBy> sortByNameDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'name', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Product, Product, QAfterSortBy> sortByQuality() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'quality', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Product, Product, QAfterSortBy> sortByQualityDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'quality', Sort.desc);
     });
   }
 
@@ -1484,18 +1479,6 @@ extension ProductQuerySortThenBy
     });
   }
 
-  QueryBuilder<Product, Product, QAfterSortBy> thenByCommissionPerUnit() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'commissionPerUnit', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Product, Product, QAfterSortBy> thenByCommissionPerUnitDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'commissionPerUnit', Sort.desc);
-    });
-  }
-
   QueryBuilder<Product, Product, QAfterSortBy> thenByCostPerUnit() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'costPerUnit', Sort.asc);
@@ -1517,18 +1500,6 @@ extension ProductQuerySortThenBy
   QueryBuilder<Product, Product, QAfterSortBy> thenByETypeProductDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'eTypeProduct', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Product, Product, QAfterSortBy> thenByETypeQuality() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'eTypeQuality', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Product, Product, QAfterSortBy> thenByETypeQualityDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'eTypeQuality', Sort.desc);
     });
   }
 
@@ -1568,6 +1539,19 @@ extension ProductQuerySortThenBy
     });
   }
 
+  QueryBuilder<Product, Product, QAfterSortBy> thenByMonthlyMarketingCost() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'monthlyMarketingCost', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Product, Product, QAfterSortBy>
+      thenByMonthlyMarketingCostDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'monthlyMarketingCost', Sort.desc);
+    });
+  }
+
   QueryBuilder<Product, Product, QAfterSortBy> thenByName() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'name', Sort.asc);
@@ -1577,6 +1561,18 @@ extension ProductQuerySortThenBy
   QueryBuilder<Product, Product, QAfterSortBy> thenByNameDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'name', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Product, Product, QAfterSortBy> thenByQuality() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'quality', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Product, Product, QAfterSortBy> thenByQualityDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'quality', Sort.desc);
     });
   }
 
@@ -1619,12 +1615,6 @@ extension ProductQueryWhereDistinct
     });
   }
 
-  QueryBuilder<Product, Product, QDistinct> distinctByCommissionPerUnit() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'commissionPerUnit');
-    });
-  }
-
   QueryBuilder<Product, Product, QDistinct> distinctByCostPerUnit() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'costPerUnit');
@@ -1634,12 +1624,6 @@ extension ProductQueryWhereDistinct
   QueryBuilder<Product, Product, QDistinct> distinctByETypeProduct() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'eTypeProduct');
-    });
-  }
-
-  QueryBuilder<Product, Product, QDistinct> distinctByETypeQuality() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'eTypeQuality');
     });
   }
 
@@ -1655,10 +1639,22 @@ extension ProductQueryWhereDistinct
     });
   }
 
+  QueryBuilder<Product, Product, QDistinct> distinctByMonthlyMarketingCost() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'monthlyMarketingCost');
+    });
+  }
+
   QueryBuilder<Product, Product, QDistinct> distinctByName(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'name', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<Product, Product, QDistinct> distinctByQuality() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'quality');
     });
   }
 
@@ -1695,12 +1691,6 @@ extension ProductQueryProperty
     });
   }
 
-  QueryBuilder<Product, double, QQueryOperations> commissionPerUnitProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'commissionPerUnit');
-    });
-  }
-
   QueryBuilder<Product, double, QQueryOperations> costPerUnitProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'costPerUnit');
@@ -1710,12 +1700,6 @@ extension ProductQueryProperty
   QueryBuilder<Product, ETypeProduct, QQueryOperations> eTypeProductProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'eTypeProduct');
-    });
-  }
-
-  QueryBuilder<Product, ETypeQuality, QQueryOperations> eTypeQualityProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'eTypeQuality');
     });
   }
 
@@ -1731,9 +1715,22 @@ extension ProductQueryProperty
     });
   }
 
+  QueryBuilder<Product, double, QQueryOperations>
+      monthlyMarketingCostProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'monthlyMarketingCost');
+    });
+  }
+
   QueryBuilder<Product, String, QQueryOperations> nameProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'name');
+    });
+  }
+
+  QueryBuilder<Product, double, QQueryOperations> qualityProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'quality');
     });
   }
 
@@ -1757,15 +1754,16 @@ extension ProductQueryProperty
 Product _$ProductFromJson(Map<String, dynamic> json) => Product(
       id: json['id'] as int? ?? Isar.autoIncrement,
       costPerUnit: (json['costPerUnit'] as num).toDouble(),
-      commissionPerUnit: (json['commissionPerUnit'] as num).toDouble(),
       name: json['name'] as String,
       businessId: json['businessId'] as int,
       unitPerWork: json['unitPerWork'] as int,
       eTypeProduct: $enumDecode(_$ETypeProductEnumMap, json['eTypeProduct']),
-      eTypeQuality: $enumDecode(_$ETypeQualityEnumMap, json['eTypeQuality']),
       rating: json['rating'] as int,
-      marketing: (json['marketing'] as num).toDouble(),
-      amount: json['amount'] as int,
+      marketing: (json['marketing'] as num?)?.toDouble() ?? 0,
+      amount: json['amount'] as int? ?? 0,
+      quality: (json['quality'] as num?)?.toDouble() ?? 1,
+      monthlyMarketingCost:
+          (json['monthlyMarketingCost'] as num?)?.toDouble() ?? 0,
     );
 
 Map<String, dynamic> _$ProductToJson(Product instance) => <String, dynamic>{
@@ -1775,11 +1773,11 @@ Map<String, dynamic> _$ProductToJson(Product instance) => <String, dynamic>{
       'rating': instance.rating,
       'marketing': instance.marketing,
       'amount': instance.amount,
+      'quality': instance.quality,
+      'monthlyMarketingCost': instance.monthlyMarketingCost,
       'unitPerWork': instance.unitPerWork,
       'costPerUnit': instance.costPerUnit,
-      'commissionPerUnit': instance.commissionPerUnit,
       'eTypeProduct': _$ETypeProductEnumMap[instance.eTypeProduct]!,
-      'eTypeQuality': _$ETypeQualityEnumMap[instance.eTypeQuality]!,
     };
 
 const _$ETypeProductEnumMap = {
@@ -1787,10 +1785,4 @@ const _$ETypeProductEnumMap = {
   ETypeProduct.cloth: 'cloth',
   ETypeProduct.furniture: 'furniture',
   ETypeProduct.jewelery: 'jewelery',
-};
-
-const _$ETypeQualityEnumMap = {
-  ETypeQuality.low: 'low',
-  ETypeQuality.mid: 'mid',
-  ETypeQuality.high: 'high',
 };

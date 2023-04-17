@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,13 +27,7 @@ class HumanResourcesScreen extends StatefulWidget {
 
 class _HumanResourcesScreenState extends State<HumanResourcesScreen> {
   ETypeEmployees eTypeEmployees = ETypeEmployees.worker;
-  final List<bool> _selected = <bool>[
-    true,
-    false,
-    false,
-    false,
-    false,
-  ];
+  final List<bool> _selected = ETypeEmployees.values.map((e) => false).toList();
 
   @override
   void initState() {
@@ -72,15 +67,10 @@ class _HumanResourcesScreenState extends State<HumanResourcesScreen> {
               fillColor: Theme.of(context).scaffoldBackgroundColor,
               color: Colors.white70,
               constraints: BoxConstraints(
-                  minWidth: (MediaQuery.of(context).size.width - 16) / 5, minHeight: 56),
+                  minWidth: (MediaQuery.of(context).size.width - 16) / ETypeEmployees.values.length,
+                  minHeight: 56),
               isSelected: _selected,
-              children: [
-                Text(Enums.toText(ETypeEmployees.worker).tr()),
-                Text(Enums.toText(ETypeEmployees.scientist).tr()),
-                Text(Enums.toText(ETypeEmployees.accountant).tr()),
-                Text(Enums.toText(ETypeEmployees.manager).tr()),
-                Text(Enums.toText(ETypeEmployees.marketer).tr()),
-              ],
+              children: ETypeEmployees.values.map((e) => Text(Enums.toText(e).tr())).toList(),
             ),
             const Padding(
               padding: EdgeInsets.only(left: 4, right: 4),
@@ -100,9 +90,14 @@ class _HumanResourcesScreenState extends State<HumanResourcesScreen> {
                         FontAwesomeIcons.cartShopping,
                         color: Colors.white,
                       ),
-                      onPressed: () {
-                        context.read<HumanResourcesCubit>().addEmployee(element);
-                        context.router.pop();
+                      onPressed: () async {
+                        final toast =
+                            await context.read<HumanResourcesCubit>().addEmployee(element);
+                        if (toast != null) {
+                          BotToast.showText(text: toast, align: const Alignment(0.1, 0.05));
+                        } else {
+                          context.router.pop();
+                        }
                       },
                     );
                   }),

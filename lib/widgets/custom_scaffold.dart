@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
+import '../app/monetization/my_banner.dart';
+
 class CustomScaffold extends StatefulWidget {
   final PreferredSizeWidget? appBar;
   final Widget? body;
@@ -45,6 +47,8 @@ class _CustomScaffoldState extends State<CustomScaffold> {
     });
   }
 
+  final bool showAdd = false;
+
   @override
   Widget build(BuildContext context) {
     if (test) {
@@ -75,7 +79,16 @@ class _CustomScaffoldState extends State<CustomScaffold> {
           Scaffold(
             backgroundColor: Colors.black.withOpacity(0.5),
             appBar: widget.appBar,
-            body: widget.body,
+            body: Column(
+              children: [
+                if (showAdd)
+                  Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: const MyBanner(),
+                  ),
+                Expanded(child: widget.body ?? Container()),
+              ],
+            ),
             floatingActionButtonLocation: widget.floatingActionButtonLocation,
             floatingActionButton: widget.floatingActionButton,
           ),

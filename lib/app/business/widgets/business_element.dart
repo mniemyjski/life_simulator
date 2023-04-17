@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:richeable/utilities/utilities.dart';
 import 'package:richeable/widgets/custom_card.dart';
 
@@ -24,92 +25,104 @@ class BusinessElement extends StatelessWidget {
       child: CustomCard(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Row(
             children: [
-              RichText(
-                text: TextSpan(
-                  style: Theme.of(context).textTheme.bodyText2,
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: '${LocaleKeys.name.tr()}: ',
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    TextSpan(text: element.name),
-                  ],
+              const Padding(
+                padding: EdgeInsets.only(left: 8, right: 8),
+                child: Icon(
+                  FontAwesomeIcons.landmark,
+                  color: Colors.white,
+                  size: 80,
                 ),
               ),
-              RichText(
-                text: TextSpan(
-                  style: Theme.of(context).textTheme.bodyText2,
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: '${LocaleKeys.employees.tr()}: ',
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  RichText(
+                    text: TextSpan(
+                      style: Theme.of(context).textTheme.bodyText2,
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: '${LocaleKeys.name.tr()}: ',
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        TextSpan(text: element.name),
+                      ],
                     ),
-                    TextSpan(text: '${element.countWorkers}/${element.maxWorkers}'),
-                  ],
-                ),
-              ),
-              RichText(
-                text: TextSpan(
-                  style: Theme.of(context).textTheme.bodyText2,
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: '${LocaleKeys.scientist.tr()}: ',
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      style: Theme.of(context).textTheme.bodyText2,
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: '${LocaleKeys.employees.tr()}: ',
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        TextSpan(text: '${element.countWorkers}/${element.maxWorkers}'),
+                      ],
                     ),
-                    TextSpan(text: '${element.countScientist}/${element.maxScientist}'),
-                  ],
-                ),
-              ),
-              RichText(
-                text: TextSpan(
-                  style: Theme.of(context).textTheme.bodyText2,
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: '${LocaleKeys.accountant.tr()}: ',
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      style: Theme.of(context).textTheme.bodyText2,
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: '${LocaleKeys.scientist.tr()}: ',
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        TextSpan(text: '${element.countScientist}/${element.maxScientist}'),
+                      ],
                     ),
-                    TextSpan(text: '${element.countAccountant}/${element.maxAccountant}'),
-                  ],
-                ),
-              ),
-              RichText(
-                text: TextSpan(
-                  style: Theme.of(context).textTheme.bodyText2,
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: '${LocaleKeys.analyst.tr()}: ',
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      style: Theme.of(context).textTheme.bodyText2,
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: '${LocaleKeys.accountant.tr()}: ',
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        TextSpan(text: '${element.countAccountant}/${element.maxAccountant}'),
+                      ],
                     ),
-                    TextSpan(text: '${element.countAnalyst}/${element.maxAnalyst}'),
-                  ],
-                ),
-              ),
-              RichText(
-                text: TextSpan(
-                  style: Theme.of(context).textTheme.bodyText2,
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: '${LocaleKeys.manager.tr()}: ',
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      style: Theme.of(context).textTheme.bodyText2,
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: '${LocaleKeys.analyst.tr()}: ',
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        TextSpan(text: '${element.countAnalyst}/${element.maxAnalyst}'),
+                      ],
                     ),
-                    TextSpan(text: '${element.countManager}/${element.maxManager}'),
-                  ],
-                ),
-              ),
-              RichText(
-                text: TextSpan(
-                  style: Theme.of(context).textTheme.bodyText2,
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: '${LocaleKeys.marketer.tr()}: ',
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      style: Theme.of(context).textTheme.bodyText2,
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: '${LocaleKeys.manager.tr()}: ',
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        TextSpan(text: '${element.countManager}/${element.maxManager}'),
+                      ],
                     ),
-                    TextSpan(text: '${element.countMarketer}/${element.maxMarketer}'),
-                  ],
-                ),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      style: Theme.of(context).textTheme.bodyText2,
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: '${LocaleKeys.marketer.tr()}: ',
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        TextSpan(text: '${element.countMarketer}/${element.maxMarketer}'),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

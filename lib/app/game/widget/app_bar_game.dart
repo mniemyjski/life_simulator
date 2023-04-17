@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:richeable/utilities/utilities.dart';
 import 'package:richeable/widgets/custom_card.dart';
 
@@ -30,7 +31,7 @@ class AppBarGame extends StatelessWidget with PreferredSizeWidget {
     required this.title,
   }) : super(key: key);
 
-  final bool showAdd = false;
+  final bool showAdd = true;
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +68,20 @@ class AppBarGame extends StatelessWidget with PreferredSizeWidget {
                           style: Theme.of(context).textTheme.bodyText2,
                         ),
                       )),
+                  SizedBox(width: 8),
+                  Badge(
+                    label: Text(
+                      ' 9',
+                      style: Theme.of(context).textTheme.bodyText2!.copyWith(fontSize: 8),
+                    ),
+                    child: GestureDetector(
+                      onTap: () => null,
+                      child: Icon(
+                        FontAwesomeIcons.solidBell,
+                        size: 16,
+                      ),
+                    ),
+                  )
                 ],
               ),
             ],

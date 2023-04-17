@@ -27,6 +27,7 @@ enum ETypeTransactionSource {
   lostMoney,
   advertisement,
   employeeWages,
+  costProduce,
   withdraw,
   deposit,
 }

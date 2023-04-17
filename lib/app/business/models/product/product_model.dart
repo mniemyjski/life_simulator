@@ -23,32 +23,41 @@ class Product extends Equatable {
   final double marketing;
   final int amount;
 
+  final double quality;
+  final double monthlyMarketingCost;
+
   final int unitPerWork;
   final double costPerUnit;
-  final double commissionPerUnit;
   @enumerated
   final ETypeProduct eTypeProduct;
-  @enumerated
-  final ETypeQuality eTypeQuality;
 
   const Product({
     this.id = Isar.autoIncrement,
     required this.costPerUnit,
-    required this.commissionPerUnit,
     required this.name,
     required this.businessId,
     required this.unitPerWork,
     required this.eTypeProduct,
-    required this.eTypeQuality,
     required this.rating,
-    required this.marketing,
-    required this.amount,
+    this.marketing = 0,
+    this.amount = 0,
+    this.quality = 1,
+    this.monthlyMarketingCost = 0,
   });
 
   @override
   List<Object?> get props => [
         id,
         businessId,
+        costPerUnit,
+        name,
+        unitPerWork,
+        eTypeProduct,
+        rating,
+        marketing,
+        amount,
+        quality,
+        monthlyMarketingCost,
       ];
 
   factory Product.fromJson(Map<String, dynamic> json) => _$ProductFromJson(json);

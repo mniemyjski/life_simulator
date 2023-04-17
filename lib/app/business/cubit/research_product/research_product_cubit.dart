@@ -54,7 +54,6 @@ class ResearchProductCubit extends HydratedCubit<ResearchProductState> {
     required String name,
     required double cost,
     required ETypeProduct eTypeProduct,
-    required ETypeQuality eTypeQuality,
     required int months,
   }) async {
     return await _dateCubit.state.maybeWhen(
@@ -64,7 +63,6 @@ class ResearchProductCubit extends HydratedCubit<ResearchProductState> {
           name: name,
           cost: cost,
           eTypeProduct: eTypeProduct,
-          eTypeQuality: eTypeQuality,
           dateEnd: date.addDate(months: months),
         );
 

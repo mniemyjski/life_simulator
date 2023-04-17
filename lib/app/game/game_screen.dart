@@ -1,7 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:badges/badges.dart';
 import 'package:bot_toast/bot_toast.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -269,7 +267,7 @@ class _GameScreenState extends State<GameScreen> {
 
                                 return Badge(
                                   padding: const EdgeInsets.all(4),
-                                  badgeContent: Text(
+                                  label: Text(
                                     freelance.length.toString(),
                                     style: const TextStyle(fontSize: 8),
                                   ),
@@ -294,7 +292,7 @@ class _GameScreenState extends State<GameScreen> {
 
                                 return Badge(
                                   padding: const EdgeInsets.all(4),
-                                  badgeContent: Text(
+                                  label: Text(
                                     building.length.toString(),
                                     style: const TextStyle(fontSize: 8),
                                   ),
@@ -338,7 +336,7 @@ class _GameScreenState extends State<GameScreen> {
 
                                 return Badge(
                                   padding: const EdgeInsets.all(4),
-                                  badgeContent: Text(
+                                  label: Text(
                                     learnings.length.toString(),
                                     style: const TextStyle(fontSize: 8),
                                   ),

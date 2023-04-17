@@ -23,13 +23,13 @@ class EmployeesScreen extends StatefulWidget {
 
 class _EmployeesScreenState extends State<EmployeesScreen> {
   ETypeEmployees eTypeEmployees = ETypeEmployees.worker;
-  final List<bool> _selected = <bool>[
-    true,
-    false,
-    false,
-    false,
-    false,
-  ];
+  final List<bool> _selected = ETypeEmployees.values.map((e) => false).toList();
+
+  @override
+  void initState() {
+    _selected[0] = true;
+    super.initState();
+  }
 
   _change(int index) {
     setState(() {
@@ -68,15 +68,12 @@ class _EmployeesScreenState extends State<EmployeesScreen> {
                           fillColor: Theme.of(context).scaffoldBackgroundColor,
                           color: Colors.white70,
                           constraints: BoxConstraints(
-                              minWidth: (MediaQuery.of(context).size.width - 8) / 5, minHeight: 56),
+                              minWidth: (MediaQuery.of(context).size.width - 8) /
+                                  ETypeEmployees.values.length,
+                              minHeight: 56),
                           isSelected: _selected,
-                          children: [
-                            Text(Enums.toText(ETypeEmployees.worker).tr()),
-                            Text(Enums.toText(ETypeEmployees.scientist).tr()),
-                            Text(Enums.toText(ETypeEmployees.accountant).tr()),
-                            Text(Enums.toText(ETypeEmployees.manager).tr()),
-                            Text(Enums.toText(ETypeEmployees.marketer).tr()),
-                          ],
+                          children:
+                              ETypeEmployees.values.map((e) => Text(Enums.toText(e).tr())).toList(),
                         ),
                         const Padding(
                           padding: EdgeInsets.only(left: 4, right: 4),

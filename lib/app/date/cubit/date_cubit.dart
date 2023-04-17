@@ -10,6 +10,7 @@ import '../../assets/cubit/build/build_asset_cubit.dart';
 import '../../bank/cubit/deposit/deposit_cubit.dart';
 import '../../bank/cubit/loan/loan_cubit.dart';
 import '../../business/repositories/employee_repository.dart';
+import '../../business/repositories/products_repository.dart';
 import '../../business/repositories/research_repository.dart';
 import '../../event/cubit/event_cubit.dart';
 import '../../freelance/cubit/job/freelance_job_cubit.dart';
@@ -55,6 +56,7 @@ class DateCubit extends HydratedCubit<DateState> {
   final TimeSpendRepository _timeSpendRepository;
   final ResearchRepository _researchRepository;
   final EmployeeRepository _employeeRepository;
+  final ProductsRepository _productsRepository;
 
   DateCubit(
     this._newGameCubit,
@@ -76,6 +78,7 @@ class DateCubit extends HydratedCubit<DateState> {
     this._timeSpendRepository,
     this._researchRepository,
     this._employeeRepository,
+    this._productsRepository,
   ) : super(const DateState.initial()) {
     _newGame();
   }
@@ -113,6 +116,7 @@ class DateCubit extends HydratedCubit<DateState> {
         await _freelanceRepository.counting(dateTime);
         await _researchRepository.counting(dateTime);
         await _employeeRepository.counting(dateTime);
+        await _productsRepository.counting(dateTime);
         //
         await _freelanceJobCubit.counting(dateTime);
         await _learningCubit.counting(dateTime);
@@ -132,7 +136,6 @@ class DateCubit extends HydratedCubit<DateState> {
         emit(DateState.loaded(dateTime));
       });
     }
-    Logger().wtf(DateTime.now().difference(start));
     _loadingCubit.remove(uid);
   }
 

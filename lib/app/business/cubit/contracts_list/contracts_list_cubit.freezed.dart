@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'product_details_cubit.dart';
+part of 'contracts_list_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-ProductDetailsState _$ProductDetailsStateFromJson(Map<String, dynamic> json) {
+ContractsListState _$ContractsListStateFromJson(Map<String, dynamic> json) {
   switch (json['runtimeType']) {
     case 'initial':
       return Initial.fromJson(json);
@@ -24,37 +24,32 @@ ProductDetailsState _$ProductDetailsStateFromJson(Map<String, dynamic> json) {
       return Loaded.fromJson(json);
 
     default:
-      throw CheckedFromJsonException(json, 'runtimeType', 'ProductDetailsState',
+      throw CheckedFromJsonException(json, 'runtimeType', 'ContractsListState',
           'Invalid union type "${json['runtimeType']}"!');
   }
 }
 
 /// @nodoc
-mixin _$ProductDetailsState {
+mixin _$ContractsListState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            Product product, List<Employee> free, List<Employee> busy)
-        loaded,
+    required TResult Function(List<Contract> contracts) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-            Product product, List<Employee> free, List<Employee> busy)?
-        loaded,
+    TResult? Function(List<Contract> contracts)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Product product, List<Employee> free, List<Employee> busy)?
-        loaded,
+    TResult Function(List<Contract> contracts)? loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -84,16 +79,16 @@ mixin _$ProductDetailsState {
 }
 
 /// @nodoc
-abstract class $ProductDetailsStateCopyWith<$Res> {
-  factory $ProductDetailsStateCopyWith(
-          ProductDetailsState value, $Res Function(ProductDetailsState) then) =
-      _$ProductDetailsStateCopyWithImpl<$Res, ProductDetailsState>;
+abstract class $ContractsListStateCopyWith<$Res> {
+  factory $ContractsListStateCopyWith(
+          ContractsListState value, $Res Function(ContractsListState) then) =
+      _$ContractsListStateCopyWithImpl<$Res, ContractsListState>;
 }
 
 /// @nodoc
-class _$ProductDetailsStateCopyWithImpl<$Res, $Val extends ProductDetailsState>
-    implements $ProductDetailsStateCopyWith<$Res> {
-  _$ProductDetailsStateCopyWithImpl(this._value, this._then);
+class _$ContractsListStateCopyWithImpl<$Res, $Val extends ContractsListState>
+    implements $ContractsListStateCopyWith<$Res> {
+  _$ContractsListStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -109,7 +104,7 @@ abstract class _$$InitialCopyWith<$Res> {
 
 /// @nodoc
 class __$$InitialCopyWithImpl<$Res>
-    extends _$ProductDetailsStateCopyWithImpl<$Res, _$Initial>
+    extends _$ContractsListStateCopyWithImpl<$Res, _$Initial>
     implements _$$InitialCopyWith<$Res> {
   __$$InitialCopyWithImpl(_$Initial _value, $Res Function(_$Initial) _then)
       : super(_value, _then);
@@ -128,7 +123,7 @@ class _$Initial implements Initial {
 
   @override
   String toString() {
-    return 'ProductDetailsState.initial()';
+    return 'ContractsListState.initial()';
   }
 
   @override
@@ -146,9 +141,7 @@ class _$Initial implements Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            Product product, List<Employee> free, List<Employee> busy)
-        loaded,
+    required TResult Function(List<Contract> contracts) loaded,
   }) {
     return initial();
   }
@@ -158,9 +151,7 @@ class _$Initial implements Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-            Product product, List<Employee> free, List<Employee> busy)?
-        loaded,
+    TResult? Function(List<Contract> contracts)? loaded,
   }) {
     return initial?.call();
   }
@@ -170,8 +161,7 @@ class _$Initial implements Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Product product, List<Employee> free, List<Employee> busy)?
-        loaded,
+    TResult Function(List<Contract> contracts)? loaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -222,7 +212,7 @@ class _$Initial implements Initial {
   }
 }
 
-abstract class Initial implements ProductDetailsState {
+abstract class Initial implements ContractsListState {
   const factory Initial() = _$Initial;
 
   factory Initial.fromJson(Map<String, dynamic> json) = _$Initial.fromJson;
@@ -236,7 +226,7 @@ abstract class _$$LoadingCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadingCopyWithImpl<$Res>
-    extends _$ProductDetailsStateCopyWithImpl<$Res, _$Loading>
+    extends _$ContractsListStateCopyWithImpl<$Res, _$Loading>
     implements _$$LoadingCopyWith<$Res> {
   __$$LoadingCopyWithImpl(_$Loading _value, $Res Function(_$Loading) _then)
       : super(_value, _then);
@@ -255,7 +245,7 @@ class _$Loading implements Loading {
 
   @override
   String toString() {
-    return 'ProductDetailsState.loading()';
+    return 'ContractsListState.loading()';
   }
 
   @override
@@ -273,9 +263,7 @@ class _$Loading implements Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            Product product, List<Employee> free, List<Employee> busy)
-        loaded,
+    required TResult Function(List<Contract> contracts) loaded,
   }) {
     return loading();
   }
@@ -285,9 +273,7 @@ class _$Loading implements Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-            Product product, List<Employee> free, List<Employee> busy)?
-        loaded,
+    TResult? Function(List<Contract> contracts)? loaded,
   }) {
     return loading?.call();
   }
@@ -297,8 +283,7 @@ class _$Loading implements Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Product product, List<Employee> free, List<Employee> busy)?
-        loaded,
+    TResult Function(List<Contract> contracts)? loaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -349,7 +334,7 @@ class _$Loading implements Loading {
   }
 }
 
-abstract class Loading implements ProductDetailsState {
+abstract class Loading implements ContractsListState {
   const factory Loading() = _$Loading;
 
   factory Loading.fromJson(Map<String, dynamic> json) = _$Loading.fromJson;
@@ -360,12 +345,12 @@ abstract class _$$LoadedCopyWith<$Res> {
   factory _$$LoadedCopyWith(_$Loaded value, $Res Function(_$Loaded) then) =
       __$$LoadedCopyWithImpl<$Res>;
   @useResult
-  $Res call({Product product, List<Employee> free, List<Employee> busy});
+  $Res call({List<Contract> contracts});
 }
 
 /// @nodoc
 class __$$LoadedCopyWithImpl<$Res>
-    extends _$ProductDetailsStateCopyWithImpl<$Res, _$Loaded>
+    extends _$ContractsListStateCopyWithImpl<$Res, _$Loaded>
     implements _$$LoadedCopyWith<$Res> {
   __$$LoadedCopyWithImpl(_$Loaded _value, $Res Function(_$Loaded) _then)
       : super(_value, _then);
@@ -373,23 +358,13 @@ class __$$LoadedCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? product = null,
-    Object? free = null,
-    Object? busy = null,
+    Object? contracts = null,
   }) {
     return _then(_$Loaded(
-      product: null == product
-          ? _value.product
-          : product // ignore: cast_nullable_to_non_nullable
-              as Product,
-      free: null == free
-          ? _value.free
-          : free // ignore: cast_nullable_to_non_nullable
-              as List<Employee>,
-      busy: null == busy
-          ? _value.busy
-          : busy // ignore: cast_nullable_to_non_nullable
-              as List<Employee>,
+      null == contracts
+          ? _value.contracts
+          : contracts // ignore: cast_nullable_to_non_nullable
+              as List<Contract>,
     ));
   }
 }
@@ -397,29 +372,20 @@ class __$$LoadedCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$Loaded implements Loaded {
-  _$Loaded(
-      {required this.product,
-      required this.free,
-      required this.busy,
-      final String? $type})
-      : $type = $type ?? 'loaded';
+  _$Loaded(this.contracts, {final String? $type}) : $type = $type ?? 'loaded';
 
   factory _$Loaded.fromJson(Map<String, dynamic> json) =>
       _$$LoadedFromJson(json);
 
   @override
-  final Product product;
-  @override
-  final List<Employee> free;
-  @override
-  final List<Employee> busy;
+  final List<Contract> contracts;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'ProductDetailsState.loaded(product: $product, free: $free, busy: $busy)';
+    return 'ContractsListState.loaded(contracts: $contracts)';
   }
 
   @override
@@ -427,18 +393,13 @@ class _$Loaded implements Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$Loaded &&
-            (identical(other.product, product) || other.product == product) &&
-            const DeepCollectionEquality().equals(other.free, free) &&
-            const DeepCollectionEquality().equals(other.busy, busy));
+            const DeepCollectionEquality().equals(other.contracts, contracts));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      product,
-      const DeepCollectionEquality().hash(free),
-      const DeepCollectionEquality().hash(busy));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(contracts));
 
   @JsonKey(ignore: true)
   @override
@@ -451,11 +412,9 @@ class _$Loaded implements Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            Product product, List<Employee> free, List<Employee> busy)
-        loaded,
+    required TResult Function(List<Contract> contracts) loaded,
   }) {
-    return loaded(product, free, busy);
+    return loaded(contracts);
   }
 
   @override
@@ -463,11 +422,9 @@ class _$Loaded implements Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-            Product product, List<Employee> free, List<Employee> busy)?
-        loaded,
+    TResult? Function(List<Contract> contracts)? loaded,
   }) {
-    return loaded?.call(product, free, busy);
+    return loaded?.call(contracts);
   }
 
   @override
@@ -475,12 +432,11 @@ class _$Loaded implements Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Product product, List<Employee> free, List<Employee> busy)?
-        loaded,
+    TResult Function(List<Contract> contracts)? loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(product, free, busy);
+      return loaded(contracts);
     }
     return orElse();
   }
@@ -527,17 +483,12 @@ class _$Loaded implements Loaded {
   }
 }
 
-abstract class Loaded implements ProductDetailsState {
-  factory Loaded(
-      {required final Product product,
-      required final List<Employee> free,
-      required final List<Employee> busy}) = _$Loaded;
+abstract class Loaded implements ContractsListState {
+  factory Loaded(final List<Contract> contracts) = _$Loaded;
 
   factory Loaded.fromJson(Map<String, dynamic> json) = _$Loaded.fromJson;
 
-  Product get product;
-  List<Employee> get free;
-  List<Employee> get busy;
+  List<Contract> get contracts;
   @JsonKey(ignore: true)
   _$$LoadedCopyWith<_$Loaded> get copyWith =>
       throw _privateConstructorUsedError;

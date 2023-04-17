@@ -39,6 +39,7 @@ const _$ETypeTransactionSourceEnumMap = {
   ETypeTransactionSource.lostMoney: 'lostMoney',
   ETypeTransactionSource.advertisement: 'advertisement',
   ETypeTransactionSource.employeeWages: 'employeeWages',
+  ETypeTransactionSource.costProduce: 'costProduce',
   ETypeTransactionSource.withdraw: 'withdraw',
   ETypeTransactionSource.deposit: 'deposit',
 };

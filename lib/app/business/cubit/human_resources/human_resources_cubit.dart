@@ -11,17 +11,18 @@ part 'human_resources_state.dart';
 
 @injectable
 class HumanResourcesCubit extends Cubit<HumanResourcesState> {
-  final EmployeeRepository employeeRepository;
+  final EmployeeRepository _employeeRepository;
   final int businessId;
 
   HumanResourcesCubit(
     @factoryParam this.businessId,
-    this.employeeRepository,
+    this._employeeRepository,
   ) : super(const HumanResourcesState.initial());
 
-  addEmployee(Employee employee) {
+  Future<String?> addEmployee(Employee employee) async {
     emit(const HumanResourcesState.loading());
-    employeeRepository.addEmployer(employee.copyWith(businessId: businessId));
+    final toast = await _employeeRepository.addEmployer(employee.copyWith(businessId: businessId));
     emit(const HumanResourcesState.loaded());
+    return toast;
   }
 }

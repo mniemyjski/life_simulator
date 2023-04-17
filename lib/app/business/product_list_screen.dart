@@ -103,19 +103,6 @@ class _ProductListScreenState extends State<ProductListScreen> {
                                             style: Theme.of(context).textTheme.bodyText2,
                                             children: <TextSpan>[
                                               TextSpan(
-                                                text: '${LocaleKeys.typeQuality.tr()}: ',
-                                                style: const TextStyle(fontWeight: FontWeight.bold),
-                                              ),
-                                              TextSpan(
-                                                  text: Enums.toText(research.eTypeQuality).tr()),
-                                            ],
-                                          ),
-                                        ),
-                                        RichText(
-                                          text: TextSpan(
-                                            style: Theme.of(context).textTheme.bodyText2,
-                                            children: <TextSpan>[
-                                              TextSpan(
                                                 text: '${LocaleKeys.datEnd.tr()}: ',
                                                 style: const TextStyle(fontWeight: FontWeight.bold),
                                               ),
